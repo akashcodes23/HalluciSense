@@ -1,0 +1,90 @@
+from datetime import timedelta
+from typing import List
+from pydantic import field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    """
+    Centralised application configuration loaded from environment variables.
+    All fields have safe defaults for local development.
+    """
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=True,
+        extra="ignore",
+    )
+
+    # ── Application ───────────────────────────────────────────────────────────
+    PROJECT_NAME: str = "HalluciSense"
+    VERSION: str = "1.0.0"
+    API_V1_STR: str = "/api/v1"
+    APP_ENV: str = "development"
+
+    # ── Security ──────────────────────────────────────────────────────────────
+    SECRET_KEY: str = "dev-secret-key-change-in-production-must-be-32-chars"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
+
+    # ── CORS ──────────────────────────────────────────────────────────────────
+    CORS_ORIGINS: str = "http://localhost:3000"
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, v: str) -> str:
+        return v
+
+    def get_cors_origins(self) -> List[str]:
+        return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
+
+    # ── Database ──────────────────────────────────────────────────────────────
+    DATABASE_URL: str = (
+        "postgresql+asyncpg://hallucisense:hallucisense@localhost:5432/hallucisense_db"
+    )
+    DATABASE_URL_SYNC: str = (
+        "postgresql+psycopg2://hallucisense:hallucisense@localhost:5432/hallucisense_db"
+    )
+    DB_POOL_SIZE: int = 10
+    DB_MAX_OVERFLOW: int = 20
+    DB_POOL_TIMEOUT: int = 30
+
+    # ── Redis ─────────────────────────────────────────────────────────────────
+    REDIS_URL: str = "redis://localhost:6379/0"
+    CELERY_BROKER_URL: str = "redis://localhost:6379/1"
+    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/2"
+
+    # ── AI Providers ─────────────────────────────────────────────────────────
+    GEMINI_API_KEY: str = ""
+    OPENAI_API_KEY: str = ""
+    DEFAULT_LLM_PROVIDER: str = "gemini"
+    DEFAULT_LLM_MODEL: str = "gemini-2.0-flash"
+
+    # ── Rate Limiting ─────────────────────────────────────────────────────────
+    RATE_LIMIT_PER_MINUTE: int = 100
+    AUTH_RATE_LIMIT_PER_MINUTE: int = 20
+
+    # ── HalluciSense Engine ──────────────────────────────────────────────────
+    ALPHA_FACTUAL_ERROR: float = 0.45
+    BETA_CONFIDENCE_GAP: float = 0.30
+    GAMMA_CONSISTENCY_FAILURE: float = 0.25
+    VERIFIED_THRESHOLD: float = 0.35
+    HALLUCINATED_THRESHOLD: float = 0.65
+    MIN_TOKEN_PROBABILITY: float = 1e-5
+
+    @property
+    def is_production(self) -> bool:
+        return self.APP_ENV == "production"
+
+    @property
+    def access_token_delta(self) -> timedelta:
+        return timedelta(minutes=self.ACCESS_TOKEN_EXPIRE_MINUTES)
+
+    @property
+    def refresh_token_delta(self) -> timedelta:
+        return timedelta(days=self.REFRESH_TOKEN_EXPIRE_DAYS)
+
+
+settings = Settings()
