@@ -1443,3 +1443,349 @@ This enables independent verification of experimental results and supports futur
 # 📌 Next Section
 
 The next section covers deployment architecture, CI/CD workflow, roadmap, publication details, citation format, acknowledgements, and contribution guidelines.
+
+---
+
+# 🚀 Deployment
+
+HalluciSense is designed with production deployment in mind. The architecture separates concerns across independent services, enabling scalable deployment to cloud environments or on-premise infrastructure.
+
+## Supported Deployment Options
+
+| Platform | Status |
+|----------|--------|
+| Docker | ✅ |
+| Railway | ✅ |
+| Render | ✅ |
+| AWS EC2 | ✅ |
+| Azure VM | ✅ |
+| Google Cloud VM | ✅ |
+| Kubernetes | ✅ |
+| Local Development | ✅ |
+
+---
+
+# ☁️ Deployment Architecture
+
+```text
+                    Internet
+                        │
+                        ▼
+                Reverse Proxy (Nginx)
+                        │
+         ┌──────────────┴──────────────┐
+         ▼                             ▼
+   Frontend (Next.js)          Backend API (FastAPI)
+                                        │
+              ┌─────────────────────────┼─────────────────────────┐
+              ▼                         ▼                         ▼
+      Retrieval Engine         Verification Engine       Confidence Fusion
+              │                         │                         │
+              └──────────────┬──────────┴──────────┬──────────────┘
+                             ▼
+                      Model Prediction
+                             │
+                             ▼
+                      Explainability API
+                             │
+                             ▼
+                         JSON Response
+```
+
+---
+
+# 🐳 Docker
+
+Build the containers
+
+```bash
+docker compose build
+```
+
+Run the application
+
+```bash
+docker compose up
+```
+
+Run in detached mode
+
+```bash
+docker compose up -d
+```
+
+Stop
+
+```bash
+docker compose down
+```
+
+---
+
+# ☁️ Railway Deployment
+
+```bash
+railway login
+
+railway init
+
+railway up
+```
+
+Environment variables
+
+```
+OPENAI_API_KEY=
+
+GOOGLE_API_KEY=
+
+PINECONE_API_KEY=
+
+SUPABASE_URL=
+
+SUPABASE_KEY=
+
+JWT_SECRET=
+
+DATABASE_URL=
+```
+
+---
+
+# 🔄 CI/CD Workflow
+
+HalluciSense follows an automated development workflow.
+
+```text
+Developer Push
+        │
+        ▼
+GitHub Actions
+        │
+        ▼
+Linting
+        │
+        ▼
+Unit Tests
+        │
+        ▼
+Integration Tests
+        │
+        ▼
+Docker Build
+        │
+        ▼
+Deployment Validation
+        │
+        ▼
+Production Release
+```
+
+---
+
+# 🧪 Testing
+
+Run all tests
+
+```bash
+pytest
+```
+
+Run a specific module
+
+```bash
+pytest backend/tests
+```
+
+Generate coverage
+
+```bash
+pytest --cov=backend
+```
+
+---
+
+# 📈 Project Roadmap
+
+## ✅ Completed
+
+- Retrieval verification
+- Structural consistency analysis
+- Confidence-aware fusion
+- Explainability
+- API deployment
+- Docker support
+- Production configuration
+- Scientific evaluation
+- Calibration framework
+- Documentation
+
+---
+
+## 🚧 Planned
+
+- Multi-document verification
+- Knowledge graph reasoning
+- Streaming verification
+- Batch inference
+- Distributed processing
+- Active learning
+- Reinforcement learning calibration
+- Graph Neural Networks
+- Vector database integration
+- Real-time monitoring
+
+---
+
+# 🔬 Research Contributions
+
+HalluciSense contributes several ideas toward trustworthy Large Language Model verification.
+
+### Novel Components
+
+- Hybrid verification pipeline
+- Confidence-aware decision fusion
+- Retrieval consistency verification
+- Structural graph reasoning
+- Multi-stage explainability
+- Calibration-aware prediction
+- Production-focused deployment architecture
+
+---
+
+# 📚 Citation
+
+If HalluciSense contributes to your research, please cite it.
+
+```bibtex
+@software{hallucisense2026,
+  title={HalluciSense: A Confidence-Aware Hybrid Framework for Detecting and Quantifying Hallucinations in Large Language Models},
+  author={Akash G. Patil},
+  year={2026},
+  url={https://github.com/akashcodes23/HalluciSense}
+}
+```
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+
+2. Create a feature branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a Pull Request
+
+---
+
+# 🐞 Reporting Issues
+
+If you encounter bugs or have suggestions:
+
+- Open an Issue
+- Include reproduction steps
+- Include logs if available
+- Describe expected behavior
+
+---
+
+# 📄 License
+
+Distributed under the MIT License.
+
+See
+
+```
+LICENSE
+```
+
+for details.
+
+---
+
+# 🙏 Acknowledgements
+
+This project builds upon ideas and technologies from the open-source community.
+
+Special thanks to:
+
+- Hugging Face
+- PyTorch
+- FastAPI
+- Next.js
+- LangChain
+- Sentence Transformers
+- Scikit-learn
+- Docker
+- Railway
+- OpenAI
+- Anthropic
+- Google DeepMind
+
+---
+
+# ⭐ Support the Project
+
+If you found HalluciSense useful:
+
+⭐ Star the repository
+
+🍴 Fork it
+
+📝 Cite it in your research
+
+📢 Share it with others
+
+Every contribution helps improve trustworthy AI.
+
+---
+
+#
+
+---
+
+# 📬 Contact
+
+For research collaborations, project discussions, or technical questions:
+
+📧 Email: your-email@example.com
+
+💼 LinkedIn: https://linkedin.com/in/your-profile
+
+🐙 GitHub: https://github.com/akashcodes23
+
+---
+
+# 🌍 Vision
+
+> **Building trustworthy AI systems through explainable, confidence-aware, and scientifically validated verification frameworks.**
+
+HalluciSense represents a step toward safer and more reliable Large Language Models by combining retrieval verification, structural reasoning, explainable AI, and calibrated confidence estimation into a unified production-ready framework.
+
+---
+
+<p align="center">
+
+### ⭐ If you found this project useful, please consider giving it a Star ⭐
+
+Made with ❤️ for the AI Research Community
+
+</p>
