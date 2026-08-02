@@ -49,3 +49,8 @@ build/
 
 # Research cache
 backend/evaluation_results/**/cache/
+
+backend/evaluation_data/
+backend/evaluation_results/
+*.joblib
+*.jsonl
