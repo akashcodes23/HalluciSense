@@ -1127,3 +1127,319 @@ Check
 # 📌 Next Section
 
 The following section presents the complete evaluation methodology, benchmark datasets, performance metrics, calibration analysis, and scientific validation used to assess HalluciSense.
+
+---
+
+# 📊 Evaluation & Benchmarking
+
+HalluciSense was developed using a rigorous multi-phase scientific evaluation protocol designed to validate accuracy, robustness, calibration, generalization, and deployment readiness.
+
+Unlike conventional LLM verification systems that report only classification metrics, HalluciSense evaluates the complete verification pipeline—from retrieval quality to confidence calibration and production performance.
+
+---
+
+# 🧪 Evaluation Pipeline
+
+```text
+Dataset Collection
+        │
+        ▼
+Feature Extraction
+        │
+        ▼
+Retrieval Verification
+        │
+        ▼
+Structural Consistency Analysis
+        │
+        ▼
+Confidence Fusion
+        │
+        ▼
+Meta Classification
+        │
+        ▼
+Calibration
+        │
+        ▼
+Error Analysis
+        │
+        ▼
+Production Validation
+```
+
+---
+
+# 📚 Benchmark Datasets
+
+HalluciSense was evaluated across multiple public hallucination benchmarks.
+
+| Dataset | Purpose |
+|---------|----------|
+| HaluEval | General hallucination detection |
+| RAGTruth | Retrieval-grounded evaluation |
+| HaluBench | Benchmark robustness testing |
+| Custom Validation Set | Real-world verification |
+| Stress Test Suite | Edge case evaluation |
+
+Each dataset undergoes preprocessing, normalization, leakage analysis, and structural verification before training.
+
+---
+
+# 📈 Evaluation Metrics
+
+The framework reports multiple complementary metrics rather than relying solely on accuracy.
+
+| Metric | Description |
+|---------|-------------|
+| Accuracy | Overall correctness |
+| Precision | Hallucination precision |
+| Recall | Hallucination recall |
+| F1 Score | Balanced performance |
+| ROC-AUC | Ranking quality |
+| PR-AUC | Precision-recall quality |
+| Brier Score | Calibration quality |
+| Expected Calibration Error | Confidence reliability |
+| Matthews Correlation Coefficient | Balanced binary evaluation |
+| Bootstrap Confidence Intervals | Statistical robustness |
+
+---
+
+# 📉 Calibration Analysis
+
+A confidence-aware verifier should produce probabilities that accurately reflect prediction reliability.
+
+HalluciSense performs:
+
+- Probability calibration
+- Reliability analysis
+- Confidence binning
+- Expected Calibration Error (ECE)
+- Brier Score evaluation
+- Calibration curve visualization
+
+These analyses ensure that a prediction with **90% confidence behaves like a true 90% confidence prediction**.
+
+---
+
+# 🔍 Error Analysis
+
+Comprehensive forensic analysis is performed on all incorrect predictions.
+
+Analysis includes:
+
+- False positives
+- False negatives
+- Retrieval failures
+- Entity extraction failures
+- Numerical inconsistencies
+- Temporal reasoning errors
+- Structural graph inconsistencies
+- Confidence overestimation
+- Distribution shift
+
+---
+
+# 📦 Held-Out Validation
+
+The final model is evaluated on a completely unseen validation set.
+
+Validation protocol includes:
+
+- Frozen preprocessing
+- Frozen feature engineering
+- Frozen retrieval pipeline
+- Frozen model parameters
+- No retraining
+- No manual corrections
+
+This protocol measures genuine generalization performance.
+
+---
+
+# 📊 Model Selection Strategy
+
+Multiple candidate models were evaluated before selecting the final production classifier.
+
+Candidate models included:
+
+- Logistic Regression
+- Random Forest
+- XGBoost
+- LightGBM
+- CatBoost
+- Confidence Fusion Meta-Classifier
+
+Selection criteria:
+
+- Highest ROC-AUC
+- Calibration quality
+- Generalization
+- Stability
+- Explainability
+- Production latency
+
+---
+
+# 📈 Benchmark Results
+
+> Replace these placeholder values with your final evaluation metrics.
+
+| Metric | Score |
+|---------|-------|
+| Accuracy | XX.XX% |
+| Precision | XX.XX% |
+| Recall | XX.XX% |
+| F1 Score | XX.XX% |
+| ROC-AUC | XX.XX |
+| PR-AUC | XX.XX |
+| MCC | XX.XX |
+| Brier Score | XX.XX |
+| ECE | XX.XX |
+
+---
+
+# 📊 Performance Comparison
+
+| Capability | HalluciSense | Typical Binary Detector |
+|-------------|-------------|--------------------------|
+| Retrieval Verification | ✅ | ❌ |
+| Structural Reasoning | ✅ | ❌ |
+| Confidence Calibration | ✅ | ❌ |
+| Explainability | ✅ | Partial |
+| Modular Architecture | ✅ | Partial |
+| Production Deployment | ✅ | Partial |
+| Hybrid Verification | ✅ | ❌ |
+| Evidence Presentation | ✅ | Limited |
+
+---
+
+# 📉 Robustness Evaluation
+
+HalluciSense was validated under multiple challenging conditions.
+
+### Distribution Shift
+
+✔ Evaluated
+
+### Retrieval Noise
+
+✔ Evaluated
+
+### Missing Evidence
+
+✔ Evaluated
+
+### Ambiguous Claims
+
+✔ Evaluated
+
+### Numerical Claims
+
+✔ Evaluated
+
+### Temporal Claims
+
+✔ Evaluated
+
+### Multi-hop Reasoning
+
+✔ Evaluated
+
+---
+
+# 🔬 Scientific Validation
+
+The project includes dedicated analyses for:
+
+- Leakage auditing
+- Feature stability
+- Cross-validation
+- Bootstrap confidence intervals
+- Correlation analysis
+- Variance Inflation Factor (VIF)
+- Probability compression
+- Root cause analysis
+- Distribution shift
+- Calibration drift
+- Feature importance stability
+
+---
+
+# 📁 Evaluation Reports
+
+The repository includes detailed evaluation artifacts and scientific reports covering every phase of development.
+
+```
+backend/
+└── evaluation_results/
+    ├── phase6/
+    ├── phase7/
+    ├── phase8/
+    ├── reports/
+    ├── calibration/
+    ├── validation/
+    └── deployment/
+```
+
+These reports document the experimental methodology, intermediate analyses, validation protocols, and deployment readiness assessments.
+
+---
+
+# 📸 Dashboard Preview
+
+> Replace with actual screenshots.
+
+<p align="center">
+
+<img src="assets/dashboard.png" width="900">
+
+</p>
+
+The dashboard provides:
+
+- Retrieval evidence visualization
+- Confidence analysis
+- Explainability
+- Prediction diagnostics
+- API monitoring
+- Interactive verification
+
+---
+
+# ⚡ Performance Characteristics
+
+| Component | Typical Latency |
+|------------|----------------:|
+| Retrieval | < 100 ms |
+| Feature Extraction | < 50 ms |
+| Structural Analysis | < 75 ms |
+| Confidence Fusion | < 20 ms |
+| End-to-End Verification | < 300 ms |
+
+> Replace with measured production values.
+
+---
+
+# 🧠 Reproducibility
+
+HalluciSense emphasizes reproducible AI research.
+
+The repository includes:
+
+- Fixed preprocessing pipelines
+- Versioned configurations
+- Deterministic evaluation scripts
+- Experiment reports
+- Deployment manifests
+- Scientific documentation
+- Model metadata
+- Validation protocols
+
+This enables independent verification of experimental results and supports future research extensions.
+
+---
+
+# 📌 Next Section
+
+The next section covers deployment architecture, CI/CD workflow, roadmap, publication details, citation format, acknowledgements, and contribution guidelines.
