@@ -614,3 +614,516 @@ HalluciSense provides several advantages over conventional hallucination detecti
 
 > **Next:** Installation, Quick Start, Docker deployment, environment configuration, and API usage.
 
+---
+
+# 🚀 Getting Started
+
+HalluciSense is designed for both **research experimentation** and **production deployment**.
+
+Choose the setup method that best fits your workflow.
+
+| Environment | Recommended |
+|-------------|-------------|
+| Local Development | ✅ |
+| Docker | ✅ |
+| Railway Deployment | ✅ |
+| Linux Server | ✅ |
+| macOS | ✅ |
+| Windows (WSL Recommended) | ✅ |
+
+---
+
+# 📋 Prerequisites
+
+Before installing HalluciSense, ensure the following software is available.
+
+| Software | Version |
+|----------|----------|
+| Python | 3.11+ |
+| Node.js | 20+ |
+| npm | 10+ |
+| PostgreSQL | 15+ |
+| Docker | Latest |
+| Git | Latest |
+
+Verify installation:
+
+```bash
+python --version
+node --version
+npm --version
+docker --version
+git --version
+```
+
+---
+
+# 📂 Clone Repository
+
+```bash
+git clone https://github.com/akashcodes23/HalluciSense.git
+
+cd HalluciSense
+```
+
+---
+
+# 🐍 Backend Installation
+
+Navigate to the backend.
+
+```bash
+cd backend
+```
+
+Create a virtual environment.
+
+```bash
+python -m venv .venv
+```
+
+Activate it.
+
+### macOS / Linux
+
+```bash
+source .venv/bin/activate
+```
+
+### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+Install dependencies.
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🌐 Frontend Installation
+
+Open another terminal.
+
+```bash
+cd frontend
+
+npm install
+```
+
+---
+
+# ⚙️ Environment Configuration
+
+Create a `.env` file inside the backend directory.
+
+```text
+backend/
+
+.env
+```
+
+Example configuration:
+
+```env
+APP_ENV=development
+
+HOST=0.0.0.0
+PORT=8000
+
+DATABASE_URL=postgresql://user:password@localhost:5432/hallucisense
+
+SECRET_KEY=your-secret-key
+
+OPENAI_API_KEY=
+
+GOOGLE_API_KEY=
+
+GEMINI_API_KEY=
+
+EMBEDDING_MODEL=all-MiniLM-L6-v2
+
+LOG_LEVEL=INFO
+```
+
+---
+
+# 📦 Configuration Files
+
+HalluciSense supports multiple runtime environments.
+
+```
+config/
+
+development.yaml
+
+production.yaml
+
+research.yaml
+```
+
+Switch environments by updating:
+
+```env
+APP_ENV=development
+```
+
+or
+
+```env
+APP_ENV=production
+```
+
+---
+
+# ▶️ Running the Backend
+
+```bash
+cd backend
+
+uvicorn app.main:app --reload
+```
+
+Server starts at
+
+```
+http://localhost:8000
+```
+
+Swagger documentation
+
+```
+http://localhost:8000/docs
+```
+
+OpenAPI
+
+```
+http://localhost:8000/openapi.json
+```
+
+---
+
+# 💻 Running the Frontend
+
+```bash
+cd frontend
+
+npm run dev
+```
+
+Frontend
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🐳 Docker Deployment
+
+Build containers.
+
+```bash
+docker compose build
+```
+
+Start services.
+
+```bash
+docker compose up
+```
+
+Detached mode.
+
+```bash
+docker compose up -d
+```
+
+Stop.
+
+```bash
+docker compose down
+```
+
+---
+
+# 🚂 Railway Deployment
+
+Deploy directly from GitHub.
+
+```bash
+railway up
+```
+
+Environment variables can be configured from the Railway dashboard.
+
+---
+
+# 📡 REST API
+
+Base URL
+
+```
+http://localhost:8000
+```
+
+---
+
+## Health Check
+
+```http
+GET /health
+```
+
+Response
+
+```json
+{
+  "status":"healthy",
+  "version":"1.0.0"
+}
+```
+
+---
+
+## Verify Response
+
+```http
+POST /verify
+```
+
+Request
+
+```json
+{
+  "query":"What is the capital of Australia?",
+  "response":"Sydney"
+}
+```
+
+Example Response
+
+```json
+{
+  "hallucination_probability":0.91,
+  "confidence":"High",
+  "verdict":"Potential Hallucination",
+  "retrieval_score":0.84,
+  "structural_score":0.78,
+  "evidence":[
+      "...",
+      "..."
+  ]
+}
+```
+
+---
+
+## Chat Endpoint
+
+```http
+POST /chat
+```
+
+---
+
+## WebSocket Streaming
+
+```
+ws://localhost:8000/ws/chat
+```
+
+Supports
+
+- Streaming responses
+- Live verification
+- Incremental confidence updates
+
+---
+
+# 🖥️ Frontend Dashboard
+
+The dashboard provides an interactive interface for:
+
+- Response verification
+- Confidence visualization
+- Retrieval evidence
+- Structural diagnostics
+- Explainability
+- API testing
+
+---
+
+# 📁 Directory Layout
+
+```
+HalluciSense
+
+backend/
+
+frontend/
+
+config/
+
+docker/
+
+docs/
+
+assets/
+
+tests/
+```
+
+---
+
+# 🧪 Running Tests
+
+Run all tests.
+
+```bash
+pytest
+```
+
+Specific module.
+
+```bash
+pytest tests/test_full_system_validation.py
+```
+
+Coverage.
+
+```bash
+pytest --cov
+```
+
+---
+
+# 🔍 Development Workflow
+
+```text
+Clone Repository
+        │
+Install Dependencies
+        │
+Configure Environment
+        │
+Run Backend
+        │
+Run Frontend
+        │
+Execute Tests
+        │
+Develop Features
+        │
+Validate
+        │
+Deploy
+```
+
+---
+
+# 🔐 Security Notes
+
+Never commit:
+
+```
+.env
+
+API Keys
+
+Secrets
+
+Database Passwords
+
+Model Weights
+
+Evaluation Artifacts
+```
+
+Sensitive files are excluded through `.gitignore`.
+
+---
+
+# 📈 Recommended Development Workflow
+
+```
+Feature Branch
+      │
+Pull Request
+      │
+Review
+      │
+Tests
+      │
+Merge
+      │
+Deploy
+```
+
+---
+
+# 🧩 Troubleshooting
+
+<details>
+
+<summary>Backend won't start</summary>
+
+Verify
+
+- Python version
+- Installed dependencies
+- Environment variables
+- Database availability
+
+</details>
+
+<details>
+
+<summary>Frontend won't build</summary>
+
+Run
+
+```bash
+rm -rf node_modules
+
+npm install
+```
+
+</details>
+
+<details>
+
+<summary>Docker issues</summary>
+
+```bash
+docker compose down
+
+docker compose build --no-cache
+
+docker compose up
+```
+
+</details>
+
+<details>
+
+<summary>Database connection failed</summary>
+
+Check
+
+- PostgreSQL service
+- DATABASE_URL
+- Network configuration
+- Credentials
+
+</details>
+
+---
+
+# 📌 Next Section
+
+The following section presents the complete evaluation methodology, benchmark datasets, performance metrics, calibration analysis, and scientific validation used to assess HalluciSense.
