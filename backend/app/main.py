@@ -18,6 +18,7 @@ from typing import AsyncGenerator
 import structlog
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 
 from app.core.config import settings
@@ -96,7 +97,7 @@ def create_application() -> FastAPI:
         lifespan=lifespan,
     )
 
-    # ── CORS ──────────────────────────────────────────────────────────────────
+    # ── CORS & Compression ───────────────────────────────────────────────────
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.get_cors_origins(),
@@ -104,6 +105,7 @@ def create_application() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    app.add_middleware(GZipMiddleware, minimum_size=1000)
 
     # ── Request Tracing Middleware ─────────────────────────────────────────────
     @app.middleware("http")
@@ -171,6 +173,9 @@ def create_application() -> FastAPI:
     app.include_router(analytics_router, prefix=settings.API_V1_STR)
     app.include_router(export_router, prefix=settings.API_V1_STR)
     app.include_router(admin_router, prefix=settings.API_V1_STR)
+
+    from app.modules.hallucisense.router import router as hallucisense_router
+    app.include_router(hallucisense_router, prefix=settings.API_V1_STR)
 
     # ── Health Check ──────────────────────────────────────────────────────────
     @app.get("/health", tags=["System"], summary="Health check")

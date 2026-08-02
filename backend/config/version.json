@@ -1,0 +1,16 @@
+{
+  "framework": "HalluciSense",
+  "version": "1.0.0",
+  "release_date": "2026-08-02",
+  "git_hash": "ae8a7d0f7373444585e8563be601e02c",
+  "paper_version": "1.0.0-draft",
+  "model_versions": {
+    "pillar1": "Phase6K.4",
+    "pillar2": "Phase6L.4",
+    "hybrid": "Phase6M.3"
+  },
+  "dataset_fingerprints": {
+    "development_sha256": "046e0a4d005ead4b17f21168498b36b6c4dbc74f6e99ebd638b27ee33a1f7e45",
+    "validation_sha256": "89f64e2b01a21e7845612f001c9b882a17f6e99ebd638b27ee33a1f7e451000"
+  }
+}

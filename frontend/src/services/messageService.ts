@@ -38,14 +38,14 @@ export function createStreamingConnection(
   ws.onmessage = (event) => {
     try {
       const chunk = JSON.parse(event.data);
-      if (chunk.type === 'token' && chunk.content) {
-        onToken(chunk.content);
+      if (chunk.type === 'token' && chunk.text) {
+        onToken(chunk.text);
       } else if (chunk.type === 'verification_dispatched' && chunk.message_id) {
         onDone(chunk.message_id);
-        ws.close();
+        ws.close(1000);
       } else if (chunk.type === 'error') {
         onError(chunk.error || 'Unknown error');
-        ws.close();
+        ws.close(1000);
       }
     } catch {
       // Non-JSON frames ignored
@@ -53,7 +53,14 @@ export function createStreamingConnection(
   };
 
   ws.onerror = () => {
-    onError('WebSocket connection failed. Check the backend.');
+    onError('WebSocket connection failed.');
+  };
+  
+  ws.onclose = (event) => {
+    // 1000 is normal closure
+    if (event.code !== 1000) {
+      onError(`WebSocket closed unexpectedly: ${event.reason || 'Unknown error'} (Code ${event.code})`);
+    }
   };
 
   return ws;

@@ -1,31 +1,71 @@
 import re
 from typing import List, Tuple
+
 from .types import Pillar1Result, EvidenceItem
+from .entailment import EvidenceEntailmentEngine
+
 
 class Pillar1RetrievalEngine:
     """
-    Pillar 1: Retrieval Verification Engine.
-    - Extracts factual claims from sentence/text.
-    - Compares claims against provided/retrieved evidence snippets.
-    - Computes Factual Error Score (FE) in range [0.0, 1.0].
+    Pillar 1: Retrieval + NLI Factual Verification.
+
+    Pipeline:
+        response
+            -> claim extraction
+            -> retrieved evidence
+            -> NLI verification
+            -> factual error score
+
+    Cross-encoder similarity is used only for relevance.
+    NLI determines factual support / contradiction.
     """
 
+    def __init__(self):
+        self.entailment_engine = EvidenceEntailmentEngine()
+
     def extract_claims(self, text: str) -> List[str]:
-        """
-        Extract candidate factual claims from text.
-        Splits by clauses or proposition patterns.
-        """
         clean_text = text.strip()
+
         if not clean_text:
             return []
 
-        # Sub-sentence splitting for discrete claims
-        raw_claims = re.split(r'[,;]\s*|\s+and\s+|\s+which\s+', clean_text)
-        claims = [c.strip() for c in raw_claims if len(c.strip().split()) >= 3]
-        
+        raw_claims = re.split(
+            r'(?<!\d),(?!\d)\s*|;\s*|\s+and\s+|\s+which\s+',
+    clean_text,
+    flags=re.IGNORECASE
+)
+        claims = [
+            claim.strip()
+            for claim in raw_claims
+            if len(claim.strip().split()) >= 3
+        ]
+
         if not claims:
             claims = [clean_text]
+
         return claims
+
+    def _evidence_relevant_to_claim(
+        self,
+        claim: str,
+        item: EvidenceItem
+    ) -> bool:
+        """
+        Prefer evidence retrieved specifically for this claim.
+
+        Falls back to all evidence when claim metadata is unavailable.
+        """
+
+        evidence_claim = (item.claim or "").strip()
+
+        if not evidence_claim:
+            return True
+
+        return (
+            evidence_claim.lower() == claim.lower()
+            or claim.lower() in evidence_claim.lower()
+            or evidence_claim.lower() in claim.lower()
+        )
 
     def evaluate_claims_against_evidence(
         self,
@@ -33,51 +73,166 @@ class Pillar1RetrievalEngine:
         external_evidence: List[EvidenceItem]
     ) -> Tuple[float, List[EvidenceItem]]:
         """
-        Compare extracted claims against evidence items to generate FE score.
-        FE = 1.0 - mean(max_claim_similarity)
+        Compute factual error using NLI.
+
+        For each claim:
+
+            support = strongest entailment
+            contradiction = strongest contradiction
+
+        FE should be high when:
+        - strong contradictory evidence exists, or
+        - evidence is relevant but fails to support the claim.
+
+        Neutral evidence is treated as uncertainty rather than
+        direct contradiction.
         """
+
         if not claims:
             return 0.0, external_evidence
 
-        claim_grounding_scores: List[float] = []
+        if not external_evidence:
+            # No evidence does NOT prove hallucination.
+            # Represent this as uncertainty.
+            return 0.5, external_evidence
+
+        claim_error_scores = []
 
         for claim in claims:
-            # Find best supporting evidence for this claim
-            best_sim = 0.0
-            for item in external_evidence:
-                # Basic token overlap + similarity calculation fallback
-                sim = item.similarity_score
-                if sim > best_sim:
-                    best_sim = sim
-            
-            claim_grounding_scores.append(best_sim)
 
-        avg_grounding = sum(claim_grounding_scores) / len(claim_grounding_scores) if claim_grounding_scores else 1.0
-        factual_error = max(0.0, min(1.0, 1.0 - avg_grounding))
-        return round(factual_error, 4), external_evidence
+            relevant_items = [
+                item
+                for item in external_evidence
+                if self._evidence_relevant_to_claim(claim, item)
+            ]
+
+            # Compatibility fallback for evidence created without
+            # claim-specific metadata.
+            if not relevant_items:
+                relevant_items = external_evidence
+
+            best_entailment = 0.0
+            strongest_contradiction = 0.0
+            best_neutral = 0.0
+
+            for item in relevant_items:
+
+                # Ignore extremely irrelevant retrieval results.
+                if item.similarity_score < 0.20:
+                    continue
+
+                result = self.entailment_engine.classify(
+                    claim=claim,
+                    evidence=item.snippet
+                )
+
+                entailment = result["entailment"]
+                contradiction = result["contradiction"]
+                neutral = result["neutral"]
+
+                best_entailment = max(
+                    best_entailment,
+                    entailment
+                )
+
+                strongest_contradiction = max(
+                    strongest_contradiction,
+                    contradiction
+                )
+
+                best_neutral = max(
+                    best_neutral,
+                    neutral
+                )
+
+            if strongest_contradiction >= 0.70:
+                claim_error = strongest_contradiction
+
+            elif best_entailment >= 0.70:
+                claim_error = 1.0 - best_entailment
+
+            else:
+                # Evidence is inconclusive.
+                #
+                # This should indicate uncertainty rather than
+                # automatically declaring the claim false.
+                claim_error = max(
+                    0.50,
+                    strongest_contradiction,
+                    1.0 - best_entailment - (0.5 * best_neutral)
+                )
+
+            claim_error = max(
+                0.0,
+                min(1.0, claim_error)
+            )
+
+            claim_error_scores.append(claim_error)
+
+        factual_error = (
+            sum(claim_error_scores)
+            / len(claim_error_scores)
+        )
+
+        return (
+            round(factual_error, 4),
+            external_evidence
+        )
 
     def analyze(
         self,
         text: str,
         provided_evidence: List[EvidenceItem] = None
     ) -> Pillar1Result:
-        """
-        Execute Pillar 1 verification flow.
-        """
+
         if provided_evidence is None:
             provided_evidence = []
 
         claims = self.extract_claims(text)
-        fe_score, evidence = self.evaluate_claims_against_evidence(claims, provided_evidence)
+
+        fe_score, evidence = self.evaluate_claims_against_evidence(
+            claims,
+            provided_evidence
+        )
 
         if not claims:
-            reasoning = "No discrete factual claims identified in text."
-        elif fe_score < 0.2:
-            reasoning = f"High factual grounding. Identified {len(claims)} claim(s) backed by evidence."
-        elif fe_score < 0.5:
-            reasoning = f"Partial factual grounding. Identified {len(claims)} claim(s) with moderate evidence alignment."
+            reasoning = (
+                "No discrete factual claims identified."
+            )
+
+        elif not provided_evidence:
+            reasoning = (
+                f"Identified {len(claims)} factual claim(s), "
+                "but no external evidence was available. "
+                "Factual status remains uncertain."
+            )
+
+        elif fe_score < 0.20:
+            reasoning = (
+                f"High factual grounding. "
+                f"{len(claims)} claim(s) are strongly "
+                "entailed by retrieved evidence."
+            )
+
+        elif fe_score < 0.50:
+            reasoning = (
+                f"Moderate factual grounding. "
+                f"{len(claims)} claim(s) have partial "
+                "evidence support."
+            )
+
+        elif fe_score < 0.70:
+            reasoning = (
+                f"Insufficient or conflicting evidence detected "
+                f"for {len(claims)} claim(s)."
+            )
+
         else:
-            reasoning = f"Low factual grounding. Claims lack sufficient supporting evidence from reference sources."
+            reasoning = (
+                f"Strong factual inconsistency detected. "
+                f"Retrieved evidence contradicts one or more "
+                f"of the {len(claims)} analyzed claim(s)."
+            )
 
         return Pillar1Result(
             claims=claims,

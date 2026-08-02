@@ -72,3 +72,36 @@ class GeminiProvider(AbstractLLMProvider):
 
         # Final yield to indicate completion
         yield ProviderResponseChunk(text="", is_done=True)
+
+    async def generate_response(
+        self,
+        messages: List[dict],
+        temperature: float = 0.7,
+        system_prompt: str | None = None,
+    ) -> str:
+        """
+        Generate a complete non-streaming response text from Gemini using specified temperature.
+        """
+        formatted_messages = []
+        for msg in messages:
+            role = "model" if msg["role"] == "assistant" else "user"
+            formatted_messages.append({
+                "role": role,
+                "parts": [msg["content"]]
+            })
+
+        client = self._client
+        if system_prompt:
+            client = genai.GenerativeModel(
+                model_name=self._model_slug,
+                system_instruction=system_prompt
+            )
+
+        gen_config = GenerationConfig(temperature=temperature)
+        response = await client.generate_content_async(
+            contents=formatted_messages,
+            generation_config=gen_config,
+            stream=False
+        )
+
+        return response.text if hasattr(response, "text") and response.text else ""

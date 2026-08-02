@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use HalluciSense in your research, please cite it as below."
+authors:
+  - family-names: "Patil"
+    given-names: "Akash G."
+    affiliation: "Major Project Research Team"
+title: "HalluciSense: A Confidence-Aware Hybrid Framework for Detecting and Quantifying Hallucinations in Large Language Models"
+version: 1.0.0
+date-released: 2026-08-02
+url: "https://github.com/akashgpatil/hallucisense"
+repository-code: "https://github.com/akashgpatil/hallucisense"
+keywords:
+  - "hallucination detection"
+  - "large language models"
+  - "natural language inference"
+  - "evidence grounding"
+  - "structural consistency"
+  - "hybrid fusion"

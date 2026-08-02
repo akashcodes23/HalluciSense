@@ -23,20 +23,29 @@ class SentenceAnalysisResponse(BaseModel):
     risk_level: str
     color_code: str
     factual_error: float
-    confidence_gap: float
-    consistency_failure: float
+    confidence_gap: Optional[float] = None
+    consistency_failure: Optional[float] = None
+    reasoning: Optional[str] = None
     evidence: List[EvidenceItemResponse]
     model_config = ConfigDict(from_attributes=True)
+
+class PillarAvailability(BaseModel):
+    pillar1: bool = True
+    pillar2: bool = False
+    pillar3: bool = False
 
 class VerificationReportResponse(BaseModel):
     id: UUID
     message_id: UUID
     overall_h_score: float
     overall_risk_level: str
+    trust_score: Optional[float] = None
     factual_error_score: float
-    confidence_gap_score: float
-    consistency_failure_score: float
+    confidence_gap_score: Optional[float] = None
+    consistency_failure_score: Optional[float] = None
     weights_used: Dict[str, Any]
+    pillar_availability: Optional[PillarAvailability] = None
+    corrected_response: Optional[str] = None
     processing_time_ms: float
     sentence_analyses: List[SentenceAnalysisResponse]
     created_at: datetime

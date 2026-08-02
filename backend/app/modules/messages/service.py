@@ -7,9 +7,12 @@ from uuid import UUID
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from starlette.concurrency import run_in_threadpool
+
 from app.core.constants import MessageRole, VerificationStatus
 from app.core.engine.pipeline import HallucinationDetectionPipeline
 from app.core.exceptions import NotFoundError
+from app.workers.celery_app import celery_app
 from app.workers.tasks.verification_task import verify_response_task
 from app.models.chat import Chat
 from app.models.message import Message
@@ -52,13 +55,19 @@ class MessageService:
             user_id=user_id,
             role=MessageRole.USER,
             content=user_content,
-            verification_status=VerificationStatus.VERIFIED # User messages don't need verification
+            verification_status=VerificationStatus.COMPLETE  # User messages don't need verification
         )
         await self._repo.create(user_msg)
 
         # Build history for LLM
         history_msgs = await self._repo.get_messages_by_chat_id(chat_id)
-        provider_messages = [{"role": m.role, "content": m.content} for m in history_msgs]
+        provider_messages = [
+            {
+                "role": m.role.value if hasattr(m.role, "value") else str(m.role),
+                "content": m.content,
+            }
+            for m in history_msgs
+        ]
         
         # Stream from orchestrator
         orchestrator = LLMOrchestrator(primary_model=chat.model_used)
@@ -96,14 +105,24 @@ class MessageService:
         self._session.add(chat)
         await self._session.flush()
 
+        # Persist messages permanently before starting async verification task
+        await self._session.commit()
+
         # Run Verification Pipeline (Module 1 Integration) asynchronously via Celery
         # Map logits to the format expected by pipeline (list of floats)
         token_probs = []
-        if captured_logits:
-            token_probs = [l["logprob"] for l in captured_logits]
+        import math
 
-        # Dispatch background task
-        verify_response_task.delay(str(ai_msg.id), full_ai_text, token_probs)
+        token_probs = None
+
+        if captured_logits:
+            token_probs = [
+                max(0.0, min(1.0, math.exp(l["logprob"])))
+                for l in captured_logits
+            ]
+
+        # Dispatch background task without blocking the event loop
+        await run_in_threadpool(verify_response_task.delay, str(ai_msg.id), full_ai_text, token_probs)
 
         # We return the message ID immediately. The client will be notified via WebSocket
         # when the verification task completes and updates the database.
@@ -134,8 +153,11 @@ class MessageService:
         chat.last_message_at = ai_msg.created_at
         self._session.add(chat)
         await self._session.flush()
+        
+        # Persist message permanently before async verification task
+        await self._session.commit()
 
-        # Dispatch background task with empty token probabilities
-        verify_response_task.delay(str(ai_msg.id), content, [])
+        # Dispatch background task — None signals P2 unavailable (no logprobs)
+        await run_in_threadpool(verify_response_task.delay, str(ai_msg.id), content, None)
 
         return ai_msg.id

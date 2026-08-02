@@ -10,6 +10,11 @@ export const verificationService = {
     const response = await api.get(`/verification/${messageId}/sentence/${sentenceIndex}`);
     return response.data;
   },
+  
+  verifyText: async (text: string) => {
+    const response = await api.post('/verification/verify-text', { text });
+    return response.data;
+  },
 };
 
 // Mock data generator for Sprint 5 UI development (no live backend needed)

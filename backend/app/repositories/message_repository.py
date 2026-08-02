@@ -9,6 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.models.message import Message
+from app.models.verification_report import VerificationReport
+from app.models.sentence_analysis import SentenceAnalysis
 from app.repositories.base import BaseRepository
 
 
@@ -25,14 +27,16 @@ class MessageRepository(BaseRepository[Message]):
     async def get_messages_by_chat_id(self, chat_id: UUID) -> List[Message]:
         """
         Fetch all messages for a given chat, ordered by creation time.
-        Eagerly loads the verification report if present.
+        Eagerly loads the verification report and its nested analyses if present.
         """
         result = await self._session.execute(
             select(Message)
             .options(
-                selectinload(Message.verification_report)
-                .selectinload(Message.verification_report.class_.sentence_analyses)
-                .selectinload(Message.verification_report.class_.sentence_analyses.property.mapper.class_.evidence_items)
+                selectinload(Message.verification_report).options(
+                    selectinload(VerificationReport.sentence_analyses).options(
+                        selectinload(SentenceAnalysis.evidence_items)
+                    )
+                )
             )
             .where(Message.chat_id == chat_id)
             .order_by(Message.created_at.asc())
@@ -46,9 +50,11 @@ class MessageRepository(BaseRepository[Message]):
         result = await self._session.execute(
             select(Message)
             .options(
-                selectinload(Message.verification_report)
-                .selectinload(Message.verification_report.class_.sentence_analyses)
-                .selectinload(Message.verification_report.class_.sentence_analyses.property.mapper.class_.evidence_items)
+                selectinload(Message.verification_report).options(
+                    selectinload(VerificationReport.sentence_analyses).options(
+                        selectinload(SentenceAnalysis.evidence_items)
+                    )
+                )
             )
             .where(Message.id == message_id)
         )

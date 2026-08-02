@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   MessageSquarePlus, Settings, LogOut, PanelLeftClose, 
-  Database, History, MessageSquare, MoreVertical, Edit2, Trash2 
+  Database, History, MessageSquare, MoreVertical, Edit2, Trash2, ShieldCheck
 } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
 import { useChatStore } from '../../stores/chatStore';
@@ -154,6 +154,10 @@ export function Sidebar({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSide
             <Link href="/dashboard" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out ${pathname === '/dashboard' && !activeChatId ? 'bg-white/10 text-white' : 'hover:bg-white/5 text-slate-400'}`}>
               <MessageSquarePlus className="w-4 h-4" />
               <span className="text-sm">New Session</span>
+            </Link>
+            <Link href="/verify" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out ${pathname === '/verify' ? 'bg-white/10 text-white' : 'hover:bg-white/5 text-slate-400'}`}>
+              <ShieldCheck className="w-4 h-4" />
+              <span className="text-sm">Verification Engine</span>
             </Link>
           </nav>
         </div>

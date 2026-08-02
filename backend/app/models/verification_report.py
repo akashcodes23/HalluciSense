@@ -6,7 +6,7 @@ Has a 1-to-1 relationship with Message.
 import uuid
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlalchemy import Float, ForeignKey, JSON, String
+from sqlalchemy import Float, ForeignKey, JSON, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.constants import RiskLevel
@@ -48,13 +48,14 @@ class VerificationReport(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         String(30), nullable=False, default=RiskLevel.NEEDS_VERIFICATION, index=True
     )
     factual_error_score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
-    confidence_gap_score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
-    consistency_failure_score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    confidence_gap_score: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    consistency_failure_score: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     weights_used: Mapped[dict] = mapped_column(JSON, nullable=False, default=dict)
     pillar1_summary: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     pillar2_summary: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     pillar3_summary: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     processing_time_ms: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    corrected_response: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     # ── Relationships ─────────────────────────────────────────────────────────
     message: Mapped["Message"] = relationship(

@@ -52,8 +52,8 @@ class SentenceAnalysis(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     )
     color_code: Mapped[str] = mapped_column(String(10), nullable=False, default="#F59E0B")
     factual_error: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
-    confidence_gap: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
-    consistency_failure: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    confidence_gap: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    consistency_failure: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     reasoning: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     # ── Relationships ─────────────────────────────────────────────────────────

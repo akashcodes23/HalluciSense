@@ -20,8 +20,8 @@ def test_pillar1_retrieval_low_grounding():
     text = "The Eiffel Tower is located in the center of downtown Tokyo."
     result = engine.analyze(text, [])
 
-    assert result.factual_error_score == 1.0
-    assert "Low factual grounding" in result.reasoning
+    assert result.factual_error_score == 0.5
+    assert "uncertain" in result.reasoning.lower()
 
 def test_pillar2_confidence_entropy():
     engine = Pillar2ConfidenceEngine()
@@ -41,7 +41,7 @@ def test_pillar2_confidence_tokens():
 
     assert result.avg_probability > 0.90
     assert result.confidence_gap_score < 0.2
-    assert "High token confidence" in result.reasoning
+    assert "High model confidence" in result.reasoning
 
 def test_pillar3_consistency_evaluation():
     engine = Pillar3ConsistencyEngine()

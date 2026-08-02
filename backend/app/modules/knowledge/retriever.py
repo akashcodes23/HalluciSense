@@ -7,6 +7,9 @@ from app.modules.knowledge.wikipedia import WikipediaKnowledgeSource
 from app.modules.knowledge.faiss_store import FAISSVectorStore
 from app.modules.knowledge.bm25_retriever import BM25Retriever
 from app.modules.knowledge.cross_encoder import CrossEncoderReranker
+import structlog
+
+logger = structlog.get_logger(__name__)
 
 class HybridRetriever:
     """
@@ -34,6 +37,7 @@ class HybridRetriever:
         all_evidence = []
         
         for claim in claims:
+            logger.info("retrieving_evidence_for_claim", claim=claim)
             # 1. Fetch from Wikipedia (External Factual)
             wiki_results = self.wiki.retrieve(claim)
             for w in wiki_results:
@@ -79,3 +83,14 @@ class HybridRetriever:
         top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5)
         
         return top_evidence
+
+    def get_evidence(self, query: str) -> List[dict]:
+        """Retrieve evidence passages for a single query text."""
+        if not hasattr(self, "_query_cache"):
+            self._query_cache = {}
+        if query in self._query_cache:
+            return self._query_cache[query]
+        res = self.retrieve([query]) if query else []
+        self._query_cache[query] = res
+        return res
+

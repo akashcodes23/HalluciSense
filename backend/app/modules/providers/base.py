@@ -30,5 +30,15 @@ class AbstractLLMProvider(Protocol):
         Must yield ProviderResponseChunk objects containing text and optionally logits.
         """
         ...
-        # Workaround for Python AST parser issue with protocols containing yield
         yield ProviderResponseChunk(text="", is_done=True) # type: ignore
+
+    async def generate_response(
+        self,
+        messages: List[dict],
+        temperature: float = 0.7,
+        system_prompt: str | None = None
+    ) -> str:
+        """
+        Generate a complete non-streaming response text.
+        """
+        ...

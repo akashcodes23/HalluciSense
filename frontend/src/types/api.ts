@@ -103,6 +103,22 @@ export interface SentenceAnalysis {
   confidence_gap: number;
   consistency_failure: number;
   evidence: EvidenceItem[];
+  reasoning?: string;
+  corrected_response?: string;
+}
+
+export interface StandaloneVerificationResponse {
+  overall_h_score: number;
+  risk_level: RiskLevel;
+  trust_score: number;
+  confidence_score: number;
+  evidence_coverage: number;
+  verified_claims: number;
+  hallucinated_claims: number;
+  sentence_analysis: SentenceAnalysis[];
+  corrected_response?: string;
+  summary: string;
+  processing_time: number;
 }
 
 export interface VerificationReport {

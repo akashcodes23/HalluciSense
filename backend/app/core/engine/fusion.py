@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Optional
 from .types import RiskLevel, Pillar1Result, Pillar2Result, Pillar3Result
 from ..config import settings
 
@@ -7,40 +7,75 @@ class FusionEngine:
     Hybrid Fusion Engine.
     Combines Factual Error (FE), Confidence Gap (CG), and Consistency Failure (CF)
     using formula: H = alpha * FE + beta * CG + gamma * CF
+
+    Dynamically renormalizes weights if CG or CF metrics are unavailable (None).
     """
 
     def __init__(
         self,
-        alpha: float = None,
-        beta: float = None,
-        gamma: float = None
+        alpha: Optional[float] = None,
+        beta: Optional[float] = None,
+        gamma: Optional[float] = None
     ):
         self.alpha = alpha if alpha is not None else settings.ALPHA_FACTUAL_ERROR
         self.beta = beta if beta is not None else settings.BETA_CONFIDENCE_GAP
         self.gamma = gamma if gamma is not None else settings.GAMMA_CONSISTENCY_FAILURE
 
-        # Normalize weights to ensure sum = 1.0
+        # Normalize configured base weights to ensure sum = 1.0
         total_weight = self.alpha + self.beta + self.gamma
         if total_weight > 0:
             self.alpha = round(self.alpha / total_weight, 4)
             self.beta = round(self.beta / total_weight, 4)
             self.gamma = round(self.gamma / total_weight, 4)
 
+    def get_effective_weights(self, cg_available: bool, cf_available: bool) -> Dict[str, float]:
+        """
+        Compute effective weights for fusion dynamically without mutating base configured weights.
+        """
+        w_alpha = self.alpha
+        w_beta = self.beta if cg_available else 0.0
+        w_gamma = self.gamma if cf_available else 0.0
+
+        total = w_alpha + w_beta + w_gamma
+        if total > 0:
+            eff_alpha = round(w_alpha / total, 4)
+            eff_beta = round(w_beta / total, 4)
+            eff_gamma = round(w_gamma / total, 4)
+        else:
+            eff_alpha = 1.0
+            eff_beta = 0.0
+            eff_gamma = 0.0
+
+        return {
+            "alpha_factual_error": eff_alpha,
+            "beta_confidence_gap": eff_beta,
+            "gamma_consistency_failure": eff_gamma,
+        }
+
     def compute_h_score(
         self,
         fe: float,
-        cg: float,
-        cf: float
+        cg: Optional[float],
+        cf: Optional[float]
     ) -> float:
         """
-        Compute aggregate H-Score in range [0.0, 1.0]
-        H = alpha * FE + beta * CG + gamma * CF
+        Compute aggregate H-Score in range [0.0, 1.0].
+        Dynamically renormalizes weights for available metrics (where metric is not None).
         """
         fe_clamped = max(0.0, min(1.0, fe))
-        cg_clamped = max(0.0, min(1.0, cg))
-        cf_clamped = max(0.0, min(1.0, cf))
+        cg_available = cg is not None
+        cf_available = cf is not None
 
-        h_score = (self.alpha * fe_clamped) + (self.beta * cg_clamped) + (self.gamma * cf_clamped)
+        eff_weights = self.get_effective_weights(cg_available=cg_available, cf_available=cf_available)
+
+        h_score = (eff_weights["alpha_factual_error"] * fe_clamped)
+        if cg_available and cg is not None:
+            cg_clamped = max(0.0, min(1.0, cg))
+            h_score += (eff_weights["beta_confidence_gap"] * cg_clamped)
+        if cf_available and cf is not None:
+            cf_clamped = max(0.0, min(1.0, cf))
+            h_score += (eff_weights["gamma_consistency_failure"] * cf_clamped)
+
         return round(max(0.0, min(1.0, h_score)), 4)
 
     def determine_risk_level(self, h_score: float) -> Tuple[RiskLevel, str]:
@@ -65,18 +100,26 @@ class FusionEngine:
     ) -> Tuple[float, RiskLevel, str, Dict[str, float]]:
         """
         Fuse individual pillar results into final metrics.
+        Handles p2.confidence_gap_score being None and p3.consistency_failure_score being None safely.
         """
+        cg_score = p2.confidence_gap_score if (p2 and getattr(p2, 'available', False)) else None
+        if p2 and p2.confidence_gap_score is None:
+            cg_score = None
+
+        cf_score = p3.consistency_failure_score if (p3 and getattr(p3, 'available', False)) else None
+        if p3 and p3.consistency_failure_score is None:
+            cf_score = None
+
         h_score = self.compute_h_score(
             fe=p1.factual_error_score,
-            cg=p2.confidence_gap_score,
-            cf=p3.consistency_failure_score
+            cg=cg_score,
+            cf=cf_score
         )
 
         risk_level, color_code = self.determine_risk_level(h_score)
-        weights_used = {
-            "alpha_factual_error": self.alpha,
-            "beta_confidence_gap": self.beta,
-            "gamma_consistency_failure": self.gamma
-        }
+        weights_used = self.get_effective_weights(
+            cg_available=(cg_score is not None),
+            cf_available=(cf_score is not None)
+        )
 
         return h_score, risk_level, color_code, weights_used

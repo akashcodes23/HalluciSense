@@ -8,8 +8,8 @@ from app.core.config import settings
 # Initialize Celery app
 celery_app = Celery(
     "hallucisense_worker",
-    broker=str(settings.REDIS_URL),
-    backend=str(settings.REDIS_URL),
+    broker=str(settings.CELERY_BROKER_URL),
+    backend=str(settings.CELERY_RESULT_BACKEND),
     include=["app.workers.tasks.verification_task"]
 )
 

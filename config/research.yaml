@@ -1,0 +1,19 @@
+# HalluciSense Research Configuration
+environment: research
+debug: true
+random_seed: 42
+
+evaluations:
+  n_dev_samples: 58002
+  n_val_samples: 12483
+  bootstrap_resamples: 2000
+  cv_splits: 5
+  cv_repeats: 3
+
+feature_subsets:
+  SET_A_FULL_HYBRID: 19
+  SET_B_LATE_FUSION: 4
+  SET_C_MID_LEVEL_LOCKED: 10
+  SET_D_COMPACT_HYBRID: 7
+  SET_E_META_SIGNALS_ONLY: 7
+  SET_F_EVIDENCE_PLUS_CONTRADICTION: 6

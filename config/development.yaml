@@ -1,0 +1,14 @@
+# HalluciSense Development Configuration
+environment: development
+debug: true
+random_seed: 42
+
+api:
+  host: "127.0.0.1"
+  port: 8000
+  reload: true
+  workers: 1
+
+logging:
+  level: "DEBUG"
+  format: "console"

@@ -160,10 +160,17 @@ export default function ChatPage() {
       (error) => {
         setStreaming(false);
         console.error('[ChatPage] Streaming error:', error);
+        
+        // Find and remove the stuck PROCESSING placeholder message
+        setMessages(useChatStore.getState().messages.filter(m => m.id !== aiPlaceholderId));
+        
+        import('react-hot-toast').then(({ toast }) => {
+            toast.error(error);
+        });
       }
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, chatId, inputMode, selectedModel]);
+  }, [accessToken, chatId, inputMode, selectedModel, setMessages, setStreaming, clearStream, addMessage, appendStreamToken]);
 
   return (
     <div className="flex flex-1 h-full overflow-hidden relative">

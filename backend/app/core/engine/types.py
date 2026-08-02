@@ -37,16 +37,52 @@ if USE_PYDANTIC:
         reasoning: str = Field(...)
 
     class Pillar2Result(BaseModel):
-        avg_probability: float = Field(..., ge=0.0, le=1.0)
-        avg_entropy: float = Field(..., ge=0.0)
-        confidence_gap_score: float = Field(..., ge=0.0, le=1.0)
+        avg_probability: Optional[float] = Field(
+            None,
+            ge=0.0,
+            le=1.0,
+        )
+
+        avg_entropy: Optional[float] = Field(
+            None,
+            ge=0.0,
+        )
+
+        confidence_gap_score: Optional[float] = Field(
+            None,
+            ge=0.0,
+            le=1.0,
+        )
+
+        available: bool = Field(default=False)
+
         reasoning: str = Field(...)
+
+    class NLIAnalysis(BaseModel):
+        primary_claim: str
+        comparison_claim: str
+        semantic_similarity: float
+        entailment_probability: Optional[float] = None
+        neutral_probability: Optional[float] = None
+        contradiction_probability: Optional[float] = None
+        label: Optional[str] = "unavailable"
+        nli_available: bool = False
 
     class Pillar3Result(BaseModel):
         sample_responses: List[str] = Field(default_factory=list)
         pairwise_similarities: List[float] = Field(default_factory=list)
-        consistency_failure_score: float = Field(..., ge=0.0, le=1.0)
+        consistency_failure_score: Optional[float] = Field(
+            None,
+            ge=0.0,
+            le=1.0,
+        )
+        similarity_method: str = Field(default="unavailable")
+        nli_analyses: List[NLIAnalysis] = Field(default_factory=list)
+        contradiction_score: Optional[float] = Field(None)
+        nli_available: bool = Field(default=False)
+        alignment_method: str = Field(default="sentence_semantic_alignment")
         reasoning: str = Field(...)
+        available: bool = Field(default=False)
 
     class SentenceAnalysis(BaseModel):
         sentence_id: int = Field(...)
@@ -54,16 +90,18 @@ if USE_PYDANTIC:
         start_char: int = Field(...)
         end_char: int = Field(...)
         factual_error: float = Field(..., ge=0.0, le=1.0)
-        confidence_gap: float = Field(..., ge=0.0, le=1.0)
-        consistency_failure: float = Field(..., ge=0.0, le=1.0)
+        confidence_gap: Optional[float] = Field(None, ge=0.0, le=1.0)
+        consistency_failure: Optional[float] = Field(None, ge=0.0, le=1.0)
         hallucination_score: float = Field(..., ge=0.0, le=1.0)
         risk_level: RiskLevel
         color_code: str
         evidence: List[EvidenceItem] = Field(default_factory=list)
         reasoning: str = Field(...)
+        corrected_response: Optional[str] = Field(None)
 
     class HallucinationReport(BaseModel):
         full_text: str = Field(...)
+        corrected_response: Optional[str] = Field(None)
         overall_h_score: float = Field(..., ge=0.0, le=1.0)
         overall_risk_level: RiskLevel
         sentence_analyses: List[SentenceAnalysis] = Field(default_factory=list)
@@ -105,17 +143,35 @@ else:
 
     @dataclass
     class Pillar2Result:
-        avg_probability: float
-        avg_entropy: float
-        confidence_gap_score: float
+        avg_probability: Optional[float]
+        avg_entropy: Optional[float]
+        confidence_gap_score: Optional[float]
         reasoning: str
+        available: bool = False
+
+    @dataclass
+    class NLIAnalysis:
+        primary_claim: str
+        comparison_claim: str
+        semantic_similarity: float
+        entailment_probability: Optional[float] = None
+        neutral_probability: Optional[float] = None
+        contradiction_probability: Optional[float] = None
+        label: Optional[str] = "unavailable"
+        nli_available: bool = False
 
     @dataclass
     class Pillar3Result:
-        consistency_failure_score: float
+        consistency_failure_score: Optional[float]
         reasoning: str
         sample_responses: List[str] = field(default_factory=list)
         pairwise_similarities: List[float] = field(default_factory=list)
+        similarity_method: str = "unavailable"
+        nli_analyses: List[NLIAnalysis] = field(default_factory=list)
+        contradiction_score: Optional[float] = None
+        nli_available: bool = False
+        alignment_method: str = "sentence_semantic_alignment"
+        available: bool = False
 
     @dataclass
     class SentenceAnalysis:
@@ -124,17 +180,19 @@ else:
         start_char: int
         end_char: int
         factual_error: float
-        confidence_gap: float
-        consistency_failure: float
+        confidence_gap: Optional[float]
+        consistency_failure: Optional[float]
         hallucination_score: float
         risk_level: RiskLevel
         color_code: str
         reasoning: str
         evidence: List[EvidenceItem] = field(default_factory=list)
+        corrected_response: Optional[str] = None
 
     @dataclass
     class HallucinationReport:
         full_text: str
+        corrected_response: Optional[str] = None
         overall_h_score: float
         overall_risk_level: RiskLevel
         pillar1_summary: Pillar1Result

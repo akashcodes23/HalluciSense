@@ -2,7 +2,8 @@
 LLM Orchestrator Service.
 Handles routing, retries, and provider fallback logic for LLM generation.
 """
-from typing import AsyncGenerator, List
+import asyncio
+from typing import AsyncGenerator, List, Optional
 import structlog
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
@@ -62,3 +63,71 @@ class LLMOrchestrator:
                     raise ProviderExhaustedError("All available LLM providers failed to generate a response.")
             else:
                 raise ProviderExhaustedError("Primary LLM provider failed and no fallback available.")
+
+    async def generate_response(
+        self,
+        messages: List[dict],
+        temperature: float = 0.7,
+        system_prompt: Optional[str] = None
+    ) -> str:
+        """
+        Non-streaming response generation with error handling.
+        """
+        provider = self._get_provider_with_retry(self.primary_model)
+        return await provider.generate_response(messages, temperature=temperature, system_prompt=system_prompt)
+
+    async def generate_samples(
+        self,
+        messages: List[dict],
+        count: int = 3,
+        temperature: float = 0.7,
+        system_prompt: Optional[str] = None
+    ) -> List[str]:
+        """
+        Generates alternate responses concurrently for self-consistency testing.
+        Fails safely per sample without raising an exception for the overall batch.
+        """
+        logger.info(
+            "consistency_sampling_started",
+            provider=self.primary_model,
+            requested_samples=count
+        )
+
+        try:
+            provider = self._get_provider_with_retry(self.primary_model)
+        except Exception as exc:
+            logger.warning("consistency_sampling_provider_init_failed", error=str(exc))
+            return []
+
+        async def _single_sample(index: int) -> Optional[str]:
+            try:
+                sample_text = await asyncio.wait_for(
+                    provider.generate_response(messages, temperature=temperature, system_prompt=system_prompt),
+                    timeout=30.0
+                )
+                sample_clean = sample_text.strip() if sample_text else ""
+                if sample_clean:
+                    logger.info("consistency_sample_generated", sample_index=index, length=len(sample_clean))
+                    return sample_clean
+                else:
+                    logger.warning("consistency_sample_failed", sample_index=index, error="empty_response")
+                    return None
+            except Exception as e:
+                logger.warning("consistency_sample_failed", sample_index=index, error=str(e))
+                return None
+
+        tasks = [_single_sample(i) for i in range(count)]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        valid_samples: List[str] = []
+        for res in results:
+            if isinstance(res, str) and res.strip():
+                valid_samples.append(res.strip())
+
+        logger.info(
+            "consistency_sampling_completed",
+            requested_samples=count,
+            successful_samples=len(valid_samples)
+        )
+
+        return valid_samples

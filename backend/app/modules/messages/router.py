@@ -54,12 +54,17 @@ async def stream_chat_messages(
 
     try:
         # Validate WebSocket token manually
-        payload = decode_token(token)
-        user_id_str = payload.get("sub")
-        if not user_id_str:
-            await websocket.close(code=1008, reason="Invalid token")
+        try:
+            payload = decode_token(token)
+            user_id_str = payload.get("sub")
+            if not user_id_str:
+                await websocket.close(code=1008, reason="Invalid token payload")
+                return
+            user_id = UUID(user_id_str)
+        except Exception as e:
+            # Catch JWTError, ExpiredSignatureError, etc.
+            await websocket.close(code=1008, reason=f"Token invalid or expired: {str(e)}")
             return
-        user_id = UUID(user_id_str)
         
         # Wait for user input
         data = await websocket.receive_text()
@@ -78,7 +83,11 @@ async def stream_chat_messages(
                 await websocket.send_json(chunk)
 
             # Close normally after verification completes
-            await websocket.close(code=1000, reason="Completed")
+            try:
+                await websocket.close(code=1000, reason="Completed")
+            except Exception:
+                # Client may have already closed the socket upon receiving verification_dispatched
+                pass
 
     except WebSocketDisconnect:
         # Client disconnected during stream
@@ -86,7 +95,10 @@ async def stream_chat_messages(
     except Exception as e:
         import traceback
         traceback.print_exc()
-        await websocket.close(code=1011, reason=str(e))
+        try:
+            await websocket.close(code=1011, reason=str(e)[:120])
+        except Exception:
+            pass
 
 
 @router.post(

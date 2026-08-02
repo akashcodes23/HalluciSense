@@ -1,0 +1,35 @@
+# HalluciSense Production Configuration
+environment: production
+debug: false
+random_seed: 42
+
+models:
+  pillar1:
+    name: "Pillar 1 (Evidence Consistency)"
+    scaler: "RobustScaler"
+    model_type: "LogisticRegression"
+    operating_threshold: 0.56
+  pillar2:
+    name: "Pillar 2 (Structural Consistency)"
+    scaler: "StandardScaler"
+    model_type: "RandomForestClassifier"
+    operating_threshold: 0.57
+  hybrid:
+    name: "Candidate 5 (HistGradientBoosting)"
+    set_key: "SET_A_FULL_HYBRID"
+    scaler: "RobustScaler"
+    model_type: "HistGradientBoostingClassifier"
+    operating_threshold: 0.54
+    calibration_method: "Raw Probabilities"
+
+nli_engine:
+  model_name: "cross-encoder/nli-deberta-v3-small"
+  device: "auto"
+  max_length: 512
+  batch_size: 32
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  rate_limit_per_min: 120

@@ -23,7 +23,7 @@ class VerificationRepository(BaseRepository[VerificationReport]):
             .where(VerificationReport.message_id == message_id)
             .options(
                 selectinload(VerificationReport.sentence_analyses)
-                .selectinload(SentenceAnalysis.evidence)
+                .selectinload(SentenceAnalysis.evidence_items)
             )
         )
         result = await self.session.execute(stmt)
