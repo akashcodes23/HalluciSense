@@ -1766,9 +1766,9 @@ Every contribution helps improve trustworthy AI.
 
 For research collaborations, project discussions, or technical questions:
 
-📧 Email: your-email@example.com
+📧 Email: akashgpatil23.05@gmail.com
 
-💼 LinkedIn: https://linkedin.com/in/your-profile
+💼 LinkedIn: https://linkedin.com/akash-g-patil
 
 🐙 GitHub: https://github.com/akashcodes23
 
