@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: hallucisense-api
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONUNBUFFERED
+        value: "1"

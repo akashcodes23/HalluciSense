@@ -177,6 +177,9 @@ def create_application() -> FastAPI:
     from app.modules.hallucisense.router import router as hallucisense_router
     app.include_router(hallucisense_router, prefix=settings.API_V1_STR)
 
+    from app.modules.pillar2.router import router as pillar2_router
+    app.include_router(pillar2_router, prefix=settings.API_V1_STR)
+
     # ── Health Check ──────────────────────────────────────────────────────────
     @app.get("/health", tags=["System"], summary="Health check")
     async def health_check():

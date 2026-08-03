@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "HalluciSense Enterprise API",
+    "description": "Evidence-Aware Multi-LLM Verification Engine for Hallucination Detection",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.hallucisense.ai/api/v1",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/pillar2/verify": {
+      "post": {
+        "summary": "Verify response text for hallucinations",
+        "parameters": [
+          {
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "pillar1_probability": {
+                    "type": "number",
+                    "default": 0.5
+                  }
+                },
+                "required": ["text"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification result payload"
+          }
+        }
+      }
+    },
+    "/pillar2/health": {
+      "get": {
+        "summary": "Get system health status",
+        "responses": {
+          "200": {
+            "description": "System health payload"
+          }
+        }
+      }
+    }
+  }
+}

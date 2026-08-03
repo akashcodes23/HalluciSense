@@ -57,16 +57,21 @@ class ModelRegistry:
         logger.info("loading_pillar2_model")
         p2_dir = self.results_dir / "phase6l" / "final_model"
 
-        meta = {"operating_threshold": 0.57, "scaler": "StandardScaler", "model": "HistGradientBoostingClassifier"}
-        meta_path = p2_dir / "model_metadata.json"
-        if meta_path.exists():
-            with open(meta_path, "r", encoding="utf-8") as f:
-                meta = json.load(f)
+        if (p2_dir / "preprocessing.joblib").exists() and (p2_dir / "classifier.joblib").exists():
+            meta = {"operating_threshold": 0.57, "scaler": "StandardScaler", "model": "HistGradientBoostingClassifier"}
+            meta_path = p2_dir / "model_metadata.json"
+            if meta_path.exists():
+                with open(meta_path, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
 
-        scaler = joblib.load(p2_dir / "preprocessing.joblib")
-        clf = joblib.load(p2_dir / "classifier.joblib")
+            scaler = joblib.load(p2_dir / "preprocessing.joblib")
+            clf = joblib.load(p2_dir / "classifier.joblib")
 
-        self._pillar2_cache = (scaler, clf, meta)
+            self._pillar2_cache = (scaler, clf, meta)
+        else:
+            logger.info("pillar2_model_not_found_falling_back_to_pillar1")
+            self._pillar2_cache = self.load_pillar1_model()
+
         return self._pillar2_cache
 
     def load_hybrid_model(self) -> Tuple[Any, Any, Dict[str, Any]]:
@@ -77,13 +82,20 @@ class ModelRegistry:
         logger.info("loading_hybrid_model")
         h_dir = self.results_dir / "phase6m" / "final_hybrid_model"
         
-        scaler = joblib.load(h_dir / "preprocessing.joblib")
-        clf = joblib.load(h_dir / "hybrid_meta_classifier.joblib")
+        if (h_dir / "preprocessing.joblib").exists() and (h_dir / "hybrid_meta_classifier.joblib").exists():
+            scaler = joblib.load(h_dir / "preprocessing.joblib")
+            clf = joblib.load(h_dir / "hybrid_meta_classifier.joblib")
 
-        with open(h_dir / "model_metadata.json", "r", encoding="utf-8") as f:
-            meta = json.load(f)
+            meta = {}
+            if (h_dir / "model_metadata.json").exists():
+                with open(h_dir / "model_metadata.json", "r", encoding="utf-8") as f:
+                    meta = json.load(f)
 
-        self._hybrid_cache = (scaler, clf, meta)
+            self._hybrid_cache = (scaler, clf, meta)
+        else:
+            logger.info("hybrid_model_not_found_falling_back_to_pillar1")
+            self._hybrid_cache = self.load_pillar1_model()
+
         return self._hybrid_cache
 
     def verify_checksums(self) -> Dict[str, bool]:

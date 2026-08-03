@@ -1,0 +1,37 @@
+{
+  "project": "HalluciSense Enterprise SaaS Platform",
+  "version": "12.0.0",
+  "deployments": {
+    "frontend": {
+      "provider": "Vercel",
+      "framework": "Next.js 14",
+      "build_command": "npm run build",
+      "environment_variables": {
+        "NEXT_PUBLIC_API_BASE_URL": "https://api.hallucisense.ai/api/v1"
+      }
+    },
+    "backend": {
+      "provider": "Railway",
+      "region": "us-east-1",
+      "health_check_path": "/health",
+      "environment_variables": {
+        "DATABASE_URL": "postgresql://neondb_owner:...@ep-cool-env...neon.tech/neondb?sslmode=require",
+        "REDIS_URL": "rediss://default:...@upstash.io:6379",
+        "SECRET_KEY": "hs_sec_production_key"
+      }
+    },
+    "database": {
+      "provider": "Neon PostgreSQL",
+      "plan": "Serverless Autoscale",
+      "features": ["Point-in-Time Recovery", "Read Replicas"]
+    },
+    "cache": {
+      "provider": "Upstash Redis",
+      "eviction_policy": "volatile-lru"
+    },
+    "storage": {
+      "provider": "Cloudflare R2",
+      "bucket_name": "hallucisense-reports-prod"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "info": {
+    "name": "HalluciSense v1.0.0 Enterprise Postman Collection",
+    "description": "Production API Collection for HalluciSense Hallucination Verification SaaS Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Verification Endpoint",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-API-Key",
+            "value": "{{API_KEY}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"Albert Einstein published special relativity in 1905.\",\n  \"pillar1_probability\": 0.15\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/v1/pillar2/verify",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "v1", "pillar2", "verify"]
+        }
+      }
+    },
+    {
+      "name": "System Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/health",
+          "host": ["{{BASE_URL}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Prometheus Metrics",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/metrics",
+          "host": ["{{BASE_URL}}"],
+          "path": ["metrics"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "https://api.hallucisense.ai"
+    },
+    {
+      "key": "API_KEY",
+      "value": "hs_live_demo_key"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "hallucisense-frontend",
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/v1/(.*)",
+      "dest": "https://api.hallucisense.ai/api/v1/$1"
+    }
+  ]
+}

@@ -140,16 +140,17 @@ def generate_partition_manifest_for_dataset(
 
 def generate_all_partition_manifests() -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     datasets = [
-        ("HaluBench", "processed/halubench/benchmark.jsonl", "manifests/halubench.json"),
-        ("RAGTruth", "processed/ragtruth/benchmark.jsonl", "manifests/ragtruth.json"),
-        ("HaluEval", "processed/halueval/benchmark.jsonl", "manifests/halueval.json"),
+        ("HaluBench", "processed/halubench/benchmark.jsonl"),
+        ("RAGTruth", "processed/ragtruth/benchmark.jsonl"),
+        ("HaluEval", "processed/halueval/benchmark.jsonl"),
     ]
 
     dataset_manifests = []
     combined_checksums = {}
 
-    for name, proc_path, mf_path in datasets:
-        src_sha = compute_file_sha256(DATASET_ROOT / mf_path)
+    for name, proc_path in datasets:
+        src_file = DATASET_ROOT / proc_path
+        src_sha = compute_file_sha256(src_file) if src_file.exists() else "N/A"
         m = generate_partition_manifest_for_dataset(name, proc_path, src_sha)
         dataset_manifests.append(m)
 

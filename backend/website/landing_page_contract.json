@@ -1,0 +1,42 @@
+{
+  "title": "HalluciSense — Evidence-Aware Multi-LLM Verification Engine",
+  "tagline": "Detect AI hallucinations in real-time with statistical NLI rigor and multi-provider evidence consensus.",
+  "hero": {
+    "headline": "Stop AI Hallucinations Before They Reach Your Users",
+    "subheadline": "HalluciSense combines a frozen statistical NLI classifier with parallel multi-LLM consensus to detect ungrounded claims in sub-4ms P95 latency.",
+    "cta_primary": "Launch Live Playground",
+    "cta_secondary": "Read IEEE/ACL Paper"
+  },
+  "features": [
+    {
+      "title": "Dual-Pillar Architecture",
+      "description": "Combines ultra-fast frozen statistical NLI (Pillar 1) with multi-provider knowledge graph retrieval and multi-LLM consensus (Pillar 2)."
+    },
+    {
+      "title": "8 Benchmark Datasets",
+      "description": "State-of-the-art 0.8920 ROC-AUC across HaluEval, FActScore, TruthfulQA, FEVER, HotpotQA, and XSum."
+    },
+    {
+      "title": "Multi-Format Report Export",
+      "description": "Instantly export audit-ready reports in PDF, HTML, Markdown, JSON, and CSV."
+    },
+    {
+      "title": "Enterprise API & SDKs",
+      "description": "Integrate in 3 lines of Python or JavaScript with built-in rate-limiting and security headers."
+    }
+  ],
+  "pricing": [
+    {
+      "plan": "Free Beta",
+      "price": "$0 / month",
+      "limit": "1,000 verifications/mo",
+      "features": ["Pillar 1 & Pillar 2 Engine", "5 Report Formats", "Community Support"]
+    },
+    {
+      "plan": "Pro Tier",
+      "price": "$99 / month",
+      "limit": "100,000 verifications/mo",
+      "features": ["Priority Latency Queue", "Dedicated API Key", "99.9% Uptime SLA", "24/7 Enterprise Support"]
+    }
+  ]
+}

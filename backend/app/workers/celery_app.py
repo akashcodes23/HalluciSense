@@ -1,19 +1,22 @@
 """
-Celery Application Factory.
-Configures Celery to use Redis as broker and backend for async tasks.
+HalluciSense SaaS — Module 12.6: Celery & Redis Task Queue Configuration
+========================================================================
+Celery application instance configured for background verification execution.
 """
-from celery import Celery
-from app.core.config import settings
 
-# Initialize Celery app
+from __future__ import annotations
+
+import os
+from celery import Celery
+
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+
 celery_app = Celery(
-    "hallucisense_worker",
-    broker=str(settings.CELERY_BROKER_URL),
-    backend=str(settings.CELERY_RESULT_BACKEND),
-    include=["app.workers.tasks.verification_task"]
+    "hallucisense_tasks",
+    broker=REDIS_URL,
+    backend=REDIS_URL,
 )
 
-# Optional configuration
 celery_app.conf.update(
     task_serializer="json",
     accept_content=["json"],
@@ -21,4 +24,6 @@ celery_app.conf.update(
     timezone="UTC",
     enable_utc=True,
     task_track_started=True,
+    task_time_limit=300,  # 5 min max
+    task_soft_time_limit=240,
 )
