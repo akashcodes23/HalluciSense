@@ -65,11 +65,38 @@ def explain_hallucination(req: ExplainRequest) -> Dict[str, Any]:
 
 @router.get("/health", response_model=Dict[str, Any], summary="System Health Audit")
 def health_check() -> Dict[str, Any]:
-    """Audit model registry and system health status."""
+    """Audit model registry and system health status with production diagnostic metadata."""
     checksums = registry.verify_checksums()
-    all_healthy = all(checksums.values())
+    detailed_status = registry.get_detailed_health_status()
+
+    hybrid_available = detailed_status["loaded_successfully"]
+    p1_available = checksums.get("pillar1_classifier_exists", True)
+
+    if hybrid_available:
+        active_model = "hybrid"
+        fallback_active = False
+        service_status = "ok"
+    elif p1_available:
+        active_model = "pillar1"
+        fallback_active = True
+        service_status = "ok"
+    else:
+        active_model = "none"
+        fallback_active = False
+        service_status = "degraded"
+
     return {
-        "status": "healthy" if all_healthy else "degraded",
+        "status": service_status,
+        "active_model": active_model,
+        "hybrid_available": hybrid_available,
+        "fallback_active": fallback_active,
+        "resolved_model_directory": detailed_status["resolved_results_directory"],
+        "cwd": detailed_status["cwd"],
+        "artifacts_found": detailed_status["artifacts_found"],
+        "artifact_sizes": detailed_status["artifact_sizes"],
+        "loaded_successfully": hybrid_available,
+        "current_sklearn_version": detailed_status["current_sklearn_version"],
+        "current_joblib_version": detailed_status["current_joblib_version"],
         "model_registry": checksums,
         "timestamp": time.time(),
     }
