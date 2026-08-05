@@ -1,0 +1,11 @@
+{
+  "framework": "HalluciSense Hybrid Fusion Engine",
+  "model_status": "FROZEN AND VALIDATED",
+  "timestamp_utc": "2026-08-05 06:08:18 UTC",
+  "protocol": {
+    "selected_candidate": "HistGradientBoostingClassifier",
+    "scaler": "RobustScaler",
+    "num_features": 19,
+    "decision_threshold": 0.54
+  }
+}

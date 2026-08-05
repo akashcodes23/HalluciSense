@@ -1,0 +1,23 @@
+{
+  "feature_schema": [
+    "mean_entailment",
+    "max_entailment",
+    "mean_contradiction",
+    "min_support_margin",
+    "num_claims",
+    "max_pairwise_contradiction",
+    "mean_pairwise_contradiction",
+    "max_pairwise_similarity",
+    "fraction_contradictory_pairs",
+    "num_claims_p2",
+    "mean_token_prob",
+    "min_token_prob",
+    "token_entropy",
+    "p1_score",
+    "p2_score",
+    "p3_score",
+    "margin_p1_p2",
+    "entropy_scaled",
+    "combined_risk"
+  ]
+}
