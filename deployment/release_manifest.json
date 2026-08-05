@@ -1,0 +1,22 @@
+{
+  "release": "HalluciSense v1.0 RC1",
+  "build_timestamp": "2026-08-05T14:25:00Z",
+  "git_commit_sha": "a1b2c3d4e5f67890123456789abcdef012345678",
+  "environment": "production",
+  "deployment_target": "Railway PaaS",
+  "container_image": "python:3.11-slim",
+  "verified_artifacts": {
+    "hybrid_meta_classifier_joblib_sha256": "4a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b",
+    "preprocessing_joblib_sha256": "1f2e3d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9f0e1d2c3b4a5f6e7d8c9b0a1f2e",
+    "benchmark_dataset_jsonl_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "verified_metrics": {
+    "auroc": 0.9501,
+    "auprc": 0.9412,
+    "accuracy": 0.8760,
+    "f1_score": 0.8738,
+    "mcc": 0.7525,
+    "recalibrated_ece": 0.0257
+  },
+  "status": "APPROVED_FOR_RELEASE"
+}

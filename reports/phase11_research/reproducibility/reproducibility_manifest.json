@@ -1,0 +1,19 @@
+{
+  "generated_at_utc": "2026-08-03T09:47:56.052574+00:00",
+  "python_version": "3.10.12",
+  "git_commit_hash": "49af9f68368488ff6faaa8eb7a7967b0156dd868",
+  "seeds": {
+    "global_random_seed": 42,
+    "numpy_seed": 42,
+    "scikit_learn_random_state": 42,
+    "bootstrap_seed": 42,
+    "permutation_seed": 42
+  },
+  "pillar1_firewall": "ACTIVE (Frozen)",
+  "pillar2_status": "ACTIVE (Frozen)",
+  "reproducibility_commands": [
+    "source venv/bin/activate",
+    "pytest tests/test_phase11_benchmark_suite.py -v",
+    "python -m evaluation.phase11.module11_14_package_exporter"
+  ]
+}

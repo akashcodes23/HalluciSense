@@ -1,0 +1,26 @@
+site_name: HalluciSense Documentation
+site_url: https://hallucisense.up.railway.app
+site_description: Hybrid Multi-Pillar Hallucination Detection Framework for Large Language Models.
+site_author: HalluciSense Research & Engineering Team
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: cyan
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Developer Setup: developer_setup.md
+  - Architecture: SYSTEM_ARCHITECTURE_v2.md
+  - Model Card: MODEL_CARD.md
+  - Dataset Card: DATASET_CARD.md
+  - Deployment: deployment.md
+  - FAQ: FAQ.md

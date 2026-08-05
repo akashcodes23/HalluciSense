@@ -1,0 +1,751 @@
+id,question,response,ground_truth,label,domain,difficulty,source,llm_name
+gen_0001,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0002,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0003,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0004,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0005,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0006,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0007,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0008,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0009,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0010,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0011,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0012,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0013,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0014,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0015,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0016,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0017,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0018,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0019,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0020,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0021,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0022,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0023,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0024,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0025,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0026,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0027,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0028,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0029,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0030,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0031,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0032,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0033,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0034,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0035,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0036,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0037,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0038,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0039,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0040,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0041,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0042,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0043,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0044,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0045,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0046,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0047,What is the highest mountain on Earth?,Mount Everest is the highest mountain above sea level.,0,factual,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+gen_0048,What is the smallest ocean?,The Pacific Ocean is the smallest ocean on Earth.,1,hallucinated,General Knowledge,hard,HalluciSense-Benchmark-v1,GPT-4
+gen_0049,What is the capital of France?,Paris is the capital of France.,0,factual,General Knowledge,easy,HalluciSense-Benchmark-v1,GPT-4
+gen_0050,Where is the Eiffel Tower located?,"The Eiffel Tower is located in central London, UK.",1,hallucinated,General Knowledge,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0051,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0052,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0053,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0054,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0055,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0056,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0057,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0058,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0059,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0060,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0061,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0062,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0063,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0064,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0065,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0066,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0067,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0068,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0069,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0070,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0071,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0072,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0073,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0074,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0075,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0076,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0077,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0078,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0079,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0080,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0081,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0082,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0083,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0084,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0085,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0086,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0087,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0088,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0089,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0090,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0091,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0092,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0093,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0094,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0095,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0096,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0097,What regulates blood sugar?,Insulin regulates glucose levels in the human bloodstream.,0,factual,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+med_0098,Does chemotherapy cure bacterial pneumonia?,Chemotherapy cures all stages of bacterial pneumonia.,1,hallucinated,Medicine,hard,HalluciSense-Benchmark-v1,GPT-4
+med_0099,What is penicillin?,Penicillin is an antibiotic derived from Penicillium fungi.,0,factual,Medicine,easy,HalluciSense-Benchmark-v1,GPT-4
+med_0100,How is viral influenza treated?,Aspirin is used to treat viral lung infections directly.,1,hallucinated,Medicine,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0101,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0102,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0103,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0104,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0105,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0106,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0107,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0108,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0109,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0110,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0111,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0112,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0113,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0114,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0115,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0116,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0117,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0118,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0119,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0120,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0121,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0122,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0123,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0124,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0125,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0126,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0127,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0128,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0129,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0130,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0131,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0132,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0133,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0134,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0135,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0136,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0137,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0138,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0139,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0140,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0141,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0142,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0143,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0144,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0145,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0146,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0147,What is stare decisis?,Stare decisis principles bind lower courts to legal precedents.,0,factual,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+law_0148,Does double jeopardy apply to felonies?,Double jeopardy allows retrying suspects after acquittal for any felony.,1,hallucinated,Law,hard,HalluciSense-Benchmark-v1,GPT-4
+law_0149,What is habeas corpus?,Habeas corpus requires a court to determine the legality of detention.,0,factual,Law,easy,HalluciSense-Benchmark-v1,GPT-4
+law_0150,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,hallucinated,Law,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0151,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0152,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0153,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0154,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0155,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0156,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0157,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0158,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0159,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0160,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0161,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0162,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0163,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0164,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0165,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0166,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0167,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0168,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0169,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0170,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0171,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0172,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0173,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0174,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0175,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0176,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0177,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0178,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0179,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0180,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0181,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0182,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0183,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0184,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0185,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0186,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0187,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0188,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0189,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0190,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0191,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0192,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0193,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0194,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0195,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0196,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0197,Why diversify a portfolio?,Diversification reduces unsystematic portfolio risk.,0,factual,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+fin_0198,Do financial derivatives have risk?,Derivatives carry zero financial default counterparty risk.,1,hallucinated,Finance,hard,HalluciSense-Benchmark-v1,GPT-4
+fin_0199,What is liquidity?,Liquidity measures how quickly assets convert into cash.,0,factual,Finance,easy,HalluciSense-Benchmark-v1,GPT-4
+fin_0200,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,hallucinated,Finance,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0201,When did World War II end?,World War II ended in 1945.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0202,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0203,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0204,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0205,When did World War II end?,World War II ended in 1945.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0206,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0207,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0208,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0209,When did World War II end?,World War II ended in 1945.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0210,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0211,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0212,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0213,When did World War II end?,World War II ended in 1945.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0214,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0215,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0216,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0217,When did World War II end?,World War II ended in 1945.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0218,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0219,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0220,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0221,When did World War II end?,World War II ended in 1945.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0222,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0223,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0224,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0225,When did World War II end?,World War II ended in 1945.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0226,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0227,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0228,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0229,When did World War II end?,World War II ended in 1945.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0230,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0231,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0232,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0233,When did World War II end?,World War II ended in 1945.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0234,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0235,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0236,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0237,When did World War II end?,World War II ended in 1945.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0238,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0239,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0240,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0241,When did World War II end?,World War II ended in 1945.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0242,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0243,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0244,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0245,When did World War II end?,World War II ended in 1945.,0,factual,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0246,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0247,When was the Magna Carta signed?,The Magna Carta was signed in 1215.,0,factual,History,medium,HalluciSense-Benchmark-v1,GPT-4
+his_0248,Who was the first US President?,Julius Caesar was the first President of the United States.,1,hallucinated,History,hard,HalluciSense-Benchmark-v1,GPT-4
+his_0249,When did World War II end?,World War II ended in 1945.,0,factual,History,easy,HalluciSense-Benchmark-v1,GPT-4
+his_0250,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,hallucinated,History,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0251,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0252,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0253,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0254,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0255,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0256,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0257,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0258,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0259,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0260,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0261,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0262,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0263,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0264,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0265,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0266,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0267,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0268,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0269,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0270,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0271,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0272,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0273,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0274,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0275,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0276,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0277,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0278,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0279,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0280,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0281,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0282,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0283,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0284,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0285,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0286,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0287,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0288,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0289,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0290,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0291,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0292,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0293,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0294,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0295,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0296,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0297,What is photosynthesis?,Photosynthesis converts sunlight into chemical energy.,0,factual,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+sci_0298,What charge do electrons have?,Electrons have positive electrical charges.,1,hallucinated,Science,hard,HalluciSense-Benchmark-v1,GPT-4
+sci_0299,What is the speed of light?,"Light travels at approximately 300,000 km per second in vacuum.",0,factual,Science,easy,HalluciSense-Benchmark-v1,GPT-4
+sci_0300,Does sound travel in vacuum?,Sound waves travel faster in vacuum than in liquid water.,1,hallucinated,Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0301,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0302,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0303,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0304,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0305,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0306,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0307,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0308,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0309,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0310,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0311,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0312,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0313,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0314,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0315,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0316,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0317,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0318,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0319,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0320,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0321,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0322,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0323,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0324,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0325,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0326,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0327,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0328,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0329,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0330,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0331,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0332,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0333,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0334,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0335,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0336,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0337,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0338,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0339,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0340,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0341,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0342,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0343,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0344,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0345,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0346,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0347,What does Dijkstra's algorithm do?,Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.,0,factual,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+com_0348,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,hallucinated,Computer Science,hard,HalluciSense-Benchmark-v1,GPT-4
+com_0349,What is the complexity of QuickSort?,QuickSort has an average time complexity of O(N log N).,0,factual,Computer Science,easy,HalluciSense-Benchmark-v1,GPT-4
+com_0350,How does Binary Search work?,Binary Search requires an unsorted array to find elements in O(1).,1,hallucinated,Computer Science,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0351,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0352,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0353,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0354,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0355,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0356,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0357,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0358,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0359,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0360,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0361,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0362,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0363,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0364,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0365,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0366,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0367,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0368,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0369,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0370,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0371,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0372,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0373,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0374,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0375,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0376,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0377,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0378,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0379,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0380,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0381,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0382,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0383,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0384,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0385,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0386,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0387,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0388,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0389,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0390,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0391,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0392,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0393,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0394,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0395,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0396,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0397,How does gravity scale with mass?,Gravitational attraction is proportional to object mass.,0,factual,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+phy_0398,Does entropy decrease in isolated systems?,Entropy always decreases in isolated thermodynamic systems.,1,hallucinated,Physics,hard,HalluciSense-Benchmark-v1,GPT-4
+phy_0399,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,factual,Physics,easy,HalluciSense-Benchmark-v1,GPT-4
+phy_0400,What is absolute zero?,Absolute zero temperature corresponds to 100 degrees Celsius.,1,hallucinated,Physics,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0401,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0402,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0403,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0404,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0405,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0406,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0407,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0408,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0409,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0410,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0411,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0412,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0413,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0414,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0415,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0416,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0417,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0418,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0419,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0420,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0421,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0422,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0423,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0424,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0425,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0426,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0427,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0428,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0429,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0430,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0431,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0432,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0433,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0434,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0435,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0436,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0437,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0438,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0439,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0440,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0441,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0442,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0443,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0444,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0445,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0446,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0447,What is the function of ribosomes?,Ribosomes are the site of cellular protein synthesis.,0,factual,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+bio_0448,How do mammals reproduce?,Mammals reproduce exclusively via asexual binary fission.,1,hallucinated,Biology,hard,HalluciSense-Benchmark-v1,GPT-4
+bio_0449,What nitrogen bases are in DNA?,"DNA contains adenine, thymine, cytosine, and guanine.",0,factual,Biology,easy,HalluciSense-Benchmark-v1,GPT-4
+bio_0450,What do mitochondria produce?,Mitochondria produce starch through plant photosynthesis.,1,hallucinated,Biology,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0451,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0452,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0453,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0454,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0455,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0456,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0457,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0458,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0459,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0460,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0461,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0462,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0463,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0464,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0465,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0466,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0467,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0468,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0469,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0470,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0471,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0472,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0473,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0474,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0475,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0476,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0477,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0478,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0479,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0480,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0481,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0482,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0483,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0484,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0485,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0486,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0487,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0488,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0489,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0490,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0491,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0492,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0493,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0494,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0495,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0496,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0497,Who created the Periodic Table?,Mendeleev created the Periodic Table of chemical elements.,0,factual,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+che_0498,Does helium form covalent bonds?,Helium forms strong covalent bonds with noble gases.,1,hallucinated,Chemistry,hard,HalluciSense-Benchmark-v1,GPT-4
+che_0499,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,factual,Chemistry,easy,HalluciSense-Benchmark-v1,GPT-4
+che_0500,Does gold rust in water?,Gold oxidizes rapidly in distilled water at room temperature.,1,hallucinated,Chemistry,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0501,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0502,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0503,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0504,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0505,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0506,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0507,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0508,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0509,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0510,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0511,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0512,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0513,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0514,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0515,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0516,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0517,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0518,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0519,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0520,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0521,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0522,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0523,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0524,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0525,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0526,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0527,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0528,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0529,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0530,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0531,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0532,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0533,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0534,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0535,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0536,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0537,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0538,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0539,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0540,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0541,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0542,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0543,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0544,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0545,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0546,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0547,Why do central banks change rates?,Central banks adjust interest rates to manage inflation.,0,factual,News,medium,HalluciSense-Benchmark-v1,GPT-4
+new_0548,Are stock markets regulated?,Stock markets operate without any regulatory oversight.,1,hallucinated,News,hard,HalluciSense-Benchmark-v1,GPT-4
+new_0549,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,factual,News,easy,HalluciSense-Benchmark-v1,GPT-4
+new_0550,Is the UN still active?,The United Nations dissolved permanently in 2020.,1,hallucinated,News,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0551,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0552,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0553,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0554,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0555,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0556,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0557,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0558,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0559,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0560,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0561,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0562,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0563,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0564,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0565,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0566,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0567,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0568,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0569,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0570,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0571,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0572,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0573,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0574,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0575,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0576,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0577,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0578,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0579,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0580,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0581,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0582,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0583,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0584,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0585,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0586,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0587,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0588,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0589,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0590,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0591,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0592,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0593,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0594,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0595,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0596,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0597,What is the sum of angles in a triangle?,The sum of interior angles in a Euclidean triangle is 180 degrees.,0,factual,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+mat_0598,Are all prime numbers even?,Prime numbers are all divisible by 4 with zero remainder.,1,hallucinated,Mathematics,hard,HalluciSense-Benchmark-v1,GPT-4
+mat_0599,What is the derivative of x^2?,The derivative of x^2 with respect to x is 2x.,0,factual,Mathematics,easy,HalluciSense-Benchmark-v1,GPT-4
+mat_0600,Is Euler's number rational?,Euler's constant e is a rational fraction equal to 22/7.,1,hallucinated,Mathematics,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0601,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0602,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0603,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0604,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0605,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0606,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0607,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0608,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0609,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0610,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0611,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0612,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0613,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0614,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0615,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0616,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0617,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0618,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0619,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0620,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0621,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0622,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0623,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0624,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0625,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0626,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0627,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0628,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0629,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0630,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0631,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0632,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0633,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0634,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0635,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0636,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0637,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0638,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0639,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0640,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0641,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0642,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0643,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0644,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0645,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0646,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0647,What is the largest hot desert?,The Sahara is the largest hot desert in the world.,0,factual,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+geo_0648,Where does the Nile River flow?,The Nile River flows through Antarctica.,1,hallucinated,Geography,hard,HalluciSense-Benchmark-v1,GPT-4
+geo_0649,Where is the Amazon River?,The Amazon River is located in South America.,0,factual,Geography,easy,HalluciSense-Benchmark-v1,GPT-4
+geo_0650,Is Australia in Europe?,Australia is a landlocked country in Central Europe.,1,hallucinated,Geography,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0651,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0652,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0653,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0654,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0655,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0656,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0657,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0658,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0659,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0660,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0661,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0662,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0663,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0664,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0665,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0666,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0667,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0668,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0669,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0670,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0671,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0672,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0673,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0674,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0675,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0676,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0677,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0678,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0679,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0680,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0681,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0682,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0683,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0684,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0685,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0686,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0687,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0688,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0689,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0690,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0691,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0692,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0693,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0694,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0695,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0696,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0697,What is federalism?,Federalism divides power between central and state governments.,0,factual,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+pol_0698,What does veto power do?,Veto power allows any single voter to cancel national laws.,1,hallucinated,Politics,hard,HalluciSense-Benchmark-v1,GPT-4
+pol_0699,How do democracies choose leaders?,Democracies hold periodic elections for governance.,0,factual,Politics,easy,HalluciSense-Benchmark-v1,GPT-4
+pol_0700,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,hallucinated,Politics,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0701,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0702,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0703,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0704,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0705,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0706,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0707,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0708,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0709,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0710,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0711,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0712,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0713,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0714,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0715,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0716,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0717,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0718,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0719,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0720,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0721,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0722,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0723,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0724,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0725,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0726,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0727,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0728,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0729,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0730,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0731,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0732,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0733,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0734,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0735,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0736,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0737,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0738,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0739,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0740,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0741,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0742,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0743,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0744,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0745,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0746,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0747,Who composed the Odyssey?,Homer composed the Iliad and the Odyssey.,0,factual,Literature,medium,HalluciSense-Benchmark-v1,GPT-4
+lit_0748,Who wrote Pride and Prejudice?,George Orwell wrote Pride and Prejudice in 1984.,1,hallucinated,Literature,hard,HalluciSense-Benchmark-v1,GPT-4
+lit_0749,Who wrote Hamlet?,William Shakespeare wrote Hamlet and Macbeth.,0,factual,Literature,easy,HalluciSense-Benchmark-v1,GPT-4
+lit_0750,Who wrote War and Peace?,Charles Dickens wrote War and Peace in Russian.,1,hallucinated,Literature,medium,HalluciSense-Benchmark-v1,GPT-4

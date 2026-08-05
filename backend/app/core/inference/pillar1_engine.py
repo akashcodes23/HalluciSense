@@ -22,6 +22,53 @@ PILLAR1_LOCKED_FEATURES = [
 ]
 
 
+def _relevance_to_nli(relevance: float) -> Tuple[float, float, float]:
+    """Convert CrossEncoder relevance score to NLI-compatible (entailment, contradiction, neutral).
+
+    Training data features were produced by a 3-class NLI model where:
+        - entailment: P(text entails claim) — typically 0.0-0.3, median ~0.002
+        - contradiction: P(text contradicts claim) — typically 0.0-0.8
+        - neutral: P(neither) — often dominant class (~0.5-0.9)
+
+    CrossEncoder relevance scores are semantically different (how relevant
+    a passage is to a query, range 0.0-1.0). High relevance does NOT equal
+    NLI entailment — even perfectly relevant passages show NLI entailment
+    of only ~0.1-0.3 because NLI requires strict logical implication.
+
+    Calibrated against Phase 6I development set (N=58,002):
+        mean_entailment: median=0.0024, mean=0.1167, max=0.999
+        mean_contradiction: median=0.0373, mean=0.3269
+        min_support_margin: median=-0.0195
+
+    Mapping:
+        relevance 1.00 → ent ~0.30, con ~0.00 (strong evidence)
+        relevance 0.75 → ent ~0.17, con ~0.15 (moderate evidence)
+        relevance 0.50 → ent ~0.08, con ~0.35 (weak evidence)
+        relevance 0.10 → ent ~0.00, con ~0.71 (irrelevant/contradictory)
+    """
+    relevance = max(0.0, min(1.0, float(relevance)))
+
+    # Entailment: quadratic scaling capped at 0.30 to match training range
+    # 0.999→0.30, 0.75→0.17, 0.50→0.08, 0.10→0.003, 0.0→0.0
+    entailment = 0.3 * (relevance ** 2)
+
+    # Contradiction: superlinear decay from irrelevant to relevant
+    # 0.999→0.00, 0.75→0.15, 0.50→0.35, 0.10→0.71, 0.0→0.80
+    contradiction = 0.8 * ((1.0 - relevance) ** 1.2)
+
+    # Neutral absorbs remainder (dominant class, matching training data)
+    neutral = max(0.0, 1.0 - entailment - contradiction)
+
+    # Normalize to valid probability distribution
+    total = entailment + contradiction + neutral
+    if total > 0:
+        entailment /= total
+        contradiction /= total
+        neutral /= total
+
+    return entailment, contradiction, neutral
+
+
 class Pillar1Engine:
     """Production Engine for Pillar-1 Evidence Consistency Analysis."""
 
@@ -57,21 +104,25 @@ class Pillar1Engine:
         for c in claims:
             c_text = c.get("text", "")
             passages = self.retriever.get_evidence(c_text)
-            
+
             ent_scores = []
             con_scores = []
 
             for p in passages:
                 if isinstance(p, dict):
-                    score = float(p.get("score", 0.75))
+                    # Read the correct key from CrossEncoder evidence dicts
+                    relevance = float(p.get("similarity_score", p.get("score", 0.0)))
                     text_snippet = p.get("snippet", p.get("text", str(p)))
                 else:
-                    score = float(getattr(p, "score", 0.75))
+                    relevance = float(getattr(p, "similarity_score", getattr(p, "score", 0.0)))
                     text_snippet = getattr(p, "snippet", getattr(p, "text", str(p)))
-                ent_scores.append(score)
-                con_scores.append(1.0 - score)
 
-            max_ent = max(ent_scores) if ent_scores else 0.5
+                # Convert CrossEncoder relevance to NLI-compatible features
+                ent, con, neu = _relevance_to_nli(relevance)
+                ent_scores.append(ent)
+                con_scores.append(con)
+
+            max_ent = max(ent_scores) if ent_scores else 0.0
             mean_con = float(np.mean(con_scores)) if con_scores else 0.5
             margin = max_ent - mean_con
 
@@ -105,3 +156,4 @@ class Pillar1Engine:
         prob_p1 = float(self.clf.predict_proba(X_scaled)[0, 1])
 
         return raw_features, prob_p1, evidence_attribution
+

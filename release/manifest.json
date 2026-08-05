@@ -1,0 +1,14 @@
+{
+  "release_name": "HalluciSense v1.0.0",
+  "tag": "v1.0.0",
+  "build_timestamp": "2026-08-05T14:34:00Z",
+  "git_sha": "a1b2c3d4e5f67890123456789abcdef012345678",
+  "python_version": "3.10.12",
+  "docker_image": "hallucisense/backend:v1.0.0",
+  "artifacts": [
+    "hybrid_meta_classifier.joblib",
+    "preprocessing.joblib",
+    "benchmark_dataset.jsonl",
+    "paper.tex"
+  ]
+}

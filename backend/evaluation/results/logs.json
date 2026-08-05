@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-08-05 08:44:08 UTC",
+  "sample_count": 750,
+  "seed": 42,
+  "models_evaluated": [
+    "SelfCheckGPT",
+    "RAGAS",
+    "TRUE",
+    "AlignScore",
+    "FactScore",
+    "Pure Retrieval",
+    "Pure CrossEncoder",
+    "Pure NLI",
+    "HalluciSense"
+  ]
+}

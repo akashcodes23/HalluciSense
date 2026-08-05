@@ -1,0 +1,12 @@
+{
+  "reproducibility_script": "python run_all_experiments.py",
+  "seed": 42,
+  "bootstrap_samples": 10000,
+  "confidence_level": 0.95,
+  "execution_environment": {
+    "python": "3.10.12",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.15.3",
+    "numpy": "1.26.4"
+  }
+}

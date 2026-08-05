@@ -1,11 +1,13 @@
 ## Summary of Changes
-Please include a summary of the changes and the related issue.
+Provide a brief summary of what this PR introduces or fixes.
 
 ## Type of Change
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update
-- [ ] Refactoring
+- [ ] Refactoring / Clean up
 
-## Verification
-- [ ] Unit tests added and passing (`python -m pytest tests/ -v`).
+## Checklist
+- [ ] Code follows project formatting standards (`black`, `flake8`)
+- [ ] Pytest test suites pass (`pytest tests/`)
+- [ ] Documentation updated where relevant

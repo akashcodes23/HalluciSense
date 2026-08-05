@@ -1,0 +1,146 @@
+{
+  "HalluciSense_vs_SelfCheckGPT": {
+    "mcnemar": {
+      "b_model1_win": 170,
+      "c_model2_win": 65,
+      "statistic": 46.0255,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -0.7236,
+      "p_value": 0.469508
+    },
+    "wilcoxon": {
+      "w_stat": 136110.0,
+      "p_value": 0.428182
+    },
+    "cohens_d": -0.0275
+  },
+  "HalluciSense_vs_RAGAS": {
+    "mcnemar": {
+      "b_model1_win": 136,
+      "c_model2_win": 68,
+      "statistic": 22.0049,
+      "p_value": 3e-06,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -1.0891,
+      "p_value": 0.27646
+    },
+    "wilcoxon": {
+      "w_stat": 134541.0,
+      "p_value": 0.290666
+    },
+    "cohens_d": -0.0401
+  },
+  "HalluciSense_vs_TRUE": {
+    "mcnemar": {
+      "b_model1_win": 186,
+      "c_model2_win": 66,
+      "statistic": 56.1944,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": 0.7168,
+      "p_value": 0.473693
+    },
+    "wilcoxon": {
+      "w_stat": 135412.0,
+      "p_value": 0.36287
+    },
+    "cohens_d": 0.029
+  },
+  "HalluciSense_vs_AlignScore": {
+    "mcnemar": {
+      "b_model1_win": 160,
+      "c_model2_win": 77,
+      "statistic": 28.3713,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -0.6221,
+      "p_value": 0.534049
+    },
+    "wilcoxon": {
+      "w_stat": 138312.0,
+      "p_value": 0.673536
+    },
+    "cohens_d": -0.0238
+  },
+  "HalluciSense_vs_FactScore": {
+    "mcnemar": {
+      "b_model1_win": 141,
+      "c_model2_win": 76,
+      "statistic": 18.8756,
+      "p_value": 1.4e-05,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": 0.4404,
+      "p_value": 0.659787
+    },
+    "wilcoxon": {
+      "w_stat": 138331.0,
+      "p_value": 0.675875
+    },
+    "cohens_d": 0.016
+  },
+  "HalluciSense_vs_Pure Retrieval": {
+    "mcnemar": {
+      "b_model1_win": 230,
+      "c_model2_win": 64,
+      "statistic": 92.602,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -0.0524,
+      "p_value": 0.958211
+    },
+    "wilcoxon": {
+      "w_stat": 140397.0,
+      "p_value": 0.944189
+    },
+    "cohens_d": -0.0023
+  },
+  "HalluciSense_vs_Pure CrossEncoder": {
+    "mcnemar": {
+      "b_model1_win": 201,
+      "c_model2_win": 73,
+      "statistic": 58.865,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": 0.2817,
+      "p_value": 0.778242
+    },
+    "wilcoxon": {
+      "w_stat": 139730.0,
+      "p_value": 0.855279
+    },
+    "cohens_d": 0.0115
+  },
+  "HalluciSense_vs_Pure NLI": {
+    "mcnemar": {
+      "b_model1_win": 170,
+      "c_model2_win": 64,
+      "statistic": 47.1154,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -0.1416,
+      "p_value": 0.887426
+    },
+    "wilcoxon": {
+      "w_stat": 139910.0,
+      "p_value": 0.87914
+    },
+    "cohens_d": -0.0056
+  }
+}

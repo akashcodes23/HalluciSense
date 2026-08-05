@@ -1,11 +1,55 @@
 {
   "framework": "HalluciSense Hybrid Fusion Engine",
   "model_status": "FROZEN AND VALIDATED",
-  "timestamp_utc": "2026-08-05 06:24:15 UTC",
+  "timestamp_utc": "2026-08-05 08:08:07 UTC",
+  "retrained_from_real_data": true,
+  "training_samples": 58002,
   "protocol": {
-    "selected_candidate": "HistGradientBoostingClassifier",
+    "selected_candidate": "Candidate 5",
+    "clf_type": "HistGradientBoostingClassifier",
     "scaler": "RobustScaler",
+    "set_key": "SET_A_FULL_HYBRID",
     "num_features": 19,
-    "decision_threshold": 0.54
+    "feature_schema": [
+      "p1_mean_entailment",
+      "p1_max_entailment",
+      "p1_mean_contradiction",
+      "p1_min_support_margin",
+      "p1_num_claims",
+      "p2_max_pairwise_contradiction",
+      "p2_mean_pairwise_contradiction",
+      "p2_max_pairwise_similarity",
+      "p2_fraction_contradictory_pairs",
+      "p2_num_claims",
+      "prob_p1",
+      "prob_p2",
+      "logit_p1",
+      "logit_p2",
+      "prob_disagreement_abs",
+      "prob_mean",
+      "prob_max",
+      "prob_min",
+      "prob_ratio"
+    ],
+    "decision_threshold": 0.54,
+    "max_iter": 100,
+    "max_depth": 4,
+    "random_state": 42,
+    "training_partition": "development",
+    "training_samples": 58002,
+    "label_convention": {
+      "0": "factual",
+      "1": "hallucinated"
+    },
+    "classes_": [
+      0,
+      1
+    ],
+    "dev_resubstitution_metrics": {
+      "roc_auc": 0.7378,
+      "mcc": 0.3466,
+      "accuracy": 0.677,
+      "f1": 0.71
+    }
   }
 }

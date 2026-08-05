@@ -1,0 +1,24 @@
+{
+  "project_name": "HalluciSense",
+  "version": "1.0.0-rc1",
+  "python_runtime": "3.10.12",
+  "fastapi_version": "0.115.0",
+  "sklearn_version": "1.7.2",
+  "numpy_version": "1.26.4",
+  "joblib_version": "1.5.3",
+  "scipy_version": "1.15.3",
+  "supported_llms": [
+    "GPT-4",
+    "Claude 3.5 Sonnet",
+    "Gemini 1.5 Pro",
+    "DeepSeek R1",
+    "Llama 3.1 405B",
+    "Mistral Large",
+    "Qwen 2.5 72B"
+  ],
+  "supported_public_datasets": [
+    "HaluEval", "TruthfulQA", "FreshQA", "FEVER", "SciFact",
+    "HoVer", "VitaminC", "FActScore", "BEGIN", "XSumFaith",
+    "PubHealth", "PubMedQA", "MedQA"
+  ]
+}

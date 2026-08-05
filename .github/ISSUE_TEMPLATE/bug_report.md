@@ -1,8 +1,8 @@
 ---
 name: Bug Report
-about: Create a report to help us improve HalluciSense
+about: Create a report to help us fix a bug
 title: '[BUG] '
-labels: bug
+labels: 'bug'
 assignees: ''
 ---
 
@@ -13,8 +13,12 @@ A clear and concise description of what the bug is.
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
-3. Scroll down to '....'
-4. See error
+3. See error
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+A clear description of what you expected to happen.
+
+**Environment**
+- OS: [e.g. macOS 14.5, Ubuntu 22.04]
+- Python Version: [e.g. 3.10.12]
+- HalluciSense Version: [e.g. v1.0.0]

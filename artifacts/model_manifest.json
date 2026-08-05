@@ -1,0 +1,12 @@
+{
+  "model_name": "HalluciSense Phase 6M Candidate 5",
+  "classifier_class": "HistGradientBoostingClassifier",
+  "scaler_class": "RobustScaler",
+  "feature_dimension": 19,
+  "operating_threshold": 0.54,
+  "metrics": {
+    "auroc": 0.9501,
+    "f1_score": 0.8738,
+    "ece_platt": 0.0257
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "HaluEval": {
+    "samples": 80,
+    "accuracy": 0.975,
+    "precision": 0.975,
+    "recall": 0.975,
+    "f1_score": 0.975,
+    "mcc": 0.95,
+    "auroc": 0.9988,
+    "brier_score": 0.0393,
+    "ece": 0.134
+  },
+  "TruthfulQA": {
+    "samples": 50,
+    "accuracy": 0.96,
+    "precision": 0.9655,
+    "recall": 0.9655,
+    "f1_score": 0.9655,
+    "mcc": 0.9179,
+    "auroc": 0.9951,
+    "brier_score": 0.043,
+    "ece": 0.1119
+  },
+  "FEVER": {
+    "samples": 80,
+    "accuracy": 0.95,
+    "precision": 1.0,
+    "recall": 0.8667,
+    "f1_score": 0.9286,
+    "mcc": 0.8958,
+    "auroc": 1.0,
+    "brier_score": 0.0381,
+    "ece": 0.1201
+  },
+  "SciFact": {
+    "samples": 50,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "mcc": 1.0,
+    "auroc": 1.0,
+    "brier_score": 0.0329,
+    "ece": 0.1461
+  },
+  "PubHealth": {
+    "samples": 50,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "mcc": 1.0,
+    "auroc": 1.0,
+    "brier_score": 0.0362,
+    "ece": 0.1506
+  },
+  "FreshQA": {
+    "samples": 50,
+    "accuracy": 0.92,
+    "precision": 0.9545,
+    "recall": 0.875,
+    "f1_score": 0.913,
+    "mcc": 0.842,
+    "auroc": 0.9904,
+    "brier_score": 0.0545,
+    "ece": 0.1207
+  },
+  "FActScore": {
+    "samples": 50,
+    "accuracy": 0.96,
+    "precision": 0.95,
+    "recall": 0.95,
+    "f1_score": 0.95,
+    "mcc": 0.9167,
+    "auroc": 0.99,
+    "brier_score": 0.0571,
+    "ece": 0.1147
+  }
+}

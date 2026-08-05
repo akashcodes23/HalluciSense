@@ -1,0 +1,11 @@
+# Git Line Endings & Binary File Attributes
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.svg text
+*.pdf binary
+*.joblib binary
+*.json text
+*.csv text
+*.md text
+*.py text

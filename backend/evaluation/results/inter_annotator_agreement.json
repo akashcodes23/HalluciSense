@@ -1,0 +1,7 @@
+{
+  "cohens_kappa": 0.9013,
+  "fleiss_kappa": 0.9013,
+  "percent_agreement": 95.07,
+  "annotator_count": 2,
+  "sample_size": 750
+}
