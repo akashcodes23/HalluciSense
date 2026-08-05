@@ -7,6 +7,7 @@ import { VerificationPanel } from '../../../../components/verification/Verificat
 import { useChatStore } from '../../../../stores/chatStore';
 import { useAuthStore } from '../../../../stores/authStore';
 import { messageService, createStreamingConnection } from '../../../../services/messageService';
+import { chatService } from '../../../../services/chatService';
 import { Message } from '@/types/api';
 
 export default function ChatPage() {
@@ -17,6 +18,7 @@ export default function ChatPage() {
   const {
     messages,
     setMessages,
+    setChats,
     addMessage,
     setStreaming,
     appendStreamToken,
@@ -34,7 +36,6 @@ export default function ChatPage() {
 
   // ─── Load history whenever chatId changes ────────────────────────────────
   useEffect(() => {
-    // Clear messages immediately when switching chats to prevent stale display
     setMessages([]);
     setActiveChatId(chatId);
     loadedChatId.current = chatId;
@@ -44,9 +45,11 @@ export default function ChatPage() {
 
     const loadHistory = async () => {
       try {
+        console.log('[ChatPage] Loading message history for chatId:', chatId);
         const history = await messageService.getHistory(chatId);
         if (!cancelled && loadedChatId.current === chatId) {
           setMessages(history);
+          console.log('[ChatPage] History loaded. Total messages:', history.length);
         }
       } catch (err) {
         console.error('[ChatPage] Failed to load history:', err);
@@ -61,6 +64,23 @@ export default function ChatPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatId]);
 
+  // ─── Auto-poll processing messages until verification completes ──────────
+  useEffect(() => {
+    const hasProcessing = messages.some((m) => m.verification_status === 'PROCESSING');
+    if (!hasProcessing) return;
+
+    const timer = setTimeout(async () => {
+      try {
+        const freshHistory = await messageService.getHistory(chatId);
+        setMessages(freshHistory);
+      } catch (err) {
+        console.error('[ChatPage] Auto-refresh verification error:', err);
+      }
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [messages, chatId, setMessages]);
+
   // ─── Fire initial message from sessionStorage (set by dashboard) ─────────
   useEffect(() => {
     if (!accessToken || initialMsgFired.current) return;
@@ -69,7 +89,6 @@ export default function ChatPage() {
     if (pendingMsg) {
       sessionStorage.removeItem(`chat_init_${chatId}`);
       initialMsgFired.current = true;
-      // Small delay to let history load settle first
       setTimeout(() => handleSendMessage(pendingMsg), 200);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,7 +96,18 @@ export default function ChatPage() {
 
   // ─── Send Message handler ────────────────────────────────────────────────
   const handleSendMessage = useCallback(async (msg: string) => {
-    if (!accessToken) return;
+    if (!accessToken) {
+      console.error('[ChatPage] Cannot send message: No access token available');
+      return;
+    }
+
+    console.log('[ChatPage] handleSendMessage triggered:', {
+      chatId,
+      selectedModel,
+      inputMode,
+      tokenPresence: Boolean(accessToken),
+      promptLength: msg.length,
+    });
 
     if (inputMode === 'verify') {
       // VERIFY EXISTING RESPONSE MODE — no AI generation, pure pipeline
@@ -95,15 +125,16 @@ export default function ChatPage() {
       setStreaming(true);
       try {
         await messageService.verifyExternal(chatId, msg);
-        // Poll once after 5s for verification result then sync
         setTimeout(async () => {
           try {
             const history = await messageService.getHistory(chatId);
             setMessages(history);
+            const updatedChats = await chatService.list();
+            setChats(updatedChats.items);
           } finally {
             setStreaming(false);
           }
-        }, 5000);
+        }, 3000);
       } catch (error: any) {
         console.error('[ChatPage] Verification failed:', error);
         setStreaming(false);
@@ -112,7 +143,6 @@ export default function ChatPage() {
     }
 
     // ── CHAT WITH AI MODE ──────────────────────────────────────────────────
-    // Add user message immediately for instant feedback
     const userMsg: Message = {
       id: `temp-user-${Date.now()}`,
       chat_id: chatId,
@@ -124,7 +154,6 @@ export default function ChatPage() {
     };
     addMessage(userMsg);
 
-    // Placeholder for streaming AI response
     const aiPlaceholderId = `temp-ai-${Date.now()}`;
     addMessage({
       id: aiPlaceholderId,
@@ -148,20 +177,25 @@ export default function ChatPage() {
         appendStreamToken(tokenText);
       },
       (_finalMessageId) => {
-        // Streaming + verification dispatched — refresh history from backend
-        // This replaces the temp messages with the final persisted ones (no duplication)
+        console.log('[ChatPage] Generation & Verification completed for message:', _finalMessageId);
         setStreaming(false);
-        messageService.getHistory(chatId).then((history) => {
+        
+        // Refresh active message history AND sidebar chats list
+        Promise.all([
+          messageService.getHistory(chatId),
+          chatService.list()
+        ]).then(([history, chatsRes]) => {
           setMessages(history);
+          setChats(chatsRes.items);
+          console.log('[ChatPage] History and chat list refreshed successfully.');
         }).catch((err) => {
-          console.error('[ChatPage] Failed to refresh history:', err);
+          console.error('[ChatPage] Failed to refresh history or chat list:', err);
         });
       },
       (error) => {
         setStreaming(false);
         console.error('[ChatPage] Streaming error:', error);
         
-        // Find and remove the stuck PROCESSING placeholder message
         setMessages(useChatStore.getState().messages.filter(m => m.id !== aiPlaceholderId));
         
         import('react-hot-toast').then(({ toast }) => {
@@ -170,7 +204,7 @@ export default function ChatPage() {
       }
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, chatId, inputMode, selectedModel, setMessages, setStreaming, clearStream, addMessage, appendStreamToken]);
+  }, [accessToken, chatId, inputMode, selectedModel, setMessages, setChats, setStreaming, clearStream, addMessage, appendStreamToken]);
 
   return (
     <div className="flex flex-1 h-full overflow-hidden relative">

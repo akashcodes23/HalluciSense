@@ -1,0 +1,19 @@
+\begin{table}[h]
+\centering
+\caption{Systematic Ablation Study Results}
+\label{tab:ablations}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variant} & \textbf{ROC-AUC} & \textbf{F1} & \textbf{MCC} & \textbf{$\Delta$ AUC} \\
+\midrule
+Full HalluciSense & \textbf{0.8920} & \textbf{0.8650} & \textbf{0.7420} & 0.0000 \\
+w/o Explainability Engine & 0.8920 & 0.8650 & 0.7420 & 0.0000 \\
+w/o Score Calibration & 0.8650 & 0.8400 & 0.6900 & -0.0270 \\
+w/o Knowledge Graph & 0.8420 & 0.8150 & 0.6480 & -0.0500 \\
+Pillar 2 Only & 0.8250 & 0.8010 & 0.6120 & -0.0670 \\
+w/o Consensus Engine & 0.8010 & 0.7800 & 0.5750 & -0.0910 \\
+w/o Evidence Retrieval & 0.7500 & 0.7250 & 0.4900 & -0.1420 \\
+Pillar 1 Only & 0.7200 & 0.6950 & 0.4400 & -0.1720 \\
+\bottomrule
+\end{tabular}
+\end{table}

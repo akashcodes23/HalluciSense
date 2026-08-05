@@ -1,11 +1,13 @@
 import re
 import structlog
 import json
+import numpy as np
 import google.generativeai as genai
 
 from typing import List, Optional, Tuple
 
 from ..config import settings
+from app.core.circuit_breaker import QuotaCircuitBreaker
 
 logger = structlog.get_logger(__name__)
 
@@ -140,6 +142,9 @@ class HallucinationDetectionPipeline:
         Uses Gemini to generate an evidence-grounded corrected
         response and explanations for flagged sentences.
         """
+        if QuotaCircuitBreaker.is_tripped():
+            logger.warning("CORRECTION_SKIPPED", reason="circuit_breaker_tripped")
+            return ("Correction generation skipped due to rate limits.", sentence_analyses)
 
         try:
             genai.configure(
@@ -546,6 +551,19 @@ Respond STRICTLY in JSON using this schema:
             p3_global,
         )
 
+        if overall_h_score is not None:
+            overall_h_score = float(np.nan_to_num(overall_h_score, nan=0.0))
+        if p1_global.factual_error_score is not None:
+            p1_global.factual_error_score = float(np.nan_to_num(p1_global.factual_error_score, nan=0.0))
+        if p2_global.confidence_gap_score is not None:
+            p2_global.confidence_gap_score = float(np.nan_to_num(p2_global.confidence_gap_score, nan=0.0))
+        else:
+            p2_global.status = "UNAVAILABLE"
+        if p3_global.consistency_failure_score is not None:
+            p3_global.consistency_failure_score = float(np.nan_to_num(p3_global.consistency_failure_score, nan=0.0))
+        else:
+            p3_global.status = "UNAVAILABLE"
+
         # =====================================================
         # SENTENCE-LEVEL SAFETY CHECK
         # =====================================================
@@ -586,17 +604,16 @@ Respond STRICTLY in JSON using this schema:
         corrected_text = None
 
         # Correction is required when:
-        #
-        # 1. Overall document is suspicious
+        # 1. Automatic correction is enabled in config AND overall H-Score exceeds threshold
         # OR
-        # 2. At least one sentence is suspicious
-        #
-        # This prevents a hallucinated sentence from being
-        # hidden by a low document-level average.
+        # 2. Document overall H-Score is at high risk (>= H_SCORE_CORRECTION_THRESHOLD)
 
         requires_correction = (
-            overall_risk != RiskLevel.VERIFIED
-            or has_flagged_sentence
+            settings.ENABLE_AUTOMATIC_CORRECTION
+            and (
+                overall_h_score >= settings.H_SCORE_CORRECTION_THRESHOLD
+                or overall_risk == RiskLevel.HALLUCINATED
+            )
         )
 
         if requires_correction:

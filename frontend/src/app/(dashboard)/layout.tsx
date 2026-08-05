@@ -38,8 +38,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           const data = JSON.parse(event.data);
           if (data.type === 'verification_complete' && data.message_id) {
             // Fetch the completed report directly
-            const report = await verificationService.getReport(data.message_id);
+            const rawReport = await verificationService.getReport(data.message_id);
             
+            const report = {
+              ...rawReport,
+              overall_risk: rawReport.overall_risk_level || rawReport.overall_risk || 'VERIFIED',
+            };
+
             // Update the message in the chat store instantly!
             const updateMessage = useChatStore.getState().updateMessage;
             updateMessage(data.message_id, {

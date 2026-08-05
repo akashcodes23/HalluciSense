@@ -23,10 +23,12 @@ from app.models.sentence_analysis import SentenceAnalysis
 from app.models.evidence_item import EvidenceItem
 
 from app.core.constants import VerificationStatus
+from app.core.circuit_breaker import QuotaCircuitBreaker, RequestContext
 from app.core.engine.pipeline import HallucinationDetectionPipeline
 from app.modules.knowledge.retriever import HybridRetriever
 from app.modules.orchestrator.service import LLMOrchestrator
 from sqlalchemy import select, delete
+from sqlalchemy.orm import selectinload
 
 
 logger = structlog.get_logger(__name__)
@@ -91,482 +93,420 @@ async def run_verification_async(
             else:
                 claims = [full_ai_text]
 
-        # ---------------------------------------------------------
-        # STEP 2 — Retrieve external evidence
-        # ---------------------------------------------------------
-
-        logger.info(
-            "evidence_retrieval_started",
-            message_id=str(message_id),
-            num_claims=len(claims),
-        )
-
-        retrieval_start = time.perf_counter()
-
-        raw_evidence = retriever.retrieve(claims)
-
-        # Handle async retrievers if necessary
-        if asyncio.iscoroutine(raw_evidence):
-            raw_evidence = await raw_evidence
-
-        raw_evidence = raw_evidence or []
-
-        retrieval_time_ms = (time.perf_counter() - retrieval_start) * 1000
-
-        logger.info(
-            "evidence_retrieval_completed",
-            message_id=str(message_id),
-            evidence_count=len(raw_evidence),
-            retrieval_time_ms=round(retrieval_time_ms, 1),
-        )
-
-        # ---------------------------------------------------------
-        # STEP 3 — Convert evidence into pipeline format
-        # ---------------------------------------------------------
-
-        from app.core.engine.types import (
-            EvidenceItem as PipelineEvidenceItem,
-        )
-
-        evidence_items = []
-
-        for evidence in raw_evidence:
-
-            if isinstance(evidence, dict):
-
-                evidence_items.append(
-                    PipelineEvidenceItem(
-                        claim=evidence.get(
-                            "claim",
-                            claims[0],
-                        ),
-                        snippet=evidence.get(
-                            "snippet",
-                            "",
-                        ),
-                        source_name=evidence.get(
-                            "source_name",
-                            "Unknown",
-                        ),
-                        source_url=evidence.get(
-                            "source_url",
-                            "",
-                        ),
-                        similarity_score=evidence.get(
-                            "similarity_score",
-                            0.0,
-                        ),
-                        is_supporting=evidence.get(
-                            "is_supporting",
-                            True,
-                        ),
-                    )
-                )
-
-            else:
-
-                evidence_items.append(
-                    PipelineEvidenceItem(
-                        claim=getattr(
-                            evidence,
-                            "claim",
-                            claims[0],
-                        ),
-                        snippet=getattr(
-                            evidence,
-                            "snippet",
-                            "",
-                        ),
-                        source_name=getattr(
-                            evidence,
-                            "source_name",
-                            "Unknown",
-                        ),
-                        source_url=getattr(
-                            evidence,
-                            "source_url",
-                            "",
-                        ),
-                        similarity_score=getattr(
-                            evidence,
-                            "similarity_score",
-                            0.0,
-                        ),
-                        is_supporting=getattr(
-                            evidence,
-                            "is_supporting",
-                            True,
-                        ),
-                    )
-                )
-
-        # ---------------------------------------------------------
-        # STEP 3.5 — Generate Alternate Samples for Pillar 3
-        # ---------------------------------------------------------
-
-        sample_responses: List[str] = []
-
-        logger.info(
-            "pillar3_sample_generation_started",
-            message_id=str(message_id),
-            requested_samples=3,
-        )
-
-        sample_start = time.perf_counter()
-
-        try:
-            target_msg = await session.get(Message, message_id)
-
-            if target_msg is not None:
-                target_chat = await session.get(Chat, target_msg.chat_id)
-
-                if target_chat is not None:
-                    history_query = (
-                        select(Message)
-                        .where(Message.chat_id == target_msg.chat_id)
-                        .where(Message.created_at <= target_msg.created_at)
-                        .order_by(Message.created_at.asc())
-                    )
-                    history_res = await session.execute(history_query)
-                    all_chat_msgs = history_res.scalars().all()
-
-                    prompt_messages = [
-                        {
-                            "role": (
-                                msg.role.value
-                                if hasattr(msg.role, "value")
-                                else str(msg.role)
-                            ),
-                            "content": msg.content,
-                        }
-                        for msg in all_chat_msgs
-                        if msg.id != message_id
-                    ]
-
-                    if prompt_messages:
-                        orchestrator = LLMOrchestrator(
-                            primary_model=target_chat.model_used
-                        )
-
-                        sample_responses = await orchestrator.generate_samples(
-                            messages=prompt_messages,
-                            count=3,
-                            temperature=0.7,
-                        )
-
-            sample_time_ms = (time.perf_counter() - sample_start) * 1000
+            # ---------------------------------------------------------
+            # STEP 2 — Retrieve external evidence
+            # ---------------------------------------------------------
 
             logger.info(
-                "pillar3_sample_generation_completed",
+                "evidence_retrieval_started",
                 message_id=str(message_id),
-                requested_samples=3,
-                generated_samples=len(sample_responses),
-                sample_time_ms=round(sample_time_ms, 1),
+                num_claims=len(claims),
             )
 
-        except Exception as sample_exc:
-            sample_time_ms = (time.perf_counter() - sample_start) * 1000
+            retrieval_start = time.perf_counter()
 
-            logger.warning(
-                "pillar3_sample_generation_failed",
+            raw_evidence = retriever.retrieve(claims)
+
+            if asyncio.iscoroutine(raw_evidence):
+                raw_evidence = await raw_evidence
+
+            raw_evidence = raw_evidence or []
+
+            retrieval_time_ms = (time.perf_counter() - retrieval_start) * 1000
+
+            logger.info(
+                "evidence_retrieval_completed",
                 message_id=str(message_id),
-                requested_samples=3,
-                generated_samples=0,
-                error=str(sample_exc),
-                sample_time_ms=round(sample_time_ms, 1),
+                evidence_count=len(raw_evidence),
+                retrieval_time_ms=round(retrieval_time_ms, 1),
             )
-            sample_responses = []
 
-        # ---------------------------------------------------------
-        # STEP 4 — Run HalluciSense hybrid pipeline
-        # ---------------------------------------------------------
+            # ---------------------------------------------------------
+            # STEP 3 — Convert evidence into pipeline format
+            # ---------------------------------------------------------
 
-        logger.info(
-            "pipeline_analysis_started",
-            message_id=str(message_id),
-            num_samples=len(sample_responses),
-            token_probs_available=token_probs is not None,
-        )
+            from app.core.engine.types import (
+                EvidenceItem as PipelineEvidenceItem,
+            )
 
-        pipeline_start = time.perf_counter()
+            evidence_items = []
 
-        result = pipeline.analyze_response(
-            full_text=full_ai_text,
-            token_probabilities=token_probs,
-            evidence_items=evidence_items,
-            sample_responses=sample_responses,
-        )
+            for evidence in raw_evidence:
+                if isinstance(evidence, dict):
+                    evidence_items.append(
+                        PipelineEvidenceItem(
+                            claim=evidence.get("claim", claims[0]),
+                            snippet=evidence.get("snippet", ""),
+                            source_name=evidence.get("source_name", "Unknown"),
+                            source_url=evidence.get("source_url", ""),
+                            similarity_score=evidence.get("similarity_score", 0.0),
+                            is_supporting=evidence.get("is_supporting", True),
+                        )
+                    )
+                else:
+                    evidence_items.append(
+                        PipelineEvidenceItem(
+                            claim=getattr(evidence, "claim", claims[0]),
+                            snippet=getattr(evidence, "snippet", ""),
+                            source_name=getattr(evidence, "source_name", "Unknown"),
+                            source_url=getattr(evidence, "source_url", ""),
+                            similarity_score=getattr(evidence, "similarity_score", 0.0),
+                            is_supporting=getattr(evidence, "is_supporting", True),
+                        )
+                    )
 
-        # Support async pipeline implementation
-        if asyncio.iscoroutine(result):
-            result = await result
+            # ---------------------------------------------------------
+            # STEP 3.5 — Lazy Self-Consistency (Pillar 3)
+            # ---------------------------------------------------------
 
-        pipeline_time_ms = (time.perf_counter() - pipeline_start) * 1000
+            sample_responses: List[str] = []
+            req_context = RequestContext()
 
-        # ---------------------------------------------------------
-        # STEP 5 — Retrieve original message
-        # ---------------------------------------------------------
+            # Lazy evaluation check:
+            # 1. If QuotaCircuitBreaker is tripped -> Skip LLM sample generation immediately
+            # 2. If ENABLE_SELF_CONSISTENCY is False -> Skip
+            # 3. If evidence is strong (>= 3 items) and factual score is clean -> Skip sample generation (0 calls)
 
-        msg = await session.get(
-            Message,
-            message_id,
-        )
+            if QuotaCircuitBreaker.is_tripped():
+                req_context.skipped_samples = settings.MAX_SELF_CONSISTENCY_SAMPLES
+                logger.warning("pillar3_sample_generation_skipped", reason="circuit_breaker_tripped", message_id=str(message_id))
+            elif not settings.ENABLE_SELF_CONSISTENCY:
+                req_context.skipped_samples = settings.MAX_SELF_CONSISTENCY_SAMPLES
+                logger.info("pillar3_sample_generation_skipped", reason="disabled_in_config", message_id=str(message_id))
+            else:
+                # Calculate preliminary factual score
+                p1_prelim = pipeline.p1_engine.analyze(full_ai_text, evidence_items)
 
-        if msg is None:
+                if len(evidence_items) >= 3 and p1_prelim.factual_error_score < 0.20:
+                    req_context.skipped_samples = settings.MAX_SELF_CONSISTENCY_SAMPLES
+                    logger.info("pillar3_sample_generation_skipped", reason="high_preliminary_factual_confidence", message_id=str(message_id))
+                else:
+                    target_sample_count = 1
+                    logger.info(
+                        "pillar3_lazy_sample_generation_started",
+                        message_id=str(message_id),
+                        requested_samples=target_sample_count,
+                        evidence_count=len(evidence_items),
+                    )
 
-            logger.error(
-                "verification_message_not_found",
+                    sample_start = time.perf_counter()
+
+                    try:
+                        target_msg = await session.get(Message, message_id)
+
+                        if target_msg is not None:
+                            target_chat = await session.get(Chat, target_msg.chat_id)
+
+                            if target_chat is not None:
+                                history_query = (
+                                    select(Message)
+                                    .where(Message.chat_id == target_msg.chat_id)
+                                    .where(Message.created_at <= target_msg.created_at)
+                                    .order_by(Message.created_at.asc())
+                                )
+                                history_res = await session.execute(history_query)
+                                all_chat_msgs = history_res.scalars().all()
+
+                                prompt_messages = [
+                                    {
+                                        "role": (
+                                            msg.role.value
+                                            if hasattr(msg.role, "value")
+                                            else str(msg.role)
+                                        ),
+                                        "content": msg.content,
+                                    }
+                                    for msg in all_chat_msgs
+                                    if msg.id != message_id
+                                ]
+
+                                if prompt_messages:
+                                    orchestrator = LLMOrchestrator(
+                                        primary_model=target_chat.model_used
+                                    )
+
+                                    sample_responses = await orchestrator.generate_samples(
+                                        messages=prompt_messages,
+                                        count=target_sample_count,
+                                        temperature=0.7,
+                                    )
+                                    for _ in sample_responses:
+                                        req_context.record_llm_call(operation="SELF_CONSISTENCY")
+
+                        sample_time_ms = (time.perf_counter() - sample_start) * 1000
+
+                        logger.info(
+                            "pillar3_sample_generation_completed",
+                            message_id=str(message_id),
+                            requested_samples=target_sample_count,
+                            generated_samples=len(sample_responses),
+                            sample_time_ms=round(sample_time_ms, 1),
+                        )
+
+                    except Exception as sample_exc:
+                        sample_time_ms = (time.perf_counter() - sample_start) * 1000
+
+                        logger.warning(
+                            "pillar3_sample_generation_failed",
+                            message_id=str(message_id),
+                            requested_samples=target_sample_count,
+                            generated_samples=0,
+                            error=str(sample_exc),
+                            sample_time_ms=round(sample_time_ms, 1),
+                        )
+                        sample_responses = []
+
+            # ---------------------------------------------------------
+            # STEP 4 — Run HalluciSense hybrid pipeline
+            # ---------------------------------------------------------
+
+            logger.info(
+                "pipeline_analysis_started",
+                message_id=str(message_id),
+                num_samples=len(sample_responses),
+                token_probs_available=token_probs is not None,
+            )
+
+            pipeline_start = time.perf_counter()
+
+            result = pipeline.analyze_response(
+                full_text=full_ai_text,
+                token_probabilities=token_probs,
+                evidence_items=evidence_items,
+                sample_responses=sample_responses,
+            )
+
+            if asyncio.iscoroutine(result):
+                result = await result
+
+            pipeline_time_ms = (time.perf_counter() - pipeline_start) * 1000
+
+            # ---------------------------------------------------------
+            # STEP 5 — Retrieve original message
+            # ---------------------------------------------------------
+
+            msg = await session.get(Message, message_id)
+
+            if msg is None:
+                logger.error(
+                    "verification_message_not_found",
+                    message_id=str(message_id),
+                )
+                return {
+                    "status": "error",
+                    "reason": "message_not_found",
+                }
+
+            processing_time_ms = (time.perf_counter() - start_time) * 1000
+
+            logger.info(
+                "pipeline_analysis_completed",
+                message_id=str(message_id),
+                overall_h_score=result.overall_h_score,
+                risk_level=(
+                    result.overall_risk_level.value
+                    if hasattr(result.overall_risk_level, "value")
+                    else str(result.overall_risk_level)
+                ),
+                pipeline_time_ms=round(pipeline_time_ms, 1),
+                processing_time_ms=round(processing_time_ms, 1),
+                pillar1_available=True,
+                pillar2_available=getattr(result.pillar2_summary, "available", False),
+                pillar3_available=getattr(result.pillar3_summary, "available", False),
+            )
+
+            # ---------------------------------------------------------
+            # STEP 5.5 — Idempotency: remove existing report if present
+            # ---------------------------------------------------------
+
+            existing_report = await session.execute(
+                select(VerificationReport).where(
+                    VerificationReport.message_id == message_id
+                )
+            )
+            existing = existing_report.scalar_one_or_none()
+
+            if existing is not None:
+                logger.info(
+                    "verification_replacing_existing_report",
+                    message_id=str(message_id),
+                    existing_report_id=str(existing.id),
+                )
+                await session.delete(existing)
+                await session.flush()
+
+            # ---------------------------------------------------------
+            # STEP 6 — Save overall verification report
+            # ---------------------------------------------------------
+
+            logger.info(
+                "verification_persistence_started",
                 message_id=str(message_id),
             )
+
+            # Delete existing report for idempotency if re-verifying same message_id
+            stmt_existing = (
+                select(VerificationReport)
+                .where(VerificationReport.message_id == message_id)
+                .options(selectinload(VerificationReport.sentence_analyses))
+            )
+            existing_report = (await session.execute(stmt_existing)).scalar_one_or_none()
+            if existing_report:
+                await session.delete(existing_report)
+                await session.flush()
+
+            report = VerificationReport(
+                message_id=message_id,
+                overall_h_score=result.overall_h_score,
+                overall_risk_level=(
+                    result.overall_risk_level.value
+                    if hasattr(result.overall_risk_level, "value")
+                    else str(result.overall_risk_level)
+                ),
+                factual_error_score=(
+                    result.pillar1_summary.factual_error_score
+                    if result.pillar1_summary is not None
+                    else None
+                ),
+                confidence_gap_score=(
+                    result.pillar2_summary.confidence_gap_score
+                    if result.pillar2_summary is not None
+                    else None
+                ),
+                consistency_failure_score=(
+                    result.pillar3_summary.consistency_failure_score
+                    if result.pillar3_summary is not None
+                    else None
+                ),
+                weights_used=result.weights_used,
+                pillar1_summary=_pillar_to_dict(result.pillar1_summary),
+                pillar2_summary=_pillar_to_dict(result.pillar2_summary),
+                pillar3_summary=_pillar_to_dict(result.pillar3_summary),
+                corrected_response=result.corrected_response,
+                processing_time_ms=processing_time_ms,
+            )
+
+            session.add(report)
+            await session.flush()
+
+            # ---------------------------------------------------------
+            # STEP 7 — Save sentence-level analyses
+            # ---------------------------------------------------------
+
+            for index, sentence_result in enumerate(result.sentence_analyses):
+                risk_level = sentence_result.risk_level
+                if hasattr(risk_level, "value"):
+                    risk_level = risk_level.value
+
+                sentence_analysis = SentenceAnalysis(
+                    report_id=report.id,
+                    sentence_index=index,
+                    sentence_text=sentence_result.text,
+                    start_char=sentence_result.start_char,
+                    end_char=sentence_result.end_char,
+                    h_score=sentence_result.hallucination_score,
+                    risk_level=str(risk_level),
+                    color_code=sentence_result.color_code,
+                    factual_error=sentence_result.factual_error,
+                    confidence_gap=sentence_result.confidence_gap,
+                    consistency_failure=sentence_result.consistency_failure,
+                    reasoning=sentence_result.reasoning,
+                )
+
+                session.add(sentence_analysis)
+                await session.flush()
+
+                # -----------------------------------------------------
+                # STEP 8 — Save evidence for this sentence
+                # -----------------------------------------------------
+
+                sentence_evidence = sentence_result.evidence or []
+
+                for evidence in sentence_evidence:
+                    if isinstance(evidence, dict):
+                        claim_str = evidence.get("claim", sentence_result.text)
+                        snippet_str = evidence.get("snippet", "")
+                        source_name_str = evidence.get("source_name", "Unknown")
+                        source_url_str = evidence.get("source_url", None)
+                        similarity_val = float(evidence.get("similarity_score", 0.0) or 0.0)
+                        is_supporting_val = bool(evidence.get("is_supporting", True))
+                    else:
+                        claim_str = getattr(evidence, "claim", sentence_result.text)
+                        snippet_str = getattr(evidence, "snippet", str(evidence))
+                        source_name_str = getattr(evidence, "source_name", "Unknown")
+                        source_url_str = getattr(evidence, "source_url", None)
+                        similarity_val = float(getattr(evidence, "similarity_score", 0.0) or 0.0)
+                        is_supporting_val = bool(getattr(evidence, "is_supporting", True))
+
+                    evidence_db = EvidenceItem(
+                        sentence_analysis_id=sentence_analysis.id,
+                        claim=claim_str,
+                        snippet=snippet_str,
+                        source_name=source_name_str,
+                        source_url=source_url_str,
+                        similarity_score=similarity_val,
+                        is_supporting=is_supporting_val,
+                    )
+                    session.add(evidence_db)
+
+            # ---------------------------------------------------------
+            # STEP 9 — Mark verification complete
+            # ---------------------------------------------------------
+
+            msg.verification_status = VerificationStatus.COMPLETE
+            await session.commit()
+
+            logger.info(
+                "verification_persistence_completed",
+                message_id=str(message_id),
+                report_id=str(report.id),
+                sentence_count=len(result.sentence_analyses),
+            )
+
+            # ---------------------------------------------------------
+            # STEP 10 — Notify frontend
+            # ---------------------------------------------------------
+
+            try:
+                from app.core.pubsub import publish_message
+
+                await publish_message(
+                    f"user_{msg.user_id}",
+                    {
+                        "type": "verification_complete",
+                        "message_id": str(msg.id),
+                        "report_id": str(report.id),
+                        "chat_id": str(msg.chat_id),
+                    },
+                )
+            except Exception as exc:
+                logger.exception(
+                    "verification_pubsub_failed",
+                    message_id=str(message_id),
+                    error=str(exc),
+                )
+
+            logger.info(
+                "verification_task_completed",
+                message_id=str(message_id),
+                report_id=str(report.id),
+                overall_h_score=result.overall_h_score,
+                risk_level=(
+                    result.overall_risk_level.value
+                    if hasattr(result.overall_risk_level, "value")
+                    else str(result.overall_risk_level)
+                ),
+                processing_time_ms=round(processing_time_ms, 1),
+            )
+
+            req_context.log_summary(processing_time_ms)
 
             return {
-                "status": "error",
-                "reason": "message_not_found",
+                "status": "success",
+                "message_id": str(message_id),
+                "report_id": str(report.id),
+                "overall_h_score": result.overall_h_score,
             }
-
-        processing_time_ms = (
-            time.perf_counter() - start_time
-        ) * 1000
-
-        logger.info(
-            "pipeline_analysis_completed",
-            message_id=str(message_id),
-            overall_h_score=result.overall_h_score,
-            risk_level=(
-                result.overall_risk_level.value
-                if hasattr(result.overall_risk_level, "value")
-                else str(result.overall_risk_level)
-            ),
-            pipeline_time_ms=round(pipeline_time_ms, 1),
-            processing_time_ms=round(processing_time_ms, 1),
-            pillar1_available=True,
-            pillar2_available=getattr(result.pillar2_summary, "available", False),
-            pillar3_available=getattr(result.pillar3_summary, "available", False),
-        )
-
-        # ---------------------------------------------------------
-        # STEP 5.5 — Idempotency: remove existing report if present
-        # ---------------------------------------------------------
-
-        existing_report = await session.execute(
-            select(VerificationReport).where(
-                VerificationReport.message_id == message_id
-            )
-        )
-        existing = existing_report.scalar_one_or_none()
-
-        if existing is not None:
-            logger.info(
-                "verification_replacing_existing_report",
-                message_id=str(message_id),
-                existing_report_id=str(existing.id),
-            )
-            # Cascade deletes SentenceAnalysis and EvidenceItem rows
-            await session.delete(existing)
-            await session.flush()
-
-        # ---------------------------------------------------------
-        # STEP 6 — Save overall verification report
-        # ---------------------------------------------------------
-
-        logger.info(
-            "verification_persistence_started",
-            message_id=str(message_id),
-        )
-
-        report = VerificationReport(
-            message_id=message_id,
-
-            overall_h_score=result.overall_h_score,
-
-            overall_risk_level=(
-                result.overall_risk_level.value
-                if hasattr(
-                    result.overall_risk_level,
-                    "value",
-                )
-                else str(result.overall_risk_level)
-            ),
-
-            factual_error_score=(
-                result.pillar1_summary.factual_error_score
-                if result.pillar1_summary is not None
-                else None
-            ),
-
-            confidence_gap_score=(
-                result.pillar2_summary.confidence_gap_score
-                if result.pillar2_summary is not None
-                else None
-            ),
-
-            consistency_failure_score=(
-                result.pillar3_summary.consistency_failure_score
-                if result.pillar3_summary is not None
-                else None
-            ),
-
-            weights_used=result.weights_used,
-
-            pillar1_summary=_pillar_to_dict(result.pillar1_summary),
-            pillar2_summary=_pillar_to_dict(result.pillar2_summary),
-            pillar3_summary=_pillar_to_dict(result.pillar3_summary),
-
-            corrected_response=result.corrected_response,
-
-            processing_time_ms=processing_time_ms,
-        )
-
-        session.add(report)
-
-        await session.flush()
-
-        # ---------------------------------------------------------
-        # STEP 7 — Save sentence-level analyses
-        # ---------------------------------------------------------
-
-        for index, sentence_result in enumerate(
-            result.sentence_analyses
-        ):
-
-            risk_level = sentence_result.risk_level
-
-            if hasattr(risk_level, "value"):
-                risk_level = risk_level.value
-
-            sentence_analysis = SentenceAnalysis(
-                report_id=report.id,
-
-                sentence_index=index,
-
-                sentence_text=sentence_result.text,
-
-                start_char=sentence_result.start_char,
-
-                end_char=sentence_result.end_char,
-
-                h_score=(
-                    sentence_result.hallucination_score
-                ),
-
-                risk_level=str(risk_level),
-
-                color_code=sentence_result.color_code,
-
-                factual_error=sentence_result.factual_error,
-
-                confidence_gap=sentence_result.confidence_gap,
-
-                consistency_failure=(
-                    sentence_result.consistency_failure
-                ),
-
-                reasoning=sentence_result.reasoning,
-            )
-
-            session.add(sentence_analysis)
-
-            await session.flush()
-
-            # -----------------------------------------------------
-            # STEP 8 — Save evidence for this sentence
-            # -----------------------------------------------------
-
-            sentence_evidence = (
-                sentence_result.evidence or []
-            )
-
-            for evidence in sentence_evidence:
-
-                evidence_db = EvidenceItem(
-                    sentence_analysis_id=(
-                        sentence_analysis.id
-                    ),
-
-                    claim=evidence.claim,
-
-                    snippet=evidence.snippet,
-
-                    source_name=evidence.source_name,
-
-                    source_url=evidence.source_url,
-
-                    similarity_score=(
-                        evidence.similarity_score
-                    ),
-
-                    is_supporting=(
-                        evidence.is_supporting
-                    ),
-                )
-
-                session.add(evidence_db)
-
-        # ---------------------------------------------------------
-        # STEP 9 — Mark verification complete
-        # ---------------------------------------------------------
-
-        msg.verification_status = (
-            VerificationStatus.COMPLETE
-        )
-
-        await session.commit()
-
-        logger.info(
-            "verification_persistence_completed",
-            message_id=str(message_id),
-            report_id=str(report.id),
-            sentence_count=len(result.sentence_analyses),
-        )
-
-        # ---------------------------------------------------------
-        # STEP 10 — Notify frontend
-        # ---------------------------------------------------------
-
-        try:
-
-            from app.core.pubsub import publish_message
-
-            await publish_message(
-                f"user_{msg.user_id}",
-                {
-                    "type": "verification_complete",
-                    "message_id": str(msg.id),
-                    "report_id": str(report.id),
-                    "chat_id": str(msg.chat_id),
-                },
-            )
-
-        except Exception as exc:
-
-            # Verification itself has succeeded.
-            # A notification failure should not destroy the report.
-
-            logger.exception(
-                "verification_pubsub_failed",
-                message_id=str(message_id),
-                error=str(exc),
-            )
-
-        logger.info(
-            "verification_task_completed",
-            message_id=str(message_id),
-            report_id=str(report.id),
-            overall_h_score=result.overall_h_score,
-            risk_level=(
-                result.overall_risk_level.value
-                if hasattr(result.overall_risk_level, "value")
-                else str(result.overall_risk_level)
-            ),
-            processing_time_ms=round(processing_time_ms, 1),
-        )
-
-        return {
-            "status": "success",
-            "message_id": str(message_id),
-            "report_id": str(report.id),
-            "overall_h_score": result.overall_h_score,
-        }
     finally:
         await worker_engine.dispose()
 
@@ -595,7 +535,6 @@ def verify_response_task(
     )
 
     try:
-
         result = asyncio.run(
             run_verification_async(
                 UUID(message_id_str),
@@ -603,16 +542,13 @@ def verify_response_task(
                 token_probs,
             )
         )
-
         return result
 
     except Exception as exc:
-
         logger.exception(
             "verification_task_failed",
             message_id=message_id_str,
             error=str(exc),
             error_type=type(exc).__name__,
         )
-
         raise

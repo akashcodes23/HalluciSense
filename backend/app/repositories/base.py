@@ -30,6 +30,10 @@ class BaseRepository(Generic[ModelT]):
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 
+    @property
+    def session(self) -> AsyncSession:
+        return self._session
+
     async def get_by_id(self, entity_id: UUID) -> Optional[ModelT]:
         """Return the entity with the given primary key or None."""
         result = await self._session.execute(

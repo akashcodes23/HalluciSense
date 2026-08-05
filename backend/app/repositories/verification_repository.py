@@ -26,5 +26,5 @@ class VerificationRepository(BaseRepository[VerificationReport]):
                 .selectinload(SentenceAnalysis.evidence_items)
             )
         )
-        result = await self.session.execute(stmt)
+        result = await self._session.execute(stmt)
         return result.scalars().first()

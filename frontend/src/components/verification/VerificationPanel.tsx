@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShieldCheck, ShieldAlert, ShieldX, Info } from 'lucide-react';
-import { useUIStore, VerificationReport } from '../../stores/uiStore';
+import { X, ShieldCheck, ShieldAlert, ShieldX, Info, ChevronDown, ChevronUp, CheckCircle2, AlertTriangle, XCircle, Activity, BarChart2 } from 'lucide-react';
+import { useUIStore } from '../../stores/uiStore';
 import { PillarCard } from './PillarCard';
 import { EvidenceCard } from './EvidenceCard';
 
@@ -31,158 +31,261 @@ const riskConfig = {
   },
 };
 
+function CircularGauge({ score }: { score: number }) {
+  const isAvailable = typeof score === 'number' && !isNaN(score);
+  const normalizedScore = isAvailable ? Math.max(0, Math.min(1, score)) : 0;
+  const percent = Math.round(normalizedScore * 100);
+  const radius = 36;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (percent / 100) * circumference;
+
+  let gaugeColor = '#22c55e';
+  if (percent > 35) gaugeColor = '#f59e0b';
+  if (percent > 65) gaugeColor = '#ef4444';
+
+  return (
+    <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
+      <svg className="w-full h-full transform -rotate-90">
+        <circle
+          cx="48"
+          cy="48"
+          r={radius}
+          stroke="currentColor"
+          strokeWidth="6"
+          className="text-white/10"
+          fill="transparent"
+        />
+        <motion.circle
+          cx="48"
+          cy="48"
+          r={radius}
+          stroke={gaugeColor}
+          strokeWidth="6"
+          strokeDasharray={circumference}
+          initial={{ strokeDashoffset: circumference }}
+          animate={{ strokeDashoffset: isAvailable ? strokeDashoffset : circumference }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          strokeLinecap="round"
+          fill="transparent"
+        />
+      </svg>
+      <div className="absolute text-center">
+        <span className="text-xl font-bold font-mono text-white">{isAvailable ? `${percent}%` : 'N/A'}</span>
+        <span className="block text-[9px] uppercase tracking-wider text-slate-400 font-semibold">H-Score</span>
+      </div>
+    </div>
+  );
+}
+
 function getPillarColor(score: number): 'green' | 'yellow' | 'red' {
-  if (score < 0.35) return 'green';
+  if (typeof score !== 'number' || isNaN(score) || score < 0.35) return 'green';
   if (score < 0.65) return 'yellow';
   return 'red';
 }
 
 export function VerificationPanel() {
   const { isPanelOpen, panelWidth, setPanelWidth, activeReport, activeSentenceIndex, closePanel, setActiveSentence } = useUIStore();
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(activeSentenceIndex ?? 0);
 
-  const activeSentence = activeReport?.sentence_analyses[activeSentenceIndex ?? 0];
-  const overallConfig = activeReport ? riskConfig[activeReport.overall_risk] : null;
-  const sentenceConfig = activeSentence ? riskConfig[activeSentence.risk_level] : null;
+  if (!isPanelOpen || !activeReport) return null;
+
+  const sentences = activeReport.sentence_analyses || [];
+  const overallConfig = riskConfig[activeReport.overall_risk] || riskConfig.VERIFIED;
+
+  const verifiedCount = sentences.filter((s) => s.risk_level === 'VERIFIED').length;
+  const reviewCount = sentences.filter((s) => s.risk_level === 'NEEDS_VERIFICATION').length;
+  const hallucinatedCount = sentences.filter((s) => s.risk_level === 'LIKELY_HALLUCINATED').length;
 
   return (
     <AnimatePresence>
-      {isPanelOpen && activeReport && (
-        <motion.aside
-          initial={{ x: '100%', opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: '100%', opacity: 0 }}
-          transition={{ type: 'spring', damping: 30, stiffness: 350, mass: 0.8 }}
-          style={{ width: panelWidth }}
-          className="fixed right-0 top-0 bottom-0 bg-[var(--bg-2)] border-l border-white/5 flex flex-col z-50 shadow-2xl"
-        >
-          {/* ── Drag Handle ── */}
-          <div 
-            className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-indigo-500/30 transition-all duration-200 ease-out z-50 opacity-0 hover:opacity-100"
-            onPointerDown={(e) => {
-              e.preventDefault();
-              const startX = e.clientX;
-              const startWidth = panelWidth;
-              
-              const onPointerMove = (moveEvent: PointerEvent) => {
-                const deltaX = startX - moveEvent.clientX;
-                const newWidth = Math.max(300, Math.min(startWidth + deltaX, 800));
-                setPanelWidth(newWidth);
-              };
-              
-              const onPointerUp = () => {
-                document.removeEventListener('pointermove', onPointerMove);
-                document.removeEventListener('pointerup', onPointerUp);
-              };
-              
-              document.addEventListener('pointermove', onPointerMove);
-              document.addEventListener('pointerup', onPointerUp);
-            }}
-          />
+      <motion.aside
+        initial={{ x: '100%', opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: '100%', opacity: 0 }}
+        transition={{ type: 'spring', damping: 30, stiffness: 350, mass: 0.8 }}
+        style={{ width: panelWidth }}
+        className="fixed right-0 top-0 bottom-0 bg-[var(--bg-2)] border-l border-white/5 flex flex-col z-50 shadow-2xl"
+      >
+        {/* ── Drag Handle ── */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-indigo-500/30 transition-all duration-200 ease-out z-50 opacity-0 hover:opacity-100"
+          onPointerDown={(e) => {
+            e.preventDefault();
+            const startX = e.clientX;
+            const startWidth = panelWidth;
+            const onPointerMove = (moveEvent: PointerEvent) => {
+              const deltaX = startX - moveEvent.clientX;
+              setPanelWidth(Math.max(320, Math.min(startWidth + deltaX, 850)));
+            };
+            const onPointerUp = () => {
+              document.removeEventListener('pointermove', onPointerMove);
+              document.removeEventListener('pointerup', onPointerUp);
+            };
+            document.addEventListener('pointermove', onPointerMove);
+            document.addEventListener('pointerup', onPointerUp);
+          }}
+        />
 
-          {/* ── Panel Header ── */}
-          <div className="flex items-center justify-between p-6 border-b border-white/5">
-            <div className="flex items-center gap-2">
-              {overallConfig?.icon}
-              <div>
-                <h2 className="text-sm font-bold text-white">Hallucination Inspector</h2>
-                <p className="text-xs text-slate-400">H-Score: {(activeReport.overall_h_score * 100).toFixed(0)}%</p>
-              </div>
-            </div>
-            <button onClick={closePanel} className="p-2 rounded-lg hover:bg-white/5 transition-colors text-slate-400 hover:text-white">
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            {/* ── Overall Risk Badge ── */}
-            <div
-              className="rounded-xl p-4 flex items-center gap-3"
-              style={{ background: overallConfig?.bg, border: `1px solid ${overallConfig?.border}` }}
-            >
-              {overallConfig?.icon}
-              <div>
-                <p className="text-sm font-semibold" style={{ color: overallConfig?.color }}>{overallConfig?.label}</p>
-                <p className="text-xs text-slate-400">Overall confidence: {(100 - activeReport.overall_h_score * 100).toFixed(0)}%</p>
-              </div>
-            </div>
-
-            {/* ── Sentence Selector ── */}
+        {/* ── Panel Header ── */}
+        <div className="flex items-center justify-between p-6 border-b border-white/5">
+          <div className="flex items-center gap-2">
+            {overallConfig.icon}
             <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Sentences</h3>
-              <div className="space-y-1">
-                {activeReport.sentence_analyses.map((s, i) => {
-                  const cfg = riskConfig[s.risk_level];
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => setActiveSentence(i)}
-                      className={`w-full text-left px-4 py-3 rounded-xl text-xs transition-all ${
-                        activeSentenceIndex === i ? 'bg-white/10 text-white shadow-sm' : 'text-slate-400 hover:bg-white/5 hover:text-slate-300'
-                      }`}
-                    >
-                      <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: cfg.color }} />
-                      <span className="line-clamp-1">{s.sentence_text}</span>
-                    </button>
-                  );
-                })}
+              <h2 className="text-sm font-bold text-white">Hallucination Inspector</h2>
+              <p className="text-xs text-slate-400">Message Verification Audit Report</p>
+            </div>
+          </div>
+          <button
+            onClick={closePanel}
+            className="p-2 rounded-lg hover:bg-white/5 transition-colors text-slate-400 hover:text-white"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* ── Scrollable Body ── */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          {/* ── Enterprise Overview Card ── */}
+          <div
+            className="rounded-2xl p-5 border flex items-center justify-between gap-4"
+            style={{ background: overallConfig.bg, borderColor: overallConfig.border }}
+          >
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Overall Verdict</span>
+              <h3 className="text-lg font-bold" style={{ color: overallConfig.color }}>
+                {overallConfig.label}
+              </h3>
+              <p className="text-xs text-slate-300">
+                Confidence: {Math.round((1.0 - activeReport.overall_h_score) * 100)}%
+              </p>
+            </div>
+            <CircularGauge score={activeReport.overall_h_score} />
+          </div>
+
+          {/* ── Evidence Statistics Grid ── */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+              <BarChart2 className="w-3.5 h-3.5 text-indigo-400" /> Evidence Metrics
+            </h3>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-white/[0.03] border border-white/5 p-3 rounded-xl text-center">
+                <span className="text-xs text-slate-400 block">Verified</span>
+                <span className="text-lg font-bold text-green-400">{verifiedCount}</span>
+              </div>
+              <div className="bg-white/[0.03] border border-white/5 p-3 rounded-xl text-center">
+                <span className="text-xs text-slate-400 block">Review</span>
+                <span className="text-lg font-bold text-yellow-400">{reviewCount}</span>
+              </div>
+              <div className="bg-white/[0.03] border border-white/5 p-3 rounded-xl text-center">
+                <span className="text-xs text-slate-400 block">Hallucinated</span>
+                <span className="text-lg font-bold text-red-400">{hallucinatedCount}</span>
               </div>
             </div>
-
-            {/* ── Active Sentence Detail ── */}
-            {activeSentence && (
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Selected Sentence</h3>
-                <p className="text-sm text-slate-200 leading-relaxed mb-4 italic border-l-2 pl-3" style={{ borderColor: sentenceConfig?.color }}>
-                  "{activeSentence.sentence_text}"
-                </p>
-
-                {/* Tri-Pillar Breakdown */}
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Tri-Pillar Analysis</h3>
-                <div className="space-y-3">
-                  <PillarCard
-                    label="Factual Grounding"
-                    score={activeSentence.factual_error}
-                    description="How well the claim is supported by retrieved evidence."
-                    color={getPillarColor(activeSentence.factual_error)}
-                  />
-                  <PillarCard
-                    label="Confidence Gap"
-                    score={activeSentence.confidence_gap}
-                    description="Model token probability uncertainty for this statement."
-                    color={getPillarColor(activeSentence.confidence_gap)}
-                  />
-                  <PillarCard
-                    label="Consistency Failure"
-                    score={activeSentence.consistency_failure}
-                    description="Semantic drift across multiple sampled responses."
-                    color={getPillarColor(activeSentence.consistency_failure)}
-                  />
-                </div>
-
-                {/* Engine Reasoning */}
-                {activeSentence.reasoning && (
-                  <div className="mt-6 bg-white/[0.02] border border-white/5 p-4 rounded-2xl flex gap-3">
-                    <Info className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
-                    <p className="text-[13px] text-slate-300 leading-relaxed">{activeSentence.reasoning}</p>
-                  </div>
-                )}
-
-                {/* Evidence */}
-                {activeSentence.evidence && activeSentence.evidence.length > 0 && (
-                  <div className="mt-4">
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Retrieved Evidence</h3>
-                    <div className="space-y-3">
-                      {activeSentence.evidence.map((ev, i) => (
-                        <EvidenceCard key={i} evidence={ev} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
-        </motion.aside>
-      )}
+
+          {/* ── Sentence Accordion Inspector ── */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+              <Activity className="w-3.5 h-3.5 text-indigo-400" /> Claim Breakdown ({sentences.length})
+            </h3>
+            <div className="space-y-3">
+              {sentences.map((sentence, idx) => {
+                const isExpanded = expandedIndex === idx;
+                const cfg = riskConfig[sentence.risk_level] || riskConfig.VERIFIED;
+
+                return (
+                  <div
+                    key={idx}
+                    className="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden transition-all duration-200"
+                  >
+                    {/* Sentence Accordion Header */}
+                    <button
+                      onClick={() => {
+                        setExpandedIndex(isExpanded ? null : idx);
+                        setActiveSentence(idx);
+                      }}
+                      className="w-full p-4 text-left flex items-start justify-between gap-3 hover:bg-white/[0.03] transition-colors"
+                    >
+                      <div className="flex items-start gap-2.5 flex-1 min-w-0">
+                        <span
+                          className="w-2 h-2 rounded-full mt-1.5 shrink-0"
+                          style={{ backgroundColor: cfg.color }}
+                        />
+                        <span className="text-xs text-slate-200 leading-relaxed line-clamp-2">
+                          "{sentence.sentence_text}"
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span
+                          className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full"
+                          style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}` }}
+                        >
+                          {cfg.label}
+                        </span>
+                        {isExpanded ? (
+                          <ChevronUp className="w-4 h-4 text-slate-400" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4 text-slate-400" />
+                        )}
+                      </div>
+                    </button>
+
+                    {/* Sentence Accordion Body */}
+                    {isExpanded && (
+                      <div className="p-4 border-t border-white/5 space-y-4 bg-white/[0.01]">
+                        {/* Tri-Pillar Breakdown */}
+                        <div className="space-y-2">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                            Tri-Pillar Analysis
+                          </span>
+                          <PillarCard
+                            label="Factual Grounding"
+                            score={sentence.factual_error}
+                            description="Retrieved external evidence entailment."
+                            color={getPillarColor(sentence.factual_error)}
+                          />
+                          <PillarCard
+                            label="Confidence Gap"
+                            score={sentence.confidence_gap}
+                            description="Token probability uncertainty."
+                            color={getPillarColor(sentence.confidence_gap)}
+                          />
+                          <PillarCard
+                            label="Consistency Failure"
+                            score={sentence.consistency_failure}
+                            description="Semantic drift across sample turns."
+                            color={getPillarColor(sentence.consistency_failure)}
+                          />
+                        </div>
+
+                        {/* NLI Engine Reasoning */}
+                        {sentence.reasoning && (
+                          <div className="bg-white/[0.02] border border-white/5 p-3 rounded-xl flex gap-2.5">
+                            <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+                            <p className="text-xs text-slate-300 leading-relaxed">{sentence.reasoning}</p>
+                          </div>
+                        )}
+
+                        {/* Sentence Evidence Items */}
+                        {sentence.evidence && sentence.evidence.length > 0 && (
+                          <div className="space-y-2">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                              Matched Evidence ({sentence.evidence.length})
+                            </span>
+                            {sentence.evidence.map((ev, evIdx) => (
+                              <EvidenceCard key={evIdx} evidence={ev} />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </motion.aside>
     </AnimatePresence>
   );
 }

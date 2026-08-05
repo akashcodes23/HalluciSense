@@ -2,6 +2,7 @@
 Notifications Router.
 Provides a global WebSocket endpoint for real-time events.
 """
+import asyncio
 from typing import Annotated
 from uuid import UUID
 
@@ -41,7 +42,12 @@ async def notifications_websocket(
             await websocket.send_json(message)
             
     except WebSocketDisconnect:
-        logger.info("websocket_disconnected", user_id=str(user_id_str) if 'user_id_str' in locals() else "unknown")
+        logger.info("websocket_notifications_disconnected", user_id=str(user_id_str) if 'user_id_str' in locals() else "unknown")
+    except asyncio.CancelledError:
+        logger.info("websocket_notifications_cancelled")
     except Exception as e:
-        logger.error("websocket_error", error=str(e))
-        await websocket.close(code=1011, reason="Internal error")
+        logger.error("websocket_notifications_error", error=str(e))
+        try:
+            await websocket.close(code=1011, reason="Internal error")
+        except Exception:
+            pass

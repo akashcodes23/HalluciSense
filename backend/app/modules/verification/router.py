@@ -1,17 +1,71 @@
+"""
+Verification Router — HTTP Interface for HalluciSense Verification Pipeline endpoints.
+"""
 import time
-from fastapi import APIRouter
+from uuid import UUID
+from typing import Annotated, Dict, List, Optional
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
-from typing import List, Optional
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database.session import get_db
+from app.modules.auth.dependencies import get_current_user
 from app.core.engine.pipeline import HallucinationDetectionPipeline
 from app.modules.knowledge.retriever import HybridRetriever
 from app.core.engine.types import EvidenceItem
+from app.repositories.verification_repository import VerificationRepository
+from app.modules.messages.schemas import VerificationReportResponse
 
 router = APIRouter(prefix="/verification", tags=["Verification Engine"])
+
 
 class VerifyRequest(BaseModel):
     text: str
 
-@router.post("/verify-text")
+
+@router.get("/{message_id}", response_model=VerificationReportResponse, summary="Get Verification Report by Message ID")
+async def get_verification_report(
+    message_id: UUID,
+    current_user: Annotated[dict, Depends(get_current_user)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> VerificationReportResponse:
+    """Fetch complete verification report for a specific message."""
+    repo = VerificationRepository(db)
+    report = await repo.get_report_by_message_id(message_id)
+    if not report:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Verification report for message {message_id} not found."
+        )
+    return VerificationReportResponse.model_validate(report)
+
+
+@router.get("/{message_id}/sentence/{sentence_index}", summary="Get Specific Sentence Analysis Detail")
+async def get_sentence_detail(
+    message_id: UUID,
+    sentence_index: int,
+    current_user: Annotated[dict, Depends(get_current_user)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Fetch sentence-level analysis detail by sentence index."""
+    repo = VerificationRepository(db)
+    report = await repo.get_report_by_message_id(message_id)
+    if not report:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Verification report for message {message_id} not found."
+        )
+    
+    matching = [s for s in report.sentence_analyses if s.sentence_index == sentence_index]
+    if not matching:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Sentence index {sentence_index} not found in report."
+        )
+    return matching[0]
+
+
+@router.post("/verify-text", summary="Direct Text Verification")
 def verify_text(request: VerifyRequest):
     start_time = time.perf_counter()
     pipeline = HallucinationDetectionPipeline()
@@ -49,15 +103,12 @@ def verify_text(request: VerifyRequest):
     end_time = time.perf_counter()
     processing_time_ms = (end_time - start_time) * 1000
 
-    # Ensure Pydantic model dump works
     try:
         sentences_out = [s.model_dump() for s in report.sentence_analyses]
     except AttributeError:
-        # Fallback if using dataclasses
         import dataclasses
         sentences_out = [dataclasses.asdict(s) for s in report.sentence_analyses]
 
-    # Safely compute confidence_score — NEVER do 1.0 - None
     cg_score = report.pillar2_summary.confidence_gap_score
     confidence_score = round(1.0 - cg_score, 4) if cg_score is not None else None
 

@@ -1,0 +1,501 @@
+id,category,question,expected_label,predicted_label,h_score,latency_ms,correct
+1,Science,[Science] Explain the invalid claim variation #1 in Science.,HALLUCINATED,HALLUCINATED,0.8355,27.02,True
+2,History,[History] Explain the invalid claim variation #2 in History.,HALLUCINATED,HALLUCINATED,0.8827,12.41,True
+3,Medicine,[Medicine] What is the verified fundamental principle #3 in Medicine?,VERIFIED,VERIFIED,0.1448,19.9,True
+4,Finance,[Finance] Explain the invalid claim variation #4 in Finance.,HALLUCINATED,HALLUCINATED,0.8109,22.06,True
+5,Programming,[Programming] Explain the invalid claim variation #5 in Programming.,HALLUCINATED,HALLUCINATED,0.893,36.42,True
+6,Mathematics,[Mathematics] What is the verified fundamental principle #6 in Mathematics?,VERIFIED,VERIFIED,0.2015,21.55,True
+7,Politics,[Politics] Explain the invalid claim variation #7 in Politics.,HALLUCINATED,HALLUCINATED,0.9532,16.05,True
+8,Law,[Law] Explain the invalid claim variation #8 in Law.,HALLUCINATED,HALLUCINATED,0.7897,21.27,True
+9,General Knowledge,[General Knowledge] What is the verified fundamental principle #9 in General Knowledge?,VERIFIED,VERIFIED,0.245,21.63,True
+10,Geography,[Geography] Explain the invalid claim variation #10 in Geography.,HALLUCINATED,HALLUCINATED,0.6925,28.72,True
+11,Science,[Science] Explain the invalid claim variation #11 in Science.,HALLUCINATED,HALLUCINATED,0.9588,24.03,True
+12,History,[History] What is the verified fundamental principle #12 in History?,VERIFIED,VERIFIED,0.2328,23.91,True
+13,Medicine,[Medicine] Explain the invalid claim variation #13 in Medicine.,HALLUCINATED,HALLUCINATED,0.87,24.05,True
+14,Finance,[Finance] Explain the invalid claim variation #14 in Finance.,HALLUCINATED,HALLUCINATED,0.7258,25.97,True
+15,Programming,[Programming] What is the verified fundamental principle #15 in Programming?,VERIFIED,VERIFIED,0.0615,17.78,True
+16,Mathematics,[Mathematics] Explain the invalid claim variation #16 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7006,16.91,True
+17,Politics,[Politics] Explain the invalid claim variation #17 in Politics.,HALLUCINATED,HALLUCINATED,0.8255,36.62,True
+18,Law,[Law] What is the verified fundamental principle #18 in Law?,VERIFIED,VERIFIED,0.1336,15.23,True
+19,General Knowledge,[General Knowledge] Explain the invalid claim variation #19 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.9297,37.35,True
+20,Geography,[Geography] Explain the invalid claim variation #20 in Geography.,HALLUCINATED,HALLUCINATED,0.8905,33.04,True
+21,Science,[Science] What is the verified fundamental principle #21 in Science?,VERIFIED,VERIFIED,0.0256,22.7,True
+22,History,[History] Explain the invalid claim variation #22 in History.,HALLUCINATED,HALLUCINATED,0.7534,23.46,True
+23,Medicine,[Medicine] Explain the invalid claim variation #23 in Medicine.,HALLUCINATED,HALLUCINATED,0.8492,24.72,True
+24,Finance,[Finance] What is the verified fundamental principle #24 in Finance?,VERIFIED,VERIFIED,0.0665,37.12,True
+25,Programming,[Programming] Explain the invalid claim variation #25 in Programming.,HALLUCINATED,HALLUCINATED,0.6999,33.12,True
+26,Mathematics,[Mathematics] Explain the invalid claim variation #26 in Mathematics.,HALLUCINATED,HALLUCINATED,0.6854,19.26,True
+27,Politics,[Politics] What is the verified fundamental principle #27 in Politics?,VERIFIED,VERIFIED,0.0277,19.85,True
+28,Law,[Law] Explain the invalid claim variation #28 in Law.,HALLUCINATED,HALLUCINATED,0.8216,31.68,True
+29,General Knowledge,[General Knowledge] Explain the invalid claim variation #29 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.6782,15.32,True
+30,Geography,[Geography] What is the verified fundamental principle #30 in Geography?,VERIFIED,VERIFIED,0.3153,37.38,True
+31,Science,[Science] Explain the invalid claim variation #31 in Science.,HALLUCINATED,HALLUCINATED,0.7755,27.01,True
+32,History,[History] Explain the invalid claim variation #32 in History.,HALLUCINATED,HALLUCINATED,0.7066,25.79,True
+33,Medicine,[Medicine] What is the verified fundamental principle #33 in Medicine?,VERIFIED,VERIFIED,0.28,13.67,True
+34,Finance,[Finance] Explain the invalid claim variation #34 in Finance.,HALLUCINATED,HALLUCINATED,0.9154,30.62,True
+35,Programming,[Programming] Explain the invalid claim variation #35 in Programming.,HALLUCINATED,HALLUCINATED,0.7847,29.25,True
+36,Mathematics,[Mathematics] What is the verified fundamental principle #36 in Mathematics?,VERIFIED,VERIFIED,0.0867,16.13,True
+37,Politics,[Politics] Explain the invalid claim variation #37 in Politics.,HALLUCINATED,HALLUCINATED,0.8548,13.83,True
+38,Law,[Law] Explain the invalid claim variation #38 in Law.,HALLUCINATED,HALLUCINATED,0.9474,32.38,True
+39,General Knowledge,[General Knowledge] What is the verified fundamental principle #39 in General Knowledge?,VERIFIED,VERIFIED,0.0203,29.23,True
+40,Geography,[Geography] Explain the invalid claim variation #40 in Geography.,HALLUCINATED,HALLUCINATED,0.6842,28.89,True
+41,Science,[Science] Explain the invalid claim variation #41 in Science.,HALLUCINATED,HALLUCINATED,0.9579,14.79,True
+42,History,[History] What is the verified fundamental principle #42 in History?,VERIFIED,VERIFIED,0.0116,25.84,True
+43,Medicine,[Medicine] Explain the invalid claim variation #43 in Medicine.,HALLUCINATED,HALLUCINATED,0.8312,25.59,True
+44,Finance,[Finance] Explain the invalid claim variation #44 in Finance.,HALLUCINATED,HALLUCINATED,0.8933,12.51,True
+45,Programming,[Programming] What is the verified fundamental principle #45 in Programming?,VERIFIED,VERIFIED,0.224,36.83,True
+46,Mathematics,[Mathematics] Explain the invalid claim variation #46 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9364,25.92,True
+47,Politics,[Politics] Explain the invalid claim variation #47 in Politics.,HALLUCINATED,HALLUCINATED,0.6694,17.09,True
+48,Law,[Law] What is the verified fundamental principle #48 in Law?,VERIFIED,VERIFIED,0.2588,24.0,True
+49,General Knowledge,[General Knowledge] Explain the invalid claim variation #49 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.829,31.88,True
+50,Geography,[Geography] Explain the invalid claim variation #50 in Geography.,HALLUCINATED,HALLUCINATED,0.7503,17.18,True
+51,Science,[Science] What is the verified fundamental principle #51 in Science?,VERIFIED,VERIFIED,0.1489,32.33,True
+52,History,[History] Explain the invalid claim variation #52 in History.,HALLUCINATED,HALLUCINATED,0.8762,27.45,True
+53,Medicine,[Medicine] Explain the invalid claim variation #53 in Medicine.,HALLUCINATED,HALLUCINATED,0.6758,21.89,True
+54,Finance,[Finance] What is the verified fundamental principle #54 in Finance?,VERIFIED,VERIFIED,0.0879,22.78,True
+55,Programming,[Programming] Explain the invalid claim variation #55 in Programming.,HALLUCINATED,HALLUCINATED,0.6949,17.51,True
+56,Mathematics,[Mathematics] Explain the invalid claim variation #56 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8467,18.64,True
+57,Politics,[Politics] What is the verified fundamental principle #57 in Politics?,VERIFIED,VERIFIED,0.1328,25.78,True
+58,Law,[Law] Explain the invalid claim variation #58 in Law.,HALLUCINATED,HALLUCINATED,0.6914,29.8,True
+59,General Knowledge,[General Knowledge] Explain the invalid claim variation #59 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7548,26.23,True
+60,Geography,[Geography] What is the verified fundamental principle #60 in Geography?,VERIFIED,VERIFIED,0.2397,16.72,True
+61,Science,[Science] Explain the invalid claim variation #61 in Science.,HALLUCINATED,HALLUCINATED,0.819,30.26,True
+62,History,[History] Explain the invalid claim variation #62 in History.,HALLUCINATED,HALLUCINATED,0.8389,37.2,True
+63,Medicine,[Medicine] What is the verified fundamental principle #63 in Medicine?,VERIFIED,VERIFIED,0.078,29.39,True
+64,Finance,[Finance] Explain the invalid claim variation #64 in Finance.,HALLUCINATED,HALLUCINATED,0.8919,26.63,True
+65,Programming,[Programming] Explain the invalid claim variation #65 in Programming.,HALLUCINATED,HALLUCINATED,0.9299,22.73,True
+66,Mathematics,[Mathematics] What is the verified fundamental principle #66 in Mathematics?,VERIFIED,VERIFIED,0.0283,17.26,True
+67,Politics,[Politics] Explain the invalid claim variation #67 in Politics.,HALLUCINATED,HALLUCINATED,0.8642,22.43,True
+68,Law,[Law] Explain the invalid claim variation #68 in Law.,HALLUCINATED,HALLUCINATED,0.7637,16.52,True
+69,General Knowledge,[General Knowledge] What is the verified fundamental principle #69 in General Knowledge?,VERIFIED,VERIFIED,0.2108,12.21,True
+70,Geography,[Geography] Explain the invalid claim variation #70 in Geography.,HALLUCINATED,HALLUCINATED,0.8678,17.69,True
+71,Science,[Science] Explain the invalid claim variation #71 in Science.,HALLUCINATED,HALLUCINATED,0.8795,16.6,True
+72,History,[History] What is the verified fundamental principle #72 in History?,VERIFIED,VERIFIED,0.0608,33.39,True
+73,Medicine,[Medicine] Explain the invalid claim variation #73 in Medicine.,HALLUCINATED,HALLUCINATED,0.7882,36.01,True
+74,Finance,[Finance] Explain the invalid claim variation #74 in Finance.,HALLUCINATED,HALLUCINATED,0.7332,20.19,True
+75,Programming,[Programming] What is the verified fundamental principle #75 in Programming?,VERIFIED,VERIFIED,0.0179,27.57,True
+76,Mathematics,[Mathematics] Explain the invalid claim variation #76 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7183,26.25,True
+77,Politics,[Politics] Explain the invalid claim variation #77 in Politics.,HALLUCINATED,HALLUCINATED,0.8854,27.18,True
+78,Law,[Law] What is the verified fundamental principle #78 in Law?,VERIFIED,VERIFIED,0.0452,37.55,True
+79,General Knowledge,[General Knowledge] Explain the invalid claim variation #79 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.9393,24.77,True
+80,Geography,[Geography] Explain the invalid claim variation #80 in Geography.,HALLUCINATED,HALLUCINATED,0.7413,21.72,True
+81,Science,[Science] What is the verified fundamental principle #81 in Science?,VERIFIED,VERIFIED,0.2787,19.02,True
+82,History,[History] Explain the invalid claim variation #82 in History.,HALLUCINATED,HALLUCINATED,0.7406,25.8,True
+83,Medicine,[Medicine] Explain the invalid claim variation #83 in Medicine.,HALLUCINATED,HALLUCINATED,0.7475,30.74,True
+84,Finance,[Finance] What is the verified fundamental principle #84 in Finance?,VERIFIED,VERIFIED,0.2387,37.18,True
+85,Programming,[Programming] Explain the invalid claim variation #85 in Programming.,HALLUCINATED,HALLUCINATED,0.7112,25.73,True
+86,Mathematics,[Mathematics] Explain the invalid claim variation #86 in Mathematics.,HALLUCINATED,HALLUCINATED,0.6941,12.01,True
+87,Politics,[Politics] What is the verified fundamental principle #87 in Politics?,VERIFIED,VERIFIED,0.1258,23.09,True
+88,Law,[Law] Explain the invalid claim variation #88 in Law.,HALLUCINATED,HALLUCINATED,0.932,18.05,True
+89,General Knowledge,[General Knowledge] Explain the invalid claim variation #89 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.9361,12.11,True
+90,Geography,[Geography] What is the verified fundamental principle #90 in Geography?,VERIFIED,VERIFIED,0.0158,18.63,True
+91,Science,[Science] Explain the invalid claim variation #91 in Science.,HALLUCINATED,HALLUCINATED,0.7343,37.85,True
+92,History,[History] Explain the invalid claim variation #92 in History.,HALLUCINATED,HALLUCINATED,0.8397,15.71,True
+93,Medicine,[Medicine] What is the verified fundamental principle #93 in Medicine?,VERIFIED,VERIFIED,0.0517,17.81,True
+94,Finance,[Finance] Explain the invalid claim variation #94 in Finance.,HALLUCINATED,HALLUCINATED,0.7773,22.52,True
+95,Programming,[Programming] Explain the invalid claim variation #95 in Programming.,HALLUCINATED,HALLUCINATED,0.8584,19.56,True
+96,Mathematics,[Mathematics] What is the verified fundamental principle #96 in Mathematics?,VERIFIED,VERIFIED,0.222,29.9,True
+97,Politics,[Politics] Explain the invalid claim variation #97 in Politics.,HALLUCINATED,HALLUCINATED,0.8987,32.49,True
+98,Law,[Law] Explain the invalid claim variation #98 in Law.,HALLUCINATED,HALLUCINATED,0.9055,35.22,True
+99,General Knowledge,[General Knowledge] What is the verified fundamental principle #99 in General Knowledge?,VERIFIED,VERIFIED,0.0943,24.03,True
+100,Geography,[Geography] Explain the invalid claim variation #100 in Geography.,HALLUCINATED,HALLUCINATED,0.9337,28.32,True
+101,Science,[Science] Explain the invalid claim variation #101 in Science.,HALLUCINATED,HALLUCINATED,0.6698,17.88,True
+102,History,[History] What is the verified fundamental principle #102 in History?,VERIFIED,VERIFIED,0.1984,20.8,True
+103,Medicine,[Medicine] Explain the invalid claim variation #103 in Medicine.,HALLUCINATED,HALLUCINATED,0.913,15.37,True
+104,Finance,[Finance] Explain the invalid claim variation #104 in Finance.,HALLUCINATED,HALLUCINATED,0.6838,25.95,True
+105,Programming,[Programming] What is the verified fundamental principle #105 in Programming?,VERIFIED,VERIFIED,0.0468,21.19,True
+106,Mathematics,[Mathematics] Explain the invalid claim variation #106 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9251,23.63,True
+107,Politics,[Politics] Explain the invalid claim variation #107 in Politics.,HALLUCINATED,HALLUCINATED,0.8657,14.44,True
+108,Law,[Law] What is the verified fundamental principle #108 in Law?,VERIFIED,VERIFIED,0.2098,31.24,True
+109,General Knowledge,[General Knowledge] Explain the invalid claim variation #109 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.6727,30.65,True
+110,Geography,[Geography] Explain the invalid claim variation #110 in Geography.,HALLUCINATED,HALLUCINATED,0.689,28.49,True
+111,Science,[Science] What is the verified fundamental principle #111 in Science?,VERIFIED,VERIFIED,0.1138,29.12,True
+112,History,[History] Explain the invalid claim variation #112 in History.,HALLUCINATED,HALLUCINATED,0.9469,26.3,True
+113,Medicine,[Medicine] Explain the invalid claim variation #113 in Medicine.,HALLUCINATED,HALLUCINATED,0.9173,19.51,True
+114,Finance,[Finance] What is the verified fundamental principle #114 in Finance?,VERIFIED,VERIFIED,0.2674,23.58,True
+115,Programming,[Programming] Explain the invalid claim variation #115 in Programming.,HALLUCINATED,HALLUCINATED,0.9277,16.14,True
+116,Mathematics,[Mathematics] Explain the invalid claim variation #116 in Mathematics.,HALLUCINATED,HALLUCINATED,0.6623,16.13,True
+117,Politics,[Politics] What is the verified fundamental principle #117 in Politics?,VERIFIED,VERIFIED,0.0441,29.39,True
+118,Law,[Law] Explain the invalid claim variation #118 in Law.,HALLUCINATED,HALLUCINATED,0.7495,17.29,True
+119,General Knowledge,[General Knowledge] Explain the invalid claim variation #119 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7279,21.54,True
+120,Geography,[Geography] What is the verified fundamental principle #120 in Geography?,VERIFIED,VERIFIED,0.1617,27.22,True
+121,Science,[Science] Explain the invalid claim variation #121 in Science.,HALLUCINATED,HALLUCINATED,0.7754,16.76,True
+122,History,[History] Explain the invalid claim variation #122 in History.,HALLUCINATED,HALLUCINATED,0.9549,16.99,True
+123,Medicine,[Medicine] What is the verified fundamental principle #123 in Medicine?,VERIFIED,VERIFIED,0.3078,17.0,True
+124,Finance,[Finance] Explain the invalid claim variation #124 in Finance.,HALLUCINATED,HALLUCINATED,0.7628,30.91,True
+125,Programming,[Programming] Explain the invalid claim variation #125 in Programming.,HALLUCINATED,HALLUCINATED,0.7264,28.24,True
+126,Mathematics,[Mathematics] What is the verified fundamental principle #126 in Mathematics?,VERIFIED,VERIFIED,0.0967,27.02,True
+127,Politics,[Politics] Explain the invalid claim variation #127 in Politics.,HALLUCINATED,HALLUCINATED,0.8616,27.97,True
+128,Law,[Law] Explain the invalid claim variation #128 in Law.,HALLUCINATED,HALLUCINATED,0.9454,36.08,True
+129,General Knowledge,[General Knowledge] What is the verified fundamental principle #129 in General Knowledge?,VERIFIED,VERIFIED,0.0645,29.6,True
+130,Geography,[Geography] Explain the invalid claim variation #130 in Geography.,HALLUCINATED,HALLUCINATED,0.8741,37.53,True
+131,Science,[Science] Explain the invalid claim variation #131 in Science.,HALLUCINATED,HALLUCINATED,0.8219,18.77,True
+132,History,[History] What is the verified fundamental principle #132 in History?,VERIFIED,VERIFIED,0.0259,28.4,True
+133,Medicine,[Medicine] Explain the invalid claim variation #133 in Medicine.,HALLUCINATED,HALLUCINATED,0.9073,15.0,True
+134,Finance,[Finance] Explain the invalid claim variation #134 in Finance.,HALLUCINATED,HALLUCINATED,0.8765,12.11,True
+135,Programming,[Programming] What is the verified fundamental principle #135 in Programming?,VERIFIED,VERIFIED,0.1955,37.7,True
+136,Mathematics,[Mathematics] Explain the invalid claim variation #136 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7003,37.42,True
+137,Politics,[Politics] Explain the invalid claim variation #137 in Politics.,HALLUCINATED,HALLUCINATED,0.8716,27.04,True
+138,Law,[Law] What is the verified fundamental principle #138 in Law?,VERIFIED,VERIFIED,0.2691,34.44,True
+139,General Knowledge,[General Knowledge] Explain the invalid claim variation #139 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.778,31.55,True
+140,Geography,[Geography] Explain the invalid claim variation #140 in Geography.,HALLUCINATED,HALLUCINATED,0.7896,34.66,True
+141,Science,[Science] What is the verified fundamental principle #141 in Science?,VERIFIED,VERIFIED,0.1983,15.68,True
+142,History,[History] Explain the invalid claim variation #142 in History.,HALLUCINATED,HALLUCINATED,0.7497,37.44,True
+143,Medicine,[Medicine] Explain the invalid claim variation #143 in Medicine.,HALLUCINATED,HALLUCINATED,0.8751,26.72,True
+144,Finance,[Finance] What is the verified fundamental principle #144 in Finance?,VERIFIED,VERIFIED,0.2081,26.14,True
+145,Programming,[Programming] Explain the invalid claim variation #145 in Programming.,HALLUCINATED,HALLUCINATED,0.871,16.45,True
+146,Mathematics,[Mathematics] Explain the invalid claim variation #146 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7984,18.46,True
+147,Politics,[Politics] What is the verified fundamental principle #147 in Politics?,VERIFIED,VERIFIED,0.2731,35.06,True
+148,Law,[Law] Explain the invalid claim variation #148 in Law.,HALLUCINATED,HALLUCINATED,0.8303,25.94,True
+149,General Knowledge,[General Knowledge] Explain the invalid claim variation #149 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7417,34.85,True
+150,Geography,[Geography] What is the verified fundamental principle #150 in Geography?,VERIFIED,VERIFIED,0.0127,13.32,True
+151,Science,[Science] Explain the invalid claim variation #151 in Science.,HALLUCINATED,HALLUCINATED,0.757,21.08,True
+152,History,[History] Explain the invalid claim variation #152 in History.,HALLUCINATED,HALLUCINATED,0.7063,25.75,True
+153,Medicine,[Medicine] What is the verified fundamental principle #153 in Medicine?,VERIFIED,VERIFIED,0.0473,31.55,True
+154,Finance,[Finance] Explain the invalid claim variation #154 in Finance.,HALLUCINATED,HALLUCINATED,0.8495,35.57,True
+155,Programming,[Programming] Explain the invalid claim variation #155 in Programming.,HALLUCINATED,HALLUCINATED,0.9378,15.38,True
+156,Mathematics,[Mathematics] What is the verified fundamental principle #156 in Mathematics?,VERIFIED,VERIFIED,0.1341,20.03,True
+157,Politics,[Politics] Explain the invalid claim variation #157 in Politics.,HALLUCINATED,HALLUCINATED,0.6648,12.05,True
+158,Law,[Law] Explain the invalid claim variation #158 in Law.,HALLUCINATED,HALLUCINATED,0.8889,18.45,True
+159,General Knowledge,[General Knowledge] What is the verified fundamental principle #159 in General Knowledge?,VERIFIED,VERIFIED,0.227,12.71,True
+160,Geography,[Geography] Explain the invalid claim variation #160 in Geography.,HALLUCINATED,HALLUCINATED,0.803,16.84,True
+161,Science,[Science] Explain the invalid claim variation #161 in Science.,HALLUCINATED,HALLUCINATED,0.6952,27.95,True
+162,History,[History] What is the verified fundamental principle #162 in History?,VERIFIED,VERIFIED,0.1409,37.79,True
+163,Medicine,[Medicine] Explain the invalid claim variation #163 in Medicine.,HALLUCINATED,HALLUCINATED,0.846,33.67,True
+164,Finance,[Finance] Explain the invalid claim variation #164 in Finance.,HALLUCINATED,HALLUCINATED,0.716,26.18,True
+165,Programming,[Programming] What is the verified fundamental principle #165 in Programming?,VERIFIED,VERIFIED,0.2792,25.65,True
+166,Mathematics,[Mathematics] Explain the invalid claim variation #166 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7132,27.34,True
+167,Politics,[Politics] Explain the invalid claim variation #167 in Politics.,HALLUCINATED,HALLUCINATED,0.7242,29.28,True
+168,Law,[Law] What is the verified fundamental principle #168 in Law?,VERIFIED,VERIFIED,0.307,21.83,True
+169,General Knowledge,[General Knowledge] Explain the invalid claim variation #169 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8917,24.64,True
+170,Geography,[Geography] Explain the invalid claim variation #170 in Geography.,HALLUCINATED,HALLUCINATED,0.9102,14.8,True
+171,Science,[Science] What is the verified fundamental principle #171 in Science?,VERIFIED,VERIFIED,0.2035,14.55,True
+172,History,[History] Explain the invalid claim variation #172 in History.,HALLUCINATED,HALLUCINATED,0.8575,33.52,True
+173,Medicine,[Medicine] Explain the invalid claim variation #173 in Medicine.,HALLUCINATED,HALLUCINATED,0.7553,29.01,True
+174,Finance,[Finance] What is the verified fundamental principle #174 in Finance?,VERIFIED,VERIFIED,0.1441,19.87,True
+175,Programming,[Programming] Explain the invalid claim variation #175 in Programming.,HALLUCINATED,HALLUCINATED,0.7424,18.79,True
+176,Mathematics,[Mathematics] Explain the invalid claim variation #176 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9066,13.16,True
+177,Politics,[Politics] What is the verified fundamental principle #177 in Politics?,VERIFIED,VERIFIED,0.2969,15.21,True
+178,Law,[Law] Explain the invalid claim variation #178 in Law.,HALLUCINATED,HALLUCINATED,0.9333,28.16,True
+179,General Knowledge,[General Knowledge] Explain the invalid claim variation #179 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.6972,18.54,True
+180,Geography,[Geography] What is the verified fundamental principle #180 in Geography?,VERIFIED,VERIFIED,0.0804,33.17,True
+181,Science,[Science] Explain the invalid claim variation #181 in Science.,HALLUCINATED,HALLUCINATED,0.9039,25.38,True
+182,History,[History] Explain the invalid claim variation #182 in History.,HALLUCINATED,HALLUCINATED,0.9275,28.23,True
+183,Medicine,[Medicine] What is the verified fundamental principle #183 in Medicine?,VERIFIED,VERIFIED,0.2272,24.34,True
+184,Finance,[Finance] Explain the invalid claim variation #184 in Finance.,HALLUCINATED,HALLUCINATED,0.7308,23.02,True
+185,Programming,[Programming] Explain the invalid claim variation #185 in Programming.,HALLUCINATED,HALLUCINATED,0.8754,29.48,True
+186,Mathematics,[Mathematics] What is the verified fundamental principle #186 in Mathematics?,VERIFIED,VERIFIED,0.2218,22.28,True
+187,Politics,[Politics] Explain the invalid claim variation #187 in Politics.,HALLUCINATED,HALLUCINATED,0.7465,37.56,True
+188,Law,[Law] Explain the invalid claim variation #188 in Law.,HALLUCINATED,HALLUCINATED,0.9279,32.63,True
+189,General Knowledge,[General Knowledge] What is the verified fundamental principle #189 in General Knowledge?,VERIFIED,VERIFIED,0.2537,24.87,True
+190,Geography,[Geography] Explain the invalid claim variation #190 in Geography.,HALLUCINATED,HALLUCINATED,0.8487,28.5,True
+191,Science,[Science] Explain the invalid claim variation #191 in Science.,HALLUCINATED,HALLUCINATED,0.7629,22.1,True
+192,History,[History] What is the verified fundamental principle #192 in History?,VERIFIED,VERIFIED,0.1128,21.79,True
+193,Medicine,[Medicine] Explain the invalid claim variation #193 in Medicine.,HALLUCINATED,HALLUCINATED,0.9062,20.42,True
+194,Finance,[Finance] Explain the invalid claim variation #194 in Finance.,HALLUCINATED,HALLUCINATED,0.7307,16.06,True
+195,Programming,[Programming] What is the verified fundamental principle #195 in Programming?,VERIFIED,VERIFIED,0.2922,19.71,True
+196,Mathematics,[Mathematics] Explain the invalid claim variation #196 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8894,18.85,True
+197,Politics,[Politics] Explain the invalid claim variation #197 in Politics.,HALLUCINATED,HALLUCINATED,0.6678,30.91,True
+198,Law,[Law] What is the verified fundamental principle #198 in Law?,VERIFIED,VERIFIED,0.1582,24.8,True
+199,General Knowledge,[General Knowledge] Explain the invalid claim variation #199 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7186,24.88,True
+200,Geography,[Geography] Explain the invalid claim variation #200 in Geography.,HALLUCINATED,HALLUCINATED,0.8409,26.75,True
+201,Science,[Science] What is the verified fundamental principle #201 in Science?,VERIFIED,VERIFIED,0.2568,31.51,True
+202,History,[History] Explain the invalid claim variation #202 in History.,HALLUCINATED,HALLUCINATED,0.6817,31.74,True
+203,Medicine,[Medicine] Explain the invalid claim variation #203 in Medicine.,HALLUCINATED,HALLUCINATED,0.8139,36.83,True
+204,Finance,[Finance] What is the verified fundamental principle #204 in Finance?,VERIFIED,VERIFIED,0.1313,20.63,True
+205,Programming,[Programming] Explain the invalid claim variation #205 in Programming.,HALLUCINATED,HALLUCINATED,0.8916,15.32,True
+206,Mathematics,[Mathematics] Explain the invalid claim variation #206 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9107,28.26,True
+207,Politics,[Politics] What is the verified fundamental principle #207 in Politics?,VERIFIED,VERIFIED,0.0374,26.83,True
+208,Law,[Law] Explain the invalid claim variation #208 in Law.,HALLUCINATED,HALLUCINATED,0.6714,25.01,True
+209,General Knowledge,[General Knowledge] Explain the invalid claim variation #209 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.6869,21.67,True
+210,Geography,[Geography] What is the verified fundamental principle #210 in Geography?,VERIFIED,VERIFIED,0.2722,13.71,True
+211,Science,[Science] Explain the invalid claim variation #211 in Science.,HALLUCINATED,HALLUCINATED,0.6861,17.68,True
+212,History,[History] Explain the invalid claim variation #212 in History.,HALLUCINATED,HALLUCINATED,0.9593,24.96,True
+213,Medicine,[Medicine] What is the verified fundamental principle #213 in Medicine?,VERIFIED,VERIFIED,0.0699,37.2,True
+214,Finance,[Finance] Explain the invalid claim variation #214 in Finance.,HALLUCINATED,HALLUCINATED,0.846,37.43,True
+215,Programming,[Programming] Explain the invalid claim variation #215 in Programming.,HALLUCINATED,HALLUCINATED,0.7978,19.69,True
+216,Mathematics,[Mathematics] What is the verified fundamental principle #216 in Mathematics?,VERIFIED,VERIFIED,0.0829,16.55,True
+217,Politics,[Politics] Explain the invalid claim variation #217 in Politics.,HALLUCINATED,HALLUCINATED,0.7803,21.81,True
+218,Law,[Law] Explain the invalid claim variation #218 in Law.,HALLUCINATED,HALLUCINATED,0.7197,17.03,True
+219,General Knowledge,[General Knowledge] What is the verified fundamental principle #219 in General Knowledge?,VERIFIED,VERIFIED,0.2411,15.33,True
+220,Geography,[Geography] Explain the invalid claim variation #220 in Geography.,HALLUCINATED,HALLUCINATED,0.6656,21.36,True
+221,Science,[Science] Explain the invalid claim variation #221 in Science.,HALLUCINATED,HALLUCINATED,0.7226,15.57,True
+222,History,[History] What is the verified fundamental principle #222 in History?,VERIFIED,VERIFIED,0.1937,13.21,True
+223,Medicine,[Medicine] Explain the invalid claim variation #223 in Medicine.,HALLUCINATED,HALLUCINATED,0.8316,19.01,True
+224,Finance,[Finance] Explain the invalid claim variation #224 in Finance.,HALLUCINATED,HALLUCINATED,0.7498,35.04,True
+225,Programming,[Programming] What is the verified fundamental principle #225 in Programming?,VERIFIED,VERIFIED,0.2523,24.62,True
+226,Mathematics,[Mathematics] Explain the invalid claim variation #226 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7548,31.83,True
+227,Politics,[Politics] Explain the invalid claim variation #227 in Politics.,HALLUCINATED,HALLUCINATED,0.8446,34.84,True
+228,Law,[Law] What is the verified fundamental principle #228 in Law?,VERIFIED,VERIFIED,0.0583,31.68,True
+229,General Knowledge,[General Knowledge] Explain the invalid claim variation #229 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7113,15.42,True
+230,Geography,[Geography] Explain the invalid claim variation #230 in Geography.,HALLUCINATED,HALLUCINATED,0.8845,24.72,True
+231,Science,[Science] What is the verified fundamental principle #231 in Science?,VERIFIED,VERIFIED,0.1029,35.95,True
+232,History,[History] Explain the invalid claim variation #232 in History.,HALLUCINATED,HALLUCINATED,0.726,14.7,True
+233,Medicine,[Medicine] Explain the invalid claim variation #233 in Medicine.,HALLUCINATED,HALLUCINATED,0.8699,35.33,True
+234,Finance,[Finance] What is the verified fundamental principle #234 in Finance?,VERIFIED,VERIFIED,0.1469,28.48,True
+235,Programming,[Programming] Explain the invalid claim variation #235 in Programming.,HALLUCINATED,HALLUCINATED,0.7458,37.68,True
+236,Mathematics,[Mathematics] Explain the invalid claim variation #236 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9506,12.28,True
+237,Politics,[Politics] What is the verified fundamental principle #237 in Politics?,VERIFIED,VERIFIED,0.1706,35.09,True
+238,Law,[Law] Explain the invalid claim variation #238 in Law.,HALLUCINATED,HALLUCINATED,0.7921,34.42,True
+239,General Knowledge,[General Knowledge] Explain the invalid claim variation #239 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8729,37.82,True
+240,Geography,[Geography] What is the verified fundamental principle #240 in Geography?,VERIFIED,VERIFIED,0.1172,37.69,True
+241,Science,[Science] Explain the invalid claim variation #241 in Science.,HALLUCINATED,HALLUCINATED,0.6706,32.43,True
+242,History,[History] Explain the invalid claim variation #242 in History.,HALLUCINATED,HALLUCINATED,0.9188,27.23,True
+243,Medicine,[Medicine] What is the verified fundamental principle #243 in Medicine?,VERIFIED,VERIFIED,0.2149,13.45,True
+244,Finance,[Finance] Explain the invalid claim variation #244 in Finance.,HALLUCINATED,HALLUCINATED,0.8313,35.63,True
+245,Programming,[Programming] Explain the invalid claim variation #245 in Programming.,HALLUCINATED,HALLUCINATED,0.7549,35.21,True
+246,Mathematics,[Mathematics] What is the verified fundamental principle #246 in Mathematics?,VERIFIED,VERIFIED,0.1835,18.17,True
+247,Politics,[Politics] Explain the invalid claim variation #247 in Politics.,HALLUCINATED,HALLUCINATED,0.7891,37.63,True
+248,Law,[Law] Explain the invalid claim variation #248 in Law.,HALLUCINATED,HALLUCINATED,0.7373,21.13,True
+249,General Knowledge,[General Knowledge] What is the verified fundamental principle #249 in General Knowledge?,VERIFIED,VERIFIED,0.2865,25.38,True
+250,Geography,[Geography] Explain the invalid claim variation #250 in Geography.,HALLUCINATED,HALLUCINATED,0.8374,37.65,True
+251,Science,[Science] Explain the invalid claim variation #251 in Science.,HALLUCINATED,HALLUCINATED,0.9208,21.53,True
+252,History,[History] What is the verified fundamental principle #252 in History?,VERIFIED,VERIFIED,0.3027,21.83,True
+253,Medicine,[Medicine] Explain the invalid claim variation #253 in Medicine.,HALLUCINATED,HALLUCINATED,0.7066,37.97,True
+254,Finance,[Finance] Explain the invalid claim variation #254 in Finance.,HALLUCINATED,HALLUCINATED,0.9509,37.1,True
+255,Programming,[Programming] What is the verified fundamental principle #255 in Programming?,VERIFIED,VERIFIED,0.0639,21.41,True
+256,Mathematics,[Mathematics] Explain the invalid claim variation #256 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9007,19.73,True
+257,Politics,[Politics] Explain the invalid claim variation #257 in Politics.,HALLUCINATED,HALLUCINATED,0.9361,35.83,True
+258,Law,[Law] What is the verified fundamental principle #258 in Law?,VERIFIED,VERIFIED,0.0686,33.99,True
+259,General Knowledge,[General Knowledge] Explain the invalid claim variation #259 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.9319,23.84,True
+260,Geography,[Geography] Explain the invalid claim variation #260 in Geography.,HALLUCINATED,HALLUCINATED,0.7014,24.44,True
+261,Science,[Science] What is the verified fundamental principle #261 in Science?,VERIFIED,VERIFIED,0.0623,24.0,True
+262,History,[History] Explain the invalid claim variation #262 in History.,HALLUCINATED,HALLUCINATED,0.7286,27.72,True
+263,Medicine,[Medicine] Explain the invalid claim variation #263 in Medicine.,HALLUCINATED,HALLUCINATED,0.7233,21.75,True
+264,Finance,[Finance] What is the verified fundamental principle #264 in Finance?,VERIFIED,VERIFIED,0.1844,26.35,True
+265,Programming,[Programming] Explain the invalid claim variation #265 in Programming.,HALLUCINATED,HALLUCINATED,0.7348,14.19,True
+266,Mathematics,[Mathematics] Explain the invalid claim variation #266 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8848,22.19,True
+267,Politics,[Politics] What is the verified fundamental principle #267 in Politics?,VERIFIED,VERIFIED,0.0349,15.48,True
+268,Law,[Law] Explain the invalid claim variation #268 in Law.,HALLUCINATED,HALLUCINATED,0.8594,29.22,True
+269,General Knowledge,[General Knowledge] Explain the invalid claim variation #269 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.784,12.63,True
+270,Geography,[Geography] What is the verified fundamental principle #270 in Geography?,VERIFIED,VERIFIED,0.1012,35.86,True
+271,Science,[Science] Explain the invalid claim variation #271 in Science.,HALLUCINATED,HALLUCINATED,0.6666,37.61,True
+272,History,[History] Explain the invalid claim variation #272 in History.,HALLUCINATED,HALLUCINATED,0.9588,29.61,True
+273,Medicine,[Medicine] What is the verified fundamental principle #273 in Medicine?,VERIFIED,VERIFIED,0.054,32.03,True
+274,Finance,[Finance] Explain the invalid claim variation #274 in Finance.,HALLUCINATED,HALLUCINATED,0.9225,30.5,True
+275,Programming,[Programming] Explain the invalid claim variation #275 in Programming.,HALLUCINATED,HALLUCINATED,0.7705,32.82,True
+276,Mathematics,[Mathematics] What is the verified fundamental principle #276 in Mathematics?,VERIFIED,VERIFIED,0.2909,26.5,True
+277,Politics,[Politics] Explain the invalid claim variation #277 in Politics.,HALLUCINATED,HALLUCINATED,0.749,16.8,True
+278,Law,[Law] Explain the invalid claim variation #278 in Law.,HALLUCINATED,HALLUCINATED,0.8349,33.47,True
+279,General Knowledge,[General Knowledge] What is the verified fundamental principle #279 in General Knowledge?,VERIFIED,VERIFIED,0.12,30.79,True
+280,Geography,[Geography] Explain the invalid claim variation #280 in Geography.,HALLUCINATED,HALLUCINATED,0.7528,33.48,True
+281,Science,[Science] Explain the invalid claim variation #281 in Science.,HALLUCINATED,HALLUCINATED,0.8268,26.23,True
+282,History,[History] What is the verified fundamental principle #282 in History?,VERIFIED,VERIFIED,0.2408,31.23,True
+283,Medicine,[Medicine] Explain the invalid claim variation #283 in Medicine.,HALLUCINATED,HALLUCINATED,0.8866,31.56,True
+284,Finance,[Finance] Explain the invalid claim variation #284 in Finance.,HALLUCINATED,HALLUCINATED,0.8215,16.93,True
+285,Programming,[Programming] What is the verified fundamental principle #285 in Programming?,VERIFIED,VERIFIED,0.1486,21.97,True
+286,Mathematics,[Mathematics] Explain the invalid claim variation #286 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8346,14.75,True
+287,Politics,[Politics] Explain the invalid claim variation #287 in Politics.,HALLUCINATED,HALLUCINATED,0.8452,26.27,True
+288,Law,[Law] What is the verified fundamental principle #288 in Law?,VERIFIED,VERIFIED,0.2864,16.99,True
+289,General Knowledge,[General Knowledge] Explain the invalid claim variation #289 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8468,28.05,True
+290,Geography,[Geography] Explain the invalid claim variation #290 in Geography.,HALLUCINATED,HALLUCINATED,0.9194,20.78,True
+291,Science,[Science] What is the verified fundamental principle #291 in Science?,VERIFIED,VERIFIED,0.3036,28.9,True
+292,History,[History] Explain the invalid claim variation #292 in History.,HALLUCINATED,HALLUCINATED,0.746,12.47,True
+293,Medicine,[Medicine] Explain the invalid claim variation #293 in Medicine.,HALLUCINATED,HALLUCINATED,0.8739,20.1,True
+294,Finance,[Finance] What is the verified fundamental principle #294 in Finance?,VERIFIED,VERIFIED,0.2931,33.12,True
+295,Programming,[Programming] Explain the invalid claim variation #295 in Programming.,HALLUCINATED,HALLUCINATED,0.9194,35.65,True
+296,Mathematics,[Mathematics] Explain the invalid claim variation #296 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8202,29.42,True
+297,Politics,[Politics] What is the verified fundamental principle #297 in Politics?,VERIFIED,VERIFIED,0.0166,33.23,True
+298,Law,[Law] Explain the invalid claim variation #298 in Law.,HALLUCINATED,HALLUCINATED,0.8157,12.41,True
+299,General Knowledge,[General Knowledge] Explain the invalid claim variation #299 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8395,19.41,True
+300,Geography,[Geography] What is the verified fundamental principle #300 in Geography?,VERIFIED,VERIFIED,0.0894,28.46,True
+301,Science,[Science] Explain the invalid claim variation #301 in Science.,HALLUCINATED,HALLUCINATED,0.869,26.71,True
+302,History,[History] Explain the invalid claim variation #302 in History.,HALLUCINATED,HALLUCINATED,0.9016,30.35,True
+303,Medicine,[Medicine] What is the verified fundamental principle #303 in Medicine?,VERIFIED,VERIFIED,0.0181,12.91,True
+304,Finance,[Finance] Explain the invalid claim variation #304 in Finance.,HALLUCINATED,HALLUCINATED,0.764,23.07,True
+305,Programming,[Programming] Explain the invalid claim variation #305 in Programming.,HALLUCINATED,HALLUCINATED,0.6671,19.87,True
+306,Mathematics,[Mathematics] What is the verified fundamental principle #306 in Mathematics?,VERIFIED,VERIFIED,0.0628,13.01,True
+307,Politics,[Politics] Explain the invalid claim variation #307 in Politics.,HALLUCINATED,HALLUCINATED,0.8049,21.31,True
+308,Law,[Law] Explain the invalid claim variation #308 in Law.,HALLUCINATED,HALLUCINATED,0.6987,30.14,True
+309,General Knowledge,[General Knowledge] What is the verified fundamental principle #309 in General Knowledge?,VERIFIED,VERIFIED,0.1764,15.91,True
+310,Geography,[Geography] Explain the invalid claim variation #310 in Geography.,HALLUCINATED,HALLUCINATED,0.7972,24.35,True
+311,Science,[Science] Explain the invalid claim variation #311 in Science.,HALLUCINATED,HALLUCINATED,0.8785,33.12,True
+312,History,[History] What is the verified fundamental principle #312 in History?,VERIFIED,VERIFIED,0.2743,26.32,True
+313,Medicine,[Medicine] Explain the invalid claim variation #313 in Medicine.,HALLUCINATED,HALLUCINATED,0.7239,28.72,True
+314,Finance,[Finance] Explain the invalid claim variation #314 in Finance.,HALLUCINATED,HALLUCINATED,0.7317,28.64,True
+315,Programming,[Programming] What is the verified fundamental principle #315 in Programming?,VERIFIED,VERIFIED,0.2272,26.04,True
+316,Mathematics,[Mathematics] Explain the invalid claim variation #316 in Mathematics.,HALLUCINATED,HALLUCINATED,0.6789,29.24,True
+317,Politics,[Politics] Explain the invalid claim variation #317 in Politics.,HALLUCINATED,HALLUCINATED,0.7507,25.22,True
+318,Law,[Law] What is the verified fundamental principle #318 in Law?,VERIFIED,VERIFIED,0.2404,15.06,True
+319,General Knowledge,[General Knowledge] Explain the invalid claim variation #319 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.6917,33.08,True
+320,Geography,[Geography] Explain the invalid claim variation #320 in Geography.,HALLUCINATED,HALLUCINATED,0.7401,34.47,True
+321,Science,[Science] What is the verified fundamental principle #321 in Science?,VERIFIED,VERIFIED,0.3025,21.02,True
+322,History,[History] Explain the invalid claim variation #322 in History.,HALLUCINATED,HALLUCINATED,0.8883,24.68,True
+323,Medicine,[Medicine] Explain the invalid claim variation #323 in Medicine.,HALLUCINATED,HALLUCINATED,0.661,13.95,True
+324,Finance,[Finance] What is the verified fundamental principle #324 in Finance?,VERIFIED,VERIFIED,0.0326,29.25,True
+325,Programming,[Programming] Explain the invalid claim variation #325 in Programming.,HALLUCINATED,HALLUCINATED,0.9384,31.64,True
+326,Mathematics,[Mathematics] Explain the invalid claim variation #326 in Mathematics.,HALLUCINATED,HALLUCINATED,0.848,26.16,True
+327,Politics,[Politics] What is the verified fundamental principle #327 in Politics?,VERIFIED,VERIFIED,0.2025,30.91,True
+328,Law,[Law] Explain the invalid claim variation #328 in Law.,HALLUCINATED,HALLUCINATED,0.6891,25.05,True
+329,General Knowledge,[General Knowledge] Explain the invalid claim variation #329 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7942,22.82,True
+330,Geography,[Geography] What is the verified fundamental principle #330 in Geography?,VERIFIED,VERIFIED,0.0318,34.14,True
+331,Science,[Science] Explain the invalid claim variation #331 in Science.,HALLUCINATED,HALLUCINATED,0.7608,15.9,True
+332,History,[History] Explain the invalid claim variation #332 in History.,HALLUCINATED,HALLUCINATED,0.9336,24.27,True
+333,Medicine,[Medicine] What is the verified fundamental principle #333 in Medicine?,VERIFIED,VERIFIED,0.0227,33.43,True
+334,Finance,[Finance] Explain the invalid claim variation #334 in Finance.,HALLUCINATED,HALLUCINATED,0.9576,15.79,True
+335,Programming,[Programming] Explain the invalid claim variation #335 in Programming.,HALLUCINATED,HALLUCINATED,0.7963,21.62,True
+336,Mathematics,[Mathematics] What is the verified fundamental principle #336 in Mathematics?,VERIFIED,VERIFIED,0.3019,31.89,True
+337,Politics,[Politics] Explain the invalid claim variation #337 in Politics.,HALLUCINATED,HALLUCINATED,0.9029,12.44,True
+338,Law,[Law] Explain the invalid claim variation #338 in Law.,HALLUCINATED,HALLUCINATED,0.7089,15.94,True
+339,General Knowledge,[General Knowledge] What is the verified fundamental principle #339 in General Knowledge?,VERIFIED,VERIFIED,0.1538,31.42,True
+340,Geography,[Geography] Explain the invalid claim variation #340 in Geography.,HALLUCINATED,HALLUCINATED,0.8496,33.99,True
+341,Science,[Science] Explain the invalid claim variation #341 in Science.,HALLUCINATED,HALLUCINATED,0.7147,19.01,True
+342,History,[History] What is the verified fundamental principle #342 in History?,VERIFIED,VERIFIED,0.0615,30.69,True
+343,Medicine,[Medicine] Explain the invalid claim variation #343 in Medicine.,HALLUCINATED,HALLUCINATED,0.8892,17.65,True
+344,Finance,[Finance] Explain the invalid claim variation #344 in Finance.,HALLUCINATED,HALLUCINATED,0.8961,14.34,True
+345,Programming,[Programming] What is the verified fundamental principle #345 in Programming?,VERIFIED,VERIFIED,0.1581,26.43,True
+346,Mathematics,[Mathematics] Explain the invalid claim variation #346 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8254,31.45,True
+347,Politics,[Politics] Explain the invalid claim variation #347 in Politics.,HALLUCINATED,HALLUCINATED,0.9213,24.55,True
+348,Law,[Law] What is the verified fundamental principle #348 in Law?,VERIFIED,VERIFIED,0.1664,31.15,True
+349,General Knowledge,[General Knowledge] Explain the invalid claim variation #349 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8871,20.95,True
+350,Geography,[Geography] Explain the invalid claim variation #350 in Geography.,HALLUCINATED,HALLUCINATED,0.9487,21.73,True
+351,Science,[Science] What is the verified fundamental principle #351 in Science?,VERIFIED,VERIFIED,0.288,15.5,True
+352,History,[History] Explain the invalid claim variation #352 in History.,HALLUCINATED,HALLUCINATED,0.8912,12.96,True
+353,Medicine,[Medicine] Explain the invalid claim variation #353 in Medicine.,HALLUCINATED,HALLUCINATED,0.7945,36.12,True
+354,Finance,[Finance] What is the verified fundamental principle #354 in Finance?,VERIFIED,VERIFIED,0.3104,12.35,True
+355,Programming,[Programming] Explain the invalid claim variation #355 in Programming.,HALLUCINATED,HALLUCINATED,0.8197,19.42,True
+356,Mathematics,[Mathematics] Explain the invalid claim variation #356 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9237,19.66,True
+357,Politics,[Politics] What is the verified fundamental principle #357 in Politics?,VERIFIED,VERIFIED,0.2289,16.01,True
+358,Law,[Law] Explain the invalid claim variation #358 in Law.,HALLUCINATED,HALLUCINATED,0.6604,35.77,True
+359,General Knowledge,[General Knowledge] Explain the invalid claim variation #359 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8998,26.96,True
+360,Geography,[Geography] What is the verified fundamental principle #360 in Geography?,VERIFIED,VERIFIED,0.0637,12.23,True
+361,Science,[Science] Explain the invalid claim variation #361 in Science.,HALLUCINATED,HALLUCINATED,0.6601,21.45,True
+362,History,[History] Explain the invalid claim variation #362 in History.,HALLUCINATED,HALLUCINATED,0.9399,30.13,True
+363,Medicine,[Medicine] What is the verified fundamental principle #363 in Medicine?,VERIFIED,VERIFIED,0.1904,27.02,True
+364,Finance,[Finance] Explain the invalid claim variation #364 in Finance.,HALLUCINATED,HALLUCINATED,0.795,26.03,True
+365,Programming,[Programming] Explain the invalid claim variation #365 in Programming.,HALLUCINATED,HALLUCINATED,0.7947,29.36,True
+366,Mathematics,[Mathematics] What is the verified fundamental principle #366 in Mathematics?,VERIFIED,VERIFIED,0.2989,13.7,True
+367,Politics,[Politics] Explain the invalid claim variation #367 in Politics.,HALLUCINATED,HALLUCINATED,0.8091,30.49,True
+368,Law,[Law] Explain the invalid claim variation #368 in Law.,HALLUCINATED,HALLUCINATED,0.842,32.99,True
+369,General Knowledge,[General Knowledge] What is the verified fundamental principle #369 in General Knowledge?,VERIFIED,VERIFIED,0.2381,31.49,True
+370,Geography,[Geography] Explain the invalid claim variation #370 in Geography.,HALLUCINATED,HALLUCINATED,0.8127,23.16,True
+371,Science,[Science] Explain the invalid claim variation #371 in Science.,HALLUCINATED,HALLUCINATED,0.7813,14.99,True
+372,History,[History] What is the verified fundamental principle #372 in History?,VERIFIED,VERIFIED,0.1004,24.84,True
+373,Medicine,[Medicine] Explain the invalid claim variation #373 in Medicine.,HALLUCINATED,HALLUCINATED,0.7191,31.55,True
+374,Finance,[Finance] Explain the invalid claim variation #374 in Finance.,HALLUCINATED,HALLUCINATED,0.8667,18.08,True
+375,Programming,[Programming] What is the verified fundamental principle #375 in Programming?,VERIFIED,VERIFIED,0.2346,35.27,True
+376,Mathematics,[Mathematics] Explain the invalid claim variation #376 in Mathematics.,HALLUCINATED,HALLUCINATED,0.798,32.6,True
+377,Politics,[Politics] Explain the invalid claim variation #377 in Politics.,HALLUCINATED,HALLUCINATED,0.9006,15.12,True
+378,Law,[Law] What is the verified fundamental principle #378 in Law?,VERIFIED,VERIFIED,0.121,19.95,True
+379,General Knowledge,[General Knowledge] Explain the invalid claim variation #379 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.9013,27.21,True
+380,Geography,[Geography] Explain the invalid claim variation #380 in Geography.,HALLUCINATED,HALLUCINATED,0.7479,21.94,True
+381,Science,[Science] What is the verified fundamental principle #381 in Science?,VERIFIED,VERIFIED,0.1658,30.01,True
+382,History,[History] Explain the invalid claim variation #382 in History.,HALLUCINATED,HALLUCINATED,0.8443,33.55,True
+383,Medicine,[Medicine] Explain the invalid claim variation #383 in Medicine.,HALLUCINATED,HALLUCINATED,0.9246,12.24,True
+384,Finance,[Finance] What is the verified fundamental principle #384 in Finance?,VERIFIED,VERIFIED,0.1915,31.54,True
+385,Programming,[Programming] Explain the invalid claim variation #385 in Programming.,HALLUCINATED,HALLUCINATED,0.7781,28.89,True
+386,Mathematics,[Mathematics] Explain the invalid claim variation #386 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7535,27.7,True
+387,Politics,[Politics] What is the verified fundamental principle #387 in Politics?,VERIFIED,VERIFIED,0.0637,36.3,True
+388,Law,[Law] Explain the invalid claim variation #388 in Law.,HALLUCINATED,HALLUCINATED,0.8274,24.53,True
+389,General Knowledge,[General Knowledge] Explain the invalid claim variation #389 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8841,17.91,True
+390,Geography,[Geography] What is the verified fundamental principle #390 in Geography?,VERIFIED,VERIFIED,0.2592,23.29,True
+391,Science,[Science] Explain the invalid claim variation #391 in Science.,HALLUCINATED,HALLUCINATED,0.6603,29.56,True
+392,History,[History] Explain the invalid claim variation #392 in History.,HALLUCINATED,HALLUCINATED,0.8532,18.47,True
+393,Medicine,[Medicine] What is the verified fundamental principle #393 in Medicine?,VERIFIED,VERIFIED,0.2998,32.98,True
+394,Finance,[Finance] Explain the invalid claim variation #394 in Finance.,HALLUCINATED,HALLUCINATED,0.9245,37.77,True
+395,Programming,[Programming] Explain the invalid claim variation #395 in Programming.,HALLUCINATED,HALLUCINATED,0.7134,17.31,True
+396,Mathematics,[Mathematics] What is the verified fundamental principle #396 in Mathematics?,VERIFIED,VERIFIED,0.0475,32.59,True
+397,Politics,[Politics] Explain the invalid claim variation #397 in Politics.,HALLUCINATED,HALLUCINATED,0.7324,23.02,True
+398,Law,[Law] Explain the invalid claim variation #398 in Law.,HALLUCINATED,HALLUCINATED,0.9333,31.31,True
+399,General Knowledge,[General Knowledge] What is the verified fundamental principle #399 in General Knowledge?,VERIFIED,VERIFIED,0.2778,16.51,True
+400,Geography,[Geography] Explain the invalid claim variation #400 in Geography.,HALLUCINATED,HALLUCINATED,0.7983,19.74,True
+401,Science,[Science] Explain the invalid claim variation #401 in Science.,HALLUCINATED,HALLUCINATED,0.8237,16.76,True
+402,History,[History] What is the verified fundamental principle #402 in History?,VERIFIED,VERIFIED,0.1762,34.78,True
+403,Medicine,[Medicine] Explain the invalid claim variation #403 in Medicine.,HALLUCINATED,HALLUCINATED,0.9246,27.61,True
+404,Finance,[Finance] Explain the invalid claim variation #404 in Finance.,HALLUCINATED,HALLUCINATED,0.8454,29.2,True
+405,Programming,[Programming] What is the verified fundamental principle #405 in Programming?,VERIFIED,VERIFIED,0.2083,29.32,True
+406,Mathematics,[Mathematics] Explain the invalid claim variation #406 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7929,25.29,True
+407,Politics,[Politics] Explain the invalid claim variation #407 in Politics.,HALLUCINATED,HALLUCINATED,0.6746,34.26,True
+408,Law,[Law] What is the verified fundamental principle #408 in Law?,VERIFIED,VERIFIED,0.2243,26.67,True
+409,General Knowledge,[General Knowledge] Explain the invalid claim variation #409 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7743,35.09,True
+410,Geography,[Geography] Explain the invalid claim variation #410 in Geography.,HALLUCINATED,HALLUCINATED,0.8532,12.39,True
+411,Science,[Science] What is the verified fundamental principle #411 in Science?,VERIFIED,VERIFIED,0.1469,20.53,True
+412,History,[History] Explain the invalid claim variation #412 in History.,HALLUCINATED,HALLUCINATED,0.6867,13.67,True
+413,Medicine,[Medicine] Explain the invalid claim variation #413 in Medicine.,HALLUCINATED,HALLUCINATED,0.929,37.98,True
+414,Finance,[Finance] What is the verified fundamental principle #414 in Finance?,VERIFIED,VERIFIED,0.3183,31.88,True
+415,Programming,[Programming] Explain the invalid claim variation #415 in Programming.,HALLUCINATED,HALLUCINATED,0.9361,31.98,True
+416,Mathematics,[Mathematics] Explain the invalid claim variation #416 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9475,36.26,True
+417,Politics,[Politics] What is the verified fundamental principle #417 in Politics?,VERIFIED,VERIFIED,0.0532,18.52,True
+418,Law,[Law] Explain the invalid claim variation #418 in Law.,HALLUCINATED,HALLUCINATED,0.9162,16.9,True
+419,General Knowledge,[General Knowledge] Explain the invalid claim variation #419 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.6767,19.19,True
+420,Geography,[Geography] What is the verified fundamental principle #420 in Geography?,VERIFIED,VERIFIED,0.1545,15.71,True
+421,Science,[Science] Explain the invalid claim variation #421 in Science.,HALLUCINATED,HALLUCINATED,0.6818,35.8,True
+422,History,[History] Explain the invalid claim variation #422 in History.,HALLUCINATED,HALLUCINATED,0.7099,27.07,True
+423,Medicine,[Medicine] What is the verified fundamental principle #423 in Medicine?,VERIFIED,VERIFIED,0.1505,21.54,True
+424,Finance,[Finance] Explain the invalid claim variation #424 in Finance.,HALLUCINATED,HALLUCINATED,0.9237,22.6,True
+425,Programming,[Programming] Explain the invalid claim variation #425 in Programming.,HALLUCINATED,HALLUCINATED,0.7864,14.89,True
+426,Mathematics,[Mathematics] What is the verified fundamental principle #426 in Mathematics?,VERIFIED,VERIFIED,0.2903,24.03,True
+427,Politics,[Politics] Explain the invalid claim variation #427 in Politics.,HALLUCINATED,HALLUCINATED,0.6895,24.95,True
+428,Law,[Law] Explain the invalid claim variation #428 in Law.,HALLUCINATED,HALLUCINATED,0.9493,17.78,True
+429,General Knowledge,[General Knowledge] What is the verified fundamental principle #429 in General Knowledge?,VERIFIED,VERIFIED,0.1294,24.95,True
+430,Geography,[Geography] Explain the invalid claim variation #430 in Geography.,HALLUCINATED,HALLUCINATED,0.7437,12.62,True
+431,Science,[Science] Explain the invalid claim variation #431 in Science.,HALLUCINATED,HALLUCINATED,0.93,12.4,True
+432,History,[History] What is the verified fundamental principle #432 in History?,VERIFIED,VERIFIED,0.0778,18.22,True
+433,Medicine,[Medicine] Explain the invalid claim variation #433 in Medicine.,HALLUCINATED,HALLUCINATED,0.9375,35.4,True
+434,Finance,[Finance] Explain the invalid claim variation #434 in Finance.,HALLUCINATED,HALLUCINATED,0.6895,13.59,True
+435,Programming,[Programming] What is the verified fundamental principle #435 in Programming?,VERIFIED,VERIFIED,0.0347,35.93,True
+436,Mathematics,[Mathematics] Explain the invalid claim variation #436 in Mathematics.,HALLUCINATED,HALLUCINATED,0.8658,17.64,True
+437,Politics,[Politics] Explain the invalid claim variation #437 in Politics.,HALLUCINATED,HALLUCINATED,0.8085,37.32,True
+438,Law,[Law] What is the verified fundamental principle #438 in Law?,VERIFIED,VERIFIED,0.1843,23.08,True
+439,General Knowledge,[General Knowledge] Explain the invalid claim variation #439 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.9322,34.86,True
+440,Geography,[Geography] Explain the invalid claim variation #440 in Geography.,HALLUCINATED,HALLUCINATED,0.8723,32.52,True
+441,Science,[Science] What is the verified fundamental principle #441 in Science?,VERIFIED,VERIFIED,0.1077,30.48,True
+442,History,[History] Explain the invalid claim variation #442 in History.,HALLUCINATED,HALLUCINATED,0.9329,12.86,True
+443,Medicine,[Medicine] Explain the invalid claim variation #443 in Medicine.,HALLUCINATED,HALLUCINATED,0.6648,20.27,True
+444,Finance,[Finance] What is the verified fundamental principle #444 in Finance?,VERIFIED,VERIFIED,0.0763,12.87,True
+445,Programming,[Programming] Explain the invalid claim variation #445 in Programming.,HALLUCINATED,HALLUCINATED,0.7576,26.85,True
+446,Mathematics,[Mathematics] Explain the invalid claim variation #446 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7207,22.5,True
+447,Politics,[Politics] What is the verified fundamental principle #447 in Politics?,VERIFIED,VERIFIED,0.0949,32.32,True
+448,Law,[Law] Explain the invalid claim variation #448 in Law.,HALLUCINATED,HALLUCINATED,0.9144,23.99,True
+449,General Knowledge,[General Knowledge] Explain the invalid claim variation #449 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.7951,26.5,True
+450,Geography,[Geography] What is the verified fundamental principle #450 in Geography?,VERIFIED,VERIFIED,0.2395,34.76,True
+451,Science,[Science] Explain the invalid claim variation #451 in Science.,HALLUCINATED,HALLUCINATED,0.9233,31.86,True
+452,History,[History] Explain the invalid claim variation #452 in History.,HALLUCINATED,HALLUCINATED,0.9082,30.11,True
+453,Medicine,[Medicine] What is the verified fundamental principle #453 in Medicine?,VERIFIED,VERIFIED,0.2162,32.29,True
+454,Finance,[Finance] Explain the invalid claim variation #454 in Finance.,HALLUCINATED,HALLUCINATED,0.7902,24.82,True
+455,Programming,[Programming] Explain the invalid claim variation #455 in Programming.,HALLUCINATED,HALLUCINATED,0.7826,12.98,True
+456,Mathematics,[Mathematics] What is the verified fundamental principle #456 in Mathematics?,VERIFIED,VERIFIED,0.1593,30.95,True
+457,Politics,[Politics] Explain the invalid claim variation #457 in Politics.,HALLUCINATED,HALLUCINATED,0.9036,24.75,True
+458,Law,[Law] Explain the invalid claim variation #458 in Law.,HALLUCINATED,HALLUCINATED,0.9273,34.3,True
+459,General Knowledge,[General Knowledge] What is the verified fundamental principle #459 in General Knowledge?,VERIFIED,VERIFIED,0.1535,12.34,True
+460,Geography,[Geography] Explain the invalid claim variation #460 in Geography.,HALLUCINATED,HALLUCINATED,0.8893,32.64,True
+461,Science,[Science] Explain the invalid claim variation #461 in Science.,HALLUCINATED,HALLUCINATED,0.9157,28.19,True
+462,History,[History] What is the verified fundamental principle #462 in History?,VERIFIED,VERIFIED,0.0647,18.36,True
+463,Medicine,[Medicine] Explain the invalid claim variation #463 in Medicine.,HALLUCINATED,HALLUCINATED,0.8144,37.78,True
+464,Finance,[Finance] Explain the invalid claim variation #464 in Finance.,HALLUCINATED,HALLUCINATED,0.7153,21.07,True
+465,Programming,[Programming] What is the verified fundamental principle #465 in Programming?,VERIFIED,VERIFIED,0.1608,28.11,True
+466,Mathematics,[Mathematics] Explain the invalid claim variation #466 in Mathematics.,HALLUCINATED,HALLUCINATED,0.7155,34.15,True
+467,Politics,[Politics] Explain the invalid claim variation #467 in Politics.,HALLUCINATED,HALLUCINATED,0.8882,20.17,True
+468,Law,[Law] What is the verified fundamental principle #468 in Law?,VERIFIED,VERIFIED,0.2705,16.32,True
+469,General Knowledge,[General Knowledge] Explain the invalid claim variation #469 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.765,30.61,True
+470,Geography,[Geography] Explain the invalid claim variation #470 in Geography.,HALLUCINATED,HALLUCINATED,0.8309,16.15,True
+471,Science,[Science] What is the verified fundamental principle #471 in Science?,VERIFIED,VERIFIED,0.2662,31.42,True
+472,History,[History] Explain the invalid claim variation #472 in History.,HALLUCINATED,HALLUCINATED,0.8415,19.85,True
+473,Medicine,[Medicine] Explain the invalid claim variation #473 in Medicine.,HALLUCINATED,HALLUCINATED,0.8796,29.45,True
+474,Finance,[Finance] What is the verified fundamental principle #474 in Finance?,VERIFIED,VERIFIED,0.2914,20.78,True
+475,Programming,[Programming] Explain the invalid claim variation #475 in Programming.,HALLUCINATED,HALLUCINATED,0.7577,28.64,True
+476,Mathematics,[Mathematics] Explain the invalid claim variation #476 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9367,33.25,True
+477,Politics,[Politics] What is the verified fundamental principle #477 in Politics?,VERIFIED,VERIFIED,0.1719,36.42,True
+478,Law,[Law] Explain the invalid claim variation #478 in Law.,HALLUCINATED,HALLUCINATED,0.8882,25.28,True
+479,General Knowledge,[General Knowledge] Explain the invalid claim variation #479 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8312,36.96,True
+480,Geography,[Geography] What is the verified fundamental principle #480 in Geography?,VERIFIED,VERIFIED,0.2807,30.99,True
+481,Science,[Science] Explain the invalid claim variation #481 in Science.,HALLUCINATED,HALLUCINATED,0.6715,23.03,True
+482,History,[History] Explain the invalid claim variation #482 in History.,HALLUCINATED,HALLUCINATED,0.907,25.22,True
+483,Medicine,[Medicine] What is the verified fundamental principle #483 in Medicine?,VERIFIED,VERIFIED,0.3146,18.93,True
+484,Finance,[Finance] Explain the invalid claim variation #484 in Finance.,HALLUCINATED,HALLUCINATED,0.9458,36.81,True
+485,Programming,[Programming] Explain the invalid claim variation #485 in Programming.,HALLUCINATED,HALLUCINATED,0.9375,14.58,True
+486,Mathematics,[Mathematics] What is the verified fundamental principle #486 in Mathematics?,VERIFIED,VERIFIED,0.0409,34.16,True
+487,Politics,[Politics] Explain the invalid claim variation #487 in Politics.,HALLUCINATED,HALLUCINATED,0.8806,16.11,True
+488,Law,[Law] Explain the invalid claim variation #488 in Law.,HALLUCINATED,HALLUCINATED,0.9011,31.42,True
+489,General Knowledge,[General Knowledge] What is the verified fundamental principle #489 in General Knowledge?,VERIFIED,VERIFIED,0.1513,12.35,True
+490,Geography,[Geography] Explain the invalid claim variation #490 in Geography.,HALLUCINATED,HALLUCINATED,0.9127,13.01,True
+491,Science,[Science] Explain the invalid claim variation #491 in Science.,HALLUCINATED,HALLUCINATED,0.726,13.94,True
+492,History,[History] What is the verified fundamental principle #492 in History?,VERIFIED,VERIFIED,0.02,16.31,True
+493,Medicine,[Medicine] Explain the invalid claim variation #493 in Medicine.,HALLUCINATED,HALLUCINATED,0.9425,22.08,True
+494,Finance,[Finance] Explain the invalid claim variation #494 in Finance.,HALLUCINATED,HALLUCINATED,0.7131,15.72,True
+495,Programming,[Programming] What is the verified fundamental principle #495 in Programming?,VERIFIED,VERIFIED,0.2213,20.49,True
+496,Mathematics,[Mathematics] Explain the invalid claim variation #496 in Mathematics.,HALLUCINATED,HALLUCINATED,0.9029,26.0,True
+497,Politics,[Politics] Explain the invalid claim variation #497 in Politics.,HALLUCINATED,HALLUCINATED,0.739,36.51,True
+498,Law,[Law] What is the verified fundamental principle #498 in Law?,VERIFIED,VERIFIED,0.09,23.02,True
+499,General Knowledge,[General Knowledge] Explain the invalid claim variation #499 in General Knowledge.,HALLUCINATED,HALLUCINATED,0.8455,25.16,True
+500,Geography,[Geography] Explain the invalid claim variation #500 in Geography.,HALLUCINATED,HALLUCINATED,0.7363,34.18,True

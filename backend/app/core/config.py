@@ -1,3 +1,6 @@
+import os
+os.environ["GRPC_DNS_RESOLVER"] = "native"
+
 from datetime import timedelta
 from typing import List
 from pydantic import field_validator
@@ -26,7 +29,7 @@ class Settings(BaseSettings):
     # ── Security ──────────────────────────────────────────────────────────────
     SECRET_KEY: str = "dev-secret-key-change-in-production-must-be-32-chars"
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # ── CORS ──────────────────────────────────────────────────────────────────
@@ -73,6 +76,21 @@ class Settings(BaseSettings):
     VERIFIED_THRESHOLD: float = 0.35
     HALLUCINATED_THRESHOLD: float = 0.65
     MIN_TOKEN_PROBABILITY: float = 1e-5
+
+    # ── Gemini Provider & Optimization Config ───────────────────────────────
+    GEMINI_QUEUE_SIZE: int = 100
+    GEMINI_STREAM_TIMEOUT: float = 15.0
+    GEMINI_MAX_RETRIES: int = 2
+    GEMINI_GENERATION_TIMEOUT: float = 30.0
+    GEMINI_MAX_BACKOFF: float = 8.0
+
+    # ── LLM Call Optimization & Architectural Controls ───────────────────────
+    ENABLE_SELF_CONSISTENCY: bool = True
+    MAX_SELF_CONSISTENCY_SAMPLES: int = 2
+    ENABLE_AUTOMATIC_CORRECTION: bool = False
+    H_SCORE_CORRECTION_THRESHOLD: float = 0.65
+    ENABLE_FALLBACK_MODELS: bool = False
+    ENABLE_REQUEST_CACHE: bool = True
 
     @property
     def is_production(self) -> bool:

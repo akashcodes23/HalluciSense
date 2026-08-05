@@ -23,8 +23,11 @@ function getPillarColor(score: number): 'green' | 'yellow' | 'red' {
 }
 
 export function PillarCard({ label, score, description, color }: PillarCardProps) {
-  const pct = Math.round(score * 100);
-  const c = colorMap[color];
+  const isAvailable = typeof score === 'number' && !isNaN(score);
+  const normalizedScore = isAvailable ? Math.max(0, Math.min(1, score)) : 0;
+  const pct = Math.round(normalizedScore * 100);
+  const c = colorMap[color] || colorMap.green;
+  const displayScore = isAvailable ? `${pct}%` : 'Unavailable';
 
   return (
     <div
@@ -33,7 +36,7 @@ export function PillarCard({ label, score, description, color }: PillarCardProps
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-sm font-semibold text-slate-200">{label}</span>
-        <span className="text-lg font-bold" style={{ color: c.text }}>{pct}%</span>
+        <span className="text-lg font-bold" style={{ color: c.text }}>{displayScore}</span>
       </div>
       <p className="text-xs text-slate-400 mb-3 leading-relaxed">{description}</p>
 
@@ -43,7 +46,7 @@ export function PillarCard({ label, score, description, color }: PillarCardProps
           className="h-full rounded-full"
           style={{ background: c.bar }}
           initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
+          animate={{ width: isAvailable ? `${pct}%` : '0%' }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         />
       </div>

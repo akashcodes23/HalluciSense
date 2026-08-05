@@ -5,11 +5,13 @@ Maps frontend model identifiers to valid provider-specific
 API model names.
 """
 
+import structlog
 from app.modules.providers.base import AbstractLLMProvider
 from app.modules.providers.gemini import GeminiProvider
 from app.modules.providers.openai import OpenAIProvider
 from app.modules.providers.ollama import OllamaProvider
 
+logger = structlog.get_logger(__name__)
 
 OPENAI_MODEL_MAP = {
     "openai": "gpt-4o",
@@ -22,12 +24,12 @@ OPENAI_MODEL_MAP = {
     "openai (gpt-4o-mini)": "gpt-4o-mini",
 }
 
-
 GEMINI_MODEL_MAP = {
-    "gemini": "gemini-2.0-flash",
-    "gemini-2.0-flash": "gemini-2.0-flash",
-    "google-gemini": "gemini-2.0-flash",
-    "google (gemini)": "gemini-2.0-flash",
+    "gemini": "gemini-2.5-flash",
+    "gemini-3.1-pro": "gemini-2.5-pro",
+    "gemini-3.1-flash": "gemini-2.5-flash",
+    "gemini-pro": "gemini-2.5-pro",
+    "gemini-flash": "gemini-2.5-flash",
 }
 
 
@@ -41,37 +43,39 @@ def get_provider(model_slug: str) -> AbstractLLMProvider:
     """
 
     if not model_slug:
-        raise ValueError("model_slug cannot be empty")
+        logger.warning("empty_model_slug_provided_defaulting_to_gemini")
+        return GeminiProvider(model_slug="gemini-1.5-flash")
 
     normalized = model_slug.strip().lower()
+    logger.info("provider_factory_resolving", model_slug=model_slug, normalized=normalized)
 
     # ---------------------------------------------------------
     # OpenAI
     # ---------------------------------------------------------
 
     if normalized in OPENAI_MODEL_MAP:
-        return OpenAIProvider(
-            model_slug=OPENAI_MODEL_MAP[normalized]
-        )
+        provider = OpenAIProvider(model_slug=OPENAI_MODEL_MAP[normalized])
+        logger.info("provider_factory_resolved", provider=provider.provider_name, model=provider.model_slug)
+        return provider
 
     if "openai" in normalized or "gpt" in normalized:
-        return OpenAIProvider(
-            model_slug="gpt-4o"
-        )
+        provider = OpenAIProvider(model_slug="gpt-4o")
+        logger.info("provider_factory_resolved", provider=provider.provider_name, model=provider.model_slug)
+        return provider
 
     # ---------------------------------------------------------
     # Google Gemini
     # ---------------------------------------------------------
 
     if normalized in GEMINI_MODEL_MAP:
-        return GeminiProvider(
-            model_slug=GEMINI_MODEL_MAP[normalized]
-        )
+        provider = GeminiProvider(model_slug=GEMINI_MODEL_MAP[normalized])
+        logger.info("provider_factory_resolved", provider=provider.provider_name, model=provider.model_slug)
+        return provider
 
     if "gemini" in normalized:
-        return GeminiProvider(
-            model_slug="gemini-2.0-flash"
-        )
+        provider = GeminiProvider(model_slug="gemini-1.5-flash")
+        logger.info("provider_factory_resolved", provider=provider.provider_name, model=provider.model_slug)
+        return provider
 
     # ---------------------------------------------------------
     # Local Ollama models
@@ -84,14 +88,10 @@ def get_provider(model_slug: str) -> AbstractLLMProvider:
         or "qwen" in normalized
         or "deepseek" in normalized
     ):
-        return OllamaProvider(
-            model_slug=model_slug
-        )
+        provider = OllamaProvider(model_slug=model_slug)
+        logger.info("provider_factory_resolved", provider=provider.provider_name, model=provider.model_slug)
+        return provider
 
-    # ---------------------------------------------------------
-    # Unknown model
-    # ---------------------------------------------------------
-
-    raise ValueError(
-        f"Unsupported HalluciSense model: {model_slug}"
-    )
+    # Fallback to Gemini if unknown
+    logger.warning("unknown_model_slug_falling_back_to_gemini", model_slug=model_slug)
+    return GeminiProvider(model_slug="gemini-1.5-flash")

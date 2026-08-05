@@ -27,39 +27,75 @@ export function createStreamingConnection(
   onError: (err: string) => void
 ): WebSocket {
   const wsBase = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/api/v1';
-  const ws = new WebSocket(
-    `${wsBase}/chats/${chatId}/messages/stream?token=${accessToken}`
-  );
+  const url = `${wsBase}/chats/${chatId}/messages/stream?token=${encodeURIComponent(accessToken)}`;
+
+  console.log('[WebSocket] Connecting...', {
+    chatId,
+    selectedModel: model,
+    wsUrl: `${wsBase}/chats/${chatId}/messages/stream?token=***`,
+    hasToken: Boolean(accessToken),
+    tokenLength: accessToken?.length || 0,
+  });
+
+  const ws = new WebSocket(url);
 
   ws.onopen = () => {
-    ws.send(JSON.stringify({ chat_id: chatId, content: userMessage, model }));
+    console.log('[WebSocket] Connection OPEN. Sending prompt payload...', {
+      chatId,
+      model,
+      contentLength: userMessage.length,
+    });
+
+    const payload = JSON.stringify({
+      chat_id: chatId,
+      content: userMessage,
+      model: model,
+    });
+
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.send(payload);
+      console.log('[WebSocket] Payload sent successfully');
+    } else {
+      console.error('[WebSocket] Socket opened but readyState is not OPEN:', ws.readyState);
+    }
   };
 
   ws.onmessage = (event) => {
     try {
       const chunk = JSON.parse(event.data);
+      console.log('[WebSocket] Frame received:', chunk.type, chunk.text ? `(${chunk.text.length} chars)` : '');
+
       if (chunk.type === 'token' && chunk.text) {
         onToken(chunk.text);
       } else if (chunk.type === 'verification_dispatched' && chunk.message_id) {
+        console.log('[WebSocket] Verification dispatched:', chunk.message_id);
         onDone(chunk.message_id);
         ws.close(1000);
       } else if (chunk.type === 'error') {
-        onError(chunk.error || 'Unknown error');
+        console.error('[WebSocket] Backend error frame:', chunk.error);
+        onError(chunk.error || 'Unknown server error');
         ws.close(1000);
       }
-    } catch {
-      // Non-JSON frames ignored
+    } catch (parseErr) {
+      console.warn('[WebSocket] Non-JSON or parse error:', parseErr);
     }
   };
 
-  ws.onerror = () => {
+  ws.onerror = (event) => {
+    console.error('[WebSocket] Socket error event:', event);
     onError('WebSocket connection failed.');
   };
   
   ws.onclose = (event) => {
+    console.log('[WebSocket] Connection CLOSED:', {
+      code: event.code,
+      reason: event.reason,
+      wasClean: event.wasClean,
+    });
+
     // 1000 is normal closure
     if (event.code !== 1000) {
-      onError(`WebSocket closed unexpectedly: ${event.reason || 'Unknown error'} (Code ${event.code})`);
+      onError(`WebSocket closed (Code ${event.code}): ${event.reason || 'Unexpected closure'}`);
     }
   };
 

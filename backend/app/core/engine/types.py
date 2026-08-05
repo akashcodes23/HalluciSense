@@ -55,7 +55,7 @@ if USE_PYDANTIC:
         )
 
         available: bool = Field(default=False)
-
+        status: str = Field(default="UNAVAILABLE")
         reasoning: str = Field(...)
 
     class NLIAnalysis(BaseModel):
@@ -83,6 +83,7 @@ if USE_PYDANTIC:
         alignment_method: str = Field(default="sentence_semantic_alignment")
         reasoning: str = Field(...)
         available: bool = Field(default=False)
+        status: str = Field(default="UNAVAILABLE")
 
     class SentenceAnalysis(BaseModel):
         sentence_id: int = Field(...)
@@ -91,7 +92,9 @@ if USE_PYDANTIC:
         end_char: int = Field(...)
         factual_error: float = Field(..., ge=0.0, le=1.0)
         confidence_gap: Optional[float] = Field(None, ge=0.0, le=1.0)
+        confidence_gap_status: str = Field(default="UNAVAILABLE")
         consistency_failure: Optional[float] = Field(None, ge=0.0, le=1.0)
+        consistency_failure_status: str = Field(default="UNAVAILABLE")
         hallucination_score: float = Field(..., ge=0.0, le=1.0)
         risk_level: RiskLevel
         color_code: str
@@ -110,6 +113,7 @@ if USE_PYDANTIC:
         pillar2_summary: Pillar2Result
         pillar3_summary: Pillar3Result
         weights_used: Dict[str, float] = Field(...)
+        validation_status: str = Field(default="VALIDATED_ZERO_NAN")
 else:
     class RiskLevel(str, Enum):
         VERIFIED = "VERIFIED"
@@ -148,6 +152,7 @@ else:
         confidence_gap_score: Optional[float]
         reasoning: str
         available: bool = False
+        status: str = "UNAVAILABLE"
 
     @dataclass
     class NLIAnalysis:
@@ -172,6 +177,7 @@ else:
         nli_available: bool = False
         alignment_method: str = "sentence_semantic_alignment"
         available: bool = False
+        status: str = "UNAVAILABLE"
 
     @dataclass
     class SentenceAnalysis:
@@ -186,13 +192,15 @@ else:
         risk_level: RiskLevel
         color_code: str
         reasoning: str
+        confidence_gap_status: str = "UNAVAILABLE"
+        consistency_failure_status: str = "UNAVAILABLE"
         evidence: List[EvidenceItem] = field(default_factory=list)
         corrected_response: Optional[str] = None
 
     @dataclass
     class HallucinationReport:
         full_text: str
-        corrected_response: Optional[str] = None
+        corrected_response: Optional[str]
         overall_h_score: float
         overall_risk_level: RiskLevel
         pillar1_summary: Pillar1Result
@@ -201,3 +209,4 @@ else:
         weights_used: Dict[str, float]
         sentence_analyses: List[SentenceAnalysis] = field(default_factory=list)
         token_analyses: List[TokenAnalysis] = field(default_factory=list)
+        validation_status: str = "VALIDATED_ZERO_NAN"

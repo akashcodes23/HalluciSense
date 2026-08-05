@@ -1,0 +1,14 @@
+site_name: HalluciSense Enterprise Documentation
+site_description: Production Documentation for HalluciSense Hallucination Detection Platform
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+
+nav:
+  - Overview: index.md
+  - Architecture: architecture.md
+  - API Reference: api.md
+  - Deployment: deployment.md
+  - Security: security.md

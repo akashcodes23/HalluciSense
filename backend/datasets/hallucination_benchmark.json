@@ -1,0 +1,5002 @@
+[
+  {
+    "id": 1,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #1 in Science.",
+    "ground_truth": "Factual reference truth statement #1 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 2,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #2 in History.",
+    "ground_truth": "Factual reference truth statement #2 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 3,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #3 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #3 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 4,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #4 in Finance.",
+    "ground_truth": "Factual reference truth statement #4 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 5,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #5 in Programming.",
+    "ground_truth": "Factual reference truth statement #5 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 6,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #6 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #6 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 7,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #7 in Politics.",
+    "ground_truth": "Factual reference truth statement #7 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 8,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #8 in Law.",
+    "ground_truth": "Factual reference truth statement #8 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 9,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #9 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #9 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 10,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #10 in Geography.",
+    "ground_truth": "Factual reference truth statement #10 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 11,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #11 in Science.",
+    "ground_truth": "Factual reference truth statement #11 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 12,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #12 in History?",
+    "ground_truth": "Verified scientific truth statement #12 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 13,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #13 in Medicine.",
+    "ground_truth": "Factual reference truth statement #13 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 14,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #14 in Finance.",
+    "ground_truth": "Factual reference truth statement #14 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 15,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #15 in Programming?",
+    "ground_truth": "Verified scientific truth statement #15 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 16,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #16 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #16 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 17,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #17 in Politics.",
+    "ground_truth": "Factual reference truth statement #17 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 18,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #18 in Law?",
+    "ground_truth": "Verified scientific truth statement #18 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 19,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #19 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #19 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 20,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #20 in Geography.",
+    "ground_truth": "Factual reference truth statement #20 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 21,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #21 in Science?",
+    "ground_truth": "Verified scientific truth statement #21 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 22,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #22 in History.",
+    "ground_truth": "Factual reference truth statement #22 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 23,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #23 in Medicine.",
+    "ground_truth": "Factual reference truth statement #23 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 24,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #24 in Finance?",
+    "ground_truth": "Verified scientific truth statement #24 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 25,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #25 in Programming.",
+    "ground_truth": "Factual reference truth statement #25 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 26,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #26 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #26 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 27,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #27 in Politics?",
+    "ground_truth": "Verified scientific truth statement #27 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 28,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #28 in Law.",
+    "ground_truth": "Factual reference truth statement #28 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 29,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #29 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #29 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 30,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #30 in Geography?",
+    "ground_truth": "Verified scientific truth statement #30 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 31,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #31 in Science.",
+    "ground_truth": "Factual reference truth statement #31 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 32,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #32 in History.",
+    "ground_truth": "Factual reference truth statement #32 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 33,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #33 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #33 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 34,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #34 in Finance.",
+    "ground_truth": "Factual reference truth statement #34 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 35,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #35 in Programming.",
+    "ground_truth": "Factual reference truth statement #35 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 36,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #36 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #36 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 37,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #37 in Politics.",
+    "ground_truth": "Factual reference truth statement #37 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 38,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #38 in Law.",
+    "ground_truth": "Factual reference truth statement #38 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 39,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #39 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #39 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 40,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #40 in Geography.",
+    "ground_truth": "Factual reference truth statement #40 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 41,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #41 in Science.",
+    "ground_truth": "Factual reference truth statement #41 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 42,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #42 in History?",
+    "ground_truth": "Verified scientific truth statement #42 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 43,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #43 in Medicine.",
+    "ground_truth": "Factual reference truth statement #43 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 44,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #44 in Finance.",
+    "ground_truth": "Factual reference truth statement #44 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 45,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #45 in Programming?",
+    "ground_truth": "Verified scientific truth statement #45 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 46,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #46 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #46 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 47,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #47 in Politics.",
+    "ground_truth": "Factual reference truth statement #47 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 48,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #48 in Law?",
+    "ground_truth": "Verified scientific truth statement #48 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 49,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #49 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #49 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 50,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #50 in Geography.",
+    "ground_truth": "Factual reference truth statement #50 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 51,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #51 in Science?",
+    "ground_truth": "Verified scientific truth statement #51 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 52,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #52 in History.",
+    "ground_truth": "Factual reference truth statement #52 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 53,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #53 in Medicine.",
+    "ground_truth": "Factual reference truth statement #53 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 54,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #54 in Finance?",
+    "ground_truth": "Verified scientific truth statement #54 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 55,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #55 in Programming.",
+    "ground_truth": "Factual reference truth statement #55 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 56,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #56 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #56 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 57,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #57 in Politics?",
+    "ground_truth": "Verified scientific truth statement #57 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 58,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #58 in Law.",
+    "ground_truth": "Factual reference truth statement #58 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 59,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #59 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #59 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 60,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #60 in Geography?",
+    "ground_truth": "Verified scientific truth statement #60 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 61,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #61 in Science.",
+    "ground_truth": "Factual reference truth statement #61 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 62,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #62 in History.",
+    "ground_truth": "Factual reference truth statement #62 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 63,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #63 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #63 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 64,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #64 in Finance.",
+    "ground_truth": "Factual reference truth statement #64 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 65,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #65 in Programming.",
+    "ground_truth": "Factual reference truth statement #65 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 66,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #66 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #66 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 67,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #67 in Politics.",
+    "ground_truth": "Factual reference truth statement #67 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 68,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #68 in Law.",
+    "ground_truth": "Factual reference truth statement #68 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 69,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #69 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #69 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 70,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #70 in Geography.",
+    "ground_truth": "Factual reference truth statement #70 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 71,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #71 in Science.",
+    "ground_truth": "Factual reference truth statement #71 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 72,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #72 in History?",
+    "ground_truth": "Verified scientific truth statement #72 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 73,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #73 in Medicine.",
+    "ground_truth": "Factual reference truth statement #73 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 74,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #74 in Finance.",
+    "ground_truth": "Factual reference truth statement #74 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 75,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #75 in Programming?",
+    "ground_truth": "Verified scientific truth statement #75 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 76,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #76 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #76 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 77,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #77 in Politics.",
+    "ground_truth": "Factual reference truth statement #77 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 78,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #78 in Law?",
+    "ground_truth": "Verified scientific truth statement #78 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 79,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #79 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #79 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 80,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #80 in Geography.",
+    "ground_truth": "Factual reference truth statement #80 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 81,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #81 in Science?",
+    "ground_truth": "Verified scientific truth statement #81 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 82,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #82 in History.",
+    "ground_truth": "Factual reference truth statement #82 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 83,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #83 in Medicine.",
+    "ground_truth": "Factual reference truth statement #83 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 84,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #84 in Finance?",
+    "ground_truth": "Verified scientific truth statement #84 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 85,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #85 in Programming.",
+    "ground_truth": "Factual reference truth statement #85 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 86,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #86 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #86 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 87,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #87 in Politics?",
+    "ground_truth": "Verified scientific truth statement #87 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 88,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #88 in Law.",
+    "ground_truth": "Factual reference truth statement #88 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 89,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #89 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #89 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 90,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #90 in Geography?",
+    "ground_truth": "Verified scientific truth statement #90 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 91,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #91 in Science.",
+    "ground_truth": "Factual reference truth statement #91 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 92,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #92 in History.",
+    "ground_truth": "Factual reference truth statement #92 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 93,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #93 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #93 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 94,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #94 in Finance.",
+    "ground_truth": "Factual reference truth statement #94 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 95,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #95 in Programming.",
+    "ground_truth": "Factual reference truth statement #95 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 96,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #96 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #96 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 97,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #97 in Politics.",
+    "ground_truth": "Factual reference truth statement #97 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 98,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #98 in Law.",
+    "ground_truth": "Factual reference truth statement #98 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 99,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #99 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #99 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 100,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #100 in Geography.",
+    "ground_truth": "Factual reference truth statement #100 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 101,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #101 in Science.",
+    "ground_truth": "Factual reference truth statement #101 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 102,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #102 in History?",
+    "ground_truth": "Verified scientific truth statement #102 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 103,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #103 in Medicine.",
+    "ground_truth": "Factual reference truth statement #103 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 104,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #104 in Finance.",
+    "ground_truth": "Factual reference truth statement #104 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 105,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #105 in Programming?",
+    "ground_truth": "Verified scientific truth statement #105 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 106,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #106 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #106 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 107,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #107 in Politics.",
+    "ground_truth": "Factual reference truth statement #107 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 108,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #108 in Law?",
+    "ground_truth": "Verified scientific truth statement #108 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 109,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #109 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #109 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 110,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #110 in Geography.",
+    "ground_truth": "Factual reference truth statement #110 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 111,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #111 in Science?",
+    "ground_truth": "Verified scientific truth statement #111 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 112,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #112 in History.",
+    "ground_truth": "Factual reference truth statement #112 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 113,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #113 in Medicine.",
+    "ground_truth": "Factual reference truth statement #113 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 114,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #114 in Finance?",
+    "ground_truth": "Verified scientific truth statement #114 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 115,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #115 in Programming.",
+    "ground_truth": "Factual reference truth statement #115 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 116,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #116 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #116 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 117,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #117 in Politics?",
+    "ground_truth": "Verified scientific truth statement #117 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 118,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #118 in Law.",
+    "ground_truth": "Factual reference truth statement #118 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 119,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #119 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #119 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 120,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #120 in Geography?",
+    "ground_truth": "Verified scientific truth statement #120 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 121,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #121 in Science.",
+    "ground_truth": "Factual reference truth statement #121 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 122,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #122 in History.",
+    "ground_truth": "Factual reference truth statement #122 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 123,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #123 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #123 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 124,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #124 in Finance.",
+    "ground_truth": "Factual reference truth statement #124 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 125,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #125 in Programming.",
+    "ground_truth": "Factual reference truth statement #125 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 126,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #126 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #126 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 127,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #127 in Politics.",
+    "ground_truth": "Factual reference truth statement #127 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 128,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #128 in Law.",
+    "ground_truth": "Factual reference truth statement #128 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 129,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #129 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #129 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 130,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #130 in Geography.",
+    "ground_truth": "Factual reference truth statement #130 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 131,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #131 in Science.",
+    "ground_truth": "Factual reference truth statement #131 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 132,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #132 in History?",
+    "ground_truth": "Verified scientific truth statement #132 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 133,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #133 in Medicine.",
+    "ground_truth": "Factual reference truth statement #133 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 134,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #134 in Finance.",
+    "ground_truth": "Factual reference truth statement #134 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 135,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #135 in Programming?",
+    "ground_truth": "Verified scientific truth statement #135 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 136,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #136 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #136 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 137,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #137 in Politics.",
+    "ground_truth": "Factual reference truth statement #137 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 138,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #138 in Law?",
+    "ground_truth": "Verified scientific truth statement #138 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 139,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #139 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #139 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 140,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #140 in Geography.",
+    "ground_truth": "Factual reference truth statement #140 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 141,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #141 in Science?",
+    "ground_truth": "Verified scientific truth statement #141 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 142,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #142 in History.",
+    "ground_truth": "Factual reference truth statement #142 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 143,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #143 in Medicine.",
+    "ground_truth": "Factual reference truth statement #143 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 144,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #144 in Finance?",
+    "ground_truth": "Verified scientific truth statement #144 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 145,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #145 in Programming.",
+    "ground_truth": "Factual reference truth statement #145 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 146,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #146 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #146 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 147,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #147 in Politics?",
+    "ground_truth": "Verified scientific truth statement #147 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 148,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #148 in Law.",
+    "ground_truth": "Factual reference truth statement #148 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 149,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #149 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #149 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 150,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #150 in Geography?",
+    "ground_truth": "Verified scientific truth statement #150 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 151,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #151 in Science.",
+    "ground_truth": "Factual reference truth statement #151 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 152,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #152 in History.",
+    "ground_truth": "Factual reference truth statement #152 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 153,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #153 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #153 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 154,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #154 in Finance.",
+    "ground_truth": "Factual reference truth statement #154 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 155,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #155 in Programming.",
+    "ground_truth": "Factual reference truth statement #155 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 156,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #156 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #156 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 157,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #157 in Politics.",
+    "ground_truth": "Factual reference truth statement #157 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 158,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #158 in Law.",
+    "ground_truth": "Factual reference truth statement #158 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 159,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #159 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #159 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 160,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #160 in Geography.",
+    "ground_truth": "Factual reference truth statement #160 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 161,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #161 in Science.",
+    "ground_truth": "Factual reference truth statement #161 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 162,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #162 in History?",
+    "ground_truth": "Verified scientific truth statement #162 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 163,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #163 in Medicine.",
+    "ground_truth": "Factual reference truth statement #163 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 164,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #164 in Finance.",
+    "ground_truth": "Factual reference truth statement #164 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 165,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #165 in Programming?",
+    "ground_truth": "Verified scientific truth statement #165 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 166,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #166 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #166 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 167,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #167 in Politics.",
+    "ground_truth": "Factual reference truth statement #167 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 168,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #168 in Law?",
+    "ground_truth": "Verified scientific truth statement #168 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 169,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #169 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #169 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 170,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #170 in Geography.",
+    "ground_truth": "Factual reference truth statement #170 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 171,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #171 in Science?",
+    "ground_truth": "Verified scientific truth statement #171 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 172,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #172 in History.",
+    "ground_truth": "Factual reference truth statement #172 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 173,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #173 in Medicine.",
+    "ground_truth": "Factual reference truth statement #173 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 174,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #174 in Finance?",
+    "ground_truth": "Verified scientific truth statement #174 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 175,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #175 in Programming.",
+    "ground_truth": "Factual reference truth statement #175 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 176,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #176 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #176 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 177,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #177 in Politics?",
+    "ground_truth": "Verified scientific truth statement #177 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 178,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #178 in Law.",
+    "ground_truth": "Factual reference truth statement #178 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 179,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #179 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #179 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 180,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #180 in Geography?",
+    "ground_truth": "Verified scientific truth statement #180 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 181,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #181 in Science.",
+    "ground_truth": "Factual reference truth statement #181 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 182,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #182 in History.",
+    "ground_truth": "Factual reference truth statement #182 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 183,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #183 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #183 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 184,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #184 in Finance.",
+    "ground_truth": "Factual reference truth statement #184 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 185,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #185 in Programming.",
+    "ground_truth": "Factual reference truth statement #185 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 186,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #186 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #186 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 187,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #187 in Politics.",
+    "ground_truth": "Factual reference truth statement #187 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 188,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #188 in Law.",
+    "ground_truth": "Factual reference truth statement #188 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 189,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #189 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #189 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 190,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #190 in Geography.",
+    "ground_truth": "Factual reference truth statement #190 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 191,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #191 in Science.",
+    "ground_truth": "Factual reference truth statement #191 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 192,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #192 in History?",
+    "ground_truth": "Verified scientific truth statement #192 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 193,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #193 in Medicine.",
+    "ground_truth": "Factual reference truth statement #193 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 194,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #194 in Finance.",
+    "ground_truth": "Factual reference truth statement #194 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 195,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #195 in Programming?",
+    "ground_truth": "Verified scientific truth statement #195 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 196,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #196 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #196 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 197,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #197 in Politics.",
+    "ground_truth": "Factual reference truth statement #197 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 198,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #198 in Law?",
+    "ground_truth": "Verified scientific truth statement #198 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 199,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #199 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #199 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 200,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #200 in Geography.",
+    "ground_truth": "Factual reference truth statement #200 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 201,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #201 in Science?",
+    "ground_truth": "Verified scientific truth statement #201 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 202,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #202 in History.",
+    "ground_truth": "Factual reference truth statement #202 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 203,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #203 in Medicine.",
+    "ground_truth": "Factual reference truth statement #203 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 204,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #204 in Finance?",
+    "ground_truth": "Verified scientific truth statement #204 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 205,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #205 in Programming.",
+    "ground_truth": "Factual reference truth statement #205 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 206,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #206 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #206 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 207,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #207 in Politics?",
+    "ground_truth": "Verified scientific truth statement #207 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 208,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #208 in Law.",
+    "ground_truth": "Factual reference truth statement #208 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 209,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #209 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #209 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 210,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #210 in Geography?",
+    "ground_truth": "Verified scientific truth statement #210 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 211,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #211 in Science.",
+    "ground_truth": "Factual reference truth statement #211 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 212,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #212 in History.",
+    "ground_truth": "Factual reference truth statement #212 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 213,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #213 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #213 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 214,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #214 in Finance.",
+    "ground_truth": "Factual reference truth statement #214 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 215,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #215 in Programming.",
+    "ground_truth": "Factual reference truth statement #215 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 216,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #216 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #216 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 217,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #217 in Politics.",
+    "ground_truth": "Factual reference truth statement #217 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 218,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #218 in Law.",
+    "ground_truth": "Factual reference truth statement #218 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 219,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #219 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #219 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 220,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #220 in Geography.",
+    "ground_truth": "Factual reference truth statement #220 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 221,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #221 in Science.",
+    "ground_truth": "Factual reference truth statement #221 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 222,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #222 in History?",
+    "ground_truth": "Verified scientific truth statement #222 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 223,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #223 in Medicine.",
+    "ground_truth": "Factual reference truth statement #223 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 224,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #224 in Finance.",
+    "ground_truth": "Factual reference truth statement #224 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 225,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #225 in Programming?",
+    "ground_truth": "Verified scientific truth statement #225 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 226,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #226 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #226 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 227,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #227 in Politics.",
+    "ground_truth": "Factual reference truth statement #227 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 228,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #228 in Law?",
+    "ground_truth": "Verified scientific truth statement #228 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 229,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #229 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #229 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 230,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #230 in Geography.",
+    "ground_truth": "Factual reference truth statement #230 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 231,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #231 in Science?",
+    "ground_truth": "Verified scientific truth statement #231 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 232,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #232 in History.",
+    "ground_truth": "Factual reference truth statement #232 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 233,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #233 in Medicine.",
+    "ground_truth": "Factual reference truth statement #233 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 234,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #234 in Finance?",
+    "ground_truth": "Verified scientific truth statement #234 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 235,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #235 in Programming.",
+    "ground_truth": "Factual reference truth statement #235 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 236,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #236 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #236 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 237,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #237 in Politics?",
+    "ground_truth": "Verified scientific truth statement #237 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 238,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #238 in Law.",
+    "ground_truth": "Factual reference truth statement #238 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 239,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #239 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #239 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 240,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #240 in Geography?",
+    "ground_truth": "Verified scientific truth statement #240 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 241,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #241 in Science.",
+    "ground_truth": "Factual reference truth statement #241 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 242,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #242 in History.",
+    "ground_truth": "Factual reference truth statement #242 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 243,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #243 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #243 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 244,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #244 in Finance.",
+    "ground_truth": "Factual reference truth statement #244 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 245,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #245 in Programming.",
+    "ground_truth": "Factual reference truth statement #245 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 246,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #246 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #246 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 247,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #247 in Politics.",
+    "ground_truth": "Factual reference truth statement #247 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 248,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #248 in Law.",
+    "ground_truth": "Factual reference truth statement #248 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 249,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #249 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #249 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 250,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #250 in Geography.",
+    "ground_truth": "Factual reference truth statement #250 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 251,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #251 in Science.",
+    "ground_truth": "Factual reference truth statement #251 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 252,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #252 in History?",
+    "ground_truth": "Verified scientific truth statement #252 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 253,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #253 in Medicine.",
+    "ground_truth": "Factual reference truth statement #253 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 254,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #254 in Finance.",
+    "ground_truth": "Factual reference truth statement #254 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 255,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #255 in Programming?",
+    "ground_truth": "Verified scientific truth statement #255 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 256,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #256 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #256 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 257,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #257 in Politics.",
+    "ground_truth": "Factual reference truth statement #257 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 258,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #258 in Law?",
+    "ground_truth": "Verified scientific truth statement #258 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 259,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #259 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #259 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 260,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #260 in Geography.",
+    "ground_truth": "Factual reference truth statement #260 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 261,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #261 in Science?",
+    "ground_truth": "Verified scientific truth statement #261 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 262,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #262 in History.",
+    "ground_truth": "Factual reference truth statement #262 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 263,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #263 in Medicine.",
+    "ground_truth": "Factual reference truth statement #263 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 264,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #264 in Finance?",
+    "ground_truth": "Verified scientific truth statement #264 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 265,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #265 in Programming.",
+    "ground_truth": "Factual reference truth statement #265 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 266,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #266 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #266 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 267,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #267 in Politics?",
+    "ground_truth": "Verified scientific truth statement #267 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 268,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #268 in Law.",
+    "ground_truth": "Factual reference truth statement #268 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 269,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #269 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #269 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 270,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #270 in Geography?",
+    "ground_truth": "Verified scientific truth statement #270 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 271,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #271 in Science.",
+    "ground_truth": "Factual reference truth statement #271 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 272,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #272 in History.",
+    "ground_truth": "Factual reference truth statement #272 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 273,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #273 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #273 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 274,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #274 in Finance.",
+    "ground_truth": "Factual reference truth statement #274 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 275,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #275 in Programming.",
+    "ground_truth": "Factual reference truth statement #275 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 276,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #276 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #276 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 277,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #277 in Politics.",
+    "ground_truth": "Factual reference truth statement #277 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 278,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #278 in Law.",
+    "ground_truth": "Factual reference truth statement #278 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 279,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #279 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #279 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 280,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #280 in Geography.",
+    "ground_truth": "Factual reference truth statement #280 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 281,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #281 in Science.",
+    "ground_truth": "Factual reference truth statement #281 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 282,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #282 in History?",
+    "ground_truth": "Verified scientific truth statement #282 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 283,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #283 in Medicine.",
+    "ground_truth": "Factual reference truth statement #283 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 284,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #284 in Finance.",
+    "ground_truth": "Factual reference truth statement #284 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 285,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #285 in Programming?",
+    "ground_truth": "Verified scientific truth statement #285 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 286,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #286 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #286 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 287,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #287 in Politics.",
+    "ground_truth": "Factual reference truth statement #287 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 288,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #288 in Law?",
+    "ground_truth": "Verified scientific truth statement #288 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 289,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #289 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #289 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 290,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #290 in Geography.",
+    "ground_truth": "Factual reference truth statement #290 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 291,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #291 in Science?",
+    "ground_truth": "Verified scientific truth statement #291 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 292,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #292 in History.",
+    "ground_truth": "Factual reference truth statement #292 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 293,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #293 in Medicine.",
+    "ground_truth": "Factual reference truth statement #293 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 294,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #294 in Finance?",
+    "ground_truth": "Verified scientific truth statement #294 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 295,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #295 in Programming.",
+    "ground_truth": "Factual reference truth statement #295 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 296,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #296 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #296 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 297,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #297 in Politics?",
+    "ground_truth": "Verified scientific truth statement #297 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 298,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #298 in Law.",
+    "ground_truth": "Factual reference truth statement #298 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 299,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #299 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #299 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 300,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #300 in Geography?",
+    "ground_truth": "Verified scientific truth statement #300 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 301,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #301 in Science.",
+    "ground_truth": "Factual reference truth statement #301 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 302,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #302 in History.",
+    "ground_truth": "Factual reference truth statement #302 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 303,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #303 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #303 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 304,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #304 in Finance.",
+    "ground_truth": "Factual reference truth statement #304 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 305,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #305 in Programming.",
+    "ground_truth": "Factual reference truth statement #305 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 306,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #306 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #306 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 307,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #307 in Politics.",
+    "ground_truth": "Factual reference truth statement #307 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 308,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #308 in Law.",
+    "ground_truth": "Factual reference truth statement #308 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 309,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #309 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #309 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 310,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #310 in Geography.",
+    "ground_truth": "Factual reference truth statement #310 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 311,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #311 in Science.",
+    "ground_truth": "Factual reference truth statement #311 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 312,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #312 in History?",
+    "ground_truth": "Verified scientific truth statement #312 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 313,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #313 in Medicine.",
+    "ground_truth": "Factual reference truth statement #313 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 314,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #314 in Finance.",
+    "ground_truth": "Factual reference truth statement #314 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 315,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #315 in Programming?",
+    "ground_truth": "Verified scientific truth statement #315 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 316,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #316 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #316 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 317,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #317 in Politics.",
+    "ground_truth": "Factual reference truth statement #317 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 318,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #318 in Law?",
+    "ground_truth": "Verified scientific truth statement #318 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 319,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #319 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #319 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 320,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #320 in Geography.",
+    "ground_truth": "Factual reference truth statement #320 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 321,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #321 in Science?",
+    "ground_truth": "Verified scientific truth statement #321 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 322,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #322 in History.",
+    "ground_truth": "Factual reference truth statement #322 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 323,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #323 in Medicine.",
+    "ground_truth": "Factual reference truth statement #323 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 324,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #324 in Finance?",
+    "ground_truth": "Verified scientific truth statement #324 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 325,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #325 in Programming.",
+    "ground_truth": "Factual reference truth statement #325 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 326,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #326 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #326 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 327,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #327 in Politics?",
+    "ground_truth": "Verified scientific truth statement #327 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 328,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #328 in Law.",
+    "ground_truth": "Factual reference truth statement #328 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 329,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #329 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #329 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 330,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #330 in Geography?",
+    "ground_truth": "Verified scientific truth statement #330 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 331,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #331 in Science.",
+    "ground_truth": "Factual reference truth statement #331 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 332,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #332 in History.",
+    "ground_truth": "Factual reference truth statement #332 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 333,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #333 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #333 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 334,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #334 in Finance.",
+    "ground_truth": "Factual reference truth statement #334 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 335,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #335 in Programming.",
+    "ground_truth": "Factual reference truth statement #335 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 336,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #336 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #336 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 337,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #337 in Politics.",
+    "ground_truth": "Factual reference truth statement #337 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 338,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #338 in Law.",
+    "ground_truth": "Factual reference truth statement #338 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 339,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #339 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #339 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 340,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #340 in Geography.",
+    "ground_truth": "Factual reference truth statement #340 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 341,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #341 in Science.",
+    "ground_truth": "Factual reference truth statement #341 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 342,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #342 in History?",
+    "ground_truth": "Verified scientific truth statement #342 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 343,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #343 in Medicine.",
+    "ground_truth": "Factual reference truth statement #343 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 344,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #344 in Finance.",
+    "ground_truth": "Factual reference truth statement #344 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 345,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #345 in Programming?",
+    "ground_truth": "Verified scientific truth statement #345 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 346,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #346 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #346 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 347,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #347 in Politics.",
+    "ground_truth": "Factual reference truth statement #347 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 348,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #348 in Law?",
+    "ground_truth": "Verified scientific truth statement #348 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 349,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #349 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #349 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 350,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #350 in Geography.",
+    "ground_truth": "Factual reference truth statement #350 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 351,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #351 in Science?",
+    "ground_truth": "Verified scientific truth statement #351 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 352,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #352 in History.",
+    "ground_truth": "Factual reference truth statement #352 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 353,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #353 in Medicine.",
+    "ground_truth": "Factual reference truth statement #353 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 354,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #354 in Finance?",
+    "ground_truth": "Verified scientific truth statement #354 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 355,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #355 in Programming.",
+    "ground_truth": "Factual reference truth statement #355 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 356,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #356 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #356 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 357,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #357 in Politics?",
+    "ground_truth": "Verified scientific truth statement #357 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 358,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #358 in Law.",
+    "ground_truth": "Factual reference truth statement #358 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 359,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #359 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #359 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 360,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #360 in Geography?",
+    "ground_truth": "Verified scientific truth statement #360 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 361,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #361 in Science.",
+    "ground_truth": "Factual reference truth statement #361 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 362,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #362 in History.",
+    "ground_truth": "Factual reference truth statement #362 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 363,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #363 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #363 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 364,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #364 in Finance.",
+    "ground_truth": "Factual reference truth statement #364 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 365,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #365 in Programming.",
+    "ground_truth": "Factual reference truth statement #365 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 366,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #366 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #366 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 367,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #367 in Politics.",
+    "ground_truth": "Factual reference truth statement #367 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 368,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #368 in Law.",
+    "ground_truth": "Factual reference truth statement #368 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 369,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #369 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #369 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 370,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #370 in Geography.",
+    "ground_truth": "Factual reference truth statement #370 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 371,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #371 in Science.",
+    "ground_truth": "Factual reference truth statement #371 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 372,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #372 in History?",
+    "ground_truth": "Verified scientific truth statement #372 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 373,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #373 in Medicine.",
+    "ground_truth": "Factual reference truth statement #373 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 374,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #374 in Finance.",
+    "ground_truth": "Factual reference truth statement #374 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 375,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #375 in Programming?",
+    "ground_truth": "Verified scientific truth statement #375 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 376,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #376 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #376 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 377,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #377 in Politics.",
+    "ground_truth": "Factual reference truth statement #377 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 378,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #378 in Law?",
+    "ground_truth": "Verified scientific truth statement #378 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 379,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #379 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #379 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 380,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #380 in Geography.",
+    "ground_truth": "Factual reference truth statement #380 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 381,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #381 in Science?",
+    "ground_truth": "Verified scientific truth statement #381 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 382,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #382 in History.",
+    "ground_truth": "Factual reference truth statement #382 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 383,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #383 in Medicine.",
+    "ground_truth": "Factual reference truth statement #383 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 384,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #384 in Finance?",
+    "ground_truth": "Verified scientific truth statement #384 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 385,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #385 in Programming.",
+    "ground_truth": "Factual reference truth statement #385 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 386,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #386 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #386 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 387,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #387 in Politics?",
+    "ground_truth": "Verified scientific truth statement #387 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 388,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #388 in Law.",
+    "ground_truth": "Factual reference truth statement #388 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 389,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #389 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #389 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 390,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #390 in Geography?",
+    "ground_truth": "Verified scientific truth statement #390 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 391,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #391 in Science.",
+    "ground_truth": "Factual reference truth statement #391 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 392,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #392 in History.",
+    "ground_truth": "Factual reference truth statement #392 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 393,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #393 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #393 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 394,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #394 in Finance.",
+    "ground_truth": "Factual reference truth statement #394 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 395,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #395 in Programming.",
+    "ground_truth": "Factual reference truth statement #395 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 396,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #396 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #396 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 397,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #397 in Politics.",
+    "ground_truth": "Factual reference truth statement #397 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 398,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #398 in Law.",
+    "ground_truth": "Factual reference truth statement #398 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 399,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #399 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #399 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 400,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #400 in Geography.",
+    "ground_truth": "Factual reference truth statement #400 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 401,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #401 in Science.",
+    "ground_truth": "Factual reference truth statement #401 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 402,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #402 in History?",
+    "ground_truth": "Verified scientific truth statement #402 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 403,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #403 in Medicine.",
+    "ground_truth": "Factual reference truth statement #403 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 404,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #404 in Finance.",
+    "ground_truth": "Factual reference truth statement #404 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 405,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #405 in Programming?",
+    "ground_truth": "Verified scientific truth statement #405 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 406,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #406 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #406 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 407,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #407 in Politics.",
+    "ground_truth": "Factual reference truth statement #407 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 408,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #408 in Law?",
+    "ground_truth": "Verified scientific truth statement #408 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 409,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #409 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #409 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 410,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #410 in Geography.",
+    "ground_truth": "Factual reference truth statement #410 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 411,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #411 in Science?",
+    "ground_truth": "Verified scientific truth statement #411 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 412,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #412 in History.",
+    "ground_truth": "Factual reference truth statement #412 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 413,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #413 in Medicine.",
+    "ground_truth": "Factual reference truth statement #413 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 414,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #414 in Finance?",
+    "ground_truth": "Verified scientific truth statement #414 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 415,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #415 in Programming.",
+    "ground_truth": "Factual reference truth statement #415 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 416,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #416 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #416 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 417,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #417 in Politics?",
+    "ground_truth": "Verified scientific truth statement #417 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 418,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #418 in Law.",
+    "ground_truth": "Factual reference truth statement #418 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 419,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #419 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #419 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 420,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #420 in Geography?",
+    "ground_truth": "Verified scientific truth statement #420 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 421,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #421 in Science.",
+    "ground_truth": "Factual reference truth statement #421 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 422,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #422 in History.",
+    "ground_truth": "Factual reference truth statement #422 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 423,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #423 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #423 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 424,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #424 in Finance.",
+    "ground_truth": "Factual reference truth statement #424 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 425,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #425 in Programming.",
+    "ground_truth": "Factual reference truth statement #425 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 426,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #426 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #426 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 427,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #427 in Politics.",
+    "ground_truth": "Factual reference truth statement #427 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 428,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #428 in Law.",
+    "ground_truth": "Factual reference truth statement #428 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 429,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #429 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #429 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 430,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #430 in Geography.",
+    "ground_truth": "Factual reference truth statement #430 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 431,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #431 in Science.",
+    "ground_truth": "Factual reference truth statement #431 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 432,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #432 in History?",
+    "ground_truth": "Verified scientific truth statement #432 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 433,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #433 in Medicine.",
+    "ground_truth": "Factual reference truth statement #433 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 434,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #434 in Finance.",
+    "ground_truth": "Factual reference truth statement #434 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 435,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #435 in Programming?",
+    "ground_truth": "Verified scientific truth statement #435 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 436,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #436 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #436 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 437,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #437 in Politics.",
+    "ground_truth": "Factual reference truth statement #437 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 438,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #438 in Law?",
+    "ground_truth": "Verified scientific truth statement #438 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 439,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #439 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #439 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 440,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #440 in Geography.",
+    "ground_truth": "Factual reference truth statement #440 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 441,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #441 in Science?",
+    "ground_truth": "Verified scientific truth statement #441 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 442,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #442 in History.",
+    "ground_truth": "Factual reference truth statement #442 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 443,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #443 in Medicine.",
+    "ground_truth": "Factual reference truth statement #443 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 444,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #444 in Finance?",
+    "ground_truth": "Verified scientific truth statement #444 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 445,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #445 in Programming.",
+    "ground_truth": "Factual reference truth statement #445 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 446,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #446 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #446 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 447,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #447 in Politics?",
+    "ground_truth": "Verified scientific truth statement #447 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 448,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #448 in Law.",
+    "ground_truth": "Factual reference truth statement #448 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 449,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #449 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #449 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 450,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #450 in Geography?",
+    "ground_truth": "Verified scientific truth statement #450 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 451,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #451 in Science.",
+    "ground_truth": "Factual reference truth statement #451 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 452,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #452 in History.",
+    "ground_truth": "Factual reference truth statement #452 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 453,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #453 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #453 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 454,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #454 in Finance.",
+    "ground_truth": "Factual reference truth statement #454 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 455,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #455 in Programming.",
+    "ground_truth": "Factual reference truth statement #455 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 456,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #456 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #456 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 457,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #457 in Politics.",
+    "ground_truth": "Factual reference truth statement #457 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 458,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #458 in Law.",
+    "ground_truth": "Factual reference truth statement #458 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 459,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #459 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #459 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 460,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #460 in Geography.",
+    "ground_truth": "Factual reference truth statement #460 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 461,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #461 in Science.",
+    "ground_truth": "Factual reference truth statement #461 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 462,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #462 in History?",
+    "ground_truth": "Verified scientific truth statement #462 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 463,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #463 in Medicine.",
+    "ground_truth": "Factual reference truth statement #463 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 464,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #464 in Finance.",
+    "ground_truth": "Factual reference truth statement #464 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 465,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #465 in Programming?",
+    "ground_truth": "Verified scientific truth statement #465 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 466,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #466 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #466 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 467,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #467 in Politics.",
+    "ground_truth": "Factual reference truth statement #467 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 468,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #468 in Law?",
+    "ground_truth": "Verified scientific truth statement #468 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 469,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #469 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #469 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 470,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #470 in Geography.",
+    "ground_truth": "Factual reference truth statement #470 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 471,
+    "category": "Science",
+    "question": "[Science] What is the verified fundamental principle #471 in Science?",
+    "ground_truth": "Verified scientific truth statement #471 for Science.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 472,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #472 in History.",
+    "ground_truth": "Factual reference truth statement #472 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 473,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #473 in Medicine.",
+    "ground_truth": "Factual reference truth statement #473 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 474,
+    "category": "Finance",
+    "question": "[Finance] What is the verified fundamental principle #474 in Finance?",
+    "ground_truth": "Verified scientific truth statement #474 for Finance.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 475,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #475 in Programming.",
+    "ground_truth": "Factual reference truth statement #475 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 476,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #476 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #476 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 477,
+    "category": "Politics",
+    "question": "[Politics] What is the verified fundamental principle #477 in Politics?",
+    "ground_truth": "Verified scientific truth statement #477 for Politics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 478,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #478 in Law.",
+    "ground_truth": "Factual reference truth statement #478 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 479,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #479 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #479 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 480,
+    "category": "Geography",
+    "question": "[Geography] What is the verified fundamental principle #480 in Geography?",
+    "ground_truth": "Verified scientific truth statement #480 for Geography.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 481,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #481 in Science.",
+    "ground_truth": "Factual reference truth statement #481 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 482,
+    "category": "History",
+    "question": "[History] Explain the invalid claim variation #482 in History.",
+    "ground_truth": "Factual reference truth statement #482 for History.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 483,
+    "category": "Medicine",
+    "question": "[Medicine] What is the verified fundamental principle #483 in Medicine?",
+    "ground_truth": "Verified scientific truth statement #483 for Medicine.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 484,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #484 in Finance.",
+    "ground_truth": "Factual reference truth statement #484 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 485,
+    "category": "Programming",
+    "question": "[Programming] Explain the invalid claim variation #485 in Programming.",
+    "ground_truth": "Factual reference truth statement #485 for Programming.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 486,
+    "category": "Mathematics",
+    "question": "[Mathematics] What is the verified fundamental principle #486 in Mathematics?",
+    "ground_truth": "Verified scientific truth statement #486 for Mathematics.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 487,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #487 in Politics.",
+    "ground_truth": "Factual reference truth statement #487 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 488,
+    "category": "Law",
+    "question": "[Law] Explain the invalid claim variation #488 in Law.",
+    "ground_truth": "Factual reference truth statement #488 for Law.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 489,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] What is the verified fundamental principle #489 in General Knowledge?",
+    "ground_truth": "Verified scientific truth statement #489 for General Knowledge.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 490,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #490 in Geography.",
+    "ground_truth": "Factual reference truth statement #490 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 491,
+    "category": "Science",
+    "question": "[Science] Explain the invalid claim variation #491 in Science.",
+    "ground_truth": "Factual reference truth statement #491 for Science.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 492,
+    "category": "History",
+    "question": "[History] What is the verified fundamental principle #492 in History?",
+    "ground_truth": "Verified scientific truth statement #492 for History.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 493,
+    "category": "Medicine",
+    "question": "[Medicine] Explain the invalid claim variation #493 in Medicine.",
+    "ground_truth": "Factual reference truth statement #493 for Medicine.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 494,
+    "category": "Finance",
+    "question": "[Finance] Explain the invalid claim variation #494 in Finance.",
+    "ground_truth": "Factual reference truth statement #494 for Finance.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Entity Fabrication",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 495,
+    "category": "Programming",
+    "question": "[Programming] What is the verified fundamental principle #495 in Programming?",
+    "ground_truth": "Verified scientific truth statement #495 for Programming.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 496,
+    "category": "Mathematics",
+    "question": "[Mathematics] Explain the invalid claim variation #496 in Mathematics.",
+    "ground_truth": "Factual reference truth statement #496 for Mathematics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 497,
+    "category": "Politics",
+    "question": "[Politics] Explain the invalid claim variation #497 in Politics.",
+    "ground_truth": "Factual reference truth statement #497 for Politics.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Factual Contradiction",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 498,
+    "category": "Law",
+    "question": "[Law] What is the verified fundamental principle #498 in Law?",
+    "ground_truth": "Verified scientific truth statement #498 for Law.",
+    "expected_label": "VERIFIED",
+    "difficulty": "Hard",
+    "hallucination_type": "None",
+    "expected_h_score_range": "[0.00, 0.35]"
+  },
+  {
+    "id": 499,
+    "category": "General Knowledge",
+    "question": "[General Knowledge] Explain the invalid claim variation #499 in General Knowledge.",
+    "ground_truth": "Factual reference truth statement #499 for General Knowledge.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Easy",
+    "hallucination_type": "Numerical Distortion",
+    "expected_h_score_range": "[0.65, 0.98]"
+  },
+  {
+    "id": 500,
+    "category": "Geography",
+    "question": "[Geography] Explain the invalid claim variation #500 in Geography.",
+    "ground_truth": "Factual reference truth statement #500 for Geography.",
+    "expected_label": "HALLUCINATED",
+    "difficulty": "Medium",
+    "hallucination_type": "Temporal Anachronism",
+    "expected_h_score_range": "[0.65, 0.98]"
+  }
+]
