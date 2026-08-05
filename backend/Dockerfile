@@ -1,6 +1,9 @@
-# Multi-stage Dockerfile for FastAPI Backend
+# ==========================================
+# HalluciSense Production Dockerfile
+# ==========================================
 
-FROM python:3.11-slim as builder
+# ---------- Builder Stage ----------
+FROM python:3.11-slim AS builder
 
 WORKDIR /app
 
@@ -9,13 +12,21 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    gcc \
     libpq-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
+RUN pip install --upgrade pip
+
+RUN pip install \
+    --no-cache-dir \
+    --prefix=/install \
+    -r requirements.txt
+
+# ---------- Runtime Stage ----------
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -30,8 +41,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /install /usr/local
-COPY . /app
+
+COPY . .
 
 EXPOSE 8000
 
-CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+HEALTHCHECK --interval=30s \
+    --timeout=5s \
+    --start-period=20s \
+    --retries=3 \
+    CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
+
+CMD ["python", "start.py"]
