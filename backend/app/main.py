@@ -180,8 +180,11 @@ def create_application() -> FastAPI:
     from app.modules.pillar2.router import router as pillar2_router
     app.include_router(pillar2_router, prefix=settings.API_V1_STR)
 
-    # ── Health Check ──────────────────────────────────────────────────────────
+    # ── Health Check Probes ───────────────────────────────────────────────────
     @app.get("/health", tags=["System"], summary="Health check")
+    @app.get("/healthz", tags=["System"], summary="Liveness check")
+    @app.get("/ready", tags=["System"], summary="Readiness check")
+    @app.get("/readyz", tags=["System"], summary="Readiness check")
     async def health_check():
         return {"status": "ok", "service": settings.PROJECT_NAME, "version": settings.VERSION}
 
