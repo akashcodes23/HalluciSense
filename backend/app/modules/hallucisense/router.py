@@ -102,16 +102,70 @@ def health_check() -> Dict[str, Any]:
     }
 
 
+@router.get("/debug/filesystem", response_model=Dict[str, Any], summary="Filesystem Diagnostic Audit")
+def filesystem_debug() -> Dict[str, Any]:
+    """Temporary diagnostic endpoint inspecting runtime directory layout, joblib files, and git SHA."""
+    import os
+    import sklearn
+    import joblib
+    from pathlib import Path
+    from app.models.registry import BASE_DIR, registry
+
+    cwd = os.getcwd()
+    cwd_path = Path(cwd)
+
+    def scan_dir_recursive(root_dir: Path, ext_pattern: str, max_depth: int = 4) -> List[str]:
+        if not root_dir.exists() or not root_dir.is_dir():
+            return []
+        matches = []
+        try:
+            for p in root_dir.rglob(ext_pattern):
+                if len(p.relative_to(root_dir).parts) <= max_depth:
+                    matches.append(str(p))
+        except Exception:
+            pass
+        return matches[:50]
+
+    joblib_files = scan_dir_recursive(cwd_path, "*.joblib")
+    if not joblib_files and (cwd_path / "backend").exists():
+        joblib_files = scan_dir_recursive(cwd_path / "backend", "*.joblib")
+
+    json_files = scan_dir_recursive(cwd_path, "*.json")
+
+    detailed_status = registry.get_detailed_health_status()
+    git_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA") or os.getenv("GIT_COMMIT_SHA") or "33c15b36f4801d253595c2999c5734b712f435ca"
+
+    return {
+        "cwd": cwd,
+        "base_dir": str(BASE_DIR),
+        "resolved_model_directory": str(registry.results_dir),
+        "git_commit_sha": git_sha,
+        "directory_tree_cwd": [f.name for f in cwd_path.iterdir()] if cwd_path.exists() else [],
+        "all_joblib_files_discovered": joblib_files,
+        "all_json_files_discovered": [j for j in json_files if "metadata" in j or "schema" in j or "config" in j],
+        "artifacts_found": detailed_status["artifacts_found"],
+        "artifact_sizes": detailed_status["artifact_sizes"],
+        "loaded_successfully": detailed_status["loaded_successfully"],
+        "sklearn_version": sklearn.__version__,
+        "joblib_version": joblib.__version__,
+    }
+
+
 @router.get("/version", response_model=Dict[str, Any], summary="Version Metadata")
 def version_metadata() -> Dict[str, Any]:
-    """Return framework version metadata, git commit hash, and dataset SHA-256 fingerprints."""
-    version_file = Path(__file__).resolve().parent.parent.parent.parent / "config" / "version.json"
-    if version_file.exists():
-        with open(version_file, "r", encoding="utf-8") as f:
-            return json.load(f)
+    """Return framework version metadata, git commit hash, and dependency versions."""
+    import os
+    import sklearn
+    import joblib
+
+    git_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA") or os.getenv("GIT_COMMIT_SHA") or "33c15b36f4801d253595c2999c5734b712f435ca"
     return {
         "framework": "HalluciSense",
         "version": "1.0.0",
+        "git_sha": git_sha,
+        "build_timestamp": "2026-08-05T12:25:59Z",
+        "sklearn_version": sklearn.__version__,
+        "joblib_version": joblib.__version__,
         "status": "Production Packaged",
     }
 
