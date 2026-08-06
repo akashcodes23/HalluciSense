@@ -1,13 +1,5 @@
 """
 HalluciSense FastAPI Application Factory.
-
-This module is the single entry point for the backend service.
-It:
-  - Creates the FastAPI application instance.
-  - Registers all middleware (CORS, logging, request ID).
-  - Registers all routers under /api/v1.
-  - Registers global exception handlers.
-  - Defines lifespan events (startup / shutdown).
 """
 import time
 import uuid
@@ -28,7 +20,6 @@ from app.core.exceptions import (
     HalluciSenseError,
     InsufficientPermissionsError,
     NotFoundError,
-    TokenInvalidError,
 )
 from app.modules.auth.router import router as auth_router
 from app.modules.users.router import router as users_router
@@ -62,10 +53,6 @@ logger = structlog.get_logger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator:
-    """
-    Application lifespan manager.
-    Runs startup logic before yielding, shutdown logic after.
-    """
     logger.info(
         "HalluciSense starting",
         version=settings.VERSION,
@@ -80,10 +67,6 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
 # ---------------------------------------------------------------------------
 
 def create_application() -> FastAPI:
-    """
-    Construct and configure the FastAPI application.
-    Returns the configured app instance.
-    """
     app = FastAPI(
         title=settings.PROJECT_NAME,
         version=settings.VERSION,
@@ -91,9 +74,10 @@ def create_application() -> FastAPI:
             "HalluciSense — A Confidence-Aware Hybrid Framework "
             "for Detecting and Quantifying Hallucinations in LLMs."
         ),
-        openapi_url=f"{settings.API_V1_STR}/openapi.json",
-        docs_url=f"{settings.API_V1_STR}/docs",
-        redoc_url=f"{settings.API_V1_STR}/redoc",
+        # ✅ FIXED: Docs at root so they work on Railway
+        openapi_url="/openapi.json",
+        docs_url="/docs",
+        redoc_url="/redoc",
         lifespan=lifespan,
     )
 
@@ -180,6 +164,9 @@ def create_application() -> FastAPI:
     from app.modules.pillar2.router import router as pillar2_router
     app.include_router(pillar2_router, prefix=settings.API_V1_STR)
 
+    from app.modules.mlops.router import router as mlops_router
+    app.include_router(mlops_router, prefix=settings.API_V1_STR)
+
     # ── Health Check Probes ───────────────────────────────────────────────────
     @app.get("/health", tags=["System"], summary="Health check")
     @app.get("/healthz", tags=["System"], summary="Liveness check")
@@ -187,6 +174,21 @@ def create_application() -> FastAPI:
     @app.get("/readyz", tags=["System"], summary="Readiness check")
     async def health_check():
         return {"status": "ok", "service": settings.PROJECT_NAME, "version": settings.VERSION}
+
+    # ✅ ADDED: Root endpoint (fixes Railway "Not Found")
+    @app.get("/", tags=["System"], summary="Root endpoint")
+    async def root():
+        return {
+            "message": "HalluciSense API is running",
+            "service": settings.PROJECT_NAME,
+            "version": settings.VERSION,
+            "environment": settings.APP_ENV,
+            "endpoints": {
+                "docs": "/docs",
+                "health": "/health",
+                "api_prefix": settings.API_V1_STR,
+            },
+        }
 
     return app
 
