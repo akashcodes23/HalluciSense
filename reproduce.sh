@@ -12,7 +12,7 @@
 #   4. Master Experiment Registry Pipeline (EXP0001...)
 #   5. Multi-LLM Evaluation Engine Execution
 #   6. Statistical Validation Engine (10,000-sample Bootstrap 95%/99% CIs)
-#   7. Literature Survey & Peer Reviewer Simulation (Reviewers #1, #2, #3)
+#   7. Literature Survey & Peer Reviewer Simulation (Reviewers #1 to #5)
 #   8. LaTeX Paper Consistency Checker & Publication Readiness Audit
 #   9. 600 DPI Publication Plots & LaTeX Paper Compilation
 #  10. Complete Unit & Integration Test Suite Verification
@@ -71,9 +71,9 @@ echo "[Step 6/10] Running Multi-LLM Benchmark & 10,000-sample Bootstrap CIs..."
 python3 evaluation/publishable_benchmark.py
 python3 evaluation/statistical_validation_engine.py
 
-# Step 7: Literature Survey & Peer Reviewer Simulator
+# Step 7: Literature Survey & 5-Reviewer Peer Simulator
 echo ""
-echo "[Step 7/10] Running Literature Survey & Elsevier Peer Reviewer Simulator..."
+echo "[Step 7/10] Running Literature Survey & 5-Reviewer Elsevier Peer Simulator..."
 python3 evaluation/literature_comparison_engine.py
 python3 -c "from review.review_generation import ReviewGenerator; ReviewGenerator().generate_all_review_documents()"
 python3 reproducibility/replication_protocol.py
@@ -92,7 +92,7 @@ python3 paper/generate_paper.py
 # Step 10: Master Test Suite Verification
 echo ""
 echo "[Step 10/10] Executing Master Engine Unit & Integration Test Suite..."
-pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py tests/test_phase22_publication_readiness.py -v
+pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py tests/test_phase22_publication_readiness.py tests/test_publication_package.py -v
 
 echo ""
 echo "================================================================================"
@@ -107,6 +107,7 @@ echo "    - Interactive Dashboard: backend/evaluation/results/interactive_dashbo
 echo "    - Peer Review Report   : backend/reports/review_simulation.md"
 echo "    - Author Rebuttal      : backend/reports/author_response.md"
 echo "    - Publication Readiness: backend/reports/publication_readiness_report.md"
+echo "    - Master Summary       : backend/reports/publication_summary.md"
 echo "    - LaTeX Paper Package  : backend/paper/elsevier_manuscript.tex"
 echo "    - 600 DPI Figures      : backend/evaluation/figures/ & backend/evaluation/calibration_figures/"
 echo "================================================================================"
