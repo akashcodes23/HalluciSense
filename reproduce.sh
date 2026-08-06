@@ -9,10 +9,10 @@
 #   1. System Environment & Hardware Metadata Audit
 #   2. Dataset SHA256 Checksum Verification
 #   3. Deterministic Seed Initialization (S=42)
-#   4. End-to-End Benchmark Execution (750 Claims across 15 Domains)
+#   4. Master Experiment Registry Pipeline (EXP0001...)
 #   5. Multi-LLM Evaluation Engine Execution
 #   6. Statistical Validation Engine (10,000-sample Bootstrap 95%/99% CIs)
-#   7. 300 DPI Publication Plots Generation (PNG, SVG, PDF)
+#   7. 600 DPI Publication Plots Generation (PNG, SVG, PDF)
 #   8. Elsevier & IEEE LaTeX Paper Generation
 #   9. Unit & Integration Test Suite Verification
 # ==============================================================================
@@ -32,7 +32,7 @@ echo "==========================================================================
 
 # Step 1: Python Runtime & Dependency Verification
 echo ""
-echo "[Step 1/8] Verifying Python Runtime Environment..."
+echo "[Step 1/9] Verifying Python Runtime Environment..."
 if ! command -v python3 &> /dev/null; then
     echo "ERROR: python3 could not be found in your PATH."
     exit 1
@@ -41,54 +41,61 @@ python3 -c "import sys; print(f'Python Version: {sys.version.split()[0]}')"
 
 # Step 2: Seed Initialization Check
 echo ""
-echo "[Step 2/8] Initializing Deterministic Random Seed S=42..."
+echo "[Step 2/9] Initializing Deterministic Random Seed S=42..."
 python3 -c "import sys; sys.path.insert(0, '${BACKEND_DIR}'); from app.core.engine.seed import set_seed; set_seed(42)"
 
 # Step 3: Dataset Checksum Verification
 echo ""
-echo "[Step 3/8] Verifying Dataset Hashes & Checksums..."
+echo "[Step 3/9] Verifying Dataset Hashes & Checksums..."
 if [ -f "${BACKEND_DIR}/evaluation/results/dataset_checksums.json" ]; then
     echo "Dataset checksum manifest verified: ${BACKEND_DIR}/evaluation/results/dataset_checksums.json"
 else
     echo "Notice: dataset_checksums.json will be generated during master benchmark execution."
 fi
 
-# Step 4: Master Scientific Benchmark Execution
+# Step 4: Experiment Registry Execution (EXP0001)
 echo ""
-echo "[Step 4/8] Executing Master Benchmark Pipeline (run_all_experiments.py)..."
+echo "[Step 4/9] Running Scientific Experiment Registry Driver (EXP0001)..."
 cd "${BACKEND_DIR}"
+python3 -c "from experiments.experiment_runner import ExperimentRunner; ExperimentRunner().run_experiment({'name': 'Master Benchmark Run', 'benchmark_dataset': 'TruthfulQA', 'sample_count': 100})"
+
+# Step 5: Master Scientific Benchmark Execution
+echo ""
+echo "[Step 5/9] Executing Master Benchmark Pipeline (run_all_experiments.py)..."
 python3 run_all_experiments.py
 
-# Step 5: Publishable Evidence Engine
+# Step 6: Publishable Evidence Engine
 echo ""
-echo "[Step 5/8] Running Multi-LLM Benchmark & Prediction Exporter (publishable_benchmark.py)..."
+echo "[Step 6/9] Running Multi-LLM Benchmark & Prediction Exporter (publishable_benchmark.py)..."
 python3 evaluation/publishable_benchmark.py
 
-# Step 6: Statistical Validation & Hypothesis Testing Engine
+# Step 7: Statistical Validation & Hypothesis Testing Engine
 echo ""
-echo "[Step 6/8] Computing 10,000 Bootstrap CIs & Hypothesis Tests (statistical_validation_engine.py)..."
+echo "[Step 7/9] Computing 10,000 Bootstrap CIs & Hypothesis Tests (statistical_validation_engine.py)..."
 python3 evaluation/statistical_validation_engine.py
 
-# Step 7: LaTeX Paper Compilation
+# Step 8: LaTeX Paper Compilation
 echo ""
-echo "[Step 7/8] Generating Elsevier & IEEE LaTeX Papers and 300 DPI Visualizations..."
+echo "[Step 8/9] Generating Elsevier & IEEE LaTeX Papers and 600 DPI Visualizations..."
 python3 paper/generate_paper.py
 
-# Step 8: Unit & Integration Verification Suite
+# Step 9: Unit & Integration Verification Suite
 echo ""
-echo "[Step 8/8] Executing Engine Unit Test Suite..."
-pytest tests/test_three_pillars_complete.py -v
+echo "[Step 9/9] Executing Engine Unit Test Suite..."
+pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py -v
 
 echo ""
 echo "================================================================================"
 echo "   REPRODUCIBILITY PIPELINE COMPLETED SUCCESSFULLY (ALL DELIVERABLES VERIFIED)   "
 echo "================================================================================"
 echo "  Artifact Outputs:"
+echo "    - Experiment Runs      : backend/experiments/runs/"
 echo "    - Predictions JSON     : backend/evaluation/results/predictions.json"
 echo "    - Predictions CSV      : backend/evaluation/results/predictions.csv"
 echo "    - Predictions Parquet  : backend/evaluation/results/predictions.parquet"
+echo "    - Interactive Dashboard: backend/evaluation/results/interactive_dashboard.html"
 echo "    - Evaluation Report    : backend/reports/evaluation_report.md"
 echo "    - Statistics Report    : backend/reports/statistics_report.md"
 echo "    - LaTeX Paper Package  : backend/paper/elsevier_manuscript.tex"
-echo "    - 300 DPI Figures      : backend/evaluation/figures/ & backend/evaluation/calibration_figures/"
+echo "    - 600 DPI Figures      : backend/evaluation/figures/ & backend/evaluation/calibration_figures/"
 echo "================================================================================"
