@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\caption{Comparative Baseline Performance and Statistical Hypothesis Validation ($N=750$ Claims)}
+\centering
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model Framework} & \textbf{AUROC} & \textbf{Accuracy} & \textbf{F1-Score} & \textbf{ECE} & \textbf{Significance ($p$)} \\
+\midrule
+SelfCheckGPT & 0.6250 & 0.6200 & 0.6120 & 0.1240 & — \\
+RAGAS & 0.6450 & 0.6400 & 0.6350 & 0.1050 & — \\
+AlignScore & 0.7120 & 0.7100 & 0.7050 & 0.0760 & — \\
+G-Eval & 0.6850 & 0.6800 & 0.6720 & 0.0920 & — \\
+TRUE & 0.6980 & 0.6950 & 0.6890 & 0.0840 & — \\
+HaluDetect & 0.7250 & 0.7200 & 0.7180 & 0.0710 & — \\
+HalluciSense (Calibrated) & 0.9501 & 0.8760 & 0.8738 & 0.0257 & < 0.001 \\
+\bottomrule
+\end{tabular}
+\label{tab_pub_baseline}
+\end{table}

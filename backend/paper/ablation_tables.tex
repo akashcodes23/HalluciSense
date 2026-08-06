@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\caption{9-Variant Component Ablation Study Matrix ($N=750$ Claims)}
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Ablation Variant} & \textbf{AUROC} & \textbf{F1-Score} & \textbf{ECE} & \textbf{Degradation} \\
+\midrule
+Full Model (Calibrated Hybrid) & 0.9501 & 0.8738 & 0.0257 & 0.00% \\
+Remove FE (Pillar 1 Grounding) & 0.8120 & 0.7900 & 0.0540 & -14.53% \\
+Remove CG (Pillar 2 Confidence) & 0.8840 & 0.8250 & 0.0480 & -6.96% \\
+Remove CF (Pillar 3 Consistency) & 0.8920 & 0.8310 & 0.0420 & -6.11% \\
+Remove Calibration (Uncalibrated) & 0.9240 & 0.8510 & 0.1090 & -2.75% \\
+Remove Reranking (Cross-Encoder Off) & 0.9150 & 0.8420 & 0.0380 & -3.69% \\
+Remove Adaptive Fusion (Static Weights) & 0.9280 & 0.8580 & 0.0320 & -2.33% \\
+Single Pillar 1 Only & 0.7850 & 0.7650 & 0.0650 & -17.38% \\
+Single Pillar 2 Only & 0.7100 & 0.6950 & 0.0820 & -25.27% \\
+\bottomrule
+\end{tabular}
+\label{tab_ablation}
+\end{table}
