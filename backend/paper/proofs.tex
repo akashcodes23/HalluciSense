@@ -1,0 +1,38 @@
+% Phase 23 — Mathematical Proofs & Theoretical Theorems
+\section{Theoretical Proofs \& Analysis}
+\label{sec:proofs}
+
+\begin{theorem}[Boundedness of Hallucination Risk $H(q)$]
+For any query $q \in \mathcal{Q}$, the calibrated risk score $H(q)$ is strictly bounded in the open unit interval $(0, 1)$.
+\end{theorem}
+\begin{proof}
+By Equation~\ref{eq:adaptive_risk}, since $FE, CG, CF, UC \in [0, 1]$ and $\alpha(q) + \beta(q) + \gamma(q) + \delta(q) = 1$, the linear combination $z(q)$ is bounded:
+$$ 0 \le z(q) \le 1 $$
+Applying Platt Sigmoidal Recalibration $H(q) = \sigma(a \cdot z(q) + b)$ with $a = 1.82, b = -0.45$:
+$$ H(q) \in [\sigma(-0.45), \sigma(1.37)] \approx [0.389, 0.797] \subset (0, 1) $$
+Hence $H(q)$ is strictly bounded in $(0, 1)$.
+\end{proof}
+
+\begin{theorem}[Lipschitz Continuity of Risk Estimator]
+Let $H(q)$ be the Platt recalibrated risk estimator. The function $H(z)$ is $L$-Lipschitz continuous with Lipschitz constant $L = \frac{|a|}{4} = \frac{1.82}{4} = 0.455$.
+\end{theorem}
+\begin{proof}
+The derivative of the sigmoidal activation $H(z) = \sigma(a \cdot z + b)$ with respect to $z$ is:
+$$ \frac{dH}{dz} = a \cdot H(z) \cdot (1 - H(z)) $$
+Since $H(z) \in (0, 1)$, the product $H(z)(1 - H(z))$ achieves its global maximum at $H(z) = 0.5$, where $H(z)(1 - H(z)) = \frac{1}{4}$. Thus:
+$$ \left| \frac{dH}{dz} \right| \le \frac{|a|}{4} = \frac{1.82}{4} = 0.455 $$
+By the Mean Value Theorem, for any $z_1, z_2$:
+$$ |H(z_1) - H(z_2)| \le 0.455 \cdot |z_1 - z_2| $$
+Therefore, $H(z)$ is $0.455$-Lipschitz continuous.
+\end{proof}
+
+\begin{proposition}[Monotonicity under Evidence Degradation]
+If Evidence Grounding $FE(q)$ strictly decreases while all other pillar scores remain constant, the risk score $H(q)$ strictly increases.
+\end{proposition}
+\begin{proof}
+Taking the partial derivative of $z(q)$ with respect to $FE(q)$:
+$$ \frac{\partial z}{\partial FE} = -\alpha(q) < 0 $$
+Since $a = 1.82 > 0$ and $\sigma'(x) > 0$ for all $x \in \mathbb{R}$:
+$$ \frac{\partial H}{\partial FE} = \frac{dH}{dz} \cdot \frac{\partial z}{\partial FE} = -a \cdot \alpha(q) \cdot H(1 - H) < 0 $$
+Thus, $H(q)$ is strictly monotonically decreasing with respect to $FE(q)$, implying that a decrease in evidence grounding strictly increases predicted hallucination risk.
+\end{proof}

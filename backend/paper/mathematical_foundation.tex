@@ -1,0 +1,47 @@
+% Phase 23 — Mathematical Foundations of HalluciSense
+\section{Mathematical Foundations}
+\label{sec:math_foundations}
+
+We formalize HalluciSense as an uncertainty-gated probabilistic meta-classifier operating over unified spaces of queries, evidence passages, model logprobs, and structural semantic graphs.
+
+\subsection{Formal Space Definitions}
+
+\begin{definition}[Query Space $\mathcal{Q}$]
+Let $\mathcal{Q} \subseteq \mathcal{V}^*$ denote the space of natural language query strings over vocabulary $\mathcal{V}$, where each query $q \in \mathcal{Q}$ possesses a query complexity score $C(q) \in [0, 1]$.
+\end{definition}
+
+\begin{definition}[Evidence Space $\mathcal{E}$]
+Let $\mathcal{E} = \{e_1, e_2, \dots, e_K\}$ denote the set of top-$K$ candidate retrieved passages from reference corpus $\mathcal{D}$, associated with sparse BM25 scores $S_{\text{sparse}}(e_i)$ and dense vector similarity $S_{\text{dense}}(e_i)$.
+\end{definition}
+
+\begin{definition}[Knowledge Space $\mathcal{K}$]
+Let $\mathcal{K} = (V, E)$ denote a directed multi-graph where vertices $V$ represent atomic claim propositions and edges $E$ represent directional entailment ($\to$) or contradiction ($\bot$) relations.
+\end{definition}
+
+\begin{definition}[Confidence Space $\mathcal{C}$]
+Let $\mathcal{C} = [0, 1] \times [0, 1]$ represent the tuple of white-box logit entropy $H(Y|\mathbf{x})$ and epistemic variance $\sigma_{\text{epi}}^2$.
+\end{definition}
+
+\begin{definition}[Risk Space $\mathcal{R}$]
+Let $\mathcal{R} = [0, 1]$ denote the continuous hallucination risk metric $H(q)$, where $H(q) \to 1$ indicates severe factual ungroundedness and $H(q) \to 0$ indicates verified empirical ground truth.
+\end{definition}
+
+\subsection{Adaptive Risk Formulation}
+
+The uncalibrated risk score $z(q)$ is formulated as the uncertainty-gated combination:
+\begin{equation}
+z(q) = \alpha(q) \cdot (1 - FE(q)) + \beta(q) \cdot (1 - CG(q)) + \gamma(q) \cdot (1 - CF(q)) + \delta(q) \cdot UC(q)
+\label{eq:adaptive_risk}
+\end{equation}
+where $\alpha(q) + \beta(q) + \gamma(q) + \delta(q) = 1$ are query-adaptive dynamic coefficients estimated via Bayesian gating network:
+\begin{equation}
+[\alpha(q), \beta(q), \gamma(q), \delta(q)] = \text{Softmax}\left( W_g \cdot \phi(q) + b_g \right)
+\label{eq:gating_softmax}
+\end{equation}
+
+The calibrated posterior hallucination probability $H(q) = P(\text{Hallucination} \mid q)$ is obtained via Platt Sigmoidal Recalibration:
+\begin{equation}
+H(q) = \sigma\left( a \cdot z(q) + b \right) = \frac{1}{1 + \exp\left(-(a \cdot z(q) + b)\right)}
+\label{eq:platt_scaling}
+\end{equation}
+where $a = 1.82$ and $b = -0.45$.

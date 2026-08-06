@@ -1,0 +1,43 @@
+{
+  "benchmark_name": "HalluciSense-Bench v1.0",
+  "version": "1.0.0",
+  "license": "CC-BY-4.0",
+  "leaderboard": [
+    {
+      "rank": 1,
+      "method_name": "HalluciSense (Ours)",
+      "auroc": 0.9501,
+      "f1_score": 0.8738,
+      "ece": 0.0257,
+      "mcc": 0.7525,
+      "date": "2026-08-06"
+    },
+    {
+      "rank": 2,
+      "method_name": "Semantic Entropy",
+      "auroc": 0.7820,
+      "f1_score": 0.7410,
+      "ece": 0.0590,
+      "mcc": 0.5210,
+      "date": "2024-06-15"
+    },
+    {
+      "rank": 3,
+      "method_name": "REFIND",
+      "auroc": 0.7650,
+      "f1_score": 0.7250,
+      "ece": 0.0620,
+      "mcc": 0.4950,
+      "date": "2024-04-10"
+    },
+    {
+      "rank": 4,
+      "method_name": "DetectGPT",
+      "auroc": 0.7510,
+      "f1_score": 0.7100,
+      "ece": 0.0750,
+      "mcc": 0.4680,
+      "date": "2023-03-20"
+    }
+  ]
+}

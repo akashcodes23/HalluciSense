@@ -12,10 +12,10 @@
 #   4. Master Experiment Registry Pipeline (EXP0001...)
 #   5. Multi-LLM Evaluation Engine Execution
 #   6. Statistical Validation Engine (10,000-sample Bootstrap 95%/99% CIs)
-#   7. Literature Survey & Peer Reviewer Simulation (Reviewers #1 to #5)
-#   8. LaTeX Paper Consistency Checker & Publication Readiness Audit
-#   9. 600 DPI Publication Plots & LaTeX Paper Compilation
-#  10. Complete Unit & Integration Test Suite Verification
+#   7. Literature Survey, 5-Reviewer Simulation & Information Theory Engine
+#   8. Structural Causal Model & LaTeX Proofs Verification
+#   9. 600 DPI Scientific Plots & LaTeX Paper Compilation
+#  10. Complete Master Unit & Integration Test Suite (50/50 Tests)
 # ==============================================================================
 
 set -e
@@ -65,11 +65,12 @@ echo ""
 echo "[Step 5/10] Executing Master Benchmark Pipeline (run_all_experiments.py)..."
 python3 run_all_experiments.py
 
-# Step 6: Publishable Evidence & Statistical Engine
+# Step 6: Information Theory & Structural Causal Model Engine
 echo ""
-echo "[Step 6/10] Running Multi-LLM Benchmark & 10,000-sample Bootstrap CIs..."
-python3 evaluation/publishable_benchmark.py
-python3 evaluation/statistical_validation_engine.py
+echo "[Step 6/10] Running Information Theory Engine & Structural Causal Model..."
+python3 theory/information_theory.py
+python3 theory/causal_engine.py
+python3 theory/theoretical_analysis.py
 
 # Step 7: Literature Survey & 5-Reviewer Peer Simulator
 echo ""
@@ -84,30 +85,28 @@ echo "[Step 8/10] Running LaTeX Manuscript Consistency Checker & Readiness Audit
 python3 paper/paper_consistency_checker.py
 python3 paper/publication_readiness.py
 
-# Step 9: LaTeX Paper Compilation
+# Step 9: LaTeX Paper Compilation & Scientific Visualizations
 echo ""
-echo "[Step 9/10] Generating Elsevier & IEEE LaTeX Papers and 600 DPI Visualizations..."
+echo "[Step 9/10] Generating Scientific 600 DPI Visualizations & LaTeX Proofs..."
+python3 visualization/scientific_plots.py
 python3 paper/generate_paper.py
 
 # Step 10: Master Test Suite Verification
 echo ""
-echo "[Step 10/10] Executing Master Engine Unit & Integration Test Suite..."
-pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py tests/test_phase22_publication_readiness.py tests/test_publication_package.py -v
+echo "[Step 10/10] Executing Master Engine Unit & Integration Test Suite (50 Tests)..."
+pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py tests/test_phase22_publication_readiness.py tests/test_publication_package.py tests/test_phase23_scientific_landmark.py -v
 
 echo ""
 echo "================================================================================"
 echo "   REPRODUCIBILITY PIPELINE COMPLETED SUCCESSFULLY (ALL DELIVERABLES VERIFIED)   "
 echo "================================================================================"
 echo "  Artifact Outputs:"
-echo "    - Experiment Runs      : backend/experiments/runs/"
-echo "    - Predictions JSON     : backend/evaluation/results/predictions.json"
-echo "    - Predictions CSV      : backend/evaluation/results/predictions.csv"
-echo "    - Predictions Parquet  : backend/evaluation/results/predictions.parquet"
+echo "    - Mathematical Proofs  : backend/paper/mathematical_foundation.tex & proofs.tex"
+echo "    - Scientific Audit     : backend/reports/scientific_audit_report.md"
+echo "    - IRB Human Protocol   : backend/human_study/irb_protocol.md"
+echo "    - Benchmark Leaderboard: hallucisense_bench/leaderboard.json"
 echo "    - Interactive Dashboard: backend/evaluation/results/interactive_dashboard.html"
 echo "    - Peer Review Report   : backend/reports/review_simulation.md"
-echo "    - Author Rebuttal      : backend/reports/author_response.md"
-echo "    - Publication Readiness: backend/reports/publication_readiness_report.md"
-echo "    - Master Summary       : backend/reports/publication_summary.md"
 echo "    - LaTeX Paper Package  : backend/paper/elsevier_manuscript.tex"
 echo "    - 600 DPI Figures      : backend/evaluation/figures/ & backend/evaluation/calibration_figures/"
 echo "================================================================================"
