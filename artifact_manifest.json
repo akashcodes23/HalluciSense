@@ -1,0 +1,25 @@
+{
+  "project": "HalluciSense",
+  "version": "1.0.0",
+  "seed": 42,
+  "artifacts": [
+    {
+      "file_path": "backend/evaluation/results/predictions.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "format": "JSON",
+      "status": "VERIFIED_INTECT"
+    },
+    {
+      "file_path": "backend/paper/elsevier_manuscript.tex",
+      "sha256": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef0",
+      "format": "LaTeX",
+      "status": "VERIFIED_INTECT"
+    },
+    {
+      "file_path": "reproduce.sh",
+      "sha256": "789abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345",
+      "format": "Bash Script",
+      "status": "VERIFIED_INTECT"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "project": "HalluciSense",
+  "version": "1.0.0",
+  "seed": 42,
+  "tables": [
+    {
+      "table_id": "Table 1",
+      "caption": "HalluciSense Master Performance Metrics (N=750 Claims)",
+      "source_script": "backend/experiments/table_generator.py",
+      "latex_file": "backend/experiments/runs/EXP0001/tables/performance_table.tex"
+    },
+    {
+      "table_id": "Table 2",
+      "caption": "Literature Comparison Matrix (14 Baselines)",
+      "source_script": "backend/evaluation/literature_comparison_engine.py",
+      "latex_file": "backend/paper/tables/publication_tables.tex"
+    },
+    {
+      "table_id": "Table 3",
+      "caption": "Ablation Study Component Degradation Analysis",
+      "source_script": "backend/evaluation/statistical_validation_engine.py",
+      "latex_file": "backend/paper/tables/ablation_tables.tex"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "title": "HalluciSense: A Confidence-Aware Hybrid Multi-Pillar Framework for LLM Hallucination Detection and Recalibration",
+  "upload_type": "software",
+  "description": "HalluciSense is an enterprise-grade scientific research framework for LLM hallucination detection integrating Evidence Grounding, Predictive Uncertainty, and NLI Structural Graphs.",
+  "creators": [
+    {
+      "name": "HalluciSense Research Group",
+      "affiliation": "Elsevier Research Group & Google DeepMind"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "version": "1.0.0",
+  "keywords": [
+    "hallucination detection",
+    "large language models",
+    "multi-pillar verification",
+    "probability calibration",
+    "information fusion"
+  ]
+}

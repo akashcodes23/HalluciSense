@@ -1,0 +1,42 @@
+{
+  "project": "HalluciSense",
+  "version": "1.0.0",
+  "seed": 42,
+  "figures": [
+    {
+      "figure_id": "Fig 1",
+      "title": "HalluciSense Three-Pillar Architecture Pipeline",
+      "source_script": "backend/paper/generate_paper.py",
+      "formats": ["svg", "pdf", "png"],
+      "dpi": 600
+    },
+    {
+      "figure_id": "Fig 2",
+      "title": "ROC & Precision-Recall Curves (7 LLM Architectures)",
+      "source_script": "backend/evaluation/publishable_benchmark.py",
+      "formats": ["svg", "pdf", "png"],
+      "dpi": 600
+    },
+    {
+      "figure_id": "Fig 3",
+      "title": "Reliability Diagram & Platt Recalibration Curves",
+      "source_script": "backend/experiments/figure_engine.py",
+      "formats": ["svg", "pdf", "png"],
+      "dpi": 600
+    },
+    {
+      "figure_id": "Fig 4",
+      "title": "Confusion Matrix Analysis",
+      "source_script": "backend/experiments/figure_engine.py",
+      "formats": ["svg", "pdf", "png"],
+      "dpi": 600
+    },
+    {
+      "figure_id": "Fig 5",
+      "title": "Domain Generalization Radar Comparison",
+      "source_script": "backend/visualization/scientific_plots.py",
+      "formats": ["svg", "pdf", "png"],
+      "dpi": 600
+    }
+  ]
+}

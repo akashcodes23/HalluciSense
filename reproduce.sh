@@ -12,10 +12,10 @@
 #   4. Master Experiment Registry Pipeline (EXP0001...)
 #   5. Multi-LLM Evaluation Engine Execution
 #   6. Statistical Validation Engine (10,000-sample Bootstrap 95%/99% CIs)
-#   7. Literature Survey, 5-Reviewer Simulation & Information Theory Engine
-#   8. Structural Causal Model & LaTeX Proofs Verification
+#   7. Raw Experiment Verifier, Metric Traceability & Theorem Classification
+#   8. Manuscript-Code Synchronization, Static Code Audit & Release Readiness
 #   9. 600 DPI Scientific Plots & LaTeX Paper Compilation
-#  10. Complete Master Unit & Integration Test Suite (50/50 Tests)
+#  10. Complete Master Unit & Integration Test Suite (56/56 Tests)
 # ==============================================================================
 
 set -e
@@ -65,19 +65,21 @@ echo ""
 echo "[Step 5/10] Executing Master Benchmark Pipeline (run_all_experiments.py)..."
 python3 run_all_experiments.py
 
-# Step 6: Information Theory & Structural Causal Model Engine
+# Step 6: Raw Experiment Verification & Metric Traceability
 echo ""
-echo "[Step 6/10] Running Information Theory Engine & Structural Causal Model..."
-python3 theory/information_theory.py
-python3 theory/causal_engine.py
-python3 theory/theoretical_analysis.py
+echo "[Step 6/10] Running Raw Experiment Verifier & Metric Traceability Engine..."
+python3 verification/experiment_verifier.py
+python3 verification/metric_traceability.py
+python3 theory/theorem_verifier.py
 
-# Step 7: Literature Survey & 5-Reviewer Peer Simulator
+# Step 7: Manuscript-Code Synchronization & Static Audit
 echo ""
-echo "[Step 7/10] Running Literature Survey & 5-Reviewer Elsevier Peer Simulator..."
+echo "[Step 7/10] Running Manuscript-Code Synchronization & Static Code Audit..."
+python3 verification/manuscript_code_sync.py
 python3 evaluation/literature_comparison_engine.py
 python3 -c "from review.review_generation import ReviewGenerator; ReviewGenerator().generate_all_review_documents()"
 python3 reproducibility/replication_protocol.py
+python3 reproducibility/reproduction_audit.py
 
 # Step 8: LaTeX Paper Consistency Checker & Publication Readiness Audit
 echo ""
@@ -93,20 +95,23 @@ python3 paper/generate_paper.py
 
 # Step 10: Master Test Suite Verification
 echo ""
-echo "[Step 10/10] Executing Master Engine Unit & Integration Test Suite (50 Tests)..."
-pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py tests/test_phase22_publication_readiness.py tests/test_publication_package.py tests/test_phase23_scientific_landmark.py -v
+echo "[Step 10/10] Executing Master Engine Unit & Integration Test Suite (56 Tests)..."
+pytest tests/test_three_pillars_complete.py tests/test_nextgen_architecture.py tests/test_scientific_validation_campaign.py tests/test_experiment_registry.py tests/test_phase22_publication_readiness.py tests/test_publication_package.py tests/test_phase23_scientific_landmark.py tests/test_phase24_submission_freeze.py -v
 
 echo ""
 echo "================================================================================"
 echo "   REPRODUCIBILITY PIPELINE COMPLETED SUCCESSFULLY (ALL DELIVERABLES VERIFIED)   "
 echo "================================================================================"
 echo "  Artifact Outputs:"
-echo "    - Mathematical Proofs  : backend/paper/mathematical_foundation.tex & proofs.tex"
-echo "    - Scientific Audit     : backend/reports/scientific_audit_report.md"
-echo "    - IRB Human Protocol   : backend/human_study/irb_protocol.md"
-echo "    - Benchmark Leaderboard: hallucisense_bench/leaderboard.json"
-echo "    - Interactive Dashboard: backend/evaluation/results/interactive_dashboard.html"
-echo "    - Peer Review Report   : backend/reports/review_simulation.md"
+echo "    - Verification Report  : backend/reports/verification_report.md"
+echo "    - Traceability Matrix  : backend/reports/metric_traceability_matrix.json"
+echo "    - Theorem Proof Audit  : backend/reports/proof_audit.md"
+echo "    - Verification Dash    : verification_dashboard.html"
+echo "    - Release Freeze v1.0.0: release/v1.0.0/RELEASE_NOTES.md"
+echo "    - Artifact Manifest    : artifact_manifest.json"
+echo "    - Figure Manifest      : figure_manifest.json"
+echo "    - Table Manifest       : table_manifest.json"
+echo "    - Master Summary       : backend/reports/publication_summary.md"
 echo "    - LaTeX Paper Package  : backend/paper/elsevier_manuscript.tex"
 echo "    - 600 DPI Figures      : backend/evaluation/figures/ & backend/evaluation/calibration_figures/"
 echo "================================================================================"
