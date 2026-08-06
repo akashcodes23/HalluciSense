@@ -6,6 +6,7 @@ checks dependencies and logical flow, and outputs backend/reports/proof_audit.md
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Dict, List, Any
