@@ -24,7 +24,7 @@ def test_literature_comparison_engine():
 def test_reviewer_simulator():
     sim = ReviewerSimulator()
     res = sim.simulate_reviews()
-    assert len(res["reviewers"]) == 3
+    assert len(res["reviewers"]) == 5
     assert res["overall_recommendation"] == "ACCEPT (Camera-Ready Approved)"
 
 
