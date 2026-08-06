@@ -1,23 +1,22 @@
 {
-  "experiment_name": "HalluciSense Phase 22 Public Benchmark Validation",
-  "timestamp_utc": "2026-08-05 08:44:35 UTC",
-  "git_commit_sha": "0ad3f899ee2c5fd72f2a845b8845bc438c82cf1d",
+  "experiment_name": "HalluciSense Elsevier Master Evaluation",
   "random_seed": 42,
-  "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
-  "platform": "macOS-26.5.2-arm64-arm-64bit",
-  "processor": "arm",
-  "architecture": "64bit",
-  "key_dependency_versions": {
-    "scikit-learn": "1.7.2",
-    "numpy": "1.26.4",
-    "joblib": "1.5.3",
-    "scipy": "1.15.3",
-    "fastapi": "0.115.0"
+  "sample_count": 750,
+  "bootstrap_iterations": 10000,
+  "confidence_level": 0.95,
+  "decision_threshold_tau": 0.54,
+  "platt_scaling": {
+    "a": 1.82,
+    "b": -0.45
   },
-  "active_model_registry": {
-    "classifier": "HistGradientBoostingClassifier",
-    "scaler": "RobustScaler",
-    "threshold": 0.54,
-    "feature_dim": 19
-  }
+  "fusion_weights": {
+    "alpha_fe": 0.4,
+    "beta_cg": 0.3,
+    "gamma_cf": 0.3
+  },
+  "target_journals": [
+    "Information Fusion",
+    "Knowledge-Based Systems",
+    "Artificial Intelligence"
+  ]
 }

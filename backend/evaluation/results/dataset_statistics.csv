@@ -1,0 +1,16 @@
+Domain,Total_Samples,Factual_Count,Hallucinated_Count,Factual_Ratio
+General Knowledge,50,25,25,0.5
+Medicine,50,25,25,0.5
+Law,50,25,25,0.5
+Finance,50,25,25,0.5
+History,50,25,25,0.5
+Science,50,25,25,0.5
+Computer Science,50,25,25,0.5
+Physics,50,25,25,0.5
+Biology,50,25,25,0.5
+Chemistry,50,25,25,0.5
+News,50,25,25,0.5
+Mathematics,50,25,25,0.5
+Geography,50,25,25,0.5
+Politics,50,25,25,0.5
+Literature,50,25,25,0.5
