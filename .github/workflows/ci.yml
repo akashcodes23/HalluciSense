@@ -1,4 +1,4 @@
-name: HalluciSense Enterprise CI/CD Pipeline
+name: HalluciSense Reproducibility & Publication CI/CD Pipeline
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ main, master ]
 
 jobs:
-  lint-and-test:
-    name: Backend Lint, Test & Verification Suite
+  lint:
+    name: Code Formatting & Syntax Check
     runs-on: ubuntu-latest
 
     steps:
@@ -21,33 +21,99 @@ jobs:
           python-version: "3.10"
           cache: "pip"
 
-      - name: Install Backend Dependencies
+      - name: Install Linting Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
+
+      - name: Run Black & Flake8
+        run: |
+          black --check backend/app/ || true
+          flake8 backend/app/ --max-line-length=120 --ignore=E203,W503 || true
+
+  test:
+    name: Pytest Unit & Engine Verification Suite
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install Dependencies
         run: |
           cd backend
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-asyncio pytest-cov flake8 black
+          pip install pytest pytest-asyncio pytest-cov
 
-      - name: Code Formatting & Linting Check
+      - name: Run Three Pillars Unit Test Suite
         run: |
           cd backend
-          black --check app/ || true
-          flake8 app/ --max-line-length=120 --ignore=E203,W503 || true
+          pytest tests/test_three_pillars_complete.py -v
 
-      - name: Run Pytest Unit & Integration Suite
+  evaluation:
+    name: Master Benchmark & Statistical Verification Pipeline
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install Dependencies
         run: |
           cd backend
-          pytest tests/test_unit_pipeline.py tests/test_integration_api.py tests/test_benchmark_runner.py tests/test_statistical_tests.py -v
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run Master Scientific Validation Pipeline
+      - name: Run Master Reproducibility Pipeline
         run: |
           cd backend
           python run_all_experiments.py
+          python evaluation/publishable_benchmark.py
+          python evaluation/statistical_validation_engine.py
 
-  docker-build:
-    name: Docker Build & Vulnerability Scan
+  paper:
+    name: Elsevier & IEEE LaTeX Paper Generation
     runs-on: ubuntu-latest
-    needs: lint-and-test
+    needs: evaluation
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Paper Dependencies
+        run: |
+          cd backend
+          pip install matplotlib scikit-learn numpy
+
+      - name: Generate Paper Packages
+        run: |
+          cd backend
+          python paper/generate_paper.py
+
+  docker:
+    name: Multi-Stage Docker Container Build
+    runs-on: ubuntu-latest
+    needs: evaluation
 
     steps:
       - name: Checkout Code
@@ -65,17 +131,3 @@ jobs:
           tags: hallucisense-backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  deployment-smoke-test:
-    name: Railway Deployment Smoke Test
-    runs-on: ubuntu-latest
-    needs: docker-build
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Trigger Railway Deployment Smoke Test
-        run: |
-          echo "Railway production deployment validated successfully for commit ${{ github.sha }}"
