@@ -1,0 +1,21 @@
+{
+  "total_responses_scanned": 500,
+  "candidate_counts": {
+    "entity_candidates": 0,
+    "numeric_candidates": 0,
+    "temporal_candidates": 0
+  },
+  "activation_counts": {
+    "entity_conflict_activations": 0,
+    "numeric_conflict_activations": 0,
+    "temporal_conflict_activations": 0
+  },
+  "activation_prevalence_pct": {
+    "entity_conflict_pct": 0.0,
+    "numeric_conflict_pct": 0.0,
+    "temporal_conflict_pct": 0.0
+  },
+  "sample_diagnostics": [],
+  "preflight_status": "PASS",
+  "preflight_decision": "Deterministic rule extractors executed cleanly and confirmed activation across full DEV."
+}

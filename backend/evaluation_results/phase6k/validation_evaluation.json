@@ -1,0 +1,6 @@
+{
+  "val_evaluated": false,
+  "verdict": "NO FEASIBLE CANDIDATE",
+  "reason": "Precondition failed: 1,000-example numerical stability gate failed. Validation partition remained completely untouched.",
+  "val_metrics": null
+}

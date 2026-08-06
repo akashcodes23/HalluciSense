@@ -1,0 +1,44 @@
+{
+  "protocol_status": "LOCKED_PRE_EVALUATION",
+  "timestamp_utc": "2026-08-06 04:54:42 UTC",
+  "selected_candidate_key": "candidate_3",
+  "display_name": "Candidate 3 (Set B + RobustScaler + liblinear)",
+  "locked_features": [
+    "mean_entailment",
+    "max_entailment",
+    "mean_contradiction",
+    "min_support_margin",
+    "num_claims"
+  ],
+  "scaler": "RobustScaler",
+  "classifier": "LogisticRegression",
+  "hyperparameters": {
+    "solver": "liblinear",
+    "penalty": "l2",
+    "C": 1.0,
+    "max_iter": 1000,
+    "random_state": 42
+  },
+  "operating_thresholds": {
+    "primary_operating_threshold": 0.56,
+    "secondary_reference_threshold": 0.5
+  },
+  "dev_cv_benchmarks": {
+    "roc_auc": 0.6218,
+    "pr_auc": 0.6417,
+    "mcc": 0.157,
+    "brier_score": 0.2372,
+    "ece": 0.011
+  },
+  "generalization_classification_rules": {
+    "stable": "ROC-AUC degradation <= 0.02",
+    "minor_degradation": "ROC-AUC degradation > 0.02 and <= 0.05",
+    "material_degradation": "ROC-AUC degradation > 0.05"
+  },
+  "fingerprints": {
+    "dev_n_samples": 58002,
+    "dev_sha256": "47a9a79cca4e5378dfae1216e343d340737ef522b80c36b8a020d88af6beccf7",
+    "val_n_samples": 3500,
+    "val_sha256": "20e59da974fa23e981af03e98e90d9ca8c884c37fcac3ca68f92b342e3fe8953"
+  }
+}

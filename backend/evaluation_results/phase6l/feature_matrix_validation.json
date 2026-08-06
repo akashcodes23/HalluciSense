@@ -1,0 +1,43 @@
+{
+  "record_count": 58002,
+  "feature_count": 24,
+  "feature_schema_version": "6L.1B.0",
+  "feature_names": [
+    "mean_pairwise_contradiction",
+    "max_pairwise_contradiction",
+    "p95_pairwise_contradiction",
+    "fraction_contradictory_pairs",
+    "contradiction_pair_count",
+    "mean_pairwise_entailment",
+    "max_pairwise_entailment",
+    "fraction_mutually_supportive_pairs",
+    "mean_pairwise_similarity",
+    "max_pairwise_similarity",
+    "near_duplicate_claim_fraction",
+    "entity_conflict_count",
+    "entity_conflict_ratio",
+    "entity_attribute_disagreement_score",
+    "numeric_conflict_count",
+    "numeric_conflict_ratio",
+    "max_numeric_disagreement",
+    "temporal_conflict_count",
+    "timeline_order_violation_score",
+    "contradiction_graph_density",
+    "max_contradiction_degree",
+    "largest_contradictory_component_ratio",
+    "num_claims",
+    "claim_length_variance"
+  ],
+  "duplicate_ids_count": 0,
+  "duplicate_rows_count": 29528,
+  "missing_values_count": 0,
+  "nan_count": 0,
+  "inf_count": 0,
+  "dtype": "float64",
+  "target_balance": {
+    "n_positive": 31502,
+    "n_negative": 26500,
+    "pos_ratio": 0.5431192027861108
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,13 @@
+{
+  "feature_names": [
+    "mean_entailment",
+    "max_entailment",
+    "mean_contradiction",
+    "min_support_margin",
+    "num_claims"
+  ],
+  "feature_count": 5,
+  "scaler": "RobustScaler",
+  "classifier": "LogisticRegression(solver='liblinear', penalty='l2', C=1.0)",
+  "operating_threshold": 0.56
+}

@@ -72,5 +72,486 @@
       "brier_score": 0.0842,
       "execution_time_seconds": 0.0002
     }
+  },
+  {
+    "exp_id": "EXP0003",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0003",
+    "metrics_summary": {
+      "exp_id": "EXP0003",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
+  },
+  {
+    "exp_id": "EXP0004",
+    "name": "Master Benchmark Run",
+    "config": {
+      "name": "Master Benchmark Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0004",
+    "metrics_summary": {
+      "exp_id": "EXP0004",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0002
+    }
+  },
+  {
+    "exp_id": "EXP0005",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0005",
+    "metrics_summary": {
+      "exp_id": "EXP0005",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
+  },
+  {
+    "exp_id": "EXP0006",
+    "name": "Master Benchmark Run",
+    "config": {
+      "name": "Master Benchmark Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0006",
+    "metrics_summary": {
+      "exp_id": "EXP0006",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0002
+    }
+  },
+  {
+    "exp_id": "EXP0007",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0007",
+    "metrics_summary": {
+      "exp_id": "EXP0007",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
+  },
+  {
+    "exp_id": "EXP0008",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0008",
+    "metrics_summary": {
+      "exp_id": "EXP0008",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
+  },
+  {
+    "exp_id": "EXP0009",
+    "name": "Master Benchmark Run",
+    "config": {
+      "name": "Master Benchmark Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0009",
+    "metrics_summary": {
+      "exp_id": "EXP0009",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0005
+    }
+  },
+  {
+    "exp_id": "EXP0010",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0010",
+    "metrics_summary": {
+      "exp_id": "EXP0010",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
+  },
+  {
+    "exp_id": "EXP0011",
+    "name": "Master Benchmark Run",
+    "config": {
+      "name": "Master Benchmark Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0011",
+    "metrics_summary": {
+      "exp_id": "EXP0011",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0003
+    }
+  },
+  {
+    "exp_id": "EXP0012",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0012",
+    "metrics_summary": {
+      "exp_id": "EXP0012",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
+  },
+  {
+    "exp_id": "EXP0013",
+    "name": "Master Benchmark Run",
+    "config": {
+      "name": "Master Benchmark Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0013",
+    "metrics_summary": {
+      "exp_id": "EXP0013",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0003
+    }
+  },
+  {
+    "exp_id": "EXP0014",
+    "name": "Master Benchmark Run",
+    "config": {
+      "name": "Master Benchmark Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0014",
+    "metrics_summary": {
+      "exp_id": "EXP0014",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 100,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0003
+    }
+  },
+  {
+    "exp_id": "EXP0015",
+    "name": "Integration Test Experiment Run",
+    "config": {
+      "name": "Integration Test Experiment Run",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "random_seed": 42,
+      "fusion_mode": "ADAPTIVE",
+      "threshold": 0.54,
+      "platt_params": [
+        1.82,
+        -0.45
+      ],
+      "enable_knowledge_graph": true,
+      "enable_token_localization": true
+    },
+    "status": "COMPLETED",
+    "dir_path": "/Users/akashgpatil/major_project/backend/experiments/runs/EXP0015",
+    "metrics_summary": {
+      "exp_id": "EXP0015",
+      "benchmark_dataset": "TruthfulQA",
+      "model_name": "GPT-4",
+      "sample_count": 10,
+      "accuracy": 0.876,
+      "precision": 0.885,
+      "recall": 0.863,
+      "f1_score": 0.8738,
+      "auroc": 0.9501,
+      "auprc": 0.9412,
+      "mcc": 0.7525,
+      "ece": 0.0257,
+      "brier_score": 0.0842,
+      "execution_time_seconds": 0.0001
+    }
   }
 ]

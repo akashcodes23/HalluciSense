@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-08-02T07:19:53.564917+00:00",
+  "feature_discrimination": {
+    "min_entailment": {
+      "roc_auc": 0.5417,
+      "cohens_d": 0.7224,
+      "cliffs_delta": -0.0833,
+      "factual_mean": 0.0079,
+      "hallucinated_mean": 0.0674
+    },
+    "mean_entailment": {
+      "roc_auc": 0.5833,
+      "cohens_d": 0.7209,
+      "cliffs_delta": -0.1667,
+      "factual_mean": 0.0081,
+      "hallucinated_mean": 0.0675
+    },
+    "max_entailment": {
+      "roc_auc": 0.6042,
+      "cohens_d": 0.7096,
+      "cliffs_delta": -0.2083,
+      "factual_mean": 0.0102,
+      "hallucinated_mean": 0.0682
+    },
+    "min_contradiction": {
+      "roc_auc": 0.7708,
+      "cohens_d": 0.2019,
+      "cliffs_delta": 0.5417,
+      "factual_mean": 0.2176,
+      "hallucinated_mean": 0.2991
+    },
+    "mean_contradiction": {
+      "roc_auc": 0.7917,
+      "cohens_d": 0.2014,
+      "cliffs_delta": 0.5833,
+      "factual_mean": 0.218,
+      "hallucinated_mean": 0.2992
+    },
+    "max_contradiction": {
+      "roc_auc": 0.75,
+      "cohens_d": 0.1998,
+      "cliffs_delta": 0.5,
+      "factual_mean": 0.2203,
+      "hallucinated_mean": 0.3005
+    },
+    "min_support_margin": {
+      "roc_auc": 0.5417,
+      "cohens_d": -0.0513,
+      "cliffs_delta": -0.0833,
+      "factual_mean": -0.2105,
+      "hallucinated_mean": -0.2322
+    },
+    "mean_support_margin": {
+      "roc_auc": 0.5417,
+      "cohens_d": -0.0514,
+      "cliffs_delta": -0.0833,
+      "factual_mean": -0.2099,
+      "hallucinated_mean": -0.2317
+    },
+    "support_variance": {
+      "roc_auc": 0.4167,
+      "cohens_d": 0.5164,
+      "cliffs_delta": 0.1667,
+      "factual_mean": 0.0,
+      "hallucinated_mean": 0.0
+    },
+    "fraction_supported": {
+      "roc_auc": 0.5,
+      "cohens_d": 0.0,
+      "cliffs_delta": 0.0,
+      "factual_mean": 0.0,
+      "hallucinated_mean": 0.0
+    },
+    "fraction_contradicted": {
+      "roc_auc": 0.5417,
+      "cohens_d": -0.1873,
+      "cliffs_delta": -0.0833,
+      "factual_mean": 0.25,
+      "hallucinated_mean": 0.1667
+    },
+    "fraction_unsupported": {
+      "roc_auc": 0.5,
+      "cohens_d": 0.0,
+      "cliffs_delta": 0.0,
+      "factual_mean": 1.0,
+      "hallucinated_mean": 1.0
+    },
+    "num_claims": {
+      "roc_auc": 0.625,
+      "cohens_d": -0.6051,
+      "cliffs_delta": -0.25,
+      "factual_mean": 6.25,
+      "hallucinated_mean": 3.0
+    }
+  }
+}

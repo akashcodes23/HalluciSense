@@ -1,0 +1,114 @@
+[
+  {
+    "perturbation": "Clean Baseline",
+    "auroc": 0.9501,
+    "f1": 0.8738,
+    "ece": 0.0257,
+    "retention": "100.0%"
+  },
+  {
+    "perturbation": "Prompt Paraphrasing",
+    "auroc": 0.942,
+    "f1": 0.865,
+    "ece": 0.028,
+    "retention": "99.1%"
+  },
+  {
+    "perturbation": "Prompt Injection",
+    "auroc": 0.931,
+    "f1": 0.852,
+    "ece": 0.031,
+    "retention": "98.0%"
+  },
+  {
+    "perturbation": "Extended Long Context",
+    "auroc": 0.928,
+    "f1": 0.849,
+    "ece": 0.033,
+    "retention": "97.7%"
+  },
+  {
+    "perturbation": "Context Truncation",
+    "auroc": 0.935,
+    "f1": 0.858,
+    "ece": 0.0295,
+    "retention": "98.4%"
+  },
+  {
+    "perturbation": "Citation Spoofing",
+    "auroc": 0.948,
+    "f1": 0.871,
+    "ece": 0.026,
+    "retention": "99.8%"
+  },
+  {
+    "perturbation": "Evidence Corruption",
+    "auroc": 0.912,
+    "f1": 0.838,
+    "ece": 0.036,
+    "retention": "96.0%"
+  },
+  {
+    "perturbation": "Entity Swaps",
+    "auroc": 0.925,
+    "f1": 0.85,
+    "ece": 0.0315,
+    "retention": "97.4%"
+  },
+  {
+    "perturbation": "Numerical Perturbations",
+    "auroc": 0.939,
+    "f1": 0.861,
+    "ece": 0.0285,
+    "retention": "98.8%"
+  },
+  {
+    "perturbation": "Temporal Changes",
+    "auroc": 0.932,
+    "f1": 0.855,
+    "ece": 0.0305,
+    "retention": "98.1%"
+  },
+  {
+    "perturbation": "Domain Shift",
+    "auroc": 0.915,
+    "f1": 0.842,
+    "ece": 0.035,
+    "retention": "96.3%"
+  },
+  {
+    "perturbation": "Multilingual Text",
+    "auroc": 0.908,
+    "f1": 0.835,
+    "ece": 0.038,
+    "retention": "95.6%"
+  },
+  {
+    "perturbation": "OCR Noise",
+    "auroc": 0.902,
+    "f1": 0.829,
+    "ece": 0.041,
+    "retention": "94.9%"
+  },
+  {
+    "perturbation": "Typos & Misspellings",
+    "auroc": 0.938,
+    "f1": 0.86,
+    "ece": 0.029,
+    "retention": "98.7%"
+  },
+  {
+    "perturbation": "Contradictory Evidence",
+    "auroc": 0.895,
+    "f1": 0.821,
+    "ece": 0.044,
+    "retention": "94.2%"
+  },
+  {
+    "perturbation": "Missing Evidence (Zero-Passage)",
+    "auroc": 0.884,
+    "f1": 0.825,
+    "ece": 0.048,
+    "retention": "93.0%"
+  }
+]

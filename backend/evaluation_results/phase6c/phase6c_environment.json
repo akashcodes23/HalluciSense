@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-08-06T04:54:29.687009+00:00",
+  "protocol_fingerprint": "5c7aae10156e27e604498cd9c143525b9cfe5a667814a2b024101f1cfdccf27d",
+  "production_scoring_hashes": {
+    "app/core/engine/fusion.py": "22cfec0346f5e4b6be302f49057c90a9701b8d001d498b5f94ba7f99c731d1b6",
+    "app/core/engine/pillar1_retrieval.py": "61d833b2e647383e8a7aa54a65550ed166ff78e10fbded7edbba42b3a629a882",
+    "app/core/engine/pillar2_confidence.py": "a4a2576f5bb6c977020573409ea24927f93aa6fed73ca9e31a2571026f8342eb",
+    "app/core/engine/pillar3_consistency.py": "02df4e13cc0d60c697aa531800dc6c166f996506f40fd0bbe4d3b0cc86c841c2",
+    "app/core/engine/pipeline.py": "2754245e813df25d8265ab2055b8a350c4c2464ebf0ab691f8cbce326a41ad4c"
+  },
+  "frozen_configuration": {
+    "alpha_factual_error": 0.45,
+    "beta_confidence_gap": 0.3,
+    "gamma_consistency_failure": 0.25,
+    "threshold_verified": 0.35,
+    "threshold_likely": 0.65
+  },
+  "models": {
+    "nli_model": "cross-encoder/nli-deberta-v3-small",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2"
+  },
+  "system": {
+    "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "darwin"
+  }
+}

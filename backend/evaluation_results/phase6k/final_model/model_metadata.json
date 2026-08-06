@@ -1,0 +1,22 @@
+{
+  "model_verdict": "PILLAR 1 VALIDATED WITH LIMITATIONS",
+  "training_sample_count": 58002,
+  "training_class_counts": {
+    "negative": 26500,
+    "positive": 31502
+  },
+  "dev_sha256": "47a9a79cca4e5378dfae1216e343d340737ef522b80c36b8a020d88af6beccf7",
+  "val_sha256": "20e59da974fa23e981af03e98e90d9ca8c884c37fcac3ca68f92b342e3fe8953",
+  "learned_coefficients": {
+    "mean_entailment": 0.10543570651980191,
+    "max_entailment": -0.050653975271468483,
+    "mean_contradiction": -0.440932249983256,
+    "min_support_margin": -1.248538501239637,
+    "num_claims": 0.08729395106281093
+  },
+  "learned_intercept": -0.23556189468443914,
+  "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "sklearn_version": "sklearn.linear_model._logistic",
+  "numpy_version": "1.26.4",
+  "created_timestamp_utc": "2026-08-06 04:54:49 UTC"
+}

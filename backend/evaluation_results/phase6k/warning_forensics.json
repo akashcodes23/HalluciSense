@@ -1,0 +1,490 @@
+{
+  "step1_warning_counting": {
+    "raw_recorded_warning_count": 0,
+    "mutually_exclusive_counts": {
+      "overflow_matmul": 0,
+      "divide_by_zero_matmul": 0,
+      "invalid_matmul": 0,
+      "convergence_warning": 0,
+      "other_runtime_warning": 0,
+      "other_warning": 0
+    },
+    "detailed_warning_records": [],
+    "flaw_identified": "Previous benchmark counted single warning strings under multiple overlapping string clauses (e.g., matching both runtime_warning, overflow, and invalid clauses simultaneously) as well as counting warnings across multiple steps."
+  },
+  "step2_matrix_inspection": {
+    "unscaled_matrix": {
+      "shape": [
+        1000,
+        3
+      ],
+      "dtype": "float64",
+      "matrix_rank": 3,
+      "condition_number": 31.30808744848328,
+      "all_finite": true,
+      "target_all_finite": true,
+      "global_stats": {
+        "min": -0.9999,
+        "max": 26.0,
+        "abs_max": 26.0,
+        "mean": 1.3320495666666665,
+        "std": 3.31908633444504
+      },
+      "per_feature_stats": {
+        "min_support_margin": {
+          "min": -0.9999,
+          "max": 0.9956,
+          "abs_max": 0.9999,
+          "mean": -0.29891039999999997,
+          "std": 0.5562953318803242,
+          "P1": -0.9997,
+          "P5": -0.9991,
+          "P25": -0.9820249999999999,
+          "P50": -0.01535,
+          "P75": -0.0007,
+          "P95": 0.8466449999999999,
+          "P99": 0.9855160000000001,
+          "P99.9": 0.9943013
+        },
+        "num_claims": {
+          "min": 1.0,
+          "max": 26.0,
+          "abs_max": 26.0,
+          "mean": 3.974,
+          "std": 4.680739685135246,
+          "P1": 1.0,
+          "P5": 1.0,
+          "P25": 1.0,
+          "P50": 2.0,
+          "P75": 6.0,
+          "P95": 14.049999999999955,
+          "P99": 21.0,
+          "P99.9": 26.0
+        },
+        "mean_contradiction": {
+          "min": 0.0001,
+          "max": 0.9999,
+          "abs_max": 0.9999,
+          "mean": 0.3210591,
+          "std": 0.41009701471382354,
+          "P1": 0.0003,
+          "P5": 0.0008,
+          "P25": 0.0038,
+          "P50": 0.03555,
+          "P75": 0.7737999999999999,
+          "P95": 0.9981099999999999,
+          "P99": 0.9997,
+          "P99.9": 0.9998001000000001
+        }
+      }
+    },
+    "scaled_matrix": {
+      "shape": [
+        1000,
+        3
+      ],
+      "dtype": "float64",
+      "matrix_rank": 3,
+      "condition_number": 3.5988577786755225,
+      "all_finite": true,
+      "global_stats": {
+        "min": -1.260103329701864,
+        "max": 4.7056665146213055,
+        "abs_max": 4.7056665146213055,
+        "mean": -2.842170943040401e-17,
+        "std": 0.9999999999999999
+      },
+      "per_feature_stats": {
+        "min_support_margin": {
+          "min": -1.260103329701864,
+          "max": 2.32702006616602,
+          "abs_max": 2.32702006616602,
+          "mean": -6.394884621840901e-17,
+          "std": 1.0,
+          "P1": -1.2597438084394368,
+          "P5": -1.2586652446521551,
+          "P25": -1.2279711168724283,
+          "P50": 0.5097299649118794,
+          "P75": 0.5360648973846754,
+          "P95": 2.059257617941765,
+          "P99": 2.308893004114438,
+          "P99.9": 2.324685514848449
+        },
+        "num_claims": {
+          "min": -0.635369663782973,
+          "max": 4.7056665146213055,
+          "abs_max": 4.7056665146213055,
+          "mean": -4.4408920985006264e-17,
+          "std": 0.9999999999999999,
+          "P1": -0.635369663782973,
+          "P5": -0.635369663782973,
+          "P25": -0.635369663782973,
+          "P50": -0.4217282166468018,
+          "P75": 0.43283757189788263,
+          "P95": 2.1526512213440507,
+          "P99": 3.6374592789404496,
+          "P99.9": 4.7056665146213055
+        },
+        "mean_contradiction": {
+          "min": -0.7826418834674368,
+          "max": 1.6553178288159764,
+          "abs_max": 1.6553178288159764,
+          "mean": 3.419486915845482e-17,
+          "std": 1.0,
+          "P1": -0.782154193987084,
+          "P5": -0.7809349702862021,
+          "P25": -0.7736196280809108,
+          "P50": -0.6961989230749113,
+          "P75": 1.1039848712771891,
+          "P95": 1.6509530079668193,
+          "P99": 1.654830139335624,
+          "P99.9": 1.6550742279205404
+        }
+      }
+    },
+    "float64_conversion_test": {
+      "input_dtype": "float64",
+      "warnings_emitted": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    }
+  },
+  "step3_direct_matmul_test": [
+    {
+      "target_magnitude": 1.0,
+      "actual_l2_norm": 1.0,
+      "output_all_finite": true,
+      "output_min": -1.6839053785667282,
+      "output_max": 0.8938873986183653,
+      "output_abs_max": 1.6839053785667282,
+      "warnings_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "target_magnitude": 10.0,
+      "actual_l2_norm": 10.0,
+      "output_all_finite": true,
+      "output_min": -16.839053785667282,
+      "output_max": 8.938873986183653,
+      "output_abs_max": 16.839053785667282,
+      "warnings_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "target_magnitude": 100.0,
+      "actual_l2_norm": 100.0,
+      "output_all_finite": true,
+      "output_min": -168.39053785667284,
+      "output_max": 89.38873986183654,
+      "output_abs_max": 168.39053785667284,
+      "warnings_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "target_magnitude": 1000.0,
+      "actual_l2_norm": 999.9999999999999,
+      "output_all_finite": true,
+      "output_min": -1683.905378566728,
+      "output_max": 893.8873986183653,
+      "output_abs_max": 1683.905378566728,
+      "warnings_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "target_magnitude": 10000.0,
+      "actual_l2_norm": 10000.0,
+      "output_all_finite": true,
+      "output_min": -16839.05378566728,
+      "output_max": 8938.873986183653,
+      "output_abs_max": 16839.05378566728,
+      "warnings_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "target_magnitude": 1000000.0,
+      "actual_l2_norm": 999999.9999999999,
+      "output_all_finite": true,
+      "output_min": -1683905.3785667282,
+      "output_max": 893887.3986183652,
+      "output_abs_max": 1683905.3785667282,
+      "warnings_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    }
+  ],
+  "step4_solver_isolation": [
+    {
+      "solver": "lbfgs",
+      "fit_success": true,
+      "converged": true,
+      "n_iter": 7,
+      "coef_min": 0.059474593731199725,
+      "coef_max": 0.23065917474769757,
+      "coef_abs_max": 0.23065917474769757,
+      "coef_l2_norm": 0.24741586351616432,
+      "intercept": 0.17444602366487005,
+      "predictions_all_finite": true,
+      "probabilities_all_finite": true,
+      "training_accuracy": 0.593,
+      "training_roc_auc": 0.5727379700263147,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "solver": "liblinear",
+      "fit_success": true,
+      "converged": true,
+      "n_iter": 3,
+      "coef_min": 0.059493117657558575,
+      "coef_max": 0.23055799705644048,
+      "coef_abs_max": 0.23055799705644048,
+      "coef_l2_norm": 0.2473033403339297,
+      "intercept": 0.17370657588077268,
+      "predictions_all_finite": true,
+      "probabilities_all_finite": true,
+      "training_accuracy": 0.592,
+      "training_roc_auc": 0.572754089244049,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "solver": "newton-cg",
+      "fit_success": true,
+      "converged": true,
+      "n_iter": 3,
+      "coef_min": 0.059488896679811866,
+      "coef_max": 0.23054269096058733,
+      "coef_abs_max": 0.23054269096058733,
+      "coef_l2_norm": 0.24727968254605276,
+      "intercept": 0.17439594223917093,
+      "predictions_all_finite": true,
+      "probabilities_all_finite": true,
+      "training_accuracy": 0.593,
+      "training_roc_auc": 0.5727460296351818,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "solver": "saga",
+      "fit_success": true,
+      "converged": true,
+      "n_iter": 20,
+      "coef_min": 0.05949226430746856,
+      "coef_max": 0.23053627704814383,
+      "coef_abs_max": 0.23053627704814383,
+      "coef_l2_norm": 0.24727249962154677,
+      "intercept": 0.17441243411551427,
+      "predictions_all_finite": true,
+      "probabilities_all_finite": true,
+      "training_accuracy": 0.593,
+      "training_roc_auc": 0.5727460296351818,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    }
+  ],
+  "step5_regularization_forensics": [
+    {
+      "C": 0.001,
+      "converged": true,
+      "n_iter": 6,
+      "coef_abs_max": 0.03110387670632917,
+      "coef_l2_norm": 0.03919120307268828,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "C": 0.01,
+      "converged": true,
+      "n_iter": 7,
+      "coef_abs_max": 0.10695364781520174,
+      "coef_l2_norm": 0.11610104018881384,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "C": 0.1,
+      "converged": true,
+      "n_iter": 6,
+      "coef_abs_max": 0.1995313862374993,
+      "coef_l2_norm": 0.21035490636608656,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "C": 1.0,
+      "converged": true,
+      "n_iter": 7,
+      "coef_abs_max": 0.23065917474769757,
+      "coef_l2_norm": 0.24741586351616432,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "C": 10.0,
+      "converged": true,
+      "n_iter": 7,
+      "coef_abs_max": 0.23462173092175978,
+      "coef_l2_norm": 0.2522706952332614,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    },
+    {
+      "C": 100.0,
+      "converged": true,
+      "n_iter": 7,
+      "coef_abs_max": 0.2350287181338267,
+      "coef_l2_norm": 0.2527708347590772,
+      "warning_count": 0,
+      "warning_summary": {
+        "overflow_matmul": 0,
+        "divide_by_zero_matmul": 0,
+        "invalid_matmul": 0,
+        "convergence_warning": 0,
+        "other_runtime_warning": 0,
+        "other_warning": 0
+      }
+    }
+  ],
+  "step6_manual_logit_check": {
+    "z_min": -0.007870252728216037,
+    "z_max": 0.7482403246582369,
+    "z_abs_max": 0.7482403246582369,
+    "z_all_finite": true,
+    "prob_manual_all_finite": true,
+    "max_prob_diff_vs_sklearn": 0.0,
+    "probabilities_match_tolerance": true
+  },
+  "step7_environment": {
+    "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "numpy_version": "1.26.4",
+    "scipy_version": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/site-packages/scipy/stats/__init__.py",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "processor": "arm",
+    "architecture": "64bit",
+    "device_backend": "CPU (NumPy / SciPy / scikit-learn)",
+    "mps_participating": false
+  },
+  "step8_standalone_reproduction": {
+    "standalone_warning_count": 0,
+    "warning_summary": {
+      "overflow_matmul": 0,
+      "divide_by_zero_matmul": 0,
+      "invalid_matmul": 0,
+      "convergence_warning": 0,
+      "other_runtime_warning": 0,
+      "other_warning": 0
+    },
+    "reproduced_in_standalone": false,
+    "verdict_explanation": "If standalone_warning_count > 0, the warning originates directly from scikit-learn's internal L-BFGS solver dot-product evaluation on this specific distribution. If standalone_warning_count == 0, the warning originated from instrumentation / secondary calls in Phase 6K."
+  }
+}

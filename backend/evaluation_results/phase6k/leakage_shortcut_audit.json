@@ -1,0 +1,97 @@
+{
+  "target_leakage_detected": false,
+  "max_feature_target_correlation": 0.6799022612122616,
+  "leakage_feature_name": "mean_contradiction",
+  "dev_exact_duplicates": 0,
+  "val_exact_duplicates": 0,
+  "dev_val_overlap_count": 0,
+  "dev_val_overlap_ratio": 0.0,
+  "label_shortcut_detected": false,
+  "single_feature_dominance_detected": false,
+  "dominant_feature_name": "mean_contradiction",
+  "dominant_feature_share": 0.6311618197804244,
+  "num_claims_target_correlation": 0.07083152331394041,
+  "num_claims_prediction_dependence": 0.07083152331394041,
+  "permutation_test": {
+    "n_permutations": 5,
+    "mean_permuted_roc_auc": 0.4835136217948718,
+    "std_permuted_roc_auc": 0.04334935897435896,
+    "mean_permuted_mcc": -0.04188792303082031,
+    "collapsed_to_chance": true
+  },
+  "ablation_results": [
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "mean_entailment",
+      "ablated_roc_auc": 0.875,
+      "delta_roc_auc": 0.11763822115384603,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "max_entailment",
+      "ablated_roc_auc": 0.9927383814102564,
+      "delta_roc_auc": -0.0001001602564103532,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "mean_contradiction",
+      "ablated_roc_auc": 0.7589142628205128,
+      "delta_roc_auc": 0.23372395833333326,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "max_contradiction",
+      "ablated_roc_auc": 0.9921374198717949,
+      "delta_roc_auc": 0.0005008012820510999,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "mean_support_margin",
+      "ablated_roc_auc": 0.9923377403846154,
+      "delta_roc_auc": 0.0003004807692306155,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "min_support_margin",
+      "ablated_roc_auc": 0.9922375801282051,
+      "delta_roc_auc": 0.0004006410256409687,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "fraction_supported",
+      "ablated_roc_auc": 0.9916366185897436,
+      "delta_roc_auc": 0.0010016025641024218,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "fraction_contradicted",
+      "ablated_roc_auc": 0.9919370993589743,
+      "delta_roc_auc": 0.0007011217948716952,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "fraction_unsupported",
+      "ablated_roc_auc": 0.9920372596153846,
+      "delta_roc_auc": 0.0006009615384614531,
+      "catastrophic_degradation": false
+    },
+    {
+      "baseline_roc_auc": 0.992638221153846,
+      "ablated_feature": "num_claims",
+      "ablated_roc_auc": 0.9928385416666667,
+      "delta_roc_auc": -0.0002003205128207064,
+      "catastrophic_degradation": false
+    }
+  ],
+  "catastrophic_ablation_features": [],
+  "overall_verdict": "PASS",
+  "audit_warnings": []
+}

@@ -1,0 +1,11 @@
+{
+  "generated_at_utc": "2026-08-03T05:16:28.433545+00:00",
+  "phase": "13_public_v1_release",
+  "version": "1.0.0",
+  "pillar1_firewall": {
+    "model_sha256": "cf5199567b880c292d5c6b4f7dc5e63ee6e6be03b14e5965662da563152dbfb5",
+    "scaler_sha256": "89d54d65bc1b015d4fefcb514eb8bf37339e6d8b499652f67c375161b8e763d8",
+    "status": "INTACT"
+  },
+  "elapsed_seconds": 0.0
+}

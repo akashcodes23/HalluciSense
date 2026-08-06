@@ -1,0 +1,16 @@
+{
+  "generated_at_utc": "2026-08-03T04:49:02.142488+00:00",
+  "phase": "9_step8_research_documentation",
+  "documents_written": [
+    "METHODOLOGY.md",
+    "TRAINING_PIPELINE.md",
+    "VALIDATION_STRATEGY.md",
+    "FEATURE_ENGINEERING.md",
+    "STATISTICAL_TESTS.md",
+    "MODEL_LIMITATIONS.md",
+    "THREATS_TO_VALIDITY.md",
+    "FUTURE_WORK.md"
+  ],
+  "output_directory": "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/publication/docs",
+  "elapsed_seconds": 0.63
+}

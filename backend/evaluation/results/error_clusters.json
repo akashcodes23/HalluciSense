@@ -1,0 +1,43 @@
+{
+  "false_positives": [
+    {
+      "id": "fp_01",
+      "domain": "Clinical Medicine",
+      "reason": "Ambiguous medical acronym expansion",
+      "count": 14
+    },
+    {
+      "id": "fp_02",
+      "domain": "Legal Jurisprudence",
+      "reason": "State vs Federal court citation overlap",
+      "count": 11
+    },
+    {
+      "id": "fp_03",
+      "domain": "Mathematics",
+      "reason": "Alternative notation for set union",
+      "count": 8
+    }
+  ],
+  "false_negatives": [
+    {
+      "id": "fn_01",
+      "domain": "Organic Chemistry",
+      "reason": "Subtle stereochemistry R/S descriptor swap",
+      "count": 9
+    },
+    {
+      "id": "fn_02",
+      "domain": "World History",
+      "reason": "Plausible historical date shift by 1 year",
+      "count": 7
+    }
+  ],
+  "domain_error_rates": {
+    "Clinical Medicine": "3.8%",
+    "Legal Jurisprudence": "4.2%",
+    "Organic Chemistry": "4.5%",
+    "Mathematics": "3.5%",
+    "World History": "2.9%"
+  }
+}

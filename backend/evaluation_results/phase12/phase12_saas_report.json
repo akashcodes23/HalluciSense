@@ -1,0 +1,22 @@
+{
+  "generated_at_utc": "2026-08-03T05:13:24.268952+00:00",
+  "phase": "12_enterprise_saas_platform",
+  "pillar1_firewall": {
+    "model_sha256": "cf5199567b880c292d5c6b4f7dc5e63ee6e6be03b14e5965662da563152dbfb5",
+    "scaler_sha256": "89d54d65bc1b015d4fefcb514eb8bf37339e6d8b499652f67c375161b8e763d8",
+    "status": "INTACT"
+  },
+  "saas_modules_completed": 15,
+  "report_files": [
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/reports/hallucisense_report_verif_p12_demo.pdf",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/reports/hallucisense_report_verif_p12_demo.html",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/reports/hallucisense_report_verif_p12_demo.md",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/reports/hallucisense_report_verif_p12_demo.json",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/reports/hallucisense_report_verif_p12_demo.csv"
+  ],
+  "sdk_files": [
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/sdk/hallucisense_sdk.py",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase12/sdk/hallucisense-sdk.js"
+  ],
+  "elapsed_seconds": 0.0
+}

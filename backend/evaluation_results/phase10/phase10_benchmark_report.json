@@ -1,0 +1,56 @@
+{
+  "generated_at_utc": "2026-08-03T05:01:37.151249+00:00",
+  "total_samples": 5,
+  "mean_latency_ms": 1.99,
+  "median_latency_ms": 1.55,
+  "p95_latency_ms": 3.87,
+  "p99_latency_ms": 3.87,
+  "memory_allocated_kb": 124.58,
+  "sample_benchmarks": [
+    {
+      "sample_index": 0,
+      "text_length": 131,
+      "num_claims": 2,
+      "num_evidence": 14,
+      "hscore": 6.41,
+      "risk_category": "VERY_LOW",
+      "latency_ms": 3.87
+    },
+    {
+      "sample_index": 1,
+      "text_length": 119,
+      "num_claims": 1,
+      "num_evidence": 7,
+      "hscore": 6.41,
+      "risk_category": "VERY_LOW",
+      "latency_ms": 1.55
+    },
+    {
+      "sample_index": 2,
+      "text_length": 108,
+      "num_claims": 1,
+      "num_evidence": 7,
+      "hscore": 6.41,
+      "risk_category": "VERY_LOW",
+      "latency_ms": 1.41
+    },
+    {
+      "sample_index": 3,
+      "text_length": 108,
+      "num_claims": 1,
+      "num_evidence": 7,
+      "hscore": 6.41,
+      "risk_category": "VERY_LOW",
+      "latency_ms": 1.68
+    },
+    {
+      "sample_index": 4,
+      "text_length": 98,
+      "num_claims": 1,
+      "num_evidence": 7,
+      "hscore": 6.41,
+      "risk_category": "VERY_LOW",
+      "latency_ms": 1.44
+    }
+  ]
+}

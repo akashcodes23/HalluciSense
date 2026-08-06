@@ -1,0 +1,7 @@
+{
+  "global_random_seed": 42,
+  "numpy_seed": 42,
+  "scikit_learn_random_state": 42,
+  "bootstrap_seed": 42,
+  "permutation_seed": 42
+}

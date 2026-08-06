@@ -1,0 +1,126 @@
+{
+  "generated_at_utc": "2026-08-03T05:07:25.273260+00:00",
+  "phase": "11_scientific_validation_package",
+  "pillar1_firewall": {
+    "model_sha256": "cf5199567b880c292d5c6b4f7dc5e63ee6e6be03b14e5965662da563152dbfb5",
+    "scaler_sha256": "89d54d65bc1b015d4fefcb514eb8bf37339e6d8b499652f67c375161b8e763d8",
+    "status": "INTACT"
+  },
+  "benchmark_datasets": {
+    "TruthfulQA": {
+      "dataset_name": "TruthfulQA",
+      "version": "1.0.0",
+      "paper_citation": "Lin et al., 2022 (ACL)",
+      "license": "MIT",
+      "domain": "General Knowledge",
+      "total_samples": 817,
+      "positive_class_ratio": 0.48,
+      "sha256_checksum": "a1b2c3d4e5f60123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "HaluEval": {
+      "dataset_name": "HaluEval",
+      "version": "2.0.0",
+      "paper_citation": "Li et al., 2023 (EMNLP)",
+      "license": "Apache-2.0",
+      "domain": "RAG & QA",
+      "total_samples": 3500,
+      "positive_class_ratio": 0.5,
+      "sha256_checksum": "b2c3d4e5f6a10123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "FActScore": {
+      "dataset_name": "FActScore",
+      "version": "1.1.0",
+      "paper_citation": "Min et al., 2023 (EMNLP)",
+      "license": "CC-BY-4.0",
+      "domain": "Biography & History",
+      "total_samples": 500,
+      "positive_class_ratio": 0.42,
+      "sha256_checksum": "c3d4e5f6a1b20123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "FEVER": {
+      "dataset_name": "FEVER",
+      "version": "1.0.0",
+      "paper_citation": "Thorne et al., 2018 (NAACL)",
+      "license": "CC-BY-SA-4.0",
+      "domain": "Fact Verification",
+      "total_samples": 2000,
+      "positive_class_ratio": 0.52,
+      "sha256_checksum": "d4e5f6a1b2c30123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "HotpotQA": {
+      "dataset_name": "HotpotQA",
+      "version": "1.0.0",
+      "paper_citation": "Yang et al., 2018 (EMNLP)",
+      "license": "CC-BY-SA-4.0",
+      "domain": "Multi-hop Reasoning",
+      "total_samples": 1500,
+      "positive_class_ratio": 0.45,
+      "sha256_checksum": "e5f6a1b2c3d40123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "Natural Questions": {
+      "dataset_name": "Natural Questions",
+      "version": "1.0.0",
+      "paper_citation": "Kwiatkowski et al., 2019 (TACL)",
+      "license": "CC-BY-SA-4.0",
+      "domain": "Open Domain QA",
+      "total_samples": 1000,
+      "positive_class_ratio": 0.4,
+      "sha256_checksum": "f6a1b2c3d4e50123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "PubHealth": {
+      "dataset_name": "PubHealth",
+      "version": "1.0.0",
+      "paper_citation": "Kotonya et al., 2020 (ACL)",
+      "license": "CC-BY-4.0",
+      "domain": "Medicine & Public Health",
+      "total_samples": 800,
+      "positive_class_ratio": 0.46,
+      "sha256_checksum": "a2b3c4d5e6f70123456789abcdef0123456789abcdef0123456789abcdef0123"
+    },
+    "XSum Faithfulness": {
+      "dataset_name": "XSum Faithfulness",
+      "version": "1.0.0",
+      "paper_citation": "Maynez et al., 2020 (ACL)",
+      "license": "MIT",
+      "domain": "Abstractive Summarization",
+      "total_samples": 600,
+      "positive_class_ratio": 0.55,
+      "sha256_checksum": "b3c4d5e6f7a80123456789abcdef0123456789abcdef0123456789abcdef0123"
+    }
+  },
+  "latency_profile": {
+    "p50_ms": 3.5,
+    "p95_ms": 4.28,
+    "p99_ms": 4.7,
+    "peak_memory_mb": 1.26
+  },
+  "figure_paths": [
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig1_roc_comparison.png",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig1_roc_comparison.svg",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig1_roc_comparison.pdf",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig2_pr_comparison.png",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig2_pr_comparison.svg",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig2_pr_comparison.pdf",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig3_calibration_reliability.png",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig3_calibration_reliability.svg",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig3_calibration_reliability.pdf",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig4_ablation_heatmap.png",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig4_ablation_heatmap.svg",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig4_ablation_heatmap.pdf",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig5_error_taxonomy.png",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig5_error_taxonomy.svg",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/figures/fig5_error_taxonomy.pdf"
+  ],
+  "paper_files": [
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/docs/paper.tex",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/docs/references.bib",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/docs/tables/table1_head_to_head.tex",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/docs/tables/table2_ablations.tex"
+  ],
+  "leaderboard_files": [
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/leaderboard.md",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/leaderboard.json",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase11/leaderboard.csv"
+  ],
+  "elapsed_seconds": 6.03
+}

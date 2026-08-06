@@ -1,0 +1,10 @@
+{
+  "verification_id": "verif_p12_demo",
+  "text": "Albert Einstein published relativity papers in 1905.",
+  "hallucisense_score": {
+    "hallucisense_score": 6.41,
+    "risk_category": "VERY_LOW",
+    "overall_confidence": 0.972,
+    "pillar1_probability": 0.15
+  }
+}

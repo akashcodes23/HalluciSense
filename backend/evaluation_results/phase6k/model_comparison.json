@@ -1,0 +1,8 @@
+{
+  "status": "STOPPED_PRECONDITION_FAILED",
+  "precondition_passed": false,
+  "verdict": "NO FEASIBLE CANDIDATE",
+  "reason": "Precondition failed: 1,000-example numerical stability gate produced STABILITY GATE: FAIL with 0 passing configurations due to internal matrix multiplication overflow/divide-by-zero warnings.",
+  "candidates_evaluated": 0,
+  "results": []
+}

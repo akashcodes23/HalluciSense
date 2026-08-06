@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-08-02T07:19:53.838729+00:00",
+  "status": "EVALUATED",
+  "threshold": 0.33,
+  "validation_metrics": {
+    "tp": 5,
+    "tn": 0,
+    "fp": 5,
+    "fn": 0,
+    "accuracy": 0.5,
+    "precision": 0.5,
+    "recall": 1.0,
+    "specificity": 0.0,
+    "f1": 0.6667,
+    "mcc": 0.0,
+    "balanced_accuracy": 0.5,
+    "roc_auc": 0.68,
+    "pr_auc": 0.6581,
+    "brier_score": 0.271,
+    "ece": 0.3672,
+    "mcc_95ci": [
+      0.0,
+      0.0
+    ]
+  },
+  "generalization_gaps": {
+    "mcc_gap": 0.3563,
+    "balanced_accuracy_gap": 0.1667,
+    "recall_gap": -0.1667,
+    "specificity_gap": 0.5
+  }
+}

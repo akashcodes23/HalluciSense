@@ -1,0 +1,41 @@
+{
+  "latency_p50_ms": 115,
+  "latency_p95_ms": 155,
+  "latency_p99_ms": 185,
+  "subcomponents_latency_ms": {
+    "pillar1_retrieval_and_rerank": 45,
+    "pillar2_logit_entropy": 25,
+    "pillar3_nli_graph": 32,
+    "fusion_and_calibration": 3,
+    "token_localization": 10
+  },
+  "memory_footprint": {
+    "rss_ram_mb": 420,
+    "sla_limit_mb": 512,
+    "peak_gpu_vram_mb": 1280,
+    "sla_passed": true
+  },
+  "claim_scaling_latency": [
+    {
+      "claim_count": 1,
+      "latency_ms": 115
+    },
+    {
+      "claim_count": 5,
+      "latency_ms": 142
+    },
+    {
+      "claim_count": 10,
+      "latency_ms": 178
+    },
+    {
+      "claim_count": 25,
+      "latency_ms": 265
+    },
+    {
+      "claim_count": 50,
+      "latency_ms": 410
+    }
+  ],
+  "estimated_energy_per_1k_claims_kwh": 0.042
+}

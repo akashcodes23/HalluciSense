@@ -1,0 +1,15 @@
+{
+  "candidate_3_val_auc": 0.6902071535320233,
+  "baseline_a_majority_auc": 0.5,
+  "baseline_b_single_feature_auc": 0.6303462345149285,
+  "delta_auc_vs_baseline_a": 0.19020715353202333,
+  "delta_auc_vs_baseline_b": 0.05986091901709478,
+  "delta_mcc_vs_baseline_b": 0.3980733377331556,
+  "delta_brier_vs_baseline_b": -0.013553932952128728,
+  "baseline_b_metrics": {
+    "val_auc": 0.6303462345149285,
+    "val_pr_auc": 0.5993180658198365,
+    "val_mcc": -0.03938677191994167,
+    "val_brier": 0.2467687813409008
+  }
+}

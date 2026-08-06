@@ -1,0 +1,6 @@
+{
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "processor": "arm",
+  "python_version": "3.10.12"
+}

@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-08-03T04:48:46.758334+00:00",
+  "phase": "9_step6_research_figures",
+  "metrics_pillar1": {
+    "ROC-AUC": 0.6902071535320233,
+    "PR-AUC (AP)": 0.6316967515450467,
+    "F1 (@0.56)": 0.6618313689936537,
+    "MCC (@0.56)": 0.35868656581321395,
+    "Brier Score": 0.23321484838877207
+  },
+  "metrics_single_feature_baseline": {
+    "ROC-AUC": 0.6303462345149285,
+    "PR-AUC (AP)": 0.600432556035136,
+    "F1 (@0.56)": 0.6159787593531257,
+    "MCC (@0.56)": 0.12839920645023603,
+    "Brier Score": 0.31494632212232215
+  },
+  "metrics_random": {
+    "ROC-AUC": 0.5,
+    "PR-AUC (AP)": 0.4705714285714286,
+    "F1 (@0.56)": 0.6399844569652224,
+    "MCC (@0.56)": 0.0,
+    "Brier Score": 0.24913395918367345
+  },
+  "figures_generated": [
+    "step6_roc_curve.png",
+    "step6_pr_curve.png",
+    "step6_confusion_matrix.png",
+    "step6_threshold_analysis.png",
+    "step6_coefficient_table.png",
+    "step6_statistical_comparison.png",
+    "step6_roc_pr_combined.png",
+    "step6_metrics_summary.png"
+  ],
+  "latex_table": "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/publication/step6_coefficient_table.tex",
+  "elapsed_seconds": 1.16
+}

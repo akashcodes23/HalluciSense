@@ -1,0 +1,31 @@
+{
+  "benchmark_name": "HalluciSense-Bench v1.0",
+  "version": "1.0.0",
+  "total_claims": 750,
+  "domain_count": 15,
+  "domains": [
+    "Clinical Medicine",
+    "Legal Jurisprudence",
+    "Financial Analytics",
+    "Quantum Physics",
+    "Organic Chemistry",
+    "World History",
+    "Global Geography",
+    "Computer Science",
+    "Molecular Biology",
+    "Economics",
+    "Environmental Science",
+    "Philosophy",
+    "Mathematics",
+    "Linguistics",
+    "Astronomy"
+  ],
+  "failure_taxonomy_classes": 12,
+  "license": "CC-BY-4.0",
+  "citation": "HalluciSense Research Group (2026). HalluciSense-Bench: Multi-Domain Hallucination Detection Benchmark.",
+  "data_files": {
+    "claims_json": "backend/evaluation/results/predictions.json",
+    "claims_csv": "backend/evaluation/results/predictions.csv",
+    "claims_parquet": "backend/evaluation/results/predictions.parquet"
+  }
+}

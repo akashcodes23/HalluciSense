@@ -1,0 +1,5 @@
+dimension,mean_score_5,std_dev,benchmark_sla
+System Usability (SUS),4.82,0.21,>= 4.0
+Explanation Quality,4.74,0.25,>= 4.0
+Trust & Confidence,4.88,0.18,>= 4.0
+Interface Aesthetics,4.91,0.15,>= 4.0

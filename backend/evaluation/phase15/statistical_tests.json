@@ -1,0 +1,74 @@
+{
+  "HalluciSense_vs_SelfCheckGPT": {
+    "mcnemar": {
+      "b_model1_win": 179,
+      "c_model2_win": 75,
+      "statistic": 41.7677,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": 0.6024,
+      "p_value": 0.547075
+    },
+    "wilcoxon": {
+      "w_stat": 138043.0,
+      "p_value": 0.64077
+    },
+    "cohens_d": 0.0246
+  },
+  "HalluciSense_vs_RAGAS": {
+    "mcnemar": {
+      "b_model1_win": 158,
+      "c_model2_win": 78,
+      "statistic": 26.4449,
+      "p_value": 0.0,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -0.4738,
+      "p_value": 0.635791
+    },
+    "wilcoxon": {
+      "w_stat": 138751.0,
+      "p_value": 0.72834
+    },
+    "cohens_d": -0.0181
+  },
+  "HalluciSense_vs_FactScore": {
+    "mcnemar": {
+      "b_model1_win": 136,
+      "c_model2_win": 76,
+      "statistic": 16.4198,
+      "p_value": 5.1e-05,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -0.2438,
+      "p_value": 0.807468
+    },
+    "wilcoxon": {
+      "w_stat": 138428.0,
+      "p_value": 0.687864
+    },
+    "cohens_d": -0.0092
+  },
+  "HalluciSense_vs_AlignScore": {
+    "mcnemar": {
+      "b_model1_win": 145,
+      "c_model2_win": 76,
+      "statistic": 20.9231,
+      "p_value": 5e-06,
+      "statistically_significant_p005": true
+    },
+    "paired_ttest": {
+      "t_stat": -1.5149,
+      "p_value": 0.13023
+    },
+    "wilcoxon": {
+      "w_stat": 132915.0,
+      "p_value": 0.183314
+    },
+    "cohens_d": -0.0563
+  }
+}

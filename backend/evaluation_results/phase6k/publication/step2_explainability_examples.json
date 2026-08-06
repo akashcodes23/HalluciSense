@@ -1,0 +1,2116 @@
+{
+  "generated_at_utc": "2026-08-03T04:48:06.766751+00:00",
+  "phase": "9_step2_explainability",
+  "val_samples": 3500,
+  "operating_threshold": 0.56,
+  "quadrant_counts": {
+    "TP": 1095,
+    "TN": 1286,
+    "FP": 567,
+    "FN": 552
+  },
+  "confidence_category_distribution": {
+    "Low": 1587,
+    "Moderate": 1771,
+    "High": 132,
+    "Very High": 10
+  },
+  "aggregate_feature_contribution_stats": {
+    "mean_entailment": {
+      "mean_contribution": 0.3265638290999537,
+      "std_contribution": 0.6771638160499545,
+      "abs_mean_contribution": 0.3302764686499946,
+      "positive_count": 1896,
+      "negative_count": 1582,
+      "zero_count": 22
+    },
+    "max_entailment": {
+      "mean_contribution": -0.1099744125365159,
+      "std_contribution": 0.19999976985769188,
+      "abs_mean_contribution": 0.11153120642076952,
+      "positive_count": 1576,
+      "negative_count": 1911,
+      "zero_count": 13
+    },
+    "mean_contradiction": {
+      "mean_contribution": -0.1731120310770214,
+      "std_contribution": 0.23340930321906958,
+      "abs_mean_contribution": 0.18873835345747758,
+      "positive_count": 1685,
+      "negative_count": 1815,
+      "zero_count": 0
+    },
+    "min_support_margin": {
+      "mean_contribution": 0.3357387257021936,
+      "std_contribution": 0.7531313294633629,
+      "abs_mean_contribution": 0.6047692444556892,
+      "positive_count": 1798,
+      "negative_count": 1702,
+      "zero_count": 0
+    },
+    "num_claims": {
+      "mean_contribution": 0.0587612996297093,
+      "std_contribution": 0.12006670579520987,
+      "abs_mean_contribution": 0.08219349020785527,
+      "positive_count": 1401,
+      "negative_count": 1879,
+      "zero_count": 220
+    }
+  },
+  "spot_check_examples": {
+    "TP": [
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.887058,
+          "logit": 2.061039,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.327058,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.7271,
+            "scaled_value": 16.32207207207207,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.720929200786046
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.982,
+            "scaled_value": -0.9754738015607581,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2179165981992002
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 4.0,
+            "scaled_value": 0.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.043646975531405466
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.2473,
+            "scaled_value": 0.25981256379326345,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.11455973832728188
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.982,
+            "scaled_value": 11.279123414071512,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5713324385002195
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.7271,
+            "scaled_value": 16.32207207207207,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.720929200786046
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.982,
+            "scaled_value": -0.9754738015607581,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2179165981992002
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 4.0,
+            "scaled_value": 0.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.043646975531405466
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.982,
+            "scaled_value": 11.279123414071512,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5713324385002195
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.2473,
+            "scaled_value": 0.25981256379326345,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.11455973832728188
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.887, threshold=0.56). Very High confidence with margin 0.327. Key supporting signals: [mean_entailment (+1.721), min_support_margin (+1.218)]. Key opposing signals: [max_entailment (-0.571), mean_contradiction (-0.115)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2188,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "TP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.887,
+          "logit": 2.060461,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.327,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.7371,
+            "scaled_value": 16.5472972972973,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.7446759815337494
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9635,
+            "scaled_value": -0.9567244349853046,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.1945072921558908
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 4.0,
+            "scaled_value": 0.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.043646975531405466
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.2448,
+            "scaled_value": 0.2567195570814389,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.11319593191862377
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9859,
+            "scaled_value": 11.32410611303345,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5736109910210815
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.7371,
+            "scaled_value": 16.5472972972973,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.7446759815337494
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9635,
+            "scaled_value": -0.9567244349853046,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.1945072921558908
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 4.0,
+            "scaled_value": 0.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.043646975531405466
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9859,
+            "scaled_value": 11.32410611303345,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5736109910210815
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.2448,
+            "scaled_value": 0.2567195570814389,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.11319593191862377
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.887, threshold=0.56). Very High confidence with margin 0.327. Key supporting signals: [mean_entailment (+1.745), min_support_margin (+1.195)]. Key opposing signals: [max_entailment (-0.574), mean_contradiction (-0.113)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2705,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "TP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.885184,
+          "logit": 2.042467,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.325184,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.7362,
+            "scaled_value": 16.527027027027028,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.7425387712664562
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9536,
+            "scaled_value": -0.9466909901692511,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.1819801500029847
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 4.0,
+            "scaled_value": 0.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.043646975531405466
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.2463,
+            "scaled_value": 0.25857536110853363,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.11401421576381864
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9902,
+            "scaled_value": 11.373702422145328,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5761232412363907
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.7362,
+            "scaled_value": 16.527027027027028,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.7425387712664562
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9536,
+            "scaled_value": -0.9466909901692511,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.1819801500029847
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 4.0,
+            "scaled_value": 0.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.043646975531405466
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9902,
+            "scaled_value": 11.373702422145328,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5761232412363907
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.2463,
+            "scaled_value": 0.25857536110853363,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.11401421576381864
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.885, threshold=0.56). Very High confidence with margin 0.325. Key supporting signals: [mean_entailment (+1.743), min_support_margin (+1.182)]. Key opposing signals: [max_entailment (-0.576), mean_contradiction (-0.114)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 3090,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "TP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.863771,
+          "logit": 1.846967,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.303771,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.6618,
+            "scaled_value": 14.851351351351353,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.5658627225035449
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9947,
+            "scaled_value": -0.9883449883449884,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2339867704559584
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 3.0,
+            "scaled_value": 0.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.021823487765702733
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.3326,
+            "scaled_value": 0.36534595280071763,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.16109281299069686
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9935,
+            "scaled_value": 11.411764705882353,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5780512472155815
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.6618,
+            "scaled_value": 14.851351351351353,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.5658627225035449
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9947,
+            "scaled_value": -0.9883449883449884,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2339867704559584
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 3.0,
+            "scaled_value": 0.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.021823487765702733
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9935,
+            "scaled_value": 11.411764705882353,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5780512472155815
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.3326,
+            "scaled_value": 0.36534595280071763,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.16109281299069686
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.864, threshold=0.56). Very High confidence with margin 0.304. Key supporting signals: [mean_entailment (+1.566), min_support_margin (+1.234)]. Key opposing signals: [max_entailment (-0.578), mean_contradiction (-0.161)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2333,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "TP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.863274,
+          "logit": 1.842752,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.303274,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.6584,
+            "scaled_value": 14.774774774774775,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.5577888170493255
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9994,
+            "scaled_value": -0.9931083409344279,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2399339995588532
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 3.0,
+            "scaled_value": 0.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.021823487765702733
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.3375,
+            "scaled_value": 0.37140824595589383,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.1637658735516668
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9925,
+            "scaled_value": 11.400230680507498,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5774670029794631
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.6584,
+            "scaled_value": 14.774774774774775,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.5577888170493255
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9994,
+            "scaled_value": -0.9931083409344279,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2399339995588532
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 3.0,
+            "scaled_value": 0.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.021823487765702733
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9925,
+            "scaled_value": 11.400230680507498,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5774670029794631
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.3375,
+            "scaled_value": 0.37140824595589383,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.1637658735516668
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.863, threshold=0.56). Very High confidence with margin 0.303. Key supporting signals: [mean_entailment (+1.558), min_support_margin (+1.240)]. Key opposing signals: [max_entailment (-0.577), mean_contradiction (-0.164)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1992,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "TP"
+      }
+    ],
+    "TN": [
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.400132,
+          "logit": -0.404917,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.159868,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1102,
+            "scaled_value": 2.4279279279279278,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.25599029646023974
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 9.0,
+            "scaled_value": 1.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.15276441435991914
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0011,
+            "scaled_value": -0.044786737187219705,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019747916797369546
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0014,
+            "scaled_value": 0.018343974865713996,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.022903158885616125
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9882,
+            "scaled_value": 11.350634371395618,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5749547527641539
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1102,
+            "scaled_value": 2.4279279279279278,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.25599029646023974
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 9.0,
+            "scaled_value": 1.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.15276441435991914
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0011,
+            "scaled_value": -0.044786737187219705,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019747916797369546
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9882,
+            "scaled_value": 11.350634371395618,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5749547527641539
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0014,
+            "scaled_value": 0.018343974865713996,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.022903158885616125
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.400, threshold=0.56). High confidence with margin 0.160. Key supporting signals: [mean_entailment (+0.256), num_claims (+0.153)]. Key opposing signals: [max_entailment (-0.575), min_support_margin (-0.023)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1081,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "TN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.402434,
+          "logit": -0.395334,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.157566,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.089,
+            "scaled_value": 1.9504504504504503,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.20564712127510912
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 11.0,
+            "scaled_value": 2.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1964113898913246
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0031,
+            "scaled_value": -0.042312331817760056,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.018656871670443054
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0034,
+            "scaled_value": 0.016317016317016316,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.020372423097150254
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9628,
+            "scaled_value": 11.05767012687428,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5601149491667455
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.089,
+            "scaled_value": 1.9504504504504503,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.20564712127510912
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 11.0,
+            "scaled_value": 2.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1964113898913246
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0031,
+            "scaled_value": -0.042312331817760056,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.018656871670443054
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9628,
+            "scaled_value": 11.05767012687428,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5601149491667455
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0034,
+            "scaled_value": 0.016317016317016316,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.020372423097150254
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.402, threshold=0.56). High confidence with margin 0.158. Key supporting signals: [mean_entailment (+0.206), num_claims (+0.196)]. Key opposing signals: [max_entailment (-0.560), min_support_margin (-0.020)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1078,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "TN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.405647,
+          "logit": -0.381989,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.154353,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1292,
+            "scaled_value": 2.8558558558558556,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.3011091798808757
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 8.0,
+            "scaled_value": 1.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1309409265942164
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0009,
+            "scaled_value": -0.045034177724165673,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019857021310062197
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0001,
+            "scaled_value": 0.019661497922367488,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.024548137148118942
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9862,
+            "scaled_value": 11.327566320645905,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5737862642919169
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1292,
+            "scaled_value": 2.8558558558558556,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.3011091798808757
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 8.0,
+            "scaled_value": 1.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1309409265942164
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0009,
+            "scaled_value": -0.045034177724165673,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019857021310062197
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9862,
+            "scaled_value": 11.327566320645905,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5737862642919169
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0001,
+            "scaled_value": 0.019661497922367488,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.024548137148118942
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.406, threshold=0.56). High confidence with margin 0.154. Key supporting signals: [mean_entailment (+0.301), num_claims (+0.131)]. Key opposing signals: [max_entailment (-0.574), min_support_margin (-0.025)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2077,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "TN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.406574,
+          "logit": -0.378148,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.153426,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0923,
+            "scaled_value": 2.0247747747747744,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.21348355892185114
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 11.0,
+            "scaled_value": 2.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1964113898913246
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0016,
+            "scaled_value": -0.044168135844854794,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019475155515637922
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0004,
+            "scaled_value": 0.019357454140062832,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.024168526779849056
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9417,
+            "scaled_value": 10.81430219146482,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5477873957846464
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0923,
+            "scaled_value": 2.0247747747747744,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.21348355892185114
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 11.0,
+            "scaled_value": 2.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1964113898913246
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0016,
+            "scaled_value": -0.044168135844854794,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019475155515637922
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9417,
+            "scaled_value": 10.81430219146482,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5477873957846464
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0004,
+            "scaled_value": 0.019357454140062832,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.024168526779849056
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.407, threshold=0.56). High confidence with margin 0.153. Key supporting signals: [mean_entailment (+0.213), num_claims (+0.196)]. Key opposing signals: [max_entailment (-0.548), min_support_margin (-0.024)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1654,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "TN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.407569,
+          "logit": -0.374025,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.152431,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1144,
+            "scaled_value": 2.5225225225225225,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.2659639443742751
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 9.0,
+            "scaled_value": 1.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.15276441435991914
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0009,
+            "scaled_value": -0.045034177724165673,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019857021310062197
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0003,
+            "scaled_value": 0.019458802067497716,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.02429506356927235
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9502,
+            "scaled_value": 10.912341407151096,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5527534717916532
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1144,
+            "scaled_value": 2.5225225225225225,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.2659639443742751
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 9.0,
+            "scaled_value": 1.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.15276441435991914
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0009,
+            "scaled_value": -0.045034177724165673,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.019857021310062197
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9502,
+            "scaled_value": 10.912341407151096,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5527534717916532
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0003,
+            "scaled_value": 0.019458802067497716,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.02429506356927235
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.408, threshold=0.56). High confidence with margin 0.152. Key supporting signals: [mean_entailment (+0.266), num_claims (+0.153)]. Key opposing signals: [max_entailment (-0.553), min_support_margin (-0.024)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1680,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "TN"
+      }
+    ],
+    "FP": [
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.917209,
+          "logit": 2.405014,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.357209,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.8169,
+            "scaled_value": 18.344594594594593,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.93417529190042
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9945,
+            "scaled_value": -0.9881422924901186,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2337336968771118
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 7.0,
+            "scaled_value": 1.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.10911743882851366
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.1496,
+            "scaled_value": 0.1389378614951595,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.06126218387692266
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9886,
+            "scaled_value": 11.35524798154556,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5751884504586012
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.8169,
+            "scaled_value": 18.344594594594593,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.93417529190042
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9945,
+            "scaled_value": -0.9881422924901186,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2337336968771118
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 7.0,
+            "scaled_value": 1.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.10911743882851366
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9886,
+            "scaled_value": 11.35524798154556,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5751884504586012
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.1496,
+            "scaled_value": 0.1389378614951595,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.06126218387692266
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.917, threshold=0.56). Very High confidence with margin 0.357. Key supporting signals: [mean_entailment (+1.934), min_support_margin (+1.234)]. Key opposing signals: [max_entailment (-0.575), mean_contradiction (-0.061)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2194,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "FP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.885972,
+          "logit": 2.050237,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.325972,
+          "confidence_category": "Very High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.8291,
+            "scaled_value": 18.61936936936937,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.9631463644126181
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.6019,
+            "scaled_value": -0.5902503293807642,
+            "coefficient": -1.248538501239637,
+            "contribution": 0.7369502616012614
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 10.0,
+            "scaled_value": 2.0,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.17458790212562186
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0638,
+            "scaled_value": 0.03278587114534039,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.014456347931776047
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9873,
+            "scaled_value": 11.340253748558247,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5744289329516472
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.8291,
+            "scaled_value": 18.61936936936937,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.9631463644126181
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.6019,
+            "scaled_value": -0.5902503293807642,
+            "coefficient": -1.248538501239637,
+            "contribution": 0.7369502616012614
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 10.0,
+            "scaled_value": 2.0,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.17458790212562186
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9873,
+            "scaled_value": 11.340253748558247,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5744289329516472
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0638,
+            "scaled_value": 0.03278587114534039,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.014456347931776047
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.886, threshold=0.56). Very High confidence with margin 0.326. Key supporting signals: [mean_entailment (+1.963), min_support_margin (+0.737)]. Key opposing signals: [max_entailment (-0.574), mean_contradiction (-0.014)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2182,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "FP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.79808,
+          "logit": 1.374335,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.23808,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9903,
+            "scaled_value": -0.9838856795378534,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2284191517213334
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.4094,
+            "scaled_value": 9.166666666666666,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.9664939764315175
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 9.0,
+            "scaled_value": 1.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.15276441435991914
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.3331,
+            "scaled_value": 0.36596455414308254,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.16136557427242848
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9907,
+            "scaled_value": 11.379469434832757,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5764153633544499
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.9903,
+            "scaled_value": -0.9838856795378534,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.2284191517213334
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.4094,
+            "scaled_value": 9.166666666666666,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.9664939764315175
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 9.0,
+            "scaled_value": 1.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.15276441435991914
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9907,
+            "scaled_value": 11.379469434832757,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5764153633544499
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.3331,
+            "scaled_value": 0.36596455414308254,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.16136557427242848
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.798, threshold=0.56). High confidence with margin 0.238. Key supporting signals: [min_support_margin (+1.228), mean_entailment (+0.966)]. Key opposing signals: [max_entailment (-0.576), mean_contradiction (-0.161)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1656,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "FP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.789485,
+          "logit": 1.321825,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.229485,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.877,
+            "scaled_value": -0.8690584777541299,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.085052969304742
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 24.0,
+            "scaled_value": 5.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.48011673084546014
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.0048,
+            "scaled_value": 0.008073817762399068,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.0004089709652829054
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0015,
+            "scaled_value": -0.020270270270270264,
+            "coefficient": 0.10543570651980191,
+            "contribution": -0.0021372102672932813
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0469,
+            "scaled_value": 0.011877145773406327,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.005237016609247171
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.877,
+            "scaled_value": -0.8690584777541299,
+            "coefficient": -1.248538501239637,
+            "contribution": 1.085052969304742
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 24.0,
+            "scaled_value": 5.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.48011673084546014
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0469,
+            "scaled_value": 0.011877145773406327,
+            "coefficient": -0.440932249983256,
+            "contribution": -0.005237016609247171
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0015,
+            "scaled_value": -0.020270270270270264,
+            "coefficient": 0.10543570651980191,
+            "contribution": -0.0021372102672932813
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.0048,
+            "scaled_value": 0.008073817762399068,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.0004089709652829054
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.789, threshold=0.56). High confidence with margin 0.229. Key supporting signals: [min_support_margin (+1.085), num_claims (+0.480)]. Key opposing signals: [mean_contradiction (-0.005), mean_entailment (-0.002)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1570,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "FP"
+      },
+      {
+        "prediction": {
+          "label": 1,
+          "label_str": "HALLUCINATED",
+          "probability": 0.781656,
+          "logit": 1.275341,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": 0.221656,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.8362,
+            "scaled_value": 18.77927927927928,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.9800065787434873
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 7.0,
+            "scaled_value": 1.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.10911743882851366
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0023,
+            "scaled_value": -0.043302093965543915,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.01909328972121365
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0046,
+            "scaled_value": 0.01510084118779771,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.018853981624070735
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9942,
+            "scaled_value": 11.419838523644751,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5784602181808643
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.8362,
+            "scaled_value": 18.77927927927928,
+            "coefficient": 0.10543570651980191,
+            "contribution": 1.9800065787434873
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 7.0,
+            "scaled_value": 1.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.10911743882851366
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0023,
+            "scaled_value": -0.043302093965543915,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.01909328972121365
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9942,
+            "scaled_value": 11.419838523644751,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5784602181808643
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0046,
+            "scaled_value": 0.01510084118779771,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.018853981624070735
+          }
+        ],
+        "reasoning_summary": "Prediction: HALLUCINATED (p=0.782, threshold=0.56). High confidence with margin 0.222. Key supporting signals: [mean_entailment (+1.980), num_claims (+0.109)]. Key opposing signals: [max_entailment (-0.578), min_support_margin (-0.019)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 2185,
+        "true_label": 0,
+        "true_label_str": "GROUNDED",
+        "quadrant": "FP"
+      }
+    ],
+    "FN": [
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.409173,
+          "logit": -0.367386,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.150827,
+          "confidence_category": "High"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1284,
+            "scaled_value": 2.8378378378378373,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.29920943742105943
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 8.0,
+            "scaled_value": 1.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1309409265942164
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0053,
+            "scaled_value": -0.03959048591135444,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.01745672203082391
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0149,
+            "scaled_value": 0.004662004662004662,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.005820692313471501
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9859,
+            "scaled_value": 11.32410611303345,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5736109910210815
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1284,
+            "scaled_value": 2.8378378378378373,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.29920943742105943
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 8.0,
+            "scaled_value": 1.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1309409265942164
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0053,
+            "scaled_value": -0.03959048591135444,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.01745672203082391
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9859,
+            "scaled_value": 11.32410611303345,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5736109910210815
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0149,
+            "scaled_value": 0.004662004662004662,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.005820692313471501
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.409, threshold=0.56). High confidence with margin 0.151. Key supporting signals: [mean_entailment (+0.299), num_claims (+0.131)]. Key opposing signals: [max_entailment (-0.574), min_support_margin (-0.006)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 952,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "FN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.412286,
+          "logit": -0.354522,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.147714,
+          "confidence_category": "Moderate"
+        },
+        "feature_contributions": [
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 14.0,
+            "scaled_value": 3.0,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.2618818531884328
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0722,
+            "scaled_value": 1.572072072072072,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.16575252961896786
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0121,
+            "scaled_value": -0.031177507655191616,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.013747168599273827
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.025,
+            "scaled_value": -0.005574136008918619,
+            "coefficient": -1.248538501239637,
+            "contribution": 0.0069595234182811445
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9751,
+            "scaled_value": 11.199538638985006,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5673011532710023
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 14.0,
+            "scaled_value": 3.0,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.2618818531884328
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0722,
+            "scaled_value": 1.572072072072072,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.16575252961896786
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0121,
+            "scaled_value": -0.031177507655191616,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.013747168599273827
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9751,
+            "scaled_value": 11.199538638985006,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5673011532710023
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.412, threshold=0.56). Moderate confidence with margin 0.148. Key supporting signals: [num_claims (+0.262), mean_entailment (+0.166)]. Key opposing signals: [max_entailment (-0.567)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 997,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "FN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.412292,
+          "logit": -0.3545,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.147708,
+          "confidence_category": "Moderate"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1095,
+            "scaled_value": 2.4121621621621623,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.2543280218079006
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 8.0,
+            "scaled_value": 1.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1309409265942164
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0023,
+            "scaled_value": -0.043302093965543915,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.01909328972121365
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0039,
+            "scaled_value": 0.015810276679841896,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.019739739150033787
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.866,
+            "scaled_value": 9.941176470588236,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5035601071104808
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1095,
+            "scaled_value": 2.4121621621621623,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.2543280218079006
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 8.0,
+            "scaled_value": 1.5,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.1309409265942164
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0023,
+            "scaled_value": -0.043302093965543915,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.01909328972121365
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.866,
+            "scaled_value": 9.941176470588236,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5035601071104808
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0039,
+            "scaled_value": 0.015810276679841896,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.019739739150033787
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.412, threshold=0.56). Moderate confidence with margin 0.148. Key supporting signals: [mean_entailment (+0.254), num_claims (+0.131)]. Key opposing signals: [max_entailment (-0.504), min_support_margin (-0.020)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 352,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "FN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.414329,
+          "logit": -0.346096,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.145671,
+          "confidence_category": "Moderate"
+        },
+        "feature_contributions": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1413,
+            "scaled_value": 3.128378378378378,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.3298427845855965
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 7.0,
+            "scaled_value": 1.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.10911743882851366
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0056,
+            "scaled_value": -0.03921932510593549,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.017293065261784934
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0242,
+            "scaled_value": -0.004763352589439545,
+            "coefficient": -1.248538501239637,
+            "contribution": 0.005947229102894794
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9844,
+            "scaled_value": 11.306805074971166,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5727346246669038
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.1413,
+            "scaled_value": 3.128378378378378,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.3298427845855965
+          },
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 7.0,
+            "scaled_value": 1.25,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.10911743882851366
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0056,
+            "scaled_value": -0.03921932510593549,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.017293065261784934
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.9844,
+            "scaled_value": 11.306805074971166,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5727346246669038
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.414, threshold=0.56). Moderate confidence with margin 0.146. Key supporting signals: [mean_entailment (+0.330), num_claims (+0.109)]. Key opposing signals: [max_entailment (-0.573)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 949,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "FN"
+      },
+      {
+        "prediction": {
+          "label": 0,
+          "label_str": "GROUNDED",
+          "probability": 0.41714,
+          "logit": -0.334526,
+          "decision_threshold": 0.56,
+          "margin_to_threshold": -0.14286,
+          "confidence_category": "Moderate"
+        },
+        "feature_contributions": [
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 13.0,
+            "scaled_value": 2.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.24005836542273007
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0743,
+            "scaled_value": 1.6193693693693694,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.17073935357598552
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0083,
+            "scaled_value": -0.035878877857164954,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.015820154340434166
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0105,
+            "scaled_value": 0.009121313469139556,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.011388311048096416
+          },
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.8842,
+            "scaled_value": 10.151095732410612,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5141933522078364
+          }
+        ],
+        "top_positive_evidence": [
+          {
+            "feature": "num_claims",
+            "description": "Number of atomic claims extracted from response",
+            "raw_value": 13.0,
+            "scaled_value": 2.75,
+            "coefficient": 0.08729395106281093,
+            "contribution": 0.24005836542273007
+          },
+          {
+            "feature": "mean_entailment",
+            "description": "Mean NLI entailment score across all claim-evidence pairs",
+            "raw_value": 0.0743,
+            "scaled_value": 1.6193693693693694,
+            "coefficient": 0.10543570651980191,
+            "contribution": 0.17073935357598552
+          },
+          {
+            "feature": "mean_contradiction",
+            "description": "Mean NLI contradiction score (evidence contradiction signal)",
+            "raw_value": 0.0083,
+            "scaled_value": -0.035878877857164954,
+            "coefficient": -0.440932249983256,
+            "contribution": 0.015820154340434166
+          }
+        ],
+        "top_negative_evidence": [
+          {
+            "feature": "max_entailment",
+            "description": "Maximum NLI entailment score (strongest supporting evidence)",
+            "raw_value": 0.8842,
+            "scaled_value": 10.151095732410612,
+            "coefficient": -0.050653975271468483,
+            "contribution": -0.5141933522078364
+          },
+          {
+            "feature": "min_support_margin",
+            "description": "Minimum support margin (weakest evidence-claim alignment)",
+            "raw_value": -0.0105,
+            "scaled_value": 0.009121313469139556,
+            "coefficient": -1.248538501239637,
+            "contribution": -0.011388311048096416
+          }
+        ],
+        "reasoning_summary": "Prediction: GROUNDED (p=0.417, threshold=0.56). Moderate confidence with margin 0.143. Key supporting signals: [num_claims (+0.240), mean_entailment (+0.171)]. Key opposing signals: [max_entailment (-0.514), min_support_margin (-0.011)].",
+        "intercept_contribution": -0.235562,
+        "sample_index": 1743,
+        "true_label": 1,
+        "true_label_str": "HALLUCINATED",
+        "quadrant": "FN"
+      }
+    ]
+  },
+  "method": "Linear coefficient-based explainability: contribution_i = coef_i \u00d7 RobustScaled(feature_i). No SHAP, no black-box approximations.",
+  "elapsed_seconds": 0.74
+}

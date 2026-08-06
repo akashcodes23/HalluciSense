@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-08-02T07:19:53.814514+00:00",
+  "models": {
+    "A_baseline_mean_contradiction": {
+      "description": "Single feature: mean_contradiction score",
+      "dev_roc_auc": 0.7917
+    },
+    "B_best_single_neg_mean_support_margin": {
+      "description": "Single feature: -mean_support_margin",
+      "dev_roc_auc": 0.5417
+    },
+    "C_logistic_regression": {
+      "description": "L2-regularized logistic regression on 10 reconstructed features",
+      "dev_5fold_cv_roc_auc_mean": 0.375,
+      "dev_5fold_cv_roc_auc_std": 0.4146,
+      "dev_roc_auc": 0.7083,
+      "val_roc_auc": 0.68,
+      "feature_names": [
+        "mean_entailment",
+        "max_entailment",
+        "mean_contradiction",
+        "max_contradiction",
+        "mean_support_margin",
+        "min_support_margin",
+        "fraction_supported",
+        "fraction_contradicted",
+        "fraction_unsupported",
+        "num_claims"
+      ],
+      "coefficients": {
+        "mean_entailment": 0.3676,
+        "max_entailment": 0.3624,
+        "mean_contradiction": 0.1768,
+        "max_contradiction": 0.18,
+        "mean_support_margin": -0.092,
+        "min_support_margin": -0.0945,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": -0.5151,
+        "fraction_unsupported": 0.0,
+        "num_claims": -0.2806
+      },
+      "intercept": 0.1418
+    },
+    "D_decision_tree": {
+      "description": "Shallow decision tree (max_depth=4, min_samples_leaf=50)",
+      "dev_5fold_cv_roc_auc_mean": 0.5,
+      "dev_5fold_cv_roc_auc_std": 0.0,
+      "dev_roc_auc": 0.5,
+      "val_roc_auc": 0.5
+    }
+  },
+  "selected_model": "C_logistic_regression",
+  "selection_reason": "Highest 5-fold CV ROC-AUC on DEVELOPMENT with regularization for generalization."
+}

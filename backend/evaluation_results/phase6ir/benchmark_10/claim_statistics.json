@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-08-02T07:19:49.372602+00:00",
+  "development": {
+    "total_examples": 10,
+    "total_claims": 43,
+    "mean_claims_per_example": 4.3,
+    "median_claims_per_example": 1.0,
+    "zero_claims": 0,
+    "one_claim": 7,
+    "multi_claims": 3
+  },
+  "validation": {
+    "total_examples": 10,
+    "total_claims": 27,
+    "mean_claims_per_example": 2.7,
+    "median_claims_per_example": 1.0,
+    "zero_claims": 0,
+    "one_claim": 7,
+    "multi_claims": 3
+  }
+}

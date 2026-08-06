@@ -1,0 +1,14 @@
+{
+  "device": "mps",
+  "batch_size": 64,
+  "write_buffer": 500,
+  "examples_processed": 58002,
+  "claims_processed": 0,
+  "elapsed_seconds": 0.5,
+  "examples_per_second": 0.0,
+  "claims_per_second": 0.0,
+  "average_batch_latency_ms": 0.0,
+  "total_batches_executed": 0,
+  "checkpoint_resume": true,
+  "timestamp": "2026-08-02T07:20:28.615675+00:00"
+}

@@ -1,0 +1,40 @@
+{
+  "selected_candidate_key": "candidate_3",
+  "display_name": "Candidate 3 (Set B + RobustScaler + liblinear)",
+  "feature_names": [
+    "mean_entailment",
+    "max_entailment",
+    "mean_contradiction",
+    "min_support_margin",
+    "num_claims"
+  ],
+  "scaler_name": "RobustScaler",
+  "solver_name": "liblinear",
+  "selection_rationale": "Candidate 3 selected based on superior discrimination. Candidate 3 achieves mean CV ROC-AUC = 0.6218 (+0.0216 improvement over Candidate 1).",
+  "acceptance_criteria": {
+    "numerical_stability": "FAIL",
+    "generalization_consistency": "PASS",
+    "calibration": "PASS",
+    "baseline_improvement": "PASS",
+    "overall_verdict": "SELECTED FOR HELD-OUT VALIDATION"
+  },
+  "mean_cv_metrics": {
+    "roc_auc": 0.6217852556459444,
+    "pr_auc": 0.6417140114872343,
+    "accuracy": 0.5818304402018454,
+    "balanced_accuracy": 0.5784834853911341,
+    "precision": 0.6144966874218815,
+    "recall": 0.6172940148074253,
+    "f1": 0.615880877959148,
+    "mcc": 0.1570470912216835,
+    "brier_score": 0.23868732737828668,
+    "log_loss": 0.6701455771725305,
+    "n_iter": 4.2,
+    "coef_abs_max": 1.2475153668628478,
+    "coef_l2_norm": 1.3308438717771063,
+    "condition_number": 55.489643267279455,
+    "total_warnings": 3.0
+  },
+  "best_mcc_threshold": 0.5599999999999998,
+  "ece": 0.011033742788312088
+}

@@ -1,0 +1,108 @@
+{
+  "n_dev_samples": 1500,
+  "n_master_features": 10,
+  "candidate_sets": {
+    "SET_A_ALL": {
+      "set_name": "SET_A_ALL",
+      "feature_names": [
+        "mean_entailment",
+        "max_entailment",
+        "mean_contradiction",
+        "max_contradiction",
+        "mean_support_margin",
+        "min_support_margin",
+        "fraction_supported",
+        "fraction_contradicted",
+        "fraction_unsupported",
+        "num_claims"
+      ],
+      "feature_count": 10,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "matrix_rank": 10,
+      "condition_number_unscaled": 1.1592945707483848,
+      "condition_number_robust_scaled": 1.153178462518957,
+      "mean_pairwise_abs_correlation": 0.01826742872877707,
+      "max_pairwise_abs_correlation": 0.06347463881132243,
+      "description": "Full original 10-feature Pillar 1 set"
+    },
+    "SET_B_DECOLLINEARIZED": {
+      "set_name": "SET_B_DECOLLINEARIZED",
+      "feature_names": [
+        "mean_entailment",
+        "max_entailment",
+        "mean_contradiction",
+        "min_support_margin",
+        "num_claims"
+      ],
+      "feature_count": 5,
+      "indices": [
+        0,
+        1,
+        2,
+        5,
+        9
+      ],
+      "matrix_rank": 5,
+      "condition_number_unscaled": 1.0817103312928469,
+      "condition_number_robust_scaled": 1.0673368131859942,
+      "mean_pairwise_abs_correlation": 0.008129058036760848,
+      "max_pairwise_abs_correlation": 0.02170771671966169,
+      "description": "Deduplicated feature set with pairwise |r| < 0.90"
+    },
+    "SET_C_TOP_DISCRIMINATIVE": {
+      "set_name": "SET_C_TOP_DISCRIMINATIVE",
+      "feature_names": [
+        "mean_entailment",
+        "mean_contradiction",
+        "num_claims",
+        "max_contradiction",
+        "fraction_unsupported"
+      ],
+      "feature_count": 5,
+      "indices": [
+        0,
+        2,
+        9,
+        3,
+        8
+      ],
+      "matrix_rank": 5,
+      "condition_number_unscaled": 1.0933330344466174,
+      "condition_number_robust_scaled": 1.0965440678741385,
+      "mean_pairwise_abs_correlation": 0.019814136663095595,
+      "max_pairwise_abs_correlation": 0.0515902074631739,
+      "description": "Top 5 features ranked by composite discriminative power (MI, ROC-AUC, Cohen's d, KS)"
+    },
+    "SET_D_DECOLLINEARIZED_DISCRIMINATIVE": {
+      "set_name": "SET_D_DECOLLINEARIZED_DISCRIMINATIVE",
+      "feature_names": [
+        "mean_entailment",
+        "mean_contradiction",
+        "num_claims"
+      ],
+      "feature_count": 3,
+      "indices": [
+        0,
+        2,
+        9
+      ],
+      "matrix_rank": 3,
+      "condition_number_unscaled": 1.0685319154204331,
+      "condition_number_robust_scaled": 1.0394761640962793,
+      "mean_pairwise_abs_correlation": 0.010811201949789163,
+      "max_pairwise_abs_correlation": 0.02170771671966169,
+      "description": "Minimalist 3-feature set combining strict decorrelation and top discriminative power"
+    }
+  }
+}

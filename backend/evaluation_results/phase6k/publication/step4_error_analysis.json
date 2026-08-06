@@ -1,0 +1,466 @@
+{
+  "generated_at_utc": "2026-08-03T04:48:29.684935+00:00",
+  "phase": "9_step4_error_analysis",
+  "quadrant_counts": {
+    "TP": 1095,
+    "TN": 1286,
+    "FP": 567,
+    "FN": 552
+  },
+  "quadrant_feature_stats": {
+    "TP": {
+      "mean_entailment": {
+        "mean": 0.20355397260273975,
+        "std": 0.35868022323375026,
+        "min": 0.0,
+        "p25": 0.0002,
+        "median": 0.0011,
+        "p75": 0.1871,
+        "max": 0.9979
+      },
+      "max_entailment": {
+        "mean": 0.2459515068493151,
+        "std": 0.4054932011715604,
+        "min": 0.0,
+        "p25": 0.0003,
+        "median": 0.0025,
+        "p75": 0.36365000000000003,
+        "max": 0.9982
+      },
+      "mean_contradiction": {
+        "mean": 0.6973647488584475,
+        "std": 0.39114524646860094,
+        "min": 0.0001,
+        "p25": 0.3402,
+        "median": 0.956,
+        "p75": 0.9954,
+        "max": 0.9999
+      },
+      "min_support_margin": {
+        "mean": -0.6113000913242009,
+        "std": 0.7058383180213484,
+        "min": -0.9999,
+        "p25": -0.998,
+        "median": -0.9911,
+        "p75": -0.7073,
+        "max": 0.9973
+      },
+      "num_claims": {
+        "mean": 5.368036529680365,
+        "std": 6.5521219873777055,
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 10.0,
+        "max": 31.0
+      }
+    },
+    "TN": {
+      "mean_entailment": {
+        "mean": 0.09848367029548989,
+        "std": 0.20934511594875796,
+        "min": 0.0001,
+        "p25": 0.0013,
+        "median": 0.00635,
+        "p75": 0.0727,
+        "max": 0.96
+      },
+      "max_entailment": {
+        "mean": 0.16080264385692067,
+        "std": 0.2842674961015097,
+        "min": 0.0001,
+        "p25": 0.002,
+        "median": 0.0123,
+        "p75": 0.158025,
+        "max": 0.9952
+      },
+      "mean_contradiction": {
+        "mean": 0.04101905132192846,
+        "std": 0.09778382624121523,
+        "min": 0.0001,
+        "p25": 0.0024,
+        "median": 0.0066,
+        "p75": 0.02385,
+        "max": 0.673
+      },
+      "min_support_margin": {
+        "mean": 0.034943545878693624,
+        "std": 0.22643739483634936,
+        "min": -0.6672,
+        "p25": -0.0119,
+        "median": -0.0022,
+        "p75": 0.0016,
+        "max": 0.9573
+      },
+      "num_claims": {
+        "mean": 4.004665629860031,
+        "std": 4.31965128825415,
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 7.0,
+        "max": 24.0
+      }
+    },
+    "FP": {
+      "mean_entailment": {
+        "mean": 0.13594444444444445,
+        "std": 0.2973474149036978,
+        "min": 0.0,
+        "p25": 0.0002,
+        "median": 0.0014,
+        "p75": 0.022699999999999998,
+        "max": 0.9966
+      },
+      "max_entailment": {
+        "mean": 0.17953897707231045,
+        "std": 0.35431918344080165,
+        "min": 0.0,
+        "p25": 0.0005,
+        "median": 0.0032,
+        "p75": 0.0482,
+        "max": 0.9966
+      },
+      "mean_contradiction": {
+        "mean": 0.6914904761904762,
+        "std": 0.38745779304432443,
+        "min": 0.0001,
+        "p25": 0.31365,
+        "median": 0.9235,
+        "p75": 0.9934499999999999,
+        "max": 0.9999
+      },
+      "min_support_margin": {
+        "mean": -0.687258024691358,
+        "std": 0.5879045942662924,
+        "min": -0.9999,
+        "p25": -0.9975,
+        "median": -0.9814,
+        "p75": -0.7513000000000001,
+        "max": 0.9964
+      },
+      "num_claims": {
+        "mean": 5.874779541446208,
+        "std": 6.405755424054914,
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 11.0,
+        "max": 28.0
+      }
+    },
+    "FN": {
+      "mean_entailment": {
+        "mean": 0.11430271739130435,
+        "std": 0.2340169885986073,
+        "min": 0.0001,
+        "p25": 0.0013,
+        "median": 0.005350000000000001,
+        "p75": 0.08885000000000001,
+        "max": 0.9589
+      },
+      "max_entailment": {
+        "mean": 0.1725724637681159,
+        "std": 0.30175885318187434,
+        "min": 0.0001,
+        "p25": 0.001975,
+        "median": 0.009850000000000001,
+        "p75": 0.163,
+        "max": 0.9869
+      },
+      "mean_contradiction": {
+        "mean": 0.05937264492753623,
+        "std": 0.12204002875139795,
+        "min": 0.0001,
+        "p25": 0.0032,
+        "median": 0.01015,
+        "p75": 0.0459,
+        "max": 0.6995
+      },
+      "min_support_margin": {
+        "mean": 0.03117789855072464,
+        "std": 0.25982185581259853,
+        "min": -0.6985,
+        "p25": -0.024399999999999998,
+        "median": -0.0049499999999999995,
+        "p75": -0.0004,
+        "max": 0.9577
+      },
+      "num_claims": {
+        "mean": 3.7409420289855073,
+        "std": 4.097974647802334,
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 6.0,
+        "max": 20.0
+      }
+    }
+  },
+  "quadrant_confidence_stats": {
+    "TP": {
+      "prob_mean": 0.6346267335817247,
+      "prob_std": 0.057709694216464935,
+      "prob_min": 0.5600381185189932,
+      "prob_max": 0.8870582751595483,
+      "prob_p25": 0.5996403781720786,
+      "prob_median": 0.611628353904414,
+      "prob_p75": 0.6766734347102572,
+      "count": 1095
+    },
+    "TN": {
+      "prob_mean": 0.46861976748668394,
+      "prob_std": 0.036881046384875785,
+      "prob_min": 0.40013151025649935,
+      "prob_max": 0.5599578507374582,
+      "prob_p25": 0.4371500491969146,
+      "prob_median": 0.4571372193444013,
+      "prob_p75": 0.48886691837337903,
+      "count": 1286
+    },
+    "FP": {
+      "prob_mean": 0.632430896773436,
+      "prob_std": 0.05347991921806357,
+      "prob_min": 0.5600141944030039,
+      "prob_max": 0.917208840153892,
+      "prob_p25": 0.600084432347106,
+      "prob_median": 0.6116454529089717,
+      "prob_p75": 0.673659965286459,
+      "count": 567
+    },
+    "FN": {
+      "prob_mean": 0.47351406333971285,
+      "prob_std": 0.039314661167995854,
+      "prob_min": 0.40917268787336186,
+      "prob_max": 0.5595494331586889,
+      "prob_p25": 0.4395110901062133,
+      "prob_median": 0.460968182940638,
+      "prob_p75": 0.49729766320821756,
+      "count": 552
+    }
+  },
+  "failure_clusters": {
+    "FP": {
+      "n_clusters": 3,
+      "total_errors": 567,
+      "clusters": [
+        {
+          "cluster_id": 0,
+          "size": 288,
+          "size_pct": 50.8,
+          "dominant_feature": "num_claims",
+          "center_raw": {
+            "mean_entailment": 0.015856597222222227,
+            "max_entailment": 0.018989930555555368,
+            "mean_contradiction": 0.8847763888888889,
+            "min_support_margin": -0.9199833333333334,
+            "num_claims": 1.5347222222222214
+          },
+          "mean_probability": 0.6114437788678684,
+          "std_probability": 0.023831686335185953,
+          "feature_means": {
+            "mean_entailment": 0.015856597222222223,
+            "max_entailment": 0.01898993055555555,
+            "mean_contradiction": 0.884776388888889,
+            "min_support_margin": -0.9199833333333333,
+            "num_claims": 1.5347222222222223
+          }
+        },
+        {
+          "cluster_id": 2,
+          "size": 186,
+          "size_pct": 32.8,
+          "dominant_feature": "num_claims",
+          "center_raw": {
+            "mean_entailment": 0.008766666666666617,
+            "max_entailment": 0.05125752688172033,
+            "mean_contradiction": 0.7163559139784947,
+            "min_support_margin": -0.9179333333333333,
+            "num_claims": 13.951612903225808
+          },
+          "mean_probability": 0.6843254493932037,
+          "std_probability": 0.03850082491850407,
+          "feature_means": {
+            "mean_entailment": 0.008766666666666667,
+            "max_entailment": 0.051257526881720424,
+            "mean_contradiction": 0.7163559139784946,
+            "min_support_margin": -0.9179333333333332,
+            "num_claims": 13.951612903225806
+          }
+        },
+        {
+          "cluster_id": 1,
+          "size": 93,
+          "size_pct": 16.4,
+          "dominant_feature": "max_entailment",
+          "center_raw": {
+            "mean_entailment": 0.7621849462365592,
+            "max_entailment": 0.9332860215053762,
+            "mean_contradiction": 0.04319677419354828,
+            "min_support_margin": 0.49479032258064526,
+            "num_claims": 3.161290322580644
+          },
+          "mean_probability": 0.5936341566608194,
+          "std_probability": 0.06677333487059625,
+          "feature_means": {
+            "mean_entailment": 0.7621849462365593,
+            "max_entailment": 0.9332860215053764,
+            "mean_contradiction": 0.04319677419354839,
+            "min_support_margin": 0.49479032258064526,
+            "num_claims": 3.161290322580645
+          }
+        }
+      ]
+    },
+    "FN": {
+      "n_clusters": 3,
+      "total_errors": 552,
+      "clusters": [
+        {
+          "cluster_id": 1,
+          "size": 450,
+          "size_pct": 81.5,
+          "dominant_feature": "mean_entailment",
+          "center_raw": {
+            "mean_entailment": 0.03738488888888879,
+            "max_entailment": 0.10856000000000002,
+            "mean_contradiction": 0.023149999999999997,
+            "min_support_margin": -0.013399999999999999,
+            "num_claims": 4.344444444444448
+          },
+          "mean_probability": 0.45958992786864744,
+          "std_probability": 0.02672456304496397,
+          "feature_means": {
+            "mean_entailment": 0.03738488888888889,
+            "max_entailment": 0.10856,
+            "mean_contradiction": 0.02315,
+            "min_support_margin": -0.013399999999999999,
+            "num_claims": 4.344444444444444
+          }
+        },
+        {
+          "cluster_id": 2,
+          "size": 54,
+          "size_pct": 9.8,
+          "dominant_feature": "mean_entailment",
+          "center_raw": {
+            "mean_entailment": 0.7603222222222221,
+            "max_entailment": 0.7603222222222223,
+            "mean_contradiction": 0.05666666666666667,
+            "min_support_margin": 0.7036425925925925,
+            "num_claims": 1.0
+          },
+          "mean_probability": 0.5435928215164453,
+          "std_probability": 0.018630110096684957,
+          "feature_means": {
+            "mean_entailment": 0.7603222222222221,
+            "max_entailment": 0.7603222222222221,
+            "mean_contradiction": 0.05666666666666667,
+            "min_support_margin": 0.7036425925925925,
+            "num_claims": 1.0
+          }
+        },
+        {
+          "cluster_id": 0,
+          "size": 48,
+          "size_pct": 8.7,
+          "dominant_feature": "mean_contradiction",
+          "center_raw": {
+            "mean_entailment": 0.10863541666666666,
+            "max_entailment": 0.11147083333333332,
+            "mean_contradiction": 0.4020041666666666,
+            "min_support_margin": -0.30742708333333335,
+            "num_claims": 1.1666666666666665
+          },
+          "mean_probability": 0.5252142304321271,
+          "std_probability": 0.025948393143888752,
+          "feature_means": {
+            "mean_entailment": 0.10863541666666665,
+            "max_entailment": 0.11147083333333334,
+            "mean_contradiction": 0.40200416666666666,
+            "min_support_margin": -0.3074270833333333,
+            "num_claims": 1.1666666666666667
+          }
+        }
+      ]
+    }
+  },
+  "systematic_weaknesses": [
+    {
+      "quadrant_pair": "FP vs TN",
+      "feature": "mean_contradiction",
+      "fp_mean": 0.6915,
+      "tn_mean": 0.041,
+      "mean_diff": 0.6505,
+      "interpretation": "FP samples have mean_contradiction = 0.691 vs TN = 0.041. Model over-predicts hallucination when this feature differs."
+    },
+    {
+      "quadrant_pair": "FP vs TN",
+      "feature": "min_support_margin",
+      "fp_mean": -0.6873,
+      "tn_mean": 0.0349,
+      "mean_diff": 0.7222,
+      "interpretation": "FP samples have min_support_margin = -0.687 vs TN = 0.035. Model over-predicts hallucination when this feature differs."
+    },
+    {
+      "quadrant_pair": "FP vs TN",
+      "feature": "num_claims",
+      "fp_mean": 5.8748,
+      "tn_mean": 4.0047,
+      "mean_diff": 1.8701,
+      "interpretation": "FP samples have num_claims = 5.875 vs TN = 4.005. Model over-predicts hallucination when this feature differs."
+    },
+    {
+      "quadrant_pair": "FN vs TP",
+      "feature": "mean_contradiction",
+      "fn_mean": 0.0594,
+      "tp_mean": 0.6974,
+      "mean_diff": 0.638,
+      "interpretation": "FN samples have mean_contradiction = 0.059 vs TP = 0.697. Model misses hallucinations when this feature differs."
+    },
+    {
+      "quadrant_pair": "FN vs TP",
+      "feature": "min_support_margin",
+      "fn_mean": 0.0312,
+      "tp_mean": -0.6113,
+      "mean_diff": 0.6425,
+      "interpretation": "FN samples have min_support_margin = 0.031 vs TP = -0.611. Model misses hallucinations when this feature differs."
+    },
+    {
+      "quadrant_pair": "FN vs TP",
+      "feature": "num_claims",
+      "fn_mean": 3.7409,
+      "tp_mean": 5.368,
+      "mean_diff": 1.6271,
+      "interpretation": "FN samples have num_claims = 3.741 vs TP = 5.368. Model misses hallucinations when this feature differs."
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "R1",
+      "type": "Feature Engineering",
+      "recommendation": "min_support_margin is the strongest predictor. Pillar 2/3 should engineer richer support margin signals (e.g., per-document, per-sentence margins) to reduce FN rate."
+    },
+    {
+      "id": "R2",
+      "type": "Threshold Calibration",
+      "recommendation": "The 0.56 threshold was optimized for balanced F1/MCC. For applications requiring higher recall (catching more hallucinations), lower threshold to 0.50 at the cost of precision."
+    },
+    {
+      "id": "R3",
+      "type": "Feature Expansion",
+      "recommendation": "mean_entailment and max_entailment show weak discriminative power. Consider claim-level aggregation variants or attention-weighted NLI scores to capture subtle entailment patterns in longer responses."
+    },
+    {
+      "id": "R4",
+      "type": "Ensemble Strategy",
+      "recommendation": "Pillar-1 misses hallucinations with low contradiction scores. A Pillar-3 semantic similarity Pillar could complement Pillar-1 for hallucinations expressed without direct contradiction."
+    },
+    {
+      "id": "R5",
+      "type": "Dataset Expansion",
+      "recommendation": "The 0.47:0.53 class ratio in VAL differs from DEV (0.46:0.54). Future work should evaluate on more diverse benchmarks beyond HaluBench/HaluEval/RAGTruth to assess generalization."
+    }
+  ],
+  "elapsed_seconds": 1.08
+}

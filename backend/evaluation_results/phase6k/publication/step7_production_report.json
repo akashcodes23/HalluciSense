@@ -1,0 +1,101 @@
+{
+  "generated_at_utc": "2026-08-03T04:48:55.143989+00:00",
+  "phase": "9_step7_production_packaging",
+  "model_registry": {
+    "registry_version": "1.0",
+    "generated_at_utc": "2026-08-03T04:48:55.112937+00:00",
+    "model": {
+      "name": "hallucisense-pillar1-logistic",
+      "version": "1.0.0",
+      "phase": "6K",
+      "verdict": "PILLAR 1 VALIDATED WITH LIMITATIONS",
+      "type": "binary_classifier",
+      "algorithm": "LogisticRegression",
+      "solver": "liblinear",
+      "penalty": "l2",
+      "C": 1.0,
+      "random_state": 42,
+      "artifacts": {
+        "classifier": {
+          "path": "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/final_model/pillar1_logistic_model.joblib",
+          "sha256": "cf5199567b880c292d5c6b4f7dc5e63ee6e6be03b14e5965662da563152dbfb5",
+          "format": "joblib"
+        },
+        "scaler": {
+          "path": "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/final_model/robust_scaler.joblib",
+          "sha256": "89d54d65bc1b015d4fefcb514eb8bf37339e6d8b499652f67c375161b8e763d8",
+          "format": "joblib",
+          "type": "RobustScaler"
+        }
+      },
+      "feature_schema": {
+        "feature_names": [
+          "mean_entailment",
+          "max_entailment",
+          "mean_contradiction",
+          "min_support_margin",
+          "num_claims"
+        ],
+        "feature_count": 5,
+        "input_dtype": "float64"
+      },
+      "inference": {
+        "operating_threshold": 0.56,
+        "output_classes": {
+          "0": "GROUNDED",
+          "1": "HALLUCINATED"
+        },
+        "output_probabilities": true
+      },
+      "performance": {
+        "val_roc_auc": 0.6902,
+        "val_pr_auc": 0.6311,
+        "val_brier_score": 0.2332,
+        "val_f1_at_056": 0.6618,
+        "val_mcc_at_056": 0.3587,
+        "val_accuracy_at_056": 0.6803,
+        "val_n_samples": 3500,
+        "dev_n_samples": 58002
+      },
+      "training_metadata": {
+        "created_utc": "2026-08-03T04:22:00Z",
+        "framework": "scikit-learn",
+        "scaler": "RobustScaler",
+        "feature_set": "SET_D_DECOLLINEARIZED_DISCRIMINATIVE",
+        "cross_validation": "5-fold stratified",
+        "stability_gate": "32/32 PASS"
+      }
+    }
+  },
+  "latency_benchmark": {
+    "n_predictions": 1000,
+    "mode": "single_prediction",
+    "median_ms": 0.02808299905154854,
+    "mean_ms": 0.028206305709318258,
+    "std_ms": 0.0012945992713427762,
+    "p50_ms": 0.02808299905154854,
+    "p90_ms": 0.029041999368928373,
+    "p95_ms": 0.029749993700534105,
+    "p99_ms": 0.033756245102267705,
+    "max_ms": 0.03820800338871777,
+    "min_ms": 0.025000001187436283,
+    "throughput_qps": 35453.06536437486,
+    "batch_3500_ms": 0.331,
+    "batch_throughput_qps": 10564730.2
+  },
+  "memory_benchmark": {
+    "total_allocated_kb": 198.53,
+    "top_frames_kb": 197.16,
+    "inference_batch_size": 3500,
+    "model_size_bytes": 939,
+    "scaler_size_bytes": 575,
+    "total_artifact_size_bytes": 1514
+  },
+  "artifacts_produced": [
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/publication/step7_production_bundle/model_registry.json",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/publication/step7_production_bundle/input_validator.py",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/publication/step7_production_bundle/inference_api_schema.json",
+    "/Users/akashgpatil/major_project/backend/evaluation_results/phase6k/publication/step7_production_bundle/MODEL_CARD.md"
+  ],
+  "elapsed_seconds": 0.67
+}

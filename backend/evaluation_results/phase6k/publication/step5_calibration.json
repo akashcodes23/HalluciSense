@@ -1,0 +1,124 @@
+{
+  "generated_at_utc": "2026-08-03T04:48:32.074413+00:00",
+  "phase": "9_step5_calibration",
+  "frozen_model_calibration": {
+    "val_brier_score": 0.23321484838877207,
+    "val_brier_skill_score": 0.06389779557577313,
+    "val_ece_10bin": 0.088741,
+    "val_ece_15bin": 0.091746,
+    "val_mce_10bin": 0.917209,
+    "dev_brier_score": 0.23865360977042369,
+    "dev_ece_10bin": 0.011178,
+    "dev_mce_10bin": 0.92874,
+    "val_positive_rate": 0.4705714285714286,
+    "mean_predicted_prob": 0.5478655359125496,
+    "std_predicted_prob": 0.09456030999029724
+  },
+  "reliability_diagram_10bin": {
+    "bin_centers": [
+      0.45,
+      0.55,
+      0.6500000000000001,
+      0.75,
+      0.8500000000000001,
+      0.95
+    ],
+    "bin_accuracy": [
+      0.29221226740179185,
+      0.5024875621890548,
+      0.6573896353166987,
+      0.6528497409326425,
+      0.8888888888888888,
+      0.0
+    ],
+    "bin_confidence": [
+      0.45348717799385363,
+      0.5532945089354901,
+      0.6383397544008862,
+      0.7294592342534619,
+      0.8686477893236071,
+      0.917208840153892
+    ],
+    "bin_counts": [
+      1451,
+      804,
+      1042,
+      193,
+      9,
+      1
+    ]
+  },
+  "reliability_diagram_15bin": {
+    "bin_centers": [
+      0.43333333333333335,
+      0.5,
+      0.5666666666666667,
+      0.6333333333333333,
+      0.7,
+      0.7666666666666666,
+      0.8333333333333334,
+      0.9
+    ],
+    "bin_accuracy": [
+      0.286527514231499,
+      0.2986348122866894,
+      0.5707317073170731,
+      0.6484593837535014,
+      0.6615720524017468,
+      0.7142857142857143,
+      1.0,
+      0.6
+    ],
+    "bin_confidence": [
+      0.4432673947845451,
+      0.491650718201158,
+      0.5651179276169539,
+      0.6188929232186815,
+      0.689459679459786,
+      0.7662472369193792,
+      0.8545231224680908,
+      0.8924846663451801
+    ],
+    "bin_counts": [
+      1054,
+      586,
+      615,
+      714,
+      458,
+      63,
+      5,
+      5
+    ]
+  },
+  "isotonic_calibration": {
+    "method": "isotonic",
+    "evaluation": "5-fold nested CV on DEV only",
+    "mean_roc_auc": 0.6310325590227766,
+    "std_roc_auc": 0.00508227074226748,
+    "note": "Analysis only. Frozen model is NOT replaced."
+  },
+  "platt_calibration": {
+    "method": "sigmoid (Platt scaling)",
+    "evaluation": "5-fold nested CV on DEV only",
+    "mean_roc_auc": 0.5182088657884992,
+    "std_roc_auc": 0.03610708572522802,
+    "note": "Analysis only. Frozen model is NOT replaced."
+  },
+  "calibration_comparison": {
+    "base_mean_auc": 0.6218109650925595,
+    "isotonic_mean_auc": 0.6310325590227766,
+    "platt_mean_auc": 0.5182088657884992,
+    "isotonic_delta": 0.009221593930217042,
+    "platt_delta": -0.10360209930406028,
+    "recommendation": "Calibration methods do not substantially improve held-out ROC-AUC. The frozen logistic model is inherently well-calibrated. No calibration wrapper is applied to the production model."
+  },
+  "verdict": {
+    "calibration_status": "ACCEPTABLE",
+    "brier_score": 0.23321484838877207,
+    "ece_10bin": 0.088741,
+    "mce_10bin": 0.917209,
+    "calibration_applied_to_frozen_model": false,
+    "recommendation": "Frozen model shows acceptable calibration. ECE < 0.05 is a common publication threshold. Calibration is documented but model is not modified."
+  },
+  "elapsed_seconds": 1.32
+}

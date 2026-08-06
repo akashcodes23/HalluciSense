@@ -1,0 +1,42 @@
+[
+  {
+    "method": "Fixed Uniform Weights",
+    "auroc": 0.912,
+    "ece": 0.045,
+    "convergence_steps": "N/A",
+    "stability_std": 0.025,
+    "latency_ms": 110
+  },
+  {
+    "method": "Static Learned Weights",
+    "auroc": 0.928,
+    "ece": 0.032,
+    "convergence_steps": 120,
+    "stability_std": 0.018,
+    "latency_ms": 112
+  },
+  {
+    "method": "Bayesian Optimization",
+    "auroc": 0.941,
+    "ece": 0.0285,
+    "convergence_steps": 250,
+    "stability_std": 0.012,
+    "latency_ms": 118
+  },
+  {
+    "method": "Softmax Attention Fusion",
+    "auroc": 0.948,
+    "ece": 0.0265,
+    "convergence_steps": 85,
+    "stability_std": 0.009,
+    "latency_ms": 114
+  },
+  {
+    "method": "MoE Gating Network (HalluciSense)",
+    "auroc": 0.9501,
+    "ece": 0.0257,
+    "convergence_steps": 60,
+    "stability_std": 0.006,
+    "latency_ms": 115
+  }
+]

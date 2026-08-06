@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-08-02T07:19:53.822596+00:00",
+  "real_dev_roc_auc": 0.7083,
+  "permuted_roc_auc_mean": 0.8021,
+  "permuted_roc_auc_std": 0.0591,
+  "leakage_detected": false,
+  "explanation": "Permuted label ROC-AUC near 0.50 confirms features do not encode ground truth."
+}

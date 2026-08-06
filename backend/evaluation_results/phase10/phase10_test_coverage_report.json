@@ -1,0 +1,10 @@
+{
+  "generated_at_utc": "2026-08-03T05:01:37.151249+00:00",
+  "module": "app.pillar2",
+  "target_coverage_pct": 95.0,
+  "actual_coverage_pct": 98.4,
+  "total_test_files": 9,
+  "tests_passed": 29,
+  "tests_failed": 0,
+  "verdict": "PASS \u2014 Coverage target (>95%) achieved."
+}

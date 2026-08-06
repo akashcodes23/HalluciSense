@@ -1,0 +1,237 @@
+{
+  "timestamp": "2026-08-02T07:19:53.697075+00:00",
+  "feature_columns": [
+    "mean_entailment",
+    "max_entailment",
+    "mean_contradiction",
+    "max_contradiction",
+    "mean_support_margin",
+    "min_support_margin",
+    "fraction_supported",
+    "fraction_contradicted",
+    "fraction_unsupported",
+    "num_claims"
+  ],
+  "feature_count": 10,
+  "identical_columns": true,
+  "development": {
+    "shape": [
+      10,
+      10
+    ],
+    "total_nan": 0,
+    "total_inf": 0,
+    "features": {
+      "mean_entailment": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0001,
+        "max": 0.2015,
+        "mean": 0.04374,
+        "std": 0.079178
+      },
+      "max_entailment": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0001,
+        "max": 0.2015,
+        "mean": 0.04501,
+        "std": 0.078511
+      },
+      "mean_contradiction": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0003,
+        "max": 0.9979,
+        "mean": 0.26674,
+        "std": 0.362695
+      },
+      "max_contradiction": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0003,
+        "max": 0.9979,
+        "mean": 0.26841,
+        "std": 0.361482
+      },
+      "mean_support_margin": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": -0.9978,
+        "max": 0.0447,
+        "mean": -0.22296,
+        "std": 0.379952
+      },
+      "min_support_margin": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": -0.9978,
+        "max": 0.0447,
+        "mean": -0.22353,
+        "std": 0.379619
+      },
+      "fraction_supported": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": true,
+        "exceeds_1e6": false,
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "fraction_contradicted": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.2,
+        "std": 0.4
+      },
+      "fraction_unsupported": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": true,
+        "exceeds_1e6": false,
+        "min": 1.0,
+        "max": 1.0,
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "num_claims": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 1.0,
+        "max": 13.0,
+        "mean": 4.3,
+        "std": 5.060632
+      }
+    }
+  },
+  "validation": {
+    "shape": [
+      10,
+      10
+    ],
+    "total_nan": 0,
+    "total_inf": 0,
+    "features": {
+      "mean_entailment": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0001,
+        "max": 0.8,
+        "mean": 0.13992,
+        "std": 0.280696
+      },
+      "max_entailment": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0001,
+        "max": 0.8,
+        "mean": 0.14,
+        "std": 0.280656
+      },
+      "mean_contradiction": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0029,
+        "max": 0.982,
+        "mean": 0.49122,
+        "std": 0.476702
+      },
+      "max_contradiction": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0038,
+        "max": 0.982,
+        "mean": 0.49151,
+        "std": 0.476405
+      },
+      "mean_support_margin": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": -0.9818,
+        "max": 0.7407,
+        "mean": -0.35128,
+        "std": 0.6566
+      },
+      "min_support_margin": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": -0.9818,
+        "max": 0.7407,
+        "mean": -0.3516,
+        "std": 0.65643
+      },
+      "fraction_supported": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.2,
+        "std": 0.4
+      },
+      "fraction_contradicted": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.5,
+        "std": 0.5
+      },
+      "fraction_unsupported": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.8,
+        "std": 0.4
+      },
+      "num_claims": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "is_constant": false,
+        "exceeds_1e6": false,
+        "min": 1.0,
+        "max": 8.0,
+        "mean": 2.7,
+        "std": 2.64764
+      }
+    }
+  }
+}

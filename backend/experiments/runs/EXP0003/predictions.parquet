@@ -1,0 +1,4 @@
+{
+  "format": "parquet_json_fallback",
+  "records": 10
+}

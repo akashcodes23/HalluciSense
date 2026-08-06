@@ -1,0 +1,73 @@
+{
+  "generated_at_utc": "2026-08-03T05:01:37.151249+00:00",
+  "evidence_providers": [
+    "Wikipedia",
+    "Wikidata",
+    "CrossRef",
+    "Semantic Scholar",
+    "PubMed",
+    "GovData",
+    "MockProvider"
+  ],
+  "llm_verifiers": [
+    "Gemini",
+    "GPT-4",
+    "Claude",
+    "MockLLM"
+  ],
+  "provider_details": [
+    {
+      "name": "Wikipedia",
+      "category": "Encyclopedia",
+      "authority": 0.85
+    },
+    {
+      "name": "Wikidata",
+      "category": "Knowledge Base",
+      "authority": 0.9
+    },
+    {
+      "name": "CrossRef",
+      "category": "Academic Literature",
+      "authority": 0.95
+    },
+    {
+      "name": "Semantic Scholar",
+      "category": "Citation Graph",
+      "authority": 0.92
+    },
+    {
+      "name": "PubMed",
+      "category": "Biomedical Literature",
+      "authority": 0.98
+    },
+    {
+      "name": "GovData",
+      "category": "Government Census",
+      "authority": 0.96
+    },
+    {
+      "name": "MockProvider",
+      "category": "Offline Testing",
+      "authority": 0.8
+    }
+  ],
+  "verifier_details": [
+    {
+      "name": "Gemini",
+      "model": "gemini-1.5-pro"
+    },
+    {
+      "name": "GPT-4",
+      "model": "gpt-4o"
+    },
+    {
+      "name": "Claude",
+      "model": "claude-3-5-sonnet"
+    },
+    {
+      "name": "MockLLM",
+      "model": "mock-verifier-v1"
+    }
+  ]
+}

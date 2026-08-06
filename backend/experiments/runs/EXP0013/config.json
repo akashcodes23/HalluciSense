@@ -1,0 +1,15 @@
+{
+  "name": "Master Benchmark Run",
+  "benchmark_dataset": "TruthfulQA",
+  "model_name": "GPT-4",
+  "sample_count": 100,
+  "random_seed": 42,
+  "fusion_mode": "ADAPTIVE",
+  "threshold": 0.54,
+  "platt_params": [
+    1.82,
+    -0.45
+  ],
+  "enable_knowledge_graph": true,
+  "enable_token_localization": true
+}

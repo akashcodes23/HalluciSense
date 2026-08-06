@@ -1,0 +1,67 @@
+{
+  "n_samples": 200,
+  "n_features": 3,
+  "feature_names": [
+    "feat1",
+    "feat2",
+    "feat3"
+  ],
+  "matrix_rank": 3,
+  "condition_number": 37.66527067581744,
+  "vif_scores": {
+    "feat1": 349.5440717908728,
+    "feat2": 349.62794952916937,
+    "feat3": 1.0187518945591736
+  },
+  "pearson_correlation": {
+    "feat1": {
+      "feat1": 1.0,
+      "feat2": 0.9985683037812453,
+      "feat3": -0.1341969439149879
+    },
+    "feat2": {
+      "feat1": 0.9985683037812453,
+      "feat2": 1.0,
+      "feat3": -0.13507185139225306
+    },
+    "feat3": {
+      "feat1": -0.13419694391498788,
+      "feat2": -0.13507185139225303,
+      "feat3": 0.9999999999999999
+    }
+  },
+  "spearman_correlation": {
+    "feat1": {
+      "feat1": 1.0,
+      "feat2": 0.9981249531238282,
+      "feat3": -0.12835370884272107
+    },
+    "feat2": {
+      "feat1": 0.9981249531238282,
+      "feat2": 1.0,
+      "feat3": -0.13057526438160955
+    },
+    "feat3": {
+      "feat1": -0.12835370884272107,
+      "feat2": -0.13057526438160955,
+      "feat3": 1.0
+    }
+  },
+  "redundant_pair_count": 1,
+  "redundant_pairs": [
+    {
+      "feature_a": "feat1",
+      "feature_b": "feat2",
+      "pearson_r": 0.9985683037812453,
+      "spearman_rho": 0.9981249531238282,
+      "mi_feature_a": 0.1685848985738021,
+      "mi_feature_b": 0.22258354317110718,
+      "roc_auc_feature_a": 0.8270067820629619,
+      "roc_auc_feature_b": 0.8259945338597025,
+      "semantic_interpretation": "Collinear pair (|r| = 0.9986)",
+      "proposed_retain": "feat1",
+      "proposed_remove": "feat2",
+      "quantitative_reason": "feat1 has higher ROC-AUC distance (0.3270 vs 0.3260) and MI (0.1686 vs 0.2226)."
+    }
+  ]
+}

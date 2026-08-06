@@ -1,0 +1,232 @@
+{
+  "confusion_counts_at_056": {
+    "TP": 1095,
+    "TN": 1286,
+    "FP": 567,
+    "FN": 552
+  },
+  "top_false_positives": [
+    {
+      "sample_index": 2194,
+      "val_probability": 0.917208840153892,
+      "features": {
+        "mean_entailment": 0.8169,
+        "max_entailment": 0.9886,
+        "mean_contradiction": 0.1496,
+        "min_support_margin": -0.9945,
+        "num_claims": 7.0
+      }
+    },
+    {
+      "sample_index": 2182,
+      "val_probability": 0.8859715996799454,
+      "features": {
+        "mean_entailment": 0.8291,
+        "max_entailment": 0.9873,
+        "mean_contradiction": 0.0638,
+        "min_support_margin": -0.6019,
+        "num_claims": 10.0
+      }
+    },
+    {
+      "sample_index": 1656,
+      "val_probability": 0.7980795885079005,
+      "features": {
+        "mean_entailment": 0.4094,
+        "max_entailment": 0.9907,
+        "mean_contradiction": 0.3331,
+        "min_support_margin": -0.9903,
+        "num_claims": 9.0
+      }
+    },
+    {
+      "sample_index": 1570,
+      "val_probability": 0.7894851135079284,
+      "features": {
+        "mean_entailment": 0.0015,
+        "max_entailment": 0.0048,
+        "mean_contradiction": 0.0469,
+        "min_support_margin": -0.877,
+        "num_claims": 24.0
+      }
+    },
+    {
+      "sample_index": 2185,
+      "val_probability": 0.781655704310115,
+      "features": {
+        "mean_entailment": 0.8362,
+        "max_entailment": 0.9942,
+        "mean_contradiction": 0.0023,
+        "min_support_margin": -0.0046,
+        "num_claims": 7.0
+      }
+    },
+    {
+      "sample_index": 178,
+      "val_probability": 0.7614686892459015,
+      "features": {
+        "mean_entailment": 0.0017,
+        "max_entailment": 0.0027,
+        "mean_contradiction": 0.0966,
+        "min_support_margin": -0.9595,
+        "num_claims": 13.0
+      }
+    },
+    {
+      "sample_index": 775,
+      "val_probability": 0.7568659451959332,
+      "features": {
+        "mean_entailment": 0.0116,
+        "max_entailment": 0.0519,
+        "mean_contradiction": 0.1036,
+        "min_support_margin": -0.9985,
+        "num_claims": 10.0
+      }
+    },
+    {
+      "sample_index": 55,
+      "val_probability": 0.7568016855999393,
+      "features": {
+        "mean_entailment": 0.0049,
+        "max_entailment": 0.0098,
+        "mean_contradiction": 0.1017,
+        "min_support_margin": -0.9388,
+        "num_claims": 13.0
+      }
+    },
+    {
+      "sample_index": 253,
+      "val_probability": 0.7508302120248248,
+      "features": {
+        "mean_entailment": 0.001,
+        "max_entailment": 0.0032,
+        "mean_contradiction": 0.0978,
+        "min_support_margin": -0.9677,
+        "num_claims": 10.0
+      }
+    },
+    {
+      "sample_index": 1153,
+      "val_probability": 0.7477633050639738,
+      "features": {
+        "mean_entailment": 0.2069,
+        "max_entailment": 0.6583,
+        "mean_contradiction": 0.2663,
+        "min_support_margin": -0.978,
+        "num_claims": 8.0
+      }
+    }
+  ],
+  "top_false_negatives": [
+    {
+      "sample_index": 952,
+      "val_probability": 0.4091726878733619,
+      "features": {
+        "mean_entailment": 0.1284,
+        "max_entailment": 0.9859,
+        "mean_contradiction": 0.0053,
+        "min_support_margin": -0.0149,
+        "num_claims": 8.0
+      }
+    },
+    {
+      "sample_index": 997,
+      "val_probability": 0.412286285582946,
+      "features": {
+        "mean_entailment": 0.0722,
+        "max_entailment": 0.9751,
+        "mean_contradiction": 0.0121,
+        "min_support_margin": -0.025,
+        "num_claims": 14.0
+      }
+    },
+    {
+      "sample_index": 352,
+      "val_probability": 0.4122917302911741,
+      "features": {
+        "mean_entailment": 0.1095,
+        "max_entailment": 0.866,
+        "mean_contradiction": 0.0023,
+        "min_support_margin": -0.0039,
+        "num_claims": 8.0
+      }
+    },
+    {
+      "sample_index": 949,
+      "val_probability": 0.414329449570993,
+      "features": {
+        "mean_entailment": 0.1413,
+        "max_entailment": 0.9844,
+        "mean_contradiction": 0.0056,
+        "min_support_margin": -0.0242,
+        "num_claims": 7.0
+      }
+    },
+    {
+      "sample_index": 1743,
+      "val_probability": 0.4171398635584193,
+      "features": {
+        "mean_entailment": 0.0743,
+        "max_entailment": 0.8842,
+        "mean_contradiction": 0.0083,
+        "min_support_margin": -0.0105,
+        "num_claims": 13.0
+      }
+    },
+    {
+      "sample_index": 1915,
+      "val_probability": 0.4187791298265657,
+      "features": {
+        "mean_entailment": 0.1689,
+        "max_entailment": 0.9796,
+        "mean_contradiction": 0.0042,
+        "min_support_margin": -0.0013,
+        "num_claims": 6.0
+      }
+    },
+    {
+      "sample_index": 756,
+      "val_probability": 0.4226478410767591,
+      "features": {
+        "mean_entailment": 0.1441,
+        "max_entailment": 0.8477,
+        "mean_contradiction": 0.0098,
+        "min_support_margin": -0.0019,
+        "num_claims": 6.0
+      }
+    },
+    {
+      "sample_index": 889,
+      "val_probability": 0.4239419272231003,
+      "features": {
+        "mean_entailment": 0.1629,
+        "max_entailment": 0.9174,
+        "mean_contradiction": 0.0082,
+        "min_support_margin": -0.0023,
+        "num_claims": 6.0
+      }
+    },
+    {
+      "sample_index": 1740,
+      "val_probability": 0.4260962772201305,
+      "features": {
+        "mean_entailment": 0.0794,
+        "max_entailment": 0.7515,
+        "mean_contradiction": 0.0094,
+        "min_support_margin": -0.0209,
+        "num_claims": 10.0
+      }
+    },
+    {
+      "sample_index": 133,
+      "val_probability": 0.4274185227271539,
+      "features": {
+        "mean_entailment": 0.0789,
+        "max_entailment": 0.8712,
+        "mean_contradiction": 0.0172,
+        "min_support_margin": -0.033,
+        "num_claims": 13.0
+      }
+    }
+  ]
+}

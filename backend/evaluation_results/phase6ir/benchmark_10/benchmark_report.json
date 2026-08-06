@@ -1,0 +1,10 @@
+{
+  "benchmark": true,
+  "examples_requested": 10,
+  "development_examples": 10,
+  "validation_examples": 10,
+  "runtime_seconds": 6.8,
+  "examples_per_second": 2.9,
+  "claims_processed": 70,
+  "device": "mps"
+}

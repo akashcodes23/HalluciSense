@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-08-02T07:19:53.839062+00:00",
+  "baseline_phase6h": {
+    "phase6h_dev_mcc": 0.0,
+    "phase6h_dev_balanced_accuracy": 0.5,
+    "phase6h_dev_recall": 1.0,
+    "phase6h_dev_specificity": 0.0,
+    "phase6h_dev_roc_auc": 0.5
+  },
+  "reconstructed_gen3_dev": {
+    "mcc": 0.3563,
+    "balanced_accuracy": 0.6667,
+    "recall": 0.8333,
+    "specificity": 0.5,
+    "roc_auc": 0.7083
+  },
+  "absolute_improvements": {
+    "mcc": 0.3563,
+    "balanced_accuracy": 0.1667,
+    "roc_auc": 0.2083
+  }
+}

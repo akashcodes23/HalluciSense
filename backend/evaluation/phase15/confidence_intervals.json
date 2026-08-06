@@ -1,0 +1,40 @@
+{
+  "hallucisense_bootstrap_ci_10000": {
+    "accuracy": {
+      "mean": 0.8695,
+      "std": 0.0122,
+      "ci_lower_95": 0.8453,
+      "ci_upper_95": 0.8933
+    },
+    "f1_score": {
+      "mean": 0.8643,
+      "std": 0.0136,
+      "ci_lower_95": 0.8366,
+      "ci_upper_95": 0.8901
+    },
+    "auroc": {
+      "mean": 0.9436,
+      "std": 0.008,
+      "ci_lower_95": 0.9271,
+      "ci_upper_95": 0.9584
+    },
+    "precision": {
+      "mean": 0.8995,
+      "std": 0.0161,
+      "ci_lower_95": 0.8665,
+      "ci_upper_95": 0.9298
+    },
+    "recall": {
+      "mean": 0.8321,
+      "std": 0.0194,
+      "ci_lower_95": 0.7929,
+      "ci_upper_95": 0.8692
+    },
+    "mcc": {
+      "mean": 0.7411,
+      "std": 0.0241,
+      "ci_lower_95": 0.6934,
+      "ci_upper_95": 0.7878
+    }
+  }
+}

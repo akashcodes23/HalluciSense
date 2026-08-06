@@ -1,0 +1,38 @@
+{
+  "total_metrics_mapped": 3,
+  "verified_count": 3,
+  "pending_count": 0,
+  "status": "100% PROVENANCE TRACEABLE",
+  "matrix": [
+    {
+      "metric_name": "AUROC (Primary Benchmark)",
+      "reported_value": 0.9501,
+      "confidence_interval_95": "[0.9320, 0.9650]",
+      "paper_location": "elsevier_manuscript.tex (Table 1)",
+      "source_experiment_id": "EXP0001",
+      "raw_prediction_file": "backend/experiments/runs/EXP0001/predictions.csv",
+      "computation_script": "backend/evaluation/statistical_validation_engine.py",
+      "verification_status": "VERIFIED_EXACT_MATCH"
+    },
+    {
+      "metric_name": "Recalibrated ECE (Platt Scaling)",
+      "reported_value": 0.0257,
+      "confidence_interval_95": "[0.0210, 0.0310]",
+      "paper_location": "elsevier_manuscript.tex (Table 1 & Fig 3)",
+      "source_experiment_id": "EXP0001",
+      "raw_prediction_file": "backend/experiments/runs/EXP0001/predictions.csv",
+      "computation_script": "backend/evaluation/publishable_benchmark.py",
+      "verification_status": "VERIFIED_EXACT_MATCH"
+    },
+    {
+      "metric_name": "Matthews Correlation Coefficient (MCC)",
+      "reported_value": 0.7525,
+      "confidence_interval_95": "[0.7100, 0.7920]",
+      "paper_location": "elsevier_manuscript.tex (Table 1)",
+      "source_experiment_id": "EXP0001",
+      "raw_prediction_file": "backend/experiments/runs/EXP0001/predictions.csv",
+      "computation_script": "backend/evaluation/statistical_validation_engine.py",
+      "verification_status": "VERIFIED_EXACT_MATCH"
+    }
+  ]
+}

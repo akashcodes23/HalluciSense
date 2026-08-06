@@ -1,0 +1,3289 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "HalluciSense",
+    "version": "10.0.0"
+  },
+  "paths": {
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register a new user account",
+        "description": "Create a new HalluciSense account.\nReturns a token pair and basic user info on success.",
+        "operationId": "register_api_v1_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Authenticate and receive a token pair",
+        "description": "Authenticate with email and password.\nReturns an access token (15 min) and a refresh token (7 days).",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Exchange a refresh token for a new token pair",
+        "description": "Validate the provided refresh token and issue a fresh access + refresh pair.",
+        "operationId": "refresh_token_api_v1_auth_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Return the authenticated user's profile",
+        "description": "Returns the currently authenticated user's public profile.",
+        "operationId": "get_me_api_v1_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPublicResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Invalidate the current session",
+        "description": "Logout endpoint. In a full implementation this blacklists the\nrefresh token in Redis. Stateless for Sprint 1.",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__modules__auth__schemas__MessageResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get the authenticated user's full profile",
+        "description": "Returns the full profile of the authenticated user.",
+        "operationId": "get_my_profile_api_v1_users_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update the authenticated user's profile",
+        "description": "Partially update the user's display name, avatar, or preferred model.\nOnly provided fields are updated.",
+        "operationId": "update_my_profile_api_v1_users_me_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/chats": {
+      "get": {
+        "tags": [
+          "Chats"
+        ],
+        "summary": "List all active chats for the authenticated user",
+        "operationId": "list_chats_api_v1_chats_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Chats"
+        ],
+        "summary": "Create a new chat session",
+        "operationId": "create_chat_api_v1_chats_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/{chat_id}": {
+      "get": {
+        "tags": [
+          "Chats"
+        ],
+        "summary": "Get a specific chat by ID",
+        "operationId": "get_chat_api_v1_chats__chat_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Chats"
+        ],
+        "summary": "Update a chat (e.g. rename or archive)",
+        "operationId": "update_chat_api_v1_chats__chat_id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Chats"
+        ],
+        "summary": "Delete a chat permanently",
+        "operationId": "delete_chat_api_v1_chats__chat_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/{chat_id}/messages": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "List all messages and their verification reports for a chat",
+        "description": "Fetch all messages for a specific chat.",
+        "operationId": "list_messages_api_v1_chats__chat_id__messages_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/{chat_id}/messages/verify-external": {
+      "post": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Verify an external response without generating a new one",
+        "description": "Submit an externally generated LLM response (or article) to be verified\nby the HalluciSense pipeline. Returns the ID of the created message.",
+        "operationId": "verify_external_message_api_v1_chats__chat_id__messages_verify_external_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/verification/verify-text": {
+      "post": {
+        "tags": [
+          "Verification Engine"
+        ],
+        "summary": "Verify Text",
+        "operationId": "verify_text_api_v1_verification_verify_text_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/analytics/summary": {
+      "get": {
+        "tags": [
+          "Analytics"
+        ],
+        "summary": "Get Analytics Summary",
+        "description": "Returns high-level analytics for the current user's chats.",
+        "operationId": "get_analytics_summary_api_v1_analytics_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Analytics Summary Api V1 Analytics Summary Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/export/chats/{chat_id}": {
+      "get": {
+        "tags": [
+          "Export"
+        ],
+        "summary": "Export Chat",
+        "description": "Export a chat in JSON or Markdown format.",
+        "operationId": "export_chat_api_v1_export_chats__chat_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Chat Id"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "title": "Format"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "List Users",
+        "description": "List all users with their chat counts.",
+        "operationId": "list_users_api_v1_admin_users_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/system-health": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get System Health",
+        "description": "Get system health and stats.",
+        "operationId": "get_system_health_api_v1_admin_system_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/hallucisense/predict": {
+      "post": {
+        "tags": [
+          "HalluciSense Core"
+        ],
+        "summary": "Predict Hallucination Probability",
+        "description": "Execute production hybrid inference pipeline on text input.",
+        "operationId": "predict_hallucination_api_v1_hallucisense_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Predict Hallucination Api V1 Hallucisense Predict Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hallucisense/explain": {
+      "post": {
+        "tags": [
+          "HalluciSense Core"
+        ],
+        "summary": "Explain Hallucination Decision",
+        "description": "Generate detailed claim-level explanation for hallucination prediction.",
+        "operationId": "explain_hallucination_api_v1_hallucisense_explain_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExplainRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Explain Hallucination Api V1 Hallucisense Explain Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hallucisense/health": {
+      "get": {
+        "tags": [
+          "HalluciSense Core"
+        ],
+        "summary": "System Health Audit",
+        "description": "Audit model registry and system health status.",
+        "operationId": "health_check_api_v1_hallucisense_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Health Check Api V1 Hallucisense Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hallucisense/version": {
+      "get": {
+        "tags": [
+          "HalluciSense Core"
+        ],
+        "summary": "Version Metadata",
+        "description": "Return framework version metadata, git commit hash, and dataset SHA-256 fingerprints.",
+        "operationId": "version_metadata_api_v1_hallucisense_version_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Version Metadata Api V1 Hallucisense Version Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/hallucisense/metrics": {
+      "get": {
+        "tags": [
+          "HalluciSense Core"
+        ],
+        "summary": "System Performance Metrics",
+        "description": "Return frozen validation metrics and system benchmark metrics.",
+        "operationId": "system_metrics_api_v1_hallucisense_metrics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response System Metrics Api V1 Hallucisense Metrics Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/health": {
+      "get": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Get Health",
+        "description": "Pillar 2 Service Health Check.",
+        "operationId": "get_health_api_v1_pillar2_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Health Api V1 Pillar2 Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/version": {
+      "get": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Get Version",
+        "description": "Pillar 2 Module Version Metadata.",
+        "operationId": "get_version_api_v1_pillar2_version_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Get Version Api V1 Pillar2 Version Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/providers": {
+      "get": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Get Providers",
+        "description": "List registered evidence retrieval providers and multi-LLM verifiers.",
+        "operationId": "get_providers_api_v1_pillar2_providers_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Providers Api V1 Pillar2 Providers Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/claims": {
+      "post": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Extract Claims",
+        "description": "Decompose response text into atomic claims.",
+        "operationId": "extract_claims_api_v1_pillar2_claims_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaimExtractionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClaimExtractionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/evidence": {
+      "post": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Retrieve Evidence",
+        "description": "Retrieve evidence across providers for a given query.",
+        "operationId": "retrieve_evidence_api_v1_pillar2_evidence_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetrievalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetrievalResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/consensus": {
+      "post": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Compute Consensus",
+        "description": "Compute statistical consensus across multi-LLM verifications.",
+        "operationId": "compute_consensus_api_v1_pillar2_consensus_post",
+        "parameters": [
+          {
+            "name": "claim_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Claim Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SingleClaimVerification"
+                },
+                "title": "Verifications"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsensusResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/hallucination-score": {
+      "post": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Compute Hscore",
+        "description": "Calculate 0-100 Unified HalluciSense Score.",
+        "operationId": "compute_hscore_api_v1_pillar2_hallucination_score_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HScoreCalculationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnifiedHScoreResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/pillar2/verify": {
+      "post": {
+        "tags": [
+          "Pillar 2 Verification Engine"
+        ],
+        "summary": "Full Verification",
+        "description": "Execute full Pillar 2 evidence-aware verification pipeline.\nDecomposes claims, retrieves evidence, executes multi-LLM verification,\ncomputes consensus & contradiction graphs, generates 10 evidence features,\nfuses with frozen Pillar 1 score, and formats Dashboard UI contract payload.",
+        "operationId": "full_verification_api_v1_pillar2_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FullVerificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullVerificationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthResponse": {
+        "properties": {
+          "tokens": {
+            "$ref": "#/components/schemas/TokenResponse"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserPublicResponse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tokens",
+          "user"
+        ],
+        "title": "AuthResponse",
+        "description": "Combines token pair with user info in a single login response."
+      },
+      "CharacterOffsets": {
+        "properties": {
+          "start": {
+            "type": "integer",
+            "title": "Start",
+            "description": "Start character index in source text"
+          },
+          "end": {
+            "type": "integer",
+            "title": "End",
+            "description": "End character index in source text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "CharacterOffsets"
+      },
+      "ChatCreateRequest": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title",
+            "default": "New Chat"
+          },
+          "model_used": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Used",
+            "default": "gemini-2.0-flash"
+          }
+        },
+        "type": "object",
+        "title": "ChatCreateRequest",
+        "description": "Payload for POST /chats."
+      },
+      "ChatListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChatResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "ChatListResponse",
+        "description": "Response for GET /chats."
+      },
+      "ChatResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "model_used": {
+            "type": "string",
+            "title": "Model Used"
+          },
+          "is_archived": {
+            "type": "boolean",
+            "title": "Is Archived"
+          },
+          "last_message_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Message At"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "title",
+          "model_used",
+          "is_archived",
+          "last_message_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ChatResponse",
+        "description": "Standard chat response."
+      },
+      "ChatUpdateRequest": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "is_archived": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Archived"
+          }
+        },
+        "type": "object",
+        "title": "ChatUpdateRequest",
+        "description": "Payload for PATCH /chats/{chat_id}."
+      },
+      "CitationMetadata": {
+        "properties": {
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi",
+            "description": "Digital Object Identifier"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors",
+            "description": "Author list"
+          },
+          "journal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Journal",
+            "description": "Journal or publisher name"
+          },
+          "volume": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Volume",
+            "description": "Volume or issue"
+          },
+          "citation_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Citation Count",
+            "description": "Total citations",
+            "default": 0
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License",
+            "description": "Publication license"
+          }
+        },
+        "type": "object",
+        "title": "CitationMetadata"
+      },
+      "ClaimCardUI": {
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "title": "Claim Id"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "claim_type": {
+            "type": "string",
+            "title": "Claim Type"
+          },
+          "consensus_label": {
+            "type": "string",
+            "title": "Consensus Label"
+          },
+          "confidence_percentage": {
+            "type": "number",
+            "title": "Confidence Percentage"
+          },
+          "supporting_sources_count": {
+            "type": "integer",
+            "title": "Supporting Sources Count"
+          },
+          "contradicting_sources_count": {
+            "type": "integer",
+            "title": "Contradicting Sources Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "claim_id",
+          "text",
+          "claim_type",
+          "consensus_label",
+          "confidence_percentage",
+          "supporting_sources_count",
+          "contradicting_sources_count"
+        ],
+        "title": "ClaimCardUI"
+      },
+      "ClaimExtractionRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "description": "LLM response text to decompose into atomic claims",
+            "default": ""
+          },
+          "domain_context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain Context",
+            "description": "Optional domain hint (e.g., scientific, medical, general)"
+          }
+        },
+        "type": "object",
+        "title": "ClaimExtractionRequest"
+      },
+      "ClaimExtractionResponse": {
+        "properties": {
+          "extracted_claims": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractedClaim"
+            },
+            "type": "array",
+            "title": "Extracted Claims",
+            "description": "List of decomposed atomic claims"
+          },
+          "total_claims": {
+            "type": "integer",
+            "title": "Total Claims",
+            "description": "Total number of claims extracted"
+          },
+          "num_sentences": {
+            "type": "integer",
+            "title": "Num Sentences",
+            "description": "Total sentences parsed in text"
+          },
+          "extraction_time_ms": {
+            "type": "number",
+            "title": "Extraction Time Ms",
+            "description": "Latency in milliseconds"
+          }
+        },
+        "type": "object",
+        "required": [
+          "extracted_claims",
+          "total_claims",
+          "num_sentences",
+          "extraction_time_ms"
+        ],
+        "title": "ClaimExtractionResponse"
+      },
+      "ClaimType": {
+        "type": "string",
+        "enum": [
+          "DECLARATIVE",
+          "NUMERICAL",
+          "TEMPORAL",
+          "ENTITY_RELATION",
+          "SCIENTIFIC"
+        ],
+        "title": "ClaimType"
+      },
+      "ConfidenceGaugeUI": {
+        "properties": {
+          "overall_confidence": {
+            "type": "number",
+            "title": "Overall Confidence"
+          },
+          "confidence_level": {
+            "type": "string",
+            "title": "Confidence Level"
+          },
+          "pillar1_probability": {
+            "type": "number",
+            "title": "Pillar1 Probability"
+          },
+          "evidence_quality_score": {
+            "type": "number",
+            "title": "Evidence Quality Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "overall_confidence",
+          "confidence_level",
+          "pillar1_probability",
+          "evidence_quality_score"
+        ],
+        "title": "ConfidenceGaugeUI"
+      },
+      "ConsensusResult": {
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "title": "Claim Id",
+            "description": "Target claim ID"
+          },
+          "majority_label": {
+            "$ref": "#/components/schemas/VerificationLabel",
+            "description": "Majority vote consensus label"
+          },
+          "weighted_label": {
+            "$ref": "#/components/schemas/VerificationLabel",
+            "description": "Confidence-weighted consensus label"
+          },
+          "consensus_confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Consensus Confidence",
+            "description": "Aggregated consensus confidence"
+          },
+          "label_distribution": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Label Distribution",
+            "description": "Raw label counts across verifiers"
+          },
+          "label_weights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Label Weights",
+            "description": "Summed confidence weights per label"
+          },
+          "pairwise_agreement_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Pairwise Agreement Score",
+            "description": "Mean pairwise agreement ratio (0-1)"
+          },
+          "shannon_entropy": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Shannon Entropy",
+            "description": "Shannon entropy of label distribution (lower = more consensus)"
+          },
+          "confidence_variance": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Confidence Variance",
+            "description": "Variance in confidence scores across verifiers"
+          },
+          "agreement_matrix": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Agreement Matrix",
+            "description": "Pairwise agreement matrix between verifiers"
+          },
+          "disagreeing_verifiers": {
+            "items": {
+              "$ref": "#/components/schemas/DisagreementDetail"
+            },
+            "type": "array",
+            "title": "Disagreeing Verifiers",
+            "description": "List of dissenting verifiers"
+          },
+          "verdict_summary": {
+            "type": "string",
+            "title": "Verdict Summary",
+            "description": "Human-readable consensus summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "claim_id",
+          "majority_label",
+          "weighted_label",
+          "consensus_confidence",
+          "label_distribution",
+          "label_weights",
+          "pairwise_agreement_score",
+          "shannon_entropy",
+          "confidence_variance",
+          "agreement_matrix",
+          "verdict_summary"
+        ],
+        "title": "ConsensusResult"
+      },
+      "ConsensusViewUI": {
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "title": "Claim Id"
+          },
+          "majority_label": {
+            "type": "string",
+            "title": "Majority Label"
+          },
+          "agreement_percentage": {
+            "type": "number",
+            "title": "Agreement Percentage"
+          },
+          "shannon_entropy": {
+            "type": "number",
+            "title": "Shannon Entropy"
+          },
+          "label_breakdown": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Label Breakdown"
+          },
+          "dissenting_verifiers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Dissenting Verifiers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "claim_id",
+          "majority_label",
+          "agreement_percentage",
+          "shannon_entropy",
+          "label_breakdown",
+          "dissenting_verifiers"
+        ],
+        "title": "ConsensusViewUI"
+      },
+      "DashboardOverviewUI": {
+        "properties": {
+          "verification_id": {
+            "type": "string",
+            "title": "Verification Id"
+          },
+          "risk_indicator": {
+            "$ref": "#/components/schemas/RiskIndicatorUI"
+          },
+          "confidence_gauge": {
+            "$ref": "#/components/schemas/ConfidenceGaugeUI"
+          },
+          "claim_cards": {
+            "items": {
+              "$ref": "#/components/schemas/ClaimCardUI"
+            },
+            "type": "array",
+            "title": "Claim Cards"
+          },
+          "evidence_cards": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceCardUI"
+            },
+            "type": "array",
+            "title": "Evidence Cards"
+          },
+          "consensus_view": {
+            "items": {
+              "$ref": "#/components/schemas/ConsensusViewUI"
+            },
+            "type": "array",
+            "title": "Consensus View"
+          },
+          "timeline": {
+            "items": {
+              "$ref": "#/components/schemas/TimelineItemUI"
+            },
+            "type": "array",
+            "title": "Timeline"
+          },
+          "network_graph": {
+            "$ref": "#/components/schemas/NetworkGraphUI"
+          },
+          "recommendations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Recommendations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "verification_id",
+          "risk_indicator",
+          "confidence_gauge",
+          "claim_cards",
+          "evidence_cards",
+          "consensus_view",
+          "timeline",
+          "network_graph",
+          "recommendations"
+        ],
+        "title": "DashboardOverviewUI"
+      },
+      "DisagreementDetail": {
+        "properties": {
+          "verifier_name": {
+            "type": "string",
+            "title": "Verifier Name",
+            "description": "Dissenting verifier name"
+          },
+          "assigned_label": {
+            "$ref": "#/components/schemas/VerificationLabel",
+            "description": "Label assigned by dissenting verifier"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence",
+            "description": "Confidence of dissenting verifier"
+          },
+          "reasoning": {
+            "type": "string",
+            "title": "Reasoning",
+            "description": "Rationale for dissent"
+          }
+        },
+        "type": "object",
+        "required": [
+          "verifier_name",
+          "assigned_label",
+          "confidence",
+          "reasoning"
+        ],
+        "title": "DisagreementDetail"
+      },
+      "EvidenceCardUI": {
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "title": "Evidence Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "snippet": {
+            "type": "string",
+            "title": "Snippet"
+          },
+          "authority_score": {
+            "type": "number",
+            "title": "Authority Score"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "title",
+          "provider",
+          "url",
+          "snippet",
+          "authority_score",
+          "publication_date"
+        ],
+        "title": "EvidenceCardUI"
+      },
+      "EvidenceItem": {
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "title": "Evidence Id",
+            "description": "Unique evidence item identifier"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Title of reference document or entry"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "description": "Provider source identifier (e.g. Wikipedia, PubMed)"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "Canonical source URL"
+          },
+          "snippet": {
+            "type": "string",
+            "title": "Snippet",
+            "description": "Retrieved excerpt or passage text"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date",
+            "description": "Publication or revision date"
+          },
+          "authority_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Authority Score",
+            "description": "Domain authority weighting (0-1)",
+            "default": 0.8
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "description": "Retrieval relevance confidence",
+            "default": 0.85
+          },
+          "retrieval_latency_ms": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Retrieval Latency Ms",
+            "description": "Retrieval latency in milliseconds",
+            "default": 0.0
+          },
+          "citation_metadata": {
+            "$ref": "#/components/schemas/CitationMetadata",
+            "description": "Bibliographic metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "title",
+          "source",
+          "url",
+          "snippet"
+        ],
+        "title": "EvidenceItem"
+      },
+      "EvidenceItemResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "claim": {
+            "type": "string",
+            "title": "Claim"
+          },
+          "snippet": {
+            "type": "string",
+            "title": "Snippet"
+          },
+          "source_name": {
+            "type": "string",
+            "title": "Source Name"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "similarity_score": {
+            "type": "number",
+            "title": "Similarity Score"
+          },
+          "is_supporting": {
+            "type": "boolean",
+            "title": "Is Supporting"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "claim",
+          "snippet",
+          "source_name",
+          "source_url",
+          "similarity_score",
+          "is_supporting"
+        ],
+        "title": "EvidenceItemResponse"
+      },
+      "ExplainRequest": {
+        "properties": {
+          "response_text": {
+            "type": "string",
+            "title": "Response Text",
+            "description": "LLM generated response text to analyze."
+          },
+          "claims": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Claims",
+            "description": "Optional claims list."
+          }
+        },
+        "type": "object",
+        "required": [
+          "response_text"
+        ],
+        "title": "ExplainRequest"
+      },
+      "ExtractedClaim": {
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "title": "Claim Id",
+            "description": "Unique deterministic identifier for extracted claim"
+          },
+          "claim_text": {
+            "type": "string",
+            "title": "Claim Text",
+            "description": "Cleaned atomic claim statement"
+          },
+          "claim_type": {
+            "$ref": "#/components/schemas/ClaimType",
+            "description": "Categorical type of claim",
+            "default": "DECLARATIVE"
+          },
+          "entities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Entities",
+            "description": "Extracted named entities"
+          },
+          "relations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Relations",
+            "description": "Extracted relational predicates"
+          },
+          "numbers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Numbers",
+            "description": "Extracted numerical values or quantities"
+          },
+          "dates": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Dates",
+            "description": "Extracted dates, years, or temporal expressions"
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "description": "Extraction confidence score",
+            "default": 1.0
+          },
+          "sentence_index": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Sentence Index",
+            "description": "0-indexed sentence position in original response",
+            "default": 0
+          },
+          "character_offsets": {
+            "$ref": "#/components/schemas/CharacterOffsets",
+            "description": "Span offsets in original text"
+          },
+          "metadata": {
+            "type": "object",
+            "title": "Metadata",
+            "description": "Extensible metadata attributes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "claim_id",
+          "claim_text",
+          "character_offsets"
+        ],
+        "title": "ExtractedClaim"
+      },
+      "FullVerificationRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Text",
+            "description": "LLM response text to verify"
+          },
+          "pillar1_probability": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Pillar1 Probability",
+            "description": "Frozen Pillar 1 statistical probability",
+            "default": 0.5
+          },
+          "evidence_providers": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidence Providers",
+            "description": "Target evidence providers"
+          },
+          "llm_verifiers": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Llm Verifiers",
+            "description": "Target LLM verifiers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "FullVerificationRequest"
+      },
+      "FullVerificationResponse": {
+        "properties": {
+          "verification_id": {
+            "type": "string",
+            "title": "Verification Id"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "hallucisense_score": {
+            "$ref": "#/components/schemas/UnifiedHScoreResult"
+          },
+          "explanation": {
+            "title": "Explanation"
+          },
+          "dashboard_ui": {
+            "$ref": "#/components/schemas/DashboardOverviewUI"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          }
+        },
+        "type": "object",
+        "required": [
+          "verification_id",
+          "text",
+          "hallucisense_score",
+          "explanation",
+          "dashboard_ui",
+          "execution_time_ms"
+        ],
+        "title": "FullVerificationResponse"
+      },
+      "GraphEdgeUI": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "target": {
+            "type": "string",
+            "title": "Target"
+          },
+          "relation": {
+            "type": "string",
+            "title": "Relation"
+          },
+          "severity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Severity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source",
+          "target",
+          "relation"
+        ],
+        "title": "GraphEdgeUI"
+      },
+      "GraphNodeUI": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "type"
+        ],
+        "title": "GraphNodeUI"
+      },
+      "HScoreCalculationRequest": {
+        "properties": {
+          "pillar1_probability": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Pillar1 Probability"
+          },
+          "support_ratio": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Support Ratio",
+            "default": 0.5
+          },
+          "contradiction_ratio": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Contradiction Ratio",
+            "default": 0.0
+          },
+          "authority_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Authority Score",
+            "default": 0.8
+          },
+          "consensus_confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Consensus Confidence",
+            "default": 0.8
+          },
+          "max_contradiction_severity": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Max Contradiction Severity",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "pillar1_probability"
+        ],
+        "title": "HScoreCalculationRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoginRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email",
+            "examples": [
+              "jane@example.com"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Password",
+            "examples": [
+              "StrongP@ssw0rd!"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "LoginRequest",
+        "description": "Payload for POST /auth/login."
+      },
+      "MessageCreateRequest": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "title": "MessageCreateRequest",
+        "description": "Payload for POST /chats/{chat_id}/messages (for non-streaming chat)."
+      },
+      "MessageListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/app__modules__messages__schemas__MessageResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "MessageListResponse",
+        "description": "Response for GET /chats/{chat_id}/messages."
+      },
+      "NetworkGraphUI": {
+        "properties": {
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/GraphNodeUI"
+            },
+            "type": "array",
+            "title": "Nodes"
+          },
+          "edges": {
+            "items": {
+              "$ref": "#/components/schemas/GraphEdgeUI"
+            },
+            "type": "array",
+            "title": "Edges"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nodes",
+          "edges"
+        ],
+        "title": "NetworkGraphUI"
+      },
+      "PredictRequest": {
+        "properties": {
+          "response_text": {
+            "type": "string",
+            "title": "Response Text",
+            "description": "LLM generated response text to analyze."
+          },
+          "claims": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Claims",
+            "description": "Optional pre-extracted claims list."
+          },
+          "feature_vector": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feature Vector",
+            "description": "Optional 19-dimensional hybrid feature vector."
+          }
+        },
+        "type": "object",
+        "required": [
+          "response_text"
+        ],
+        "title": "PredictRequest"
+      },
+      "RefreshRequest": {
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token",
+            "description": "Long-lived refresh JWT."
+          }
+        },
+        "type": "object",
+        "required": [
+          "refresh_token"
+        ],
+        "title": "RefreshRequest",
+        "description": "Payload for POST /auth/refresh."
+      },
+      "RegisterRequest": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 2,
+            "title": "Full Name",
+            "examples": [
+              "Jane Smith"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email",
+            "examples": [
+              "jane@example.com"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 8,
+            "title": "Password",
+            "examples": [
+              "StrongP@ssw0rd!"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_name",
+          "email",
+          "password"
+        ],
+        "title": "RegisterRequest",
+        "description": "Payload for POST /auth/register."
+      },
+      "RetrievalRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Query",
+            "description": "Query or claim text to retrieve evidence for"
+          },
+          "max_results_per_provider": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Max Results Per Provider",
+            "description": "Maximum items per provider",
+            "default": 3
+          },
+          "providers": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Providers",
+            "description": "Specific providers to query; None queries all active"
+          },
+          "timeout_seconds": {
+            "type": "number",
+            "maximum": 30.0,
+            "minimum": 0.5,
+            "title": "Timeout Seconds",
+            "description": "Request timeout per provider",
+            "default": 5.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "RetrievalRequest"
+      },
+      "RetrievalResponse": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "Original query"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceItem"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "Retrieved evidence items"
+          },
+          "total_retrieved": {
+            "type": "integer",
+            "title": "Total Retrieved",
+            "description": "Total evidence item count"
+          },
+          "providers_queried": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Providers Queried",
+            "description": "List of providers attempted"
+          },
+          "failed_providers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Failed Providers",
+            "description": "List of providers that timed out or failed"
+          },
+          "total_latency_ms": {
+            "type": "number",
+            "title": "Total Latency Ms",
+            "description": "Total wall-clock latency in milliseconds"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "items",
+          "total_retrieved",
+          "providers_queried",
+          "total_latency_ms"
+        ],
+        "title": "RetrievalResponse"
+      },
+      "RiskCategory": {
+        "type": "string",
+        "enum": [
+          "VERY_LOW",
+          "LOW",
+          "MODERATE",
+          "HIGH",
+          "CRITICAL"
+        ],
+        "title": "RiskCategory"
+      },
+      "RiskIndicatorUI": {
+        "properties": {
+          "hallucisense_score": {
+            "type": "number",
+            "title": "Hallucisense Score"
+          },
+          "risk_category": {
+            "$ref": "#/components/schemas/RiskCategory"
+          },
+          "color_hex": {
+            "type": "string",
+            "title": "Color Hex"
+          },
+          "badge_label": {
+            "type": "string",
+            "title": "Badge Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hallucisense_score",
+          "risk_category",
+          "color_hex",
+          "badge_label"
+        ],
+        "title": "RiskIndicatorUI"
+      },
+      "SentenceAnalysisResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "sentence_index": {
+            "type": "integer",
+            "title": "Sentence Index"
+          },
+          "sentence_text": {
+            "type": "string",
+            "title": "Sentence Text"
+          },
+          "h_score": {
+            "type": "number",
+            "title": "H Score"
+          },
+          "risk_level": {
+            "type": "string",
+            "title": "Risk Level"
+          },
+          "color_code": {
+            "type": "string",
+            "title": "Color Code"
+          },
+          "reasoning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reasoning"
+          },
+          "evidence_items": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceItemResponse"
+            },
+            "type": "array",
+            "title": "Evidence Items",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "sentence_index",
+          "sentence_text",
+          "h_score",
+          "risk_level",
+          "color_code",
+          "reasoning"
+        ],
+        "title": "SentenceAnalysisResponse"
+      },
+      "SingleClaimVerification": {
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "title": "Claim Id",
+            "description": "Target claim ID"
+          },
+          "provider_name": {
+            "type": "string",
+            "title": "Provider Name",
+            "description": "LLM provider name (e.g., Gemini, GPT-4, Claude)"
+          },
+          "label": {
+            "$ref": "#/components/schemas/VerificationLabel",
+            "description": "Normalized verification label"
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "description": "Provider verification confidence"
+          },
+          "reasoning": {
+            "type": "string",
+            "title": "Reasoning",
+            "description": "Explanation string from LLM provider"
+          },
+          "supporting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supporting Evidence Ids",
+            "description": "IDs of supporting evidence items"
+          },
+          "contradicting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Contradicting Evidence Ids",
+            "description": "IDs of contradicting evidence items"
+          },
+          "latency_ms": {
+            "type": "number",
+            "title": "Latency Ms",
+            "description": "Inference latency in milliseconds",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "claim_id",
+          "provider_name",
+          "label",
+          "confidence",
+          "reasoning"
+        ],
+        "title": "SingleClaimVerification"
+      },
+      "TimelineItemUI": {
+        "properties": {
+          "step_name": {
+            "type": "string",
+            "title": "Step Name"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "latency_ms": {
+            "type": "number",
+            "title": "Latency Ms"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "step_name",
+          "status",
+          "latency_ms",
+          "description"
+        ],
+        "title": "TimelineItemUI"
+      },
+      "TokenResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type",
+            "default": "bearer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "refresh_token"
+        ],
+        "title": "TokenResponse",
+        "description": "Returned after a successful login or token refresh."
+      },
+      "UnifiedHScoreResult": {
+        "properties": {
+          "hallucisense_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Hallucisense Score",
+            "description": "Unified HalluciSense Score (0-100)"
+          },
+          "risk_category": {
+            "$ref": "#/components/schemas/RiskCategory",
+            "description": "Categorical risk classification"
+          },
+          "overall_confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Overall Confidence",
+            "description": "Overall verification confidence (0-1)"
+          },
+          "pillar1_probability": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Pillar1 Probability",
+            "description": "Frozen Pillar 1 statistical probability"
+          },
+          "evidence_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Evidence Score",
+            "description": "Pillar 2 Evidence-level risk score (0-100)"
+          },
+          "consensus_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Consensus Score",
+            "description": "Pillar 2 Consensus-level risk score (0-100)"
+          },
+          "contradiction_score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Contradiction Score",
+            "description": "Pillar 2 Contradiction-level risk score (0-100)"
+          },
+          "component_weights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Component Weights",
+            "description": "Weight allocation across score components"
+          },
+          "explanation_summary": {
+            "type": "string",
+            "title": "Explanation Summary",
+            "description": "Concise human-readable rationale for score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hallucisense_score",
+          "risk_category",
+          "overall_confidence",
+          "pillar1_probability",
+          "evidence_score",
+          "consensus_score",
+          "contradiction_score",
+          "component_weights",
+          "explanation_summary"
+        ],
+        "title": "UnifiedHScoreResult"
+      },
+      "UserDetailResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "preferred_model": {
+            "type": "string",
+            "title": "Preferred Model"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "is_verified": {
+            "type": "boolean",
+            "title": "Is Verified"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "full_name",
+          "avatar_url",
+          "role",
+          "preferred_model",
+          "is_active",
+          "is_verified"
+        ],
+        "title": "UserDetailResponse",
+        "description": "Full user profile response."
+      },
+      "UserPublicResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "preferred_model": {
+            "type": "string",
+            "title": "Preferred Model"
+          },
+          "is_verified": {
+            "type": "boolean",
+            "title": "Is Verified"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "full_name",
+          "role",
+          "preferred_model",
+          "is_verified"
+        ],
+        "title": "UserPublicResponse",
+        "description": "Minimal user representation returned after registration or login."
+      },
+      "UserUpdateRequest": {
+        "properties": {
+          "full_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Full Name"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1024
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
+          },
+          "preferred_model": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Model"
+          }
+        },
+        "type": "object",
+        "title": "UserUpdateRequest",
+        "description": "Payload for PATCH /users/me."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VerificationLabel": {
+        "type": "string",
+        "enum": [
+          "SUPPORTED",
+          "CONTRADICTED",
+          "PARTIALLY_SUPPORTED",
+          "UNKNOWN"
+        ],
+        "title": "VerificationLabel"
+      },
+      "VerificationReportResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "overall_h_score": {
+            "type": "number",
+            "title": "Overall H Score"
+          },
+          "overall_risk_level": {
+            "type": "string",
+            "title": "Overall Risk Level"
+          },
+          "processing_time_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Time Ms"
+          },
+          "sentence_analyses": {
+            "items": {
+              "$ref": "#/components/schemas/SentenceAnalysisResponse"
+            },
+            "type": "array",
+            "title": "Sentence Analyses",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "overall_h_score",
+          "overall_risk_level",
+          "processing_time_ms"
+        ],
+        "title": "VerificationReportResponse"
+      },
+      "VerifyRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "VerifyRequest"
+      },
+      "app__modules__auth__schemas__MessageResponse": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "MessageResponse",
+        "description": "Generic success message response."
+      },
+      "app__modules__messages__schemas__MessageResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "chat_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Chat Id"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "verification_status": {
+            "type": "string",
+            "title": "Verification Status"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "verification_report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VerificationReportResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "chat_id",
+          "role",
+          "content",
+          "verification_status",
+          "created_at"
+        ],
+        "title": "MessageResponse",
+        "description": "Standard message response."
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "timestamp": "2026-08-02T07:19:53.793153+00:00",
+  "n_samples": 10,
+  "n_positive": 6,
+  "n_negative": 4,
+  "feature_count": 10,
+  "features": {
+    "mean_entailment": {
+      "mean_positive": 0.067483,
+      "mean_negative": 0.008125,
+      "std": 0.079178,
+      "cohens_d": 0.8815,
+      "pearson_r": 0.3673,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.4167,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 4,
+      "rank_abs_pearson": 1,
+      "rank_roc_distance": 5
+    },
+    "max_entailment": {
+      "mean_positive": 0.068233,
+      "mean_negative": 0.010175,
+      "std": 0.078511,
+      "cohens_d": 0.8681,
+      "pearson_r": 0.3623,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.3958,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 5,
+      "rank_abs_pearson": 2,
+      "rank_roc_distance": 4
+    },
+    "mean_contradiction": {
+      "mean_positive": 0.299217,
+      "mean_negative": 0.218025,
+      "std": 0.362695,
+      "cohens_d": 0.2236,
+      "pearson_r": 0.1097,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.7917,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 6,
+      "rank_abs_pearson": 4,
+      "rank_roc_distance": 1
+    },
+    "max_contradiction": {
+      "mean_positive": 0.300517,
+      "mean_negative": 0.22025,
+      "std": 0.361482,
+      "cohens_d": 0.2218,
+      "pearson_r": 0.1088,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.75,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 7,
+      "rank_abs_pearson": 5,
+      "rank_roc_distance": 2
+    },
+    "mean_support_margin": {
+      "mean_positive": -0.231683,
+      "mean_negative": -0.209875,
+      "std": 0.379952,
+      "cohens_d": -0.0577,
+      "pearson_r": -0.0281,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.4583,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 8,
+      "rank_abs_pearson": 7,
+      "rank_roc_distance": 6
+    },
+    "min_support_margin": {
+      "mean_positive": -0.232233,
+      "mean_negative": -0.210475,
+      "std": 0.379619,
+      "cohens_d": -0.0577,
+      "pearson_r": -0.0281,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.4583,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 9,
+      "rank_abs_pearson": 8,
+      "rank_roc_distance": 7
+    },
+    "fraction_supported": {
+      "mean_positive": 0.0,
+      "mean_negative": 0.0,
+      "std": 0.0,
+      "cohens_d": 0.0,
+      "pearson_r": 0.0,
+      "mutual_information": 0.097659,
+      "univariate_roc_auc": 0.5,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 3,
+      "rank_abs_pearson": 9,
+      "rank_roc_distance": 9
+    },
+    "fraction_contradicted": {
+      "mean_positive": 0.166667,
+      "mean_negative": 0.25,
+      "std": 0.4,
+      "cohens_d": -0.2063,
+      "pearson_r": -0.1021,
+      "mutual_information": 0.0,
+      "univariate_roc_auc": 0.4583,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 10,
+      "rank_abs_pearson": 6,
+      "rank_roc_distance": 8
+    },
+    "fraction_unsupported": {
+      "mean_positive": 1.0,
+      "mean_negative": 1.0,
+      "std": 0.0,
+      "cohens_d": 0.0,
+      "pearson_r": 0.0,
+      "mutual_information": 2.225635,
+      "univariate_roc_auc": 0.5,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 1,
+      "rank_abs_pearson": 10,
+      "rank_roc_distance": 10
+    },
+    "num_claims": {
+      "mean_positive": 3.0,
+      "mean_negative": 6.25,
+      "std": 5.060632,
+      "cohens_d": -0.6656,
+      "pearson_r": -0.3146,
+      "mutual_information": 0.698492,
+      "univariate_roc_auc": 0.375,
+      "missing_pct": 0.0,
+      "rank_mutual_information": 2,
+      "rank_abs_pearson": 3,
+      "rank_roc_distance": 3
+    }
+  },
+  "rankings": {
+    "by_mutual_information": [
+      "fraction_unsupported",
+      "num_claims",
+      "fraction_supported",
+      "mean_entailment",
+      "max_entailment",
+      "mean_contradiction",
+      "max_contradiction",
+      "mean_support_margin",
+      "min_support_margin",
+      "fraction_contradicted"
+    ],
+    "by_abs_pearson": [
+      "mean_entailment",
+      "max_entailment",
+      "num_claims",
+      "mean_contradiction",
+      "max_contradiction",
+      "fraction_contradicted",
+      "mean_support_margin",
+      "min_support_margin",
+      "fraction_supported",
+      "fraction_unsupported"
+    ],
+    "by_roc_distance_from_0.5": [
+      "mean_contradiction",
+      "max_contradiction",
+      "num_claims",
+      "max_entailment",
+      "mean_entailment",
+      "mean_support_margin",
+      "min_support_margin",
+      "fraction_contradicted",
+      "fraction_supported",
+      "fraction_unsupported"
+    ]
+  },
+  "weak_features": [
+    "fraction_supported",
+    "fraction_unsupported"
+  ],
+  "constant_features": [
+    "fraction_supported",
+    "fraction_unsupported"
+  ]
+}

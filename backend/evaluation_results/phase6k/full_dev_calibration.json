@@ -1,0 +1,492 @@
+{
+  "candidate_1": {
+    "ece": 0.018062005823750938,
+    "brier_score": 0.24269686804973742,
+    "log_loss": 0.6783736026304568,
+    "n_bins": 10,
+    "bins": [
+      {
+        "bin_idx": 0,
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.05,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 1,
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.15000000000000002,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 2,
+        "bin_lower": 0.2,
+        "bin_upper": 0.30000000000000004,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.25,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 3,
+        "bin_lower": 0.30000000000000004,
+        "bin_upper": 0.4,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.35000000000000003,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 4,
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 25558,
+        "accuracy": 0.46815087252523674,
+        "confidence": 0.47940344631783427,
+        "absolute_gap": 0.011252573792597531
+      },
+      {
+        "bin_idx": 5,
+        "bin_lower": 0.5,
+        "bin_upper": 0.6000000000000001,
+        "count": 16513,
+        "accuracy": 0.5710652213407619,
+        "confidence": 0.539326519717108,
+        "absolute_gap": 0.03173870162365389
+      },
+      {
+        "bin_idx": 6,
+        "bin_lower": 0.6000000000000001,
+        "bin_upper": 0.7000000000000001,
+        "count": 14702,
+        "accuracy": 0.6299823153312475,
+        "confidence": 0.643814490009112,
+        "absolute_gap": 0.013832174677864462
+      },
+      {
+        "bin_idx": 7,
+        "bin_lower": 0.7000000000000001,
+        "bin_upper": 0.8,
+        "count": 1229,
+        "accuracy": 0.6875508543531327,
+        "confidence": 0.7140580706042591,
+        "absolute_gap": 0.026507216251126398
+      },
+      {
+        "bin_idx": 8,
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.8500000000000001,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 9,
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.95,
+        "absolute_gap": 0.0
+      }
+    ]
+  },
+  "candidate_2": {
+    "ece": 0.018000391844441684,
+    "brier_score": 0.24269688958800056,
+    "log_loss": 0.6783736985461011,
+    "n_bins": 10,
+    "bins": [
+      {
+        "bin_idx": 0,
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.05,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 1,
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.15000000000000002,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 2,
+        "bin_lower": 0.2,
+        "bin_upper": 0.30000000000000004,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.25,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 3,
+        "bin_lower": 0.30000000000000004,
+        "bin_upper": 0.4,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.35000000000000003,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 4,
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 25564,
+        "accuracy": 0.46823658269441404,
+        "confidence": 0.47939935464296424,
+        "absolute_gap": 0.011162771948550199
+      },
+      {
+        "bin_idx": 5,
+        "bin_lower": 0.5,
+        "bin_upper": 0.6000000000000001,
+        "count": 16507,
+        "accuracy": 0.5709698915611559,
+        "confidence": 0.5393228408145012,
+        "absolute_gap": 0.03164705074665464
+      },
+      {
+        "bin_idx": 6,
+        "bin_lower": 0.6000000000000001,
+        "bin_upper": 0.7000000000000001,
+        "count": 14700,
+        "accuracy": 0.63,
+        "confidence": 0.6438281246524558,
+        "absolute_gap": 0.013828124652455753
+      },
+      {
+        "bin_idx": 7,
+        "bin_lower": 0.7000000000000001,
+        "bin_upper": 0.8,
+        "count": 1231,
+        "accuracy": 0.6872461413484972,
+        "confidence": 0.7140717519110006,
+        "absolute_gap": 0.026825610562503432
+      },
+      {
+        "bin_idx": 8,
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.8500000000000001,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 9,
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.95,
+        "absolute_gap": 0.0
+      }
+    ]
+  },
+  "candidate_3": {
+    "ece": 0.011033742788312088,
+    "brier_score": 0.2386847891539668,
+    "log_loss": 0.6701399752779272,
+    "n_bins": 10,
+    "bins": [
+      {
+        "bin_idx": 0,
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.05,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 1,
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.15000000000000002,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 2,
+        "bin_lower": 0.2,
+        "bin_upper": 0.30000000000000004,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.25,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 3,
+        "bin_lower": 0.30000000000000004,
+        "bin_upper": 0.4,
+        "count": 4,
+        "accuracy": 0.0,
+        "confidence": 0.3976056898842738,
+        "absolute_gap": 0.3976056898842738
+      },
+      {
+        "bin_idx": 4,
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 26366,
+        "accuracy": 0.45752104983691116,
+        "confidence": 0.4510361947332482,
+        "absolute_gap": 0.006484855103662979
+      },
+      {
+        "bin_idx": 5,
+        "bin_lower": 0.5,
+        "bin_upper": 0.6000000000000001,
+        "count": 10688,
+        "accuracy": 0.5345247005988024,
+        "confidence": 0.5537086780709478,
+        "absolute_gap": 0.019183977472145397
+      },
+      {
+        "bin_idx": 6,
+        "bin_lower": 0.6000000000000001,
+        "bin_upper": 0.7000000000000001,
+        "count": 17796,
+        "accuracy": 0.6473926725106766,
+        "confidence": 0.63901068353601,
+        "absolute_gap": 0.008381988974666577
+      },
+      {
+        "bin_idx": 7,
+        "bin_lower": 0.7000000000000001,
+        "bin_upper": 0.8,
+        "count": 3044,
+        "accuracy": 0.6987516425755584,
+        "confidence": 0.732656449820556,
+        "absolute_gap": 0.03390480724499756
+      },
+      {
+        "bin_idx": 8,
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 103,
+        "accuracy": 0.7572815533980582,
+        "confidence": 0.8453420189868929,
+        "absolute_gap": 0.08806046558883462
+      },
+      {
+        "bin_idx": 9,
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 1,
+        "accuracy": 0.0,
+        "confidence": 0.9283485600836311,
+        "absolute_gap": 0.9283485600836311
+      }
+    ]
+  },
+  "baseline_majority": {
+    "ece": 0.4568807972138892,
+    "brier_score": 0.4568807972138892,
+    "log_loss": 16.46765309492094,
+    "n_bins": 10,
+    "bins": [
+      {
+        "bin_idx": 0,
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.05,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 1,
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.15000000000000002,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 2,
+        "bin_lower": 0.2,
+        "bin_upper": 0.30000000000000004,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.25,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 3,
+        "bin_lower": 0.30000000000000004,
+        "bin_upper": 0.4,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.35000000000000003,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 4,
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.45,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 5,
+        "bin_lower": 0.5,
+        "bin_upper": 0.6000000000000001,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.55,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 6,
+        "bin_lower": 0.6000000000000001,
+        "bin_upper": 0.7000000000000001,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.6500000000000001,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 7,
+        "bin_lower": 0.7000000000000001,
+        "bin_upper": 0.8,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.75,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 8,
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.8500000000000001,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 9,
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 58002,
+        "accuracy": 0.5431192027861108,
+        "confidence": 1.0,
+        "absolute_gap": 0.4568807972138892
+      }
+    ]
+  },
+  "baseline_single_feature": {
+    "ece": 0.04756610565073412,
+    "brier_score": 0.24388227320969855,
+    "log_loss": 0.680760836833566,
+    "n_bins": 10,
+    "bins": [
+      {
+        "bin_idx": 0,
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.05,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 1,
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.15000000000000002,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 2,
+        "bin_lower": 0.2,
+        "bin_upper": 0.30000000000000004,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.25,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 3,
+        "bin_lower": 0.30000000000000004,
+        "bin_upper": 0.4,
+        "count": 2462,
+        "accuracy": 0.6742485783915516,
+        "confidence": 0.39491880116021505,
+        "absolute_gap": 0.27932977723133656
+      },
+      {
+        "bin_idx": 4,
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 3784,
+        "accuracy": 0.36945031712473575,
+        "confidence": 0.44931539945034404,
+        "absolute_gap": 0.0798650823256083
+      },
+      {
+        "bin_idx": 5,
+        "bin_lower": 0.5,
+        "bin_upper": 0.6000000000000001,
+        "count": 31632,
+        "accuracy": 0.48248609003540716,
+        "confidence": 0.5165399354103659,
+        "absolute_gap": 0.03405384537495876
+      },
+      {
+        "bin_idx": 6,
+        "bin_lower": 0.6000000000000001,
+        "bin_upper": 0.7000000000000001,
+        "count": 20124,
+        "accuracy": 0.6550387596899225,
+        "confidence": 0.6206609699866065,
+        "absolute_gap": 0.034377789703316064
+      },
+      {
+        "bin_idx": 7,
+        "bin_lower": 0.7000000000000001,
+        "bin_upper": 0.8,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.75,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 8,
+        "bin_lower": 0.8,
+        "bin_upper": 0.9,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.8500000000000001,
+        "absolute_gap": 0.0
+      },
+      {
+        "bin_idx": 9,
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 0,
+        "accuracy": 0.0,
+        "confidence": 0.95,
+        "absolute_gap": 0.0
+      }
+    ]
+  }
+}

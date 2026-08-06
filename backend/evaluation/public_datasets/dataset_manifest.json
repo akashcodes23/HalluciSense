@@ -1,0 +1,79 @@
+{
+  "benchmark_framework": "HalluciSense Phase 22 Public Dataset Registry",
+  "total_datasets": 12,
+  "total_samples": 740,
+  "datasets": {
+    "HaluEval": {
+      "domain": "General Knowledge / QA",
+      "citation": "@inproceedings{halueval2023, title={HaluEval: A Large-Scale Hallucination Evaluation Benchmark}, author={Li et al.}, year={2023}}",
+      "license": "MIT License",
+      "samples": 100
+    },
+    "TruthfulQA": {
+      "domain": "Miscalibration / Common Misconceptions",
+      "citation": "@inproceedings{truthfulqa2022, title={TruthfulQA: Measuring How Models Mimic Human Falsehoods}, author={Lin et al.}, year={2022}}",
+      "license": "Apache-2.0",
+      "samples": 80
+    },
+    "FreshQA": {
+      "domain": "Temporal News & Fast-changing Facts",
+      "citation": "@article{freshqa2023, title={FreshLLMs: Refreshing Large Language Models with Search Engine Augmentation}, author={Vu et al.}, year={2023}}",
+      "license": "CC-BY-4.0",
+      "samples": 60
+    },
+    "FEVER": {
+      "domain": "Fact Verification",
+      "citation": "@inproceedings{fever2018, title={FEVER: a Large-scale Dataset for Fact Extraction and VERification}, author={Thorne et al.}, year={2018}}",
+      "license": "CC-BY-SA-4.0",
+      "samples": 100
+    },
+    "SciFact": {
+      "domain": "Scientific Claim Verification",
+      "citation": "@inproceedings{scifact2020, title={Fact or Fiction: Verifying Scientific Claims}, author={Wadden et al.}, year={2020}}",
+      "license": "CC-BY-4.0",
+      "samples": 60
+    },
+    "HoVer": {
+      "domain": "Multi-hop Reasoning & Factuality",
+      "citation": "@inproceedings{hover2020, title={HoVer: A Dataset for Many-Hop Fact Verification}, author={Jiang et al.}, year={2020}}",
+      "license": "MIT License",
+      "samples": 50
+    },
+    "VitaminC": {
+      "domain": "Factual Contrast Sets",
+      "citation": "@inproceedings{vitaminc2021, title={Vitamin C: Robust Fact Verification via Contrastive Revisions}, author={Schuster et al.}, year={2021}}",
+      "license": "MIT License",
+      "samples": 60
+    },
+    "FActScore": {
+      "domain": "Long-form Atomic Factuality",
+      "citation": "@inproceedings{factscore2023, title={FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation}, author={Min et al.}, year={2023}}",
+      "license": "MIT License",
+      "samples": 50
+    },
+    "BEGIN": {
+      "domain": "Summarization Groundedness",
+      "citation": "@inproceedings{begin2021, title={The BEGIN Benchmark for Grounded Text Generation}, author={Dziri et al.}, year={2021}}",
+      "license": "CC-BY-4.0",
+      "samples": 40
+    },
+    "XSumFaith": {
+      "domain": "Summarization Faithfulness",
+      "citation": "@inproceedings{xsumfaith2020, title={On Faithfulness and Factuality in Abstractive Summarization}, author={Maynez et al.}, year={2020}}",
+      "license": "MIT License",
+      "samples": 40
+    },
+    "PubHealth": {
+      "domain": "Public Health & Medical Verification",
+      "citation": "@inproceedings{pubhealth2020, title={PUBHEALTH: A Dataset for Fact-Checking Public Health Claims}, author={Kotonya et al.}, year={2020}}",
+      "license": "CC-BY-4.0",
+      "samples": 60
+    },
+    "MedQA": {
+      "domain": "Biomedical & Clinical QA",
+      "citation": "@article{medqa2021, title={What Disease does this Patient Have? A Large-scale Dataset for Medical Automated Diagnosis}, author={Jin et al.}, year={2021}}",
+      "license": "MIT License",
+      "samples": 40
+    }
+  }
+}

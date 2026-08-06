@@ -1,0 +1,19 @@
+{
+  "generalization_classification": "STABLE",
+  "degradation_magnitude": -0.06840715353202331,
+  "dev_cv_auc": 0.6218,
+  "val_auc": 0.6902071535320233,
+  "gap_auc": 0.06840715353202331,
+  "dev_cv_pr_auc": 0.6417,
+  "val_pr_auc": 0.6310874177873081,
+  "gap_pr_auc": -0.010612582212691901,
+  "dev_cv_mcc": 0.157,
+  "val_mcc": 0.35868656581321395,
+  "gap_mcc": 0.20168656581321395,
+  "dev_cv_brier": 0.2372,
+  "val_brier": 0.23321484838877207,
+  "gap_brier": -0.003985151611227922,
+  "dev_cv_ece": 0.011,
+  "val_ece": 0.08874104780418625,
+  "gap_ece": 0.07774104780418625
+}

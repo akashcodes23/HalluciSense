@@ -1,0 +1,654 @@
+{
+  "confusion_counts": {
+    "TP": 19537,
+    "TN": 13593,
+    "FP": 12907,
+    "FN": 11965
+  },
+  "top_false_positives": [
+    {
+      "sample_index": 18244,
+      "true_label": 0,
+      "oof_probability": 0.7624949317562636,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0001,
+        "mean_contradiction": 0.9981,
+        "max_contradiction": 0.9989,
+        "mean_support_margin": -0.998,
+        "min_support_margin": -0.9988,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 32.0
+      }
+    },
+    {
+      "sample_index": 18354,
+      "true_label": 0,
+      "oof_probability": 0.7509581790623052,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0003,
+        "mean_contradiction": 0.9963,
+        "max_contradiction": 0.9984,
+        "mean_support_margin": -0.9962,
+        "min_support_margin": -0.9984,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 30.0
+      }
+    },
+    {
+      "sample_index": 14436,
+      "true_label": 0,
+      "oof_probability": 0.7507984906640969,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0004,
+        "mean_contradiction": 0.9859,
+        "max_contradiction": 0.9953,
+        "mean_support_margin": -0.9858,
+        "min_support_margin": -0.9952,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 29.0
+      }
+    },
+    {
+      "sample_index": 15144,
+      "true_label": 0,
+      "oof_probability": 0.7465807774794743,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0003,
+        "mean_contradiction": 0.9946,
+        "max_contradiction": 0.9968,
+        "mean_support_margin": -0.9945,
+        "min_support_margin": -0.9967,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 28.0
+      }
+    },
+    {
+      "sample_index": 18078,
+      "true_label": 0,
+      "oof_probability": 0.745601821545768,
+      "features": {
+        "mean_entailment": 0.0002,
+        "max_entailment": 0.0034,
+        "mean_contradiction": 0.9939,
+        "max_contradiction": 0.9984,
+        "mean_support_margin": -0.9937,
+        "min_support_margin": -0.9983,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 28.0
+      }
+    },
+    {
+      "sample_index": 18486,
+      "true_label": 0,
+      "oof_probability": 0.7425759170414773,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0003,
+        "mean_contradiction": 0.9909,
+        "max_contradiction": 0.9967,
+        "mean_support_margin": -0.9908,
+        "min_support_margin": -0.9966,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 28.0
+      }
+    },
+    {
+      "sample_index": 16438,
+      "true_label": 0,
+      "oof_probability": 0.741954523215801,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0004,
+        "mean_contradiction": 0.9932,
+        "max_contradiction": 0.9964,
+        "mean_support_margin": -0.9931,
+        "min_support_margin": -0.9964,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 27.0
+      }
+    },
+    {
+      "sample_index": 17922,
+      "true_label": 0,
+      "oof_probability": 0.7414939776151014,
+      "features": {
+        "mean_entailment": 0.0002,
+        "max_entailment": 0.0007,
+        "mean_contradiction": 0.9776,
+        "max_contradiction": 0.999,
+        "mean_support_margin": -0.9774,
+        "min_support_margin": -0.999,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 27.0
+      }
+    },
+    {
+      "sample_index": 18066,
+      "true_label": 0,
+      "oof_probability": 0.7397438625621292,
+      "features": {
+        "mean_entailment": 0.0005,
+        "max_entailment": 0.0072,
+        "mean_contradiction": 0.9509,
+        "max_contradiction": 0.9978,
+        "mean_support_margin": -0.9504,
+        "min_support_margin": -0.9977,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 0.963,
+        "fraction_unsupported": 1.0,
+        "num_claims": 27.0
+      }
+    },
+    {
+      "sample_index": 18624,
+      "true_label": 0,
+      "oof_probability": 0.7381336451275157,
+      "features": {
+        "mean_entailment": 0.0001,
+        "max_entailment": 0.0002,
+        "mean_contradiction": 0.9968,
+        "max_contradiction": 0.9987,
+        "mean_support_margin": -0.9967,
+        "min_support_margin": -0.9987,
+        "fraction_supported": 0.0,
+        "fraction_contradicted": 1.0,
+        "fraction_unsupported": 1.0,
+        "num_claims": 26.0
+      }
+    }
+  ],
+  "top_false_negatives": [
+    {
+      "sample_index": 24717,
+      "true_label": 1,
+      "oof_probability": 0.44966659612466414,
+      "features": {
+        "mean_entailment": 0.9937,
+        "max_entailment": 0.9937,
+        "mean_contradiction": 0.0002,
+        "max_contradiction": 0.0002,
+        "mean_support_margin": 0.9935,
+        "min_support_margin": 0.9935,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 28950,
+      "true_label": 1,
+      "oof_probability": 0.4496923459129322,
+      "features": {
+        "mean_entailment": 0.9928,
+        "max_entailment": 0.9928,
+        "mean_contradiction": 0.0002,
+        "max_contradiction": 0.0002,
+        "mean_support_margin": 0.9926,
+        "min_support_margin": 0.9926,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 24493,
+      "true_label": 1,
+      "oof_probability": 0.449704274401946,
+      "features": {
+        "mean_entailment": 0.9931,
+        "max_entailment": 0.9931,
+        "mean_contradiction": 0.0003,
+        "max_contradiction": 0.0003,
+        "mean_support_margin": 0.9929,
+        "min_support_margin": 0.9929,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 33306,
+      "true_label": 1,
+      "oof_probability": 0.44971178662415784,
+      "features": {
+        "mean_entailment": 0.9935,
+        "max_entailment": 0.9935,
+        "mean_contradiction": 0.0004,
+        "max_contradiction": 0.0004,
+        "mean_support_margin": 0.9931,
+        "min_support_margin": 0.9931,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 8457,
+      "true_label": 1,
+      "oof_probability": 0.44972915494618565,
+      "features": {
+        "mean_entailment": 0.9948,
+        "max_entailment": 0.9948,
+        "mean_contradiction": 0.0008,
+        "max_contradiction": 0.0008,
+        "mean_support_margin": 0.9941,
+        "min_support_margin": 0.9941,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 34222,
+      "true_label": 1,
+      "oof_probability": 0.4497515300783233,
+      "features": {
+        "mean_entailment": 0.9938,
+        "max_entailment": 0.9938,
+        "mean_contradiction": 0.0007,
+        "max_contradiction": 0.0007,
+        "mean_support_margin": 0.9931,
+        "min_support_margin": 0.9931,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 32754,
+      "true_label": 1,
+      "oof_probability": 0.4497587845568156,
+      "features": {
+        "mean_entailment": 0.9933,
+        "max_entailment": 0.9933,
+        "mean_contradiction": 0.0007,
+        "max_contradiction": 0.0007,
+        "mean_support_margin": 0.9926,
+        "min_support_margin": 0.9926,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 7679,
+      "true_label": 1,
+      "oof_probability": 0.44982478537068854,
+      "features": {
+        "mean_entailment": 0.9893,
+        "max_entailment": 0.9893,
+        "mean_contradiction": 0.0004,
+        "max_contradiction": 0.0004,
+        "mean_support_margin": 0.9889,
+        "min_support_margin": 0.9889,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 24897,
+      "true_label": 1,
+      "oof_probability": 0.44984118176952187,
+      "features": {
+        "mean_entailment": 0.9954,
+        "max_entailment": 0.9954,
+        "mean_contradiction": 0.0016,
+        "max_contradiction": 0.0016,
+        "mean_support_margin": 0.9939,
+        "min_support_margin": 0.9939,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    },
+    {
+      "sample_index": 9530,
+      "true_label": 1,
+      "oof_probability": 0.44984481424755485,
+      "features": {
+        "mean_entailment": 0.9886,
+        "max_entailment": 0.9886,
+        "mean_contradiction": 0.0004,
+        "max_contradiction": 0.0004,
+        "mean_support_margin": 0.9882,
+        "min_support_margin": 0.9882,
+        "fraction_supported": 1.0,
+        "fraction_contradicted": 0.0,
+        "fraction_unsupported": 0.0,
+        "num_claims": 1.0
+      }
+    }
+  ],
+  "group_feature_distributions": {
+    "TP": {
+      "count": 19537,
+      "feature_stats": {
+        "mean_entailment": {
+          "mean": 0.04634846189281876,
+          "std": 0.1223682289394136,
+          "median": 0.001,
+          "min": 0.0,
+          "max": 0.9132
+        },
+        "max_entailment": {
+          "mean": 0.10852870450939243,
+          "std": 0.26206600601284546,
+          "median": 0.0021,
+          "min": 0.0,
+          "max": 0.9985
+        },
+        "mean_contradiction": {
+          "mean": 0.602815892921124,
+          "std": 0.396959103461706,
+          "median": 0.6932,
+          "min": 0.0002,
+          "max": 0.9999
+        },
+        "max_contradiction": {
+          "mean": 0.7361476531709065,
+          "std": 0.3868686358206516,
+          "median": 0.9883,
+          "min": 0.0002,
+          "max": 1.0
+        },
+        "mean_support_margin": {
+          "mean": -0.5564678507447408,
+          "std": 0.4442671292951321,
+          "median": -0.6667,
+          "min": -0.9999,
+          "max": 0.9125
+        },
+        "min_support_margin": {
+          "mean": -0.7193462302298204,
+          "std": 0.4052017595315494,
+          "median": -0.9871,
+          "min": -0.9999,
+          "max": 0.5177
+        },
+        "fraction_supported": {
+          "mean": 0.03627853815836617,
+          "std": 0.1254136399547905,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "fraction_contradicted": {
+          "mean": 0.6050703434508882,
+          "std": 0.4308450914597723,
+          "median": 0.875,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "fraction_unsupported": {
+          "mean": 0.9483643957618876,
+          "std": 0.1677933374006401,
+          "median": 1.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "num_claims": {
+          "mean": 5.496749756871577,
+          "std": 5.573300644518982,
+          "median": 3.0,
+          "min": 1.0,
+          "max": 40.0
+        }
+      }
+    },
+    "TN": {
+      "count": 13593,
+      "feature_stats": {
+        "mean_entailment": {
+          "mean": 0.16993437798867062,
+          "std": 0.3084088483139274,
+          "median": 0.0054,
+          "min": 0.0,
+          "max": 0.9978
+        },
+        "max_entailment": {
+          "mean": 0.19416274553078788,
+          "std": 0.33905990257417384,
+          "median": 0.0062,
+          "min": 0.0,
+          "max": 0.9978
+        },
+        "mean_contradiction": {
+          "mean": 0.016361127050687853,
+          "std": 0.029012978929009375,
+          "median": 0.0044,
+          "min": 0.0,
+          "max": 0.2446
+        },
+        "max_contradiction": {
+          "mean": 0.018059788126241445,
+          "std": 0.03113036646177287,
+          "median": 0.0049,
+          "min": 0.0,
+          "max": 0.2466
+        },
+        "mean_support_margin": {
+          "mean": 0.1535736334878246,
+          "std": 0.30535559164344356,
+          "median": 0.0004,
+          "min": -0.1335,
+          "max": 0.9977
+        },
+        "min_support_margin": {
+          "mean": 0.13505518281468404,
+          "std": 0.3016808272179033,
+          "median": -0.0002,
+          "min": -0.166,
+          "max": 0.9977
+        },
+        "fraction_supported": {
+          "mean": 0.18626729934525124,
+          "std": 0.3760134085393108,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "fraction_contradicted": {
+          "mean": 0.0,
+          "std": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "fraction_unsupported": {
+          "mean": 0.8042069741778857,
+          "std": 0.38370626856039547,
+          "median": 1.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "num_claims": {
+          "mean": 1.3732803648936953,
+          "std": 0.9310036805505445,
+          "median": 1.0,
+          "min": 1.0,
+          "max": 9.0
+        }
+      }
+    },
+    "FP": {
+      "count": 12907,
+      "feature_stats": {
+        "mean_entailment": {
+          "mean": 0.04664216316727357,
+          "std": 0.11056245617798058,
+          "median": 0.002,
+          "min": 0.0,
+          "max": 0.9701
+        },
+        "max_entailment": {
+          "mean": 0.12817264275199503,
+          "std": 0.2732398044900128,
+          "median": 0.0042,
+          "min": 0.0,
+          "max": 0.9972
+        },
+        "mean_contradiction": {
+          "mean": 0.524723560858449,
+          "std": 0.41691624517919246,
+          "median": 0.5035,
+          "min": 0.0002,
+          "max": 1.0
+        },
+        "max_contradiction": {
+          "mean": 0.6230298597660183,
+          "std": 0.42059555792335135,
+          "median": 0.9036,
+          "min": 0.0002,
+          "max": 1.0
+        },
+        "mean_support_margin": {
+          "mean": -0.4780823429146974,
+          "std": 0.4616449442188371,
+          "median": -0.4981,
+          "min": -0.9999,
+          "max": 0.9614
+        },
+        "min_support_margin": {
+          "mean": -0.6018007050437747,
+          "std": 0.4381273460837012,
+          "median": -0.892,
+          "min": -0.9999,
+          "max": 0.936
+        },
+        "fraction_supported": {
+          "mean": 0.03443075075540404,
+          "std": 0.11660728166728755,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "fraction_contradicted": {
+          "mean": 0.5206066785465252,
+          "std": 0.4621196675175763,
+          "median": 0.5,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "fraction_unsupported": {
+          "mean": 0.9508407530797242,
+          "std": 0.16040809275876833,
+          "median": 1.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "num_claims": {
+          "mean": 5.883009219803207,
+          "std": 5.6028066321368355,
+          "median": 3.0,
+          "min": 1.0,
+          "max": 40.0
+        }
+      }
+    },
+    "FN": {
+      "count": 11965,
+      "feature_stats": {
+        "mean_entailment": {
+          "mean": 0.24663690764730462,
+          "std": 0.3803383263236449,
+          "median": 0.0056,
+          "min": 0.0,
+          "max": 0.9986
+        },
+        "max_entailment": {
+          "mean": 0.2959893857083159,
+          "std": 0.4176434387668565,
+          "median": 0.009,
+          "min": 0.0,
+          "max": 0.9986
+        },
+        "mean_contradiction": {
+          "mean": 0.01560295862933556,
+          "std": 0.029277470112458813,
+          "median": 0.0043,
+          "min": 0.0,
+          "max": 0.2486
+        },
+        "max_contradiction": {
+          "mean": 0.020112010029251986,
+          "std": 0.03519898514587492,
+          "median": 0.0057,
+          "min": 0.0,
+          "max": 0.3132
+        },
+        "mean_support_margin": {
+          "mean": 0.23103412452987881,
+          "std": 0.3784516462946272,
+          "median": 0.0008,
+          "min": -0.1351,
+          "max": 0.9982
+        },
+        "min_support_margin": {
+          "mean": 0.19102814876723775,
+          "std": 0.3778325375817348,
+          "median": -0.0009,
+          "min": -0.1763,
+          "max": 0.9982
+        },
+        "fraction_supported": {
+          "mean": 0.2618034851650648,
+          "std": 0.414726261402331,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "fraction_contradicted": {
+          "mean": 0.0,
+          "std": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "fraction_unsupported": {
+          "mean": 0.7330314417049728,
+          "std": 0.4175380313254651,
+          "median": 1.0,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "num_claims": {
+          "mean": 2.0033430839949853,
+          "std": 1.3175299572250938,
+          "median": 1.0,
+          "min": 1.0,
+          "max": 8.0
+        }
+      }
+    }
+  }
+}

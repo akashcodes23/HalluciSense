@@ -5,13 +5,13 @@ Evaluated 93 total error cases out of 750 benchmark claims.
 
 | Error Taxonomy Category | Count | Percentage of Failures |
 | :--- | :---: | :---: |
-| **Entity hallucination** | 6 | 6.5% |
-| **Temporal hallucination** | 9 | 9.7% |
+| **Entity hallucination** | 9 | 9.7% |
+| **Temporal hallucination** | 4 | 4.3% |
 | **Numerical hallucination** | 9 | 9.7% |
-| **Citation hallucination** | 10 | 10.8% |
-| **Reasoning hallucination** | 9 | 9.7% |
-| **Retrieval failure** | 16 | 17.2% |
-| **Evidence ranking failure** | 7 | 7.5% |
+| **Citation hallucination** | 9 | 9.7% |
+| **Reasoning hallucination** | 11 | 11.8% |
+| **Retrieval failure** | 14 | 15.1% |
+| **Evidence ranking failure** | 9 | 9.7% |
 | **Contradiction detection failure** | 8 | 8.6% |
-| **Graph reasoning failure** | 13 | 14.0% |
+| **Graph reasoning failure** | 14 | 15.1% |
 | **Unknown** | 6 | 6.5% |

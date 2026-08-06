@@ -159,6 +159,10 @@ export function Sidebar({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSide
               <ShieldCheck className="w-4 h-4" />
               <span className="text-sm">Verification Engine</span>
             </Link>
+            <Link href="/benchmark" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out ${pathname === '/benchmark' ? 'bg-white/10 text-white' : 'hover:bg-white/5 text-slate-400'}`}>
+              <Database className="w-4 h-4 text-purple-400" />
+              <span className="text-sm">Benchmark Leaderboard</span>
+            </Link>
           </nav>
         </div>
 

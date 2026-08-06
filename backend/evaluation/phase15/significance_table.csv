@@ -1,0 +1,5 @@
+Baseline,HalluciSense_AUC,Baseline_AUC,McNemar_p_val,Paired_ttest_p_val,Wilcoxon_p_val,Cohens_d,Significant_p005
+SelfCheckGPT,0.9435,0.8005,0.0,0.547075,0.64077,0.0246,True
+RAGAS,0.9435,0.8494,0.0,0.635791,0.72834,-0.0181,True
+FactScore,0.9435,0.8714,5.1e-05,0.807468,0.687864,-0.0092,True
+AlignScore,0.9435,0.8685,5e-06,0.13023,0.183314,-0.0563,True

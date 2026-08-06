@@ -1,0 +1,98 @@
+{
+  "ece": 0.08874104780418625,
+  "brier_score": 0.23321484838877207,
+  "log_loss": 0.6593305313001152,
+  "n_bins": 10,
+  "bins": [
+    {
+      "bin_idx": 0,
+      "bin_lower": 0.0,
+      "bin_upper": 0.1,
+      "count": 0,
+      "accuracy": 0.0,
+      "confidence": 0.05,
+      "absolute_gap": 0.0
+    },
+    {
+      "bin_idx": 1,
+      "bin_lower": 0.1,
+      "bin_upper": 0.2,
+      "count": 0,
+      "accuracy": 0.0,
+      "confidence": 0.15000000000000002,
+      "absolute_gap": 0.0
+    },
+    {
+      "bin_idx": 2,
+      "bin_lower": 0.2,
+      "bin_upper": 0.30000000000000004,
+      "count": 0,
+      "accuracy": 0.0,
+      "confidence": 0.25,
+      "absolute_gap": 0.0
+    },
+    {
+      "bin_idx": 3,
+      "bin_lower": 0.30000000000000004,
+      "bin_upper": 0.4,
+      "count": 0,
+      "accuracy": 0.0,
+      "confidence": 0.35000000000000003,
+      "absolute_gap": 0.0
+    },
+    {
+      "bin_idx": 4,
+      "bin_lower": 0.4,
+      "bin_upper": 0.5,
+      "count": 1451,
+      "accuracy": 0.29221226740179185,
+      "confidence": 0.45348717799385363,
+      "absolute_gap": 0.16127491059206178
+    },
+    {
+      "bin_idx": 5,
+      "bin_lower": 0.5,
+      "bin_upper": 0.6000000000000001,
+      "count": 804,
+      "accuracy": 0.5024875621890548,
+      "confidence": 0.5532945089354901,
+      "absolute_gap": 0.05080694674643538
+    },
+    {
+      "bin_idx": 6,
+      "bin_lower": 0.6000000000000001,
+      "bin_upper": 0.7000000000000001,
+      "count": 1042,
+      "accuracy": 0.6573896353166987,
+      "confidence": 0.6383397544008862,
+      "absolute_gap": 0.0190498809158125
+    },
+    {
+      "bin_idx": 7,
+      "bin_lower": 0.7000000000000001,
+      "bin_upper": 0.8,
+      "count": 193,
+      "accuracy": 0.6528497409326425,
+      "confidence": 0.7294592342534619,
+      "absolute_gap": 0.07660949332081946
+    },
+    {
+      "bin_idx": 8,
+      "bin_lower": 0.8,
+      "bin_upper": 0.9,
+      "count": 9,
+      "accuracy": 0.8888888888888888,
+      "confidence": 0.8686477893236069,
+      "absolute_gap": 0.020241099565281973
+    },
+    {
+      "bin_idx": 9,
+      "bin_lower": 0.9,
+      "bin_upper": 1.0,
+      "count": 1,
+      "accuracy": 0.0,
+      "confidence": 0.917208840153892,
+      "absolute_gap": 0.917208840153892
+    }
+  ]
+}

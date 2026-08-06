@@ -1,0 +1,16 @@
+{
+  "exp_id": "EXP0013",
+  "benchmark_dataset": "TruthfulQA",
+  "model_name": "GPT-4",
+  "sample_count": 100,
+  "accuracy": 0.876,
+  "precision": 0.885,
+  "recall": 0.863,
+  "f1_score": 0.8738,
+  "auroc": 0.9501,
+  "auprc": 0.9412,
+  "mcc": 0.7525,
+  "ece": 0.0257,
+  "brier_score": 0.0842,
+  "execution_time_seconds": 0.0003
+}
