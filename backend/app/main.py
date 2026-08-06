@@ -158,6 +158,9 @@ def create_application() -> FastAPI:
     app.include_router(export_router, prefix=settings.API_V1_STR)
     app.include_router(admin_router, prefix=settings.API_V1_STR)
 
+    from app.modules.verification.production_router import router as production_router
+    app.include_router(production_router, prefix=settings.API_V1_STR)
+
     from app.modules.hallucisense.router import router as hallucisense_router
     app.include_router(hallucisense_router, prefix=settings.API_V1_STR)
 

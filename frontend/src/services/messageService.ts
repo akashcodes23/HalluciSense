@@ -15,6 +15,15 @@ export const messageService = {
     });
     return response.data;
   },
+
+  async analyzeResponse(query: string, responseText: string, modelName = 'GPT-4') {
+    const response = await api.post('/analyze', {
+      query,
+      response: responseText,
+      model_name: modelName,
+    });
+    return response.data;
+  },
 };
 
 export function createStreamingConnection(

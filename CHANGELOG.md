@@ -1,17 +1,22 @@
-# Changelog
+# HalluciSense Production Release Changelog
 
-All notable changes to **HalluciSense** will be documented in this file.
+All notable changes to the HalluciSense hallucination detection platform will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+---
 
-## [1.0.0-rc1] - 2026-08-05
+## [v1.0.0] - 2026-08-06 - Production Release Candidate
 
 ### Added
-- **Hybrid Multi-Pillar Inference Pipeline**: Combines Pillar 1 (External Evidence Grounding) and Pillar 2 (Intra-Model Self-Consistency Contradiction Matrix) using a 19-dimensional feature schema.
-- **Phase 6M Hybrid Model**: Deserializes candidate 5 `HistGradientBoostingClassifier` with `RobustScaler` preprocessing.
-- **Public Benchmark Dataset Registry**: Adapters for 12 public datasets (*HaluEval, TruthfulQA, FreshQA, FEVER, SciFact, HoVer, VitaminC, FActScore, BEGIN, XSumFaith, PubHealth, PubMedQA, MedQA*) across 15 domains ($N=750$ claims).
-- **Statistical Validation Engine**: 10,000-sample non-parametric bootstrap 95% CIs, McNemar's test, DeLong ROC AUC test, Wilcoxon signed-rank test, Permutation test, Cohen's $d$, and Cliff's Delta.
-- **Probability Recalibration Suite**: Platt Scaling sigmoidal recalibration reducing ECE from $0.1090 \to \mathbf{0.0257}$.
-- **Multi-Format Publication Visualizations**: Export 300 DPI PNG, SVG, and PDF graphics (ROC, PR, Calibration, Confusion Matrix, Radar plots, 15-Domain breakdowns).
-- **Enterprise Production Architecture**: Single-command reproducibility script `python run_all_experiments.py`, Docker multi-stage build, Railway deployment configuration, OpenTelemetry tracing, and structured JSON logging.
+- **Canonical Production Endpoint (`POST /api/v1/analyze`)**: Unified multi-pillar analysis pipeline executing Retrieval, Predictive Confidence, Paraphrase Consistency, Bayesian Adaptive Fusion, and 4-Tier Token Localization.
+- **Deep Health & Readiness Probes (`/health`, `/healthz`, `/ready`, `/readyz`)**: Returns vector store, ML model, and provider status.
+- **Root Info Endpoint (`GET /`)**: Provides service name, version, environment, and Swagger docs paths for Railway and Docker deployments.
+- **Production Schemas**: Strictly typed Pydantic V2 models (`AnalysisRequest`, `AnalysisResponse`) with OpenAPI 3.0 specs.
+- **Structured JSON Logging & Tracing**: Request ID propagation (`X-Request-ID`), latency tracking, and sanitization.
+
+### Fixed
+- Fixed FastAPI openapi/docs paths for Railway proxy deployments.
+- Fixed 500 error exception handling to return sanitized JSON errors without exposing internal stack traces.
+
+### Security & Operations
+- Locked dependency manifests (`release/requirements-lock.txt`, `release/environment.yml`).
+- Docker Compose & Railway multi-stage container build optimizations.
