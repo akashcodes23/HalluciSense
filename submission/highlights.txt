@@ -1,0 +1,6 @@
+- Proposes HalluciSense, an uncertainty-gated multi-pillar hybrid framework for LLM hallucination detection.
+- Integrates Evidence Grounding, Predictive Uncertainty, and Structural Self-Consistency graphs.
+- Introduces query-adaptive dynamic coefficient estimation conditioning on query complexity.
+- Reduces Expected Calibration Error (ECE) to 0.0257 via Platt Sigmoidal Recalibration.
+- Achieves state-of-the-art detection performance (AUROC = 0.9501, F1 = 0.8738) across 7 benchmarks (N=750 claims).
+- Fully reproducible open-source artifact package with single-command execution script.
