@@ -338,6 +338,18 @@ class Pillar3ConsistencyEngine:
             cf_final=cf_final
         )
 
+        # 5. Construct Paraphrase Matrix & Sentence Consistency Score
+        all_texts = [primary_response] + valid_samples
+        paraphrase_matrix = []
+        for i, t1 in enumerate(all_texts):
+            row = []
+            for j, t2 in enumerate(all_texts):
+                sim = self.jaccard_similarity(t1, t2)
+                row.append(round(sim, 4))
+            paraphrase_matrix.append(row)
+
+        sentence_consistency = round(1.0 - cf_final, 4)
+
         return Pillar3Result(
             sample_responses=valid_samples,
             pairwise_similarities=similarities,
@@ -349,4 +361,6 @@ class Pillar3ConsistencyEngine:
             alignment_method="sentence_semantic_alignment",
             reasoning=reasoning,
             available=True,
+            paraphrase_matrix=paraphrase_matrix,
+            sentence_consistency_score=sentence_consistency,
         )

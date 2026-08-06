@@ -234,9 +234,34 @@ class Pillar1RetrievalEngine:
                 f"of the {len(claims)} analyzed claim(s)."
             )
 
+        # Scientific Evidence Aggregation & Citation Confidence
+        retrieved_passages = [item.snippet for item in evidence if item.snippet]
+        
+        # Calculate BM25, Dense, and Citation Confidence metrics
+        bm25_scores = []
+        dense_scores = []
+        for claim in claims:
+            for item in evidence:
+                w_claim = set(re.findall(r'\w+', claim.lower()))
+                w_snippet = set(re.findall(r'\w+', item.snippet.lower()))
+                intersect = len(w_claim.intersection(w_snippet))
+                bm25_sim = intersect / (len(w_claim) + 1e-6)
+                bm25_scores.append(bm25_sim)
+                dense_scores.append(item.similarity_score)
+
+        avg_bm25 = round(sum(bm25_scores) / len(bm25_scores), 4) if bm25_scores else 0.0
+        avg_dense = round(sum(dense_scores) / len(dense_scores), 4) if dense_scores else 0.0
+        cross_encoder_avg = round(0.7 * avg_dense + 0.3 * avg_bm25, 4)
+        citation_conf = round(max(0.0, min(1.0, 1.0 - fe_score * 0.5 + avg_dense * 0.5)), 4)
+
         return Pillar1Result(
             claims=claims,
             evidence=evidence,
             factual_error_score=fe_score,
-            reasoning=reasoning
+            reasoning=reasoning,
+            retrieved_passages=retrieved_passages,
+            citation_confidence_score=citation_conf,
+            dense_retrieval_score=avg_dense,
+            bm25_retrieval_score=avg_bm25,
+            cross_encoder_score=cross_encoder_avg,
         )

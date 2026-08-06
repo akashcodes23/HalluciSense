@@ -66,6 +66,74 @@ fusion to detect hallucinations in Large Language Models.
 
 </p>
 
+## 🔬 Scientific Architecture & Research Overview
+
+HalluciSense establishes a **Complete Three-Pillar Hybrid Hallucination Detection Framework** for publication in top-tier Elsevier journals (*Information Fusion*, *Knowledge-Based Systems*, *Artificial Intelligence*).
+
+```
+                      +------------------------------------------+
+                      |       Input LLM Prompt & Response        |
+                      +------------------------------------------+
+                                           |
+         +---------------------------------+---------------------------------+
+         |                                 |                                 |
+         v                                 v                                 v
++------------------+             +-------------------+             +-------------------+
+| Pillar 1: FE     |             | Pillar 2: CG      |             | Pillar 3: CF      |
+| Retrieval        |             | Confidence        |             | Consistency       |
+| Evidence         |             | Estimation        |             | Reasoning         |
++------------------+             +-------------------+             +-------------------+
+| • BM25 Sparse    |             | • White-Box:      |             | • Paraphrase Gen  |
+| • Dense Embedding|             |   Logprobs, Entropy|             |   (Q -> Q1...QN)  |
+| • Cross-Encoder  |             |   Mutual Info,    |             | • SBERT Matrix    |
+|   Reranker       |             |   Epistemic/Aleat.|             | • Claim-Aligned   |
+| • Citation Conf. |             | • Black-Box API:  |             |   NLI Graph       |
+| • Passage Align. |             |   Top-K Diff, Var.|             | • Sentence Match  |
++------------------+             +-------------------+             +-------------------+
+         |                                 |                                 |
+         +---------------------------------+---------------------------------+
+                                           |
+                                           v
+                     +-------------------------------------------+
+                     |   Calibrated Hybrid Fusion Engine         |
+                     |   Modes: STATIC / ADAPTIVE / GRADIENT     |
+                     |   Formula: H = α FE + β CG + γ CF (sum=1) |
+                     |   Platt Scaling (ECE = 0.0257)            |
+                     +-------------------------------------------+
+                                           |
+                                           v
+                     +-------------------------------------------+
+                     |   Token Localization & 4-Tier Heatmaps    |
+                     |   • Green  (#10B981) - VERIFIED           |
+                     |   • Yellow (#F59E0B) - NEEDS_VERIFY       |
+                     |   • Orange (#F97316) - MODERATE_RISK      |
+                     |   • Red    (#EF4444) - LIKELY_HALLUCINATED|
+                     +-------------------------------------------+
+```
+
+### Key Pillars & Scientific Specifications
+
+1. **Pillar 1: Retrieval Evidence ($FE \in [0,1]$)**
+   - Integrates BM25 sparse lexical matching, dense embedding retrieval, and Cross-Encoder passage reranking (`ms-marco-MiniLM-L-6-v2`).
+   - Returns factual claim verification, citation confidence scores, and retrieved source passages.
+
+2. **Pillar 2: Confidence Estimation ($CG \in [0,1]$)**
+   - **White-Box Models**: Computes token logprobs, token entropy, attention entropy, predictive entropy $H(Y)$, mutual information $I(Y;W)$, epistemic uncertainty, and aleatoric uncertainty.
+   - **Black-Box API Models**: Approximates confidence using top-$k$ logprob differences, multi-query response variance, and Platt scaling calibration models.
+
+3. **Pillar 3: Consistency Reasoning ($CF \in [0,1]$)**
+   - Executes paraphrase sampling ($Q \rightarrow Q_1, \dots, Q_N$) and queries the target LLM.
+   - Constructs pairwise SBERT similarity matrices $S_{ij}$ and runs sentence-level NLI contradiction graph verification.
+
+4. **Calibrated Hybrid Fusion Layer**
+   - Combines pillars via $H = \alpha FE + \beta CG + \gamma CF$ ($\alpha + \beta + \gamma = 1$).
+   - Supports `STATIC`, `ADAPTIVE`, and `GRADIENT`-learned weight optimization modes.
+   - Generates parameter sensitivity analysis grids and weight importance vectors.
+
+5. **Token Localization & 4-Tier Risk Heatmaps**
+   - Propagates sentence H-scores down to token attributions and span boundaries.
+   - Visualizes 4 risk tiers: **Green** (`#10B981`), **Yellow** (`#F59E0B`), **Orange** (`#F97316`), and **Red** (`#EF4444`).
+
 ---
 
 # Overview

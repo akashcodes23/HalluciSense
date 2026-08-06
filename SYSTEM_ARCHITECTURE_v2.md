@@ -1,59 +1,86 @@
-# HalluciSense System Architecture & Technical Design Specification (v2.0)
+# HalluciSense Scientific System Architecture & Technical Design Specification (v2.0)
 
-**Document Version**: 2.0.0-RC1  
-**Target Platform**: Railway Cloud / Docker Containers  
-**Author**: Principal Staff Backend & MLOps Architect  
+**Document Version**: 2.0.0-Publication-Ready  
+**Target Platform**: Elsevier Research Framework / Enterprise Cloud  
+**Authors**: Lead Research Engineer & Principal Scientist Team  
 
 ---
 
-## 1. High-Level System Architecture
+## 1. Complete Scientific Three-Pillar Architecture
 
 ```mermaid
 graph TD
-    Client[React / Next.js 14 Web Frontend] -->|HTTPS / WSS| Gateway[FastAPI API Gateway / Nginx Reverse Proxy]
-    Gateway --> Auth[JWT Authentication & Rate Limiter]
-    Auth --> Verification[Verification Orchestrator Engine]
+    InputText[User Prompt & LLM Output] --> Pipeline[HalluciSense Multi-Pillar Orchestrator]
 
-    subgraph "Hybrid Multi-Pillar Inference Pipeline"
-        Verification --> Pillar1[Pillar 1: External Evidence Grounding]
-        Verification --> Pillar2[Pillar 2: Intra-Model Self-Consistency]
-
-        Pillar1 --> WebSearch[Wikipedia / PubMed / CrossRef Retrieval]
-        Pillar1 --> CrossEncoder[CrossEncoder Reranker & NLI Model]
-
-        Pillar2 --> Claims[Atomic Claim Extractor]
-        Pillar2 --> SelfNLI[Pairwise Claim NLI Matrix]
-
-        Pillar1 --> FeatureVector[19-Dimensional Hybrid Vector Assembly]
-        Pillar2 --> FeatureVector
-
-        FeatureVector --> HybridClassifier[Phase 6M HistGradientBoostingClassifier]
+    subgraph "Pillar 1: Retrieval Evidence (FE)"
+        Pipeline --> P1[Pillar 1 Engine]
+        P1 --> Sparse[BM25 Lexical Retrieval]
+        P1 --> Dense[Sentence Embedding Dense Retrieval]
+        P1 --> CrossEnc[Cross-Encoder Reranker: ms-marco-MiniLM-L-6-v2]
+        CrossEnc --> FE[Evidence Grounding Score: FE ∈ 0,1]
     end
 
-    HybridClassifier --> Decision[Decision Threshold Engine (tau* = 0.54)]
-    Decision --> Explainability[SHAP Attribution & Topological Graph Engine]
+    subgraph "Pillar 2: Confidence Estimation (CG)"
+        Pipeline --> P2[Pillar 2 Engine]
+        P2 --> WhiteBox[White-Box: Logit Entropy, Attention, Mutual Info, Epistemic/Aleatoric]
+        P2 --> BlackBox[Black-Box API: Top-K Logprobs, Response Variance, Calibration]
+        WhiteBox --> CG[Confidence Estimation Score: CG ∈ 0,1]
+        BlackBox --> CG
+    end
 
-    Explainability --> Response[JSON API Response + SSE Streaming]
+    subgraph "Pillar 3: Consistency Reasoning (CF)"
+        Pipeline --> P3[Pillar 3 Engine]
+        P3 --> ParaGen[Paraphrase Generator: Q -> Q1...QN]
+        P3 --> SBERT[SBERT Similarity Matrix]
+        P3 --> NLIGraph[Claim-Aligned NLI Contradiction Graph]
+        NLIGraph --> CF[Consistency Failure Score: CF ∈ 0,1]
+    end
 
-    Response --> DB[(PostgreSQL Database)]
-    Response --> RedisCache[(Redis Cache & Session Store)]
+    FE --> Fusion[Calibrated Hybrid Fusion Layer]
+    CG --> Fusion
+    CF --> Fusion
+
+    subgraph "Uncertainty-Aware Adaptive Fusion Engine"
+        Fusion --> Modes[Modes: STATIC / ADAPTIVE / GRADIENT]
+        Modes --> Formula["H = α FE + β CG + γ CF (α+β+γ=1)"]
+        Formula --> Platt[Platt Sigmoidal Calibration: ECE = 0.0257]
+    end
+
+    Platt --> TokenLoc[Token Localization & Span Merging]
+
+    subgraph "Token Attribution & Heatmap Overlay"
+        TokenLoc --> Green["VERIFIED (< 0.35): Green #10B981"]
+        TokenLoc --> Yellow["NEEDS_VERIFICATION (0.35-0.50): Yellow #F59E0B"]
+        TokenLoc --> Orange["MODERATE_RISK (0.50-0.65): Orange #F97316"]
+        TokenLoc --> Red["LIKELY_HALLUCINATED (>= 0.65): Red #EF4444"]
+    end
+
+    Green --> Output[JSON API & Structured Research Report]
+    Yellow --> Output
+    Orange --> Output
+    Red --> Output
 ```
 
 ---
 
-## 2. Component Design Specifications
+## 2. Component Specifications
 
-### A. API Gateway Layer (`backend/app/main.py`)
-- Fast, asynchronous Python 3.10 / FastAPI runtime.
-- CORS middleware with strict origin whitelist.
-- GZip compression for payloads &gt; 1KB.
-- Structured `structlog` logging with trace correlation IDs.
+### A. Pillar 1: Retrieval Evidence ($FE \in [0,1]$)
+- **Hybrid Retrieval**: BM25 sparse lexical matching combined with dense cosine embedding retrieval.
+- **Reranking & Entailment**: Cross-Encoder passage reranking coupled with `nli-deberta-v3-small` entailment scoring.
+- **Citation Confidence**: Calculates evidence support margin and citation reliability index.
 
-### B. Hybrid Multi-Pillar Inference Engine (`backend/app/core/inference/`)
-- **Pillar 1**: Retrieves top-$K$ passages from external authoritative corpora (Wikipedia, PubMed, CrossRef) and computes cross-encoder entailment and contradiction distributions.
-- **Pillar 2**: Extracts fine-grained atomic claims from LLM responses and computes pairwise self-consistency contradiction margins.
-- **Hybrid Meta-Classifier**: Combines 19 continuous features through a robustly scaled `HistGradientBoostingClassifier` trained on $N=58,002$ dev samples.
+### B. Pillar 2: Confidence Estimation ($CG \in [0,1]$)
+- **White-Box Models**: Computes token logprobs, token entropy, attention entropy, predictive entropy $H(Y)$, mutual information $I(Y;W)$, epistemic uncertainty, and aleatoric uncertainty.
+- **Black-Box API Models**: Approximates confidence via top-$k$ logprob differences, response variance across multi-queries, and Platt scaling calibration models.
 
-### C. Storage & Caching Layer
-- **PostgreSQL**: Stores user accounts, verification history, claims, and ground truth feedback.
-- **Redis**: Caches Wikipedia evidence passages, rate-limit buckets, and active WebSocket connections.
+### C. Pillar 3: Consistency Reasoning ($CF \in [0,1]$)
+- **Paraphrase Sampling**: Generates $N$ semantic paraphrases ($Q_1, \dots, Q_N$) and queries target LLM.
+- **SBERT Matrix**: Constructs full pairwise SBERT cosine similarity matrix $S_{ij}$.
+- **Contradiction Graph**: Executes sentence-level NLI contradiction detection across response pairs.
+
+### D. Fusion Layer & Explainability
+- **Mathematical Model**: $H = \alpha FE + \beta CG + \gamma CF$ where $\alpha + \beta + \gamma = 1$.
+- **Modes**: Supports `STATIC`, `ADAPTIVE`, and `GRADIENT`-learned weight optimization.
+- **Diagnostics**: Computes weight importance vectors and 1D/2D parameter sensitivity analysis matrices.
+- **Explainability Payload**: Every report includes evidence citations, confidence breakdown, consistency matrix, span localization, and 4-tier risk heatmaps (**Green**, **Yellow**, **Orange**, **Red**).

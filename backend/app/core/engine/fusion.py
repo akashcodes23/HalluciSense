@@ -1,4 +1,4 @@
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Any
 from .types import RiskLevel, Pillar1Result, Pillar2Result, Pillar3Result
 from ..config import settings
 
@@ -80,26 +80,65 @@ class FusionEngine:
 
     def determine_risk_level(self, h_score: float) -> Tuple[RiskLevel, str]:
         """
-        Assign RiskLevel enum and hexadecimal color indicator.
+        Assign RiskLevel enum and hexadecimal color indicator across 4 risk tiers.
         - VERIFIED (< 0.35): Green (#10B981)
-        - NEEDS_VERIFICATION (0.35 to 0.65): Yellow (#F59E0B)
+        - NEEDS_VERIFICATION (0.35 to 0.50): Yellow (#F59E0B)
+        - MODERATE_RISK (0.50 to 0.65): Orange (#F97316)
         - LIKELY_HALLUCINATED (>= 0.65): Red (#EF4444)
         """
-        if h_score < settings.VERIFIED_THRESHOLD:
+        if h_score < 0.35:
             return RiskLevel.VERIFIED, "#10B981"
-        elif h_score < settings.HALLUCINATED_THRESHOLD:
+        elif h_score < 0.50:
             return RiskLevel.NEEDS_VERIFICATION, "#F59E0B"
+        elif h_score < 0.65:
+            return RiskLevel.MODERATE_RISK, "#F97316"
         else:
             return RiskLevel.LIKELY_HALLUCINATED, "#EF4444"
+
+    def compute_sensitivity_analysis(
+        self,
+        fe: float,
+        cg: Optional[float],
+        cf: Optional[float]
+    ) -> Dict[str, Any]:
+        """
+        Computes 1D/2D parameter sensitivity grid for alpha, beta, gamma weight perturbation.
+        """
+        cg_val = cg if cg is not None else 0.5
+        cf_val = cf if cf is not None else 0.5
+
+        sensitivity_grid = []
+        for a_step in [0.2, 0.4, 0.6, 0.8]:
+            for b_step in [0.1, 0.2, 0.3, 0.4]:
+                g_step = round(max(0.0, 1.0 - a_step - b_step), 2)
+                sim_h = round(a_step * fe + b_step * cg_val + g_step * cf_val, 4)
+                sensitivity_grid.append({
+                    "alpha": a_step,
+                    "beta": b_step,
+                    "gamma": g_step,
+                    "h_score": sim_h,
+                })
+
+        weight_importance = {
+            "evidence_grounding_importance": round(self.alpha * fe, 4),
+            "confidence_estimation_importance": round(self.beta * cg_val, 4),
+            "consistency_reasoning_importance": round(self.gamma * cf_val, 4),
+        }
+
+        return {
+            "weight_importance": weight_importance,
+            "sensitivity_grid": sensitivity_grid[:8],
+        }
 
     def fuse(
         self,
         p1: Pillar1Result,
         p2: Pillar2Result,
-        p3: Pillar3Result
+        p3: Pillar3Result,
+        mode: str = "ADAPTIVE",
     ) -> Tuple[float, RiskLevel, str, Dict[str, float]]:
         """
-        Fuse individual pillar results into final metrics.
+        Fuse individual pillar results into final metrics with mode support (STATIC, ADAPTIVE, GRADIENT).
         Handles p2.confidence_gap_score being None and p3.consistency_failure_score being None safely.
         """
         cg_score = p2.confidence_gap_score if (p2 and getattr(p2, 'available', False)) else None
