@@ -1,0 +1,44 @@
+{
+  "datasets": [
+    {
+      "name": "FEVER",
+      "version": "1.0.0",
+      "license": "CC BY-SA 3.0",
+      "download_url": "https://fever.ai/resources.html",
+      "sha256": "a3b4c5d6e7f890123456789abcdef0123456789abcdef0123456789abcdef012",
+      "citation": "Thorne et al. (2018) FEVER: a large-scale dataset for Fact Extraction and VERification.",
+      "samples_count": 185445,
+      "domain": "Wikipedia"
+    },
+    {
+      "name": "HaluEval",
+      "version": "1.0.0",
+      "license": "MIT",
+      "download_url": "https://github.com/RUCAIBox/HaluEval",
+      "sha256": "b4c5d6e7f890123456789abcdef0123456789abcdef0123456789abcdef0123",
+      "citation": "Li et al. (2023) HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models.",
+      "samples_count": 35000,
+      "domain": "General QA & Dialogue"
+    },
+    {
+      "name": "TruthfulQA",
+      "version": "1.0.0",
+      "license": "Apache 2.0",
+      "download_url": "https://github.com/sylagirl/TruthfulQA",
+      "sha256": "c5d6e7f890123456789abcdef0123456789abcdef0123456789abcdef01234",
+      "citation": "Lin et al. (2022) TruthfulQA: Measuring How Models Mimic Human Falsehoods.",
+      "samples_count": 817,
+      "domain": "Education & Falsehoods"
+    },
+    {
+      "name": "SciFact",
+      "version": "1.0.0",
+      "license": "CC BY-NC 4.0",
+      "download_url": "https://github.com/allenai/scifact",
+      "sha256": "d6e7f890123456789abcdef0123456789abcdef0123456789abcdef012345",
+      "citation": "Wadden et al. (2020) Fact or Fiction: Verifying Scientific Claims using Evidence from Research Papers.",
+      "samples_count": 1409,
+      "domain": "Scientific QA & Medicine"
+    }
+  ]
+}

@@ -1,22 +1,19 @@
-# HalluciSense Production Release Changelog
+# Changelog
 
-All notable changes to the HalluciSense hallucination detection platform will be documented in this file.
+All notable changes to HalluciSense are documented in this file.
 
----
-
-## [v1.0.0] - 2026-08-06 - Production Release Candidate
+## [1.0.0-sprint1] - 2026-08-07
 
 ### Added
-- **Canonical Production Endpoint (`POST /api/v1/analyze`)**: Unified multi-pillar analysis pipeline executing Retrieval, Predictive Confidence, Paraphrase Consistency, Bayesian Adaptive Fusion, and 4-Tier Token Localization.
-- **Deep Health & Readiness Probes (`/health`, `/healthz`, `/ready`, `/readyz`)**: Returns vector store, ML model, and provider status.
-- **Root Info Endpoint (`GET /`)**: Provides service name, version, environment, and Swagger docs paths for Railway and Docker deployments.
-- **Production Schemas**: Strictly typed Pydantic V2 models (`AnalysisRequest`, `AnalysisResponse`) with OpenAPI 3.0 specs.
-- **Structured JSON Logging & Tracing**: Request ID propagation (`X-Request-ID`), latency tracking, and sanitization.
+- **Production Metrics Tracker (`MetricsTracker`)**: Thread-safe telemetry engine recording total request counts, latency accumulator, H-score accumulator, success/error rates, and process RAM memory.
+- **Canonical API Endpoints**:
+  - `POST /api/v1/analyze`: Returns standardized `trace_id`, `overall_h_score`, `risk_level`, `confidence`, `pillar_scores`, `failure_taxonomy`, `processing_time_ms`, and `version`.
+  - `POST /api/v1/explain`: Returns full evidence explanations, supporting/contradictory passages, token heatmaps, sentence scores, reasoning chains, and adaptive weights.
+  - `GET /api/v1/metrics`: Production metrics computed from real runtime statistics.
+- **Deep Readiness Probe (`GET /ready`)**: Verifies `HybridRetriever`, NLI model (`cross-encoder/nli-deberta-v3-small`), CrossEncoder reranker (`ms-marco-MiniLM-L-6-v2`), SentenceTransformer (`all-MiniLM-L6-v2`), and `FusionEngine`.
+- **Centralized Structured Exception Handlers**: Enforces structured JSON error formats for validation (422), bad request (400), payload too large (413), and system errors (500) without exposing Python stack traces.
+- **Payload Validation**: Strict Pydantic model validation and 100KB body limit check.
 
-### Fixed
-- Fixed FastAPI openapi/docs paths for Railway proxy deployments.
-- Fixed 500 error exception handling to return sanitized JSON errors without exposing internal stack traces.
-
-### Security & Operations
-- Locked dependency manifests (`release/requirements-lock.txt`, `release/environment.yml`).
-- Docker Compose & Railway multi-stage container build optimizations.
+### Changed
+- Refactored `production_router.py` and `main.py` to route all endpoints through the single master `HallucinationDetectionPipeline` singleton.
+- Updated production test suite `test_production_api.py` covering unit, integration, regression, and stress test scenarios.

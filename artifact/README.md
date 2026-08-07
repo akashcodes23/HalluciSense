@@ -1,25 +1,27 @@
-# HalluciSense Artifact Evaluation Package
+# HalluciSense Artifact Evaluation Guide
 
-Welcome to the camera-ready **HalluciSense Artifact Evaluation Package** for Elsevier journal peer review (*Information Fusion*, *Knowledge-Based Systems*, *Artificial Intelligence*, *Expert Systems with Applications*).
-
----
-
-## 📂 Artifact Package Structure
-
-- `INSTALL.md`: Complete installation guide (Conda, Pip, Poetry, Docker).
-- `DATASETS.md`: Public benchmark dataset manifest, SHA256 checksums, and schema.
-- `MODELS.md`: Supported white-box and black-box LLM architecture specifications.
-- `DOCKER.md`: Docker and Docker Compose container instructions.
-- `REPRODUCE.md`: Single-command reproduction guide (`./reproduce.sh`).
-- `API_REFERENCE.md`: REST and WebSocket API documentation.
-- `LICENSE`: MIT Open Source License.
-- `CITATION.cff`: Citation File Format metadata.
+Welcome to the HalluciSense Artifact Evaluation package. This repository provides a complete, self-contained, reproducible benchmarking framework designed for peer review by committee members at NeurIPS, ICLR, ICML, ACL, EMNLP, and Elsevier top-tier Q1 journals.
 
 ---
 
-## ⚡ Quick Reproduction
+## Artifact Contents
+
+- **`INSTALL.md`**: Step-by-step installation instructions for Linux, macOS, and Docker.
+- **`RUN.md`**: Commands for running fast smoke tests (< 2 minutes) and full reproduction (< 30 minutes).
+- **`CHECKSUMS.md`**: SHA256 checksums verifying file integrity across datasets, models, and evaluation outputs.
+- **`LICENSE`**: MIT Open Science license.
+- **`expected_outputs/`**: Reference outputs generated during primary benchmark execution.
+
+---
+
+## Quick Start (One-Line Execution)
 
 ```bash
-chmod +x reproduce.sh
-./reproduce.sh
+# Clean machine automated reproduction
+bash scripts/fresh_install.sh
+```
+
+Or via Docker:
+```bash
+docker compose up --build
 ```

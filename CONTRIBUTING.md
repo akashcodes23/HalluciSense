@@ -1,10 +1,27 @@
 # Contributing to HalluciSense
 
-We welcome contributions to HalluciSense!
+Thank you for your interest in contributing to HalluciSense! We welcome contributions from researchers, software engineers, and open science advocates.
 
-## Development Guidelines
-1. Fork and clone the repository.
-2. Create a feature branch (`git checkout -b feature/amazing-feature`).
-3. Ensure all pytest unit tests pass (`python -m pytest tests/ -v`).
-4. Commit your changes using conventional commits (`feat: add new feature`).
-5. Open a Pull Request against `main`.
+---
+
+## Development Workflow
+
+1. **Fork & Clone**:
+   ```bash
+   git clone https://github.com/akashcodes23/HalluciSense.git
+   cd HalluciSense
+   ```
+
+2. **Environment Setup**:
+   ```bash
+   bash scripts/fresh_install.sh
+   ```
+
+3. **Running Pytest Tests**:
+   ```bash
+   cd backend
+   pytest tests/ -v
+   ```
+
+4. **Submitting Pull Requests**:
+   Ensure all CI Quality Gates pass (`python3 backend/scripts/check_phase26_quality_gates.py`) before opening a PR.

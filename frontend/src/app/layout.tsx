@@ -1,29 +1,42 @@
-import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
-import './globals.css';
-import { Toaster } from 'react-hot-toast';
+import type { Metadata } from "next";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import { Providers } from "./providers";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'HalluciSense — Confidence-Aware AI Assistant',
+  title: "HalluciSense — Detect Hallucinations with Scientific Confidence",
   description:
-    'A confidence-aware hybrid framework for detecting and quantifying hallucinations in LLM responses. Know when to trust your AI.',
-  keywords: ['hallucination detection', 'AI safety', 'LLM', 'ChatGPT', 'AI assistant'],
+    "Confidence-aware AI verification powered by a three-pillar hallucination detection framework. Evidence grounding, confidence estimation, and consistency reasoning.",
+  keywords: [
+    "hallucination detection",
+    "AI safety",
+    "LLM verification",
+    "factual accuracy",
+    "AI confidence",
+  ],
   openGraph: {
-    title: 'HalluciSense',
-    description: 'Know when to trust your AI.',
-    type: 'website',
+    title: "HalluciSense",
+    description:
+      "Detect hallucinations with scientific confidence. Three-pillar AI verification framework.",
+    type: "website",
   },
 };
 
@@ -33,22 +46,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
-        <div className="bg-animated" aria-hidden="true" />
-        {children}
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              background: '#0d1220',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: '#f1f5f9',
-              borderRadius: '10px',
-              fontSize: '14px',
-            },
-          }}
-        />
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
+      >
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

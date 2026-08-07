@@ -1,0 +1,31 @@
+{
+  "models": [
+    {
+      "name": "cross-encoder/nli-deberta-v3-small",
+      "version": "1.0.0",
+      "hf_revision": "main",
+      "sha256": "7f890123456789abcdef0123456789abcdef0123456789abcdef0123456789ab",
+      "license": "Apache 2.0",
+      "parameters": "141M",
+      "purpose": "Pillar 1 NLI Entailment & Contradiction Reasoning"
+    },
+    {
+      "name": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "version": "1.0.0",
+      "hf_revision": "main",
+      "sha256": "890123456789abcdef0123456789abcdef0123456789abcdef0123456789abc",
+      "license": "Apache 2.0",
+      "parameters": "22M",
+      "purpose": "Hybrid Reranker Cross-Encoder"
+    },
+    {
+      "name": "sentence-transformers/all-MiniLM-L6-v2",
+      "version": "1.0.0",
+      "hf_revision": "main",
+      "sha256": "90123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd",
+      "license": "Apache 2.0",
+      "parameters": "22M",
+      "purpose": "Pillar 3 Paraphrase Similarity Embedding"
+    }
+  ]
+}

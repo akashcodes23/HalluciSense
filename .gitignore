@@ -79,4 +79,7 @@ backend/evaluation_results/**/cache/
 !backend/evaluation_results/phase6m/
 !backend/evaluation_results/phase6m/final_hybrid_model/
 !backend/evaluation_results/phase6m/final_hybrid_model/*.joblib
-!backend/evaluation_results/phase6m/final_hybrid_model/*.json
+!backend/evaluation_results/phase6m/final_hybrid_model/*.jsonsubmission_packages/*.zip
+submission_packages/*.zip
+submission_packages/*.zip
+submission_packages/

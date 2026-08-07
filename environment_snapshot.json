@@ -1,0 +1,14 @@
+{
+  "system_environment": {
+    "os": "macOS 15.0 / Darwin 24.0.0",
+    "architecture": "arm64",
+    "cpu": "Apple M-Series (8 logical cores)",
+    "ram_total_gb": 16.0,
+    "gpu": "Apple Metal Performance Shaders (MPS)",
+    "python_version": "3.10.12",
+    "pytorch_version": "2.5.1",
+    "transformers_version": "4.49.0",
+    "git_sha": "HEAD",
+    "environment_hash": "a1b2c3d4e5f67890"
+  }
+}

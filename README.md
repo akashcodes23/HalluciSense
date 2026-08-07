@@ -324,16 +324,18 @@ HalluciSense
 
 | Component | Status |
 |------------|--------|
-| Backend API | ✅ Complete |
-| Frontend Dashboard | ✅ Complete |
-| Retrieval Module | ✅ Complete |
-| Hybrid Verification | ✅ Complete |
-| Explainability | ✅ Complete |
-| Confidence Calibration | ✅ Complete |
-| Evaluation Pipeline | ✅ Complete |
-| Docker Deployment | ✅ Complete |
-| Documentation | 🚧 In Progress |
-| IEEE Publication | 🚧 In Preparation |
+| Backend API (FastAPI) | ✅ Complete |
+| Frontend Dashboard (Next.js 16) | ✅ Complete |
+| Retrieval Grounding Module (Pillar 1) | ✅ Complete |
+| Confidence Estimation (Pillar 2) | ✅ Complete |
+| Structural Consistency (Pillar 3) | ✅ Complete |
+| Calibrated Adaptive Fusion Engine | ✅ Complete |
+| Token Localization & Heatmaps | ✅ Complete |
+| Explainability Engine | ✅ Complete |
+| Railway Backend Deployment (Sprint 3.1A) | ✅ Complete |
+| Railway Frontend Deployment (Sprint 3.1B) | ✅ Complete |
+| Docker & Compose Setup | ✅ Complete |
+| Scientific Benchmarking & Reports | ✅ Complete |
 
 ---
 

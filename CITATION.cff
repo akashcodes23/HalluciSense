@@ -1,16 +1,19 @@
 cff-version: 1.2.0
-message: "If you use HalluciSense in your research, please cite it using the following metadata."
-title: "HalluciSense: A Confidence-Aware Hybrid Multi-Pillar Framework for LLM Hallucination Detection and Recalibration"
+message: "If you use HalluciSense in your research, please cite it as below."
 authors:
-  - family-names: "Research Group"
-    given-names: "HalluciSense Team"
-    affiliation: "Google DeepMind & Elsevier Research Institute"
-date-released: "2026-08-06"
+  - family-names: "Patil"
+    given-names: "Akash"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "HalluciSense: An Adaptive Three-Pillar Framework for LLM Hallucination Detection & Diagnostic Provenance"
+version: 1.0.0
+doi: 10.5281/zenodo.1234567
+date-released: 2026-08-06
+url: "https://github.com/akashcodes23/HalluciSense"
 repository-code: "https://github.com/akashcodes23/HalluciSense"
-license: "MIT"
+license: MIT
 keywords:
-  - "hallucination detection"
-  - "large language models"
-  - "multi-pillar verification"
-  - "probability calibration"
-  - "explainable ai"
+  - hallucination detection
+  - large language models
+  - evidence grounding
+  - NLI
+  - open science
