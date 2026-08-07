@@ -2,6 +2,7 @@ import os
 os.environ["GRPC_DNS_RESOLVER"] = "native"
 
 from datetime import timedelta
+from pathlib import Path
 from typing import List
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -10,7 +11,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """
     Centralised application configuration loaded from environment variables.
-    All fields have safe defaults for local development.
+    Supports Railway deployment environment variables and volume paths (/data).
     """
 
     model_config = SettingsConfigDict(
@@ -25,6 +26,21 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
     APP_ENV: str = "development"
+    LOG_LEVEL: str = "INFO"
+    HOST: str = "0.0.0.0"
+    PORT: int = 8000
+    ENABLE_TRACING: bool = True
+    ENABLE_DEBUG_API: bool = True
+    TOKENIZERS_PARALLELISM: bool = False
+
+    # ── Volume & Directory Paths ──────────────────────────────────────────────
+    # Supports Railway volume mount (/data) when deployed
+    DATA_VOLUME_DIR: str = "/data"
+    HF_HOME: str = "/data/cache/huggingface"
+    TRANSFORMERS_CACHE: str = "/data/cache/transformers"
+    TRACE_DIR: str = "/data/traces"
+    MODEL_DIR: str = "/data/models"
+    FAISS_DIR: str = "/data/faiss"
 
     # ── Security ──────────────────────────────────────────────────────────────
     SECRET_KEY: str = "dev-secret-key-change-in-production-must-be-32-chars"
@@ -33,7 +49,7 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # ── CORS ──────────────────────────────────────────────────────────────────
-    CORS_ORIGINS: str = "http://localhost:3000"
+    CORS_ORIGINS: str = "*"
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
@@ -41,6 +57,8 @@ class Settings(BaseSettings):
         return v
 
     def get_cors_origins(self) -> List[str]:
+        if self.CORS_ORIGINS == "*":
+            return ["*"]
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
 
     # ── Database ──────────────────────────────────────────────────────────────
@@ -103,6 +121,18 @@ class Settings(BaseSettings):
     @property
     def refresh_token_delta(self) -> timedelta:
         return timedelta(days=self.REFRESH_TOKEN_EXPIRE_DAYS)
+
+    def get_resolved_trace_dir(self) -> Path:
+        """Resolve trace directory: check /data/traces or fallback to project traces/."""
+        data_traces = Path("/data/traces")
+        if data_traces.parent.exists():
+            data_traces.mkdir(parents=True, exist_ok=True)
+            return data_traces
+        
+        base_dir = Path(__file__).resolve().parent.parent.parent
+        local_traces = base_dir / "traces"
+        local_traces.mkdir(parents=True, exist_ok=True)
+        return local_traces
 
 
 settings = Settings()

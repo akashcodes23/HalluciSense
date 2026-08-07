@@ -1,0 +1,25 @@
+{
+  "trace_id": "TRACE_22904095E048",
+  "timestamp": "2026-08-06T12:17:25.826321+00:00",
+  "start_time_unix": 1786018645.826174,
+  "environment": "production",
+  "stages": {
+    "unit_test_stage": {
+      "duration_ms": 12.5,
+      "memory_mb": 0.0,
+      "confidence": 0.95,
+      "details": {
+        "test_key": "test_val"
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 0.18,
+    "total_memory_mb": 0.0,
+    "final_h_score": 0.1,
+    "risk_level": "VERIFIED",
+    "root_cause_classification": "VERIFIED",
+    "stage_count": 1,
+    "metadata": {}
+  }
+}

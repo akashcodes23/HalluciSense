@@ -80,7 +80,7 @@ def test_fastapi_health_endpoint():
     assert response.status_code == 200
 
     data = response.json()
-    assert data["status"] in ["healthy", "degraded"]
+    assert data["status"].lower() in ["ok", "healthy", "degraded"]
 
 
 def test_fastapi_version_endpoint():

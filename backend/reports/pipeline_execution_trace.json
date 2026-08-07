@@ -1,0 +1,572 @@
+[
+  {
+    "test_id": "TRUE_01",
+    "query": "Who invented the telephone?",
+    "response": "Alexander Graham Bell invented the telephone in 1876.",
+    "expected_risk": "LOW",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 1.41,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "Alexander Graham Bell invented the telephone in 1876."
+      ],
+      "num_claims": 1,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 1 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "FALSE_01",
+    "query": "Who invented the telephone?",
+    "response": "The telephone was invented by Albert Einstein in 1920.",
+    "expected_risk": "HIGH",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.5,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "The telephone was invented by Albert Einstein in 1920."
+      ],
+      "num_claims": 1,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 1 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "TRUE_02",
+    "query": "What is the capital of France?",
+    "response": "The capital of France is Paris.",
+    "expected_risk": "LOW",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.54,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "The capital of France is Paris."
+      ],
+      "num_claims": 1,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 1 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "FALSE_02",
+    "query": "What is the capital of France?",
+    "response": "The capital of France is Berlin, which has been so since the 1400s.",
+    "expected_risk": "HIGH",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.53,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "The capital of France is Berlin",
+        "which has been so since the 1400s."
+      ],
+      "num_claims": 2,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 2 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "MIXED_01",
+    "query": "Tell me about water",
+    "response": "Water is H2O. It boils at 50 degrees Celsius at sea level.",
+    "expected_risk": "MODERATE",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.58,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "Water is H2O. It boils at 50 degrees Celsius at sea level."
+      ],
+      "num_claims": 1,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 1 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 2,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "TRUE_03",
+    "query": "What is photosynthesis?",
+    "response": "Photosynthesis is the process by which green plants convert sunlight into chemical energy using chlorophyll.",
+    "expected_risk": "LOW",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.34,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "Photosynthesis is the process by",
+        "green plants convert sunlight into chemical energy using chlorophyll."
+      ],
+      "num_claims": 2,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 2 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "FALSE_03",
+    "query": "Who wrote Romeo and Juliet?",
+    "response": "Romeo and Juliet was written by Charles Dickens in 1920.",
+    "expected_risk": "HIGH",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.4,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "Juliet was written by Charles Dickens in 1920."
+      ],
+      "num_claims": 1,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 1 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  },
+  {
+    "test_id": "FALSE_04",
+    "query": "What is the speed of light?",
+    "response": "The speed of light is approximately 1000 kilometers per hour.",
+    "expected_risk": "HIGH",
+    "overall_h_score": 0.5,
+    "overall_risk_level": "MODERATE_RISK",
+    "elapsed_ms": 0.35,
+    "pillar1": {
+      "factual_error_score": 0.5,
+      "claims_extracted": [
+        "The speed of light is approximately 1000 kilometers per hour."
+      ],
+      "num_claims": 1,
+      "evidence_count": 0,
+      "retrieved_passages_count": 0,
+      "dense_retrieval_score": 0.0,
+      "bm25_retrieval_score": 0.0,
+      "cross_encoder_score": 0.0,
+      "citation_confidence_score": 0.75,
+      "reasoning": "Identified 1 factual claim(s), but no external evidence was available. Factual status remains uncertain."
+    },
+    "pillar2": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "avg_probability": null,
+      "avg_entropy": null,
+      "confidence_gap_score": null,
+      "epistemic_uncertainty": null,
+      "aleatoric_uncertainty": null,
+      "predictive_entropy": null,
+      "mutual_information": null,
+      "calibration_score": null,
+      "reasoning": "Token-level generation probabilities were not available from the model provider. Confidence analysis was excluded from fusion."
+    },
+    "pillar3": {
+      "available": false,
+      "status": "UNAVAILABLE",
+      "consistency_failure_score": null,
+      "contradiction_score": null,
+      "num_sample_responses": 0,
+      "num_pairwise_similarities": 0,
+      "similarity_method": "unavailable",
+      "nli_available": false,
+      "reasoning": "Alternate generations were not available. Self-consistency analysis was excluded from fusion."
+    },
+    "fusion": {
+      "weights_used": {
+        "alpha_factual_error": 1.0,
+        "beta_confidence_gap": 0.0,
+        "gamma_consistency_failure": 0.0
+      },
+      "fusion_mode": "ADAPTIVE",
+      "calibrated_probability": 0.3894
+    },
+    "token_localization": {
+      "num_annotations": 1,
+      "tiers_found": [
+        "MODERATE_RISK"
+      ]
+    },
+    "diagnosis": [
+      "CRITICAL: H-score is exactly 0.5 (likely placeholder/fallback)",
+      "WARNING: Pillar 1 FE score is exactly 0.5 (no evidence used)",
+      "INFO: Pillar 2 unavailable (no token probabilities)",
+      "INFO: Pillar 3 unavailable (no sample responses)",
+      "WARNING: No evidence returned by retrieval",
+      "WARNING: Dense retrieval score is 0.0",
+      "WARNING: BM25 retrieval score is 0.0"
+    ]
+  }
+]

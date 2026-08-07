@@ -1,5 +1,5 @@
 # ==========================================
-# HalluciSense Production Dockerfile
+# HalluciSense Production Dockerfile (Railway Ready)
 # ==========================================
 
 # ---------- Builder Stage ----------
@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 
 RUN pip install --upgrade pip
-
 RUN pip install \
     --no-cache-dir \
     --prefix=/install \
@@ -31,7 +30,21 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
+# Production Environment Variables for Railway
+ENV APP_ENV=production \
+    HOST=0.0.0.0 \
+    PORT=8000 \
+    LOG_LEVEL=INFO \
+    ENABLE_TRACING=true \
+    ENABLE_DEBUG_API=true \
+    API_VERSION=v1 \
+    TOKENIZERS_PARALLELISM=false \
+    HF_HOME=/data/cache/huggingface \
+    TRANSFORMERS_CACHE=/data/cache/transformers \
+    TRACE_DIR=/data/traces \
+    MODEL_DIR=/data/models \
+    FAISS_DIR=/data/faiss \
+    PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app
 
@@ -40,8 +53,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /install /usr/local
+# Create Railway persistent volume directories
+RUN mkdir -p /data/traces /data/models /data/cache /data/faiss /data/reports \
+    && chmod -R 777 /data
 
+COPY --from=builder /install /usr/local
 COPY . .
 
 EXPOSE 8000

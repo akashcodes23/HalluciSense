@@ -1,0 +1,46 @@
+{
+  "trace_id": "TRACE_69A3840C0C7A",
+  "timestamp": "2026-08-07T09:56:00.401844+00:00",
+  "start_time_unix": 1786096560.4017978,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 5641.15,
+      "memory_mb": 80.25,
+      "confidence": 0.6236,
+      "details": {
+        "num_claims": 2,
+        "num_evidence": 5
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 2256.46,
+      "memory_mb": 80.25,
+      "confidence": 0.6236,
+      "details": {
+        "factual_error": 0.3764
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 564.12,
+      "memory_mb": 80.25,
+      "confidence": 0.6236,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 5641.34,
+    "total_memory_mb": 80.25,
+    "final_h_score": 0.3764,
+    "risk_level": "NEEDS_VERIFICATION",
+    "root_cause_classification": "Knowledge Gap",
+    "stage_count": 3,
+    "metadata": {}
+  }
+}

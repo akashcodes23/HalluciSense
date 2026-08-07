@@ -39,6 +39,9 @@ EVAL_DATA_DIR = BASE_DIR / "evaluation_data"
 RESULTS_DIR = BASE_DIR / "evaluation_results" / "phase7_5"
 DOCS_DIR = BASE_DIR.parent / "docs"
 
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+DOCS_DIR.mkdir(parents=True, exist_ok=True)
+
 client = TestClient(app)
 
 

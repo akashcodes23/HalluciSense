@@ -1,0 +1,31 @@
+{
+  "endpoints": {
+    "/predict": {
+      "status_code": 200,
+      "latency_ms": 2062.21,
+      "schema_valid": true
+    },
+    "/explain": {
+      "status_code": 200,
+      "latency_ms": 2224.33,
+      "schema_valid": true
+    },
+    "/health": {
+      "status_code": 200,
+      "schema_valid": true
+    },
+    "/version": {
+      "status_code": 200,
+      "schema_valid": true
+    },
+    "/metrics": {
+      "status_code": 200,
+      "schema_valid": true
+    }
+  },
+  "edge_cases": {
+    "empty_request_handled": true,
+    "malformed_request_handled": true
+  },
+  "api_resiliency_status": "PASSED"
+}

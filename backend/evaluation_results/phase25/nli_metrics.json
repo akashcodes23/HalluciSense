@@ -1,0 +1,9 @@
+{
+  "mean_entailment_prob": 0.9981,
+  "mean_neutral_prob": 0.0018,
+  "mean_contradiction_prob": 0.0001,
+  "false_entailment_rate": 0.0,
+  "false_contradiction_rate": 0.0,
+  "neutral_ambiguity_rate": 0.0,
+  "total_pairs_evaluated": 1
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "TRACE_E52730022337",
+  "timestamp": "2026-08-07T09:58:53.090600+00:00",
+  "start_time_unix": 1786096733.090529,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 233.68,
+      "memory_mb": 0.11,
+      "confidence": 0.0006,
+      "details": {
+        "num_claims": 1,
+        "num_evidence": 3
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 93.47,
+      "memory_mb": 0.11,
+      "confidence": 0.0006,
+      "details": {
+        "factual_error": 0.9994
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 23.37,
+      "memory_mb": 0.11,
+      "confidence": 0.0006,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 233.95,
+    "total_memory_mb": 0.11,
+    "final_h_score": 0.9994,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause_classification": "Entity Linking Failure",
+    "stage_count": 3,
+    "metadata": {}
+  }
+}

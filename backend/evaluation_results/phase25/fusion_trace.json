@@ -1,0 +1,24 @@
+{
+  "final_h_score": 0.121,
+  "input_scores": {
+    "factual_error_FE": 0.1,
+    "confidence_gap_CG": 0.15,
+    "consistency_failure_CF": 0.12
+  },
+  "effective_weights": {
+    "alpha": 0.4,
+    "beta": 0.3,
+    "gamma": 0.3
+  },
+  "fusion_equation": "H = 0.40 * FE (0.10) + 0.30 * CG (0.15) + 0.30 * CF (0.12)",
+  "partial_derivatives": {
+    "dH_dFE": 0.4,
+    "dH_dCG": 0.3,
+    "dH_dCF": 0.3
+  },
+  "contribution_percentages": {
+    "factual_error_contribution_pct": 33.06,
+    "confidence_gap_contribution_pct": 37.19,
+    "consistency_failure_contribution_pct": 29.75
+  }
+}

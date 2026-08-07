@@ -1,0 +1,46 @@
+{
+  "trace_id": "TRACE_A0EAC2D131E6",
+  "timestamp": "2026-08-07T09:56:10.466165+00:00",
+  "start_time_unix": 1786096570.466089,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 2270.68,
+      "memory_mb": 41.33,
+      "confidence": 0.4563,
+      "details": {
+        "num_claims": 1,
+        "num_evidence": 4
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 908.27,
+      "memory_mb": 41.33,
+      "confidence": 0.4563,
+      "details": {
+        "factual_error": 0.5437
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 227.07,
+      "memory_mb": 41.33,
+      "confidence": 0.4563,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 2270.88,
+    "total_memory_mb": 41.33,
+    "final_h_score": 0.5437,
+    "risk_level": "MODERATE_RISK",
+    "root_cause_classification": "NLI Failure",
+    "stage_count": 3,
+    "metadata": {}
+  }
+}

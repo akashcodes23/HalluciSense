@@ -83,7 +83,13 @@ class HalluciSensePipeline:
             X_raw = np.array(hybrid_vector, dtype=np.float64).reshape(1, -1)
 
         # Task 7: Hybrid Fusion Inference
-        X_scaled = self.scaler.transform(X_raw)
+        expected_features = getattr(self.scaler, "n_features_in_", 19)
+        if expected_features == 5:
+            X_input = np.array(p1_feats, dtype=np.float64).reshape(1, -1)
+        else:
+            X_input = X_raw
+
+        X_scaled = self.scaler.transform(X_input)
         prob_hybrid = float(self.clf.predict_proba(X_scaled)[0, 1])
         is_hallucinated = bool(prob_hybrid >= self.threshold)
 

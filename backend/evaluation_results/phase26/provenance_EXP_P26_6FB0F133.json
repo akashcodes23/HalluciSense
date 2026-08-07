@@ -1,0 +1,23 @@
+{
+  "experiment_id": "EXP_P26_6FB0F133",
+  "experiment_name": "Phase26_Master_Benchmark",
+  "timestamp_utc": "2026-08-06T12:47:06.957910+00:00",
+  "random_seed": 42,
+  "git_sha": "a4e7e35568504b43a033254c83aac9b805695ad1",
+  "dataset_hash": "COMPUTED_HASH",
+  "hardware_metadata": {
+    "system": "Darwin",
+    "release": "25.5.0",
+    "architecture": "arm64",
+    "python_version": "3.10.12",
+    "cpu_count_logical": 10,
+    "cpu_count_physical": 10,
+    "ram_total_gb": 16.0
+  },
+  "configuration": {
+    "alpha": 0.4,
+    "beta": 0.3,
+    "gamma": 0.3,
+    "decision_threshold": 0.54
+  }
+}

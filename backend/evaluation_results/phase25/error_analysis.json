@@ -1,0 +1,360 @@
+{
+  "total_samples": 50,
+  "taxonomy_counts": {
+    "VERIFIED": 20,
+    "Entity Linking Failure": 10,
+    "Retrieval Failure": 20
+  },
+  "records": [
+    {
+      "test_id": "REG2_01_001",
+      "response_text": "The capital of France is Paris.",
+      "h_score": 0.0024,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_002",
+      "response_text": "The capital of France is Berlin.",
+      "h_score": 0.9981,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_003",
+      "response_text": "Alexander Graham Bell invented the telephone in 1876.",
+      "h_score": 0.0057,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_004",
+      "response_text": "Albert Einstein invented the telephone in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_005",
+      "response_text": "Water is H2O.",
+      "h_score": 0.05,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_006",
+      "response_text": "Water boils at 50 degrees Celsius at sea level.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_007",
+      "response_text": "The Earth orbits the Sun once per year.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_008",
+      "response_text": "The Sun orbits the Earth once per day.",
+      "h_score": 0.9149,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_009",
+      "response_text": "DNA stands for deoxyribonucleic acid.",
+      "h_score": 0.0274,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_010",
+      "response_text": "Romeo and Juliet was written by Charles Dickens in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_011",
+      "response_text": "The capital of France is Paris.",
+      "h_score": 0.0024,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_012",
+      "response_text": "The capital of France is Berlin.",
+      "h_score": 0.9981,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_013",
+      "response_text": "Alexander Graham Bell invented the telephone in 1876.",
+      "h_score": 0.0057,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_014",
+      "response_text": "Albert Einstein invented the telephone in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_015",
+      "response_text": "Water is H2O.",
+      "h_score": 0.05,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_016",
+      "response_text": "Water boils at 50 degrees Celsius at sea level.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_017",
+      "response_text": "The Earth orbits the Sun once per year.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_018",
+      "response_text": "The Sun orbits the Earth once per day.",
+      "h_score": 0.9149,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_019",
+      "response_text": "DNA stands for deoxyribonucleic acid.",
+      "h_score": 0.0274,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_020",
+      "response_text": "Romeo and Juliet was written by Charles Dickens in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_021",
+      "response_text": "The capital of France is Paris.",
+      "h_score": 0.0024,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_022",
+      "response_text": "The capital of France is Berlin.",
+      "h_score": 0.9981,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_023",
+      "response_text": "Alexander Graham Bell invented the telephone in 1876.",
+      "h_score": 0.0057,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_024",
+      "response_text": "Albert Einstein invented the telephone in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_025",
+      "response_text": "Water is H2O.",
+      "h_score": 0.05,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_026",
+      "response_text": "Water boils at 50 degrees Celsius at sea level.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_027",
+      "response_text": "The Earth orbits the Sun once per year.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_028",
+      "response_text": "The Sun orbits the Earth once per day.",
+      "h_score": 0.9149,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_029",
+      "response_text": "DNA stands for deoxyribonucleic acid.",
+      "h_score": 0.0274,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_030",
+      "response_text": "Romeo and Juliet was written by Charles Dickens in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_031",
+      "response_text": "The capital of France is Paris.",
+      "h_score": 0.0024,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_032",
+      "response_text": "The capital of France is Berlin.",
+      "h_score": 0.9981,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_033",
+      "response_text": "Alexander Graham Bell invented the telephone in 1876.",
+      "h_score": 0.0057,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_034",
+      "response_text": "Albert Einstein invented the telephone in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_035",
+      "response_text": "Water is H2O.",
+      "h_score": 0.05,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_036",
+      "response_text": "Water boils at 50 degrees Celsius at sea level.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_037",
+      "response_text": "The Earth orbits the Sun once per year.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_038",
+      "response_text": "The Sun orbits the Earth once per day.",
+      "h_score": 0.9149,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_039",
+      "response_text": "DNA stands for deoxyribonucleic acid.",
+      "h_score": 0.0274,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_040",
+      "response_text": "Romeo and Juliet was written by Charles Dickens in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_041",
+      "response_text": "The capital of France is Paris.",
+      "h_score": 0.0024,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_042",
+      "response_text": "The capital of France is Berlin.",
+      "h_score": 0.9981,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_043",
+      "response_text": "Alexander Graham Bell invented the telephone in 1876.",
+      "h_score": 0.0057,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_044",
+      "response_text": "Albert Einstein invented the telephone in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_045",
+      "response_text": "Water is H2O.",
+      "h_score": 0.05,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_046",
+      "response_text": "Water boils at 50 degrees Celsius at sea level.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_047",
+      "response_text": "The Earth orbits the Sun once per year.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "Retrieval Failure"
+    },
+    {
+      "test_id": "REG2_01_048",
+      "response_text": "The Sun orbits the Earth once per day.",
+      "h_score": 0.9149,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Entity Linking Failure"
+    },
+    {
+      "test_id": "REG2_01_049",
+      "response_text": "DNA stands for deoxyribonucleic acid.",
+      "h_score": 0.0274,
+      "expected_is_hallucinated": false,
+      "root_cause_classification": "VERIFIED"
+    },
+    {
+      "test_id": "REG2_01_050",
+      "response_text": "Romeo and Juliet was written by Charles Dickens in 1920.",
+      "h_score": 1.0,
+      "expected_is_hallucinated": true,
+      "root_cause_classification": "Retrieval Failure"
+    }
+  ]
+}

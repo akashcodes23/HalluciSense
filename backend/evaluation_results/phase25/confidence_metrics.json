@@ -1,0 +1,8 @@
+{
+  "mean_token_entropy": 0.2139,
+  "mean_confidence_gap": 0.0245,
+  "mean_predictive_entropy": 0.2189,
+  "expected_calibration_error_ece": 0.0245,
+  "epistemic_uncertainty_mean": 0.14,
+  "aleatoric_uncertainty_mean": 0.11
+}

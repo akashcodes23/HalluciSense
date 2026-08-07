@@ -23,6 +23,7 @@ from .pillar1_retrieval import Pillar1RetrievalEngine
 from .pillar2_confidence import Pillar2ConfidenceEngine
 from .pillar3_consistency import Pillar3ConsistencyEngine
 from .fusion import FusionEngine
+from app.modules.knowledge.retriever import HybridRetriever
 
 
 class HallucinationDetectionPipeline:
@@ -46,12 +47,53 @@ class HallucinationDetectionPipeline:
         self.p1_engine = Pillar1RetrievalEngine()
         self.p2_engine = Pillar2ConfidenceEngine()
         self.p3_engine = Pillar3ConsistencyEngine()
+        self.retriever = HybridRetriever()
 
         self.fusion_engine = FusionEngine(
             alpha=alpha,
             beta=beta,
             gamma=gamma,
         )
+
+    def _retrieve_evidence(self, text: str) -> List[EvidenceItem]:
+        """Retrieve real evidence from Wikipedia + BM25 + FAISS + CrossEncoder.
+
+        Converts raw retriever dicts into typed EvidenceItem objects
+        that Pillar 1 can use for NLI-based scoring.
+        """
+        try:
+            claims = self.p1_engine.extract_claims(text)
+            if not claims:
+                claims = [text]
+
+            raw_evidence = self.retriever.retrieve(claims)
+
+            evidence_items: List[EvidenceItem] = []
+            for ev in raw_evidence:
+                snippet = ev.get("snippet", "").strip()
+                if not snippet:
+                    continue
+                evidence_items.append(
+                    EvidenceItem(
+                        claim=claims[0] if claims else text,
+                        snippet=snippet,
+                        source_name=ev.get("source_name", "Wikipedia"),
+                        source_url=ev.get("source_url"),
+                        similarity_score=float(ev.get("similarity_score", 0.5)),
+                        is_supporting=ev.get("is_supporting", True),
+                    )
+                )
+
+            logger.info(
+                "evidence_retrieval_completed",
+                num_claims=len(claims),
+                num_evidence=len(evidence_items),
+            )
+            return evidence_items
+
+        except Exception as e:
+            logger.warning("evidence_retrieval_failed", error=str(e))
+            return []
 
     # =========================================================
     # SENTENCE SPLITTING
@@ -382,6 +424,13 @@ Respond STRICTLY in JSON using this schema:
 
         if sample_responses is None:
             sample_responses = []
+
+        # =====================================================
+        # EVIDENCE RETRIEVAL (when no external evidence provided)
+        # =====================================================
+
+        if not evidence_items:
+            evidence_items = self._retrieve_evidence(clean_text)
 
         # =====================================================
         # PILLAR 1 — DOCUMENT-LEVEL FACTUAL VERIFICATION

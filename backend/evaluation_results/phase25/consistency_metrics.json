@@ -1,0 +1,10 @@
+{
+  "primary_response": "The capital of France is Paris.",
+  "num_sample_responses": 2,
+  "mean_sbert_similarity": 0.9797,
+  "min_sbert_similarity": 0.9701,
+  "consistency_failure_score": 0.0132,
+  "nli_contradiction_score": 0.0001,
+  "similarity_method": "semantic_embedding",
+  "nli_available": true
+}

@@ -1,0 +1,77 @@
+{
+  "experiment_id": "EXP_PHASE25_7AF68AF5",
+  "timestamp": "2026-08-06T11:09:56.895944+00:00",
+  "execution_time_seconds": 3926.67,
+  "regression_v2_accuracy": 0.883,
+  "longform_accuracy": 0.522,
+  "ir_metrics": {
+    "recall_at_1": 0.6,
+    "recall_at_3": 0.6,
+    "recall_at_5": 0.6,
+    "recall_at_10": 0.6,
+    "mrr": 0.6,
+    "ndcg_at_5": 1.0,
+    "map": 0.375,
+    "evidence_coverage": 1.0,
+    "entity_coverage": 0.6,
+    "number_coverage": 0.6
+  },
+  "nli_metrics": {
+    "mean_entailment_prob": 0.6632,
+    "mean_neutral_prob": 0.0033,
+    "mean_contradiction_prob": 0.3335,
+    "false_entailment_rate": 0.0,
+    "false_contradiction_rate": 0.0,
+    "neutral_ambiguity_rate": 0.0,
+    "total_pairs_evaluated": 3
+  },
+  "confidence_metrics": {
+    "mean_token_entropy": 0.2139,
+    "mean_confidence_gap": 0.0245,
+    "mean_predictive_entropy": 0.2189,
+    "expected_calibration_error_ece": 0.0245,
+    "epistemic_uncertainty_mean": 0.14,
+    "aleatoric_uncertainty_mean": 0.11
+  },
+  "consistency_metrics": {
+    "primary_response": "The capital of France is Paris.",
+    "num_sample_responses": 2,
+    "mean_sbert_similarity": 0.9797,
+    "min_sbert_similarity": 0.9701,
+    "consistency_failure_score": 0.0132,
+    "nli_contradiction_score": 0.0001,
+    "similarity_method": "semantic_embedding",
+    "nli_available": true
+  },
+  "fusion_explanation": {
+    "final_h_score": 0.121,
+    "input_scores": {
+      "factual_error_FE": 0.1,
+      "confidence_gap_CG": 0.15,
+      "consistency_failure_CF": 0.12
+    },
+    "effective_weights": {
+      "alpha": 0.4,
+      "beta": 0.3,
+      "gamma": 0.3
+    },
+    "fusion_equation": "H = 0.40 * FE (0.10) + 0.30 * CG (0.15) + 0.30 * CF (0.12)",
+    "partial_derivatives": {
+      "dH_dFE": 0.4,
+      "dH_dCG": 0.3,
+      "dH_dCF": 0.3
+    },
+    "contribution_percentages": {
+      "factual_error_contribution_pct": 33.06,
+      "confidence_gap_contribution_pct": 37.19,
+      "consistency_failure_contribution_pct": 29.75
+    }
+  },
+  "root_cause_taxonomy_counts": {
+    "VERIFIED": 391,
+    "Entity Linking Failure": 195,
+    "Retrieval Failure": 406,
+    "Evidence Missing": 8
+  },
+  "publication_figures_count": 9
+}

@@ -1,0 +1,46 @@
+{
+  "trace_id": "TRACE_98493123F47E",
+  "timestamp": "2026-08-06T20:44:52.763444+00:00",
+  "start_time_unix": 1786049092.7633522,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 2312.36,
+      "memory_mb": 13.28,
+      "confidence": 0.0,
+      "details": {
+        "num_claims": 1,
+        "num_evidence": 3
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 924.94,
+      "memory_mb": 13.28,
+      "confidence": 0.0,
+      "details": {
+        "factual_error": 1.0
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 231.24,
+      "memory_mb": 13.28,
+      "confidence": 0.0,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 2312.57,
+    "total_memory_mb": 13.28,
+    "final_h_score": 1.0,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause_classification": "Retrieval Failure",
+    "stage_count": 3,
+    "metadata": {}
+  }
+}
