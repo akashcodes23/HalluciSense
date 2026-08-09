@@ -3,130 +3,94 @@ Hybrid Knowledge Retriever.
 Combines Wikipedia, FAISS, and BM25 strategies to fetch relevant evidence.
 """
 from typing import List
+import structlog
 from app.modules.knowledge.wikipedia import WikipediaKnowledgeSource
 from app.modules.knowledge.faiss_store import FAISSVectorStore
 from app.modules.knowledge.bm25_retriever import BM25Retriever
 from app.modules.knowledge.cross_encoder import CrossEncoderReranker
-import structlog
 
 logger = structlog.get_logger(__name__)
 
 class HybridRetriever:
-    """
-    Orchestrates multiple knowledge sources to find evidence for a claim.
-    """
+    """Orchestrates multiple knowledge sources to find evidence for claims."""
     def __init__(self):
         self.wiki = WikipediaKnowledgeSource(max_results=3)
         self.vector_store = FAISSVectorStore()
-        
-        # Load some mock documents for BM25 and FAISS internal search for Sprint 3
         internal_docs = [
             {"title": "Internal Company Policy", "url": "https://intranet/policy", "text": "All employees must complete compliance training by Q3."},
             {"title": "Product Architecture", "url": "https://wiki/arch", "text": "The backend uses FastAPI and Celery for async processing."},
             {"title": "HalluciSense Design", "url": "https://wiki/design", "text": "HalluciSense uses a three-pillar system: Factual Error, Confidence Gap, and Consistency Failure."}
         ]
-        
         self.bm25 = BM25Retriever(internal_docs)
         self.reranker = CrossEncoderReranker()
+        self.last_timings = {}
+        self.last_cache_metrics = {}
 
     def retrieve(self, claims: List[str]) -> List[dict]:
-        """
-        Given a list of claims (or a single text broken into claims),
-        retrieve relevant evidence snippets from all configured sources.
-        """
+        """Retrieve evidence for all claims, batching external Wikipedia work."""
         import time
         all_evidence = []
-        
-        t_ext_start = time.perf_counter()
-        wiki_total_ms = 0.0
-        faiss_total_ms = 0.0
-        bm25_total_ms = 0.0
-        rerank_total_ms = 0.0
+        t_start = time.perf_counter()
+        clean_claims = [c.strip() for c in claims if c and c.strip()]
 
-        for claim in claims:
-            logger.info("retrieving_evidence_for_claim", claim=claim)
-            # 1. Fetch from Wikipedia (External Factual)
-            t_w0 = time.perf_counter()
-            wiki_results = self.wiki.retrieve(claim)
-            wiki_total_ms += (time.perf_counter() - t_w0) * 1000.0
-            for w in wiki_results:
-                all_evidence.append(w)
-                
-            # 2. Fetch from Internal FAISS Vector Store (Dense Retrieval)
+        t_w0 = time.perf_counter()
+        wiki_by_claim = self.wiki.retrieve_batch(clean_claims)
+        wiki_ms = (time.perf_counter() - t_w0) * 1000.0
+        for claim in clean_claims:
+            for item in wiki_by_claim.get(claim, []):
+                evidence = dict(item)
+                evidence["claim"] = claim
+                all_evidence.append(evidence)
+
+        faiss_ms = 0.0
+        bm25_ms = 0.0
+        for claim in clean_claims:
             if self.vector_store.documents:
-                t_f0 = time.perf_counter()
+                t0 = time.perf_counter()
                 faiss_results = self.vector_store.search(claim, top_k=2)
-                faiss_total_ms += (time.perf_counter() - t_f0) * 1000.0
+                faiss_ms += (time.perf_counter() - t0) * 1000.0
                 for doc, sim in faiss_results:
-                    all_evidence.append({
-                        "source_name": doc.get("title", "Internal KB (FAISS)"),
-                        "source_url": doc.get("url", ""),
-                        "snippet": doc.get("text", "")
-                    })
-                    
-            # 3. Fetch from Internal BM25 Store (Sparse Retrieval)
-            t_b0 = time.perf_counter()
+                    all_evidence.append({"claim": claim, "source_name": doc.get("title", "Internal KB (FAISS)"), "source_url": doc.get("url", ""), "snippet": doc.get("text", ""), "similarity_score": float(sim)})
+
+            t0 = time.perf_counter()
             bm25_results = self.bm25.search(claim, top_k=2)
-            bm25_total_ms += (time.perf_counter() - t_b0) * 1000.0
+            bm25_ms += (time.perf_counter() - t0) * 1000.0
             for r in bm25_results:
                 doc = r["document"]
-                all_evidence.append({
-                    "source_name": doc.get("title", "Internal KB (BM25)"),
-                    "source_url": doc.get("url", ""),
-                    "snippet": doc.get("text", "")
-                })
-                    
-        # Simple deduplication by snippet text before reranking
+                all_evidence.append({"claim": claim, "source_name": doc.get("title", "Internal KB (BM25)"), "source_url": doc.get("url", ""), "snippet": doc.get("text", ""), "similarity_score": float(r.get("score", 0.0))})
+
         seen = set()
         unique_evidence = []
         for ev in all_evidence:
-            snippet = ev["snippet"]
-            if snippet not in seen:
-                seen.add(snippet)
+            key = ((ev.get("claim") or "").lower(), ev.get("snippet", ""))
+            if key not in seen and ev.get("snippet", "").strip():
+                seen.add(key)
                 ev["is_supporting"] = True
                 unique_evidence.append(ev)
-                
-        # 4. Rerank all candidates using CrossEncoder
-        if not claims:
-            self.last_timings = {
-                "wikipedia_ms": round(wiki_total_ms, 2),
-                "faiss_ms": round(faiss_total_ms, 2),
-                "bm25_ms": round(bm25_total_ms, 2),
-                "reranker_ms": 0.0,
-                "external_retrieval_ms": round((time.perf_counter() - t_ext_start) * 1000.0, 2),
-                "retrieval_bm25_ms": round(bm25_total_ms, 2),
-                "retrieval_dense_ms": round(wiki_total_ms + faiss_total_ms, 2),
-                "retrieval_hybrid_fusion_ms": 0.0,
-            }
-            return []
 
-        primary_claim = claims[0]
         t_r0 = time.perf_counter()
-        top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5)
-        rerank_total_ms = (time.perf_counter() - t_r0) * 1000.0
+        primary_claim = clean_claims[0] if clean_claims else ""
+        top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5) if primary_claim else []
+        rerank_ms = (time.perf_counter() - t_r0) * 1000.0
+        total_ms = (time.perf_counter() - t_start) * 1000.0
 
-        ext_total_ms = (time.perf_counter() - t_ext_start) * 1000.0
-        dense_total_ms = wiki_total_ms + faiss_total_ms
-
+        self.last_cache_metrics = dict(getattr(self.wiki, "last_metrics", {}))
         self.last_timings = {
-            "wikipedia_ms": round(wiki_total_ms, 2),
-            "faiss_ms": round(faiss_total_ms, 2),
-            "bm25_ms": round(bm25_total_ms, 2),
-            "reranker_ms": round(rerank_total_ms, 2),
-            "external_retrieval_ms": round(ext_total_ms, 2),
-            "retrieval_bm25_ms": round(bm25_total_ms, 2),
-            "retrieval_dense_ms": round(dense_total_ms, 2),
-            "retrieval_hybrid_fusion_ms": round(rerank_total_ms, 2),
+            "wikipedia_ms": round(wiki_ms, 2), "faiss_ms": round(faiss_ms, 2), "bm25_ms": round(bm25_ms, 2),
+            "reranker_ms": round(rerank_ms, 2), "external_retrieval_ms": round(total_ms, 2),
+            "retrieval_bm25_ms": round(bm25_ms, 2), "retrieval_dense_ms": round(wiki_ms + faiss_ms, 2),
+            "retrieval_hybrid_fusion_ms": round(rerank_ms, 2), "retrieval_total_ms": round(total_ms, 2),
         }
+        logger.info("retrieval_completed", claims=len(clean_claims), evidence=len(top_evidence), cache=self.last_cache_metrics, timings=self.last_timings)
         return top_evidence
 
     def get_evidence(self, query: str) -> List[dict]:
-        """Retrieve evidence passages for a single query text."""
+        """Retrieve evidence for a single query with cache support."""
         if not hasattr(self, "_query_cache"):
             self._query_cache = {}
-        if query in self._query_cache:
-            return self._query_cache[query]
+        key = query.strip().lower() if query else ""
+        if key in self._query_cache:
+            return self._query_cache[key]
         res = self.retrieve([query]) if query else []
-        self._query_cache[query] = res
+        self._query_cache[key] = res
         return res
-
