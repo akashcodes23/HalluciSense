@@ -127,7 +127,7 @@ class Pillar1RetrievalEngine:
         fe_score, evidence = self.evaluate_claims_against_evidence(claims, provided_evidence)
 
         # Temporal Claim & Epistemic Modality Evaluation
-        temp_res = self.temporal_engine.analyze_claim(text, query=query)
+        temp_res = self.temporal_engine.analyze_claim(text, query=query, evidence_items=provided_evidence)
         if temp_res.temporal_inconsistency_score > 0.0:
             fe_score = round(max(fe_score, temp_res.temporal_inconsistency_score), 4)
         elif temp_res.modality in (

@@ -1,15 +1,15 @@
 {
   "metrics": {
-    "accuracy": 0.9,
-    "precision": 1.0,
-    "recall": 0.75,
-    "f1": 0.8571,
-    "fpr": 0.0,
-    "fnr": 0.25,
-    "tp": 6,
-    "fp": 0,
-    "tn": 12,
-    "fn": 2
+    "accuracy": 0.95,
+    "precision": 0.8889,
+    "recall": 1.0,
+    "f1": 0.9412,
+    "fpr": 0.0833,
+    "fnr": 0.0,
+    "tp": 8,
+    "fp": 1,
+    "tn": 11,
+    "fn": 0
   },
   "cases": [
     {
@@ -25,7 +25,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.1388,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1649.3,
+      "latency_ms": 1789.9,
       "notes": "True historical sports claim."
     },
     {
@@ -41,7 +41,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.92,
       "overall_risk_level": "LIKELY_HALLUCINATED",
-      "latency_ms": 1526.85,
+      "latency_ms": 1486.97,
       "notes": "Asserts future event as completed past fact."
     },
     {
@@ -57,7 +57,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1656.83,
+      "latency_ms": 1500.6,
       "notes": "Legitimate prediction protected against false positive."
     },
     {
@@ -73,7 +73,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 2421.71,
+      "latency_ms": 1913.13,
       "notes": "Hypothetical scenario protected against false positive."
     },
     {
@@ -89,7 +89,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1886.32,
+      "latency_ms": 1539.11,
       "notes": "Counterfactual statement protected against false positive."
     },
     {
@@ -105,7 +105,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1371.65,
+      "latency_ms": 1381.16,
       "notes": "Fictional context protected against false positive."
     },
     {
@@ -121,7 +121,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.9998,
       "overall_risk_level": "LIKELY_HALLUCINATED",
-      "latency_ms": 1493.05,
+      "latency_ms": 1460.92,
       "notes": "Asserts future product release as past historical fact."
     },
     {
@@ -137,7 +137,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1178.84,
+      "latency_ms": 1307.78,
       "notes": "Legitimate tech prediction."
     },
     {
@@ -146,14 +146,14 @@
       "query": "When did Einstein publish special relativity?",
       "response": "Albert Einstein published his paper on special relativity in 1905.",
       "expected_label": 0,
-      "predicted_binary": 0,
+      "predicted_binary": 1,
       "temporal_status": "PAST_FACT",
-      "p1_factual_error": 0.0142,
+      "p1_factual_error": 0.9,
       "p2_confidence_gap": null,
       "p3_consistency_failure": null,
-      "overall_h_score": 0.0142,
-      "overall_risk_level": "VERIFIED",
-      "latency_ms": 1423.14,
+      "overall_h_score": 0.9,
+      "overall_risk_level": "LIKELY_HALLUCINATED",
+      "latency_ms": 1753.77,
       "notes": "True historical physics claim."
     },
     {
@@ -162,14 +162,14 @@
       "query": "When did Einstein discover relativity?",
       "response": "Albert Einstein discovered general relativity in the year 2020.",
       "expected_label": 1,
-      "predicted_binary": 0,
+      "predicted_binary": 1,
       "temporal_status": "DATE_MISMATCH",
-      "p1_factual_error": 0.1333,
+      "p1_factual_error": 0.9,
       "p2_confidence_gap": null,
       "p3_consistency_failure": null,
-      "overall_h_score": 0.1333,
-      "overall_risk_level": "VERIFIED",
-      "latency_ms": 1521.82,
+      "overall_h_score": 0.9,
+      "overall_risk_level": "LIKELY_HALLUCINATED",
+      "latency_ms": 1449.41,
       "notes": "Historical date mismatch (1915 vs 2020)."
     },
     {
@@ -185,7 +185,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.9882,
       "overall_risk_level": "LIKELY_HALLUCINATED",
-      "latency_ms": 1345.8,
+      "latency_ms": 1533.78,
       "notes": "Asserts future discovery as completed fact."
     },
     {
@@ -194,14 +194,14 @@
       "query": "When was George Washington elected?",
       "response": "George Washington was elected the first US President in 2004.",
       "expected_label": 1,
-      "predicted_binary": 0,
+      "predicted_binary": 1,
       "temporal_status": "DATE_MISMATCH",
-      "p1_factual_error": 0.05,
+      "p1_factual_error": 0.9,
       "p2_confidence_gap": null,
       "p3_consistency_failure": null,
-      "overall_h_score": 0.05,
-      "overall_risk_level": "VERIFIED",
-      "latency_ms": 1528.63,
+      "overall_h_score": 0.9,
+      "overall_risk_level": "LIKELY_HALLUCINATED",
+      "latency_ms": 1603.32,
       "notes": "Severe historical date mismatch."
     },
     {
@@ -217,7 +217,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.9856,
       "overall_risk_level": "LIKELY_HALLUCINATED",
-      "latency_ms": 1395.04,
+      "latency_ms": 1414.74,
       "notes": "Asserts future election outcome as past completed fact."
     },
     {
@@ -233,7 +233,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1639.25,
+      "latency_ms": 1459.23,
       "notes": "Scheduled future event assertion."
     },
     {
@@ -249,7 +249,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1323.01,
+      "latency_ms": 1480.24,
       "notes": "Protected conditional hypothetical."
     },
     {
@@ -265,7 +265,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0058,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1647.41,
+      "latency_ms": 1543.67,
       "notes": "True historical space exploration claim."
     },
     {
@@ -281,7 +281,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.9992,
       "overall_risk_level": "LIKELY_HALLUCINATED",
-      "latency_ms": 1577.07,
+      "latency_ms": 1580.8,
       "notes": "Historical date mismatch."
     },
     {
@@ -297,7 +297,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 1.0,
       "overall_risk_level": "LIKELY_HALLUCINATED",
-      "latency_ms": 1176.57,
+      "latency_ms": 1306.99,
       "notes": "Asserts future Olympic results as past completed fact."
     },
     {
@@ -313,7 +313,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.0024,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1551.17,
+      "latency_ms": 1588.54,
       "notes": "Standard present factual statement."
     },
     {
@@ -329,7 +329,7 @@
       "p3_consistency_failure": null,
       "overall_h_score": 0.2709,
       "overall_risk_level": "VERIFIED",
-      "latency_ms": 1565.06,
+      "latency_ms": 1691.44,
       "notes": "True time-relative claim."
     }
   ]

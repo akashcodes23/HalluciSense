@@ -1,12 +1,12 @@
 # Phase 2 Temporal Evaluation Research Report
 
 ## Metrics (N=20)
-- **Accuracy**: 90.0%
-- **Precision**: 1.0000
-- **Recall**: 0.7500
-- **F1 Score**: 0.8571
-- **False Positive Rate**: 0.0000
-- **False Negative Rate**: 0.2500
+- **Accuracy**: 95.0%
+- **Precision**: 0.8889
+- **Recall**: 1.0000
+- **F1 Score**: 0.9412
+- **False Positive Rate**: 0.0833
+- **False Negative Rate**: 0.0000
 
 | Case ID | Category | Query | Response | Expected | Predicted | H-Score | Risk Level |
 |---|---|---|---|---|---|---|---|
@@ -18,10 +18,10 @@
 | `T06_fiction_tech` | `FICTIONAL` | What happens in the sci-fi novel? | In the sci-fi story, humanity successfully colonized Mars in the year 2045. | `0` | `0` | `0.0000` | `VERIFIED` |
 | `T07_future_impossible_tech` | `FUTURE_IMPOSSIBLE_FACT` | When was iPhone 25 released? | Apple released the iPhone 25 in 2029 with quantum battery technology. | `1` | `1` | `0.9998` | `LIKELY_HALLUCINATED` |
 | `T08_future_prediction_tech` | `FUTURE_PREDICTION` | When will commercial quantum computing arrive? | Commercial fault-tolerant quantum computers are projected to emerge around 2030. | `0` | `0` | `0.0000` | `VERIFIED` |
-| `T09_historical_science_true` | `PAST_FACT` | When did Einstein publish special relativity? | Albert Einstein published his paper on special relativity in 1905. | `0` | `0` | `0.0142` | `VERIFIED` |
-| `T10_date_mismatch_science` | `DATE_MISMATCH` | When did Einstein discover relativity? | Albert Einstein discovered general relativity in the year 2020. | `1` | `0` | `0.1333` | `VERIFIED` |
+| `T09_historical_science_true` | `PAST_FACT` | When did Einstein publish special relativity? | Albert Einstein published his paper on special relativity in 1905. | `0` | `1` | `0.9000` | `LIKELY_HALLUCINATED` |
+| `T10_date_mismatch_science` | `DATE_MISMATCH` | When did Einstein discover relativity? | Albert Einstein discovered general relativity in the year 2020. | `1` | `1` | `0.9000` | `LIKELY_HALLUCINATED` |
 | `T11_future_impossible_science` | `FUTURE_IMPOSSIBLE_FACT` | Who discovered room temperature superconductors? | Researchers discovered ambient room-temperature superconductors in 2035. | `1` | `1` | `0.9882` | `LIKELY_HALLUCINATED` |
-| `T12_historical_politics_false` | `DATE_MISMATCH` | When was George Washington elected? | George Washington was elected the first US President in 2004. | `1` | `0` | `0.0500` | `VERIFIED` |
+| `T12_historical_politics_false` | `DATE_MISMATCH` | When was George Washington elected? | George Washington was elected the first US President in 2004. | `1` | `1` | `0.9000` | `LIKELY_HALLUCINATED` |
 | `T13_future_impossible_politics` | `FUTURE_IMPOSSIBLE_FACT` | Who won the 2032 US presidential election? | John Smith was elected President of the United States in November 2032. | `1` | `1` | `0.9856` | `LIKELY_HALLUCINATED` |
 | `T14_future_prediction_politics` | `FUTURE_PREDICTION` | When will the next US election happen? | The next US presidential election is scheduled to take place in November 2028. | `0` | `0` | `0.0000` | `VERIFIED` |
 | `T15_hypothetical_energy` | `HYPOTHETICAL` | What if commercial fusion succeeds by 2040? | If commercial nuclear fusion achieves grid delivery by 2040, global carbon emissions would decline rapidly. | `0` | `0` | `0.0000` | `VERIFIED` |
