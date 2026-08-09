@@ -24,16 +24,19 @@ def test_wikipedia_batch_uses_cache(monkeypatch):
 
     def fake_get(url, params=None, **kwargs):
         calls.append(params.copy())
-        action = params.get("action")
-        if action == "query" and params.get("list") == "search":
+        if params.get("action") == "query" and params.get("list") == "search":
             q = params["srsearch"]
             return type("R", (), {
                 "status_code": 200,
                 "json": lambda self: {"query": {"search": [{"title": q.title()}]}}
             })()
+        pages = {
+            str(i + 1): {"title": title, "extract": "Real Wikipedia evidence."}
+            for i, title in enumerate(params["titles"].split("|"))
+        }
         return type("R", (), {
             "status_code": 200,
-            "json": lambda self: {"query": {"pages": {"1": {"title": params["titles"], "extract": "Real Wikipedia evidence."}}}}
+            "json": lambda self: {"query": {"pages": pages}}
         })()
 
     monkeypatch.setattr("app.modules.knowledge.wikipedia.requests.get", fake_get)
