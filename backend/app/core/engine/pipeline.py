@@ -55,7 +55,7 @@ class HallucinationDetectionPipeline:
             gamma=gamma,
         )
 
-    def _retrieve_evidence(self, text: str) -> List[EvidenceItem]:
+    def _retrieve_evidence(self, text: str, query: Optional[str] = None) -> List[EvidenceItem]:
         """Retrieve real evidence from Wikipedia + BM25 + FAISS + CrossEncoder.
 
         Converts raw retriever dicts into typed EvidenceItem objects
@@ -66,7 +66,14 @@ class HallucinationDetectionPipeline:
             if not claims:
                 claims = [text]
 
-            raw_evidence = self.retriever.retrieve(claims)
+            retrieval_queries = []
+            if query and isinstance(query, str) and query.strip():
+                retrieval_queries.append(query.strip())
+            for c in claims:
+                if c not in retrieval_queries:
+                    retrieval_queries.append(c)
+
+            raw_evidence = self.retriever.retrieve(retrieval_queries)
 
             evidence_items: List[EvidenceItem] = []
             for ev in raw_evidence:
@@ -353,6 +360,7 @@ Respond STRICTLY in JSON using this schema:
         token_probabilities: Optional[List[float]] = None,
         provided_evidence: Optional[List[EvidenceItem]] = None,
         sample_responses: Optional[List[str]] = None,
+        query: Optional[str] = None,
     ) -> HallucinationReport:
         """Alias for analyze_response to support standard engine contract."""
         return self.analyze_response(
@@ -360,6 +368,7 @@ Respond STRICTLY in JSON using this schema:
             token_probabilities=token_probabilities,
             evidence_items=provided_evidence,
             sample_responses=sample_responses,
+            query=query,
         )
 
     def analyze_response(
@@ -368,6 +377,7 @@ Respond STRICTLY in JSON using this schema:
         token_probabilities: Optional[List[float]] = None,
         evidence_items: Optional[List[EvidenceItem]] = None,
         sample_responses: Optional[List[str]] = None,
+        query: Optional[str] = None,
     ) -> HallucinationReport:
         """
         Run the complete hybrid hallucination detection pipeline
@@ -434,7 +444,7 @@ Respond STRICTLY in JSON using this schema:
 
         t_ret_start = time.perf_counter()
         if not evidence_items:
-            evidence_items = self._retrieve_evidence(clean_text)
+            evidence_items = self._retrieve_evidence(clean_text, query=query)
         ret_timings = getattr(self.retriever, "last_timings", {})
 
         # =====================================================

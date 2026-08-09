@@ -96,7 +96,7 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
     try:
         # 3. Master Pipeline Execution (Async Offloaded)
         t0 = time.perf_counter()
-        report = await asyncio.to_thread(_pipeline.analyze, text=response_text)
+        report = await asyncio.to_thread(_pipeline.analyze, text=response_text, query=query)
         p_dur = (time.perf_counter() - t0) * 1000.0
 
         overall_h = float(report.overall_h_score)
