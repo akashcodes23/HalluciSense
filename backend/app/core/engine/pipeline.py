@@ -454,6 +454,7 @@ Respond STRICTLY in JSON using this schema:
         p1_global = self.p1_engine.analyze(
             clean_text,
             evidence_items,
+            query=query,
         )
         t_ret_end = time.perf_counter()
         retrieval_duration_ms = round((t_ret_end - t_ret_start) * 1000.0, 2)

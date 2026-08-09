@@ -1,14 +1,16 @@
 import re
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from .types import Pillar1Result, EvidenceItem
 from .entailment import EvidenceEntailmentEngine
+from .temporal import TemporalClaimEngine, TemporalStatus, EpistemicModality
 
 
 class Pillar1RetrievalEngine:
-    """Pillar 1: Retrieval + NLI Factual Verification."""
+    """Pillar 1: Retrieval + NLI Factual Verification + Temporal Consistency Analysis."""
 
     def __init__(self):
         self.entailment_engine = EvidenceEntailmentEngine()
+        self.temporal_engine = TemporalClaimEngine()
 
     def extract_claims(self, text: str) -> List[str]:
         import time
@@ -118,14 +120,30 @@ class Pillar1RetrievalEngine:
         factual_error = sum(claim_error_scores) / len(claim_error_scores)
         return round(factual_error, 4), external_evidence
 
-    def analyze(self, text: str, provided_evidence: List[EvidenceItem] = None) -> Pillar1Result:
+    def analyze(self, text: str, provided_evidence: List[EvidenceItem] = None, query: Optional[str] = None) -> Pillar1Result:
         if provided_evidence is None:
             provided_evidence = []
         claims = self.extract_claims(text)
         fe_score, evidence = self.evaluate_claims_against_evidence(claims, provided_evidence)
 
+        # Temporal Claim & Epistemic Modality Evaluation
+        temp_res = self.temporal_engine.analyze_claim(text, query=query)
+        if temp_res.temporal_inconsistency_score > 0.0:
+            fe_score = round(max(fe_score, temp_res.temporal_inconsistency_score), 4)
+        elif temp_res.modality in (
+            EpistemicModality.PREDICTION,
+            EpistemicModality.HYPOTHETICAL,
+            EpistemicModality.COUNTERFACTUAL,
+            EpistemicModality.FICTION,
+        ):
+            fe_score = 0.0
+
         if not claims:
             reasoning = "No discrete factual claims identified."
+        elif temp_res.temporal_inconsistency_score > 0.0:
+            reasoning = f"Temporal Inconsistency: {temp_res.reasoning}"
+        elif temp_res.modality != EpistemicModality.ASSERTED_FACT:
+            reasoning = f"Protected Epistemic Modality ({temp_res.modality.value}): Statement is non-factual assertion."
         elif not provided_evidence:
             reasoning = f"Identified {len(claims)} factual claim(s), but no external evidence was available. Factual status remains uncertain."
         elif fe_score < 0.20:
