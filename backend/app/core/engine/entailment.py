@@ -1,15 +1,4 @@
-"""
-Natural Language Inference engine for HalluciSense Pillar 1.
-
-Determines whether retrieved evidence:
-- entails a generated claim,
-- contradicts it, or
-- is neutral / insufficient.
-
-Evidence is the NLI premise.
-Generated claim is the NLI hypothesis.
-"""
-
+import time
 from typing import Dict, List
 import torch
 import structlog
@@ -19,41 +8,17 @@ logger = structlog.get_logger(__name__)
 
 
 class EvidenceEntailmentEngine:
-    """
-    NLI-based factual verification engine.
+    """NLI-based factual verification engine with batched DeBERTa inference."""
 
-    premise    = retrieved evidence
-    hypothesis = generated factual claim
-    """
-
-    def __init__(
-        self,
-        model_name: str = "cross-encoder/nli-deberta-v3-small"
-    ):
-        logger.info(
-            "initializing_nli_model",
-            model_name=model_name
-        )
-
+    def __init__(self, model_name: str = "cross-encoder/nli-deberta-v3-small"):
+        logger.info("initializing_nli_model", model_name=model_name)
         self.model_name = model_name
-
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-
-        self.model = AutoModelForSequenceClassification.from_pretrained(
-            model_name
-        )
-
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
         self.model.eval()
-
-        # Apple Silicon acceleration when available.
-        if torch.backends.mps.is_available():
-            self.device = torch.device("mps")
-        else:
-            self.device = torch.device("cpu")
-
+        self.device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu")
         self.model.to(self.device)
 
-        # Cache id2label mapping during initialization
         self.label_map: Dict[str, int] = {}
         id2label = getattr(self.model.config, "id2label", {})
         for idx, label in id2label.items():
@@ -65,110 +30,75 @@ class EvidenceEntailmentEngine:
             elif "contrad" in label_str:
                 self.label_map["contradiction"] = int(idx)
 
-        logger.info(
-            "nli_model_initialized",
-            model_name=model_name,
-            device=str(self.device)
-        )
-
-    def classify(
-        self,
-        claim: str,
-        evidence: str
-    ) -> Dict[str, float]:
-        """
-        Classify the relationship between evidence and claim.
-
-        Returns:
-        {
-            "entailment": float,
-            "neutral": float,
-            "contradiction": float
+        self.last_batch_metrics = {
+            "pairs": 0,
+            "batches": 0,
+            "batch_size": 32,
+            "inference_ms": 0.0,
         }
-        """
+        logger.info("nli_model_initialized", model_name=model_name, device=str(self.device))
+
+    def classify(self, claim: str, evidence: str) -> Dict[str, float]:
         return self.classify_batch([claim], [evidence])[0]
 
     def classify_batch(
         self,
         claims: List[str],
         evidences: List[str],
-        batch_size: int = 32
+        batch_size: int = 32,
     ) -> List[Dict[str, float]]:
-        """
-        Classify a batch of relationship pairs (claims and evidences).
-
-        Args:
-            claims: List of generated claim strings (hypotheses).
-            evidences: List of retrieved evidence strings (premises).
-            batch_size: Number of pairs per forward pass.
-
-        Returns:
-            List of dicts containing entailment, neutral, and contradiction scores.
-        """
         if len(claims) != len(evidences):
-            raise ValueError(
-                f"Claims and evidences length mismatch: {len(claims)} vs {len(evidences)}"
-            )
-
+            raise ValueError(f"Claims and evidences length mismatch: {len(claims)} vs {len(evidences)}")
         if not claims:
+            self.last_batch_metrics = {"pairs": 0, "batches": 0, "batch_size": batch_size, "inference_ms": 0.0}
             return []
 
-        results: List[Dict[str, float]] = [
-            {
-                "entailment": 0.0,
-                "neutral": 1.0,
-                "contradiction": 0.0
-            }
-            for _ in range(len(claims))
-        ]
-
-        valid_indices: List[int] = []
-        valid_evidences: List[str] = []
-        valid_claims: List[str] = []
-
-        for idx, (c, e) in enumerate(zip(claims, evidences)):
-            if c and e and c.strip() and e.strip():
+        results = [{"entailment": 0.0, "neutral": 1.0, "contradiction": 0.0} for _ in claims]
+        valid_indices, valid_evidences, valid_claims = [], [], []
+        for idx, (claim, evidence) in enumerate(zip(claims, evidences)):
+            if claim and evidence and claim.strip() and evidence.strip():
                 valid_indices.append(idx)
-                valid_evidences.append(e)
-                valid_claims.append(c)
+                valid_evidences.append(evidence)
+                valid_claims.append(claim)
 
         if not valid_indices:
+            self.last_batch_metrics = {"pairs": 0, "batches": 0, "batch_size": batch_size, "inference_ms": 0.0}
             return results
 
         ent_idx = self.label_map.get("entailment", 0)
         neu_idx = self.label_map.get("neutral", 1)
         con_idx = self.label_map.get("contradiction", 2)
+        num_batches = 0
+        t0 = time.perf_counter()
 
-        num_valid = len(valid_indices)
-
-        for b_start in range(0, num_valid, batch_size):
-            b_end = min(b_start + batch_size, num_valid)
-            b_evidences = valid_evidences[b_start:b_end]
-            b_claims = valid_claims[b_start:b_end]
-
+        for b_start in range(0, len(valid_indices), batch_size):
+            b_end = min(b_start + batch_size, len(valid_indices))
             inputs = self.tokenizer(
-                b_evidences,
-                b_claims,
+                valid_evidences[b_start:b_end],
+                valid_claims[b_start:b_end],
                 padding=True,
                 truncation=True,
                 max_length=512,
-                return_tensors="pt"
+                return_tensors="pt",
             )
-
             inputs = {key: val.to(self.device) for key, val in inputs.items()}
-
             with torch.inference_mode():
-                outputs = self.model(**inputs)
-                probs = torch.softmax(outputs.logits, dim=-1)
-
-            probs_cpu = probs.cpu().numpy()
-
+                probs = torch.softmax(self.model(**inputs).logits, dim=-1).cpu().numpy()
+            num_batches += 1
             for offset, orig_idx in enumerate(valid_indices[b_start:b_end]):
-                row = probs_cpu[offset]
+                row = probs[offset]
                 results[orig_idx] = {
                     "entailment": float(row[ent_idx]),
                     "neutral": float(row[neu_idx]),
-                    "contradiction": float(row[con_idx])
+                    "contradiction": float(row[con_idx]),
                 }
 
+        inference_ms = (time.perf_counter() - t0) * 1000.0
+        self.last_batch_metrics = {
+            "pairs": len(valid_indices),
+            "batches": num_batches,
+            "batch_size": batch_size,
+            "inference_ms": round(inference_ms, 2),
+        }
+        logger.info("nli_batch_completed", **self.last_batch_metrics)
         return results
