@@ -141,6 +141,8 @@ class FusionEngine:
         Fuse individual pillar results into final metrics with mode support (STATIC, ADAPTIVE, GRADIENT).
         Handles p2.confidence_gap_score being None and p3.consistency_failure_score being None safely.
         """
+        import time
+        t_fus0 = time.perf_counter()
         cg_score = p2.confidence_gap_score if (p2 and getattr(p2, 'available', False)) else None
         if p2 and p2.confidence_gap_score is None:
             cg_score = None
@@ -161,4 +163,5 @@ class FusionEngine:
             cf_available=(cf_score is not None)
         )
 
+        self.last_fusion_ms = round((time.perf_counter() - t_fus0) * 1000.0, 2)
         return h_score, risk_level, color_code, weights_used

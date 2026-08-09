@@ -13,7 +13,7 @@ from __future__ import annotations
 import asyncio
 import time
 from typing import Dict, List, Any
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, Request, Response, status
 from app.schemas.production_schemas import (
     AnalysisRequest,
     AnalysisResponse,
@@ -54,8 +54,9 @@ VALID_MODELS = {
     summary="Canonical production hallucination analysis",
     description="Executes Pillar 1 Retrieval, Pillar 2 Confidence, Pillar 3 Consistency, Adaptive Fusion, Token Localization, and single-label failure classification.",
 )
-async def analyze_response(payload: AnalysisRequest, request: Request) -> AnalysisResponse:
+async def analyze_response(payload: AnalysisRequest, request: Request, response: Response) -> AnalysisResponse:
     """Execute end-to-end HalluciSense verification pipeline with full tracing."""
+    t_req_start = time.perf_counter()
     start_time = time.time()
     tracer = PipelineTracer()
 
@@ -89,17 +90,18 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
 
     try:
         # 3. Master Pipeline Execution (Async Offloaded)
-        t0 = time.time()
+        t0 = time.perf_counter()
         report = await asyncio.to_thread(_pipeline.analyze, text=response_text)
-        p_dur = (time.time() - t0) * 1000.0
+        p_dur = (time.perf_counter() - t0) * 1000.0
 
         overall_h = float(report.overall_h_score)
         risk_level_str = str(report.overall_risk_level.value) if hasattr(report.overall_risk_level, "value") else str(report.overall_risk_level)
 
-        # 4. Extract Pillar Scores
+        # 4. Extract Pillar Scores & Timings
         p1 = report.pillar1_summary
         p2 = report.pillar2_summary
         p3 = report.pillar3_summary
+        p_timings = getattr(report, "performance_timings", {}) or {}
 
         fe_val = float(getattr(p1, "factual_error_score", 0.5))
         cg_val = float(getattr(p2, "avg_entropy", 0.15)) if getattr(p2, "avg_entropy", None) is not None else 0.15
@@ -112,12 +114,14 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
         )
 
         # 5. Token Localization Heatmap (Async Offloaded)
+        t_loc_start = time.perf_counter()
         annotations, _ = await asyncio.to_thread(
             _localization_engine.localize_tokens,
             response_text=response_text,
             overall_h_score=overall_h,
             sentence_scores=[overall_h],
         )
+        localization_ms = (time.perf_counter() - t_loc_start) * 1000.0
 
         heatmap_items = []
         for ann in annotations:
@@ -179,6 +183,7 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
             )
 
         # 8. Single-Label Root Cause Classifier
+        t_risk_start = time.perf_counter()
         root_cause = RootCauseClassifier.classify(
             h_score=overall_h,
             p1_res=p1,
@@ -188,14 +193,11 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
             query=query,
             response_text=response_text,
         ).value
+        risk_ms = (time.perf_counter() - t_risk_start) * 1000.0
 
-        # 9. Record Pipeline Trace
-        tracer.record_stage("pipeline_execution", p_dur, {"num_claims": len(p1.claims), "num_evidence": len(evidence_items)}, confidence=1.0 - overall_h)
-        tracer.record_stage("pillar1_grounding", p_dur * 0.4, {"factual_error": fe_val}, confidence=1.0 - fe_val)
-        tracer.record_stage("adaptive_fusion", p_dur * 0.1, {"weights": getattr(report, "weights_used", {})}, confidence=1.0 - overall_h)
-        tracer.finalize(final_h_score=overall_h, risk_level=risk_level_str, root_cause=root_cause)
+        # 9. Serialization Timing
+        t_ser_start = time.perf_counter()
 
-        # 10. Confidence Decomposition
         unc = getattr(report, "uncertainty_analysis", {})
         confidence_info = ConfidenceAnalysis(
             whitebox_entropy=float(unc.get("predictive_entropy", 0.12)),
@@ -204,19 +206,97 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
             aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.20)),
         )
 
-        elapsed_ms = round((time.time() - start_time) * 1000, 2)
         confidence_val = round(1.0 - abs(overall_h - 0.5), 4)
 
-        _metrics_tracker.record_request(elapsed_ms, overall_h, is_success=True)
+        serialization_ms = (time.perf_counter() - t_ser_start) * 1000.0
+        total_req_ms = (time.perf_counter() - t_req_start) * 1000.0
 
-        return AnalysisResponse(
+        # Extract breakdown variables for logging & tracing
+        ret_perf = p_timings.get("retrieval", {})
+        conf_perf = p_timings.get("confidence", {})
+        cons_perf = p_timings.get("consistency", {})
+        fus_perf = p_timings.get("fusion", {})
+
+        ret_total_ms = float(ret_perf.get("duration_ms", p_dur * 0.4))
+        nli_total_ms = float(ret_perf.get("nli_ms", 0.0)) + float(cons_perf.get("nli_ms", 0.0))
+        conf_total_ms = float(conf_perf.get("duration_ms", 0.0))
+        cons_total_ms = float(cons_perf.get("duration_ms", 0.0))
+        fusion_total_ms = float(fus_perf.get("duration_ms", 0.0))
+
+        full_perf_dict = {
+            "retrieval": ret_perf,
+            "confidence": conf_perf,
+            "consistency": cons_perf,
+            "fusion": fus_perf,
+            "risk_ms": round(risk_ms, 2),
+            "localization_ms": round(localization_ms, 2),
+            "serialization_ms": round(serialization_ms, 2),
+            "request_total_ms": round(total_req_ms, 2),
+        }
+
+        # Record Pipeline Trace
+        tracer.record_stage("pipeline_execution", p_dur, {"num_claims": len(p1.claims), "num_evidence": len(evidence_items)}, confidence=1.0 - overall_h)
+        tracer.record_stage("pillar1_grounding", ret_total_ms, {"factual_error": fe_val}, confidence=1.0 - fe_val)
+        tracer.record_stage("adaptive_fusion", fusion_total_ms, {"weights": getattr(report, "weights_used", {})}, confidence=1.0 - overall_h)
+        tracer.finalize(
+            final_h_score=overall_h,
+            risk_level=risk_level_str,
+            root_cause=root_cause,
+            metadata={"performance_timings": full_perf_dict},
+        )
+
+        stage_timings_record = {
+            "retrieval_ms": ret_total_ms,
+            "nli_ms": nli_total_ms,
+            "confidence_ms": conf_total_ms,
+            "consistency_ms": cons_total_ms,
+            "fusion_ms": fusion_total_ms,
+            "risk_ms": risk_ms,
+            "localization_ms": localization_ms,
+            "serialization_ms": serialization_ms,
+        }
+        _metrics_tracker.record_request(total_req_ms, overall_h, is_success=True, stage_timings=stage_timings_record)
+
+        # Structured [PERF] Logs
+        print(f"[PERF] retrieval.total_ms={ret_total_ms:.2f}")
+        print(f"[PERF] retrieval.wikipedia_ms={ret_perf.get('wikipedia_ms', 0.0):.2f}")
+        print(f"[PERF] retrieval.nli_ms={ret_perf.get('nli_ms', 0.0):.2f}")
+        print(f"[PERF] confidence.total_ms={conf_total_ms:.2f}")
+        print(f"[PERF] consistency.total_ms={cons_total_ms:.2f}")
+        print(f"[PERF] fusion.total_ms={fusion_total_ms:.2f}")
+        print(f"[PERF] risk.total_ms={risk_ms:.2f}")
+        print(f"[PERF] localization.total_ms={localization_ms:.2f}")
+        print(f"[PERF] serialization.total_ms={serialization_ms:.2f}")
+        print(f"[PERF] request.total_ms={total_req_ms:.2f}")
+
+        # Final Performance Summary Console Output Block
+        summary_block = (
+            "\n========== HALLUCISENSE PERFORMANCE ==========\n"
+            f"Retrieval:       {ret_total_ms:10.2f} ms\n"
+            f"NLI:             {nli_total_ms:10.2f} ms\n"
+            f"Confidence:      {conf_total_ms:10.2f} ms\n"
+            f"Consistency:     {cons_total_ms:10.2f} ms\n"
+            f"Fusion:          {fusion_total_ms:10.2f} ms\n"
+            f"Risk:            {risk_ms:10.2f} ms\n"
+            f"Localization:    {localization_ms:10.2f} ms\n"
+            f"Serialization:   {serialization_ms:10.2f} ms\n"
+            "-----------------------------------------------\n"
+            f"TOTAL:           {total_req_ms:10.2f} ms\n"
+            "==============================================="
+        )
+        print(summary_block)
+
+        # Add HTTP Latency Header
+        response.headers["X-HalluciSense-Latency-Ms"] = f"{total_req_ms:.2f}"
+
+        res_body = AnalysisResponse(
             trace_id=tracer.trace_id,
             overall_h_score=round(overall_h, 4),
             risk_level=risk_level_str,
             confidence=confidence_val,
             pillar_scores=pillar_scores,
             failure_taxonomy=root_cause if overall_h >= 0.35 else "NONE",
-            processing_time_ms=elapsed_ms,
+            processing_time_ms=round(total_req_ms, 2),
             version="1.0.0",
             hallucination=overall_h >= 0.54,
             sentence_scores=sentences,
@@ -225,10 +305,13 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
             confidence_analysis=confidence_info,
             root_cause_classification=root_cause,
         )
+        return res_body
 
     except HTTPException:
         raise
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         _metrics_tracker.record_request(0.0, 0.0, is_success=False)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -243,9 +326,9 @@ async def analyze_response(payload: AnalysisRequest, request: Request) -> Analys
     summary="Detailed hallucination explainability analysis",
     description="Returns supporting passages, contradiction evidence, token heatmap, sentence scores, reasoning chain, fusion contribution, adaptive weights, and confidence explanation.",
 )
-async def explain_analysis(payload: ExplainRequest, request: Request) -> ExplainResponse:
+async def explain_analysis(payload: ExplainRequest, request: Request, response: Response) -> ExplainResponse:
     """Execute detailed explainability analysis."""
-    analysis = await analyze_response(AnalysisRequest(query=payload.query, response=payload.response, model_name=payload.model_name), request)
+    analysis = await analyze_response(AnalysisRequest(query=payload.query, response=payload.response, model_name=payload.model_name), request, response)
 
     supporting = [ev.snippet for ev in analysis.evidence if ev.score >= 0.70] or ["No explicit supporting passage retrieved."]
     contradiction = [ev.snippet for ev in analysis.evidence if ev.score < 0.50] or ["No explicit contradiction passage detected."]

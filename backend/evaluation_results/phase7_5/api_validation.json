@@ -2,12 +2,12 @@
   "endpoints": {
     "/predict": {
       "status_code": 200,
-      "latency_ms": 2062.21,
+      "latency_ms": 2231.19,
       "schema_valid": true
     },
     "/explain": {
       "status_code": 200,
-      "latency_ms": 2224.33,
+      "latency_ms": 2071.32,
       "schema_valid": true
     },
     "/health": {

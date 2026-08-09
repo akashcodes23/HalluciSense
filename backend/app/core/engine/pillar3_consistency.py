@@ -261,10 +261,16 @@ class Pillar3ConsistencyEngine:
         """
         Execute Pillar 3 consistency and claim-aligned NLI contradiction checking.
         """
+        import time
+        t_p3_start = time.perf_counter()
+
+        t_san0 = time.perf_counter()
         valid_samples = self._sanitize_samples(primary_response, sample_responses)
+        sanitization_ms = (time.perf_counter() - t_san0) * 1000.0
 
         if not valid_samples:
-            return Pillar3Result(
+            p3_duration_ms = (time.perf_counter() - t_p3_start) * 1000.0
+            res = Pillar3Result(
                 sample_responses=[],
                 pairwise_similarities=[],
                 consistency_failure_score=None,
@@ -279,20 +285,38 @@ class Pillar3ConsistencyEngine:
                 ),
                 available=False,
             )
+            res.last_timings = {
+                "start_time": t_p3_start,
+                "end_time": time.perf_counter(),
+                "duration_ms": round(p3_duration_ms, 2),
+                "sanitization_ms": round(sanitization_ms, 2),
+                "jaccard_ms": 0.0,
+                "semantic_ms": 0.0,
+                "nli_ms": 0.0,
+            }
+            return res
 
         logger.info("pillar3_analysis_started", num_samples=len(valid_samples))
 
         # 1. Compute Semantic Consistency
+        semantic_ms = 0.0
+        jaccard_ms = 0.0
         try:
+            t_sem0 = time.perf_counter()
             similarities, cf_semantic = self.evaluate_semantic_consistency(primary_response, valid_samples)
+            semantic_ms = (time.perf_counter() - t_sem0) * 1000.0
             similarity_method = "semantic_embedding"
         except Exception as exc:
             logger.warning("pillar3_embedding_fallback", num_samples=len(valid_samples), error=str(exc))
+            t_jac0 = time.perf_counter()
             similarities, cf_semantic = self.evaluate_jaccard_consistency(primary_response, valid_samples)
+            jaccard_ms = (time.perf_counter() - t_jac0) * 1000.0
             similarity_method = "jaccard_fallback"
 
         # 2. Compute Claim-Aligned NLI Contradiction Analysis
+        t_nli0 = time.perf_counter()
         nli_analyses, contradiction_score, nli_available = self.evaluate_claim_nli(primary_response, valid_samples)
+        nli_ms = (time.perf_counter() - t_nli0) * 1000.0
 
         # 3. Fuse Contradiction Score into Contradiction-Aware CF
         if nli_available and contradiction_score is not None:
@@ -350,7 +374,8 @@ class Pillar3ConsistencyEngine:
 
         sentence_consistency = round(1.0 - cf_final, 4)
 
-        return Pillar3Result(
+        p3_duration_ms = (time.perf_counter() - t_p3_start) * 1000.0
+        res = Pillar3Result(
             sample_responses=valid_samples,
             pairwise_similarities=similarities,
             consistency_failure_score=cf_final,
@@ -364,3 +389,13 @@ class Pillar3ConsistencyEngine:
             paraphrase_matrix=paraphrase_matrix,
             sentence_consistency_score=sentence_consistency,
         )
+        res.last_timings = {
+            "start_time": t_p3_start,
+            "end_time": time.perf_counter(),
+            "duration_ms": round(p3_duration_ms, 2),
+            "sanitization_ms": round(sanitization_ms, 2),
+            "jaccard_ms": round(jaccard_ms, 2),
+            "semantic_ms": round(semantic_ms, 2),
+            "nli_ms": round(nli_ms, 2),
+        }
+        return res

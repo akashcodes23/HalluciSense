@@ -54,6 +54,8 @@ class TokenLevelLocalizationEngine:
         sentence_scores: List[float],
     ) -> Tuple[List[Dict[str, Any]], str]:
         """Propagate scores to tokens, merge adjacent spans, generate interactive HTML heatmap."""
+        import time
+        t_loc0 = time.perf_counter()
         sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", response_text) if s.strip()]
 
         annotations: List[TokenSpanAnnotation] = []
@@ -88,4 +90,5 @@ class TokenLevelLocalizationEngine:
 
         html_heatmap = f'<div class="hallucisense-heatmap" style="line-height: 1.8; font-family: sans-serif;">{" ".join(html_chunks)}</div>'
 
+        self.last_localization_ms = round((time.perf_counter() - t_loc0) * 1000.0, 2)
         return [asdict(a) for a in annotations], html_heatmap

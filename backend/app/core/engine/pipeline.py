@@ -419,6 +419,9 @@ Respond STRICTLY in JSON using this schema:
         # INPUT NORMALIZATION
         # =====================================================
 
+        import time
+        t_pipe_start = time.perf_counter()
+
         if evidence_items is None:
             evidence_items = []
 
@@ -429,8 +432,10 @@ Respond STRICTLY in JSON using this schema:
         # EVIDENCE RETRIEVAL (when no external evidence provided)
         # =====================================================
 
+        t_ret_start = time.perf_counter()
         if not evidence_items:
             evidence_items = self._retrieve_evidence(clean_text)
+        ret_timings = getattr(self.retriever, "last_timings", {})
 
         # =====================================================
         # PILLAR 1 — DOCUMENT-LEVEL FACTUAL VERIFICATION
@@ -440,11 +445,16 @@ Respond STRICTLY in JSON using this schema:
             clean_text,
             evidence_items,
         )
+        t_ret_end = time.perf_counter()
+        retrieval_duration_ms = round((t_ret_end - t_ret_start) * 1000.0, 2)
+        claim_ext_ms = getattr(self.p1_engine, "last_claim_extraction_ms", 0.0)
+        nli_ms = getattr(self.p1_engine, "last_nli_ms", 0.0)
 
         # =====================================================
         # PILLAR 2 — DOCUMENT-LEVEL TOKEN CONFIDENCE
         # =====================================================
 
+        t_p2_start = time.perf_counter()
         raw_tokens = re.findall(
             r"\S+",
             clean_text,
@@ -461,15 +471,21 @@ Respond STRICTLY in JSON using this schema:
             raw_tokens,
             token_probabilities,
         )
+        confidence_duration_ms = round((time.perf_counter() - t_p2_start) * 1000.0, 2)
+        tok_proc_ms = getattr(self.p2_engine, "last_token_processing_ms", 0.0)
+        ent_calc_ms = getattr(self.p2_engine, "last_entropy_calculation_ms", 0.0)
 
         # =====================================================
         # PILLAR 3 — DOCUMENT-LEVEL CONSISTENCY
         # =====================================================
 
+        t_p3_start = time.perf_counter()
         p3_global = self.p3_engine.analyze(
             clean_text,
             sample_responses,
         )
+        consistency_duration_ms = round((time.perf_counter() - t_p3_start) * 1000.0, 2)
+        p3_sub_timings = getattr(p3_global, "last_timings", {})
 
         # =====================================================
         # SENTENCE EXTRACTION
@@ -771,7 +787,36 @@ Respond STRICTLY in JSON using this schema:
         # Platt-scaled sigmoidal probability calibration (a=1.82, b=-0.45 calibrated on 750 benchmark claims)
         logit_z = np.log((overall_h_score + 1e-6) / (1.0 - overall_h_score + 1e-6))
         calibrated_p = float(1.0 / (1.0 + np.exp(-(1.82 * logit_z - 0.45))))
-        calibrated_p = round(float(np.clip(calibrated_p, 0.0, 1.0)), 4)
+        fusion_duration_ms = getattr(self.fusion_engine, "last_fusion_ms", 0.0)
+
+        perf_timings = {
+            "retrieval": {
+                "duration_ms": retrieval_duration_ms,
+                "claim_extraction_ms": claim_ext_ms,
+                "external_retrieval_ms": ret_timings.get("external_retrieval_ms", 0.0),
+                "wikipedia_ms": ret_timings.get("wikipedia_ms", 0.0),
+                "faiss_ms": ret_timings.get("faiss_ms", 0.0),
+                "bm25_ms": ret_timings.get("bm25_ms", 0.0),
+                "reranker_ms": ret_timings.get("reranker_ms", 0.0),
+                "nli_ms": nli_ms,
+            },
+            "confidence": {
+                "duration_ms": confidence_duration_ms,
+                "token_processing_ms": tok_proc_ms,
+                "entropy_calculation_ms": ent_calc_ms,
+            },
+            "consistency": {
+                "duration_ms": consistency_duration_ms,
+                "sanitization_ms": p3_sub_timings.get("sanitization_ms", 0.0),
+                "jaccard_ms": p3_sub_timings.get("jaccard_ms", 0.0),
+                "semantic_ms": p3_sub_timings.get("semantic_ms", 0.0),
+                "nli_ms": p3_sub_timings.get("nli_ms", 0.0),
+            },
+            "fusion": {
+                "duration_ms": fusion_duration_ms,
+            },
+            "pipeline_total_ms": round((time.perf_counter() - t_pipe_start) * 1000.0, 2),
+        }
 
         # =====================================================
         # FINAL REPORT
@@ -799,4 +844,5 @@ Respond STRICTLY in JSON using this schema:
             calibrated_probability=calibrated_p,
             fusion_mode="ADAPTIVE",
             sensitivity_analysis=sensitivity_diag,
+            performance_timings=perf_timings,
         )

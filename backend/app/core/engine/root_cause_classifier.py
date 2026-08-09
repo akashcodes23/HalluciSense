@@ -33,8 +33,9 @@ class RootCauseCategory(str, Enum):
 class RootCauseClassifier:
     """Classifies pipeline predictions into a single, explainable root-cause failure label."""
 
-    @staticmethod
+    @classmethod
     def classify(
+        cls,
         h_score: float,
         p1_res: Any,
         p2_res: Any,
@@ -44,6 +45,22 @@ class RootCauseClassifier:
         response_text: str = "",
     ) -> RootCauseCategory:
         """Assign single-label failure classification based on empirical pipeline signals."""
+        import time
+        t_r0 = time.perf_counter()
+        res = cls._classify_internal(h_score, p1_res, p2_res, p3_res, evidence_items, query, response_text)
+        cls.last_risk_ms = round((time.perf_counter() - t_r0) * 1000.0, 2)
+        return res
+
+    @staticmethod
+    def _classify_internal(
+        h_score: float,
+        p1_res: Any,
+        p2_res: Any,
+        p3_res: Any,
+        evidence_items: List[Any],
+        query: str = "",
+        response_text: str = "",
+    ) -> RootCauseCategory:
 
         # Verified threshold
         if h_score < 0.35:

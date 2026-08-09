@@ -52,8 +52,12 @@ class Pillar2ConfidenceEngine:
         Optional[float],
         Optional[float],
     ]:
+        import time
+        t_proc_start = time.perf_counter()
 
         if not tokens:
+            self.last_token_processing_ms = round((time.perf_counter() - t_proc_start) * 1000.0, 2)
+            self.last_entropy_calculation_ms = 0.0
             return [], None, None, None
 
         # --------------------------------------------------
@@ -61,11 +65,15 @@ class Pillar2ConfidenceEngine:
         # --------------------------------------------------
 
         if probabilities is None:
+            self.last_token_processing_ms = round((time.perf_counter() - t_proc_start) * 1000.0, 2)
+            self.last_entropy_calculation_ms = 0.0
             return [], None, None, None
 
         # Token/probability mismatch means confidence cannot
         # be measured reliably.
         if len(probabilities) != len(tokens):
+            self.last_token_processing_ms = round((time.perf_counter() - t_proc_start) * 1000.0, 2)
+            self.last_entropy_calculation_ms = 0.0
             return [], None, None, None
 
         token_analyses: List[TokenAnalysis] = []
@@ -73,7 +81,9 @@ class Pillar2ConfidenceEngine:
         total_prob = 0.0
         total_entropy = 0.0
         low_prob_count = 0
+        token_proc_ms = (time.perf_counter() - t_proc_start) * 1000.0
 
+        t_ent_start = time.perf_counter()
         for idx, (tok, prob) in enumerate(
             zip(tokens, probabilities)
         ):
@@ -145,6 +155,8 @@ class Pillar2ConfidenceEngine:
             ),
         )
 
+        self.last_token_processing_ms = round(token_proc_ms, 2)
+        self.last_entropy_calculation_ms = round((time.perf_counter() - t_ent_start) * 1000.0, 2)
         return (
             token_analyses,
             round(avg_prob, 4),

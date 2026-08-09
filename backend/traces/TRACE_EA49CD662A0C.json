@@ -1,0 +1,109 @@
+{
+  "trace_id": "TRACE_EA49CD662A0C",
+  "timestamp": "2026-08-09T13:47:10.124049+00:00",
+  "start_time_unix": 1786283230.123977,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 1921.6,
+      "memory_mb": -73.97,
+      "confidence": 0.0,
+      "details": {
+        "num_claims": 1,
+        "num_evidence": 3
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 1921.18,
+      "memory_mb": -73.97,
+      "confidence": 0.0,
+      "details": {
+        "factual_error": 1.0
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 0.0,
+      "memory_mb": -73.97,
+      "confidence": 0.0,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 1921.87,
+    "total_memory_mb": -73.97,
+    "final_h_score": 1.0,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause_classification": "Retrieval Failure",
+    "stage_count": 3,
+    "metadata": {
+      "performance_timings": {
+        "retrieval": {
+          "duration_ms": 1921.18,
+          "claim_extraction_ms": 0.01,
+          "external_retrieval_ms": 1920.98,
+          "wikipedia_ms": 1811.33,
+          "faiss_ms": 0.0,
+          "bm25_ms": 0.2,
+          "reranker_ms": 109.38,
+          "nli_ms": 0.0
+        },
+        "confidence": {
+          "duration_ms": 0.01,
+          "token_processing_ms": 0.0,
+          "entropy_calculation_ms": 0.0
+        },
+        "consistency": {
+          "duration_ms": 0.01,
+          "sanitization_ms": 0.0,
+          "jaccard_ms": 0.0,
+          "semantic_ms": 0.0,
+          "nli_ms": 0.0
+        },
+        "fusion": {
+          "duration_ms": 0.0
+        },
+        "risk_ms": 0.01,
+        "localization_ms": 0.09,
+        "serialization_ms": 0.0,
+        "request_total_ms": 1921.84
+      }
+    }
+  },
+  "performance_timings": {
+    "retrieval": {
+      "duration_ms": 1921.18,
+      "claim_extraction_ms": 0.01,
+      "external_retrieval_ms": 1920.98,
+      "wikipedia_ms": 1811.33,
+      "faiss_ms": 0.0,
+      "bm25_ms": 0.2,
+      "reranker_ms": 109.38,
+      "nli_ms": 0.0
+    },
+    "confidence": {
+      "duration_ms": 0.01,
+      "token_processing_ms": 0.0,
+      "entropy_calculation_ms": 0.0
+    },
+    "consistency": {
+      "duration_ms": 0.01,
+      "sanitization_ms": 0.0,
+      "jaccard_ms": 0.0,
+      "semantic_ms": 0.0,
+      "nli_ms": 0.0
+    },
+    "fusion": {
+      "duration_ms": 0.0
+    },
+    "risk_ms": 0.01,
+    "localization_ms": 0.09,
+    "serialization_ms": 0.0,
+    "request_total_ms": 1921.84
+  }
+}

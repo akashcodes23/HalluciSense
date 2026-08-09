@@ -24,9 +24,12 @@ class Pillar1RetrievalEngine:
         self.entailment_engine = EvidenceEntailmentEngine()
 
     def extract_claims(self, text: str) -> List[str]:
+        import time
+        t0 = time.perf_counter()
         clean_text = text.strip()
 
         if not clean_text:
+            self.last_claim_extraction_ms = round((time.perf_counter() - t0) * 1000.0, 2)
             return []
 
         # Split on clause boundaries (commas, semicolons) but NOT on
@@ -46,6 +49,7 @@ class Pillar1RetrievalEngine:
         if not claims:
             claims = [clean_text]
 
+        self.last_claim_extraction_ms = round((time.perf_counter() - t0) * 1000.0, 2)
         return claims
 
     def _evidence_relevant_to_claim(
@@ -75,28 +79,18 @@ class Pillar1RetrievalEngine:
         claims: List[str],
         external_evidence: List[EvidenceItem]
     ) -> Tuple[float, List[EvidenceItem]]:
-        """
-        Compute factual error using NLI.
-
-        For each claim:
-
-            support = strongest entailment
-            contradiction = strongest contradiction
-
-        FE should be high when:
-        - strong contradictory evidence exists, or
-        - evidence is relevant but fails to support the claim.
-
-        Neutral evidence is treated as uncertainty rather than
-        direct contradiction.
-        """
+        import time
+        t_nli_start = time.perf_counter()
+        nli_total_ms = 0.0
 
         if not claims:
+            self.last_nli_ms = 0.0
             return 0.0, external_evidence
 
         if not external_evidence:
             # No evidence does NOT prove hallucination.
             # Represent this as uncertainty.
+            self.last_nli_ms = 0.0
             return 0.5, external_evidence
 
         claim_error_scores = []
@@ -125,10 +119,12 @@ class Pillar1RetrievalEngine:
                 if sim_score < 0.20:
                     continue
 
+                t_cls0 = time.perf_counter()
                 result = self.entailment_engine.classify(
                     claim=claim,
                     evidence=item.snippet
                 )
+                nli_total_ms += (time.perf_counter() - t_cls0) * 1000.0
 
                 entailment = result["entailment"]
                 contradiction = result["contradiction"]
@@ -211,6 +207,7 @@ class Pillar1RetrievalEngine:
             / len(claim_error_scores)
         )
 
+        self.last_nli_ms = round(nli_total_ms, 2)
         return (
             round(factual_error, 4),
             external_evidence

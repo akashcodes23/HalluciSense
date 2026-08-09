@@ -45,6 +45,7 @@ if USE_PYDANTIC:
         dense_retrieval_score: Optional[float] = Field(None)
         bm25_retrieval_score: Optional[float] = Field(None)
         cross_encoder_score: Optional[float] = Field(None)
+        last_timings: Optional[Dict[str, Any]] = Field(default=None)
 
     class Pillar2Result(BaseModel):
         avg_probability: Optional[float] = Field(None, ge=0.0, le=1.0)
@@ -64,6 +65,7 @@ if USE_PYDANTIC:
         top_k_logprob_diff: Optional[float] = Field(None)
         response_variance: Optional[float] = Field(None)
         calibration_score: Optional[float] = Field(None)
+        last_timings: Optional[Dict[str, Any]] = Field(default=None)
 
     class NLIAnalysis(BaseModel):
         primary_claim: str
@@ -89,6 +91,7 @@ if USE_PYDANTIC:
         status: str = Field(default="UNAVAILABLE")
         paraphrase_matrix: List[List[float]] = Field(default_factory=list)
         sentence_consistency_score: Optional[float] = Field(None)
+        last_timings: Optional[Dict[str, Any]] = Field(default=None)
 
     class SentenceAnalysis(BaseModel):
         sentence_id: int = Field(...)
@@ -127,6 +130,7 @@ if USE_PYDANTIC:
         calibrated_probability: Optional[float] = Field(None, description="Platt-scaled calibrated hallucination probability")
         fusion_mode: str = Field(default="ADAPTIVE", description="STATIC, ADAPTIVE, or GRADIENT weight mode")
         sensitivity_analysis: Optional[Dict[str, Any]] = Field(None, description="Weight sensitivity diagnostics grid")
+        performance_timings: Optional[Dict[str, Any]] = Field(None, description="High-resolution latency timing breakdown")
 else:
     class RiskLevel(str, Enum):
         VERIFIED = "VERIFIED"

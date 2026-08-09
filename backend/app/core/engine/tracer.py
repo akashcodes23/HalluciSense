@@ -100,6 +100,8 @@ class PipelineTracer:
             "stage_count": len(self.stages),
             "metadata": metadata or {},
         }
+        if metadata and "performance_timings" in metadata:
+            self.trace_payload["performance_timings"] = metadata["performance_timings"]
         self.trace_payload["summary"] = summary
 
         trace_file = TRACES_DIR / f"{self.trace_id}.json"

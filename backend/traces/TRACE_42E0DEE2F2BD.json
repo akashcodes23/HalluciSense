@@ -1,0 +1,109 @@
+{
+  "trace_id": "TRACE_42E0DEE2F2BD",
+  "timestamp": "2026-08-09T13:47:07.798720+00:00",
+  "start_time_unix": 1786283227.798639,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 2322.28,
+      "memory_mb": 31.45,
+      "confidence": 0.95,
+      "details": {
+        "num_claims": 1,
+        "num_evidence": 3
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 2250.56,
+      "memory_mb": 31.45,
+      "confidence": 0.95,
+      "details": {
+        "factual_error": 0.05
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 0.0,
+      "memory_mb": 31.45,
+      "confidence": 0.95,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 2322.56,
+    "total_memory_mb": 31.45,
+    "final_h_score": 0.05,
+    "risk_level": "VERIFIED",
+    "root_cause_classification": "VERIFIED",
+    "stage_count": 3,
+    "metadata": {
+      "performance_timings": {
+        "retrieval": {
+          "duration_ms": 2250.56,
+          "claim_extraction_ms": 0.01,
+          "external_retrieval_ms": 1931.86,
+          "wikipedia_ms": 1799.45,
+          "faiss_ms": 0.0,
+          "bm25_ms": 0.16,
+          "reranker_ms": 132.16,
+          "nli_ms": 318.33
+        },
+        "confidence": {
+          "duration_ms": 0.01,
+          "token_processing_ms": 0.0,
+          "entropy_calculation_ms": 0.0
+        },
+        "consistency": {
+          "duration_ms": 0.02,
+          "sanitization_ms": 0.0,
+          "jaccard_ms": 0.0,
+          "semantic_ms": 0.0,
+          "nli_ms": 0.0
+        },
+        "fusion": {
+          "duration_ms": 0.0
+        },
+        "risk_ms": 0.0,
+        "localization_ms": 0.1,
+        "serialization_ms": 0.0,
+        "request_total_ms": 2322.52
+      }
+    }
+  },
+  "performance_timings": {
+    "retrieval": {
+      "duration_ms": 2250.56,
+      "claim_extraction_ms": 0.01,
+      "external_retrieval_ms": 1931.86,
+      "wikipedia_ms": 1799.45,
+      "faiss_ms": 0.0,
+      "bm25_ms": 0.16,
+      "reranker_ms": 132.16,
+      "nli_ms": 318.33
+    },
+    "confidence": {
+      "duration_ms": 0.01,
+      "token_processing_ms": 0.0,
+      "entropy_calculation_ms": 0.0
+    },
+    "consistency": {
+      "duration_ms": 0.02,
+      "sanitization_ms": 0.0,
+      "jaccard_ms": 0.0,
+      "semantic_ms": 0.0,
+      "nli_ms": 0.0
+    },
+    "fusion": {
+      "duration_ms": 0.0
+    },
+    "risk_ms": 0.0,
+    "localization_ms": 0.1,
+    "serialization_ms": 0.0,
+    "request_total_ms": 2322.52
+  }
+}

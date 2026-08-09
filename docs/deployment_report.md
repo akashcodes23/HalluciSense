@@ -1,6 +1,6 @@
 # HalluciSense Local Deployment Report
 
-**Generated UTC**: `2026-08-06 10:29:50 UTC`  
+**Generated UTC**: `2026-08-09 13:44:25 UTC`  
 **Deployment Status**: **`HEALTHY`**  
 **Backend Framework**: `FastAPI 0.100+`  
 **Model Threshold**: `τ* = 0.54`  

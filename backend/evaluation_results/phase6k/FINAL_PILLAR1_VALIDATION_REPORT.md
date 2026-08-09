@@ -1,6 +1,6 @@
 # HalluciSense Phase 6K.4 — Final Locked-Model Held-Out Validation Report
 
-**Generated UTC**: `2026-08-06 09:46:48 UTC`  
+**Generated UTC**: `2026-08-09 13:43:57 UTC`  
 **Evaluation Status**: `COMPLETED`  
 **Final Pillar-1 Verdict**: **`PILLAR 1 VALIDATED WITH LIMITATIONS`**  
 

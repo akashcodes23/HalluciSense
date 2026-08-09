@@ -34,18 +34,29 @@ class HybridRetriever:
         Given a list of claims (or a single text broken into claims),
         retrieve relevant evidence snippets from all configured sources.
         """
+        import time
         all_evidence = []
         
+        t_ext_start = time.perf_counter()
+        wiki_total_ms = 0.0
+        faiss_total_ms = 0.0
+        bm25_total_ms = 0.0
+        rerank_total_ms = 0.0
+
         for claim in claims:
             logger.info("retrieving_evidence_for_claim", claim=claim)
             # 1. Fetch from Wikipedia (External Factual)
+            t_w0 = time.perf_counter()
             wiki_results = self.wiki.retrieve(claim)
+            wiki_total_ms += (time.perf_counter() - t_w0) * 1000.0
             for w in wiki_results:
                 all_evidence.append(w)
                 
             # 2. Fetch from Internal FAISS Vector Store (Dense Retrieval)
             if self.vector_store.documents:
+                t_f0 = time.perf_counter()
                 faiss_results = self.vector_store.search(claim, top_k=2)
+                faiss_total_ms += (time.perf_counter() - t_f0) * 1000.0
                 for doc, sim in faiss_results:
                     all_evidence.append({
                         "source_name": doc.get("title", "Internal KB (FAISS)"),
@@ -54,7 +65,9 @@ class HybridRetriever:
                     })
                     
             # 3. Fetch from Internal BM25 Store (Sparse Retrieval)
+            t_b0 = time.perf_counter()
             bm25_results = self.bm25.search(claim, top_k=2)
+            bm25_total_ms += (time.perf_counter() - t_b0) * 1000.0
             for r in bm25_results:
                 doc = r["document"]
                 all_evidence.append({
@@ -75,13 +88,28 @@ class HybridRetriever:
                 
         # 4. Rerank all candidates using CrossEncoder
         if not claims:
+            self.last_timings = {
+                "wikipedia_ms": round(wiki_total_ms, 2),
+                "faiss_ms": round(faiss_total_ms, 2),
+                "bm25_ms": round(bm25_total_ms, 2),
+                "reranker_ms": 0.0,
+                "external_retrieval_ms": round((time.perf_counter() - t_ext_start) * 1000.0, 2),
+            }
             return []
             
-        # We rerank based on the first claim for simplicity in Sprint 3
-        # Ideally, we'd rerank per claim and combine
         primary_claim = claims[0]
+        t_r0 = time.perf_counter()
         top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5)
+        rerank_total_ms = (time.perf_counter() - t_r0) * 1000.0
         
+        ext_total_ms = (time.perf_counter() - t_ext_start) * 1000.0
+        self.last_timings = {
+            "wikipedia_ms": round(wiki_total_ms, 2),
+            "faiss_ms": round(faiss_total_ms, 2),
+            "bm25_ms": round(bm25_total_ms, 2),
+            "reranker_ms": round(rerank_total_ms, 2),
+            "external_retrieval_ms": round(ext_total_ms, 2),
+        }
         return top_evidence
 
     def get_evidence(self, query: str) -> List[dict]:

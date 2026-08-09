@@ -40,9 +40,25 @@ class MetricsTracker:
         self._failed_requests = 0
         self._total_latency_ms = 0.0
         self._total_h_score = 0.0
+        self._stage_latencies: Dict[str, float] = {
+            "retrieval_ms": 0.0,
+            "nli_ms": 0.0,
+            "confidence_ms": 0.0,
+            "consistency_ms": 0.0,
+            "fusion_ms": 0.0,
+            "risk_ms": 0.0,
+            "localization_ms": 0.0,
+            "serialization_ms": 0.0,
+        }
         self._process = psutil.Process(os.getpid())
 
-    def record_request(self, latency_ms: float, h_score: float, is_success: bool = True) -> None:
+    def record_request(
+        self,
+        latency_ms: float,
+        h_score: float,
+        is_success: bool = True,
+        stage_timings: Optional[Dict[str, float]] = None,
+    ) -> None:
         """Record request telemetry."""
         with self._lock:
             self._total_requests += 1
@@ -50,6 +66,10 @@ class MetricsTracker:
                 self._successful_requests += 1
                 self._total_latency_ms += max(0.0, latency_ms)
                 self._total_h_score += max(0.0, min(1.0, h_score))
+                if stage_timings:
+                    for k, v in stage_timings.items():
+                        if k in self._stage_latencies:
+                            self._stage_latencies[k] += max(0.0, float(v))
             else:
                 self._failed_requests += 1
 
@@ -65,6 +85,11 @@ class MetricsTracker:
             succ_rate = round((succ / float(max(1, reqs))) * 100.0, 2)
             err_rate = round((fails / float(max(1, reqs))) * 100.0, 2)
 
+            avg_stage_latencies = {
+                k: round(v / float(max(1, succ)), 2)
+                for k, v in self._stage_latencies.items()
+            }
+
             try:
                 mem_mb = round(self._process.memory_info().rss / (1024 * 1024), 2)
             except Exception:
@@ -79,6 +104,7 @@ class MetricsTracker:
                 "success_rate": succ_rate,
                 "error_rate": err_rate,
                 "memory_mb": mem_mb,
+                "average_stage_latencies_ms": avg_stage_latencies,
             }
 
 

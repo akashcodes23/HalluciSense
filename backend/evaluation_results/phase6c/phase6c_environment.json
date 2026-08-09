@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-08-06T07:16:45.381548+00:00",
+  "timestamp": "2026-08-09T13:43:10.009908+00:00",
   "protocol_fingerprint": "5c7aae10156e27e604498cd9c143525b9cfe5a667814a2b024101f1cfdccf27d",
   "production_scoring_hashes": {
     "app/core/engine/fusion.py": "092fb2e8754b1f2dc8774e504a7f1fed7a5059adf03c77c6e73cfad4157b296b",
-    "app/core/engine/pillar1_retrieval.py": "3d5bfa617e5db97100850837124b5b57be8aee77671baeee87ff45e0bee852a2",
-    "app/core/engine/pillar2_confidence.py": "08d4d7a81ed9f0ca87a5bf07ec7e4743f79c038b3f80b8ac6c51c4060f1dd0c3",
-    "app/core/engine/pillar3_consistency.py": "bf0c9841d985d5b54c22dd31012fa751fc717093a7da58529422b857a90e8102",
+    "app/core/engine/pillar1_retrieval.py": "fbde8968e01ee065bd5921eaebd2d314d65b92bde66e2a4be69c81fc7972c384",
+    "app/core/engine/pillar2_confidence.py": "923a59326a3ab84a5c0c26bee32bf968a5f10becd696542960556bc6c930947b",
+    "app/core/engine/pillar3_consistency.py": "9b2442ebf7675828c91b190d7eb7324024a38c029fbed6ea545086e7666852e7",
     "app/core/engine/pipeline.py": "cf39e778b5d0509df2f635ac67008b85287e85af36019c08e60945b9252f8199"
   },
   "frozen_configuration": {

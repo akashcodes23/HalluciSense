@@ -1,0 +1,109 @@
+{
+  "trace_id": "TRACE_87F7F7167E0F",
+  "timestamp": "2026-08-09T13:47:03.162718+00:00",
+  "start_time_unix": 1786283223.162646,
+  "environment": "production",
+  "stages": {
+    "pipeline_execution": {
+      "duration_ms": 2450.06,
+      "memory_mb": 95.38,
+      "confidence": 0.0019,
+      "details": {
+        "num_claims": 1,
+        "num_evidence": 4
+      }
+    },
+    "pillar1_grounding": {
+      "duration_ms": 2363.54,
+      "memory_mb": 95.38,
+      "confidence": 0.0019,
+      "details": {
+        "factual_error": 0.9981
+      }
+    },
+    "adaptive_fusion": {
+      "duration_ms": 0.0,
+      "memory_mb": 95.38,
+      "confidence": 0.0019,
+      "details": {
+        "weights": {
+          "alpha_factual_error": 1.0,
+          "beta_confidence_gap": 0.0,
+          "gamma_consistency_failure": 0.0
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_duration_ms": 2450.35,
+    "total_memory_mb": 95.38,
+    "final_h_score": 0.9981,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause_classification": "Entity Linking Failure",
+    "stage_count": 3,
+    "metadata": {
+      "performance_timings": {
+        "retrieval": {
+          "duration_ms": 2363.54,
+          "claim_extraction_ms": 0.01,
+          "external_retrieval_ms": 2050.14,
+          "wikipedia_ms": 1925.82,
+          "faiss_ms": 0.0,
+          "bm25_ms": 0.21,
+          "reranker_ms": 124.05,
+          "nli_ms": 313.09
+        },
+        "confidence": {
+          "duration_ms": 0.01,
+          "token_processing_ms": 0.0,
+          "entropy_calculation_ms": 0.0
+        },
+        "consistency": {
+          "duration_ms": 0.01,
+          "sanitization_ms": 0.0,
+          "jaccard_ms": 0.0,
+          "semantic_ms": 0.0,
+          "nli_ms": 0.0
+        },
+        "fusion": {
+          "duration_ms": 0.0
+        },
+        "risk_ms": 0.01,
+        "localization_ms": 0.1,
+        "serialization_ms": 0.0,
+        "request_total_ms": 2450.31
+      }
+    }
+  },
+  "performance_timings": {
+    "retrieval": {
+      "duration_ms": 2363.54,
+      "claim_extraction_ms": 0.01,
+      "external_retrieval_ms": 2050.14,
+      "wikipedia_ms": 1925.82,
+      "faiss_ms": 0.0,
+      "bm25_ms": 0.21,
+      "reranker_ms": 124.05,
+      "nli_ms": 313.09
+    },
+    "confidence": {
+      "duration_ms": 0.01,
+      "token_processing_ms": 0.0,
+      "entropy_calculation_ms": 0.0
+    },
+    "consistency": {
+      "duration_ms": 0.01,
+      "sanitization_ms": 0.0,
+      "jaccard_ms": 0.0,
+      "semantic_ms": 0.0,
+      "nli_ms": 0.0
+    },
+    "fusion": {
+      "duration_ms": 0.0
+    },
+    "risk_ms": 0.01,
+    "localization_ms": 0.1,
+    "serialization_ms": 0.0,
+    "request_total_ms": 2450.31
+  }
+}
