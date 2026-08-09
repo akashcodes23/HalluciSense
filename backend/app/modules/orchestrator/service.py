@@ -4,6 +4,7 @@ Handles provider routing, retries, streaming and intelligent fallback.
 """
 
 import asyncio
+import time
 from typing import AsyncGenerator, List, Optional
 
 import structlog
@@ -184,8 +185,13 @@ class LLMOrchestrator:
         count: int = 3,
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
+        max_concurrency: int = 5,
+        per_sample_timeout: float = 10.0,
     ) -> List[str]:
+        """Generate alternate response samples concurrently with bounded concurrency,
 
+        connection reuse, fail-fast timeout handling, and per-sample timing instrumentation.
+        """
         if QuotaCircuitBreaker.is_tripped():
             logger.warning("SELF_CONSISTENCY_SKIPPED", reason="circuit_breaker_tripped")
             return []
@@ -197,27 +203,62 @@ class LLMOrchestrator:
         effective_count = min(count, settings.MAX_SELF_CONSISTENCY_SAMPLES)
         provider = self._provider(self.primary_model)
 
-        async def sample():
+        concurrency_level = min(effective_count, max_concurrency)
+        semaphore = asyncio.Semaphore(concurrency_level)
+        start_time_all = time.perf_counter()
+
+        individual_timings_ms: dict = {}
+        successful_count = 0
+        failed_count = 0
+
+        async def sample_task(idx: int) -> Optional[str]:
+            nonlocal successful_count, failed_count
+            sample_name = f"consistency_generation_{idx+1}"
             if QuotaCircuitBreaker.is_tripped():
+                failed_count += 1
                 return None
+
+            t0 = time.perf_counter()
             try:
-                return await asyncio.wait_for(
-                    provider.generate_response(
-                        messages,
-                        temperature=temperature,
-                        system_prompt=system_prompt,
-                    ),
-                    timeout=30,
-                )
+                async with semaphore:
+                    resp = await asyncio.wait_for(
+                        provider.generate_response(
+                            messages,
+                            temperature=temperature,
+                            system_prompt=system_prompt,
+                        ),
+                        timeout=per_sample_timeout,
+                    )
+                dur_ms = round((time.perf_counter() - t0) * 1000.0, 2)
+                individual_timings_ms[sample_name] = dur_ms
+                if resp and resp.strip():
+                    successful_count += 1
+                    return resp.strip()
+                else:
+                    failed_count += 1
+                    return None
             except Exception as exc:
+                dur_ms = round((time.perf_counter() - t0) * 1000.0, 2)
+                individual_timings_ms[sample_name] = dur_ms
+                failed_count += 1
                 err_str = str(exc)
                 if "429" in err_str or "Quota exceeded" in err_str or "ResourceExhausted" in err_str:
                     QuotaCircuitBreaker.trip(err_str)
-                    logger.warning("sample_generation_failed_quota_tripped", error=err_str)
+                    logger.warning("sample_generation_failed_quota_tripped", error_type=type(exc).__name__, sample_index=idx+1)
                 else:
-                    logger.warning("sample_generation_failed", error=err_str)
+                    logger.warning("sample_generation_failed", error_type=type(exc).__name__, sample_index=idx+1)
                 return None
 
-        results = await asyncio.gather(*(sample() for _ in range(effective_count)))
+        results = await asyncio.gather(*(sample_task(i) for i in range(effective_count)))
+        total_dur_ms = round((time.perf_counter() - start_time_all) * 1000.0, 2)
 
-        return [r.strip() for r in results if r and r.strip()]
+        logger.info(
+            "pillar3_generation_metrics",
+            total_generation_ms=total_dur_ms,
+            concurrency_level=concurrency_level,
+            successful_generations=successful_count,
+            failed_generations=failed_count,
+            individual_generations_ms=individual_timings_ms,
+        )
+
+        return [r for r in results if r]

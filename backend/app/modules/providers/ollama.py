@@ -12,6 +12,7 @@ import httpx
 
 from app.modules.providers.base import AbstractLLMProvider
 from app.modules.providers.schemas import ProviderResponseChunk
+from app.core.http_client import get_shared_async_client
 
 
 class OllamaProvider(AbstractLLMProvider):
@@ -168,19 +169,12 @@ class OllamaProvider(AbstractLLMProvider):
             }
         }
 
-        timeout = httpx.Timeout(
-            connect=10.0,
-            read=120.0,
-            write=30.0,
-            pool=10.0,
+        client = get_shared_async_client()
+        response = await client.post(
+            f"{self.BASE_URL}/api/chat",
+            json=payload,
         )
-
-        async with httpx.AsyncClient(timeout=timeout) as client:
-            response = await client.post(
-                f"{self.BASE_URL}/api/chat",
-                json=payload,
-            )
-            response.raise_for_status()
-            data = response.json()
-            message_obj = data.get("message") or {}
-            return message_obj.get("content", "") or ""
+        response.raise_for_status()
+        data = response.json()
+        message_obj = data.get("message") or {}
+        return message_obj.get("content", "") or ""

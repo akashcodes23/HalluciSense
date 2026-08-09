@@ -94,21 +94,29 @@ class HybridRetriever:
                 "bm25_ms": round(bm25_total_ms, 2),
                 "reranker_ms": 0.0,
                 "external_retrieval_ms": round((time.perf_counter() - t_ext_start) * 1000.0, 2),
+                "retrieval_bm25_ms": round(bm25_total_ms, 2),
+                "retrieval_dense_ms": round(wiki_total_ms + faiss_total_ms, 2),
+                "retrieval_hybrid_fusion_ms": 0.0,
             }
             return []
-            
+
         primary_claim = claims[0]
         t_r0 = time.perf_counter()
         top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5)
         rerank_total_ms = (time.perf_counter() - t_r0) * 1000.0
-        
+
         ext_total_ms = (time.perf_counter() - t_ext_start) * 1000.0
+        dense_total_ms = wiki_total_ms + faiss_total_ms
+
         self.last_timings = {
             "wikipedia_ms": round(wiki_total_ms, 2),
             "faiss_ms": round(faiss_total_ms, 2),
             "bm25_ms": round(bm25_total_ms, 2),
             "reranker_ms": round(rerank_total_ms, 2),
             "external_retrieval_ms": round(ext_total_ms, 2),
+            "retrieval_bm25_ms": round(bm25_total_ms, 2),
+            "retrieval_dense_ms": round(dense_total_ms, 2),
+            "retrieval_hybrid_fusion_ms": round(rerank_total_ms, 2),
         }
         return top_evidence
 

@@ -397,5 +397,8 @@ class Pillar3ConsistencyEngine:
             "jaccard_ms": round(jaccard_ms, 2),
             "semantic_ms": round(semantic_ms, 2),
             "nli_ms": round(nli_ms, 2),
+            "consistency_paraphrase_ms": round(sanitization_ms, 2),
+            "consistency_multi_run_ms": round(max(0.0, p3_duration_ms - sanitization_ms - semantic_ms - nli_ms), 2),
+            "consistency_comparison_ms": round(semantic_ms + nli_ms, 2),
         }
         return res

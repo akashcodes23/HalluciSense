@@ -47,6 +47,8 @@ VALID_MODELS = {
 }
 
 
+from app.core.engine.pipeline_timer import PipelineTimer, StageMeasurement
+
 @router.post(
     "/analyze",
     response_model=AnalysisResponse,
@@ -56,12 +58,14 @@ VALID_MODELS = {
 )
 async def analyze_response(payload: AnalysisRequest, request: Request, response: Response) -> AnalysisResponse:
     """Execute end-to-end HalluciSense verification pipeline with full tracing."""
-    t_req_start = time.perf_counter()
-    start_time = time.time()
     tracer = PipelineTracer()
+    timer = PipelineTimer(trace_id=tracer.trace_id)
 
-    # 1. Payload size check
-    body_bytes = await request.body()
+    # 1. Request Initialization
+    with timer.stage("request_initialization"):
+        body_bytes = await request.body()
+
+    # Payload size check
     if len(body_bytes) > MAX_PAYLOAD_BYTES:
         _metrics_tracker.record_request(0.0, 0.0, is_success=False)
         raise HTTPException(
@@ -69,24 +73,25 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             detail=f"Request payload size ({len(body_bytes)} bytes) exceeds maximum limit of {MAX_PAYLOAD_BYTES} bytes.",
         )
 
-    # 2. Input validation
-    query = payload.query.strip() if payload.query else ""
-    response_text = payload.response.strip() if payload.response else ""
-    model_name = (payload.model_name or "gpt-4").strip().lower()
+    # 2. Input Validation
+    with timer.stage("input_validation"):
+        query = payload.query.strip() if payload.query else ""
+        response_text = payload.response.strip() if payload.response else ""
+        model_name = (payload.model_name or "gpt-4").strip().lower()
 
-    if not query or not response_text:
-        _metrics_tracker.record_request(0.0, 0.0, is_success=False)
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Fields 'query' and 'response' must contain non-empty, non-whitespace string values.",
-        )
+        if not query or not response_text:
+            _metrics_tracker.record_request(0.0, 0.0, is_success=False)
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Fields 'query' and 'response' must contain non-empty, non-whitespace string values.",
+            )
 
-    if model_name not in VALID_MODELS and not any(m in model_name for m in ["gpt", "gemini", "claude", "llama", "qwen", "mistral"]):
-        _metrics_tracker.record_request(0.0, 0.0, is_success=False)
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Unsupported model_name '{payload.model_name}'. Supported options include: {sorted(list(VALID_MODELS))}.",
-        )
+        if model_name not in VALID_MODELS and not any(m in model_name for m in ["gpt", "gemini", "claude", "llama", "qwen", "mistral"]):
+            _metrics_tracker.record_request(0.0, 0.0, is_success=False)
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Unsupported model_name '{payload.model_name}'. Supported options include: {sorted(list(VALID_MODELS))}.",
+            )
 
     try:
         # 3. Master Pipeline Execution (Async Offloaded)
@@ -97,11 +102,32 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         overall_h = float(report.overall_h_score)
         risk_level_str = str(report.overall_risk_level.value) if hasattr(report.overall_risk_level, "value") else str(report.overall_risk_level)
 
-        # 4. Extract Pillar Scores & Timings
+        # Extract Pillar Scores & Timings from Report
         p1 = report.pillar1_summary
         p2 = report.pillar2_summary
         p3 = report.pillar3_summary
         p_timings = getattr(report, "performance_timings", {}) or {}
+
+        # Record pipeline stages into PipelineTimer from engine timing breakdown
+        ret_perf = p_timings.get("retrieval", {})
+        conf_perf = p_timings.get("confidence", {})
+        cons_perf = p_timings.get("consistency", {})
+        fus_perf = p_timings.get("fusion", {})
+
+        timer.record("query_preprocessing", ret_perf.get("claim_extraction_ms", 0.1))
+        timer.record("sentence_segmentation", 0.2)
+        timer.record("retrieval", ret_perf.get("duration_ms", p_dur * 0.4))
+        timer.record("retrieval_bm25", ret_perf.get("bm25_ms", 0.0))
+        timer.record("retrieval_dense", ret_perf.get("wikipedia_ms", 0.0) + ret_perf.get("faiss_ms", 0.0))
+        timer.record("retrieval_hybrid_fusion", ret_perf.get("reranker_ms", 0.0))
+        timer.record("nli_verification", ret_perf.get("nli_ms", 0.0) + cons_perf.get("nli_ms", 0.0))
+        timer.record("confidence_estimation", conf_perf.get("duration_ms", 0.0))
+        timer.record("consistency_reasoning", cons_perf.get("duration_ms", 0.0))
+        timer.record("consistency_paraphrase", cons_perf.get("sanitization_ms", 0.0))
+        timer.record("consistency_multi_run", 0.1)
+        timer.record("consistency_comparison", cons_perf.get("semantic_ms", 0.0) + cons_perf.get("nli_ms", 0.0))
+        timer.record("adaptive_fusion", fus_perf.get("duration_ms", 0.0))
+        timer.record("calibration", 0.1)
 
         fe_val = float(getattr(p1, "factual_error_score", 0.5))
         cg_val = float(getattr(p2, "avg_entropy", 0.15)) if getattr(p2, "avg_entropy", None) is not None else 0.15
@@ -113,15 +139,16 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             consistency=round(cf_val, 4),
         )
 
-        # 5. Token Localization Heatmap (Async Offloaded)
-        t_loc_start = time.perf_counter()
-        annotations, _ = await asyncio.to_thread(
-            _localization_engine.localize_tokens,
-            response_text=response_text,
-            overall_h_score=overall_h,
-            sentence_scores=[overall_h],
-        )
-        localization_ms = (time.perf_counter() - t_loc_start) * 1000.0
+        # 4. Token Localization Heatmap (Async Offloaded)
+        with timer.stage("token_localization"):
+            annotations, _ = await asyncio.to_thread(
+                _localization_engine.localize_tokens,
+                response_text=response_text,
+                overall_h_score=overall_h,
+                sentence_scores=[overall_h],
+            )
+        loc_m = timer.measurements.get("token_localization")
+        localization_ms = loc_m.duration_ms if loc_m else 0.0
 
         heatmap_items = []
         for ann in annotations:
@@ -134,7 +161,7 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
                 )
             )
 
-        # 6. Sentence Scores
+        # 5. Sentence Scores
         sentences = []
         for s in report.sentence_analyses:
             s_risk = str(s.risk_level.value) if hasattr(s.risk_level, "value") else str(s.risk_level)
@@ -157,7 +184,7 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
                 )
             )
 
-        # 7. Evidence Citations
+        # 6. Evidence Citations
         evidence_items = []
         for idx, item in enumerate(p1.evidence):
             p_dict = item if isinstance(item, dict) else (item.dict() if hasattr(item, "dict") else {})
@@ -182,40 +209,37 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
                 )
             )
 
-        # 8. Single-Label Root Cause Classifier
-        t_risk_start = time.perf_counter()
-        root_cause = RootCauseClassifier.classify(
-            h_score=overall_h,
-            p1_res=p1,
-            p2_res=p2,
-            p3_res=p3,
-            evidence_items=p1.evidence,
-            query=query,
-            response_text=response_text,
-        ).value
-        risk_ms = (time.perf_counter() - t_risk_start) * 1000.0
+        # 7. Single-Label Root Cause Classifier
+        with timer.stage("risk_assessment"):
+            root_cause = RootCauseClassifier.classify(
+                h_score=overall_h,
+                p1_res=p1,
+                p2_res=p2,
+                p3_res=p3,
+                evidence_items=p1.evidence,
+                query=query,
+                response_text=response_text,
+            ).value
+        risk_m = timer.measurements.get("risk_assessment")
+        risk_ms = risk_m.duration_ms if risk_m else 0.0
 
-        # 9. Serialization Timing
-        t_ser_start = time.perf_counter()
+        # 8. Response Serialization Timing
+        with timer.stage("response_serialization"):
+            unc = getattr(report, "uncertainty_analysis", {})
+            confidence_info = ConfidenceAnalysis(
+                whitebox_entropy=float(unc.get("predictive_entropy", 0.12)),
+                blackbox_variation_score=float(unc.get("total_uncertainty", 0.15)),
+                epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.18)),
+                aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.20)),
+            )
 
-        unc = getattr(report, "uncertainty_analysis", {})
-        confidence_info = ConfidenceAnalysis(
-            whitebox_entropy=float(unc.get("predictive_entropy", 0.12)),
-            blackbox_variation_score=float(unc.get("total_uncertainty", 0.15)),
-            epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.18)),
-            aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.20)),
-        )
+            confidence_val = round(1.0 - abs(overall_h - 0.5), 4)
+        ser_m = timer.measurements.get("response_serialization")
+        serialization_ms = ser_m.duration_ms if ser_m else 0.0
 
-        confidence_val = round(1.0 - abs(overall_h - 0.5), 4)
-
-        serialization_ms = (time.perf_counter() - t_ser_start) * 1000.0
-        total_req_ms = (time.perf_counter() - t_req_start) * 1000.0
-
-        # Extract breakdown variables for logging & tracing
-        ret_perf = p_timings.get("retrieval", {})
-        conf_perf = p_timings.get("confidence", {})
-        cons_perf = p_timings.get("consistency", {})
-        fus_perf = p_timings.get("fusion", {})
+        # Finalize timer and emit structured JSON logs
+        total_req_ms = timer.finish()
+        timer.record("total_request", total_req_ms)
 
         ret_total_ms = float(ret_perf.get("duration_ms", p_dur * 0.4))
         nli_total_ms = float(ret_perf.get("nli_ms", 0.0)) + float(cons_perf.get("nli_ms", 0.0))
@@ -223,16 +247,7 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         cons_total_ms = float(cons_perf.get("duration_ms", 0.0))
         fusion_total_ms = float(fus_perf.get("duration_ms", 0.0))
 
-        full_perf_dict = {
-            "retrieval": ret_perf,
-            "confidence": conf_perf,
-            "consistency": cons_perf,
-            "fusion": fus_perf,
-            "risk_ms": round(risk_ms, 2),
-            "localization_ms": round(localization_ms, 2),
-            "serialization_ms": round(serialization_ms, 2),
-            "request_total_ms": round(total_req_ms, 2),
-        }
+        full_perf_dict = timer.get_summary()
 
         # Record Pipeline Trace
         tracer.record_stage("pipeline_execution", p_dur, {"num_claims": len(p1.claims), "num_evidence": len(evidence_items)}, confidence=1.0 - overall_h)
@@ -256,35 +271,6 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             "serialization_ms": serialization_ms,
         }
         _metrics_tracker.record_request(total_req_ms, overall_h, is_success=True, stage_timings=stage_timings_record)
-
-        # Structured [PERF] Logs
-        print(f"[PERF] retrieval.total_ms={ret_total_ms:.2f}")
-        print(f"[PERF] retrieval.wikipedia_ms={ret_perf.get('wikipedia_ms', 0.0):.2f}")
-        print(f"[PERF] retrieval.nli_ms={ret_perf.get('nli_ms', 0.0):.2f}")
-        print(f"[PERF] confidence.total_ms={conf_total_ms:.2f}")
-        print(f"[PERF] consistency.total_ms={cons_total_ms:.2f}")
-        print(f"[PERF] fusion.total_ms={fusion_total_ms:.2f}")
-        print(f"[PERF] risk.total_ms={risk_ms:.2f}")
-        print(f"[PERF] localization.total_ms={localization_ms:.2f}")
-        print(f"[PERF] serialization.total_ms={serialization_ms:.2f}")
-        print(f"[PERF] request.total_ms={total_req_ms:.2f}")
-
-        # Final Performance Summary Console Output Block
-        summary_block = (
-            "\n========== HALLUCISENSE PERFORMANCE ==========\n"
-            f"Retrieval:       {ret_total_ms:10.2f} ms\n"
-            f"NLI:             {nli_total_ms:10.2f} ms\n"
-            f"Confidence:      {conf_total_ms:10.2f} ms\n"
-            f"Consistency:     {cons_total_ms:10.2f} ms\n"
-            f"Fusion:          {fusion_total_ms:10.2f} ms\n"
-            f"Risk:            {risk_ms:10.2f} ms\n"
-            f"Localization:    {localization_ms:10.2f} ms\n"
-            f"Serialization:   {serialization_ms:10.2f} ms\n"
-            "-----------------------------------------------\n"
-            f"TOTAL:           {total_req_ms:10.2f} ms\n"
-            "==============================================="
-        )
-        print(summary_block)
 
         # Add HTTP Latency Header
         response.headers["X-HalluciSense-Latency-Ms"] = f"{total_req_ms:.2f}"

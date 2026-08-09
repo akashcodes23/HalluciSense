@@ -10,6 +10,7 @@ import structlog
 from app.modules.providers.base import AbstractLLMProvider
 from app.modules.providers.schemas import ProviderResponseChunk, TokenLogit
 from app.core.config import settings
+from app.core.http_client import get_shared_async_client
 
 logger = structlog.get_logger(__name__)
 
@@ -150,14 +151,13 @@ class OpenAIProvider(AbstractLLMProvider):
             "stream": False,
         }
 
-        timeout = httpx.Timeout(connect=10.0, read=60.0, write=30.0, pool=10.0)
-        async with httpx.AsyncClient(timeout=timeout) as client:
-            response = await client.post(
-                "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
-            )
-            response.raise_for_status()
-            data = response.json()
-            choices = data.get("choices", [])
-            if choices:
-                return choices[0].get("message", {}).get("content", "") or ""
-            return ""
+        client = get_shared_async_client()
+        response = await client.post(
+            "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
+        )
+        response.raise_for_status()
+        data = response.json()
+        choices = data.get("choices", [])
+        if choices:
+            return choices[0].get("message", {}).get("content", "") or ""
+        return ""

@@ -104,7 +104,7 @@ class Settings(BaseSettings):
 
     # ── LLM Call Optimization & Architectural Controls ───────────────────────
     ENABLE_SELF_CONSISTENCY: bool = True
-    MAX_SELF_CONSISTENCY_SAMPLES: int = 2
+    MAX_SELF_CONSISTENCY_SAMPLES: int = 5
     ENABLE_AUTOMATIC_CORRECTION: bool = False
     H_SCORE_CORRECTION_THRESHOLD: float = 0.65
     ENABLE_FALLBACK_MODELS: bool = False
