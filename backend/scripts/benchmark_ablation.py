@@ -91,7 +91,7 @@ def fuse_selected(
     fusion: FusionEngine,
     scores: Dict[str, Optional[float]],
     mode: str,
-) -> tuple[float, str, Dict[str, float]]:
+) -> tuple[Optional[float], Optional[str], Dict[str, float]]:
     """Apply the production FusionEngine weighting to a selected subset.
 
     This is benchmark-only composition: production ``pipeline.analyze`` still
@@ -108,16 +108,20 @@ def fuse_selected(
         "P3": fusion.gamma,
     }
     available = [name for name, value in (("P1", p1), ("P2", p2), ("P3", p3)) if value is not None]
+    if not available:
+        return None, None, {"P1": 0.0, "P2": 0.0, "P3": 0.0}
+
     total = sum(base_weights[name] for name in available)
     if total <= 0:
-        weights = {name: (1.0 if name == available[0] else 0.0) for name in ("P1", "P2", "P3")} if available else {"P1": 0.0, "P2": 0.0, "P3": 0.0}
+        weights = {name: (1.0 if name == available[0] else 0.0) for name in ("P1", "P2", "P3")}
     else:
         weights = {name: round(base_weights[name] / total, 4) if name in available else 0.0 for name in ("P1", "P2", "P3")}
 
     h = 0.0
-    for name, value in (("P1", p1), ("P2", p2), ("P3", p3)):
-        if value is not None:
-            h += weights[name] * max(0.0, min(1.0, float(value)))
+    for name in available:
+        val = scores[name]
+        if val is not None:
+            h += weights[name] * max(0.0, min(1.0, float(val)))
     h = round(max(0.0, min(1.0, h)), 4)
     risk, _ = fusion.determine_risk_level(h)
     risk_str = risk.value if hasattr(risk, "value") else str(risk)
@@ -210,10 +214,12 @@ async def run_all_benchmarks() -> None:
             case_records = await evaluate_case(pipeline, orchestrator, case)
             records.extend(case_records)
             for record in case_records:
+                h_str = f"{record['overall_h_score']:.4f}" if record['overall_h_score'] is not None else "None"
+                risk_str = record['overall_risk_level'] if record['overall_risk_level'] is not None else "UNAVAILABLE"
                 print(
                     f"[{record['case_name']} | {record['mode']}] "
-                    f"H={record['overall_h_score']:.4f} "
-                    f"risk={record['overall_risk_level']} "
+                    f"H={h_str} "
+                    f"risk={risk_str} "
                     f"latency={record['retrieval_latency_ms'] + record['p2_latency_ms'] + record['p3_generation_latency_ms']:.2f}ms"
                 )
         except Exception as exc:
