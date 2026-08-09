@@ -1,0 +1,722 @@
+[
+  {
+    "case_name": "A_correct",
+    "query": "What is artificial intelligence?",
+    "response": "Artificial intelligence is a field of computer science focused on creating systems that perform tasks requiring human intelligence.",
+    "expected_epistemic_category": "factual_correct",
+    "execution_mode": "P1_ONLY",
+    "available_pillars": [
+      "P1"
+    ],
+    "p1_score": 0.0116,
+    "p2_score": null,
+    "p3_score": null,
+    "overall_h_score": 0.0116,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 1363.37,
+    "nli_latency": 62.55,
+    "p3_generation_latency": 0.0,
+    "total_latency": 1580.21,
+    "cache_metrics": {
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "cache_hit_rate": 0.0,
+      "search_requests": 2,
+      "extraction_requests": 1,
+      "retrieved_pages": 6,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "A_correct",
+    "query": "What is artificial intelligence?",
+    "response": "Artificial intelligence is a field of computer science focused on creating systems that perform tasks requiring human intelligence.",
+    "expected_epistemic_category": "factual_correct",
+    "execution_mode": "P1_P3",
+    "available_pillars": [
+      "P1",
+      "P3"
+    ],
+    "p1_score": 0.0116,
+    "p2_score": null,
+    "p3_score": 0.4279,
+    "overall_h_score": 0.1603,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 59.63,
+    "nli_latency": 78.27,
+    "p3_generation_latency": 456.04,
+    "total_latency": 5063.5,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "A_correct",
+    "query": "What is artificial intelligence?",
+    "response": "Artificial intelligence is a field of computer science focused on creating systems that perform tasks requiring human intelligence.",
+    "expected_epistemic_category": "factual_correct",
+    "execution_mode": "P1_P2",
+    "available_pillars": [
+      "P1",
+      "P2"
+    ],
+    "p1_score": 0.0116,
+    "p2_score": 0.0292,
+    "p3_score": null,
+    "overall_h_score": 0.0186,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 25.02,
+    "nli_latency": 61.45,
+    "p3_generation_latency": 0.0,
+    "total_latency": 149.3,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "A_correct",
+    "query": "What is artificial intelligence?",
+    "response": "Artificial intelligence is a field of computer science focused on creating systems that perform tasks requiring human intelligence.",
+    "expected_epistemic_category": "factual_correct",
+    "execution_mode": "P1_P2_P3",
+    "available_pillars": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "p1_score": 0.0116,
+    "p2_score": 0.0292,
+    "p3_score": 0.4279,
+    "overall_h_score": 0.121,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 25.66,
+    "nli_latency": 60.84,
+    "p3_generation_latency": 0.05,
+    "total_latency": 242.03,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "B_obvious_hallucination",
+    "query": "Who won the 2027 FIFA World Cup?",
+    "response": "Brazil won the 2027 FIFA World Cup.",
+    "expected_epistemic_category": "future_unverifiable_entity",
+    "execution_mode": "P1_ONLY",
+    "available_pillars": [
+      "P1"
+    ],
+    "p1_score": 0.1036,
+    "p2_score": null,
+    "p3_score": null,
+    "overall_h_score": 0.1036,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 1192.26,
+    "nli_latency": 84.87,
+    "p3_generation_latency": 0.0,
+    "total_latency": 1423.88,
+    "cache_metrics": {
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "cache_hit_rate": 0.0,
+      "search_requests": 2,
+      "extraction_requests": 1,
+      "retrieved_pages": 6,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "B_obvious_hallucination",
+    "query": "Who won the 2027 FIFA World Cup?",
+    "response": "Brazil won the 2027 FIFA World Cup.",
+    "expected_epistemic_category": "future_unverifiable_entity",
+    "execution_mode": "P1_P3",
+    "available_pillars": [
+      "P1",
+      "P3"
+    ],
+    "p1_score": 0.1036,
+    "p2_score": null,
+    "p3_score": 0.2373,
+    "overall_h_score": 0.1513,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 42.49,
+    "nli_latency": 83.11,
+    "p3_generation_latency": 0.04,
+    "total_latency": 449.35,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "B_obvious_hallucination",
+    "query": "Who won the 2027 FIFA World Cup?",
+    "response": "Brazil won the 2027 FIFA World Cup.",
+    "expected_epistemic_category": "future_unverifiable_entity",
+    "execution_mode": "P1_P2",
+    "available_pillars": [
+      "P1",
+      "P2"
+    ],
+    "p1_score": 0.1036,
+    "p2_score": 0.4996,
+    "p3_score": null,
+    "overall_h_score": 0.262,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 41.53,
+    "nli_latency": 84.46,
+    "p3_generation_latency": 0.0,
+    "total_latency": 210.67,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "B_obvious_hallucination",
+    "query": "Who won the 2027 FIFA World Cup?",
+    "response": "Brazil won the 2027 FIFA World Cup.",
+    "expected_epistemic_category": "future_unverifiable_entity",
+    "execution_mode": "P1_P2_P3",
+    "available_pillars": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "p1_score": 0.1036,
+    "p2_score": 0.4996,
+    "p3_score": 0.2373,
+    "overall_h_score": 0.2558,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 43.04,
+    "nli_latency": 82.81,
+    "p3_generation_latency": 0.04,
+    "total_latency": 312.08,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "C_partially_incorrect",
+    "query": "What is the solar system?",
+    "response": "The solar system contains the Sun, eight planets, Earth has one Moon, and Jupiter is the smallest planet.",
+    "expected_epistemic_category": "partially_incorrect",
+    "execution_mode": "P1_ONLY",
+    "available_pillars": [
+      "P1"
+    ],
+    "p1_score": 0.3282,
+    "p2_score": null,
+    "p3_score": null,
+    "overall_h_score": 0.3282,
+    "overall_risk_level": "VERIFIED",
+    "retrieval_latency": 1247.48,
+    "nli_latency": 142.79,
+    "p3_generation_latency": 0.0,
+    "total_latency": 1593.88,
+    "cache_metrics": {
+      "cache_hits": 0,
+      "cache_misses": 4,
+      "cache_hit_rate": 0.0,
+      "search_requests": 4,
+      "extraction_requests": 1,
+      "retrieved_pages": 12,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "C_partially_incorrect",
+    "query": "What is the solar system?",
+    "response": "The solar system contains the Sun, eight planets, Earth has one Moon, and Jupiter is the smallest planet.",
+    "expected_epistemic_category": "partially_incorrect",
+    "execution_mode": "P1_P3",
+    "available_pillars": [
+      "P1",
+      "P3"
+    ],
+    "p1_score": 0.3282,
+    "p2_score": null,
+    "p3_score": 0.5404,
+    "overall_h_score": 0.404,
+    "overall_risk_level": "NEEDS_VERIFICATION",
+    "retrieval_latency": 68.24,
+    "nli_latency": 141.91,
+    "p3_generation_latency": 0.1,
+    "total_latency": 623.94,
+    "cache_metrics": {
+      "cache_hits": 4,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "C_partially_incorrect",
+    "query": "What is the solar system?",
+    "response": "The solar system contains the Sun, eight planets, Earth has one Moon, and Jupiter is the smallest planet.",
+    "expected_epistemic_category": "partially_incorrect",
+    "execution_mode": "P1_P2",
+    "available_pillars": [
+      "P1",
+      "P2"
+    ],
+    "p1_score": 0.3282,
+    "p2_score": 0.5303,
+    "p3_score": null,
+    "overall_h_score": 0.409,
+    "overall_risk_level": "NEEDS_VERIFICATION",
+    "retrieval_latency": 62.76,
+    "nli_latency": 143.47,
+    "p3_generation_latency": 0.0,
+    "total_latency": 351.52,
+    "cache_metrics": {
+      "cache_hits": 4,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "C_partially_incorrect",
+    "query": "What is the solar system?",
+    "response": "The solar system contains the Sun, eight planets, Earth has one Moon, and Jupiter is the smallest planet.",
+    "expected_epistemic_category": "partially_incorrect",
+    "execution_mode": "P1_P2_P3",
+    "available_pillars": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "p1_score": 0.3282,
+    "p2_score": 0.5303,
+    "p3_score": 0.5404,
+    "overall_h_score": 0.4419,
+    "overall_risk_level": "NEEDS_VERIFICATION",
+    "retrieval_latency": 68.46,
+    "nli_latency": 141.71,
+    "p3_generation_latency": 0.08,
+    "total_latency": 473.66,
+    "cache_metrics": {
+      "cache_hits": 4,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "D_highly_confident_hallucination",
+    "query": "What is the structure of graphene?",
+    "response": "Graphene is a three-dimensional crystal whose atoms form a cubic lattice with silicon-like tetrahedral bonds.",
+    "expected_epistemic_category": "highly_confident_hallucination",
+    "execution_mode": "P1_ONLY",
+    "available_pillars": [
+      "P1"
+    ],
+    "p1_score": 0.9991,
+    "p2_score": null,
+    "p3_score": null,
+    "overall_h_score": 0.9991,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 1130.62,
+    "nli_latency": 32.97,
+    "p3_generation_latency": 0.0,
+    "total_latency": 1275.02,
+    "cache_metrics": {
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "cache_hit_rate": 0.0,
+      "search_requests": 2,
+      "extraction_requests": 1,
+      "retrieved_pages": 4,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "D_highly_confident_hallucination",
+    "query": "What is the structure of graphene?",
+    "response": "Graphene is a three-dimensional crystal whose atoms form a cubic lattice with silicon-like tetrahedral bonds.",
+    "expected_epistemic_category": "highly_confident_hallucination",
+    "execution_mode": "P1_P3",
+    "available_pillars": [
+      "P1",
+      "P3"
+    ],
+    "p1_score": 0.9991,
+    "p2_score": null,
+    "p3_score": 0.4591,
+    "overall_h_score": 0.8063,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 21.12,
+    "nli_latency": 27.41,
+    "p3_generation_latency": 0.03,
+    "total_latency": 251.89,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "D_highly_confident_hallucination",
+    "query": "What is the structure of graphene?",
+    "response": "Graphene is a three-dimensional crystal whose atoms form a cubic lattice with silicon-like tetrahedral bonds.",
+    "expected_epistemic_category": "highly_confident_hallucination",
+    "execution_mode": "P1_P2",
+    "available_pillars": [
+      "P1",
+      "P2"
+    ],
+    "p1_score": 0.9991,
+    "p2_score": 0.5166,
+    "p3_score": null,
+    "overall_h_score": 0.8061,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 18.13,
+    "nli_latency": 24.25,
+    "p3_generation_latency": 0.0,
+    "total_latency": 68.87,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "D_highly_confident_hallucination",
+    "query": "What is the structure of graphene?",
+    "response": "Graphene is a three-dimensional crystal whose atoms form a cubic lattice with silicon-like tetrahedral bonds.",
+    "expected_epistemic_category": "highly_confident_hallucination",
+    "execution_mode": "P1_P2_P3",
+    "available_pillars": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "p1_score": 0.9991,
+    "p2_score": 0.5166,
+    "p3_score": 0.4591,
+    "overall_h_score": 0.7193,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 17.18,
+    "nli_latency": 23.09,
+    "p3_generation_latency": 0.03,
+    "total_latency": 152.69,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "E_ambiguous",
+    "query": "What caused the exact weather at my house yesterday?",
+    "response": "A specific storm definitely caused the weather at your house yesterday.",
+    "expected_epistemic_category": "ambiguous_private_event",
+    "execution_mode": "P1_ONLY",
+    "available_pillars": [
+      "P1"
+    ],
+    "p1_score": 1.0,
+    "p2_score": null,
+    "p3_score": null,
+    "overall_h_score": 1.0,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 1210.7,
+    "nli_latency": 23.09,
+    "p3_generation_latency": 0.0,
+    "total_latency": 1211.51,
+    "cache_metrics": {
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "cache_hit_rate": 0.0,
+      "search_requests": 2,
+      "extraction_requests": 1,
+      "retrieved_pages": 6,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "E_ambiguous",
+    "query": "What caused the exact weather at my house yesterday?",
+    "response": "A specific storm definitely caused the weather at your house yesterday.",
+    "expected_epistemic_category": "ambiguous_private_event",
+    "execution_mode": "P1_P3",
+    "available_pillars": [
+      "P1",
+      "P3"
+    ],
+    "p1_score": 1.0,
+    "p2_score": null,
+    "p3_score": 0.3789,
+    "overall_h_score": 0.7782,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 48.59,
+    "nli_latency": 23.09,
+    "p3_generation_latency": 0.03,
+    "total_latency": 275.94,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  },
+  {
+    "case_name": "E_ambiguous",
+    "query": "What caused the exact weather at my house yesterday?",
+    "response": "A specific storm definitely caused the weather at your house yesterday.",
+    "expected_epistemic_category": "ambiguous_private_event",
+    "execution_mode": "P1_P2",
+    "available_pillars": [
+      "P1",
+      "P2"
+    ],
+    "p1_score": 1.0,
+    "p2_score": 0.5499,
+    "p3_score": null,
+    "overall_h_score": 0.82,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 47.58,
+    "nli_latency": 23.09,
+    "p3_generation_latency": 0.0,
+    "total_latency": 48.32,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 0,
+      "successful": 0,
+      "failed": 0
+    }
+  },
+  {
+    "case_name": "E_ambiguous",
+    "query": "What caused the exact weather at my house yesterday?",
+    "response": "A specific storm definitely caused the weather at your house yesterday.",
+    "expected_epistemic_category": "ambiguous_private_event",
+    "execution_mode": "P1_P2_P3",
+    "available_pillars": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "p1_score": 1.0,
+    "p2_score": 0.5499,
+    "p3_score": 0.3789,
+    "overall_h_score": 0.7097,
+    "overall_risk_level": "LIKELY_HALLUCINATED",
+    "retrieval_latency": 47.74,
+    "nli_latency": 23.09,
+    "p3_generation_latency": 0.02,
+    "total_latency": 133.85,
+    "cache_metrics": {
+      "cache_hits": 2,
+      "cache_misses": 0,
+      "cache_hit_rate": 1.0,
+      "search_requests": 0,
+      "extraction_requests": 0,
+      "retrieved_pages": 0,
+      "failed_queries": 0
+    },
+    "evidence_count": 5,
+    "claim_count": 1,
+    "sample_metrics": {
+      "requested": 3,
+      "successful": 2,
+      "failed": 1
+    }
+  }
+]
