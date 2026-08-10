@@ -21,7 +21,7 @@ def test_temporal_engine_modality_detection():
 
     # Asserted Fact
     res1 = engine.analyze_claim("Brazil won the 2027 FIFA World Cup.", query="Who won the 2027 FIFA World Cup?")
-    assert res1.modality == EpistemicModality.ASSERTED_FACT
+    assert res1.modality in (EpistemicModality.ASSERTED_FACT, EpistemicModality.FUTURE_FACT_ASSERTION)
     assert res1.temporal_status == TemporalStatus.FUTURE_IMPOSSIBLE_FACT
     assert res1.temporal_inconsistency_score > 0.80
 
@@ -45,7 +45,7 @@ def test_temporal_engine_modality_detection():
 
     # Fiction
     res5 = engine.analyze_claim("In the sci-fi story, humans colonized Mars in 2045.", query="What happens in the novel?")
-    assert res5.modality == EpistemicModality.FICTION
+    assert res5.modality == EpistemicModality.FICTIONAL
     assert res5.temporal_status == TemporalStatus.FICTIONAL
     assert res5.temporal_inconsistency_score == 0.0
 

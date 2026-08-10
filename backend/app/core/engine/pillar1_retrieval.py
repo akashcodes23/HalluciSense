@@ -130,19 +130,14 @@ class Pillar1RetrievalEngine:
         temp_res = self.temporal_engine.analyze_claim(text, query=query, evidence_items=provided_evidence)
         if temp_res.temporal_inconsistency_score > 0.0:
             fe_score = round(max(fe_score, temp_res.temporal_inconsistency_score), 4)
-        elif temp_res.modality in (
-            EpistemicModality.PREDICTION,
-            EpistemicModality.HYPOTHETICAL,
-            EpistemicModality.COUNTERFACTUAL,
-            EpistemicModality.FICTION,
-        ):
+        elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
             fe_score = 0.0
 
         if not claims:
             reasoning = "No discrete factual claims identified."
         elif temp_res.temporal_inconsistency_score > 0.0:
             reasoning = f"Temporal Inconsistency: {temp_res.reasoning}"
-        elif temp_res.modality != EpistemicModality.ASSERTED_FACT:
+        elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
             reasoning = f"Protected Epistemic Modality ({temp_res.modality.value}): Statement is non-factual assertion."
         elif not provided_evidence:
             reasoning = f"Identified {len(claims)} factual claim(s), but no external evidence was available. Factual status remains uncertain."
