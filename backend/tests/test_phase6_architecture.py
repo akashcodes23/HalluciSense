@@ -14,7 +14,7 @@ def _evidence(snippet: str, claim: str = "") -> EvidenceItem:
         snippet=snippet,
         claim=claim,
         similarity_score=0.90,
-        source="phase6-test",
+        source_name="phase6-test",
     )
 
 
@@ -33,7 +33,7 @@ def test_query_modality_does_not_leak_into_asserted_response():
 def test_prediction_phrase_with_intervening_words_is_protected():
     engine = TemporalClaimEngine()
     result = engine.analyze_claim(
-        "The agency projects global sea level to reach higher levels by 2050.",
+        "The agency projected global sea level to reach higher levels by 2050.",
         query="What is the 2050 projection?",
     )
     assert result.modality == EpistemicModality.PREDICTION
