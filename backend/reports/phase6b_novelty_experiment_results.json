@@ -1,0 +1,196 @@
+{
+  "10_level_ablation": {
+    "A0_NLI_Baseline": {
+      "accuracy": 0.64,
+      "precision": 0.7246,
+      "recall": 0.4432,
+      "f1": 0.55,
+      "specificity": 0.8339,
+      "fpr": 0.1661,
+      "fnr": 0.5568,
+      "tp": 121,
+      "tn": 231,
+      "fp": 46,
+      "fn": 152,
+      "total": 550,
+      "auroc": 0.6834,
+      "auprc": 0.6654
+    },
+    "A1_NLI_Retrieval": {
+      "accuracy": 0.64,
+      "precision": 0.7246,
+      "recall": 0.4432,
+      "f1": 0.55,
+      "specificity": 0.8339,
+      "fpr": 0.1661,
+      "fnr": 0.5568,
+      "tp": 121,
+      "tn": 231,
+      "fp": 46,
+      "fn": 152,
+      "total": 550,
+      "auroc": 0.6834,
+      "auprc": 0.6654
+    },
+    "A2_Plus_TemporalReasoning": {
+      "accuracy": 0.6364,
+      "precision": 0.716,
+      "recall": 0.4432,
+      "f1": 0.5475,
+      "specificity": 0.8267,
+      "fpr": 0.1733,
+      "fnr": 0.5568,
+      "tp": 121,
+      "tn": 229,
+      "fp": 48,
+      "fn": 152,
+      "total": 550,
+      "auroc": 0.6802,
+      "auprc": 0.6614
+    },
+    "A3_Plus_ModalitySeparation": {
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "specificity": 0.9928,
+      "fpr": 0.0072,
+      "fnr": 1.0,
+      "tp": 0,
+      "tn": 275,
+      "fp": 2,
+      "fn": 273,
+      "total": 550,
+      "auroc": 0.6284,
+      "auprc": 0.7007
+    },
+    "A4_Plus_AtomicClaimDecomposition": {
+      "accuracy": 0.5873,
+      "precision": 0.5816,
+      "recall": 0.6007,
+      "f1": 0.591,
+      "specificity": 0.574,
+      "fpr": 0.426,
+      "fnr": 0.3993,
+      "tp": 164,
+      "tn": 159,
+      "fp": 118,
+      "fn": 109,
+      "total": 550,
+      "auroc": 0.6303,
+      "auprc": 0.6102
+    },
+    "A5_Plus_GlobalEvidenceAlignment": {
+      "accuracy": 0.5109,
+      "precision": 1.0,
+      "recall": 0.0147,
+      "f1": 0.0289,
+      "specificity": 1.0,
+      "fpr": 0.0,
+      "fnr": 0.9853,
+      "tp": 4,
+      "tn": 277,
+      "fp": 0,
+      "fn": 269,
+      "total": 550,
+      "auroc": 0.6482,
+      "auprc": 0.7428
+    },
+    "A6_Plus_RelationalTemporalParsing": {
+      "accuracy": 0.6473,
+      "precision": 0.7548,
+      "recall": 0.4286,
+      "f1": 0.5467,
+      "specificity": 0.8628,
+      "fpr": 0.1372,
+      "fnr": 0.5714,
+      "tp": 117,
+      "tn": 239,
+      "fp": 38,
+      "fn": 156,
+      "total": 550,
+      "auroc": 0.7053,
+      "auprc": 0.681
+    },
+    "A7_Plus_MetaQuotationFiction": {
+      "accuracy": 0.6455,
+      "precision": 0.7378,
+      "recall": 0.4432,
+      "f1": 0.5538,
+      "specificity": 0.8448,
+      "fpr": 0.1552,
+      "fnr": 0.5568,
+      "tp": 121,
+      "tn": 234,
+      "fp": 43,
+      "fn": 152,
+      "total": 550,
+      "auroc": 0.6863,
+      "auprc": 0.669
+    },
+    "A8_Plus_DynamicEventAnchoring": {
+      "accuracy": 0.6436,
+      "precision": 0.7278,
+      "recall": 0.4505,
+      "f1": 0.5566,
+      "specificity": 0.8339,
+      "fpr": 0.1661,
+      "fnr": 0.5495,
+      "tp": 123,
+      "tn": 231,
+      "fp": 46,
+      "fn": 150,
+      "total": 550,
+      "auroc": 0.6871,
+      "auprc": 0.6682
+    },
+    "A9_Full_HalluciSense": {
+      "accuracy": 0.6291,
+      "precision": 0.6949,
+      "recall": 0.4505,
+      "f1": 0.5467,
+      "specificity": 0.8051,
+      "fpr": 0.1949,
+      "fnr": 0.5495,
+      "tp": 123,
+      "tn": 223,
+      "fp": 54,
+      "fn": 150,
+      "total": 550,
+      "auroc": 0.6807,
+      "auprc": 0.6526
+    }
+  },
+  "evidence_noise_stress_test": {
+    "E1_Clean_Evidence": {
+      "baseline_accuracy": 1.0,
+      "phase5_accuracy": 0.4,
+      "phase6_accuracy": 1.0
+    },
+    "E2_Irrelevant_Dates": {
+      "baseline_accuracy": 1.0,
+      "phase5_accuracy": 0.4,
+      "phase6_accuracy": 1.0
+    },
+    "E3_Conflicting_Dates": {
+      "baseline_accuracy": 1.0,
+      "phase5_accuracy": 0.4,
+      "phase6_accuracy": 1.0
+    },
+    "E4_Multiple_Historical_Events": {
+      "baseline_accuracy": 1.0,
+      "phase5_accuracy": 0.4,
+      "phase6_accuracy": 1.0
+    },
+    "E5_Modality_Conflicting_Language": {
+      "baseline_accuracy": 1.0,
+      "phase5_accuracy": 0.4,
+      "phase6_accuracy": 1.0
+    },
+    "E6_Meta_Claim_Framing": {
+      "baseline_accuracy": 1.0,
+      "phase5_accuracy": 0.4,
+      "phase6_accuracy": 1.0
+    }
+  }
+}
