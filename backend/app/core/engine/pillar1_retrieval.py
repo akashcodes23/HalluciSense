@@ -6,7 +6,22 @@ from .temporal import TemporalClaimEngine, TemporalStatus, EpistemicModality
 
 
 class Pillar1RetrievalEngine:
-    """Pillar 1: Retrieval + NLI Factual Verification + Temporal Consistency Analysis."""
+    """Pillar 1: Retrieval + NLI Factual Verification + Phase 6 Temporal Analysis."""
+
+    # These modalities suppress temporal penalties, but NEGATED_FACT and QUOTED_CLAIM
+    # remain truth-apt and must still be evaluated by NLI.
+    _NLI_NON_ASSERTIVE_MODALITIES = {
+        EpistemicModality.PREDICTION,
+        EpistemicModality.HYPOTHETICAL,
+        EpistemicModality.COUNTERFACTUAL,
+        EpistemicModality.CONDITIONAL,
+        EpistemicModality.FICTIONAL,
+    }
+    _META_CLAIM_PATTERNS = (
+        re.compile(r"\b(?:falsely|erroneously|incorrectly|wrongly)\s+(?:reported|claimed|stated|asserted)\b", re.I),
+        re.compile(r"\b(?:debunked|discredited|refuted)\s+(?:claim|claims|assertion|assertions|rumou?r)\b", re.I),
+        re.compile(r"\b(?:article|post|press release|report|rumou?r)\b[^.]{0,100}\b(?:claimed|reported|stated|asserted)\b", re.I),
+    )
 
     def __init__(self):
         self.entailment_engine = EvidenceEntailmentEngine()
@@ -62,6 +77,10 @@ class Pillar1RetrievalEngine:
                     neutral = max(0.0, 1.0 - entailment - contradiction)
         return entailment, contradiction, neutral
 
+    @classmethod
+    def _is_meta_claim(cls, claim: str) -> bool:
+        return any(pattern.search(claim or "") for pattern in cls._META_CLAIM_PATTERNS)
+
     def evaluate_claims_against_evidence(self, claims: List[str], external_evidence: List[EvidenceItem]) -> Tuple[float, List[EvidenceItem]]:
         import time
         t0 = time.perf_counter()
@@ -72,8 +91,6 @@ class Pillar1RetrievalEngine:
             self.last_nli_ms = 0.0
             return 0.5, external_evidence
 
-        # Build all relevant claim/evidence pairs first, then execute ONE batched
-        # DeBERTa inference pass instead of invoking the model once per pair.
         pairs = []
         pair_meta = []
         for claim_idx, claim in enumerate(claims):
@@ -102,8 +119,13 @@ class Pillar1RetrievalEngine:
             best[claim_idx][2] = max(best[claim_idx][2], neutral)
 
         claim_error_scores = []
-        for best_entailment, strongest_contradiction, best_neutral in best:
-            if strongest_contradiction >= 0.70 and strongest_contradiction > (best_entailment + 0.15):
+        for claim, (best_entailment, strongest_contradiction, best_neutral) in zip(claims, best):
+            # A meta-claim such as "the article falsely reported X" is truth-apt at the
+            # reporting level. Strong contradiction of embedded X therefore supports the
+            # meta-claim instead of being treated as direct evidence that the response is false.
+            if self._is_meta_claim(claim) and strongest_contradiction >= 0.50:
+                claim_error = 1.0 - strongest_contradiction
+            elif strongest_contradiction >= 0.70 and strongest_contradiction > (best_entailment + 0.15):
                 claim_error = strongest_contradiction
             elif best_entailment >= 0.65:
                 claim_error = 1.0 - best_entailment
@@ -126,19 +148,25 @@ class Pillar1RetrievalEngine:
         claims = self.extract_claims(text)
         fe_score, evidence = self.evaluate_claims_against_evidence(claims, provided_evidence)
 
-        # Temporal Claim & Epistemic Modality Evaluation
         temp_res = self.temporal_engine.analyze_claim(text, query=query, evidence_items=provided_evidence)
         if temp_res.temporal_inconsistency_score > 0.0:
             fe_score = round(max(fe_score, temp_res.temporal_inconsistency_score), 4)
-        elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
+        elif temp_res.protected_from_temporal_penalty and temp_res.modality in self._NLI_NON_ASSERTIVE_MODALITIES:
+            # Predictions, hypotheticals, counterfactuals, conditionals and fiction are
+            # not literal present/past factual assertions. Keep the Phase 4 contract that
+            # temporal protection prevents their NLI factual-error score from dominating.
             fe_score = 0.0
+        # NEGATED_FACT and QUOTED_CLAIM intentionally reach NLI. Their propositions can
+        # be true or false, so temporal protection must not fabricate factual certainty.
 
         if not claims:
             reasoning = "No discrete factual claims identified."
         elif temp_res.temporal_inconsistency_score > 0.0:
             reasoning = f"Temporal Inconsistency: {temp_res.reasoning}"
-        elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
-            reasoning = f"Protected Epistemic Modality ({temp_res.modality.value}): Statement is non-factual assertion."
+        elif temp_res.protected_from_temporal_penalty and temp_res.modality in self._NLI_NON_ASSERTIVE_MODALITIES:
+            reasoning = f"Protected Epistemic Modality ({temp_res.modality.value}): Statement is non-literal factual assertion."
+        elif temp_res.modality in (EpistemicModality.NEGATED_FACT, EpistemicModality.QUOTED_CLAIM):
+            reasoning = f"Truth-apt non-affirmative claim ({temp_res.modality.value}) evaluated against evidence without temporal penalty."
         elif not provided_evidence:
             reasoning = f"Identified {len(claims)} factual claim(s), but no external evidence was available. Factual status remains uncertain."
         elif fe_score < 0.20:
