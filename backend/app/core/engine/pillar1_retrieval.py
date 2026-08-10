@@ -1,8 +1,197 @@
 import re
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict, Any
+
+import httpx
+
 from .types import Pillar1Result, EvidenceItem
 from .entailment import EvidenceEntailmentEngine
 from .temporal import TemporalClaimEngine, TemporalStatus, EpistemicModality
+
+
+class EventTemporalAnchorResolver:
+    """Resolve event/entity time spans dynamically through Wikidata.
+
+    No entity names or dates are hardcoded. The resolver is deliberately
+    conservative: it only activates for relative temporal statements without
+    explicit four-digit years and returns a contradiction only when two
+    independently resolved anchors make the stated relation impossible.
+    """
+
+    API_URL = "https://www.wikidata.org/w/api.php"
+    TIME_PROPERTIES = ("P585", "P580", "P582", "P571", "P576", "P575")
+    MAX_ANCHORS = 2
+    TIMEOUT_SECONDS = 0.8
+
+    def __init__(self):
+        self._cache: Dict[str, Optional[Dict[str, Any]]] = {}
+        self.last_lookup_count = 0
+
+    @staticmethod
+    def _extract_year(value: Any) -> Optional[int]:
+        if not isinstance(value, str):
+            return None
+        match = re.search(r"[+-](\d{4})-", value)
+        return int(match.group(1)) if match else None
+
+    @staticmethod
+    def _normalise_candidate(value: str) -> str:
+        value = re.sub(r"^[Tt]he\s+", "", value.strip())
+        value = re.sub(r"\s+", " ", value)
+        return value.strip(" ,.;:()[]")
+
+    def extract_anchor_candidates(self, text: str) -> List[str]:
+        candidates: List[str] = []
+
+        # Named multi-word entities / periods.
+        for match in re.finditer(
+            r"\b(?:[A-Z][A-Za-z0-9'’-]+(?:\s+[A-Z][A-Za-z0-9'’-]+){1,5})\b",
+            text,
+        ):
+            candidate = self._normalise_candidate(match.group(0))
+            if candidate and candidate.lower() not in {c.lower() for c in candidates}:
+                candidates.append(candidate)
+
+        # Explicit temporal-object phrases after relational operators. This
+        # captures entities such as "the Renaissance" without hardcoding them.
+        relation_object = re.compile(
+            r"\b(?:during|after|before|since|prior to|following|preceding|earlier than|later than)\s+"
+            r"(?:the\s+)?([A-Za-z][A-Za-z0-9'’-]*(?:\s+[A-Za-z][A-Za-z0-9'’-]*){0,4})",
+            re.IGNORECASE,
+        )
+        for match in relation_object.finditer(text):
+            candidate = self._normalise_candidate(match.group(1))
+            candidate = re.split(r"\b(?:was|were|is|are|happened|occurred|began|ended)\b", candidate, maxsplit=1, flags=re.IGNORECASE)[0].strip()
+            if candidate and len(candidate.split()) <= 5 and candidate.lower() not in {c.lower() for c in candidates}:
+                candidates.append(candidate)
+
+        return candidates[: self.MAX_ANCHORS]
+
+    def _search_entity(self, label: str) -> Optional[str]:
+        if label in self._cache:
+            cached = self._cache[label]
+            return cached.get("id") if cached else None
+
+        try:
+            self.last_lookup_count += 1
+            response = httpx.get(
+                self.API_URL,
+                params={
+                    "action": "wbsearchentities",
+                    "search": label,
+                    "language": "en",
+                    "type": "item",
+                    "limit": 1,
+                    "format": "json",
+                },
+                headers={"User-Agent": "HalluciSense/Phase6 temporal-research"},
+                timeout=self.TIMEOUT_SECONDS,
+            )
+            response.raise_for_status()
+            results = response.json().get("search", [])
+            if not results:
+                self._cache[label] = None
+                return None
+            entity_id = results[0].get("id")
+            self._cache[label] = {"id": entity_id} if entity_id else None
+            return entity_id
+        except Exception:
+            self._cache[label] = None
+            return None
+
+    def _fetch_time_span(self, entity_id: str) -> Optional[Dict[str, Any]]:
+        try:
+            response = httpx.get(
+                self.API_URL,
+                params={
+                    "action": "wbgetentities",
+                    "ids": entity_id,
+                    "props": "claims|labels|descriptions",
+                    "languages": "en",
+                    "format": "json",
+                },
+                headers={"User-Agent": "HalluciSense/Phase6 temporal-research"},
+                timeout=self.TIMEOUT_SECONDS,
+            )
+            response.raise_for_status()
+            entity = response.json().get("entities", {}).get(entity_id, {})
+            claims = entity.get("claims", {})
+            years: List[int] = []
+            for prop in self.TIME_PROPERTIES:
+                for statement in claims.get(prop, []):
+                    value = (
+                        statement.get("mainsnak", {})
+                        .get("datavalue", {})
+                        .get("value", {})
+                    )
+                    year = self._extract_year(value.get("time") if isinstance(value, dict) else None)
+                    if year is not None:
+                        years.append(year)
+
+            if not years:
+                return None
+
+            return {
+                "id": entity_id,
+                "label": entity.get("labels", {}).get("en", {}).get("value", ""),
+                "start": min(years),
+                "end": max(years),
+                "points": sorted(set(years)),
+            }
+        except Exception:
+            return None
+
+    def resolve(self, text: str) -> List[Dict[str, Any]]:
+        anchors: List[Dict[str, Any]] = []
+        for candidate in self.extract_anchor_candidates(text):
+            entity_id = self._search_entity(candidate)
+            if not entity_id:
+                continue
+            span = self._fetch_time_span(entity_id)
+            if span:
+                span["query"] = candidate
+                anchors.append(span)
+            if len(anchors) >= self.MAX_ANCHORS:
+                break
+        return anchors
+
+    @staticmethod
+    def _relation(text: str) -> Optional[str]:
+        lower = text.lower()
+        for relation in ("prior to", "earlier than", "later than", "preceding", "following", "before", "after", "since", "during"):
+            if re.search(rf"\b{re.escape(relation)}\b", lower):
+                return relation
+        return None
+
+    def evaluate(self, text: str) -> Tuple[Optional[float], Optional[str], List[Dict[str, Any]]]:
+        anchors = self.resolve(text)
+        if len(anchors) < 2:
+            return None, None, anchors
+
+        relation = self._relation(text)
+        if not relation:
+            return None, None, anchors
+
+        first, second = anchors[0], anchors[1]
+        a_start, a_end = first["start"], first["end"]
+        b_start, b_end = second["start"], second["end"]
+
+        contradiction = False
+        if relation == "during":
+            contradiction = a_end < b_start or a_start > b_end
+        elif relation in {"before", "prior to", "earlier than", "preceding"}:
+            contradiction = a_end >= b_start
+        elif relation in {"after", "following", "later than", "since"}:
+            contradiction = a_start <= b_end
+
+        if contradiction:
+            return 0.92, (
+                f"Dynamic event-anchor contradiction: '{first['query']}' [{a_start}-{a_end}] "
+                f"is incompatible with relation '{relation}' to '{second['query']}' [{b_start}-{b_end}]."
+            ), anchors
+        return 0.0, (
+            f"Dynamic event-anchor relation '{relation}' is temporally compatible: "
+            f"'{first['query']}' [{a_start}-{a_end}] vs '{second['query']}' [{b_start}-{b_end}]."
+        ), anchors
 
 
 class Pillar1RetrievalEngine:
@@ -11,6 +200,7 @@ class Pillar1RetrievalEngine:
     def __init__(self):
         self.entailment_engine = EvidenceEntailmentEngine()
         self.temporal_engine = TemporalClaimEngine()
+        self.event_anchor_resolver = EventTemporalAnchorResolver()
 
     def extract_claims(self, text: str) -> List[str]:
         import time
@@ -72,8 +262,6 @@ class Pillar1RetrievalEngine:
             self.last_nli_ms = 0.0
             return 0.5, external_evidence
 
-        # Build all relevant claim/evidence pairs first, then execute ONE batched
-        # DeBERTa inference pass instead of invoking the model once per pair.
         pairs = []
         pair_meta = []
         for claim_idx, claim in enumerate(claims):
@@ -126,19 +314,43 @@ class Pillar1RetrievalEngine:
         claims = self.extract_claims(text)
         fe_score, evidence = self.evaluate_claims_against_evidence(claims, provided_evidence)
 
-        # Temporal Claim & Epistemic Modality Evaluation
         temp_res = self.temporal_engine.analyze_claim(text, query=query, evidence_items=provided_evidence)
+        event_anchor_score = None
+        event_anchor_reasoning = None
+        event_anchors: List[Dict[str, Any]] = []
+
+        # Phase 6: only invoke dynamic event anchoring when explicit years are
+        # absent and the temporal engine identifies relational language.
+        if temp_res.temporal_status == TemporalStatus.TIME_RELATIVE and not temp_res.extracted_years:
+            event_anchor_score, event_anchor_reasoning, event_anchors = self.event_anchor_resolver.evaluate(text)
+
         if temp_res.temporal_inconsistency_score > 0.0:
             fe_score = round(max(fe_score, temp_res.temporal_inconsistency_score), 4)
+        elif event_anchor_score is not None and event_anchor_score > 0.0:
+            fe_score = round(max(fe_score, event_anchor_score), 4)
         elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
-            fe_score = 0.0
+            # Preserve Phase 4's non-assertion semantics for prediction,
+            # hypothetical, conditional, counterfactual and fictional claims.
+            # Negated/quoted claims remain evidence-dependent.
+            if temp_res.modality in {
+                EpistemicModality.PREDICTION,
+                EpistemicModality.HYPOTHETICAL,
+                EpistemicModality.COUNTERFACTUAL,
+                EpistemicModality.CONDITIONAL,
+                EpistemicModality.FICTIONAL,
+            }:
+                fe_score = 0.0
 
         if not claims:
             reasoning = "No discrete factual claims identified."
         elif temp_res.temporal_inconsistency_score > 0.0:
             reasoning = f"Temporal Inconsistency: {temp_res.reasoning}"
+        elif event_anchor_score is not None and event_anchor_score > 0.0:
+            reasoning = f"Temporal Event-Anchor Inconsistency: {event_anchor_reasoning}"
+        elif event_anchor_reasoning:
+            reasoning = f"Temporal Event-Anchor Check: {event_anchor_reasoning}"
         elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
-            reasoning = f"Protected Epistemic Modality ({temp_res.modality.value}): Statement is non-factual assertion."
+            reasoning = f"Protected Epistemic Modality ({temp_res.modality.value}): temporal penalty suppressed."
         elif not provided_evidence:
             reasoning = f"Identified {len(claims)} factual claim(s), but no external evidence was available. Factual status remains uncertain."
         elif fe_score < 0.20:
@@ -163,6 +375,14 @@ class Pillar1RetrievalEngine:
         avg_dense = round(sum(dense_scores) / len(dense_scores), 4) if dense_scores else 0.0
         cross_encoder_avg = round(0.7 * avg_dense + 0.3 * avg_bm25, 4)
         citation_conf = round(max(0.0, min(1.0, 1.0 - fe_score * 0.5 + avg_dense * 0.5)), 4)
+
+        # Diagnostic metadata is attached non-invasively for Phase 6 reports.
+        self.last_event_anchor_diagnostics = {
+            "anchors": event_anchors,
+            "score": event_anchor_score,
+            "reasoning": event_anchor_reasoning,
+            "lookups": self.event_anchor_resolver.last_lookup_count,
+        }
 
         return Pillar1Result(
             claims=claims,
