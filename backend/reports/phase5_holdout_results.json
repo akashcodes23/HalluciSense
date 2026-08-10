@@ -1,0 +1,1490 @@
+{
+  "benchmark_metadata": {
+    "total_cases": 70,
+    "categories_count": 15,
+    "domains_count": 13,
+    "deterministic": true
+  },
+  "ablation_results": {
+    "A_nli_baseline": {
+      "accuracy": 0.7429,
+      "precision": 0.5882,
+      "recall": 0.8333,
+      "f1": 0.6897,
+      "specificity": 0.6957,
+      "fpr": 0.3043,
+      "fnr": 0.1667,
+      "tp": 20,
+      "tn": 32,
+      "fp": 14,
+      "fn": 4,
+      "total": 70
+    },
+    "B_basic_temporal": {
+      "accuracy": 0.5429,
+      "precision": 0.4231,
+      "recall": 0.9167,
+      "f1": 0.5789,
+      "specificity": 0.3478,
+      "fpr": 0.6522,
+      "fnr": 0.0833,
+      "tp": 22,
+      "tn": 16,
+      "fp": 30,
+      "fn": 2,
+      "total": 70
+    },
+    "C_modality_protection": {
+      "accuracy": 0.7429,
+      "precision": 0.5882,
+      "recall": 0.8333,
+      "f1": 0.6897,
+      "specificity": 0.6957,
+      "fpr": 0.3043,
+      "fnr": 0.1667,
+      "tp": 20,
+      "tn": 32,
+      "fp": 14,
+      "fn": 4,
+      "total": 70
+    },
+    "D_mismatch_verification": {
+      "accuracy": 0.6429,
+      "precision": 0.4878,
+      "recall": 0.8333,
+      "f1": 0.6154,
+      "specificity": 0.5435,
+      "fpr": 0.4565,
+      "fnr": 0.1667,
+      "tp": 20,
+      "tn": 25,
+      "fp": 21,
+      "fn": 4,
+      "total": 70
+    },
+    "E_full_system": {
+      "accuracy": 0.7429,
+      "precision": 0.5882,
+      "recall": 0.8333,
+      "f1": 0.6897,
+      "specificity": 0.6957,
+      "fpr": 0.3043,
+      "fnr": 0.1667,
+      "tp": 20,
+      "tn": 32,
+      "fp": 14,
+      "fn": 4,
+      "total": 70
+    }
+  },
+  "latency_metrics": {
+    "mean_ms": 0.005218,
+    "median_ms": 0.005083,
+    "p95_ms": 0.005292,
+    "p99_ms": 0.006583,
+    "min_ms": 0.004666,
+    "max_ms": 0.052375
+  },
+  "case_details": [
+    {
+      "case_id": "H01",
+      "category": "HISTORICAL_FACT",
+      "domain": "history",
+      "query": "When did the Berlin Wall fall?",
+      "response": "The Berlin Wall fell in November 1989, signaling the collapse of the Eastern Bloc.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H02",
+      "category": "HISTORICAL_FACT",
+      "domain": "astronomy",
+      "query": "When was Pluto discovered?",
+      "response": "Clyde Tombaugh discovered Pluto at the Lowell Observatory in 1930.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H03",
+      "category": "HISTORICAL_FACT",
+      "domain": "medicine",
+      "query": "When was the polio vaccine developed?",
+      "response": "Jonas Salk developed the first successful inactivated polio vaccine in 1953.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H04",
+      "category": "HISTORICAL_FACT",
+      "domain": "climate",
+      "query": "When was the Paris Climate Agreement signed?",
+      "response": "The Paris Agreement on climate change mitigation was signed in 2016.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0231,
+        "overall_h_score": 0.0231,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H05",
+      "category": "HISTORICAL_FACT",
+      "domain": "engineering",
+      "query": "When was the Golden Gate Bridge opened?",
+      "response": "San Francisco's Golden Gate Bridge officially opened to traffic in 1937.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.1214,
+        "overall_h_score": 0.1214,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H06",
+      "category": "DATE_MISMATCH",
+      "domain": "geography",
+      "query": "When was the Panama Canal completed?",
+      "response": "Engineers completed the construction of the Panama Canal in 2018.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H07",
+      "category": "DATE_MISMATCH",
+      "domain": "economics",
+      "query": "When was the Federal Reserve created?",
+      "response": "The US Congress established the Federal Reserve System in 2005.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9997,
+        "overall_h_score": 0.9997,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H08",
+      "category": "DATE_MISMATCH",
+      "domain": "entertainment",
+      "query": "When was the first Academy Awards ceremony held?",
+      "response": "The inaugural Academy Awards ceremony took place in Hollywood in 2012.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H09",
+      "category": "DATE_MISMATCH",
+      "domain": "technology",
+      "query": "When was the ENIAC computer unveiled?",
+      "response": "The ENIAC electronic general-purpose computer was introduced in 2008.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9995,
+        "overall_h_score": 0.9995,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H10",
+      "category": "DATE_MISMATCH",
+      "domain": "science",
+      "query": "When was the structure of DNA discovered?",
+      "response": "Watson and Crick published the double helix structure of DNA in 2015.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9956,
+        "overall_h_score": 0.9956,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H11",
+      "category": "FUTURE_FACT_ASSERTION",
+      "domain": "space",
+      "query": "Who landed on Europa in 2031?",
+      "response": "ESA astronauts landed on Jupiter's moon Europa in 2031.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 1.0,
+        "overall_h_score": 1.0,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.92,
+        "modality": "FUTURE_FACT_ASSERTION",
+        "status": "FUTURE_IMPOSSIBLE_FACT",
+        "protected": false,
+        "reasoning": "Asserted completed fact with future event year (2031 > 2026). Temporal assertion is unverified / impossible."
+      }
+    },
+    {
+      "case_id": "H12",
+      "category": "FUTURE_FACT_ASSERTION",
+      "domain": "politics",
+      "query": "Who won the 2028 UK general election?",
+      "response": "The Labour Party won a supermajority in the 2028 UK general election.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.92,
+        "overall_h_score": 0.92,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.92,
+        "modality": "FUTURE_FACT_ASSERTION",
+        "status": "FUTURE_IMPOSSIBLE_FACT",
+        "protected": false,
+        "reasoning": "Asserted completed fact with future event year (2028 > 2026). Temporal assertion is unverified / impossible."
+      }
+    },
+    {
+      "case_id": "H13",
+      "category": "FUTURE_FACT_ASSERTION",
+      "domain": "technology",
+      "query": "When was GPT-7 released?",
+      "response": "OpenAI released GPT-7 with AGI capabilities in early 2029.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.92,
+        "overall_h_score": 0.92,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.92,
+        "modality": "FUTURE_FACT_ASSERTION",
+        "status": "FUTURE_IMPOSSIBLE_FACT",
+        "protected": false,
+        "reasoning": "Asserted completed fact with future event year (2029 > 2026). Temporal assertion is unverified / impossible."
+      }
+    },
+    {
+      "case_id": "H14",
+      "category": "FUTURE_FACT_ASSERTION",
+      "domain": "business",
+      "query": "When did Tesla reach 10 million annual vehicle deliveries?",
+      "response": "Tesla achieved 10 million annual EV deliveries worldwide in 2030.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9696,
+        "overall_h_score": 0.9696,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H15",
+      "category": "FUTURE_FACT_ASSERTION",
+      "domain": "medicine",
+      "query": "When was the universal cancer cure approved?",
+      "response": "The FDA approved a pan-cancer mRNA therapeutic in 2033.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 1.0,
+        "overall_h_score": 1.0,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H16",
+      "category": "FUTURE_PREDICTION",
+      "domain": "astronomy",
+      "query": "When will the Artemis IV mission launch?",
+      "response": "NASA's Artemis IV lunar landing mission is targeted to launch in 2028.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "PREDICTION",
+        "status": "FUTURE_PREDICTION",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (PREDICTION). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H17",
+      "category": "FUTURE_PREDICTION",
+      "domain": "climate",
+      "query": "What is the 2030 global solar capacity projection?",
+      "response": "Global installed solar capacity is projected to exceed 3 terawatts by 2030.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "PREDICTION",
+        "status": "FUTURE_PREDICTION",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (PREDICTION). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H18",
+      "category": "FUTURE_PREDICTION",
+      "domain": "economics",
+      "query": "What is India's GDP growth forecast for 2027?",
+      "response": "India's real GDP is forecast to expand by 6.8% in fiscal year 2027.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "PREDICTION",
+        "status": "FUTURE_PREDICTION",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (PREDICTION). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H19",
+      "category": "FUTURE_PREDICTION",
+      "domain": "engineering",
+      "query": "When will the Square Kilometre Array be operational?",
+      "response": "The Square Kilometre Array radio telescope is expected to begin science operations by 2029.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "PREDICTION",
+        "status": "FUTURE_PREDICTION",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (PREDICTION). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H20",
+      "category": "FUTURE_PREDICTION",
+      "domain": "business",
+      "query": "What is semiconductor market revenue estimated for 2030?",
+      "response": "Global semiconductor market revenue is estimated to reach $1 trillion by 2030.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "PREDICTION",
+        "status": "FUTURE_PREDICTION",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (PREDICTION). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H21",
+      "category": "HYPOTHETICAL",
+      "domain": "science",
+      "query": "What if fusion power reaches commercial scale by 2038?",
+      "response": "Supposing commercial fusion reactors become grid-tied by 2038, fossil fuel generation would plummet.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "HYPOTHETICAL",
+        "status": "HYPOTHETICAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (HYPOTHETICAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H22",
+      "category": "HYPOTHETICAL",
+      "domain": "space",
+      "query": "What if a crewed Mars flyby occurs in 2033?",
+      "response": "Imagine astronauts complete a crewed Mars orbital flyby in 2033, deep space life support would be proven.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "HYPOTHETICAL",
+        "status": "HYPOTHETICAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (HYPOTHETICAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H23",
+      "category": "HYPOTHETICAL",
+      "domain": "medicine",
+      "query": "What if universal organ printing is commercialized in 2035?",
+      "response": "Assuming 3D bioprinting solves organ transplant waiting lists by 2035, average life expectancy would rise.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "HYPOTHETICAL",
+        "status": "HYPOTHETICAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (HYPOTHETICAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H24",
+      "category": "HYPOTHETICAL",
+      "domain": "technology",
+      "query": "What if quantum encryption becomes standard in 2029?",
+      "response": "In a scenario where quantum key distribution secures banking in 2029, RSA encryption would be retired.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "HYPOTHETICAL",
+        "status": "HYPOTHETICAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (HYPOTHETICAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H25",
+      "category": "COUNTERFACTUAL",
+      "domain": "history",
+      "query": "What if the League of Nations had prevented WWII?",
+      "response": "If the League of Nations had averted World War II in 1939, European infrastructure would have been spared.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "COUNTERFACTUAL",
+        "status": "COUNTERFACTUAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (COUNTERFACTUAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H26",
+      "category": "COUNTERFACTUAL",
+      "domain": "technology",
+      "query": "What if NeXT had not been acquired by Apple?",
+      "response": "Had Apple not acquired NeXT in 1996, macOS would have been built on a completely different architecture.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "COUNTERFACTUAL",
+        "status": "COUNTERFACTUAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (COUNTERFACTUAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H27",
+      "category": "COUNTERFACTUAL",
+      "domain": "science",
+      "query": "What if Chernobyl had not suffered a meltdown?",
+      "response": "Were the Chernobyl power plant not to have suffered an explosion in 1986, nuclear energy adoption might have accelerated.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "HYPOTHETICAL",
+        "status": "HYPOTHETICAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (HYPOTHETICAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H28",
+      "category": "COUNTERFACTUAL",
+      "domain": "politics",
+      "query": "What if the Scottish independence referendum had passed?",
+      "response": "If Scotland had voted for independence in 2014, constitutional negotiations would have ensued.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "HYPOTHETICAL",
+        "status": "HYPOTHETICAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (HYPOTHETICAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H29",
+      "category": "CONDITIONAL",
+      "domain": "climate",
+      "query": "If global warming exceeds 1.5C by 2032...",
+      "response": "If average temperatures exceed 1.5 degrees Celsius above pre-industrial levels by 2032, extreme weather events will intensify.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H30",
+      "category": "CONDITIONAL",
+      "domain": "economics",
+      "query": "If central banks cut interest rates in 2027...",
+      "response": "If central banks reduce benchmark interest rates in 2027, housing market liquidity will rebound.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H31",
+      "category": "CONDITIONAL",
+      "domain": "engineering",
+      "query": "If the high-speed rail line opens in 2030...",
+      "response": "If regional transit authorities open the high-speed rail corridor in 2030, intercity travel times will drop by half.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H32",
+      "category": "CONDITIONAL",
+      "domain": "technology",
+      "query": "If autonomous taxis achieve Level 5 by 2028...",
+      "response": "If car manufacturers achieve fully uncrewed Level 5 autonomy in 2028, private vehicle ownership will decline.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H33",
+      "category": "NEGATED_CLAIM",
+      "domain": "history",
+      "query": "Did Napoleon win at Waterloo?",
+      "response": "Napoleon Bonaparte did not win the Battle of Waterloo in 1815.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "NEGATED_FACT",
+        "status": "NEGATED_FACT",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (NEGATED_FACT). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H34",
+      "category": "NEGATED_CLAIM",
+      "domain": "space",
+      "query": "Did commercial passenger flights land on the Moon in 2024?",
+      "response": "No commercial airliner landed passengers on the lunar surface in 2024.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9997,
+        "overall_h_score": 0.9997,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H35",
+      "category": "NEGATED_CLAIM",
+      "domain": "science",
+      "query": "Did Newton publish Principia Mathematica in 2000?",
+      "response": "Isaac Newton did not publish his Principia Mathematica in 2000.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "NEGATED_FACT",
+        "status": "NEGATED_FACT",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (NEGATED_FACT). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H36",
+      "category": "NEGATED_CLAIM",
+      "domain": "history",
+      "query": "Did the United States declare independence in 1776?",
+      "response": "The United States did not declare independence in 1776.",
+      "expected_label": 1,
+      "predicted_label": 0,
+      "correct": false,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "NEGATED_FACT",
+        "status": "NEGATED_FACT",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (NEGATED_FACT). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H37",
+      "category": "QUOTED_CLAIM",
+      "domain": "politics",
+      "query": "What did the conspiracy article claim?",
+      "response": "The article falsely reported that the moon landing occurred in 2015, which is untrue.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9996,
+        "overall_h_score": 0.9996,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H38",
+      "category": "QUOTED_CLAIM",
+      "domain": "medicine",
+      "query": "What is the debunked medical claim?",
+      "response": "The assertion that vaccines cause autism was thoroughly debunked by researchers.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.5027,
+        "overall_h_score": 0.5027,
+        "risk_level": "MODERATE_RISK",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H39",
+      "category": "QUOTED_CLAIM",
+      "domain": "business",
+      "query": "What was the fraudulent press release?",
+      "response": "The press release erroneously claimed that the company filed for bankruptcy in 2029.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 1.0,
+        "overall_h_score": 1.0,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H40",
+      "category": "QUOTED_CLAIM",
+      "domain": "astronomy",
+      "query": "What was the viral social media post?",
+      "response": "Social media posts claimed that Mars would appear as large as the Moon in 2027, which is physically impossible.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.8408,
+        "overall_h_score": 0.8408,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H41",
+      "category": "FICTIONAL",
+      "domain": "entertainment",
+      "query": "What happens in Interstellar?",
+      "response": "In the movie Interstellar, endurance astronauts travel through a wormhole near Saturn.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "FICTIONAL",
+        "status": "FICTIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (FICTIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H42",
+      "category": "FICTIONAL",
+      "domain": "literature",
+      "query": "What happens in Dune?",
+      "response": "In Frank Herbert's novel Dune, house Atreides assumes control of Arrakis in the far future.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.4954,
+        "overall_h_score": 0.4954,
+        "risk_level": "NEEDS_VERIFICATION",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H43",
+      "category": "FICTIONAL",
+      "domain": "technology",
+      "query": "What occurs in the anime Ghost in the Shell?",
+      "response": "In the anime Ghost in the Shell, cybernetic augmentation becomes widespread in 2029.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "FICTIONAL",
+        "status": "FICTIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (FICTIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H44",
+      "category": "FICTIONAL",
+      "domain": "entertainment",
+      "query": "What is the timeline of Star Trek?",
+      "response": "In the Star Trek universe, Zefram Cochrane develops warp drive in the year 2063.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.5161,
+        "overall_h_score": 0.5161,
+        "risk_level": "MODERATE_RISK",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H45",
+      "category": "TIME_RELATIVE",
+      "domain": "history",
+      "query": "When did the 21st century begin?",
+      "response": "The 21st century began in the year 2001.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0048,
+        "overall_h_score": 0.0048,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H46",
+      "category": "TIME_RELATIVE",
+      "domain": "technology",
+      "query": "Has AI advanced since 2020?",
+      "response": "Generative artificial intelligence models have advanced significantly since 2020.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.015,
+        "overall_h_score": 0.015,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H47",
+      "category": "TIME_RELATIVE",
+      "domain": "climate",
+      "query": "Were atmospheric CO2 levels measured recently?",
+      "response": "Global baseline atmospheric CO2 concentration exceeded 420 parts per million in recent years.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.4855,
+        "overall_h_score": 0.4855,
+        "risk_level": "NEEDS_VERIFICATION",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H48",
+      "category": "TIME_RELATIVE",
+      "domain": "economics",
+      "query": "Did inflation rise after 2021?",
+      "response": "Global central banks raised benchmark interest rates following inflation spikes after 2021.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H49",
+      "category": "DATE_RANGE",
+      "domain": "history",
+      "query": "When was the American Civil War fought?",
+      "response": "The American Civil War was fought between 1861 and 1865.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0069,
+        "overall_h_score": 0.0069,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_RANGE",
+        "protected": true,
+        "reasoning": "Valid historical date range [1861-1865] statement."
+      }
+    },
+    {
+      "case_id": "H50",
+      "category": "DATE_RANGE",
+      "domain": "history",
+      "query": "When did the Thirty Years War occur?",
+      "response": "The Thirty Years War took place across Central Europe between 1618 and 1648.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.1438,
+        "overall_h_score": 0.1438,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_RANGE",
+        "protected": true,
+        "reasoning": "Valid historical date range [1618-1648] statement."
+      }
+    },
+    {
+      "case_id": "H51",
+      "category": "DATE_RANGE",
+      "domain": "history",
+      "query": "When was the American Civil War fought?",
+      "response": "The American Civil War was fought between 1961 and 1965.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9995,
+        "overall_h_score": 0.9995,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_RANGE",
+        "protected": true,
+        "reasoning": "Valid historical date range [1961-1965] statement."
+      }
+    },
+    {
+      "case_id": "H52",
+      "category": "BEFORE_AFTER",
+      "domain": "technology",
+      "query": "Did the invention of the telephone precede the internet?",
+      "response": "Alexander Graham Bell patented the telephone in 1876, decades before the creation of ARPANET.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 1.0,
+        "overall_h_score": 1.0,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H53",
+      "category": "BEFORE_AFTER",
+      "domain": "history",
+      "query": "Did World War I occur before World War II?",
+      "response": "World War I concluded in 1918, prior to the outbreak of World War II in 1939.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.8697,
+        "overall_h_score": 0.8697,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H54",
+      "category": "BEFORE_AFTER",
+      "domain": "history",
+      "query": "Did World War II occur before World War I?",
+      "response": "World War II ended in 1945, before World War I began in 1914.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.5013,
+        "overall_h_score": 0.5013,
+        "risk_level": "MODERATE_RISK",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PAST_FACT",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H55",
+      "category": "ADVERSARIAL_QUERY_RESPONSE",
+      "domain": "politics",
+      "query": "If Candidate A wins the 2028 election, what will happen?",
+      "response": "Candidate A won the 2028 US presidential election.",
+      "expected_label": 1,
+      "predicted_label": 0,
+      "correct": false,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H56",
+      "category": "ADVERSARIAL_QUERY_RESPONSE",
+      "domain": "sports",
+      "query": "Who won the 2032 Olympic marathon?",
+      "response": "If an athlete wins the 2032 Olympic marathon, they receive a gold medal.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H57",
+      "category": "ADVERSARIAL_QUERY_RESPONSE",
+      "domain": "technology",
+      "query": "Will 6G networks launch in 2030?",
+      "response": "Apple released the 6G iPhone in 2030.",
+      "expected_label": 1,
+      "predicted_label": 0,
+      "correct": false,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "PREDICTION",
+        "status": "FUTURE_PREDICTION",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (PREDICTION). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H58",
+      "category": "ADVERSARIAL_QUERY_RESPONSE",
+      "domain": "science",
+      "query": "Did scientists discover fusion in 2024?",
+      "response": "If scientists discovered fusion in 2024, clean energy would be solved.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H59",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "history",
+      "query": "When was George Washington elected president?",
+      "response": "George Washington was elected president during the American Civil War.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9986,
+        "overall_h_score": 0.9986,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H60",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "history",
+      "query": "When did the Roman Empire collapse?",
+      "response": "The Western Roman Empire collapsed during the European Renaissance.",
+      "expected_label": 1,
+      "predicted_label": 0,
+      "correct": false,
+      "details": {
+        "p1_score": 0.1571,
+        "overall_h_score": 0.1571,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H61",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "technology",
+      "query": "When did the Apollo 11 moon landing happen?",
+      "response": "The first manned moon landing happened after the widespread adoption of smartphones.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9957,
+        "overall_h_score": 0.9957,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H62",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "history",
+      "query": "When did World War II end?",
+      "response": "World War II ended before World War I began.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9929,
+        "overall_h_score": 0.9929,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H63",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "science",
+      "query": "When did Albert Einstein live?",
+      "response": "Albert Einstein formulated his theories of physics during the ancient Roman Empire.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9558,
+        "overall_h_score": 0.9558,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H64",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "astronomy",
+      "query": "When was the Hubble Space Telescope launched?",
+      "response": "The Hubble Space Telescope was launched into orbit prior to the American Revolutionary War.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9939,
+        "overall_h_score": 0.9939,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H65",
+      "category": "IMPLIED_TEMPORAL_CONTRADICTION",
+      "domain": "medicine",
+      "query": "When were antibiotics discovered?",
+      "response": "Alexander Fleming discovered penicillin during the Middle Ages.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.994,
+        "overall_h_score": 0.994,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "PRESENT_STATE",
+        "protected": true,
+        "reasoning": "No temporal expressions detected."
+      }
+    },
+    {
+      "case_id": "H66",
+      "category": "HISTORICAL_FACT",
+      "domain": "geography",
+      "query": "When did Mount Everest get first summited?",
+      "response": "Edmund Hillary and Tenzing Norgay summited Mount Everest in 1953.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.9,
+        "overall_h_score": 0.9,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H67",
+      "category": "DATE_MISMATCH",
+      "domain": "geography",
+      "query": "When was Mount Everest first summited?",
+      "response": "Edmund Hillary and Tenzing Norgay reached the summit of Mount Everest in 2017.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 0.9986,
+        "overall_h_score": 0.9986,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.9,
+        "modality": "ASSERTED_FACT",
+        "status": "DATE_MISMATCH",
+        "protected": false,
+        "reasoning": "Historical date mismatch detected between claim and retrieved ground-truth evidence."
+      }
+    },
+    {
+      "case_id": "H68",
+      "category": "FUTURE_PREDICTION",
+      "domain": "geography",
+      "query": "What is the population projection for 2050?",
+      "response": "The global human population is projected by the UN to reach 9.7 billion by 2050.",
+      "expected_label": 0,
+      "predicted_label": 1,
+      "correct": false,
+      "details": {
+        "p1_score": 0.5,
+        "overall_h_score": 0.5,
+        "risk_level": "MODERATE_RISK",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    },
+    {
+      "case_id": "H69",
+      "category": "CONDITIONAL",
+      "domain": "law",
+      "query": "If the supreme court rules on privacy in 2027...",
+      "response": "If the Supreme Court issues a ruling on digital privacy in 2027, legal precedents will change.",
+      "expected_label": 0,
+      "predicted_label": 0,
+      "correct": true,
+      "details": {
+        "p1_score": 0.0,
+        "overall_h_score": 0.0,
+        "risk_level": "VERIFIED",
+        "temporal_score": 0.0,
+        "modality": "CONDITIONAL",
+        "status": "CONDITIONAL",
+        "protected": true,
+        "reasoning": "Protected epistemic modality detected (CONDITIONAL). Zero temporal penalty applied."
+      }
+    },
+    {
+      "case_id": "H70",
+      "category": "FUTURE_FACT_ASSERTION",
+      "domain": "law",
+      "query": "When was the 2030 Global AI Treaty ratified?",
+      "response": "190 nations ratified the 2030 Global AI Treaty in Geneva.",
+      "expected_label": 1,
+      "predicted_label": 1,
+      "correct": true,
+      "details": {
+        "p1_score": 1.0,
+        "overall_h_score": 1.0,
+        "risk_level": "LIKELY_HALLUCINATED",
+        "temporal_score": 0.0,
+        "modality": "ASSERTED_FACT",
+        "status": "UNKNOWN",
+        "protected": true,
+        "reasoning": "Historical or present temporal expression within valid timeline bounds."
+      }
+    }
+  ]
+}
