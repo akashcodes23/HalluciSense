@@ -1,0 +1,33 @@
+{
+  "dataset": "HaluEval",
+  "canonical_source": "RUCAIBox/HaluEval",
+  "source_url": "https://github.com/RUCAIBox/HaluEval",
+  "version": "1.0.0",
+  "license": "MIT",
+  "retrieval_timestamp": "2026-08-10T05:45:06.682119+00:00",
+  "raw_count": 34507,
+  "normalized_count": 150,
+  "fields_discovered": [
+    "knowledge",
+    "question",
+    "right_answer",
+    "hallucinated_answer",
+    "dialogue_history",
+    "document"
+  ],
+  "label_schema": {
+    "right_answer": "Grounded (gold_hallucination=False)",
+    "hallucinated_answer": "Hallucinated (gold_hallucination=True)"
+  },
+  "train_test_splits": {
+    "qa": 150,
+    "dialogue": 150,
+    "summarization": 150,
+    "general": 150
+  },
+  "checksum": "cf520a105b85e099d9ae3198e7a667a5574c1b0b32a56e2deb7e56934cb3c496",
+  "upstream_overlap": [],
+  "normalization_procedure": "Pairing right_answer (False) and hallucinated_answer (True) for each prompt/context pair across qa, dialogue, summarization, general tasks.",
+  "exclusions": [],
+  "reason_for_exclusions": "None."
+}

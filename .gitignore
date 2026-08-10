@@ -57,6 +57,7 @@ build/
 # Research Data (ignore)
 ############################
 backend/evaluation_data/
+backend/data/external/*/raw/
 
 ############################
 # Ignore ONLY research cache

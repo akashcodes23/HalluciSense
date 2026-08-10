@@ -1,0 +1,1602 @@
+[
+  {
+    "example_id": "halubench_d3fb4c3c-d21b-480a-baa0-98d6d0d17c1d",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team scored the longest field goal kick of the game?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "['Rams', 'second', 'Marc Bulger', 'Kevin Curtis']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "d3fb4c3c-d21b-480a-baa0-98d6d0d17c1d",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_8603663e-c53b-46db-a482-a867f12ff3b4",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many percent were not  Irish?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "87.1",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "8603663e-c53b-46db-a482-a867f12ff3b4",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_c63a73e5-2c91-489b-bd24-af150ddfa82c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards was the second longest field goal of the first half?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "42",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "c63a73e5-2c91-489b-bd24-af150ddfa82c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_52db14ed-5426-46ec-b0ae-4ef843b2d692",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How long was the last touchdown?",
+    "context": "Hoping to rebound from their tough overtime road loss to the Raiders, the Jets went home for a Week 8 duel with the Kansas City Chiefs.  In the first quarter, New York took flight as QB Brett Favre completed an 18-yard TD pass to RB Leon Washington.  In the second quarter, the Chiefs tied the game as QB Tyler Thigpen completed a 19-yard TD pass to TE Tony Gonzalez.  The Jets would answer with Washington getting a 60-yard TD run.  Kansas City closed out the half as Thigpen completed an 11-yard TD pass to WR Mark Bradley. In the third quarter, the Chiefs took the lead as kicker Connor Barth nailed a 30-yard field goal, yet New York replied with RB Thomas Jones getting a 1-yard TD run.  In the fourth quarter, Kansas City got the lead again as CB Brandon Flowers returned an interception 91 yards for a touchdown.  Fortunately, the Jets pulled out the win with Favre completing the game-winning 15-yard TD pass to WR Laveranues Coles. During halftime, the Jets celebrated the 40th anniversary of their Super Bowl III championship team.",
+    "response": "18-yard",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "52db14ed-5426-46ec-b0ae-4ef843b2d692",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_31b36417-aad1-412c-b0e5-9c1faaed233f",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many in percent from the census weren't Irish?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "87.1",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "31b36417-aad1-412c-b0e5-9c1faaed233f",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_57d6f476-5163-4069-baab-b53504a3e662",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more men were registered in 1918 than 1917?",
+    "context": "In the United States, conscription began in 1917 and was generally well received, with a few pockets of opposition in isolated rural areas. The administration decided to rely primarily on conscription, rather than voluntary enlistment, to raise military manpower for when only 73,000 volunteers enlisted out of the initial 1 million target in the first six weeks of the war. In 1917 10 million men were registered. This was deemed to be inadequate, so age ranges were increased and exemptions reduced, and so by the end of 1918 this increased to 24 million men that were registered with nearly 3 million inducted into the military services. The draft was universal and included blacks on the same terms as whites, although they served in different units. In all 367,710 black Americans were drafted , compared to 2,442,586 white . Forms of resistance ranged from peaceful protest to violent demonstrations and from humble letter-writing campaigns asking for mercy to radical newspapers demanding reform. The most common tactics were dodging and desertion, and many communities sheltered and defended their draft dodgers as political heroes. Many socialists were jailed for \"obstructing the recruitment or enlistment service\". The most famous was Eugene Debs, head of the Socialist Party of America, who ran for president in 1920 from his prison cell. In 1917 a number of radicals and anarchists challenged the new draft law in federal court, arguing that it was a direct violation of the Thirteenth Amendment's prohibition against slavery and involuntary servitude. The Supreme Court unanimously upheld the constitutionality of the draft act in the Selective Draft Law Cases on January 7, 1918.",
+    "response": "15000000",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "57d6f476-5163-4069-baab-b53504a3e662",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_81da46e1-384f-4026-8b02-0c7b48fe5899",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards were the two shortest touchdowns of the first half?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "['2', '3']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "81da46e1-384f-4026-8b02-0c7b48fe5899",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_5b3b919d-6895-43ec-a065-6de13ac56e2f",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more households are there than families?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "19300",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "5b3b919d-6895-43ec-a065-6de13ac56e2f",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_78f47611-5119-42dc-af43-f40dcfd6fe96",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more households are there than families?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "19300",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "78f47611-5119-42dc-af43-f40dcfd6fe96",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_4a549e4a-b934-400e-960b-7acd4d920d9e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many years after their defeat in Brazil did the Dutch return?",
+    "context": "Surprised by such easy gains in the East, the Republic quickly decided to exploit Portugal's weakness in the Americas. In 1621 the Geoctroyeerde Westindische Compagnie  was created to take control of the sugar trade and colonise America . The Company benefited from a large investment in capital, drawing on the enthusiasm of the best financiers and capitalists of the Republic, such as Isaac de Pinto, by origin a Portuguese Jew. The Dutch West India Company would not, however, be as successful as its eastern counterpart. The Dutch invasion began in 1624 with the conquest of the then capital of the State of Brazil, the city of S\u00e3o Salvador da Bahia, but the Dutch conquest was short lived. In 1625, a joint Spanish-Portuguese fleet of 52 ships and 12,000 men rapidly recaptured Salvador. In 1630 the Dutch returned, and captured Olinda and then Recife, renamed Mauritsstadt, thus establishing the colony of New Holland. The Portuguese commander Matias de Albuquerque retreated his forces inland, to establish a camp dubbed Arraial do Bom Jesus. Until 1635, the Dutch were unable to harvest sugar due to Portuguese guerrilla attacks, and were virtually confined to the walled perimeter of the cities. Eventually, the Dutch evicted the Portuguese with the assistance of a local landlord named Domingos Fernandes Calabar, but on his retreat to Bahia, Matias de Albuquerque captured Calabar at Porto Calvo, and had him hang for treason. The Portuguese fought back two Dutch attacks on Bahia in 1638. Nonenetheless, by 1641 the Dutch captured S\u00e3o Lu\u00eds, leaving them in control of northwestern Brazil between Maranh\u00e3o and Sergipe in the south",
+    "response": "6",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "4a549e4a-b934-400e-960b-7acd4d920d9e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_e1afeb0e-9ad7-4733-bcc2-c977344de287",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards Hanson score with in the first?",
+    "context": "To start the season, the Lions traveled south to Tampa, Florida to take on the Tampa Bay Buccaneers. The Lions scored first in the first quarter with a 23-yard field goal by Jason Hanson. The Buccaneers tied it up with a 38-yard field goal by Connor Barth, then took the lead when Aqib Talib intercepted a pass from Matthew Stafford and ran it in 28 yards. The Lions responded with a 28-yard field goal. In the second quarter, Detroit took the lead with a 36-yard touchdown catch by Calvin Johnson, and later added more points when Tony Scheffler caught an 11-yard TD pass. Tampa Bay responded with a 31-yard field goal just before halftime. The second half was relatively quiet, with each team only scoring one touchdown. First, Detroit's Calvin Johnson caught a 1-yard pass in the third quarter. The game's final points came when Mike Williams of Tampa Bay caught a 5-yard pass.  The Lions won their regular season opener for the first time since 2007",
+    "response": "28",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "e1afeb0e-9ad7-4733-bcc2-c977344de287",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_2d560a12-2b8f-4c4f-9c9f-85e7a73114f5",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "how many points did new orleans defeat tampa by?",
+    "context": "Drew Brees threw for 312 yards and two touchdown passes, as New Orleans defeated Tampa Bay 24-17. The Saints jumped out to a 14-0 lead in the second quarter, and led 17-10 at halftime. Tampa Bay made the score 24-17 after Jameis Winston threw a touchdown pass to Adam Humphries with just under 9 minutes left in regulation. Trailing by 7, the Buccaneers got the ball back with 5:22 to go, but went 3-and-out. The Saints were then able to run out the clock to secure the win.",
+    "response": "7",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "2d560a12-2b8f-4c4f-9c9f-85e7a73114f5",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_70ff6095-aab3-45ad-83d0-03a302345f66",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many points did each team score in the first quarter?",
+    "context": "The Browns dropped their 13th consecutive season-opening game with a 21-18 loss to the Steelers. The scoring began early in the first quarter when Pittsburgh's Tyler Matakevich blocked a Britton Colquitt punt, knocking the ball into the end zone where it was recovered by Anthony Chickillo for a touchdown. The Browns were able to tie the score by the end of the first quarter, however, as rookie quarterback DeShone Kizer orchestrated a 12-play drive that ended when he scored on a 1-yard touchdown run. The game stayed at 7-7 through most of the second quarter, until the Steelers quarterback Ben Roethlisberger connected with tight end Jesse James on a 4-yard touchdown with 45 seconds left in the first half. The 7-play, 91-yard scoring drive was highlighted by a 50-yard reception by Antonio Brown on a tipped ball. After a Zane Gonzalez field goal brought the Browns within 14-10 early in the third quarter, the Steelers drove down the field again. Roethlisberger threw a second touchdown pass to James to put them up by 11, 21-10. The drive was boosted by a 41-yard pass interference penalty on Browns cornerback Jamar Taylor on a deep pass intended for Brown. The score remained 21-10 until under four minutes remained in the game, when Kizer was able to throw his first career touchdown pass to Corey Coleman. A two-point conversion run by Isaiah Crowell brought the Browns to within a field goal, 21-18. The Browns did not get a chance to score again, however, as the Steelers were able to run out the clock after a long pass from Roethlisberger to Brown. Browns head coach Hue Jackson challenged the ruling; however, the catch call on the field was upheld. The 13th-straight season-opening loss extended an NFL record for the Browns, who also fell to 1-18 in season openers since returning to the league in 1999.  The team also lost their 12th straight game against a divisional opponent.  The team started 0-1.",
+    "response": "10",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "70ff6095-aab3-45ad-83d0-03a302345f66",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_8fac9dea-d6e7-4439-b822-943cab0abe47",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which group from the census is smaller: German or Irish?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "German",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "8fac9dea-d6e7-4439-b822-943cab0abe47",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_008c309d-84bf-42c6-8123-376d749d50bd",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many total yards were played in the fourth quarter that resulted in a score?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "12",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "008c309d-84bf-42c6-8123-376d749d50bd",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_3ae07499-28e3-4c35-b1bd-d1a89cf3db36",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team won the game, Patriots or Packers?",
+    "context": "Trying to rebound from back-to-back home losses, the Patriots traveled to Lambeau Field for a Week 11 showdown with the Green Bay Packers.  In the first quarter, Brady hooked up with Graham on a two-yard touchdown pass for the only score of the period.  In the second quarter, Dillon got a one-yard touchdown run, while Brady hooked up with Caldwell on a 54-yard touchdown pass.  Late in the quarter Packers quarterback Brett Favre was sacked by Tedy Bruschi and was knocked out of the game with injury to his right (throwing) wrist.  In the third quarter, Brady threw an eight-yard touchdown pass to Watson for the only score of the period.  In the fourth quarter, New England put the game away with Brady throwing his fourth touchdown pass of the day to Maroney, a 19-yard strike.  With the win, the Patriots improved to 7-3.",
+    "response": "['Packers']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "3ae07499-28e3-4c35-b1bd-d1a89cf3db36",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_660cbd19-c845-4ba4-9921-671d15dbcaa3",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many touchdowns did Crabtree catch?",
+    "context": "The Raiders traveled to Baltimore looking to win their third straight road game to open the season for the first time since 2000. The Ravens, undefeated on the season, looked to continue their good start. The Raiders jumped out early, taking a lead on a six-yard touchdown pass to Seth Roberts from Derek Carr. A Baltimore field goal tightened the lead before Carr hit Michael Crabtree for his first of three touchdown scores on the day, and the Raiders took a 14-6 lead to the half as the Raiders defense held the Ravens in check. Baltimore answered in the third quarter, pulling within two on a Joe Flacco one-yard touchdown run. Crabtree again answered for the Raiders on a 13-yard pass from Carr. However, the Raiders defense allowed a 52-yard pass and catch from Flacco to Steve Smith Sr. and the Ravens pulled within two after failing to convert on the two-point conversion. The Raiders lead tightened to 21-19. The Ravens struck again following a fumble by Raiders rookie running back DeAndre Washington and Terrance West scored three-yard touchdown run to take the Ravens first lead of the game 27-21. The Raiders answered, driving down the field before Carr hit Crabtree from 23 yards out. The Raiders took the lead 28-27. As time was running out, the Ravens looked for the game-winning field goal, but the Raiders defense held and the Raiders moved to 3-1 for the first time since 2000. The three-touchdown game marked Crabtree's first career three-touchdown game. Carr finished with four touchdowns on 199 yards passing. The Raiders defense, much maligned on the season, gave up 412 yards, but stopped the Ravens when needed.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "660cbd19-c845-4ba4-9921-671d15dbcaa3",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_d33e83dc-41d1-4545-8d27-5a6827c1de8e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards were all Brady's TD passes combined?",
+    "context": "Trying to snap a two-game skid, the Bills flew to Gillette Stadium for a Week 3 divisional fight with the New England Patriots.  In the first quarter, QB J. P. Losman was immediately injured on the first offensive play of the game.  He would finish the series, but ended up on the bench for the rest of the game.  After New England took the lead with kicker Stephen Gostkowski's 24-yard field goal, rookie QB Trent Edwards played the rest of the game for Buffalo.  The Bills would get their only score of the game as RB Marshawn Lynch got an 8-yard TD run, and a Rian Lindell extra point put the Bills ahead surprisingly 7-3.  However, in the second quarter, the Patriots were able to open up their running game when Bills rookie standout Paul Posluszny was lost due to a broken arm. This left passing lanes open, and for the rest of the game, the Patriots dominated. QB Tom Brady's 8-yard TD pass to TE Benjamin Watson and a 3-yard TD pass to WR Randy Moss made it 17-7 at the half.  In the third quarter, New England continued its conquest with Brady's 4-yard TD pass to WR Jabar Gaffney and RB Sammy Morris' 4-yard TD run.  In the fourth quarter, the Patriots ended the day with Brady and Moss hooking up with each other again on a 45-yard TD pass.",
+    "response": "60",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "d33e83dc-41d1-4545-8d27-5a6827c1de8e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_e9dc8976-a720-42d4-a109-850435841ad0",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many total yards were kicked by Olindo Mare?",
+    "context": "The Seahawks' third game was played at home ground when they played their former division rival, the San Diego Chargers. In the second quarter Seattle took the early lead when kicker Olindo Mare made a 23-yard field goal. Then QB Matt Hasselbeck completed a 9-yard TD pass to TE John Carlson. This was followed in the third quarter by RB Leon Washington returning a kickoff 101 yards to the endzone for a touchdown. The lead was broken down with QB Philip Rivers getting a 3-yard TD pass to WR Malcolm Floyd, followed by Hasselbeck getting sacked by ILB Brandon Siler in the endzone for a safety. Then kicker Nate Kaeding made a 29-yard field goal. The Seahawks increased their lead when Mare made a 23-yard field goal, but the Chargers replied and tied the game when Rivers found TE Antonio Gates on a 12-yard TD pass. (With a successful 2-point conversion as Rivers found WR Legedu Naanee). Before the clock struck zero Seattle took the winning score as RB Leon Washington returned his second kickoff of the game into the endzone running 99 yards for a touchdown. Rivers and the Chargers attempted to make a comeback with less than a minute left, but was picked off by rookie Earl Thomas to seal the win for Seattle.",
+    "response": "46",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "e9dc8976-a720-42d4-a109-850435841ad0",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_c81bc7a0-3a0d-473e-b2ab-45bb769c7505",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which player had the longest touchdown play of the first half?",
+    "context": "The Browns dropped their 13th consecutive season-opening game with a 21-18 loss to the Steelers. The scoring began early in the first quarter when Pittsburgh's Tyler Matakevich blocked a Britton Colquitt punt, knocking the ball into the end zone where it was recovered by Anthony Chickillo for a touchdown. The Browns were able to tie the score by the end of the first quarter, however, as rookie quarterback DeShone Kizer orchestrated a 12-play drive that ended when he scored on a 1-yard touchdown run. The game stayed at 7-7 through most of the second quarter, until the Steelers quarterback Ben Roethlisberger connected with tight end Jesse James on a 4-yard touchdown with 45 seconds left in the first half. The 7-play, 91-yard scoring drive was highlighted by a 50-yard reception by Antonio Brown on a tipped ball. After a Zane Gonzalez field goal brought the Browns within 14-10 early in the third quarter, the Steelers drove down the field again. Roethlisberger threw a second touchdown pass to James to put them up by 11, 21-10. The drive was boosted by a 41-yard pass interference penalty on Browns cornerback Jamar Taylor on a deep pass intended for Brown. The score remained 21-10 until under four minutes remained in the game, when Kizer was able to throw his first career touchdown pass to Corey Coleman. A two-point conversion run by Isaiah Crowell brought the Browns to within a field goal, 21-18. The Browns did not get a chance to score again, however, as the Steelers were able to run out the clock after a long pass from Roethlisberger to Brown. Browns head coach Hue Jackson challenged the ruling; however, the catch call on the field was upheld. The 13th-straight season-opening loss extended an NFL record for the Browns, who also fell to 1-18 in season openers since returning to the league in 1999.  The team also lost their 12th straight game against a divisional opponent.  The team started 0-1.",
+    "response": "['Antonio Brown']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "c81bc7a0-3a0d-473e-b2ab-45bb769c7505",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_1a7e9f62-3033-4d25-ba1a-3acfaa190811",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Wich team won the game?",
+    "context": "The Raiders traveled to Baltimore looking to win their third straight road game to open the season for the first time since 2000. The Ravens, undefeated on the season, looked to continue their good start. The Raiders jumped out early, taking a lead on a six-yard touchdown pass to Seth Roberts from Derek Carr. A Baltimore field goal tightened the lead before Carr hit Michael Crabtree for his first of three touchdown scores on the day, and the Raiders took a 14-6 lead to the half as the Raiders defense held the Ravens in check. Baltimore answered in the third quarter, pulling within two on a Joe Flacco one-yard touchdown run. Crabtree again answered for the Raiders on a 13-yard pass from Carr. However, the Raiders defense allowed a 52-yard pass and catch from Flacco to Steve Smith Sr. and the Ravens pulled within two after failing to convert on the two-point conversion. The Raiders lead tightened to 21-19. The Ravens struck again following a fumble by Raiders rookie running back DeAndre Washington and Terrance West scored three-yard touchdown run to take the Ravens first lead of the game 27-21. The Raiders answered, driving down the field before Carr hit Crabtree from 23 yards out. The Raiders took the lead 28-27. As time was running out, the Ravens looked for the game-winning field goal, but the Raiders defense held and the Raiders moved to 3-1 for the first time since 2000. The three-touchdown game marked Crabtree's first career three-touchdown game. Carr finished with four touchdowns on 199 yards passing. The Raiders defense, much maligned on the season, gave up 412 yards, but stopped the Ravens when needed.",
+    "response": "['Ravens']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "1a7e9f62-3033-4d25-ba1a-3acfaa190811",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_bbd452c6-f047-4f57-97a0-9608d255846a",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who had more touchdowns Crabtree or Carr?",
+    "context": "The Raiders traveled to Baltimore looking to win their third straight road game to open the season for the first time since 2000. The Ravens, undefeated on the season, looked to continue their good start. The Raiders jumped out early, taking a lead on a six-yard touchdown pass to Seth Roberts from Derek Carr. A Baltimore field goal tightened the lead before Carr hit Michael Crabtree for his first of three touchdown scores on the day, and the Raiders took a 14-6 lead to the half as the Raiders defense held the Ravens in check. Baltimore answered in the third quarter, pulling within two on a Joe Flacco one-yard touchdown run. Crabtree again answered for the Raiders on a 13-yard pass from Carr. However, the Raiders defense allowed a 52-yard pass and catch from Flacco to Steve Smith Sr. and the Ravens pulled within two after failing to convert on the two-point conversion. The Raiders lead tightened to 21-19. The Ravens struck again following a fumble by Raiders rookie running back DeAndre Washington and Terrance West scored three-yard touchdown run to take the Ravens first lead of the game 27-21. The Raiders answered, driving down the field before Carr hit Crabtree from 23 yards out. The Raiders took the lead 28-27. As time was running out, the Ravens looked for the game-winning field goal, but the Raiders defense held and the Raiders moved to 3-1 for the first time since 2000. The three-touchdown game marked Crabtree's first career three-touchdown game. Carr finished with four touchdowns on 199 yards passing. The Raiders defense, much maligned on the season, gave up 412 yards, but stopped the Ravens when needed.",
+    "response": "['Crabtree']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "bbd452c6-f047-4f57-97a0-9608d255846a",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_4600e413-5dc2-480f-a561-631214c52782",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "When did Momchil die?",
+    "context": "In 1344, Momchil, the independent Bulgarian ruler of the Rhodope and Aegean regions, whose army grew to 2,000 men, took an important role in the Byzantine civil war. While at first he supported John Kantakouzenos, from the spring of 1344 Momchil reneged, provoked by the aggression of the Ottoman allies. In June he defeated the Ottoman fleet near the Portogalos bay. According to sources, at night the Bulgarian ruler sent boats to burn the anchored Ottoman ships and soon after he defeated the army of Kantakouzenos at Mosynopolis. Probably the first local ruler to become aware of the impending Ottoman threat, Momchil unsuccessfully pleaded with the emperors of Bulgaria and Byzantium for help. Even though his troops continued the resistance in the Eastern Rhodopes, in May 1345 the Turks led by Umur Beg marched from Asia Minor and devastated Bulgarian territories driving away people and livestock. Soon after, on 7 July 1345, Ottoman forces under Umur Beg defeated Momchil's army in the battle of Peritor near his capital Xanthi. Sources attest that the independent ruler perished in the battle without leaving asuccessor, and with little political will or leadership left to counter the Ottoman invasion.",
+    "response": "5 July 1345",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "4600e413-5dc2-480f-a561-631214c52782",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_32d77b6d-b109-40b7-bc0f-99803277fbcd",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who kicked the second longest field goal?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "Lawrence Tynes",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "32d77b6d-b109-40b7-bc0f-99803277fbcd",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_43989606-830f-4a57-a506-2a751316d2e6",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many percent were not  American?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "92.1",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "43989606-830f-4a57-a506-2a751316d2e6",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_63d298a2-5895-4a11-9c8e-7e780952cce0",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many fumbles did the game have in total?",
+    "context": "San Francisco kept Detroit in the game with missed opportunities, then made just enough plays for a rare two-game winning streak and its first road win. RB Frank Gore set a franchise record with 148 yards rushing in the first half and scored on a 61-yard run before leaving with a concussion. San Francisco led 13-3 at halftime after scoring on three of its first four drives, wishing it had a bigger lead after out gaining Detroit 247-102 yards and recovering a fumble without giving up a turnover. The 49ers had chances to go ahead big in the third quarter because Detroit had two turnovers on its first three plays, but they came away with only a field goal and a 13-point lead. Gore then caught a 7-yard pass, wobbled off the field and didn't return. QB Alex Smith's fumble midway through the third quarter set up a score that helped the Lions get back in the game. The 49ers drove down the field to set up K Joe Nedney's fourth field goal, a key score because it made Detroit go for a TD instead of kicking a tying field goal late in the game. S Keith Lewis intercepted QB Jon Kitna's pass at the 49ers' 2 with 2&#189; minutes left and San Francisco now 4-5 picked up the one first down it needed to seal the game, winning consecutive games for the second time since 2003. RB Frank Gore finished with career-high 159 yards rushing and San Francisco's QB Alex Smith was 14 of 20 for 136 yards with a fumble. WR Arnaz Battle caught six passes for 55 yards, and converted a third-and-4 on the final drive to allow the 49ers to run out the clock. The 49ers' defense again came up huge, allowing only 273 total offensive yards and forcing 4 turnovers. LB Brandon Moore was yet again the story, leading the team with 9 tackles, 2 sacks and forcing 2 turnovers. With the win, the 49ers advanced to 4-5.",
+    "response": "4",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "63d298a2-5895-4a11-9c8e-7e780952cce0",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_740f740f-b4e2-4b56-a3df-ee484e0c85c3",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many points did Oakland win by?",
+    "context": "The Raiders traveled to Baltimore looking to win their third straight road game to open the season for the first time since 2000. The Ravens, undefeated on the season, looked to continue their good start. The Raiders jumped out early, taking a lead on a six-yard touchdown pass to Seth Roberts from Derek Carr. A Baltimore field goal tightened the lead before Carr hit Michael Crabtree for his first of three touchdown scores on the day, and the Raiders took a 14-6 lead to the half as the Raiders defense held the Ravens in check. Baltimore answered in the third quarter, pulling within two on a Joe Flacco one-yard touchdown run. Crabtree again answered for the Raiders on a 13-yard pass from Carr. However, the Raiders defense allowed a 52-yard pass and catch from Flacco to Steve Smith Sr. and the Ravens pulled within two after failing to convert on the two-point conversion. The Raiders lead tightened to 21-19. The Ravens struck again following a fumble by Raiders rookie running back DeAndre Washington and Terrance West scored three-yard touchdown run to take the Ravens first lead of the game 27-21. The Raiders answered, driving down the field before Carr hit Crabtree from 23 yards out. The Raiders took the lead 28-27. As time was running out, the Ravens looked for the game-winning field goal, but the Raiders defense held and the Raiders moved to 3-1 for the first time since 2000. The three-touchdown game marked Crabtree's first career three-touchdown game. Carr finished with four touchdowns on 199 yards passing. The Raiders defense, much maligned on the season, gave up 412 yards, but stopped the Ravens when needed.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "740f740f-b4e2-4b56-a3df-ee484e0c85c3",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_9c7132be-5b44-40e9-9bbe-39c14a86a4d1",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team scored the least points in the first half?",
+    "context": "Hoping to break their current losing streak the Cowboys played on home ground for an Interconference duel with the Jaguars. In the first quarter the Cowboys took the lead as kicker David Buehler hit a 34-yard field goal. But they fell behind with QB David Garrard getting a 10-yard TD pass to WR Mike Sims-Walker. In the second quarter, the Cowboys struggled further with Garrard finding TE Marcedes Lewis on a 42-yard TD pass, then in the third quarter he found WR Mike Thomas on a 15-yard TD pass, and then he found Lewis again on a 9-yard TD pass. The Cowboys responded in the 4th quarter with RB Marion Barber getting a 1-yard TD run. But the Jaguars scored again with Garrard scrambling 2 yards to the endzone for a touchdown. The Cowboys replied with QB Jon Kitna making an 8-yard TD pass to TE Jason Witten.",
+    "response": "['Jaguars']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "9c7132be-5b44-40e9-9bbe-39c14a86a4d1",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_f5f7dea7-cd51-467f-8ad7-5ed82cc4324c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which ancestral groups are at least 10%?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "['German', 'Italian']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "f5f7dea7-cd51-467f-8ad7-5ed82cc4324c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_998621b9-8bbd-43ef-a77d-78a2a6dd69b8",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team got on the board first?",
+    "context": "In week 6, the Lions hosted the NFC West Division-leading San Francisco 49ers. The Lions struck first, when Jason Hanson kicked a 25-yard field goal that came after a San Francisco turnover. Detroit added to their lead when Brandon Pettigrew caught a 16-yard TD pass. In the second quarter, the 49ers finally got on the board with a 1-yard TD run by Frank Gore. San Francisco received a safety when Aldon Smith sacked Matthew Stafford in the end zone. The final points of the first half came just before intermission when David Akers of the 49ers kicked a 55-yard field goal, putting the Lions down at halftime for the fourth consecutive week. After the break, Detroit scored on a 24-yard field goal. San Francisco responded with a field goal of their own, this one from 31 yards out. In the fourth quarter, the Lions' Nate Burleson caught a 5-yard TD pass; the Lions went for a 2-point conversion but Calvin Johnson failed to catch Matthew Stafford's pass. In the final 2 minutes, the 49ers rallied from behind, first with a 6-yard TD catch by Delanie Walker, then a 37-yard field goal by David Akers, putting them up 25-19. With 1:02 left in the game, the Lions attempted another comeback, but San Francisco's defense held them off, handing Detroit its first loss of the season as the team fell to 5-1 and 2nd place in the NFC North. After the game, coaches Jim Schwartz and Jim Harbaugh got into an argument after Schwartz claimed Harbaugh pushed him out of the way when the two coaches were shaking hands.",
+    "response": "49ers",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "998621b9-8bbd-43ef-a77d-78a2a6dd69b8",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_7999cb17-682b-4e55-a068-430d207a993f",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many field goals did Graham Gano have in the first half of the game?",
+    "context": "The Panthers started off their season by making their first return to Levi's Stadium since losing to the Denver Broncos in Super Bowl 50. Late in the first quarter Cam Newton threw a 40-yard touchdown to Russell Sheppard followed by a Graham Gano field goal. The Panthers scored six more points in the second quarter with two field goals. In the third Jonathan Stewart scored a touchdown, followed by another Gano field goal. With 3:14 left to go in the third quarter, Gano made his third field goal of the day making the score 23-0. Robbie Gould's kick with thirteen seconds to go gave the 49ers their first points of the game. Neither the Panthers or 49ers scored in the fourth quarter, resulting in Carolina defeating San Francisco 23-3. They improved to 1-0.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "7999cb17-682b-4e55-a068-430d207a993f",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_614f2439-4e9a-44ab-addb-4059057af0b7",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team had a safety scored on them in the first half??",
+    "context": "In week 6, the Lions hosted the NFC West Division-leading San Francisco 49ers. The Lions struck first, when Jason Hanson kicked a 25-yard field goal that came after a San Francisco turnover. Detroit added to their lead when Brandon Pettigrew caught a 16-yard TD pass. In the second quarter, the 49ers finally got on the board with a 1-yard TD run by Frank Gore. San Francisco received a safety when Aldon Smith sacked Matthew Stafford in the end zone. The final points of the first half came just before intermission when David Akers of the 49ers kicked a 55-yard field goal, putting the Lions down at halftime for the fourth consecutive week. After the break, Detroit scored on a 24-yard field goal. San Francisco responded with a field goal of their own, this one from 31 yards out. In the fourth quarter, the Lions' Nate Burleson caught a 5-yard TD pass; the Lions went for a 2-point conversion but Calvin Johnson failed to catch Matthew Stafford's pass. In the final 2 minutes, the 49ers rallied from behind, first with a 6-yard TD catch by Delanie Walker, then a 37-yard field goal by David Akers, putting them up 25-19. With 1:02 left in the game, the Lions attempted another comeback, but San Francisco's defense held them off, handing Detroit its first loss of the season as the team fell to 5-1 and 2nd place in the NFC North. After the game, coaches Jim Schwartz and Jim Harbaugh got into an argument after Schwartz claimed Harbaugh pushed him out of the way when the two coaches were shaking hands.",
+    "response": "['49ers']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "614f2439-4e9a-44ab-addb-4059057af0b7",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_a31ad985-79d4-47e0-92fc-adfeb0bf9b41",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "What war started first: Russo-Crimean War or Smolensk War?",
+    "context": "1564: The city of Ryazan posad was burned.:47 1571: Russo-Crimean War 1572: Battle of Molodi 1591: Raid reaches Moscow. :116 1591: Artillery stops a raid at Kolomenskoy on the Bank Line. :52 1592: Suburbs of Moscow burned.  Russian troops were away fighting Sweden.:17 1598: Crimeans stopped by Bank Line, withdraw and sue for peace.:46 1614: Nogai raids within sight of Moscow. During the Time of Troubles so many captives were taken that the price of a slave at Kaffa dropped to fifteen or twenty gold pieces.:66 1618: Nogais release 15,000 captives in peace treaty with Moscow. 1632: Force from Livny ambushed by Tatars and Janissaries. 300 killed and the rest enslaved.:67 1632: 20,000 Tatars raid the south, as troops were shifted north for the Smolensk War.:76 1633: 30,000 Tatars cross Abatis and Bank lines. Thousands were captured from Oka region.:76 This was the last deep raid into Muscovy. :26 1635: Many small war parties invaded Russia south of Ryazan.:79 1637,41-43: Several raids were led by Nogais and Crimean nobles without permission of Khan.:90 1643: 600 Tatars and 200 Zaporozhian Cossacks raid Kozlov. 19 were killed, and 262 were captured.:23 1644: 20,000 The Tatars raid southern Muscovy, 10,000 captives.:91 1645: A raid captures 6,000 captives. It is claimed that the Turks encouraged these raids to obtain galley slaves for a war with Venice.:91",
+    "response": "Smolensk War",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "a31ad985-79d4-47e0-92fc-adfeb0bf9b41",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_64712c5c-b2b2-475e-82db-02e0ceea2016",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which players caught touchdown passes in the first half?",
+    "context": "Hoping to rebound from their tough overtime road loss to the Raiders, the Jets went home for a Week 8 duel with the Kansas City Chiefs.  In the first quarter, New York took flight as QB Brett Favre completed an 18-yard TD pass to RB Leon Washington.  In the second quarter, the Chiefs tied the game as QB Tyler Thigpen completed a 19-yard TD pass to TE Tony Gonzalez.  The Jets would answer with Washington getting a 60-yard TD run.  Kansas City closed out the half as Thigpen completed an 11-yard TD pass to WR Mark Bradley. In the third quarter, the Chiefs took the lead as kicker Connor Barth nailed a 30-yard field goal, yet New York replied with RB Thomas Jones getting a 1-yard TD run.  In the fourth quarter, Kansas City got the lead again as CB Brandon Flowers returned an interception 91 yards for a touchdown.  Fortunately, the Jets pulled out the win with Favre completing the game-winning 15-yard TD pass to WR Laveranues Coles. During halftime, the Jets celebrated the 40th anniversary of their Super Bowl III championship team.",
+    "response": "['Leon Washington', 'Tony Gonzalez', 'Thomas Jones']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "64712c5c-b2b2-475e-82db-02e0ceea2016",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_f703d43d-73fa-4fda-8913-d81bd5569700",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How long was the Lion's longest field goal?",
+    "context": "To start the season, the Lions traveled south to Tampa, Florida to take on the Tampa Bay Buccaneers. The Lions scored first in the first quarter with a 23-yard field goal by Jason Hanson. The Buccaneers tied it up with a 38-yard field goal by Connor Barth, then took the lead when Aqib Talib intercepted a pass from Matthew Stafford and ran it in 28 yards. The Lions responded with a 28-yard field goal. In the second quarter, Detroit took the lead with a 36-yard touchdown catch by Calvin Johnson, and later added more points when Tony Scheffler caught an 11-yard TD pass. Tampa Bay responded with a 31-yard field goal just before halftime. The second half was relatively quiet, with each team only scoring one touchdown. First, Detroit's Calvin Johnson caught a 1-yard pass in the third quarter. The game's final points came when Mike Williams of Tampa Bay caught a 5-yard pass.  The Lions won their regular season opener for the first time since 2007",
+    "response": "36-yard",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "f703d43d-73fa-4fda-8913-d81bd5569700",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_3fc35d66-fe98-42a2-9139-ed5b147d542e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many points were the latter at the end of the game?",
+    "context": "In week 6, the Lions hosted the NFC West Division-leading San Francisco 49ers. The Lions struck first, when Jason Hanson kicked a 25-yard field goal that came after a San Francisco turnover. Detroit added to their lead when Brandon Pettigrew caught a 16-yard TD pass. In the second quarter, the 49ers finally got on the board with a 1-yard TD run by Frank Gore. San Francisco received a safety when Aldon Smith sacked Matthew Stafford in the end zone. The final points of the first half came just before intermission when David Akers of the 49ers kicked a 55-yard field goal, putting the Lions down at halftime for the fourth consecutive week. After the break, Detroit scored on a 24-yard field goal. San Francisco responded with a field goal of their own, this one from 31 yards out. In the fourth quarter, the Lions' Nate Burleson caught a 5-yard TD pass; the Lions went for a 2-point conversion but Calvin Johnson failed to catch Matthew Stafford's pass. In the final 2 minutes, the 49ers rallied from behind, first with a 6-yard TD catch by Delanie Walker, then a 37-yard field goal by David Akers, putting them up 25-19. With 1:02 left in the game, the Lions attempted another comeback, but San Francisco's defense held them off, handing Detroit its first loss of the season as the team fell to 5-1 and 2nd place in the NFC North. After the game, coaches Jim Schwartz and Jim Harbaugh got into an argument after Schwartz claimed Harbaugh pushed him out of the way when the two coaches were shaking hands.",
+    "response": "25",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "3fc35d66-fe98-42a2-9139-ed5b147d542e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_d8cfed6e-9771-4d65-902c-9a28d526ed6c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which player caught a touchdown in both halfs?",
+    "context": "The Browns dropped their 13th consecutive season-opening game with a 21-18 loss to the Steelers. The scoring began early in the first quarter when Pittsburgh's Tyler Matakevich blocked a Britton Colquitt punt, knocking the ball into the end zone where it was recovered by Anthony Chickillo for a touchdown. The Browns were able to tie the score by the end of the first quarter, however, as rookie quarterback DeShone Kizer orchestrated a 12-play drive that ended when he scored on a 1-yard touchdown run. The game stayed at 7-7 through most of the second quarter, until the Steelers quarterback Ben Roethlisberger connected with tight end Jesse James on a 4-yard touchdown with 45 seconds left in the first half. The 7-play, 91-yard scoring drive was highlighted by a 50-yard reception by Antonio Brown on a tipped ball. After a Zane Gonzalez field goal brought the Browns within 14-10 early in the third quarter, the Steelers drove down the field again. Roethlisberger threw a second touchdown pass to James to put them up by 11, 21-10. The drive was boosted by a 41-yard pass interference penalty on Browns cornerback Jamar Taylor on a deep pass intended for Brown. The score remained 21-10 until under four minutes remained in the game, when Kizer was able to throw his first career touchdown pass to Corey Coleman. A two-point conversion run by Isaiah Crowell brought the Browns to within a field goal, 21-18. The Browns did not get a chance to score again, however, as the Steelers were able to run out the clock after a long pass from Roethlisberger to Brown. Browns head coach Hue Jackson challenged the ruling; however, the catch call on the field was upheld. The 13th-straight season-opening loss extended an NFL record for the Browns, who also fell to 1-18 in season openers since returning to the league in 1999.  The team also lost their 12th straight game against a divisional opponent.  The team started 0-1.",
+    "response": "['Antonio Brown']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "d8cfed6e-9771-4d65-902c-9a28d526ed6c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_c1084d20-57f9-4d4d-a154-766c1db9bde8",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more housing units are there than households?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "3500",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "c1084d20-57f9-4d4d-a154-766c1db9bde8",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_2512dbf6-02c6-46ec-92f0-dedbe76bcaf8",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which player caught the first TD of the game?",
+    "context": "Hoping to break their current losing streak the Cowboys played on home ground for an Interconference duel with the Jaguars. In the first quarter the Cowboys took the lead as kicker David Buehler hit a 34-yard field goal. But they fell behind with QB David Garrard getting a 10-yard TD pass to WR Mike Sims-Walker. In the second quarter, the Cowboys struggled further with Garrard finding TE Marcedes Lewis on a 42-yard TD pass, then in the third quarter he found WR Mike Thomas on a 15-yard TD pass, and then he found Lewis again on a 9-yard TD pass. The Cowboys responded in the 4th quarter with RB Marion Barber getting a 1-yard TD run. But the Jaguars scored again with Garrard scrambling 2 yards to the endzone for a touchdown. The Cowboys replied with QB Jon Kitna making an 8-yard TD pass to TE Jason Witten.",
+    "response": "['Marcedes Lewis']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "2512dbf6-02c6-46ec-92f0-dedbe76bcaf8",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_6bbf1900-2cef-4fc2-815b-91b661cce636",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many percent were not  American?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "8.1",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "6bbf1900-2cef-4fc2-815b-91b661cce636",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_e406d360-a2ee-4276-b041-c54746fb2352",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards was the only rushing touchdown?",
+    "context": "Trying to rebound from back-to-back home losses, the Patriots traveled to Lambeau Field for a Week 11 showdown with the Green Bay Packers.  In the first quarter, Brady hooked up with Graham on a two-yard touchdown pass for the only score of the period.  In the second quarter, Dillon got a one-yard touchdown run, while Brady hooked up with Caldwell on a 54-yard touchdown pass.  Late in the quarter Packers quarterback Brett Favre was sacked by Tedy Bruschi and was knocked out of the game with injury to his right (throwing) wrist.  In the third quarter, Brady threw an eight-yard touchdown pass to Watson for the only score of the period.  In the fourth quarter, New England put the game away with Brady throwing his fourth touchdown pass of the day to Maroney, a 19-yard strike.  With the win, the Patriots improved to 7-3.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "e406d360-a2ee-4276-b041-c54746fb2352",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_c7142117-4e5b-4aaf-a49c-fd1c6213e74a",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more housing units are there than families?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "22758",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "c7142117-4e5b-4aaf-a49c-fd1c6213e74a",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_af57318b-b375-48bd-98d7-633dcfa9b2a9",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many points did Carolina win by?",
+    "context": "The Panthers started off their season by making their first return to Levi's Stadium since losing to the Denver Broncos in Super Bowl 50. Late in the first quarter Cam Newton threw a 40-yard touchdown to Russell Sheppard followed by a Graham Gano field goal. The Panthers scored six more points in the second quarter with two field goals. In the third Jonathan Stewart scored a touchdown, followed by another Gano field goal. With 3:14 left to go in the third quarter, Gano made his third field goal of the day making the score 23-0. Robbie Gould's kick with thirteen seconds to go gave the 49ers their first points of the game. Neither the Panthers or 49ers scored in the fourth quarter, resulting in Carolina defeating San Francisco 23-3. They improved to 1-0.",
+    "response": "21",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "af57318b-b375-48bd-98d7-633dcfa9b2a9",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_073c9470-a5ea-48c4-b60f-f7affbbe0717",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who lost to Petrova in the Australian Open?",
+    "context": "Coming off their road win over the Redskins, the Chiefs went home, donned their Dallas Texans throwbacks, and played a Week 7 AFL Legacy game with the San Diego Chargers. Kansas City would find themselves trailing in the first quarter as Chargers quarterback Philip Rivers completed a 3-yard touchdown pass to wide receiver Malcom Floyd, followed by a 10-yard touchdown pass to wide receiver Vincent Jackson. San Diego would add onto their lead in the second quarter with a 20-yard and a 39-yard field goal from kicker Nate Kaeding. The Chiefs would get onto the board in the third quarter with quarterback Matt Cassel completing a 7-yard touchdown pass to wide receiver Dwayne Bowe, but the Chargers kept their momentum going with Rivers finding running back Darren Sproles on a 58-yard touchdown pass. In the fourth quarter, San Diego sealed the win with Kaeding's 19-yard field goal and fullback Jacob Hester recovering a blocked punt in the end zone for a touchdown. With the loss, Kansas City went into their bye week at 1-6. Larry Johnson was suspended for two weeks after he made offensive comments about Todd Haley and made offensive comments about homosexuals on Twitter and in public.",
+    "response": "['Maria Sharapova', 'Venus Williams', 'Svetlana Kuznetsova']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "073c9470-a5ea-48c4-b60f-f7affbbe0717",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_4c219d65-8fe2-4029-9da0-70f5e2857bdb",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many years before Navarrase used the captivity of John II?",
+    "context": "The French king, John II, had been held captive in England. The Treaty of Br\u00e9tigny set his ransom at 3\u00a0million\u00a0crowns and allowed for hostages to be held in lieu of John. The hostages included two of his sons, several princes and nobles, four inhabitants of Paris, and two citizens from each of the nineteen principal towns of France. While these hostages were held, John returned to France to try and raise funds to pay the ransom. In 1362 John's son Louis of Anjou, a hostage in English-held Calais, escaped captivity. So, with his stand-in hostage gone, John felt honor-bound to return to captivity in England. The French crown had been at odds with Navarre  since 1354, and in 1363 the Navarrese used the captivity of John II in London and the political weakness of the Dauphin to try to seize power. Although there was no formal treaty, Edward III supported the Navarrese moves, particularly as there was a prospect that he might gain control over the northern and western provinces as a consequence. With this in mind, Edward deliberately slowed the peace negotiations. In 1364, John II died in London, while still in honourable captivity. Charles V succeeded him as king of France. On 7 May 1364, one month after the dauphin's accession and three days before his coronation as Charles V, the Navarrese suffered a crushing defeat at the Battle of Cocherel.",
+    "response": "8",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "4c219d65-8fe2-4029-9da0-70f5e2857bdb",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_712e0c96-3255-49b7-b201-3ecee897b77f",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many in percent from the census weren't German?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "22.5",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "712e0c96-3255-49b7-b201-3ecee897b77f",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_f16c0ee7-f131-4a8b-a6ac-4d275ea68066",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many points did the buccaneers need to tie in the first?",
+    "context": "To start the season, the Lions traveled south to Tampa, Florida to take on the Tampa Bay Buccaneers. The Lions scored first in the first quarter with a 23-yard field goal by Jason Hanson. The Buccaneers tied it up with a 38-yard field goal by Connor Barth, then took the lead when Aqib Talib intercepted a pass from Matthew Stafford and ran it in 28 yards. The Lions responded with a 28-yard field goal. In the second quarter, Detroit took the lead with a 36-yard touchdown catch by Calvin Johnson, and later added more points when Tony Scheffler caught an 11-yard TD pass. Tampa Bay responded with a 31-yard field goal just before halftime. The second half was relatively quiet, with each team only scoring one touchdown. First, Detroit's Calvin Johnson caught a 1-yard pass in the third quarter. The game's final points came when Mike Williams of Tampa Bay caught a 5-yard pass.  The Lions won their regular season opener for the first time since 2007",
+    "response": "7",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "f16c0ee7-f131-4a8b-a6ac-4d275ea68066",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_b04a6f58-2860-445b-8770-d309a467fe30",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who threw the first touchdown pass of the game?",
+    "context": "To start the season, the Lions traveled south to Tampa, Florida to take on the Tampa Bay Buccaneers. The Lions scored first in the first quarter with a 23-yard field goal by Jason Hanson. The Buccaneers tied it up with a 38-yard field goal by Connor Barth, then took the lead when Aqib Talib intercepted a pass from Matthew Stafford and ran it in 28 yards. The Lions responded with a 28-yard field goal. In the second quarter, Detroit took the lead with a 36-yard touchdown catch by Calvin Johnson, and later added more points when Tony Scheffler caught an 11-yard TD pass. Tampa Bay responded with a 31-yard field goal just before halftime. The second half was relatively quiet, with each team only scoring one touchdown. First, Detroit's Calvin Johnson caught a 1-yard pass in the third quarter. The game's final points came when Mike Williams of Tampa Bay caught a 5-yard pass.  The Lions won their regular season opener for the first time since 2007",
+    "response": "Calvin Johnson",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "b04a6f58-2860-445b-8770-d309a467fe30",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_43e7bb76-2672-4be3-92d1-f17b2065ab93",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which player scored the fist points of the game?",
+    "context": "The Browns dropped their 13th consecutive season-opening game with a 21-18 loss to the Steelers. The scoring began early in the first quarter when Pittsburgh's Tyler Matakevich blocked a Britton Colquitt punt, knocking the ball into the end zone where it was recovered by Anthony Chickillo for a touchdown. The Browns were able to tie the score by the end of the first quarter, however, as rookie quarterback DeShone Kizer orchestrated a 12-play drive that ended when he scored on a 1-yard touchdown run. The game stayed at 7-7 through most of the second quarter, until the Steelers quarterback Ben Roethlisberger connected with tight end Jesse James on a 4-yard touchdown with 45 seconds left in the first half. The 7-play, 91-yard scoring drive was highlighted by a 50-yard reception by Antonio Brown on a tipped ball. After a Zane Gonzalez field goal brought the Browns within 14-10 early in the third quarter, the Steelers drove down the field again. Roethlisberger threw a second touchdown pass to James to put them up by 11, 21-10. The drive was boosted by a 41-yard pass interference penalty on Browns cornerback Jamar Taylor on a deep pass intended for Brown. The score remained 21-10 until under four minutes remained in the game, when Kizer was able to throw his first career touchdown pass to Corey Coleman. A two-point conversion run by Isaiah Crowell brought the Browns to within a field goal, 21-18. The Browns did not get a chance to score again, however, as the Steelers were able to run out the clock after a long pass from Roethlisberger to Brown. Browns head coach Hue Jackson challenged the ruling; however, the catch call on the field was upheld. The 13th-straight season-opening loss extended an NFL record for the Browns, who also fell to 1-18 in season openers since returning to the league in 1999.  The team also lost their 12th straight game against a divisional opponent.  The team started 0-1.",
+    "response": "Tyler Matakevich",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "43e7bb76-2672-4be3-92d1-f17b2065ab93",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_ae7c4737-8662-471c-a3be-430ba8a0cd75",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards was the longest pass?",
+    "context": "Trying to snap a two-game skid, the Bills flew to Gillette Stadium for a Week 3 divisional fight with the New England Patriots.  In the first quarter, QB J. P. Losman was immediately injured on the first offensive play of the game.  He would finish the series, but ended up on the bench for the rest of the game.  After New England took the lead with kicker Stephen Gostkowski's 24-yard field goal, rookie QB Trent Edwards played the rest of the game for Buffalo.  The Bills would get their only score of the game as RB Marshawn Lynch got an 8-yard TD run, and a Rian Lindell extra point put the Bills ahead surprisingly 7-3.  However, in the second quarter, the Patriots were able to open up their running game when Bills rookie standout Paul Posluszny was lost due to a broken arm. This left passing lanes open, and for the rest of the game, the Patriots dominated. QB Tom Brady's 8-yard TD pass to TE Benjamin Watson and a 3-yard TD pass to WR Randy Moss made it 17-7 at the half.  In the third quarter, New England continued its conquest with Brady's 4-yard TD pass to WR Jabar Gaffney and RB Sammy Morris' 4-yard TD run.  In the fourth quarter, the Patriots ended the day with Brady and Moss hooking up with each other again on a 45-yard TD pass.",
+    "response": "44",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "ae7c4737-8662-471c-a3be-430ba8a0cd75",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_04e10d50-4ba2-4dd8-b6b6-0b54c37b9549",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many percent were not German?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "22.5",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "04e10d50-4ba2-4dd8-b6b6-0b54c37b9549",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_bfed1d83-121b-44ab-8355-8b77a43bcbb6",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who had the most receiving yards?",
+    "context": "Coming off their road win over the Redskins, the Chiefs went home, donned their Dallas Texans throwbacks, and played a Week 7 AFL Legacy game with the San Diego Chargers. Kansas City would find themselves trailing in the first quarter as Chargers quarterback Philip Rivers completed a 3-yard touchdown pass to wide receiver Malcom Floyd, followed by a 10-yard touchdown pass to wide receiver Vincent Jackson. San Diego would add onto their lead in the second quarter with a 20-yard and a 39-yard field goal from kicker Nate Kaeding. The Chiefs would get onto the board in the third quarter with quarterback Matt Cassel completing a 7-yard touchdown pass to wide receiver Dwayne Bowe, but the Chargers kept their momentum going with Rivers finding running back Darren Sproles on a 58-yard touchdown pass. In the fourth quarter, San Diego sealed the win with Kaeding's 19-yard field goal and fullback Jacob Hester recovering a blocked punt in the end zone for a touchdown. With the loss, Kansas City went into their bye week at 1-6. Larry Johnson was suspended for two weeks after he made offensive comments about Todd Haley and made offensive comments about homosexuals on Twitter and in public.",
+    "response": "['Vincent Jackson']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "bfed1d83-121b-44ab-8355-8b77a43bcbb6",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_cf4e37e5-c287-4b28-a65e-15aa2818e5c5",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many percent were not Polish?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "92",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "cf4e37e5-c287-4b28-a65e-15aa2818e5c5",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_e1488f18-19ee-413d-a511-3d885d8bcfa0",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more touchdowns were scored in the first half compared to the second half?",
+    "context": "The Browns dropped their 13th consecutive season-opening game with a 21-18 loss to the Steelers. The scoring began early in the first quarter when Pittsburgh's Tyler Matakevich blocked a Britton Colquitt punt, knocking the ball into the end zone where it was recovered by Anthony Chickillo for a touchdown. The Browns were able to tie the score by the end of the first quarter, however, as rookie quarterback DeShone Kizer orchestrated a 12-play drive that ended when he scored on a 1-yard touchdown run. The game stayed at 7-7 through most of the second quarter, until the Steelers quarterback Ben Roethlisberger connected with tight end Jesse James on a 4-yard touchdown with 45 seconds left in the first half. The 7-play, 91-yard scoring drive was highlighted by a 50-yard reception by Antonio Brown on a tipped ball. After a Zane Gonzalez field goal brought the Browns within 14-10 early in the third quarter, the Steelers drove down the field again. Roethlisberger threw a second touchdown pass to James to put them up by 11, 21-10. The drive was boosted by a 41-yard pass interference penalty on Browns cornerback Jamar Taylor on a deep pass intended for Brown. The score remained 21-10 until under four minutes remained in the game, when Kizer was able to throw his first career touchdown pass to Corey Coleman. A two-point conversion run by Isaiah Crowell brought the Browns to within a field goal, 21-18. The Browns did not get a chance to score again, however, as the Steelers were able to run out the clock after a long pass from Roethlisberger to Brown. Browns head coach Hue Jackson challenged the ruling; however, the catch call on the field was upheld. The 13th-straight season-opening loss extended an NFL record for the Browns, who also fell to 1-18 in season openers since returning to the league in 1999.  The team also lost their 12th straight game against a divisional opponent.  The team started 0-1.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "e1488f18-19ee-413d-a511-3d885d8bcfa0",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_e3d18516-fe9f-45af-bfa7-f1bde37ab170",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which player scored a special teams touchdown?",
+    "context": "Coming off their road win over the Redskins, the Chiefs went home, donned their Dallas Texans throwbacks, and played a Week 7 AFL Legacy game with the San Diego Chargers. Kansas City would find themselves trailing in the first quarter as Chargers quarterback Philip Rivers completed a 3-yard touchdown pass to wide receiver Malcom Floyd, followed by a 10-yard touchdown pass to wide receiver Vincent Jackson. San Diego would add onto their lead in the second quarter with a 20-yard and a 39-yard field goal from kicker Nate Kaeding. The Chiefs would get onto the board in the third quarter with quarterback Matt Cassel completing a 7-yard touchdown pass to wide receiver Dwayne Bowe, but the Chargers kept their momentum going with Rivers finding running back Darren Sproles on a 58-yard touchdown pass. In the fourth quarter, San Diego sealed the win with Kaeding's 19-yard field goal and fullback Jacob Hester recovering a blocked punt in the end zone for a touchdown. With the loss, Kansas City went into their bye week at 1-6. Larry Johnson was suspended for two weeks after he made offensive comments about Todd Haley and made offensive comments about homosexuals on Twitter and in public.",
+    "response": "['Darren Sproles']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "e3d18516-fe9f-45af-bfa7-f1bde37ab170",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_33f06667-614b-4ca2-b186-161628435f4d",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more people are there than housing units?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "135450",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "33f06667-614b-4ca2-b186-161628435f4d",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_f2570d0b-043f-4984-9273-d1d0e84ba760",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which ancestral group is smaller: English or Italian?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "['Italian']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "f2570d0b-043f-4984-9273-d1d0e84ba760",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_16916544-1e32-4dc2-affb-924530416d96",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many quarters  did Trent Edwards play?",
+    "context": "Trying to snap a two-game skid, the Bills flew to Gillette Stadium for a Week 3 divisional fight with the New England Patriots.  In the first quarter, QB J. P. Losman was immediately injured on the first offensive play of the game.  He would finish the series, but ended up on the bench for the rest of the game.  After New England took the lead with kicker Stephen Gostkowski's 24-yard field goal, rookie QB Trent Edwards played the rest of the game for Buffalo.  The Bills would get their only score of the game as RB Marshawn Lynch got an 8-yard TD run, and a Rian Lindell extra point put the Bills ahead surprisingly 7-3.  However, in the second quarter, the Patriots were able to open up their running game when Bills rookie standout Paul Posluszny was lost due to a broken arm. This left passing lanes open, and for the rest of the game, the Patriots dominated. QB Tom Brady's 8-yard TD pass to TE Benjamin Watson and a 3-yard TD pass to WR Randy Moss made it 17-7 at the half.  In the third quarter, New England continued its conquest with Brady's 4-yard TD pass to WR Jabar Gaffney and RB Sammy Morris' 4-yard TD run.  In the fourth quarter, the Patriots ended the day with Brady and Moss hooking up with each other again on a 45-yard TD pass.",
+    "response": "3",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "16916544-1e32-4dc2-affb-924530416d96",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_6bcc8ce2-8447-4dfe-ad8c-2597782d63cd",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards was the longest touchdown pass?",
+    "context": "Hoping to break their current losing streak the Cowboys played on home ground for an Interconference duel with the Jaguars. In the first quarter the Cowboys took the lead as kicker David Buehler hit a 34-yard field goal. But they fell behind with QB David Garrard getting a 10-yard TD pass to WR Mike Sims-Walker. In the second quarter, the Cowboys struggled further with Garrard finding TE Marcedes Lewis on a 42-yard TD pass, then in the third quarter he found WR Mike Thomas on a 15-yard TD pass, and then he found Lewis again on a 9-yard TD pass. The Cowboys responded in the 4th quarter with RB Marion Barber getting a 1-yard TD run. But the Jaguars scored again with Garrard scrambling 2 yards to the endzone for a touchdown. The Cowboys replied with QB Jon Kitna making an 8-yard TD pass to TE Jason Witten.",
+    "response": "34",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "6bcc8ce2-8447-4dfe-ad8c-2597782d63cd",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_38d480e4-9efc-4d20-93da-20a81f9eabf5",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many in percent from the census weren't Irish?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "87.1",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "38d480e4-9efc-4d20-93da-20a81f9eabf5",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_2744ab4d-e4d2-46ce-8160-b32be79e9045",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team got the first TD?",
+    "context": "The Raiders traveled to Baltimore looking to win their third straight road game to open the season for the first time since 2000. The Ravens, undefeated on the season, looked to continue their good start. The Raiders jumped out early, taking a lead on a six-yard touchdown pass to Seth Roberts from Derek Carr. A Baltimore field goal tightened the lead before Carr hit Michael Crabtree for his first of three touchdown scores on the day, and the Raiders took a 14-6 lead to the half as the Raiders defense held the Ravens in check. Baltimore answered in the third quarter, pulling within two on a Joe Flacco one-yard touchdown run. Crabtree again answered for the Raiders on a 13-yard pass from Carr. However, the Raiders defense allowed a 52-yard pass and catch from Flacco to Steve Smith Sr. and the Ravens pulled within two after failing to convert on the two-point conversion. The Raiders lead tightened to 21-19. The Ravens struck again following a fumble by Raiders rookie running back DeAndre Washington and Terrance West scored three-yard touchdown run to take the Ravens first lead of the game 27-21. The Raiders answered, driving down the field before Carr hit Crabtree from 23 yards out. The Raiders took the lead 28-27. As time was running out, the Ravens looked for the game-winning field goal, but the Raiders defense held and the Raiders moved to 3-1 for the first time since 2000. The three-touchdown game marked Crabtree's first career three-touchdown game. Carr finished with four touchdowns on 199 yards passing. The Raiders defense, much maligned on the season, gave up 412 yards, but stopped the Ravens when needed.",
+    "response": "The Ravens",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "2744ab4d-e4d2-46ce-8160-b32be79e9045",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_732eb5ab-1b8e-40be-b2fa-108ac60364c6",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which player scored the last touchdown of the game?",
+    "context": "Coming off their road win over the Lions, the Steelers went home for a divisional match with the Cleveland Browns.  After a scoreless first quarter, Pittsburgh came out striking in the second quarter as quarterback Ben Roethlisberger completed an 8-yard touchdown pass to tight end Heath Miller and a 52-yard touchdown pass to wide receiver Hines Ward.  The Browns immediately struck back as wide receiver Joshua Cribbs returned a kickoff 98&#160;yards for a touchdown. Pittsburgh would close out the half with a 32-yard field goal from kicker Jeff Reed. Cleveland tried to catch up as quarterback Derek Anderson completed a 1-yard touchdown pass to fullback Lawrence Vickers, yet the Steelers answered with a 2-yard touchdown run from running back Rashard Mendenhall.  Pittsburgh would then close the game out in the fourth quarter with Reed kicking a 39-yard field goal. With their 12th-straight win over the Browns, the Steelers improved to 4-2.  With the Ravens' loss to the Vikings, and the Bengals' loss to the Texans that same week, the Steelers are now tied with the Bengals at the top of the AFC North.",
+    "response": "Ben Roethlisberger",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "732eb5ab-1b8e-40be-b2fa-108ac60364c6",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_8627332d-2ef1-4de7-babd-1106a8a5694b",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards longer was Philip Rivers' second touchdown pass compared to Matt Hasselbeck's touchdown pass?",
+    "context": "The Seahawks' third game was played at home ground when they played their former division rival, the San Diego Chargers. In the second quarter Seattle took the early lead when kicker Olindo Mare made a 23-yard field goal. Then QB Matt Hasselbeck completed a 9-yard TD pass to TE John Carlson. This was followed in the third quarter by RB Leon Washington returning a kickoff 101 yards to the endzone for a touchdown. The lead was broken down with QB Philip Rivers getting a 3-yard TD pass to WR Malcolm Floyd, followed by Hasselbeck getting sacked by ILB Brandon Siler in the endzone for a safety. Then kicker Nate Kaeding made a 29-yard field goal. The Seahawks increased their lead when Mare made a 23-yard field goal, but the Chargers replied and tied the game when Rivers found TE Antonio Gates on a 12-yard TD pass. (With a successful 2-point conversion as Rivers found WR Legedu Naanee). Before the clock struck zero Seattle took the winning score as RB Leon Washington returned his second kickoff of the game into the endzone running 99 yards for a touchdown. Rivers and the Chargers attempted to make a comeback with less than a minute left, but was picked off by rookie Earl Thomas to seal the win for Seattle.",
+    "response": "6",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "8627332d-2ef1-4de7-babd-1106a8a5694b",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_13c6b87f-9bcf-4928-9b6c-138b43560a33",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many field goals did Gould kick in the second half?",
+    "context": "The Panthers started off their season by making their first return to Levi's Stadium since losing to the Denver Broncos in Super Bowl 50. Late in the first quarter Cam Newton threw a 40-yard touchdown to Russell Sheppard followed by a Graham Gano field goal. The Panthers scored six more points in the second quarter with two field goals. In the third Jonathan Stewart scored a touchdown, followed by another Gano field goal. With 3:14 left to go in the third quarter, Gano made his third field goal of the day making the score 23-0. Robbie Gould's kick with thirteen seconds to go gave the 49ers their first points of the game. Neither the Panthers or 49ers scored in the fourth quarter, resulting in Carolina defeating San Francisco 23-3. They improved to 1-0.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "13c6b87f-9bcf-4928-9b6c-138b43560a33",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_90167be8-fae9-4b86-b242-ddba3319d6ef",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many in percent from the census weren't Italian?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "89.8",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "90167be8-fae9-4b86-b242-ddba3319d6ef",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_8aa1518e-e932-4286-81a2-fd7709e92085",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many years after John II returned to captivity did he die?",
+    "context": "The French king, John II, had been held captive in England. The Treaty of Br\u00e9tigny set his ransom at 3\u00a0million\u00a0crowns and allowed for hostages to be held in lieu of John. The hostages included two of his sons, several princes and nobles, four inhabitants of Paris, and two citizens from each of the nineteen principal towns of France. While these hostages were held, John returned to France to try and raise funds to pay the ransom. In 1362 John's son Louis of Anjou, a hostage in English-held Calais, escaped captivity. So, with his stand-in hostage gone, John felt honor-bound to return to captivity in England. The French crown had been at odds with Navarre  since 1354, and in 1363 the Navarrese used the captivity of John II in London and the political weakness of the Dauphin to try to seize power. Although there was no formal treaty, Edward III supported the Navarrese moves, particularly as there was a prospect that he might gain control over the northern and western provinces as a consequence. With this in mind, Edward deliberately slowed the peace negotiations. In 1364, John II died in London, while still in honourable captivity. Charles V succeeded him as king of France. On 7 May 1364, one month after the dauphin's accession and three days before his coronation as Charles V, the Navarrese suffered a crushing defeat at the Battle of Cocherel.",
+    "response": "3",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "8aa1518e-e932-4286-81a2-fd7709e92085",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_2b399ed9-0140-4e09-9b60-d4c254dfd44c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many years after the Dutch returned to Brazil did the Portuguese continue to attack and prevent the Dutch from harvesting sugar?",
+    "context": "Surprised by such easy gains in the East, the Republic quickly decided to exploit Portugal's weakness in the Americas. In 1621 the Geoctroyeerde Westindische Compagnie  was created to take control of the sugar trade and colonise America . The Company benefited from a large investment in capital, drawing on the enthusiasm of the best financiers and capitalists of the Republic, such as Isaac de Pinto, by origin a Portuguese Jew. The Dutch West India Company would not, however, be as successful as its eastern counterpart. The Dutch invasion began in 1624 with the conquest of the then capital of the State of Brazil, the city of S\u00e3o Salvador da Bahia, but the Dutch conquest was short lived. In 1625, a joint Spanish-Portuguese fleet of 52 ships and 12,000 men rapidly recaptured Salvador. In 1630 the Dutch returned, and captured Olinda and then Recife, renamed Mauritsstadt, thus establishing the colony of New Holland. The Portuguese commander Matias de Albuquerque retreated his forces inland, to establish a camp dubbed Arraial do Bom Jesus. Until 1635, the Dutch were unable to harvest sugar due to Portuguese guerrilla attacks, and were virtually confined to the walled perimeter of the cities. Eventually, the Dutch evicted the Portuguese with the assistance of a local landlord named Domingos Fernandes Calabar, but on his retreat to Bahia, Matias de Albuquerque captured Calabar at Porto Calvo, and had him hang for treason. The Portuguese fought back two Dutch attacks on Bahia in 1638. Nonenetheless, by 1641 the Dutch captured S\u00e3o Lu\u00eds, leaving them in control of northwestern Brazil between Maranh\u00e3o and Sergipe in the south",
+    "response": "3",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "2b399ed9-0140-4e09-9b60-d4c254dfd44c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_629b40e4-cdb9-41e5-8674-98ee98e51003",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which happened first, the Treaty of Br\u00e9tigny or the Battle of Cocherel?",
+    "context": "The French king, John II, had been held captive in England. The Treaty of Br\u00e9tigny set his ransom at 3\u00a0million\u00a0crowns and allowed for hostages to be held in lieu of John. The hostages included two of his sons, several princes and nobles, four inhabitants of Paris, and two citizens from each of the nineteen principal towns of France. While these hostages were held, John returned to France to try and raise funds to pay the ransom. In 1362 John's son Louis of Anjou, a hostage in English-held Calais, escaped captivity. So, with his stand-in hostage gone, John felt honor-bound to return to captivity in England. The French crown had been at odds with Navarre  since 1354, and in 1363 the Navarrese used the captivity of John II in London and the political weakness of the Dauphin to try to seize power. Although there was no formal treaty, Edward III supported the Navarrese moves, particularly as there was a prospect that he might gain control over the northern and western provinces as a consequence. With this in mind, Edward deliberately slowed the peace negotiations. In 1364, John II died in London, while still in honourable captivity. Charles V succeeded him as king of France. On 7 May 1364, one month after the dauphin's accession and three days before his coronation as Charles V, the Navarrese suffered a crushing defeat at the Battle of Cocherel.",
+    "response": "Battle of Cocherel",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "629b40e4-cdb9-41e5-8674-98ee98e51003",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_f92c49c4-f8e3-4b17-bc7e-d5849ae0c72c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which players made at least one field goal?",
+    "context": "Hoping to break their current losing streak the Cowboys played on home ground for an Interconference duel with the Jaguars. In the first quarter the Cowboys took the lead as kicker David Buehler hit a 34-yard field goal. But they fell behind with QB David Garrard getting a 10-yard TD pass to WR Mike Sims-Walker. In the second quarter, the Cowboys struggled further with Garrard finding TE Marcedes Lewis on a 42-yard TD pass, then in the third quarter he found WR Mike Thomas on a 15-yard TD pass, and then he found Lewis again on a 9-yard TD pass. The Cowboys responded in the 4th quarter with RB Marion Barber getting a 1-yard TD run. But the Jaguars scored again with Garrard scrambling 2 yards to the endzone for a touchdown. The Cowboys replied with QB Jon Kitna making an 8-yard TD pass to TE Jason Witten.",
+    "response": "['Jon Kitna']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "f92c49c4-f8e3-4b17-bc7e-d5849ae0c72c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_e04b971a-19b5-4be3-8d57-959eeb3d6afc",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "What did the Selective Draft Law Cases hold?",
+    "context": "In the United States, conscription began in 1917 and was generally well received, with a few pockets of opposition in isolated rural areas. The administration decided to rely primarily on conscription, rather than voluntary enlistment, to raise military manpower for when only 73,000 volunteers enlisted out of the initial 1 million target in the first six weeks of the war. In 1917 10 million men were registered. This was deemed to be inadequate, so age ranges were increased and exemptions reduced, and so by the end of 1918 this increased to 24 million men that were registered with nearly 3 million inducted into the military services. The draft was universal and included blacks on the same terms as whites, although they served in different units. In all 367,710 black Americans were drafted , compared to 2,442,586 white . Forms of resistance ranged from peaceful protest to violent demonstrations and from humble letter-writing campaigns asking for mercy to radical newspapers demanding reform. The most common tactics were dodging and desertion, and many communities sheltered and defended their draft dodgers as political heroes. Many socialists were jailed for \"obstructing the recruitment or enlistment service\". The most famous was Eugene Debs, head of the Socialist Party of America, who ran for president in 1920 from his prison cell. In 1917 a number of radicals and anarchists challenged the new draft law in federal court, arguing that it was a direct violation of the Thirteenth Amendment's prohibition against slavery and involuntary servitude. The Supreme Court unanimously upheld the constitutionality of the draft act in the Selective Draft Law Cases on January 7, 1918.",
+    "response": "unconstitutionality of the draft act",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "e04b971a-19b5-4be3-8d57-959eeb3d6afc",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_aa7a6a6a-56be-495d-b015-912fcaed1526",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who did the Rams loose to in the previous game?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "Chiefs",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "aa7a6a6a-56be-495d-b015-912fcaed1526",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_261a1db7-19e2-4ab5-b557-ca7d7209549e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "how many yards did pettigrew catch?",
+    "context": "In week 6, the Lions hosted the NFC West Division-leading San Francisco 49ers. The Lions struck first, when Jason Hanson kicked a 25-yard field goal that came after a San Francisco turnover. Detroit added to their lead when Brandon Pettigrew caught a 16-yard TD pass. In the second quarter, the 49ers finally got on the board with a 1-yard TD run by Frank Gore. San Francisco received a safety when Aldon Smith sacked Matthew Stafford in the end zone. The final points of the first half came just before intermission when David Akers of the 49ers kicked a 55-yard field goal, putting the Lions down at halftime for the fourth consecutive week. After the break, Detroit scored on a 24-yard field goal. San Francisco responded with a field goal of their own, this one from 31 yards out. In the fourth quarter, the Lions' Nate Burleson caught a 5-yard TD pass; the Lions went for a 2-point conversion but Calvin Johnson failed to catch Matthew Stafford's pass. In the final 2 minutes, the 49ers rallied from behind, first with a 6-yard TD catch by Delanie Walker, then a 37-yard field goal by David Akers, putting them up 25-19. With 1:02 left in the game, the Lions attempted another comeback, but San Francisco's defense held them off, handing Detroit its first loss of the season as the team fell to 5-1 and 2nd place in the NFC North. After the game, coaches Jim Schwartz and Jim Harbaugh got into an argument after Schwartz claimed Harbaugh pushed him out of the way when the two coaches were shaking hands.",
+    "response": "18",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "261a1db7-19e2-4ab5-b557-ca7d7209549e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_fff72e27-13c3-4f1d-8705-39c0548c0c7e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "When did the first success of a defeat happen for Momchil?",
+    "context": "In 1344, Momchil, the independent Bulgarian ruler of the Rhodope and Aegean regions, whose army grew to 2,000 men, took an important role in the Byzantine civil war. While at first he supported John Kantakouzenos, from the spring of 1344 Momchil reneged, provoked by the aggression of the Ottoman allies. In June he defeated the Ottoman fleet near the Portogalos bay. According to sources, at night the Bulgarian ruler sent boats to burn the anchored Ottoman ships and soon after he defeated the army of Kantakouzenos at Mosynopolis. Probably the first local ruler to become aware of the impending Ottoman threat, Momchil unsuccessfully pleaded with the emperors of Bulgaria and Byzantium for help. Even though his troops continued the resistance in the Eastern Rhodopes, in May 1345 the Turks led by Umur Beg marched from Asia Minor and devastated Bulgarian territories driving away people and livestock. Soon after, on 7 July 1345, Ottoman forces under Umur Beg defeated Momchil's army in the battle of Peritor near his capital Xanthi. Sources attest that the independent ruler perished in the battle without leaving asuccessor, and with little political will or leadership left to counter the Ottoman invasion.",
+    "response": "May",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "fff72e27-13c3-4f1d-8705-39c0548c0c7e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_a2a8ad0c-808e-479e-936e-1cfa6739b570",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many total yards of field goals did John Kasay make?",
+    "context": "Trying to rebound from their divisional home loss to the Buccaneers, the Panthers flew to the Louisiana Superdome for a Week 5 divisional duel with the winless New Orleans Saints. With QB Jake Delhomme out and done for the year with a right elbow injury, QB David Carr was given the start. In the first quarter, Carolina took the early lead with kicker John Kasay getting a 23-yard field goal. The Saints responded with kicker Olindo Mare getting a 25-yard field goal. In the second quarter, the Panthers went back into the lead with Kasay nailing a 35-yard field goal. New Orleans would respond with Mare kicking a 28-yard field goal. In the third quarter, Carolina trailed as Saints FB Mike Karney got a 2-yard TD run for the only score of the period. In the fourth quarter, the Panthers tied the game with Carr completing a 17-yard TD pass to WR Steve Smith. Afterwards, Carolina sealed the win in the final seconds with Kasay nailing a 52-yard field goal as time ran out.",
+    "response": "120",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "a2a8ad0c-808e-479e-936e-1cfa6739b570",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_fed63029-ef54-4fcc-b0a8-c8cdae29094c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards was the longest touchdown run of the game?",
+    "context": "The Seahawks' third game was played at home ground when they played their former division rival, the San Diego Chargers. In the second quarter Seattle took the early lead when kicker Olindo Mare made a 23-yard field goal. Then QB Matt Hasselbeck completed a 9-yard TD pass to TE John Carlson. This was followed in the third quarter by RB Leon Washington returning a kickoff 101 yards to the endzone for a touchdown. The lead was broken down with QB Philip Rivers getting a 3-yard TD pass to WR Malcolm Floyd, followed by Hasselbeck getting sacked by ILB Brandon Siler in the endzone for a safety. Then kicker Nate Kaeding made a 29-yard field goal. The Seahawks increased their lead when Mare made a 23-yard field goal, but the Chargers replied and tied the game when Rivers found TE Antonio Gates on a 12-yard TD pass. (With a successful 2-point conversion as Rivers found WR Legedu Naanee). Before the clock struck zero Seattle took the winning score as RB Leon Washington returned his second kickoff of the game into the endzone running 99 yards for a touchdown. Rivers and the Chargers attempted to make a comeback with less than a minute left, but was picked off by rookie Earl Thomas to seal the win for Seattle.",
+    "response": "99",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "fed63029-ef54-4fcc-b0a8-c8cdae29094c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_b097125c-5c97-497a-80a7-b9230d8244c5",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How long was Robbie Gould's field goal to end the first half?",
+    "context": "Coming off their bye week, the Bears traveled to Lambeau Field to play the Green Bay Packers in the 189th meeting between the two rivals. The Bears had struggled regarding scoring against Green Bay in the last nine games between the two prior to 2013, and including the 2010 NFC title game, had scored 127 points, an average of 14.11 points. The two teams entered with among the top three scoring offenses, with Chicago and Green Bay ranked second and third, respectively, with 30.4 and 30.3 points per game, both of which rank behind the Denver Broncos. Among the weapons of the Packers offense that the Bears must attempt to hinder was the running game, as Green Bay's rookie running back Eddie Lacy has recorded over 100 yards per game in the previous six during the season, along with quarterback Aaron Rodgers. One of Rodgers' skills is passing balls longer than 20 yards, and was 16 of 32 on these attempts, which was tied with Russell Wilson of the Seattle Seahawks for the highest percentage in the league; the Bears allowed 57 percent of opponents to throw for the aforementioned distance, the second-worst score in the NFL. However, both teams ranked in the bottom five in the NFL in pass rush, with the Bears being in last with only nine sacks. For Chicago, Matt Fort&#233; had gained 533 yards along with averaging 4.6 yards per run, while Josh McCown filled in for Jay Cutler. Since 2009, Bears quarterbacks besides Cutler had thrown a combined eight touchdowns and 21 interceptions against the Packers; in McCown's last start in 2011 against the Packers, he threw for 242 yards, a touchdown and two interceptions in a 35-21 losing effort. On the Packers' first drive, Rodgers failed to recognize the Bears' zone defense, having expected a man-to-man defense, and Shea McClellin escaped Don Barclay's block and, along with Isaiah Frey, pulled Rodgers down, who landed on his shoulder and injured his left collarbone, and was replaced by Seneca Wallace for the remainder of the game. Afterwards, Mason Crosby kicked the 30-yard field goal to give the Packers the lead. On Chicago's first drive, McCown escaped pressure from Mike Neal and threw towards Brandon Marshall for the 7-3 lead. Once the Packers got the ball back, Wallace's pass for Jordy Nelson was tipped and intercepted by Julius Peppers, and was returned 14 yards to Green Bay's 45-yard line, but after the Bears failed to convert on third down, Adam Podlesh's punt was blocked by Jamari Lattimore. Eventually, James Starks ran 32 yards for the touchdown. However, the Bears traveled 60 yards on two plays, and Fort&#233; scored on the 1-yard run. The Bears ended the first half with Robbie Gould's 24-yard field goal to expand the lead to 17-10. In the third quarter, the Packers forced the Bears to punt, and Lacy ran 56 yards to the Bears' 1, and scored on the ensuing play. On the eventual kickoff, the Packers successfully attempted a surprise onside kick, which was recovered by Lattimore. Crosby kicked a 23-yarder on the drive. On the Bears' next drive, McCown threw a six-yard pass to Alshon Jeffery, whose size kept the ball from being knocked away by Davon House. After both teams exchanged punts in the fourth quarter, on the Bears' next drive, began attempting to run out the clock. On 4th and 1 at the Bears' 32 with 7:50 remaining, Fort&#233; ran three yards for the conversion and continuing the drive, which ended with Gould's 27-yard field goal. The drive lasted 18 plays and took up 8:58, leaving only 50 seconds remaining in the game. Despite a 15-yard pass by Wallace to Nelson, sacks by Corey Wootton and McClellin ended the game with a 27-20 victory for the Bears. McCown ended the night completing 22 of 41 passes for 272 yards and two touchdowns, while Wallace completed 11 of 19 for 114 yards and an interception. The win marked the first time the Packers lost at home to an NFC North opponent since 2009, and the first win for the Bears at Lambeau Field since 2007.",
+    "response": "Robbie Gould's 27-yard field field goal",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "b097125c-5c97-497a-80a7-b9230d8244c5",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_169fab50-e3ff-4551-9ac0-18dd659e4250",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team won the game?",
+    "context": "Coming off their Bye Week, the Redskins avenged their Week 2 loss by defeating the Dallas Cowboys after a wild final minute of the fourth quarter which ended with a game-winning 47-yard field goal by kicker Nick Novak. With less than a minute left in the fourth quarter, Dallas kicker Mike Vanderjagt's field goal was blocked by newly signed Redskins cornerback Troy Vincent, and recovered by Redskins free safety Sean Taylor, who ran the ball down to the Dallas 45-yard line with no time remaining. During the runback by Taylor, Dallas offensive lineman Kyle Kosier was flagged for a 15-yard facemask penalty, which moved the ball down to the Cowboys 30-yard line.  The NFL Rulebook states that a game cannot end on a defensive penalty, thus, Washington was awarded one un-timed down. With the playclock at 0:00, Novak completed a 47-yard field goal to win the game, sending FedEx field into pandemoneum and improving the Redskins record to 3-5. Stats",
+    "response": "Cowboys",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "169fab50-e3ff-4551-9ac0-18dd659e4250",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_0fe30258-7fc0-4236-9f6d-3330d65df08f",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more housing units are there than families?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "22758",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "0fe30258-7fc0-4236-9f6d-3330d65df08f",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_0745e624-835d-4189-b5d0-e35c8cc3cf90",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many days had passed from when The North Carolina Department of Transportation and South Carolina Department of Transportation Carolina departments of transportation previously agreed to an I-73 corridor crossing the state line along SC and NC 38 near Hamlet, North Carolina until SCDOT announced its preferred routing of I-73 between Myrtle Beach and Interstate 95 in South Carolina?",
+    "context": "On May 30, 2006, SCDOT announced its preferred routing of I-73 between Myrtle Beach and Interstate 95 in South Carolina.  I-73 will begin where South Carolina Highway 22 (SC 22) starts at U.S. Route 17 in South Carolina near Briarcliffe Acres, South Carolina. It will then proceed northwest crossing the proposed routing of I-74 (currently South Carolina Highway 31, the Carolina Bays Parkway). After passing Conway, South Carolina, I-73 will leave SC 22 at a new interchange to be constructed  west of U.S. Route 701, and will then use a new highway to be built between SC 22 and South Carolina Highway 917 north of Cool Spring, South Carolina. I-73 will then use an upgraded SC 917 to cross the Little Pee Dee River. It will then proceed on a new freeway alignment between SC 917 and Interstate 95 in South Carolina that would have an interchange with U.S. Route 76 in South Carolina west of Mullins and then would proceed northwest to an exit with U.S. Route 501 near Latta, passing that city to the south before intersecting I-95 near South Carolina Highway 38. After crossing I-95, I-73 will use the chosen middle route, one of six potential alternative corridors that were studied all of which roughly paralleling SC 38 to proceed further north to the North Carolina state line. These alternative corridors were formally announced to the public on September 7, 2006, at a meeting in Bennettsville, South Carolina. The number of possible routes was reduced to three, and a final decision on the preferred northern route was announced on July 19, 2007. The central route caused the least disruption to homes, farms and wetlands. The North Carolina Department of Transportation and South Carolina Department of Transportation Carolina departments of transportation previously agreed to an I-73 corridor crossing the state line along SC  and NC 38 near Hamlet, North Carolina, on February 11, 2005. Previously I-73 had been planned to cross the state line further west, near U.S. Route 1 in North Carolina south of Rockingham, North Carolina.",
+    "response": "472",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "0745e624-835d-4189-b5d0-e35c8cc3cf90",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_41163cff-d27a-40aa-8a33-e9447b9a5640",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many yards did Frank Gore have in the first half on runs other than his touchdown run?",
+    "context": "San Francisco kept Detroit in the game with missed opportunities, then made just enough plays for a rare two-game winning streak and its first road win. RB Frank Gore set a franchise record with 148 yards rushing in the first half and scored on a 61-yard run before leaving with a concussion. San Francisco led 13-3 at halftime after scoring on three of its first four drives, wishing it had a bigger lead after out gaining Detroit 247-102 yards and recovering a fumble without giving up a turnover. The 49ers had chances to go ahead big in the third quarter because Detroit had two turnovers on its first three plays, but they came away with only a field goal and a 13-point lead. Gore then caught a 7-yard pass, wobbled off the field and didn't return. QB Alex Smith's fumble midway through the third quarter set up a score that helped the Lions get back in the game. The 49ers drove down the field to set up K Joe Nedney's fourth field goal, a key score because it made Detroit go for a TD instead of kicking a tying field goal late in the game. S Keith Lewis intercepted QB Jon Kitna's pass at the 49ers' 2 with 2&#189; minutes left and San Francisco now 4-5 picked up the one first down it needed to seal the game, winning consecutive games for the second time since 2003. RB Frank Gore finished with career-high 159 yards rushing and San Francisco's QB Alex Smith was 14 of 20 for 136 yards with a fumble. WR Arnaz Battle caught six passes for 55 yards, and converted a third-and-4 on the final drive to allow the 49ers to run out the clock. The 49ers' defense again came up huge, allowing only 273 total offensive yards and forcing 4 turnovers. LB Brandon Moore was yet again the story, leading the team with 9 tackles, 2 sacks and forcing 2 turnovers. With the win, the 49ers advanced to 4-5.",
+    "response": "85",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "41163cff-d27a-40aa-8a33-e9447b9a5640",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_8f176cb2-ea5e-4bc7-aeca-4fa670a85ad5",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many points did each team have at halftime?",
+    "context": "Hoping to rebound from their tough overtime road loss to the Raiders, the Jets went home for a Week 8 duel with the Kansas City Chiefs.  In the first quarter, New York took flight as QB Brett Favre completed an 18-yard TD pass to RB Leon Washington.  In the second quarter, the Chiefs tied the game as QB Tyler Thigpen completed a 19-yard TD pass to TE Tony Gonzalez.  The Jets would answer with Washington getting a 60-yard TD run.  Kansas City closed out the half as Thigpen completed an 11-yard TD pass to WR Mark Bradley. In the third quarter, the Chiefs took the lead as kicker Connor Barth nailed a 30-yard field goal, yet New York replied with RB Thomas Jones getting a 1-yard TD run.  In the fourth quarter, Kansas City got the lead again as CB Brandon Flowers returned an interception 91 yards for a touchdown.  Fortunately, the Jets pulled out the win with Favre completing the game-winning 15-yard TD pass to WR Laveranues Coles. During halftime, the Jets celebrated the 40th anniversary of their Super Bowl III championship team.",
+    "response": "21",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "8f176cb2-ea5e-4bc7-aeca-4fa670a85ad5",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_a2f02664-a032-4b4a-b388-299d7b95fb7a",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many in percent from the census weren't Polish?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "93",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "a2f02664-a032-4b4a-b388-299d7b95fb7a",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_d1b14418-fd40-42fd-94b7-5326dbb4121e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many field goals did Gano kick in the third quarter?",
+    "context": "The Panthers started off their season by making their first return to Levi's Stadium since losing to the Denver Broncos in Super Bowl 50. Late in the first quarter Cam Newton threw a 40-yard touchdown to Russell Sheppard followed by a Graham Gano field goal. The Panthers scored six more points in the second quarter with two field goals. In the third Jonathan Stewart scored a touchdown, followed by another Gano field goal. With 3:14 left to go in the third quarter, Gano made his third field goal of the day making the score 23-0. Robbie Gould's kick with thirteen seconds to go gave the 49ers their first points of the game. Neither the Panthers or 49ers scored in the fourth quarter, resulting in Carolina defeating San Francisco 23-3. They improved to 1-0.",
+    "response": "3",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "d1b14418-fd40-42fd-94b7-5326dbb4121e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_7aaff956-dc28-4985-bbae-55aec0665651",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who scored on the longest touchdown play of the game?",
+    "context": "Hoping to rebound from their tough overtime road loss to the Raiders, the Jets went home for a Week 8 duel with the Kansas City Chiefs.  In the first quarter, New York took flight as QB Brett Favre completed an 18-yard TD pass to RB Leon Washington.  In the second quarter, the Chiefs tied the game as QB Tyler Thigpen completed a 19-yard TD pass to TE Tony Gonzalez.  The Jets would answer with Washington getting a 60-yard TD run.  Kansas City closed out the half as Thigpen completed an 11-yard TD pass to WR Mark Bradley. In the third quarter, the Chiefs took the lead as kicker Connor Barth nailed a 30-yard field goal, yet New York replied with RB Thomas Jones getting a 1-yard TD run.  In the fourth quarter, Kansas City got the lead again as CB Brandon Flowers returned an interception 91 yards for a touchdown.  Fortunately, the Jets pulled out the win with Favre completing the game-winning 15-yard TD pass to WR Laveranues Coles. During halftime, the Jets celebrated the 40th anniversary of their Super Bowl III championship team.",
+    "response": "Leon Washington",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "7aaff956-dc28-4985-bbae-55aec0665651",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_748fc6d6-bfe8-4dee-8bec-0d8eb153efd7",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many kickoff return touchdowns shorter than 100-yards did Leon Washington score?",
+    "context": "The Seahawks' third game was played at home ground when they played their former division rival, the San Diego Chargers. In the second quarter Seattle took the early lead when kicker Olindo Mare made a 23-yard field goal. Then QB Matt Hasselbeck completed a 9-yard TD pass to TE John Carlson. This was followed in the third quarter by RB Leon Washington returning a kickoff 101 yards to the endzone for a touchdown. The lead was broken down with QB Philip Rivers getting a 3-yard TD pass to WR Malcolm Floyd, followed by Hasselbeck getting sacked by ILB Brandon Siler in the endzone for a safety. Then kicker Nate Kaeding made a 29-yard field goal. The Seahawks increased their lead when Mare made a 23-yard field goal, but the Chargers replied and tied the game when Rivers found TE Antonio Gates on a 12-yard TD pass. (With a successful 2-point conversion as Rivers found WR Legedu Naanee). Before the clock struck zero Seattle took the winning score as RB Leon Washington returned his second kickoff of the game into the endzone running 99 yards for a touchdown. Rivers and the Chargers attempted to make a comeback with less than a minute left, but was picked off by rookie Earl Thomas to seal the win for Seattle.",
+    "response": "2",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "748fc6d6-bfe8-4dee-8bec-0d8eb153efd7",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_6b4ee027-ad46-4645-8122-0cd57beea9da",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many more people are there than families?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "158204",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "6b4ee027-ad46-4645-8122-0cd57beea9da",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_a849cb71-b6da-4c1a-9791-b962c9ff2d65",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "which player scored the longest field goal?",
+    "context": "Coming off their road win over the Redskins, the Chiefs went home, donned their Dallas Texans throwbacks, and played a Week 7 AFL Legacy game with the San Diego Chargers. Kansas City would find themselves trailing in the first quarter as Chargers quarterback Philip Rivers completed a 3-yard touchdown pass to wide receiver Malcom Floyd, followed by a 10-yard touchdown pass to wide receiver Vincent Jackson. San Diego would add onto their lead in the second quarter with a 20-yard and a 39-yard field goal from kicker Nate Kaeding. The Chiefs would get onto the board in the third quarter with quarterback Matt Cassel completing a 7-yard touchdown pass to wide receiver Dwayne Bowe, but the Chargers kept their momentum going with Rivers finding running back Darren Sproles on a 58-yard touchdown pass. In the fourth quarter, San Diego sealed the win with Kaeding's 19-yard field goal and fullback Jacob Hester recovering a blocked punt in the end zone for a touchdown. With the loss, Kansas City went into their bye week at 1-6. Larry Johnson was suspended for two weeks after he made offensive comments about Todd Haley and made offensive comments about homosexuals on Twitter and in public.",
+    "response": "['Matt Prater']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "a849cb71-b6da-4c1a-9791-b962c9ff2d65",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_87176942-b400-4fd3-a7d3-48183b54987d",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many season openers have the Browns played since 1999?",
+    "context": "The Browns dropped their 13th consecutive season-opening game with a 21-18 loss to the Steelers. The scoring began early in the first quarter when Pittsburgh's Tyler Matakevich blocked a Britton Colquitt punt, knocking the ball into the end zone where it was recovered by Anthony Chickillo for a touchdown. The Browns were able to tie the score by the end of the first quarter, however, as rookie quarterback DeShone Kizer orchestrated a 12-play drive that ended when he scored on a 1-yard touchdown run. The game stayed at 7-7 through most of the second quarter, until the Steelers quarterback Ben Roethlisberger connected with tight end Jesse James on a 4-yard touchdown with 45 seconds left in the first half. The 7-play, 91-yard scoring drive was highlighted by a 50-yard reception by Antonio Brown on a tipped ball. After a Zane Gonzalez field goal brought the Browns within 14-10 early in the third quarter, the Steelers drove down the field again. Roethlisberger threw a second touchdown pass to James to put them up by 11, 21-10. The drive was boosted by a 41-yard pass interference penalty on Browns cornerback Jamar Taylor on a deep pass intended for Brown. The score remained 21-10 until under four minutes remained in the game, when Kizer was able to throw his first career touchdown pass to Corey Coleman. A two-point conversion run by Isaiah Crowell brought the Browns to within a field goal, 21-18. The Browns did not get a chance to score again, however, as the Steelers were able to run out the clock after a long pass from Roethlisberger to Brown. Browns head coach Hue Jackson challenged the ruling; however, the catch call on the field was upheld. The 13th-straight season-opening loss extended an NFL record for the Browns, who also fell to 1-18 in season openers since returning to the league in 1999.  The team also lost their 12th straight game against a divisional opponent.  The team started 0-1.",
+    "response": "20",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "87176942-b400-4fd3-a7d3-48183b54987d",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_2f68f7db-ebb1-4864-ab40-22db2970305e",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many total points were scored by halftime?",
+    "context": "Coming off their bye week, the Bears traveled to Lambeau Field to play the Green Bay Packers in the 189th meeting between the two rivals. The Bears had struggled regarding scoring against Green Bay in the last nine games between the two prior to 2013, and including the 2010 NFC title game, had scored 127 points, an average of 14.11 points. The two teams entered with among the top three scoring offenses, with Chicago and Green Bay ranked second and third, respectively, with 30.4 and 30.3 points per game, both of which rank behind the Denver Broncos. Among the weapons of the Packers offense that the Bears must attempt to hinder was the running game, as Green Bay's rookie running back Eddie Lacy has recorded over 100 yards per game in the previous six during the season, along with quarterback Aaron Rodgers. One of Rodgers' skills is passing balls longer than 20 yards, and was 16 of 32 on these attempts, which was tied with Russell Wilson of the Seattle Seahawks for the highest percentage in the league; the Bears allowed 57 percent of opponents to throw for the aforementioned distance, the second-worst score in the NFL. However, both teams ranked in the bottom five in the NFL in pass rush, with the Bears being in last with only nine sacks. For Chicago, Matt Fort&#233; had gained 533 yards along with averaging 4.6 yards per run, while Josh McCown filled in for Jay Cutler. Since 2009, Bears quarterbacks besides Cutler had thrown a combined eight touchdowns and 21 interceptions against the Packers; in McCown's last start in 2011 against the Packers, he threw for 242 yards, a touchdown and two interceptions in a 35-21 losing effort. On the Packers' first drive, Rodgers failed to recognize the Bears' zone defense, having expected a man-to-man defense, and Shea McClellin escaped Don Barclay's block and, along with Isaiah Frey, pulled Rodgers down, who landed on his shoulder and injured his left collarbone, and was replaced by Seneca Wallace for the remainder of the game. Afterwards, Mason Crosby kicked the 30-yard field goal to give the Packers the lead. On Chicago's first drive, McCown escaped pressure from Mike Neal and threw towards Brandon Marshall for the 7-3 lead. Once the Packers got the ball back, Wallace's pass for Jordy Nelson was tipped and intercepted by Julius Peppers, and was returned 14 yards to Green Bay's 45-yard line, but after the Bears failed to convert on third down, Adam Podlesh's punt was blocked by Jamari Lattimore. Eventually, James Starks ran 32 yards for the touchdown. However, the Bears traveled 60 yards on two plays, and Fort&#233; scored on the 1-yard run. The Bears ended the first half with Robbie Gould's 24-yard field goal to expand the lead to 17-10. In the third quarter, the Packers forced the Bears to punt, and Lacy ran 56 yards to the Bears' 1, and scored on the ensuing play. On the eventual kickoff, the Packers successfully attempted a surprise onside kick, which was recovered by Lattimore. Crosby kicked a 23-yarder on the drive. On the Bears' next drive, McCown threw a six-yard pass to Alshon Jeffery, whose size kept the ball from being knocked away by Davon House. After both teams exchanged punts in the fourth quarter, on the Bears' next drive, began attempting to run out the clock. On 4th and 1 at the Bears' 32 with 7:50 remaining, Fort&#233; ran three yards for the conversion and continuing the drive, which ended with Gould's 27-yard field goal. The drive lasted 18 plays and took up 8:58, leaving only 50 seconds remaining in the game. Despite a 15-yard pass by Wallace to Nelson, sacks by Corey Wootton and McClellin ended the game with a 27-20 victory for the Bears. McCown ended the night completing 22 of 41 passes for 272 yards and two touchdowns, while Wallace completed 11 of 19 for 114 yards and an interception. The win marked the first time the Packers lost at home to an NFC North opponent since 2009, and the first win for the Bears at Lambeau Field since 2007.",
+    "response": "24",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "2f68f7db-ebb1-4864-ab40-22db2970305e",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_3637ce9d-203d-49e0-a454-b8a49e376148",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "When did Momchil defeat the Ottoman fleet near the Portogalos bay?",
+    "context": "In 1344, Momchil, the independent Bulgarian ruler of the Rhodope and Aegean regions, whose army grew to 2,000 men, took an important role in the Byzantine civil war. While at first he supported John Kantakouzenos, from the spring of 1344 Momchil reneged, provoked by the aggression of the Ottoman allies. In June he defeated the Ottoman fleet near the Portogalos bay. According to sources, at night the Bulgarian ruler sent boats to burn the anchored Ottoman ships and soon after he defeated the army of Kantakouzenos at Mosynopolis. Probably the first local ruler to become aware of the impending Ottoman threat, Momchil unsuccessfully pleaded with the emperors of Bulgaria and Byzantium for help. Even though his troops continued the resistance in the Eastern Rhodopes, in May 1345 the Turks led by Umur Beg marched from Asia Minor and devastated Bulgarian territories driving away people and livestock. Soon after, on 7 July 1345, Ottoman forces under Umur Beg defeated Momchil's army in the battle of Peritor near his capital Xanthi. Sources attest that the independent ruler perished in the battle without leaving asuccessor, and with little political will or leadership left to counter the Ottoman invasion.",
+    "response": "July 1344",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "3637ce9d-203d-49e0-a454-b8a49e376148",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_c017b2c9-0717-4f59-bfd9-9f2c5f17840a",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team scored fewer points in the 1st quarter?",
+    "context": "Trying to rebound from back-to-back home losses, the Patriots traveled to Lambeau Field for a Week 11 showdown with the Green Bay Packers.  In the first quarter, Brady hooked up with Graham on a two-yard touchdown pass for the only score of the period.  In the second quarter, Dillon got a one-yard touchdown run, while Brady hooked up with Caldwell on a 54-yard touchdown pass.  Late in the quarter Packers quarterback Brett Favre was sacked by Tedy Bruschi and was knocked out of the game with injury to his right (throwing) wrist.  In the third quarter, Brady threw an eight-yard touchdown pass to Watson for the only score of the period.  In the fourth quarter, New England put the game away with Brady throwing his fourth touchdown pass of the day to Maroney, a 19-yard strike.  With the win, the Patriots improved to 7-3.",
+    "response": "Patriots",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "c017b2c9-0717-4f59-bfd9-9f2c5f17840a",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_fa8b2cbd-06ed-44a9-bfd8-8e13b789b0cf",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Who is the Panthers quarterback?",
+    "context": "The Panthers started off their season by making their first return to Levi's Stadium since losing to the Denver Broncos in Super Bowl 50. Late in the first quarter Cam Newton threw a 40-yard touchdown to Russell Sheppard followed by a Graham Gano field goal. The Panthers scored six more points in the second quarter with two field goals. In the third Jonathan Stewart scored a touchdown, followed by another Gano field goal. With 3:14 left to go in the third quarter, Gano made his third field goal of the day making the score 23-0. Robbie Gould's kick with thirteen seconds to go gave the 49ers their first points of the game. Neither the Panthers or 49ers scored in the fourth quarter, resulting in Carolina defeating San Francisco 23-3. They improved to 1-0.",
+    "response": "['Teddy Bridgewater']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "fa8b2cbd-06ed-44a9-bfd8-8e13b789b0cf",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_f928fbc3-c8fc-471d-9d66-576b1717edf1",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which team scored the second-longest field goal kick of the game?",
+    "context": "Hoping to rebound from the road loss to the Chargers, the Rams went home for Week 9, as they fought the Kansas City Chiefs in a \"Show Me State Showdown\". The Chiefs struck first as RB Larry Johnson got a 1-yard TD run for the only score of the period.  In the second quarter, things got worse for the Rams as QB Damon Huard completed a 3-yard TD pass to TE Tony Gonzalez, while kicker Lawrence Tynes nailed a 42-yard field goal.  St. Louis got on the board with RB Steven Jackson getting a 2-yard TD run, yet Huard and Gonzalez hooked up with each other again on a 25-yard TD strike.  Rams kicker Jeff Wilkins made a 41-yard field goal to end the half.  In the third quarter, QB Marc Bulger completed a 2-yard TD pass to WR Kevin Curtis for the only score of the period, yet the only score of the fourth quarter came from Huard completing an 11-yard TD pass to TE Kris Wilson. With the loss, the Rams fell to 4-4.",
+    "response": "['Chiefs']",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "f928fbc3-c8fc-471d-9d66-576b1717edf1",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_4966f1e8-f040-48d0-b263-917429652223",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which kicker kicked the shortest field goal?",
+    "context": "The Seahawks' third game was played at home ground when they played their former division rival, the San Diego Chargers. In the second quarter Seattle took the early lead when kicker Olindo Mare made a 23-yard field goal. Then QB Matt Hasselbeck completed a 9-yard TD pass to TE John Carlson. This was followed in the third quarter by RB Leon Washington returning a kickoff 101 yards to the endzone for a touchdown. The lead was broken down with QB Philip Rivers getting a 3-yard TD pass to WR Malcolm Floyd, followed by Hasselbeck getting sacked by ILB Brandon Siler in the endzone for a safety. Then kicker Nate Kaeding made a 29-yard field goal. The Seahawks increased their lead when Mare made a 23-yard field goal, but the Chargers replied and tied the game when Rivers found TE Antonio Gates on a 12-yard TD pass. (With a successful 2-point conversion as Rivers found WR Legedu Naanee). Before the clock struck zero Seattle took the winning score as RB Leon Washington returned his second kickoff of the game into the endzone running 99 yards for a touchdown. Rivers and the Chargers attempted to make a comeback with less than a minute left, but was picked off by rookie Earl Thomas to seal the win for Seattle.",
+    "response": "Nate Kaeding",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "4966f1e8-f040-48d0-b263-917429652223",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_12825b42-178d-43af-855a-5a48fb5dec43",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many years passed from the burning of Moscow suburbs until the Nogai raids withing sight of Moscow?",
+    "context": "1564: The city of Ryazan posad was burned.:47 1571: Russo-Crimean War 1572: Battle of Molodi 1591: Raid reaches Moscow. :116 1591: Artillery stops a raid at Kolomenskoy on the Bank Line. :52 1592: Suburbs of Moscow burned.  Russian troops were away fighting Sweden.:17 1598: Crimeans stopped by Bank Line, withdraw and sue for peace.:46 1614: Nogai raids within sight of Moscow. During the Time of Troubles so many captives were taken that the price of a slave at Kaffa dropped to fifteen or twenty gold pieces.:66 1618: Nogais release 15,000 captives in peace treaty with Moscow. 1632: Force from Livny ambushed by Tatars and Janissaries. 300 killed and the rest enslaved.:67 1632: 20,000 Tatars raid the south, as troops were shifted north for the Smolensk War.:76 1633: 30,000 Tatars cross Abatis and Bank lines. Thousands were captured from Oka region.:76 This was the last deep raid into Muscovy. :26 1635: Many small war parties invaded Russia south of Ryazan.:79 1637,41-43: Several raids were led by Nogais and Crimean nobles without permission of Khan.:90 1643: 600 Tatars and 200 Zaporozhian Cossacks raid Kozlov. 19 were killed, and 262 were captured.:23 1644: 20,000 The Tatars raid southern Muscovy, 10,000 captives.:91 1645: A raid captures 6,000 captives. It is claimed that the Turks encouraged these raids to obtain galley slaves for a war with Venice.:91",
+    "response": "24",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "12825b42-178d-43af-855a-5a48fb5dec43",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_be36ba97-e539-4d4c-86b0-e04f98111a55",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many field goals between 20 and 30 yards were made?",
+    "context": "In week 6, the Lions hosted the NFC West Division-leading San Francisco 49ers. The Lions struck first, when Jason Hanson kicked a 25-yard field goal that came after a San Francisco turnover. Detroit added to their lead when Brandon Pettigrew caught a 16-yard TD pass. In the second quarter, the 49ers finally got on the board with a 1-yard TD run by Frank Gore. San Francisco received a safety when Aldon Smith sacked Matthew Stafford in the end zone. The final points of the first half came just before intermission when David Akers of the 49ers kicked a 55-yard field goal, putting the Lions down at halftime for the fourth consecutive week. After the break, Detroit scored on a 24-yard field goal. San Francisco responded with a field goal of their own, this one from 31 yards out. In the fourth quarter, the Lions' Nate Burleson caught a 5-yard TD pass; the Lions went for a 2-point conversion but Calvin Johnson failed to catch Matthew Stafford's pass. In the final 2 minutes, the 49ers rallied from behind, first with a 6-yard TD catch by Delanie Walker, then a 37-yard field goal by David Akers, putting them up 25-19. With 1:02 left in the game, the Lions attempted another comeback, but San Francisco's defense held them off, handing Detroit its first loss of the season as the team fell to 5-1 and 2nd place in the NFC North. After the game, coaches Jim Schwartz and Jim Harbaugh got into an argument after Schwartz claimed Harbaugh pushed him out of the way when the two coaches were shaking hands.",
+    "response": "3",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "be36ba97-e539-4d4c-86b0-e04f98111a55",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_6acd6dec-a558-403a-97a4-9e8107760fe2",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "Which group from the census is smaller: German or Italian?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "German",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "6acd6dec-a558-403a-97a4-9e8107760fe2",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_928fd407-19d7-4a38-97d3-3022ec48f01c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many percent were not  Italian?",
+    "context": "As of the census of 2000, there were 218,590 people, 79,667 households, and 60,387 families residing in the county.  The population density was 496 people per square mile (192/km\u00b2). There were 83,146 housing units at an average density of 189 per square mile (73/km\u00b2). The racial makeup of the county was 86.77% Race (United States Census), 9.27% Race (United States Census), 0.23% Race (United States Census), 1.52% Race (United States Census), 0.06% Race (United States Census), 0.69% from Race (United States Census), and 1.47% from two or more races.  1.91% of the population were Race (United States Census) or Race (United States Census) of any race. 22.5% were of German people, 13.1% Irish people, 9.8% Italian people, 9.2% English, 8.1% \"American\" and 6.0% Polish ancestry.",
+    "response": "89.8",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "928fd407-19d7-4a38-97d3-3022ec48f01c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_284dae0c-53fa-4b20-8162-37028792481c",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "What was burned first: city of Ryazan or suburbs of Moscow?",
+    "context": "1564: The city of Ryazan posad was burned.:47 1571: Russo-Crimean War 1572: Battle of Molodi 1591: Raid reaches Moscow. :116 1591: Artillery stops a raid at Kolomenskoy on the Bank Line. :52 1592: Suburbs of Moscow burned.  Russian troops were away fighting Sweden.:17 1598: Crimeans stopped by Bank Line, withdraw and sue for peace.:46 1614: Nogai raids within sight of Moscow. During the Time of Troubles so many captives were taken that the price of a slave at Kaffa dropped to fifteen or twenty gold pieces.:66 1618: Nogais release 15,000 captives in peace treaty with Moscow. 1632: Force from Livny ambushed by Tatars and Janissaries. 300 killed and the rest enslaved.:67 1632: 20,000 Tatars raid the south, as troops were shifted north for the Smolensk War.:76 1633: 30,000 Tatars cross Abatis and Bank lines. Thousands were captured from Oka region.:76 This was the last deep raid into Muscovy. :26 1635: Many small war parties invaded Russia south of Ryazan.:79 1637,41-43: Several raids were led by Nogais and Crimean nobles without permission of Khan.:90 1643: 600 Tatars and 200 Zaporozhian Cossacks raid Kozlov. 19 were killed, and 262 were captured.:23 1644: 20,000 The Tatars raid southern Muscovy, 10,000 captives.:91 1645: A raid captures 6,000 captives. It is claimed that the Turks encouraged these raids to obtain galley slaves for a war with Venice.:91",
+    "response": "suburbs of Moscow",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "284dae0c-53fa-4b20-8162-37028792481c",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  },
+  {
+    "example_id": "halubench_8d865c44-8b45-42f4-bd6a-65651f363667",
+    "dataset": "HaluBench",
+    "split": "test",
+    "query": "How many games had the Bills won before this game?",
+    "context": "Trying to snap a two-game skid, the Bills flew to Gillette Stadium for a Week 3 divisional fight with the New England Patriots.  In the first quarter, QB J. P. Losman was immediately injured on the first offensive play of the game.  He would finish the series, but ended up on the bench for the rest of the game.  After New England took the lead with kicker Stephen Gostkowski's 24-yard field goal, rookie QB Trent Edwards played the rest of the game for Buffalo.  The Bills would get their only score of the game as RB Marshawn Lynch got an 8-yard TD run, and a Rian Lindell extra point put the Bills ahead surprisingly 7-3.  However, in the second quarter, the Patriots were able to open up their running game when Bills rookie standout Paul Posluszny was lost due to a broken arm. This left passing lanes open, and for the rest of the game, the Patriots dominated. QB Tom Brady's 8-yard TD pass to TE Benjamin Watson and a 3-yard TD pass to WR Randy Moss made it 17-7 at the half.  In the third quarter, New England continued its conquest with Brady's 4-yard TD pass to WR Jabar Gaffney and RB Sammy Morris' 4-yard TD run.  In the fourth quarter, the Patriots ended the day with Brady and Moss hooking up with each other again on a 45-yard TD pass.",
+    "response": "1",
+    "gold_hallucination": true,
+    "task_type": "DROP",
+    "domain": "drop",
+    "source_id": "8d865c44-8b45-42f4-bd6a-65651f363667",
+    "metadata": {
+      "original_label": "FAIL",
+      "source_ds": "DROP"
+    }
+  }
+]

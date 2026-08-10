@@ -1,0 +1,32 @@
+{
+  "dataset": "RAGTruth",
+  "canonical_source": "ParticleMedia/RAGTruth",
+  "source_url": "https://github.com/ParticleMedia/RAGTruth",
+  "version": "1.0.0",
+  "license": "MIT",
+  "retrieval_timestamp": "2026-08-10T05:44:55.702461+00:00",
+  "raw_count": 17790,
+  "normalized_count": 300,
+  "fields_discovered": [
+    "id",
+    "source_id",
+    "model",
+    "temperature",
+    "labels",
+    "split",
+    "quality",
+    "response"
+  ],
+  "label_schema": {
+    "labels==[]": "Grounded (gold_hallucination=False)",
+    "labels! philosophy": "Hallucinated (gold_hallucination=True)"
+  },
+  "train_test_splits": {
+    "eval_sample": 300
+  },
+  "checksum": "6547baeebd7e05c3e33c57ba21588dad7a113f11b70885f2069df5ab89893b68",
+  "upstream_overlap": [],
+  "normalization_procedure": "Joined response.jsonl with source_info.jsonl via source_id; empty labels array -> False, non-empty labels -> True.",
+  "exclusions": [],
+  "reason_for_exclusions": "None."
+}

@@ -1,0 +1,36 @@
+{
+  "dataset": "HaluBench",
+  "canonical_source": "PatronusAI/HaluBench",
+  "source_url": "https://huggingface.co/datasets/PatronusAI/HaluBench",
+  "version": "1.0.0",
+  "license": "MIT",
+  "retrieval_timestamp": "2026-08-10T05:44:50.743332+00:00",
+  "raw_count": 100,
+  "normalized_count": 100,
+  "fields_discovered": [
+    "id",
+    "passage",
+    "question",
+    "answer",
+    "label",
+    "source_ds"
+  ],
+  "label_schema": {
+    "PASS": "Grounded (gold_hallucination=False)",
+    "FAIL": "Hallucinated (gold_hallucination=True)"
+  },
+  "train_test_splits": {
+    "test": 100
+  },
+  "checksum": "0409f8bdbdc3c4ae29dd5ae853b6cdd2f80af32a02d84204e9cfcd981125e936",
+  "upstream_overlap": [
+    "RAGTruth",
+    "HaluEval",
+    "DROP",
+    "BioASQ",
+    "FinanceBench"
+  ],
+  "normalization_procedure": "Mapped PASS -> False, FAIL -> True; preserved passage as context, question as query, answer as response.",
+  "exclusions": [],
+  "reason_for_exclusions": "None. All fetched test split examples were structurally valid."
+}

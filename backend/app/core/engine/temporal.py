@@ -71,6 +71,7 @@ class TemporalClaimEngine:
         re.compile(r"\bexpected\b.{0,80}\bto\b"),
         re.compile(r"\bpredicted\b.{0,80}\bto\b"),
         re.compile(r"\bprojected\b.{0,80}\bto\b"),
+        re.compile(r"\btargeted\b.{0,80}\bto\b"),
         re.compile(r"\bforecast\b.{0,80}\bto\b"),
         re.compile(r"\bscheduled\b.{0,80}\bto\b"),
         re.compile(r"\bplans?\b.{0,80}\bto\b"),
