@@ -1,0 +1,10 @@
+{
+  "accuracy": 0.888,
+  "f1": 0.877193,
+  "mcc": 0.79713,
+  "non_assert_fpr": 0.181,
+  "assertion_preservation_rate": 1.0,
+  "brier_score": 0.1695,
+  "ece": 0.2667,
+  "cross_claim_contamination": 0.0
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "weight_alpha",
+    "expected": 0.45,
+    "observed": 0.45,
+    "status": "PASS"
+  },
+  {
+    "name": "weight_beta",
+    "expected": 0.3,
+    "observed": 0.3,
+    "status": "PASS"
+  },
+  {
+    "name": "weight_gamma",
+    "expected": 0.25,
+    "observed": 0.25,
+    "status": "PASS"
+  },
+  {
+    "name": "weight_sum",
+    "expected": 1.0,
+    "observed": 1.0,
+    "status": "PASS"
+  },
+  {
+    "name": "epistemic_gate_active",
+    "expected": true,
+    "observed": true,
+    "status": "PASS"
+  },
+  {
+    "name": "claim_level_reconstruction_active",
+    "expected": true,
+    "observed": true,
+    "status": "PASS"
+  },
+  {
+    "name": "phase6f_locked_artifacts_untouched",
+    "expected": true,
+    "observed": true,
+    "status": "PASS"
+  },
+  {
+    "name": "locked_final_test_untouched",
+    "expected": true,
+    "observed": true,
+    "status": "PASS"
+  }
+]

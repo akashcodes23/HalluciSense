@@ -1,0 +1,9 @@
+{
+  "python": "3.10.12",
+  "pytorch": "2.5.1",
+  "transformers": "4.47.1",
+  "os": "macOS",
+  "hardware_device": "mps",
+  "git_sha": "d1b1c9f",
+  "random_seed": 42
+}

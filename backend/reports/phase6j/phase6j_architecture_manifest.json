@@ -1,0 +1,29 @@
+{
+  "pipeline_flow": [
+    "Input",
+    "Claim Segmentation",
+    "Claim-Level Evidence Reconstruction E(c_i)",
+    "Claim-Specific Temporal Anchors Y_i",
+    "Epistemic Modality Resolution",
+    "Temporal Analysis",
+    "NLI Verification",
+    "Evidence Alignment",
+    "Fusion / Risk Scoring",
+    "Final Hallucination Assessment"
+  ],
+  "frozen_components": [
+    "Weights alpha/beta/gamma",
+    "Risk Thresholds",
+    "Epistemic Gate",
+    "NLI Model ID"
+  ],
+  "deterministic_components": [
+    "EpistemicResolver",
+    "TemporalClaimEngine",
+    "FusionEngine"
+  ],
+  "model_dependencies": [
+    "cross-encoder/nli-deberta-v3-small",
+    "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  ]
+}

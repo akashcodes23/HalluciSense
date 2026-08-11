@@ -1,0 +1,19 @@
+{
+  "modality_resolution": {
+    "mean_ms": 0.0539,
+    "p50_ms": 0.0539,
+    "p95_ms": 0.0665
+  },
+  "temporal_analysis": {
+    "mean_ms": 0.0608,
+    "p50_ms": 0.0608,
+    "p95_ms": 0.0677
+  },
+  "full_pipeline": {
+    "mean_ms": 34.2915,
+    "p50_ms": 34.7409,
+    "p95_ms": 38.1023,
+    "p99_ms": 39.1701
+  },
+  "claim_level_reconstruction_overhead_ms": 0.08
+}

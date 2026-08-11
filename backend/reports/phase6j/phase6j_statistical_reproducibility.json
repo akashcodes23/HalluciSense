@@ -1,0 +1,24 @@
+{
+  "mcnemar_d1_vs_d4_phase6e": {
+    "statistic": 8.1,
+    "p_value": 0.0044,
+    "significant": true,
+    "effect_size": "Non-Assertion FPR reduced by 32.25% relative (4.76 percentage points)"
+  },
+  "mcnemar_r0_vs_r5_phase6i": {
+    "statistic": 0.0,
+    "p_value": 1.0,
+    "significant": false,
+    "effect_size": "Metric preservation without assertion regression"
+  },
+  "bootstrap_ci_95": {
+    "phase6e_f1": [
+      0.9348,
+      0.9688
+    ],
+    "phase6i_f1": [
+      0.849,
+      0.9025
+    ]
+  }
+}
