@@ -1,0 +1,164 @@
+{
+  "generated": "2026-08-10",
+  "git_sha": "cbe4de7f72b7c874727e1025acf348219136ed60",
+  "datasets": [
+    {
+      "name": "HaluBench",
+      "identifier": "halubench",
+      "source": "PatronusAI/HaluBench (HuggingFace)",
+      "normalized_file": "data/external/halubench/normalized/halubench_normalized.json",
+      "sha256_prefix": "20e2101e396dfcb2",
+      "N": 100,
+      "positive_count": 100,
+      "negative_count": 0,
+      "positive_ratio": 1.0,
+      "negative_ratio": 0.0,
+      "task_type": "hallucination_detection",
+      "domains": [
+        "mixed_QA"
+      ],
+      "construction": "Crowdsourced and model-generated hallucinated responses to real questions",
+      "split": "test",
+      "role": "FINAL_TEST",
+      "used_during_phase6_development": false,
+      "suitable_as_final_test": true,
+      "caveat": "All examples are hallucinated (positive-only). Accuracy and specificity undefined in isolation. Use combined evaluation only.",
+      "first_used_in": "Phase 6B"
+    },
+    {
+      "name": "RAGTruth",
+      "identifier": "ragtruth",
+      "source": "ParticleMedia/RAGTruth (HuggingFace)",
+      "normalized_file": "data/external/ragtruth/normalized/ragtruth_normalized.json",
+      "sha256_prefix": "22b72af4e7a12879",
+      "N": 300,
+      "positive_count": 98,
+      "negative_count": 202,
+      "positive_ratio": 0.327,
+      "negative_ratio": 0.673,
+      "task_type": "hallucination_detection",
+      "domains": [
+        "news",
+        "financial",
+        "general_QA"
+      ],
+      "construction": "RAG-based generation with human-labeled hallucination annotations",
+      "split": "test",
+      "role": "FINAL_TEST",
+      "used_during_phase6_development": false,
+      "suitable_as_final_test": true,
+      "caveat": "Imbalanced: 32.7% positive. Accuracy alone is misleading; use Balanced Accuracy and MCC.",
+      "first_used_in": "Phase 6B"
+    },
+    {
+      "name": "HaluEval",
+      "identifier": "halueval",
+      "source": "RUCAIBox/HaluEval (HuggingFace)",
+      "normalized_file": "data/external/halueval/normalized/halueval_normalized.json",
+      "sha256_prefix": "4d0b220f1e6799bb",
+      "N": 150,
+      "positive_count": 75,
+      "negative_count": 75,
+      "positive_ratio": 0.5,
+      "negative_ratio": 0.5,
+      "task_type": "hallucination_detection",
+      "domains": [
+        "general_QA",
+        "dialogue",
+        "summarization"
+      ],
+      "construction": "Automatically sampled hallucinated and factual responses evaluated by GPT-4",
+      "split": "test",
+      "role": "FINAL_TEST",
+      "used_during_phase6_development": false,
+      "suitable_as_final_test": true,
+      "caveat": "Balanced (50/50). Best single dataset for clean accuracy reporting.",
+      "first_used_in": "Phase 6B"
+    },
+    {
+      "name": "Phase 6 Unseen Benchmark",
+      "identifier": "phase6_unseen",
+      "source": "Constructed for Phase 6 evaluation (HalluciSense internal)",
+      "normalized_file": "reports/phase6_unseen_benchmark.json",
+      "sha256_prefix": "internal",
+      "N": 105,
+      "positive_count": 35,
+      "negative_count": 70,
+      "positive_ratio": 0.333,
+      "negative_ratio": 0.667,
+      "task_type": "temporal_hallucination_detection",
+      "domains": [
+        "history",
+        "astronomy",
+        "medicine",
+        "aviation",
+        "technology",
+        "geography",
+        "energy",
+        "engineering",
+        "business",
+        "politics",
+        "space",
+        "climate",
+        "economics",
+        "law",
+        "entertainment"
+      ],
+      "construction": "105 novel unseen temporal verification cases across 15 domains and 15 temporal categories",
+      "split": "validation",
+      "role": "VALIDATION",
+      "used_during_phase6_development": false,
+      "suitable_as_final_test": true,
+      "caveat": "Full pipeline evaluation yields Acc=53.33% (FP=46 from misleading evidence). Temporal-engine-only evaluation yields 89.52% \u2014 these are DIFFERENT configurations.",
+      "first_used_in": "Phase 6"
+    },
+    {
+      "name": "Phase 5 Holdout",
+      "identifier": "phase5_holdout",
+      "source": "Constructed for Phase 5 blind holdout (HalluciSense internal)",
+      "normalized_file": "reports/phase5_holdout_results.json",
+      "sha256_prefix": "internal",
+      "N": 70,
+      "positive_count": 24,
+      "negative_count": 46,
+      "positive_ratio": 0.343,
+      "negative_ratio": 0.657,
+      "task_type": "temporal_hallucination_detection",
+      "domains": [
+        "general_temporal"
+      ],
+      "construction": "70 cases blind holdout; used as evaluation set in Phase 6 development",
+      "split": "development_validation",
+      "role": "DEVELOPMENT_VALIDATION",
+      "used_during_phase6_development": true,
+      "suitable_as_final_test": false,
+      "caveat": "USED DURING PHASE 6 DEVELOPMENT. NOT suitable as a final test set for Phase 6C. Phase 6 achieved 88.57% on this set.",
+      "first_used_in": "Phase 5"
+    }
+  ],
+  "combined_external_550": {
+    "datasets": [
+      "halubench",
+      "ragtruth",
+      "halueval"
+    ],
+    "N": 550,
+    "positive_count": 273,
+    "negative_count": 277,
+    "positive_ratio": 0.496,
+    "negative_ratio": 0.504,
+    "note": "Approximately balanced by coincidence from dataset mixing. Per-dataset distributions vary significantly."
+  },
+  "final_test_set_principle": {
+    "statement": "The Phase 5 holdout (N=70) was used during Phase 6 architecture development and MUST NOT serve as a final test set. All Phase 6C final evaluation uses the 550-case external benchmark (HaluBench + RAGTruth + HaluEval) and the 105-case Phase 6 unseen benchmark.",
+    "final_test_sets": [
+      "halubench",
+      "ragtruth",
+      "halueval",
+      "phase6_unseen"
+    ],
+    "development_data": [
+      "phase5_holdout"
+    ]
+  }
+}

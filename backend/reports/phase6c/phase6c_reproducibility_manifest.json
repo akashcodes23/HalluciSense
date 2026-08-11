@@ -1,0 +1,163 @@
+{
+  "manifest_version": "1.0",
+  "project": "HalluciSense",
+  "phase": "6C",
+  "purpose": "Publication-grade scientific validation and novelty audit",
+  "generated": "2026-08-11",
+  
+  "code": {
+    "repository": "akashcodes23/HalluciSense",
+    "branch": "main",
+    "frozen_sha": "cbe4de7f72b7c874727e1025acf348219136ed60",
+    "short_sha": "cbe4de7",
+    "freeze_date": "2026-08-10",
+    "note": "Architecture frozen before external evaluation datasets were used"
+  },
+  
+  "production_invariants": {
+    "fusion_weights": {
+      "alpha": 0.40,
+      "beta": 0.30,
+      "gamma": 0.30,
+      "sum": 1.00,
+      "status": "FROZEN — do not modify"
+    },
+    "risk_thresholds": {
+      "VERIFIED": {"operator": "<", "value": 0.35},
+      "NEEDS_VERIFICATION": {"operator": "<", "value": 0.50},
+      "MODERATE_RISK": {"operator": "<", "value": 0.65},
+      "LIKELY_HALLUCINATED": {"operator": ">=", "value": 0.65},
+      "status": "FROZEN — do not modify"
+    }
+  },
+  
+  "models": {
+    "nli_model": {
+      "name": "cross-encoder/nli-deberta-v3-small",
+      "source": "HuggingFace",
+      "version": "default (pinned by model card hash)",
+      "role": "Pillar 1 NLI scoring"
+    },
+    "retrieval_model": {
+      "name": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "source": "HuggingFace",
+      "version": "default",
+      "role": "Pillar 1 retrieval reranking"
+    },
+    "p2_p3_models": {
+      "name": "Gemini API (external)",
+      "status": "NOT ACTIVE in evaluation environment",
+      "note": "P2 and P3 require live Gemini API. All 6C evaluations use P1 + temporal only."
+    }
+  },
+  
+  "evaluation_seed": 42,
+  "evaluation_threshold": 0.50,
+  
+  "datasets": {
+    "halubench": {
+      "source": "PatronusAI/HaluBench",
+      "hub": "https://huggingface.co/datasets/PatronusAI/HaluBench",
+      "local_path": "data/external/halubench/normalized/halubench_normalized.json",
+      "n": 100,
+      "positive": 100,
+      "negative": 0,
+      "class_balance": "100% hallucinated — specificity and FPR undefined",
+      "role": "FINAL_TEST",
+      "used_in_development": false,
+      "caveat": "Cannot evaluate specificity or FPR. Accuracy = Recall for this dataset."
+    },
+    "ragtruth": {
+      "source": "ParticleMedia/RAGTruth",
+      "hub": "https://huggingface.co/datasets/ParticleMedia/RAGTruth",
+      "local_path": "data/external/ragtruth/normalized/ragtruth_normalized.json",
+      "n": 300,
+      "positive": 98,
+      "negative": 202,
+      "class_balance": "32.7%/67.3% (imbalanced toward negative)",
+      "role": "FINAL_TEST",
+      "used_in_development": false,
+      "caveat": "Raw accuracy biased toward majority class. Report Balanced Accuracy and MCC."
+    },
+    "halueval": {
+      "source": "RUCAIBox/HaluEval",
+      "hub": "https://huggingface.co/datasets/RUCAIBox/HaluEval",
+      "local_path": "data/external/halueval/normalized/halueval_normalized.json",
+      "n": 150,
+      "positive": 75,
+      "negative": 75,
+      "class_balance": "50%/50% (balanced)",
+      "role": "FINAL_TEST",
+      "used_in_development": false
+    },
+    "combined_external": {
+      "datasets": ["halubench", "ragtruth", "halueval"],
+      "n_total": 550,
+      "positive": 273,
+      "negative": 277,
+      "class_balance": "49.6%/50.4% (near-balanced by coincidence)",
+      "caveat": "Near-balance is a coincidence of dataset mixing. Per-dataset imbalances vary."
+    },
+    "phase5_holdout": {
+      "n": 70,
+      "role": "DEVELOPMENT_VALIDATION",
+      "used_in_development": true,
+      "note": "NOT suitable as final test. Used during Phase 6 architecture development."
+    }
+  },
+  
+  "canonical_evaluator": {
+    "file": "backend/evaluation/canonical_evaluator.py",
+    "test_file": "backend/tests/test_metrics_consistency.py",
+    "tests_passing": 34,
+    "tests_total": 34,
+    "metrics_computed": [
+      "accuracy", "precision", "recall", "f1",
+      "specificity", "fpr", "fnr",
+      "balanced_accuracy", "mcc",
+      "auroc", "auprc",
+      "tp", "tn", "fp", "fn"
+    ],
+    "edge_cases_handled": [
+      "all_positive (specificity=None, FPR=None)",
+      "all_negative (sensitivity=None, FNR=None)",
+      "no_positive_predictions (precision=None)"
+    ]
+  },
+  
+  "score_cache": {
+    "file": "backend/reports/phase6c/phase6c_score_cache.json",
+    "n": 550,
+    "contains": ["p1_scores", "full_scores", "temporal_scores", "y_true", "modalities", "domains", "example_ids"],
+    "git_sha": "cbe4de7",
+    "seed": 42
+  },
+  
+  "bootstrap_ci": {
+    "n_bootstrap": 5000,
+    "alpha": 0.05,
+    "seed": 42,
+    "method": "Percentile bootstrap"
+  },
+  
+  "statistical_tests": {
+    "mcnemar": {
+      "method": "McNemar chi-squared with continuity correction",
+      "comparison": "P1 Baseline vs M9 Full HalluciSense",
+      "note": "On combined 550-record dataset"
+    }
+  },
+  
+  "reproduction_command": "cd backend && bash scripts/reproduce_phase6c.sh",
+  
+  "known_limitations": [
+    "P2 (predictive uncertainty) and P3 (self-consistency) require live Gemini API. All evaluations use P1 + temporal only.",
+    "HaluBench has 0 negative examples — specificity and FPR cannot be computed.",
+    "59.3% of external benchmark records have no temporal signal — temporal components not activated.",
+    "0% of external benchmark records contain future-year assertions (primary novel capability).",
+    "Modality detection is pattern-based (regex), not deep semantic NLP.",
+    "EventTemporalAnchorResolver requires live Wikidata API connectivity.",
+    "Phase 5 comparison in stress test uses a strawman approximation, not the actual Phase 5 system.",
+    "Evidence noise stress test N=5 (illustrative only, not statistically powered)."
+  ]
+}

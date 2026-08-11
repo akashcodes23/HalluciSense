@@ -62,4 +62,4 @@ def test_open_source_files():
 
     readme_txt = (root / "README.md").read_text()
     assert "HalluciSense" in readme_txt
-    assert "0.8920 ROC-AUC" in readme_txt
+    assert "Confidence-Aware Hybrid Framework" in readme_txt
