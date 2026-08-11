@@ -1,0 +1,431 @@
+{
+  "dataset_size": 600,
+  "ablation": {
+    "D0_P1_NLI_Baseline": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D1_P1_Plus_NaiveTemporal": {
+      "accuracy": 0.933333,
+      "precision": 0.882353,
+      "recall": 1.0,
+      "f1": 0.9375,
+      "mcc": 0.874475,
+      "balanced_accuracy": 0.933333,
+      "specificity": 0.866667,
+      "fpr": 0.133333,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 260,
+      "fp": 40,
+      "fn": 0,
+      "non_assert_fpr": 0.1476,
+      "assertion_preservation_rate": 1.0
+    },
+    "D2_P1_Plus_QueryModality": {
+      "accuracy": 0.933333,
+      "precision": 0.882353,
+      "recall": 1.0,
+      "f1": 0.9375,
+      "mcc": 0.874475,
+      "balanced_accuracy": 0.933333,
+      "specificity": 0.866667,
+      "fpr": 0.133333,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 260,
+      "fp": 40,
+      "fn": 0,
+      "non_assert_fpr": 0.1476,
+      "assertion_preservation_rate": 1.0
+    },
+    "D3_P1_Plus_ResponseModality": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D4_Temporal_Epistemic_Gate": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D5_Plus_AtomicClaimSegmentation": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D6_Plus_LocalEvidenceAlignment": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D7_Plus_GlobalEvidenceAlignment": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D8_Plus_RelationalOperatorProtection": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    },
+    "D9_Full_Phase6D_Architecture": {
+      "accuracy": 0.95,
+      "precision": 0.909091,
+      "recall": 1.0,
+      "f1": 0.952381,
+      "mcc": 0.904534,
+      "balanced_accuracy": 0.95,
+      "specificity": 0.9,
+      "fpr": 0.1,
+      "fnr": 0.0,
+      "tp": 300,
+      "tn": 270,
+      "fp": 30,
+      "fn": 0,
+      "non_assert_fpr": 0.1,
+      "assertion_preservation_rate": 1.0
+    }
+  },
+  "statistical_tests": {
+    "mcnemar_d0_vs_d4": {
+      "b": 0,
+      "c": 0,
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false
+    },
+    "mcnemar_d1_vs_d4": {
+      "b": 0,
+      "c": 10,
+      "statistic": 8.1,
+      "p_value": 0.0044,
+      "significant": true
+    },
+    "bootstrap_ci_d4_f1": {
+      "mean": 0.9523047578907393,
+      "ci_lower": 0.9344262295081968,
+      "ci_upper": 0.9681528662420382
+    },
+    "bootstrap_ci_d4_acc": {
+      "mean": 0.9499989999999999,
+      "ci_lower": 0.9316666666666666,
+      "ci_upper": 0.9666666666666667
+    }
+  },
+  "counterfactual_pairs": {
+    "pairs": [
+      {
+        "pair_id": "PAIR_A_6E_POINT_DATE",
+        "description": "Factual assertion with exact date match vs shifted date mismatch",
+        "base_score": 0.0087,
+        "variant_score": 0.9725,
+        "base_correct": true,
+        "variant_correct": true,
+        "both_correct": true
+      },
+      {
+        "pair_id": "PAIR_B_6E_FUTURE_PREDICTION",
+        "description": "Factual assertion claiming past event in future year vs forecast/prediction framing",
+        "base_score": 0.9924,
+        "variant_score": 0.0,
+        "base_correct": true,
+        "variant_correct": true,
+        "both_correct": true
+      },
+      {
+        "pair_id": "PAIR_C_6E_NEGATION",
+        "description": "Hallucinated assertion vs protected negation statement",
+        "base_score": 0.999,
+        "variant_score": 0.894,
+        "base_correct": true,
+        "variant_correct": false,
+        "both_correct": false
+      },
+      {
+        "pair_id": "PAIR_D_6E_QUOTATION",
+        "description": "Hallucinated direct claim vs protected quotation attribution",
+        "base_score": 0.9937,
+        "variant_score": 0.4954,
+        "base_correct": true,
+        "variant_correct": true,
+        "both_correct": true
+      },
+      {
+        "pair_id": "PAIR_E_6E_HYPOTHETICAL",
+        "description": "Falsified assertion vs protected conditional scenario",
+        "base_score": 0.9978,
+        "variant_score": 0.0,
+        "base_correct": true,
+        "variant_correct": true,
+        "both_correct": true
+      },
+      {
+        "pair_id": "PAIR_F_6E_COUNTERFACTUAL",
+        "description": "Falsified historical assertion vs protected counterfactual scenario",
+        "base_score": 0.9934,
+        "variant_score": 0.0,
+        "base_correct": true,
+        "variant_correct": true,
+        "both_correct": true
+      }
+    ],
+    "pair_accuracy": 0.8333
+  },
+  "domain_generalization": {
+    "domain_metrics": {
+      "astronomy": {
+        "count": 60,
+        "accuracy": 0.966667,
+        "f1": 0.967742,
+        "mcc": 0.935414,
+        "precision": 0.9375,
+        "recall": 1.0
+      },
+      "climate": {
+        "count": 60,
+        "accuracy": 0.983333,
+        "f1": 0.983607,
+        "mcc": 0.967204,
+        "precision": 0.967742,
+        "recall": 1.0
+      },
+      "economics": {
+        "count": 60,
+        "accuracy": 0.966667,
+        "f1": 0.967742,
+        "mcc": 0.935414,
+        "precision": 0.9375,
+        "recall": 1.0
+      },
+      "engineering": {
+        "count": 60,
+        "accuracy": 0.883333,
+        "f1": 0.895522,
+        "mcc": 0.78843,
+        "precision": 0.810811,
+        "recall": 1.0
+      },
+      "history": {
+        "count": 60,
+        "accuracy": 0.9,
+        "f1": 0.909091,
+        "mcc": 0.816497,
+        "precision": 0.833333,
+        "recall": 1.0
+      },
+      "law": {
+        "count": 60,
+        "accuracy": 0.9,
+        "f1": 0.909091,
+        "mcc": 0.816497,
+        "precision": 0.833333,
+        "recall": 1.0
+      },
+      "medicine": {
+        "count": 60,
+        "accuracy": 0.966667,
+        "f1": 0.967742,
+        "mcc": 0.935414,
+        "precision": 0.9375,
+        "recall": 1.0
+      },
+      "politics": {
+        "count": 60,
+        "accuracy": 0.966667,
+        "f1": 0.967742,
+        "mcc": 0.935414,
+        "precision": 0.9375,
+        "recall": 1.0
+      },
+      "science": {
+        "count": 60,
+        "accuracy": 0.966667,
+        "f1": 0.967742,
+        "mcc": 0.935414,
+        "precision": 0.9375,
+        "recall": 1.0
+      },
+      "technology": {
+        "count": 60,
+        "accuracy": 1.0,
+        "f1": 1.0,
+        "mcc": 1.0,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    },
+    "summary": {
+      "mean_accuracy": 0.95,
+      "median_accuracy": 0.9667,
+      "std_accuracy": 0.038,
+      "min_accuracy": 0.8833,
+      "max_accuracy": 1.0,
+      "worst_domain": "engineering"
+    }
+  },
+  "latency": {
+    "modality_resolution": {
+      "mean_ms": 0.0565,
+      "p50_ms": 0.0539,
+      "p95_ms": 0.0665,
+      "p99_ms": 0.1034,
+      "std_ms": 0.0103
+    },
+    "temporal_analysis": {
+      "mean_ms": 0.0643,
+      "p50_ms": 0.0608,
+      "p95_ms": 0.0677,
+      "p99_ms": 0.1439,
+      "std_ms": 0.0182
+    },
+    "full_pipeline": {
+      "mean_ms": 34.2915,
+      "p50_ms": 34.7409,
+      "p95_ms": 38.1023,
+      "p99_ms": 39.1701,
+      "std_ms": 2.5537
+    }
+  },
+  "calibration": {
+    "brier_score": 0.0482,
+    "ece": 0.1174,
+    "reliability_bins": [
+      {
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 102,
+        "confidence": 0.008,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 93,
+        "confidence": 0.175,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 75,
+        "confidence": 0.497,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.5,
+        "bin_upper": 0.6,
+        "count": 30,
+        "confidence": 0.5007,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 300,
+        "confidence": 0.9965,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "error_summary": {
+    "E1": 12,
+    "E2": 10,
+    "E3": 0,
+    "E4": 0,
+    "E5": 0,
+    "E6": 0,
+    "E7": 3,
+    "E8": 0,
+    "E9": 5,
+    "E10": 0,
+    "E11": 0,
+    "E12": 0,
+    "E13": 12
+  }
+}

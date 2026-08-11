@@ -1,0 +1,290 @@
+{
+  "total_errors": 30,
+  "error_counts": {
+    "E1": 12,
+    "E2": 10,
+    "E3": 0,
+    "E4": 0,
+    "E5": 0,
+    "E6": 0,
+    "E7": 3,
+    "E8": 0,
+    "E9": 5,
+    "E10": 0,
+    "E11": 0,
+    "E12": 0,
+    "E13": 12
+  },
+  "error_details": [
+    {
+      "record_id": "P6E_HISTORY_0002",
+      "domain": "history",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "Standard history protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5003,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_HISTORY_0020",
+      "domain": "history",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "Standard history protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5003,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_HISTORY_0038",
+      "domain": "history",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "Standard history protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5003,
+      "error_category": "E7_counterfactual_failure"
+    },
+    {
+      "record_id": "P6E_HISTORY_0044",
+      "domain": "history",
+      "epistemic_category": "TEMPORAL_CONTRADICTION",
+      "claim": "Standard history protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5003,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_HISTORY_0050",
+      "domain": "history",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "Standard history protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5003,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_HISTORY_0056",
+      "domain": "history",
+      "epistemic_category": "NO_TEMPORAL_CONTROL",
+      "claim": "Standard history protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5003,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_MEDICINE_0074",
+      "domain": "medicine",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the medicine project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_MEDICINE_0092",
+      "domain": "medicine",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The lead engineer stated: 'We completed Phase 1 of the medicine initiative in 2019.'",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E9_quotation_meta_claim_failure"
+    },
+    {
+      "record_id": "P6E_SCIENCE_0134",
+      "domain": "science",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the science project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_SCIENCE_0152",
+      "domain": "science",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The lead engineer stated: 'We completed Phase 1 of the science initiative in 2019.'",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E9_quotation_meta_claim_failure"
+    },
+    {
+      "record_id": "P6E_ASTRONOMY_0194",
+      "domain": "astronomy",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the astronomy project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_ASTRONOMY_0212",
+      "domain": "astronomy",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The lead engineer stated: 'We completed Phase 1 of the astronomy initiative in 2019.'",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E9_quotation_meta_claim_failure"
+    },
+    {
+      "record_id": "P6E_LAW_0302",
+      "domain": "law",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "Standard law protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5002,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_LAW_0320",
+      "domain": "law",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "Standard law protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5002,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_LAW_0338",
+      "domain": "law",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "Standard law protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5002,
+      "error_category": "E7_counterfactual_failure"
+    },
+    {
+      "record_id": "P6E_LAW_0344",
+      "domain": "law",
+      "epistemic_category": "TEMPORAL_CONTRADICTION",
+      "claim": "Standard law protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5002,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_LAW_0350",
+      "domain": "law",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "Standard law protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5002,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_LAW_0356",
+      "domain": "law",
+      "epistemic_category": "NO_TEMPORAL_CONTROL",
+      "claim": "Standard law protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.5002,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_ECONOMICS_0374",
+      "domain": "economics",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the economics project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_ECONOMICS_0392",
+      "domain": "economics",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The lead engineer stated: 'We completed Phase 1 of the economics initiative in 2019.'",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E9_quotation_meta_claim_failure"
+    },
+    {
+      "record_id": "P6E_CLIMATE_0434",
+      "domain": "climate",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the climate project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0482",
+      "domain": "engineering",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "Standard engineering protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.503,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0494",
+      "domain": "engineering",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the engineering project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0500",
+      "domain": "engineering",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "Standard engineering protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.503,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0518",
+      "domain": "engineering",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "Standard engineering protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.503,
+      "error_category": "E7_counterfactual_failure"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0524",
+      "domain": "engineering",
+      "epistemic_category": "TEMPORAL_CONTRADICTION",
+      "claim": "Standard engineering protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.503,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0530",
+      "domain": "engineering",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "Standard engineering protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.503,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_ENGINEERING_0536",
+      "domain": "engineering",
+      "epistemic_category": "NO_TEMPORAL_CONTROL",
+      "claim": "Standard engineering protocols require peer review prior to publication.",
+      "gold": 0,
+      "score": 0.503,
+      "error_category": "E13_other"
+    },
+    {
+      "record_id": "P6E_POLITICS_0554",
+      "domain": "politics",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "If funding is approved, the politics project could commence in 2028.",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E2_modality_resolution_failure"
+    },
+    {
+      "record_id": "P6E_POLITICS_0572",
+      "domain": "politics",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The lead engineer stated: 'We completed Phase 1 of the politics initiative in 2019.'",
+      "gold": 0,
+      "score": 0.5,
+      "error_category": "E9_quotation_meta_claim_failure"
+    }
+  ]
+}

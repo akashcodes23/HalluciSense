@@ -1,0 +1,92 @@
+{
+  "domain_metrics": {
+    "astronomy": {
+      "count": 60,
+      "accuracy": 0.966667,
+      "f1": 0.967742,
+      "mcc": 0.935414,
+      "precision": 0.9375,
+      "recall": 1.0
+    },
+    "climate": {
+      "count": 60,
+      "accuracy": 0.983333,
+      "f1": 0.983607,
+      "mcc": 0.967204,
+      "precision": 0.967742,
+      "recall": 1.0
+    },
+    "economics": {
+      "count": 60,
+      "accuracy": 0.966667,
+      "f1": 0.967742,
+      "mcc": 0.935414,
+      "precision": 0.9375,
+      "recall": 1.0
+    },
+    "engineering": {
+      "count": 60,
+      "accuracy": 0.883333,
+      "f1": 0.895522,
+      "mcc": 0.78843,
+      "precision": 0.810811,
+      "recall": 1.0
+    },
+    "history": {
+      "count": 60,
+      "accuracy": 0.9,
+      "f1": 0.909091,
+      "mcc": 0.816497,
+      "precision": 0.833333,
+      "recall": 1.0
+    },
+    "law": {
+      "count": 60,
+      "accuracy": 0.9,
+      "f1": 0.909091,
+      "mcc": 0.816497,
+      "precision": 0.833333,
+      "recall": 1.0
+    },
+    "medicine": {
+      "count": 60,
+      "accuracy": 0.966667,
+      "f1": 0.967742,
+      "mcc": 0.935414,
+      "precision": 0.9375,
+      "recall": 1.0
+    },
+    "politics": {
+      "count": 60,
+      "accuracy": 0.966667,
+      "f1": 0.967742,
+      "mcc": 0.935414,
+      "precision": 0.9375,
+      "recall": 1.0
+    },
+    "science": {
+      "count": 60,
+      "accuracy": 0.966667,
+      "f1": 0.967742,
+      "mcc": 0.935414,
+      "precision": 0.9375,
+      "recall": 1.0
+    },
+    "technology": {
+      "count": 60,
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "mcc": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "summary": {
+    "mean_accuracy": 0.95,
+    "median_accuracy": 0.9667,
+    "std_accuracy": 0.038,
+    "min_accuracy": 0.8833,
+    "max_accuracy": 1.0,
+    "worst_domain": "engineering"
+  }
+}

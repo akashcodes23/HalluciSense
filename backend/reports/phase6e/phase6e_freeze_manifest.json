@@ -1,0 +1,25 @@
+{
+  "phase": "6E",
+  "git_sha": "79c92e6fa5191ba2e3df89034ff210e26826b1bd",
+  "production_frozen": true,
+  "weights": {
+    "alpha": 0.40,
+    "beta": 0.30,
+    "gamma": 0.30
+  },
+  "thresholds": {
+    "VERIFIED": 0.35,
+    "NEEDS_VERIFICATION": 0.50,
+    "MODERATE_RISK": 0.65,
+    "LIKELY_HALLUCINATED": 0.65
+  },
+  "random_seeds": [42],
+  "environment": {
+    "python": "3.10.12",
+    "pytorch": "2.5.1",
+    "transformers": "4.47.1",
+    "os": "macOS"
+  },
+  "nli_model": "cross-encoder/nli-deberta-v3-small",
+  "dataset_hashes": {}
+}

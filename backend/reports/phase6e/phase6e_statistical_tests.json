@@ -1,0 +1,26 @@
+{
+  "mcnemar_d0_vs_d4": {
+    "b": 0,
+    "c": 0,
+    "statistic": 0.0,
+    "p_value": 1.0,
+    "significant": false
+  },
+  "mcnemar_d1_vs_d4": {
+    "b": 0,
+    "c": 10,
+    "statistic": 8.1,
+    "p_value": 0.0044,
+    "significant": true
+  },
+  "bootstrap_ci_d4_f1": {
+    "mean": 0.9523047578907393,
+    "ci_lower": 0.9344262295081968,
+    "ci_upper": 0.9681528662420382
+  },
+  "bootstrap_ci_d4_acc": {
+    "mean": 0.9499989999999999,
+    "ci_lower": 0.9316666666666666,
+    "ci_upper": 0.9666666666666667
+  }
+}

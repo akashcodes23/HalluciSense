@@ -1,0 +1,59 @@
+{
+  "pairs": [
+    {
+      "pair_id": "PAIR_A_6E_POINT_DATE",
+      "description": "Factual assertion with exact date match vs shifted date mismatch",
+      "base_score": 0.0087,
+      "variant_score": 0.9725,
+      "base_correct": true,
+      "variant_correct": true,
+      "both_correct": true
+    },
+    {
+      "pair_id": "PAIR_B_6E_FUTURE_PREDICTION",
+      "description": "Factual assertion claiming past event in future year vs forecast/prediction framing",
+      "base_score": 0.9924,
+      "variant_score": 0.0,
+      "base_correct": true,
+      "variant_correct": true,
+      "both_correct": true
+    },
+    {
+      "pair_id": "PAIR_C_6E_NEGATION",
+      "description": "Hallucinated assertion vs protected negation statement",
+      "base_score": 0.999,
+      "variant_score": 0.894,
+      "base_correct": true,
+      "variant_correct": false,
+      "both_correct": false
+    },
+    {
+      "pair_id": "PAIR_D_6E_QUOTATION",
+      "description": "Hallucinated direct claim vs protected quotation attribution",
+      "base_score": 0.9937,
+      "variant_score": 0.4954,
+      "base_correct": true,
+      "variant_correct": true,
+      "both_correct": true
+    },
+    {
+      "pair_id": "PAIR_E_6E_HYPOTHETICAL",
+      "description": "Falsified assertion vs protected conditional scenario",
+      "base_score": 0.9978,
+      "variant_score": 0.0,
+      "base_correct": true,
+      "variant_correct": true,
+      "both_correct": true
+    },
+    {
+      "pair_id": "PAIR_F_6E_COUNTERFACTUAL",
+      "description": "Falsified historical assertion vs protected counterfactual scenario",
+      "base_score": 0.9934,
+      "variant_score": 0.0,
+      "base_correct": true,
+      "variant_correct": true,
+      "both_correct": true
+    }
+  ],
+  "pair_accuracy": 0.8333
+}
