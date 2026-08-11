@@ -1,0 +1,72 @@
+{
+  "domain_metrics": {
+    "astronomy": {
+      "count": 50,
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "mcc": 1.0
+    },
+    "climate": {
+      "count": 50,
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "mcc": 1.0
+    },
+    "economics": {
+      "count": 50,
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "mcc": 1.0
+    },
+    "engineering": {
+      "count": 50,
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "mcc": 1.0
+    },
+    "history": {
+      "count": 50,
+      "accuracy": 0.84,
+      "f1": 0.833333,
+      "mcc": 0.723747
+    },
+    "law": {
+      "count": 50,
+      "accuracy": 0.64,
+      "f1": 0.689655,
+      "mcc": 0.458831
+    },
+    "medicine": {
+      "count": 50,
+      "accuracy": 0.8,
+      "f1": 0.8,
+      "mcc": 0.666667
+    },
+    "politics": {
+      "count": 50,
+      "accuracy": 0.8,
+      "f1": 0.8,
+      "mcc": 0.666667
+    },
+    "science": {
+      "count": 50,
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "mcc": 1.0
+    },
+    "technology": {
+      "count": 50,
+      "accuracy": 0.8,
+      "f1": 0.8,
+      "mcc": 0.666667
+    }
+  },
+  "summary": {
+    "mean_accuracy": 0.888,
+    "median_accuracy": 0.92,
+    "std_accuracy": 0.1224,
+    "min_accuracy": 0.64,
+    "max_accuracy": 1.0,
+    "worst_domain": "law"
+  }
+}

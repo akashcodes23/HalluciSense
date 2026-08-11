@@ -1,0 +1,521 @@
+{
+  "total_errors": 56,
+  "error_counts": {
+    "E1": 0,
+    "E2": 0,
+    "E3": 0,
+    "E4": 40,
+    "E5": 0,
+    "E6": 0,
+    "E7": 16,
+    "E8": 0,
+    "E9": 0,
+    "E10": 0
+  },
+  "error_details": [
+    {
+      "record_id": "P6I_HISTORY_0003",
+      "domain": "history",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_HISTORY_0013",
+      "domain": "history",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_HISTORY_0018",
+      "domain": "history",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_HISTORY_0023",
+      "domain": "history",
+      "epistemic_category": "NEGATED_FACT",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_HISTORY_0033",
+      "domain": "history",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_HISTORY_0038",
+      "domain": "history",
+      "epistemic_category": "FICTIONAL",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_HISTORY_0043",
+      "domain": "history",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_HISTORY_0048",
+      "domain": "history",
+      "epistemic_category": "MULTI_CLAIM_MIXED",
+      "claim": "The international history framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0051",
+      "domain": "medicine",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0056",
+      "domain": "medicine",
+      "epistemic_category": "PREDICTION",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0061",
+      "domain": "medicine",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0066",
+      "domain": "medicine",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0071",
+      "domain": "medicine",
+      "epistemic_category": "NEGATED_FACT",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0076",
+      "domain": "medicine",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0081",
+      "domain": "medicine",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0086",
+      "domain": "medicine",
+      "epistemic_category": "FICTIONAL",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0091",
+      "domain": "medicine",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_MEDICINE_0096",
+      "domain": "medicine",
+      "epistemic_category": "MULTI_CLAIM_MIXED",
+      "claim": "The primary medicine standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9992,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0201",
+      "domain": "technology",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0206",
+      "domain": "technology",
+      "epistemic_category": "PREDICTION",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0211",
+      "domain": "technology",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0216",
+      "domain": "technology",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0221",
+      "domain": "technology",
+      "epistemic_category": "NEGATED_FACT",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0226",
+      "domain": "technology",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0231",
+      "domain": "technology",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0236",
+      "domain": "technology",
+      "epistemic_category": "FICTIONAL",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0241",
+      "domain": "technology",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_TECHNOLOGY_0246",
+      "domain": "technology",
+      "epistemic_category": "MULTI_CLAIM_MIXED",
+      "claim": "The primary technology standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9989,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0251",
+      "domain": "law",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0253",
+      "domain": "law",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0256",
+      "domain": "law",
+      "epistemic_category": "PREDICTION",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_LAW_0261",
+      "domain": "law",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_LAW_0263",
+      "domain": "law",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_LAW_0266",
+      "domain": "law",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_LAW_0268",
+      "domain": "law",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_LAW_0271",
+      "domain": "law",
+      "epistemic_category": "NEGATED_FACT",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0273",
+      "domain": "law",
+      "epistemic_category": "NEGATED_FACT",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0276",
+      "domain": "law",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0281",
+      "domain": "law",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0283",
+      "domain": "law",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0286",
+      "domain": "law",
+      "epistemic_category": "FICTIONAL",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0288",
+      "domain": "law",
+      "epistemic_category": "FICTIONAL",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0291",
+      "domain": "law",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0293",
+      "domain": "law",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0296",
+      "domain": "law",
+      "epistemic_category": "MULTI_CLAIM_MIXED",
+      "claim": "The primary law standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9912,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_LAW_0298",
+      "domain": "law",
+      "epistemic_category": "MULTI_CLAIM_MIXED",
+      "claim": "The international law framework mandates strict audit compliance.",
+      "gold": 0,
+      "score": 0.5001,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0451",
+      "domain": "politics",
+      "epistemic_category": "ASSERTED_FACT",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0456",
+      "domain": "politics",
+      "epistemic_category": "PREDICTION",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_POLITICS_0461",
+      "domain": "politics",
+      "epistemic_category": "HYPOTHETICAL",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_POLITICS_0466",
+      "domain": "politics",
+      "epistemic_category": "CONDITIONAL",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E7_epistemic_resolution_error"
+    },
+    {
+      "record_id": "P6I_POLITICS_0471",
+      "domain": "politics",
+      "epistemic_category": "NEGATED_FACT",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0476",
+      "domain": "politics",
+      "epistemic_category": "QUOTED_CLAIM",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0481",
+      "domain": "politics",
+      "epistemic_category": "COUNTERFACTUAL",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0486",
+      "domain": "politics",
+      "epistemic_category": "FICTIONAL",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0491",
+      "domain": "politics",
+      "epistemic_category": "EVIDENCE_DATE_CONFOUNDING",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    },
+    {
+      "record_id": "P6I_POLITICS_0496",
+      "domain": "politics",
+      "epistemic_category": "MULTI_CLAIM_MIXED",
+      "claim": "The primary politics standard was officially ratified in 2021.",
+      "gold": 0,
+      "score": 0.9972,
+      "error_category": "E4_evidence_contamination"
+    }
+  ]
+}

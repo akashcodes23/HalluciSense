@@ -1,0 +1,41 @@
+{
+  "brier_score": 0.1695,
+  "ece": 0.2667,
+  "reliability_bins": [
+    {
+      "bin_lower": 0.0,
+      "bin_upper": 0.1,
+      "count": 60,
+      "confidence": 0.0275,
+      "accuracy": 0.0
+    },
+    {
+      "bin_lower": 0.1,
+      "bin_upper": 0.2,
+      "count": 20,
+      "confidence": 0.1182,
+      "accuracy": 0.0
+    },
+    {
+      "bin_lower": 0.4,
+      "bin_upper": 0.5,
+      "count": 164,
+      "confidence": 0.4977,
+      "accuracy": 0.0
+    },
+    {
+      "bin_lower": 0.5,
+      "bin_upper": 0.6,
+      "count": 16,
+      "confidence": 0.5001,
+      "accuracy": 0.0
+    },
+    {
+      "bin_lower": 0.9,
+      "bin_upper": 1.0,
+      "count": 240,
+      "confidence": 0.9988,
+      "accuracy": 0.8333
+    }
+  ]
+}

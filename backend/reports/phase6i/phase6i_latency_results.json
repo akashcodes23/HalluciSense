@@ -1,0 +1,23 @@
+{
+  "modality_resolution": {
+    "mean_ms": 0.0631,
+    "p50_ms": 0.0603,
+    "p95_ms": 0.0663,
+    "p99_ms": 0.1212,
+    "std_ms": 0.012
+  },
+  "temporal_analysis": {
+    "mean_ms": 0.0753,
+    "p50_ms": 0.0697,
+    "p95_ms": 0.0908,
+    "p99_ms": 0.1878,
+    "std_ms": 0.0241
+  },
+  "full_pipeline": {
+    "mean_ms": 51.9672,
+    "p50_ms": 51.0499,
+    "p95_ms": 59.4915,
+    "p99_ms": 63.435,
+    "std_ms": 4.2578
+  }
+}

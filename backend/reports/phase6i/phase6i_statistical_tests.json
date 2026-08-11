@@ -1,0 +1,19 @@
+{
+  "mcnemar_r0_vs_r5": {
+    "b": 0,
+    "c": 0,
+    "statistic": 0.0,
+    "p_value": 1.0,
+    "significant": false
+  },
+  "bootstrap_ci_r5_f1": {
+    "mean": 0.876847278030848,
+    "ci_lower": 0.8442437923250564,
+    "ci_upper": 0.9071729957805907
+  },
+  "bootstrap_ci_r5_acc": {
+    "mean": 0.8878655999999999,
+    "ci_lower": 0.86,
+    "ci_upper": 0.914
+  }
+}

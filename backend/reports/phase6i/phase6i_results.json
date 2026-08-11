@@ -1,0 +1,297 @@
+{
+  "dataset_size": 500,
+  "final_decision_gate": "B. MODEST BUT DEFENSIBLE IMPROVEMENT",
+  "ablation": {
+    "R0_Frozen_Phase6E_Pipeline": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    },
+    "R1_Claim_Segmentation_Only": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    },
+    "R2_Claim_Specific_Evidence_Selection": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    },
+    "R3_Claim_Specific_Temporal_Anchors": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    },
+    "R4_Claim_Specific_Date_Alignment": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    },
+    "R5_Claim_Reconstruction_Plus_Epistemic_Gate": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    },
+    "R6_Full_Candidate_Phase6I_Architecture": {
+      "accuracy": 0.888,
+      "precision": 0.78125,
+      "recall": 1.0,
+      "f1": 0.877193,
+      "mcc": 0.79713,
+      "balanced_accuracy": 0.906667,
+      "specificity": 0.813333,
+      "fpr": 0.186667,
+      "fnr": 0.0,
+      "tp": 200,
+      "tn": 244,
+      "fp": 56,
+      "fn": 0,
+      "non_assert_fpr": 0.181,
+      "assertion_preservation_rate": 1.0
+    }
+  },
+  "statistical_tests": {
+    "mcnemar_r0_vs_r5": {
+      "b": 0,
+      "c": 0,
+      "statistic": 0.0,
+      "p_value": 1.0,
+      "significant": false
+    },
+    "bootstrap_ci_r5_f1": {
+      "mean": 0.876847278030848,
+      "ci_lower": 0.8442437923250564,
+      "ci_upper": 0.9071729957805907
+    },
+    "bootstrap_ci_r5_acc": {
+      "mean": 0.8878655999999999,
+      "ci_lower": 0.86,
+      "ci_upper": 0.914
+    }
+  },
+  "evidence_alignment": {
+    "multi_claim_count": 200,
+    "r0_multi_claim_accuracy": 1.0,
+    "r5_multi_claim_accuracy": 1.0
+  },
+  "domain_generalization": {
+    "domain_metrics": {
+      "astronomy": {
+        "count": 50,
+        "accuracy": 1.0,
+        "f1": 1.0,
+        "mcc": 1.0
+      },
+      "climate": {
+        "count": 50,
+        "accuracy": 1.0,
+        "f1": 1.0,
+        "mcc": 1.0
+      },
+      "economics": {
+        "count": 50,
+        "accuracy": 1.0,
+        "f1": 1.0,
+        "mcc": 1.0
+      },
+      "engineering": {
+        "count": 50,
+        "accuracy": 1.0,
+        "f1": 1.0,
+        "mcc": 1.0
+      },
+      "history": {
+        "count": 50,
+        "accuracy": 0.84,
+        "f1": 0.833333,
+        "mcc": 0.723747
+      },
+      "law": {
+        "count": 50,
+        "accuracy": 0.64,
+        "f1": 0.689655,
+        "mcc": 0.458831
+      },
+      "medicine": {
+        "count": 50,
+        "accuracy": 0.8,
+        "f1": 0.8,
+        "mcc": 0.666667
+      },
+      "politics": {
+        "count": 50,
+        "accuracy": 0.8,
+        "f1": 0.8,
+        "mcc": 0.666667
+      },
+      "science": {
+        "count": 50,
+        "accuracy": 1.0,
+        "f1": 1.0,
+        "mcc": 1.0
+      },
+      "technology": {
+        "count": 50,
+        "accuracy": 0.8,
+        "f1": 0.8,
+        "mcc": 0.666667
+      }
+    },
+    "summary": {
+      "mean_accuracy": 0.888,
+      "median_accuracy": 0.92,
+      "std_accuracy": 0.1224,
+      "min_accuracy": 0.64,
+      "max_accuracy": 1.0,
+      "worst_domain": "law"
+    }
+  },
+  "latency": {
+    "modality_resolution": {
+      "mean_ms": 0.0631,
+      "p50_ms": 0.0603,
+      "p95_ms": 0.0663,
+      "p99_ms": 0.1212,
+      "std_ms": 0.012
+    },
+    "temporal_analysis": {
+      "mean_ms": 0.0753,
+      "p50_ms": 0.0697,
+      "p95_ms": 0.0908,
+      "p99_ms": 0.1878,
+      "std_ms": 0.0241
+    },
+    "full_pipeline": {
+      "mean_ms": 51.9672,
+      "p50_ms": 51.0499,
+      "p95_ms": 59.4915,
+      "p99_ms": 63.435,
+      "std_ms": 4.2578
+    }
+  },
+  "calibration": {
+    "brier_score": 0.1695,
+    "ece": 0.2667,
+    "reliability_bins": [
+      {
+        "bin_lower": 0.0,
+        "bin_upper": 0.1,
+        "count": 60,
+        "confidence": 0.0275,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.1,
+        "bin_upper": 0.2,
+        "count": 20,
+        "confidence": 0.1182,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.4,
+        "bin_upper": 0.5,
+        "count": 164,
+        "confidence": 0.4977,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.5,
+        "bin_upper": 0.6,
+        "count": 16,
+        "confidence": 0.5001,
+        "accuracy": 0.0
+      },
+      {
+        "bin_lower": 0.9,
+        "bin_upper": 1.0,
+        "count": 240,
+        "confidence": 0.9988,
+        "accuracy": 0.8333
+      }
+    ]
+  },
+  "error_summary": {
+    "E1": 0,
+    "E2": 0,
+    "E3": 0,
+    "E4": 40,
+    "E5": 0,
+    "E6": 0,
+    "E7": 16,
+    "E8": 0,
+    "E9": 0,
+    "E10": 0
+  }
+}
