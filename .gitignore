@@ -60,6 +60,13 @@ backend/evaluation_data/
 backend/data/external/*/raw/
 
 ############################
+# Generated Runtime Data
+############################
+
+/backend/traces/
+/backend/experiments/runs/
+
+############################
 # Ignore ONLY research cache
 ############################
 backend/evaluation_results/**/cache/

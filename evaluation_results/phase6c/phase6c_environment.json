@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-08-10T04:38:09.976186+00:00",
+  "protocol_fingerprint": "405f6d33c1006b8b466c4557caefb635fa1f2c83245ca0bb73dab38b464cc57e",
+  "production_scoring_hashes": {
+    "app/core/engine/fusion.py": "MISSING",
+    "app/core/engine/pillar1_retrieval.py": "MISSING",
+    "app/core/engine/pillar2_confidence.py": "MISSING",
+    "app/core/engine/pillar3_consistency.py": "MISSING",
+    "app/core/engine/pipeline.py": "MISSING"
+  },
+  "frozen_configuration": {
+    "alpha_factual_error": 0.45,
+    "beta_confidence_gap": 0.3,
+    "gamma_consistency_failure": 0.25,
+    "threshold_verified": 0.35,
+    "threshold_likely": 0.65
+  },
+  "models": {
+    "nli_model": "cross-encoder/nli-deberta-v3-small",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2"
+  },
+  "system": {
+    "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "darwin"
+  }
+}
