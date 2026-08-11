@@ -1,0 +1,62 @@
+[
+  {
+    "pair_id": "PAIR_A_POINT_DATE",
+    "description": "Historical assertion date shift (2010 vs 2020)",
+    "base_claim": "Apollo 11 landed on the Moon in 1969.",
+    "variant_claim": "Apollo 11 landed on the Moon in 1975.",
+    "evidence": "Apollo 11 landed on the Moon on July 20, 1969.",
+    "base_gold_hallucination": false,
+    "variant_gold_hallucination": true,
+    "expected_mechanism": "Global Evidence-Date Alignment (DATE_MISMATCH detection)"
+  },
+  {
+    "pair_id": "PAIR_B_FUTURE_ASSERTION",
+    "description": "Assertion vs Prediction for future date (2030)",
+    "base_claim": "Artemis IV landed on Mars in 2030.",
+    "variant_claim": "Artemis IV is targeted to land on Mars in 2030.",
+    "evidence": "Artemis IV mission roadmap targets Mars landing in 2030.",
+    "base_gold_hallucination": true,
+    "variant_gold_hallucination": false,
+    "expected_mechanism": "Temporal-Epistemic Gate (FUTURE_IMPOSSIBLE_FACT vs PREDICTION protection)"
+  },
+  {
+    "pair_id": "PAIR_C_NEGATION",
+    "description": "Assertion vs Negated Assertion for historical date",
+    "base_claim": "The bridge collapsed in 2018.",
+    "variant_claim": "The bridge did not collapse in 2018.",
+    "evidence": "Official inspection records confirm the bridge did not collapse in 2018.",
+    "base_gold_hallucination": true,
+    "variant_gold_hallucination": false,
+    "expected_mechanism": "Epistemic Gate (NEGATED_FACT protection)"
+  },
+  {
+    "pair_id": "PAIR_D_QUOTATION",
+    "description": "Assertion vs Quoted/Debunked Meta-Claim",
+    "base_claim": "The satellite crashed in 2022.",
+    "variant_claim": "Reports falsely claimed that the satellite crashed in 2022.",
+    "evidence": "Fact checkers debunked false reports claiming the satellite crashed in 2022.",
+    "base_gold_hallucination": true,
+    "variant_gold_hallucination": false,
+    "expected_mechanism": "Epistemic Gate (QUOTED_CLAIM / META_CLAIM protection)"
+  },
+  {
+    "pair_id": "PAIR_E_HYPOTHETICAL",
+    "description": "Assertion vs Conditional Hypothetical",
+    "base_claim": "Commercial fusion reached grid scale in 2038.",
+    "variant_claim": "If commercial fusion reaches grid scale by 2038, carbon emissions will drop.",
+    "evidence": "Energy projections estimate carbon reductions if fusion reaches scale in 2038.",
+    "base_gold_hallucination": true,
+    "variant_gold_hallucination": false,
+    "expected_mechanism": "Temporal-Epistemic Gate (HYPOTHETICAL / CONDITIONAL protection)"
+  },
+  {
+    "pair_id": "PAIR_F_COUNTERFACTUAL",
+    "description": "Assertion vs Counterfactual Past",
+    "base_claim": "Candidate A won the 2024 presidential election.",
+    "variant_claim": "Had Candidate A won the 2024 election, economic policy would have differed.",
+    "evidence": "Candidate B won the 2024 election. Analysts discussed counterfactual policy scenarios.",
+    "base_gold_hallucination": true,
+    "variant_gold_hallucination": false,
+    "expected_mechanism": "Epistemic Gate (COUNTERFACTUAL protection)"
+  }
+]

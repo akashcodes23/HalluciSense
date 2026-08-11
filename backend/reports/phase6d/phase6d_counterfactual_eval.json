@@ -1,0 +1,88 @@
+{
+  "counterfactual_eval": [
+    {
+      "pair_id": "PAIR_A_POINT_DATE",
+      "description": "Historical assertion date shift (2010 vs 2020)",
+      "base_score": 0.0049,
+      "base_pred": false,
+      "base_gold": false,
+      "base_correct": true,
+      "variant_score": 0.9982,
+      "variant_pred": true,
+      "variant_gold": true,
+      "variant_correct": true,
+      "both_correct": true,
+      "mechanism": "Global Evidence-Date Alignment (DATE_MISMATCH detection)"
+    },
+    {
+      "pair_id": "PAIR_B_FUTURE_ASSERTION",
+      "description": "Assertion vs Prediction for future date (2030)",
+      "base_score": 0.92,
+      "base_pred": true,
+      "base_gold": true,
+      "base_correct": true,
+      "variant_score": 0.0,
+      "variant_pred": false,
+      "variant_gold": false,
+      "variant_correct": true,
+      "both_correct": true,
+      "mechanism": "Temporal-Epistemic Gate (FUTURE_IMPOSSIBLE_FACT vs PREDICTION protection)"
+    },
+    {
+      "pair_id": "PAIR_C_NEGATION",
+      "description": "Assertion vs Negated Assertion for historical date",
+      "base_score": 0.999,
+      "base_pred": true,
+      "base_gold": true,
+      "base_correct": true,
+      "variant_score": 0.0041,
+      "variant_pred": false,
+      "variant_gold": false,
+      "variant_correct": true,
+      "both_correct": true,
+      "mechanism": "Epistemic Gate (NEGATED_FACT protection)"
+    },
+    {
+      "pair_id": "PAIR_D_QUOTATION",
+      "description": "Assertion vs Quoted/Debunked Meta-Claim",
+      "base_score": 0.7526,
+      "base_pred": true,
+      "base_gold": true,
+      "base_correct": true,
+      "variant_score": 0.0034,
+      "variant_pred": false,
+      "variant_gold": false,
+      "variant_correct": true,
+      "both_correct": true,
+      "mechanism": "Epistemic Gate (QUOTED_CLAIM / META_CLAIM protection)"
+    },
+    {
+      "pair_id": "PAIR_E_HYPOTHETICAL",
+      "description": "Assertion vs Conditional Hypothetical",
+      "base_score": 0.5005,
+      "base_pred": true,
+      "base_gold": true,
+      "base_correct": true,
+      "variant_score": 0.0,
+      "variant_pred": false,
+      "variant_gold": false,
+      "variant_correct": true,
+      "both_correct": true,
+      "mechanism": "Temporal-Epistemic Gate (HYPOTHETICAL / CONDITIONAL protection)"
+    },
+    {
+      "pair_id": "PAIR_F_COUNTERFACTUAL",
+      "description": "Assertion vs Counterfactual Past",
+      "base_score": 0.1333,
+      "base_pred": false,
+      "base_gold": true,
+      "base_correct": false,
+      "variant_score": 0.0,
+      "variant_pred": false,
+      "variant_gold": false,
+      "variant_correct": true,
+      "both_correct": false,
+      "mechanism": "Epistemic Gate (COUNTERFACTUAL protection)"
+    }
+  ]
+}

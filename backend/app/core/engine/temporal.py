@@ -16,7 +16,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
+from .epistemic import EpistemicResolver, EpistemicFrame, EpistemicModality
 
 
 class TemporalStatus(str, Enum):
@@ -35,17 +36,17 @@ class TemporalStatus(str, Enum):
     UNKNOWN = "UNKNOWN"
 
 
-class EpistemicModality(str, Enum):
-    ASSERTED_FACT = "ASSERTED_FACT"
-    FUTURE_FACT_ASSERTION = "FUTURE_FACT_ASSERTION"
-    PREDICTION = "PREDICTION"
-    HYPOTHETICAL = "HYPOTHETICAL"
-    COUNTERFACTUAL = "COUNTERFACTUAL"
-    CONDITIONAL = "CONDITIONAL"
-    NEGATED_FACT = "NEGATED_FACT"
-    FICTIONAL = "FICTIONAL"
-    QUOTED_CLAIM = "QUOTED_CLAIM"
-    UNKNOWN = "UNKNOWN"
+@dataclass
+class TemporalConstraint:
+    """Structured claim-level temporal constraint representation."""
+    has_point_date: bool
+    point_years: List[int]
+    has_date_range: bool
+    range_bounds: Optional[Tuple[int, int]]
+    has_relational_operator: bool
+    relational_operators: List[str]
+    is_future: bool
+    is_historical: bool
 
 
 @dataclass
@@ -57,6 +58,8 @@ class TemporalAnalysisResult:
     temporal_inconsistency_score: float
     protected_from_temporal_penalty: bool
     reasoning: str
+    epistemic_frame: Optional[EpistemicFrame] = None
+    constraint: Optional[TemporalConstraint] = None
 
 
 class TemporalClaimEngine:
@@ -184,23 +187,9 @@ class TemporalClaimEngine:
         hypothetical/conditional markers cannot protect an asserted response.
         """
         del query
-        claim_lower = (claim_text or text or "").lower().strip()
-
-        if self._matches_any(self.FICTION_PATTERNS, claim_lower):
-            return EpistemicModality.FICTIONAL
-        if self._matches_any(self.META_CLAIM_PATTERNS, claim_lower):
-            return EpistemicModality.QUOTED_CLAIM
-        if self._matches_any(self.NEGATION_PATTERNS, claim_lower):
-            return EpistemicModality.NEGATED_FACT
-        if self._matches_any(self.COUNTERFACTUAL_PATTERNS, claim_lower):
-            return EpistemicModality.COUNTERFACTUAL
-        if self._matches_any(self.HYPOTHETICAL_PATTERNS, claim_lower):
-            return EpistemicModality.HYPOTHETICAL
-        if re.search(r"\bif\b", claim_lower):
-            return EpistemicModality.CONDITIONAL
-        if self._matches_any(self.PREDICTION_PATTERNS, claim_lower):
-            return EpistemicModality.PREDICTION
-        return EpistemicModality.ASSERTED_FACT
+        resolver = EpistemicResolver()
+        frame = resolver.resolve_frame(claim_text or text or "", is_query=False)
+        return frame.modality
 
     def verify_evidence_date_mismatch(
         self,
@@ -280,7 +269,26 @@ class TemporalClaimEngine:
             years_found = [int(y) for y in self.YEAR_PATTERN.findall(q_str)]
 
         has_temporal = bool(years_found)
-        modality = self.detect_modality(q_str, text, claim_text=text)
+        resolver = EpistemicResolver()
+        frame = resolver.resolve_frame(text, is_query=False)
+        modality = frame.modality
+
+        relational_ops = [
+            m.group(0) for m in [
+                p.search(text.lower()) for p in self.RELATIONAL_PATTERNS
+            ] if m
+        ]
+
+        constraint = TemporalConstraint(
+            has_point_date=bool(years_found),
+            point_years=years_found,
+            has_date_range="between " in text.lower() and " and " in text.lower(),
+            range_bounds=(years_found[0], years_found[1]) if len(years_found) >= 2 else None,
+            has_relational_operator=bool(relational_ops),
+            relational_operators=relational_ops,
+            is_future=any(y > eval_year for y in years_found),
+            is_historical=any(y <= eval_year for y in years_found),
+        )
 
         protected_modalities = {
             EpistemicModality.PREDICTION,
@@ -309,6 +317,8 @@ class TemporalClaimEngine:
                 temporal_inconsistency_score=0.0,
                 protected_from_temporal_penalty=True,
                 reasoning=f"Protected response modality detected ({modality.value}); temporal penalty suppressed without overriding NLI grounding.",
+                epistemic_frame=frame,
+                constraint=constraint,
             )
 
         future_years = [y for y in years_found if y > eval_year]
@@ -322,6 +332,8 @@ class TemporalClaimEngine:
                 temporal_inconsistency_score=0.92,
                 protected_from_temporal_penalty=False,
                 reasoning=f"Asserted completed fact with future event year ({future_years[0]} > {eval_year}).",
+                epistemic_frame=frame,
+                constraint=constraint,
             )
 
         date_mismatch_score = self.verify_evidence_date_mismatch(text, evidence_items)
@@ -334,6 +346,8 @@ class TemporalClaimEngine:
                 temporal_inconsistency_score=date_mismatch_score,
                 protected_from_temporal_penalty=False,
                 reasoning="Historical date mismatch detected after global evidence-year consistency check.",
+                epistemic_frame=frame,
+                constraint=constraint,
             )
 
         if "between " in text_lower and " and " in text_lower and len(years_found) >= 2:
@@ -345,6 +359,8 @@ class TemporalClaimEngine:
                 temporal_inconsistency_score=0.0,
                 protected_from_temporal_penalty=True,
                 reasoning=f"Valid historical date range [{years_found[0]}-{years_found[1]}] statement.",
+                epistemic_frame=frame,
+                constraint=constraint,
             )
 
         if self._matches_any(self.RELATIONAL_PATTERNS, text_lower):
@@ -356,6 +372,8 @@ class TemporalClaimEngine:
                 temporal_inconsistency_score=0.0,
                 protected_from_temporal_penalty=True,
                 reasoning="Relational temporal language detected; requires event-to-event comparison rather than naive year mismatch.",
+                epistemic_frame=frame,
+                constraint=constraint,
             )
 
         if has_temporal:
@@ -367,6 +385,8 @@ class TemporalClaimEngine:
                 temporal_inconsistency_score=0.0,
                 protected_from_temporal_penalty=True,
                 reasoning="Historical or present temporal expression within valid timeline bounds.",
+                epistemic_frame=frame,
+                constraint=constraint,
             )
 
         return TemporalAnalysisResult(
@@ -377,4 +397,6 @@ class TemporalClaimEngine:
             temporal_inconsistency_score=0.0,
             protected_from_temporal_penalty=True,
             reasoning="No temporal expressions detected.",
+            epistemic_frame=frame,
+            constraint=constraint,
         )

@@ -1,0 +1,9 @@
+{
+  "mcnemar_d0_vs_d4": {
+    "statistic": 0.0,
+    "p_value": 1.0,
+    "b": 0,
+    "c": 0,
+    "significant": false
+  }
+}

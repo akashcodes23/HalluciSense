@@ -1,0 +1,312 @@
+{
+  "D0_P1_NLI_Baseline": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D1_P1_Plus_NaiveTemporal": {
+    "accuracy": 0.854545,
+    "precision": 0.774648,
+    "recall": 1.0,
+    "f1": 0.873016,
+    "mcc": 0.741145,
+    "balanced_accuracy": 0.854545,
+    "specificity": 0.709091,
+    "fpr": 0.290909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 156,
+    "fp": 64,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.6465,
+      "modality_protection_rate": 0.3535,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 64,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.873,
+      "ci_lower": 0.8388,
+      "ci_upper": 0.9024
+    }
+  },
+  "D2_P1_Plus_QueryModality": {
+    "accuracy": 0.854545,
+    "precision": 0.774648,
+    "recall": 1.0,
+    "f1": 0.873016,
+    "mcc": 0.741145,
+    "balanced_accuracy": 0.854545,
+    "specificity": 0.709091,
+    "fpr": 0.290909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 156,
+    "fp": 64,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.6465,
+      "modality_protection_rate": 0.3535,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 64,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.873,
+      "ci_lower": 0.8388,
+      "ci_upper": 0.9024
+    }
+  },
+  "D3_P1_Plus_ResponseModality": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D4_Temporal_Epistemic_Gate": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D5_Plus_AtomicClaimSegmentation": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D6_Plus_LocalEvidenceAlignment": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D7_Plus_GlobalEvidenceAlignment": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D8_Plus_RelationalOperatorProtection": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  },
+  "D9_Full_Phase6D_Architecture": {
+    "accuracy": 0.929545,
+    "precision": 0.876494,
+    "recall": 1.0,
+    "f1": 0.934183,
+    "mcc": 0.867749,
+    "balanced_accuracy": 0.929545,
+    "specificity": 0.859091,
+    "fpr": 0.140909,
+    "fnr": 0.0,
+    "auroc": 0.968368,
+    "auprc": 0.906775,
+    "tp": 220,
+    "tn": 189,
+    "fp": 31,
+    "fn": 0,
+    "targeted": {
+      "non_assertion_fpr": 0.3131,
+      "modality_protection_rate": 0.6869,
+      "assertion_preservation_rate": 1.0,
+      "non_assertion_total": 99,
+      "non_assertion_fp": 31,
+      "assertion_pos_total": 209,
+      "assertion_pos_tp": 209
+    },
+    "f1_ci": {
+      "mean": 0.9343,
+      "ci_lower": 0.9087,
+      "ci_upper": 0.9556
+    }
+  }
+}

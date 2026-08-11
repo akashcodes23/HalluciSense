@@ -1,0 +1,52 @@
+{
+  "climate": {
+    "n": 88,
+    "pos": 44,
+    "neg": 44,
+    "accuracy": 0.931818,
+    "f1": 0.93617,
+    "mcc": 0.87178,
+    "balanced_accuracy": 0.931818,
+    "specificity": 0.863636
+  },
+  "history": {
+    "n": 88,
+    "pos": 44,
+    "neg": 44,
+    "accuracy": 0.931818,
+    "f1": 0.93617,
+    "mcc": 0.87178,
+    "balanced_accuracy": 0.931818,
+    "specificity": 0.863636
+  },
+  "politics": {
+    "n": 88,
+    "pos": 44,
+    "neg": 44,
+    "accuracy": 0.931818,
+    "f1": 0.93617,
+    "mcc": 0.87178,
+    "balanced_accuracy": 0.931818,
+    "specificity": 0.863636
+  },
+  "science": {
+    "n": 88,
+    "pos": 44,
+    "neg": 44,
+    "accuracy": 0.920455,
+    "f1": 0.926316,
+    "mcc": 0.851757,
+    "balanced_accuracy": 0.920455,
+    "specificity": 0.840909
+  },
+  "technology": {
+    "n": 88,
+    "pos": 44,
+    "neg": 44,
+    "accuracy": 0.931818,
+    "f1": 0.93617,
+    "mcc": 0.87178,
+    "balanced_accuracy": 0.931818,
+    "specificity": 0.863636
+  }
+}
