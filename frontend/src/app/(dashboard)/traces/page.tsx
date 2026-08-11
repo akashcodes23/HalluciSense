@@ -129,7 +129,7 @@ export default function TracesPage() {
                 {/* Vertical Line */}
                 <div className="absolute left-[11px] top-3 bottom-3 w-px bg-white/[0.06]" />
 
-                {displayTrace.stages.map((stage, index) => (
+                {displayTrace.stages.map((stage: TraceStage, index: number) => (
                   <TraceStageRow key={index} stage={stage} index={index} />
                 ))}
               </div>

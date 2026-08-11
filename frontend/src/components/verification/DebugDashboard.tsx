@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface StageDetails {
   duration_ms: number;
   memory_mb: number;
   confidence: number | null;
-  details: Record<string, any>;
+  details: Record<string, unknown>;
 }
 
 interface TraceSummary {
@@ -29,7 +29,7 @@ export const DebugDashboard: React.FC = () => {
   const [searchId, setSearchId] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
-  const fetchLatestTrace = async () => {
+  const fetchLatestTrace = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -37,12 +37,12 @@ export const DebugDashboard: React.FC = () => {
       if (!res.ok) throw new Error('No trace data found');
       const data = await res.json();
       setTrace(data);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch trace');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch trace');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const fetchTraceById = async (id: string) => {
     if (!id.trim()) return;
@@ -53,8 +53,8 @@ export const DebugDashboard: React.FC = () => {
       if (!res.ok) throw new Error(`Trace ID ${id} not found`);
       const data = await res.json();
       setTrace(data);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Trace fetch failed');
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,7 @@ export const DebugDashboard: React.FC = () => {
 
   useEffect(() => {
     fetchLatestTrace();
-  }, []);
+  }, [fetchLatestTrace]);
 
   const downloadJson = () => {
     if (!trace) return;
@@ -72,111 +72,95 @@ export const DebugDashboard: React.FC = () => {
     a.href = url;
     a.download = `${trace.trace_id}.json`;
     a.click();
-    URL.revokeObjectURL(url);
   };
 
   return (
-    <div className="p-6 bg-slate-950 text-slate-100 rounded-xl border border-slate-800 shadow-2xl space-y-6">
-      {/* Header & Controls */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4">
+    <div className="p-6 bg-[#0b1220] border border-white/[0.08] rounded-xl space-y-6 text-white font-sans">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
-          <h2 className="text-2xl font-bold text-sky-400 flex items-center gap-2">
-            <span>🔬</span> HalluciSense Pipeline Debug Inspector
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Phase 25 Trace Diagnostics, Step-by-Step Claim Execution & Single-Label Root Cause Classifier
+          <h2 className="text-xl font-bold tracking-tight">Pipeline Diagnostics & Trace Explorer</h2>
+          <p className="text-xs text-slate-400 mt-1">
+            Real-time stage latency, memory footprint, and telemetry
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <input
             type="text"
-            placeholder="Search TRACE_ID..."
+            placeholder="Search Trace ID..."
             value={searchId}
             onChange={(e) => setSearchId(e.target.value)}
-            className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:border-sky-500"
+            className="px-3 py-1.5 bg-black/40 border border-white/10 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-mono"
           />
           <button
             onClick={() => fetchTraceById(searchId)}
-            className="bg-sky-600 hover:bg-sky-500 text-white font-medium text-xs px-3 py-2 rounded-lg transition"
+            className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold rounded-lg transition-colors"
           >
             Search
           </button>
           <button
             onClick={fetchLatestTrace}
-            className="bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs px-3 py-2 rounded-lg transition"
+            className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold rounded-lg transition-colors"
           >
-            Latest Trace
+            Latest
           </button>
-          {trace && (
-            <button
-              onClick={downloadJson}
-              className="bg-emerald-700 hover:bg-emerald-600 text-white font-medium text-xs px-3 py-2 rounded-lg transition"
-            >
-              Export JSON
-            </button>
-          )}
         </div>
       </div>
 
       {loading && (
-        <div className="text-center py-12 text-slate-400 animate-pulse">
-          Loading diagnostic trace payload...
+        <div className="py-12 text-center text-slate-400 text-sm">
+          Loading trace telemetry...
         </div>
       )}
 
       {error && (
-        <div className="bg-rose-950/40 border border-rose-800 text-rose-300 p-4 rounded-lg text-sm">
-          ⚠️ {error}
+        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-mono">
+          {error}
         </div>
       )}
 
-      {trace && !loading && (
+      {!loading && trace && (
         <div className="space-y-6">
-          {/* Summary Banner */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
-              <span className="text-slate-400 text-xs block">Trace ID</span>
-              <span className="text-sky-400 font-mono font-bold text-sm">{trace.trace_id}</span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Trace ID</span>
+              <span className="text-xs font-mono text-indigo-400 font-semibold">{trace.trace_id}</span>
             </div>
-            <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
-              <span className="text-slate-400 text-xs block">Final H-Score</span>
-              <span className="text-emerald-400 font-bold text-lg">{trace.summary.final_h_score.toFixed(4)}</span>
+            <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Total Latency</span>
+              <span className="text-xs font-mono text-emerald-400 font-semibold">{trace.summary?.total_duration_ms?.toFixed(2)} ms</span>
             </div>
-            <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
-              <span className="text-slate-400 text-xs block">Risk Level</span>
-              <span className="text-amber-400 font-semibold text-sm">{trace.summary.risk_level}</span>
+            <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">H-Score</span>
+              <span className="text-xs font-mono text-amber-400 font-semibold">{(trace.summary?.final_h_score * 100)?.toFixed(1)}%</span>
             </div>
-            <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
-              <span className="text-slate-400 text-xs block">Root Cause Category</span>
-              <span className="text-purple-400 font-bold text-sm">{trace.summary.root_cause_classification}</span>
-            </div>
-            <div className="bg-slate-900 p-4 rounded-lg border border-slate-800 text-center">
-              <span className="text-slate-400 text-xs block">Execution Latency</span>
-              <span className="text-indigo-400 font-bold text-sm">{trace.summary.total_duration_ms} ms</span>
+            <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg flex items-center justify-between">
+              <div>
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Risk Level</span>
+                <span className="text-xs font-semibold text-white">{trace.summary?.risk_level}</span>
+              </div>
+              <button
+                onClick={downloadJson}
+                className="px-2 py-1 bg-white/10 hover:bg-white/20 text-[10px] rounded font-semibold transition-colors"
+              >
+                Export JSON
+              </button>
             </div>
           </div>
 
-          {/* Execution Stages Timeline */}
-          <div className="bg-slate-900 p-5 rounded-lg border border-slate-800 space-y-4">
-            <h3 className="text-md font-semibold text-slate-200 border-b border-slate-800 pb-2">
-              Pipeline Stage Diagnostics Timeline
-            </h3>
-            <div className="space-y-3">
-              {Object.entries(trace.stages).map(([stageName, details]) => (
-                <div key={stageName} className="bg-slate-950 p-3.5 rounded border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-                  <div>
-                    <span className="font-mono text-sky-300 font-medium text-sm">{stageName}</span>
-                    <p className="text-slate-400 text-xs mt-0.5">
-                      Details: {JSON.stringify(details.details)}
-                    </p>
+          <div className="space-y-3">
+            <h3 className="text-sm font-semibold text-slate-300">Execution Stage Breakdown</h3>
+            <div className="space-y-2">
+              {Object.entries(trace.stages || {}).map(([stageName, stageData]) => (
+                <div key={stageName} className="p-3 bg-white/[0.02] border border-white/5 rounded-lg space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-slate-200 capitalize">{stageName.replace(/_/g, ' ')}</span>
+                    <span className="font-mono text-slate-400">{stageData.duration_ms?.toFixed(2)} ms</span>
                   </div>
-                  <div className="flex items-center gap-4 text-xs font-mono">
-                    <span className="text-slate-400">⏱️ {details.duration_ms} ms</span>
-                    <span className="text-slate-400">💾 {details.memory_mb} MB</span>
-                    {details.confidence !== null && (
-                      <span className="text-emerald-400">Confidence: {(details.confidence * 100).toFixed(1)}%</span>
-                    )}
-                  </div>
+                  {stageData.details && Object.keys(stageData.details).length > 0 && (
+                    <pre className="p-2 bg-black/40 rounded text-[10px] text-slate-400 font-mono overflow-x-auto">
+                      {JSON.stringify(stageData.details, null, 2)}
+                    </pre>
+                  )}
                 </div>
               ))}
             </div>

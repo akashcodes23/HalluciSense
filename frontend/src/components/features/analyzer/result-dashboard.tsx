@@ -9,12 +9,9 @@ import {
   Clock,
   Cpu,
   Database,
-  Activity,
-  GitBranch,
   AlertTriangle,
   Info,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { GlassCard } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -34,7 +31,8 @@ const riskIcon = (level: string) => {
   switch (level) {
     case "VERIFIED": return <ShieldCheck className="w-5 h-5" />;
     case "LOW_RISK": return <ShieldCheck className="w-5 h-5" />;
-    case "MODERATE_RISK": return <ShieldAlert className="w-5 h-5" />;
+    case "MODERATE_RISK":
+    case "NEEDS_VERIFICATION": return <ShieldAlert className="w-5 h-5" />;
     case "LIKELY_HALLUCINATED": return <ShieldX className="w-5 h-5" />;
     default: return <Info className="w-5 h-5" />;
   }
@@ -44,7 +42,8 @@ const riskBadgeVariant = (level: string) => {
   switch (level) {
     case "VERIFIED": return "verified" as const;
     case "LOW_RISK": return "info" as const;
-    case "MODERATE_RISK": return "warning" as const;
+    case "MODERATE_RISK":
+    case "NEEDS_VERIFICATION": return "warning" as const;
     case "LIKELY_HALLUCINATED": return "danger" as const;
     default: return "default" as const;
   }
@@ -61,7 +60,9 @@ const item = {
 };
 
 export function ResultDashboard({ result, explain }: ResultDashboardProps) {
-  const riskColor = getRiskColor(result.risk_level);
+  const confidencePct = ((result.confidence ?? (1 - result.overall_h_score)) * 100).toFixed(1);
+  const latencyMs = result.latency_ms ?? result.processing_time_ms ?? 0;
+  const traceIdStr = result.trace_id ? result.trace_id.slice(0, 12) : "LOCAL_EXEC";
 
   return (
     <motion.div variants={container} initial="hidden" animate="show" className="space-y-6">
@@ -83,16 +84,16 @@ export function ResultDashboard({ result, explain }: ResultDashboardProps) {
                   Hallucination Score: {(result.overall_h_score * 100).toFixed(1)}%
                 </h2>
                 <p className="text-sm text-slate-400 mt-1">
-                  System confidence: {(result.confidence * 100).toFixed(1)}%
+                  System confidence: {confidencePct}%
                 </p>
               </div>
 
               {/* Meta Stats */}
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                <MetaStat icon={<Clock className="w-3.5 h-3.5" />} label="Latency" value={formatLatency(result.processing_time_ms)} />
-                <MetaStat icon={<Cpu className="w-3.5 h-3.5" />} label="Version" value={result.version} />
+                <MetaStat icon={<Clock className="w-3.5 h-3.5" />} label="Latency" value={formatLatency(latencyMs)} />
+                <MetaStat icon={<Cpu className="w-3.5 h-3.5" />} label="Version" value={result.version || "1.0 Production"} />
                 <MetaStat icon={<AlertTriangle className="w-3.5 h-3.5" />} label="Root Cause" value={result.root_cause_classification || "None"} />
-                <MetaStat icon={<Database className="w-3.5 h-3.5" />} label="Trace" value={result.trace_id.slice(0, 12)} />
+                <MetaStat icon={<Database className="w-3.5 h-3.5" />} label="Trace" value={traceIdStr} />
               </div>
             </div>
           </div>
@@ -109,37 +110,37 @@ export function ResultDashboard({ result, explain }: ResultDashboardProps) {
 
       {/* ── Tabbed Detail Views ────────────────────────────────────── */}
       <motion.div variants={item}>
-        <Tabs defaultValue="heatmap">
+        <Tabs defaultValue="sentences">
           <TabsList>
+            <TabsTrigger value="sentences">Sentence Claims</TabsTrigger>
             <TabsTrigger value="heatmap">Token Heatmap</TabsTrigger>
-            <TabsTrigger value="evidence">Evidence</TabsTrigger>
-            <TabsTrigger value="sentences">Sentences</TabsTrigger>
+            <TabsTrigger value="evidence">Evidence Citations</TabsTrigger>
             {explain && <TabsTrigger value="reasoning">Reasoning</TabsTrigger>}
           </TabsList>
 
+          <TabsContent value="sentences">
+            <SentenceList sentences={result.sentence_scores} />
+          </TabsContent>
+
           <TabsContent value="heatmap">
-            <TokenHeatmap tokens={result.token_heatmap} />
+            <TokenHeatmap tokens={result.token_heatmap || []} />
           </TabsContent>
 
           <TabsContent value="evidence">
             <EvidenceExplorer
-              evidence={result.evidence}
+              evidence={result.evidence || []}
               explainEvidence={explain?.retrieved_evidence}
               supporting={explain?.supporting_passages}
               contradicting={explain?.contradiction_evidence}
             />
           </TabsContent>
 
-          <TabsContent value="sentences">
-            <SentenceList sentences={result.sentence_scores} />
-          </TabsContent>
-
           {explain && (
             <TabsContent value="reasoning">
               <ReasoningChain
-                chain={explain.reasoning_chain}
-                explanation={explain.confidence_explanation}
-                fusion={explain.fusion_contribution}
+                chain={explain.reasoning_chain || []}
+                explanation={explain.confidence_explanation || explain.explanation_markdown || ""}
+                fusion={explain.fusion_contribution || {}}
               />
             </TabsContent>
           )}
@@ -162,7 +163,7 @@ function MetaStat({ icon, label, value }: { icon: React.ReactNode; label: string
 }
 
 function SentenceList({ sentences }: { sentences: AnalysisResponse["sentence_scores"] }) {
-  if (!sentences.length) {
+  if (!sentences || !sentences.length) {
     return (
       <div className="text-center py-12 text-slate-500 text-sm">
         No sentence-level scores available.
@@ -172,29 +173,33 @@ function SentenceList({ sentences }: { sentences: AnalysisResponse["sentence_sco
 
   return (
     <div className="space-y-2">
-      {sentences.map((s, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -8 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.05 }}
-          className="flex items-start gap-3 px-4 py-3 rounded-xl border border-white/[0.06] bg-white/[0.02]"
-        >
-          <div
-            className="w-2 h-2 rounded-full mt-2 shrink-0"
-            style={{ backgroundColor: getRiskColor(s.risk_level) }}
-          />
-          <div className="flex-1 min-w-0">
-            <p className="text-sm text-slate-200">{s.text}</p>
-            <p className="text-xs text-slate-500 mt-1">
-              Score: {(s.score * 100).toFixed(1)}% • {getRiskLabel(s.risk_level)}
-            </p>
-          </div>
-          <Badge variant={riskBadgeVariant(s.risk_level)} className="shrink-0 text-[10px]">
-            {(s.score * 100).toFixed(0)}%
-          </Badge>
-        </motion.div>
-      ))}
+      {sentences.map((s, i) => {
+        const textStr = s.sentence_text || s.text || "";
+        const scoreVal = s.h_score ?? s.score ?? 0;
+        return (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className="flex items-start gap-3 px-4 py-3 rounded-xl border border-white/[0.06] bg-white/[0.02]"
+          >
+            <div
+              className="w-2 h-2 rounded-full mt-2 shrink-0"
+              style={{ backgroundColor: getRiskColor(s.risk_level) }}
+            />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-slate-200">{textStr}</p>
+              <p className="text-xs text-slate-500 mt-1">
+                Score: {(scoreVal * 100).toFixed(1)}% • {getRiskLabel(s.risk_level)}
+              </p>
+            </div>
+            <Badge variant={riskBadgeVariant(s.risk_level)} className="shrink-0 text-[10px]">
+              {(scoreVal * 100).toFixed(0)}%
+            </Badge>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
@@ -210,7 +215,6 @@ function ReasoningChain({
 }) {
   return (
     <div className="space-y-6">
-      {/* Reasoning Steps */}
       {chain.length > 0 && (
         <div className="space-y-2">
           <h4 className="text-sm font-medium text-slate-400 mb-3">Reasoning Chain</h4>
@@ -231,7 +235,6 @@ function ReasoningChain({
         </div>
       )}
 
-      {/* Confidence Explanation */}
       {explanation && (
         <div className="px-4 py-3 rounded-xl border border-white/[0.06] bg-white/[0.02]">
           <h4 className="text-sm font-medium text-slate-400 mb-2">Confidence Explanation</h4>
@@ -239,7 +242,6 @@ function ReasoningChain({
         </div>
       )}
 
-      {/* Fusion Contributions */}
       {Object.keys(fusion).length > 0 && (
         <div className="px-4 py-3 rounded-xl border border-white/[0.06] bg-white/[0.02]">
           <h4 className="text-sm font-medium text-slate-400 mb-3">Fusion Contributions</h4>
@@ -249,7 +251,7 @@ function ReasoningChain({
                 <span className="text-xs text-slate-500 w-24 truncate font-mono">{key}</span>
                 <div className="flex-1 h-2 rounded-full bg-white/[0.06] overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-blue-500"
+                    className="h-full rounded-full bg-blue-500"
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.min(val * 100, 100)}%` }}
                     transition={{ duration: 0.6, delay: 0.2 }}

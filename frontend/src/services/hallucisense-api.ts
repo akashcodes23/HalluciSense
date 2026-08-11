@@ -9,39 +9,52 @@ import type {
   ExplainRequest,
   ExplainResponse,
   MetricsResponse,
-  HealthResponse,
-  ReadinessResponse,
   TraceData,
 } from "@/types/hallucisense";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://hallucisense-production.up.railway.app";
+const getBaseUrl = (): string => {
+  if (typeof window !== "undefined") {
+    return process.env.NEXT_PUBLIC_API_BASE_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      "http://localhost:8000";
+  }
+  return process.env.NEXT_PUBLIC_API_BASE_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:8000";
+};
 
 async function request<T>(
   path: string,
   options?: RequestInit
 ): Promise<T> {
-  const url = `${BASE_URL}${path}`;
-  const res = await fetch(url, {
-    headers: { "Content-Type": "application/json" },
-    ...options,
-  });
+  const url = `${getBaseUrl()}${path}`;
+  try {
+    const res = await fetch(url, {
+      headers: { "Content-Type": "application/json" },
+      ...options,
+    });
 
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({ detail: res.statusText }));
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new HalluciSenseAPIError(
+        body.detail || body.message || `HTTP ${res.status}`,
+        res.status,
+        body
+      );
+    }
+
+    return res.json() as Promise<T>;
+  } catch (err: unknown) {
+    if (err instanceof HalluciSenseAPIError) {
+      throw err;
+    }
     throw new HalluciSenseAPIError(
-      body.detail || body.message || `HTTP ${res.status}`,
-      res.status,
-      body
+      err instanceof Error ? err.message : "Verification service unavailable",
+      503,
+      { error: "NETWORK_ERROR" }
     );
   }
-
-  return res.json() as Promise<T>;
 }
-
-// ── Error Class ──────────────────────────────────────────────────────────────
 
 export class HalluciSenseAPIError extends Error {
   constructor(
@@ -53,8 +66,6 @@ export class HalluciSenseAPIError extends Error {
     this.name = "HalluciSenseAPIError";
   }
 }
-
-// ── API Functions ────────────────────────────────────────────────────────────
 
 export async function analyzeResponse(
   payload: AnalysisRequest
@@ -78,12 +89,12 @@ export async function getMetrics(): Promise<MetricsResponse> {
   return request<MetricsResponse>("/api/v1/metrics");
 }
 
-export async function getHealth(): Promise<HealthResponse> {
-  return request<HealthResponse>("/health");
+export async function getHealth(): Promise<{ status: string }> {
+  return request<{ status: string }>("/health");
 }
 
-export async function getReady(): Promise<ReadinessResponse> {
-  return request<ReadinessResponse>("/ready");
+export async function getReady(): Promise<{ status: string; components: Record<string, boolean> }> {
+  return request<{ status: string; components: Record<string, boolean> }>("/ready");
 }
 
 export async function getLatestDebug(): Promise<TraceData> {

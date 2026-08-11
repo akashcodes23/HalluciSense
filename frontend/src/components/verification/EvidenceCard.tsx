@@ -63,7 +63,7 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
 
       {/* Snippet */}
       <blockquote className="text-xs text-slate-300 leading-relaxed border-l-2 border-indigo-500/40 pl-3 italic">
-        "{evidence.snippet}"
+        &quot;{evidence.snippet}&quot;
       </blockquote>
 
       {/* Matched Claim */}

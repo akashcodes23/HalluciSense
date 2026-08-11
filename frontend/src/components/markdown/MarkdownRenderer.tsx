@@ -55,7 +55,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight]}
         components={{
-          code({ node, inline, className, children, ...props }: any) {
+          code({ inline, className, children, ...props }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) {
             if (inline) {
               return (
                 <code className="bg-white/10 text-indigo-300 px-1.5 py-0.5 rounded font-mono text-[13px]" {...props}>

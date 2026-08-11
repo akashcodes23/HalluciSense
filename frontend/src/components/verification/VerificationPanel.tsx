@@ -212,7 +212,7 @@ export function VerificationPanel() {
                           style={{ backgroundColor: cfg.color }}
                         />
                         <span className="text-xs text-slate-200 leading-relaxed line-clamp-2">
-                          "{sentence.sentence_text}"
+                          &quot;{sentence.sentence_text}&quot;
                         </span>
                       </div>
                       <div className="flex items-center gap-2 shrink-0">

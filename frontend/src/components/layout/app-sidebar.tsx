@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  ShieldCheck,
   Zap,
   GitBranch,
   BarChart3,
@@ -12,13 +13,15 @@ import {
   ChevronLeft,
   ChevronRight,
   Activity,
-  Shield,
+  LayoutDashboard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useHealth } from "@/hooks/use-analysis";
 
 const NAV_ITEMS = [
-  { href: "/analyze", label: "Analyzer", icon: Zap, description: "Detect hallucinations" },
+  { href: "/verify", label: "Verify", icon: ShieldCheck, description: "Verify LLM responses" },
+  { href: "/analyze", label: "Analyzer", icon: Zap, description: "Detailed analysis" },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, description: "Overview" },
   { href: "/traces", label: "Traces", icon: GitBranch, description: "Pipeline traces" },
   { href: "/metrics", label: "Metrics", icon: BarChart3, description: "System metrics" },
   { href: "/settings", label: "Settings", icon: Settings, description: "Configuration" },
@@ -37,14 +40,14 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
   return (
     <motion.aside
       initial={false}
-      animate={{ width: isOpen ? 260 : 72 }}
-      transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-      className="relative flex flex-col h-full border-r border-white/[0.06] bg-[#060a14] overflow-hidden z-30"
+      animate={{ width: isOpen ? 240 : 72 }}
+      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+      className="relative flex flex-col h-full border-r border-white/[0.06] bg-[#060a14] overflow-hidden z-30 shrink-0"
     >
       {/* ── Brand ──────────────────────────────────────────────────────── */}
       <div className="flex items-center gap-3 px-4 h-16 shrink-0 border-b border-white/[0.06]">
-        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-          <Shield className="w-5 h-5 text-white" />
+        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400">
+          <ShieldCheck className="w-5 h-5" />
         </div>
         <AnimatePresence>
           {isOpen && (
@@ -56,7 +59,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
               className="flex flex-col min-w-0"
             >
               <span className="text-sm font-bold text-white tracking-tight">HalluciSense</span>
-              <span className="text-[10px] text-slate-500 font-medium">v1.0 Production</span>
+              <span className="text-[10px] text-slate-500 font-medium">Research v1.0 Production</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -65,20 +68,19 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
       {/* ── Navigation ─────────────────────────────────────────────────── */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           const Icon = item.icon;
 
           return (
             <Link key={item.href} href={item.href}>
               <div
                 className={cn(
-                  "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 cursor-pointer",
+                  "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 cursor-pointer",
                   isActive
-                    ? "bg-blue-600/10 text-blue-400"
-                    : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200"
+                    ? "bg-blue-600/10 text-blue-400 font-semibold"
+                    : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200 font-normal"
                 )}
               >
-                {/* Active indicator */}
                 {isActive && (
                   <motion.div
                     layoutId="sidebar-active"
@@ -87,7 +89,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
                   />
                 )}
 
-                <Icon className={cn("w-[18px] h-[18px] shrink-0", isActive && "text-blue-400")} />
+                <Icon className={cn("w-[18px] h-[18px] shrink-0", isActive ? "text-blue-400" : "text-slate-400")} />
 
                 <AnimatePresence>
                   {isOpen && (
@@ -96,7 +98,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.15 }}
-                      className="text-sm font-medium truncate"
+                      className="text-sm truncate"
                     >
                       {item.label}
                     </motion.span>
@@ -116,7 +118,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
             <div
               className={cn(
                 "absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full",
-                isHealthy ? "bg-emerald-500 animate-pulse-glow" : "bg-red-500"
+                isHealthy ? "bg-emerald-500" : "bg-red-500"
               )}
             />
           </div>
@@ -128,7 +130,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
                 exit={{ opacity: 0 }}
                 className="text-xs text-slate-500"
               >
-                {isHealthy ? "Backend Online" : "Backend Offline"}
+                {isHealthy ? "Backend Active" : "Offline"}
               </motion.span>
             )}
           </AnimatePresence>
@@ -138,7 +140,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
       {/* ── Toggle Button ──────────────────────────────────────────────── */}
       <button
         onClick={onToggle}
-        className="absolute top-20 -right-3 z-40 flex items-center justify-center w-6 h-6 rounded-full bg-[#111827] border border-white/[0.1] text-slate-400 hover:text-white hover:border-white/[0.2] transition-all cursor-pointer shadow-lg"
+        className="absolute top-20 -right-3 z-40 flex items-center justify-center w-6 h-6 rounded-full bg-[#111827] border border-white/[0.1] text-slate-400 hover:text-white transition-all cursor-pointer shadow-lg"
         aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
       >
         {isOpen ? <ChevronLeft className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}

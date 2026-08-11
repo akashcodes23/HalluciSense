@@ -1,6 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// HalluciSense v1.0 — React Query Hooks
-// All hooks consume real production backend endpoints
+// HalluciSense v1.0 — React Query Hooks for Verification & Analysis
 // ─────────────────────────────────────────────────────────────────────────────
 
 "use client";
@@ -23,28 +22,40 @@ import type {
 } from "@/types/hallucisense";
 import { useAnalysisStore } from "@/store/analysis-store";
 
-// ── Analysis Mutation ────────────────────────────────────────────────────────
-
 export function useAnalysis() {
   const addToHistory = useAnalysisStore((s) => s.addToHistory);
   const setCurrentResult = useAnalysisStore((s) => s.setCurrentResult);
+  const setIsAnalyzing = useAnalysisStore((s) => s.setIsAnalyzing);
 
   return useMutation({
-    mutationFn: (payload: AnalysisRequest) => analyzeResponse(payload),
+    mutationFn: async (payload: AnalysisRequest) => {
+      setIsAnalyzing(true);
+      const textToAnalyze = payload.text || payload.response || "";
+      const reqPayload: AnalysisRequest = {
+        text: textToAnalyze,
+        response: textToAnalyze,
+        query: payload.query || "",
+        provided_evidence: payload.provided_evidence || [],
+        model_name: payload.model_name || "default",
+      };
+      return analyzeResponse(reqPayload);
+    },
     onSuccess: (data: AnalysisResponse, variables: AnalysisRequest) => {
+      setIsAnalyzing(false);
       setCurrentResult(data);
       addToHistory({
-        id: data.trace_id,
-        query: variables.query,
-        response: variables.response,
+        id: data.trace_id || `trace_${Date.now()}`,
+        query: variables.query || "",
+        response: variables.text || variables.response || "",
         result: data,
         timestamp: new Date().toISOString(),
       });
     },
+    onError: () => {
+      setIsAnalyzing(false);
+    },
   });
 }
-
-// ── Explain Mutation ─────────────────────────────────────────────────────────
 
 export function useExplain() {
   const setCurrentExplain = useAnalysisStore((s) => s.setCurrentExplain);
@@ -57,60 +68,45 @@ export function useExplain() {
   });
 }
 
-// ── Metrics Query (polling every 5s) ─────────────────────────────────────────
-
-export function useMetrics(enabled = true) {
+export function useMetrics() {
   return useQuery({
     queryKey: ["metrics"],
     queryFn: getMetrics,
     refetchInterval: 5000,
-    enabled,
-    retry: 2,
+    staleTime: 2000,
   });
 }
 
-// ── Health Query (polling every 10s) ─────────────────────────────────────────
-
-export function useHealth(enabled = true) {
+export function useHealth() {
   return useQuery({
     queryKey: ["health"],
     queryFn: getHealth,
     refetchInterval: 10000,
-    enabled,
-    retry: 1,
   });
 }
 
-// ── Readiness Query ──────────────────────────────────────────────────────────
-
-export function useReadiness(enabled = true) {
+export function useReady() {
   return useQuery({
-    queryKey: ["readiness"],
+    queryKey: ["ready"],
     queryFn: getReady,
     refetchInterval: 10000,
-    enabled,
-    retry: 1,
   });
 }
 
-// ── Latest Debug Trace ───────────────────────────────────────────────────────
-
-export function useLatestTrace(enabled = true) {
+export function useLatestDebug() {
   return useQuery({
     queryKey: ["debug", "latest"],
     queryFn: getLatestDebug,
-    enabled,
-    retry: 1,
+    staleTime: 5000,
   });
 }
 
-// ── Debug Trace by ID ────────────────────────────────────────────────────────
+export const useLatestTrace = useLatestDebug;
 
 export function useDebugTrace(traceId: string | null) {
   return useQuery({
     queryKey: ["debug", traceId],
     queryFn: () => getDebugTrace(traceId!),
     enabled: !!traceId,
-    retry: 1,
   });
 }
