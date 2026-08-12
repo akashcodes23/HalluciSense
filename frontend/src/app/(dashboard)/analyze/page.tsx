@@ -17,6 +17,7 @@ import {
   Sliders,
   ChevronDown,
   ChevronUp,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -52,12 +53,16 @@ export default function AnalyzePage() {
   const [resultB, setResultB] = useState<AnalysisResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [errorDetails, setErrorDetails] = useState<unknown>(null);
+  const [showErrorDetails, setShowErrorDetails] = useState(false);
 
   const handleCompare = async () => {
     if (!responseA.trim() || !responseB.trim()) return;
 
     setIsAnalyzing(true);
     setErrorMsg(null);
+    setErrorDetails(null);
+    setShowErrorDetails(false);
 
     const providedEvidence = evidenceText.trim()
       ? evidenceText.split("\n").filter((line) => line.trim().length > 0)
@@ -82,9 +87,13 @@ export default function AnalyzePage() {
       setResultA(resA);
       setResultB(resB);
     } catch (err: unknown) {
-      setErrorMsg(
-        err instanceof Error ? err.message : "Failed to complete comparative response analysis."
-      );
+      if (err && typeof err === "object" && "body" in err) {
+        const apiErr = err as { message?: string; body?: { details?: unknown } };
+        setErrorMsg(apiErr.message || "Invalid request payload schema or missing required fields.");
+        setErrorDetails(apiErr.body?.details || apiErr.body || null);
+      } else {
+        setErrorMsg(err instanceof Error ? err.message : "Failed to complete comparative response analysis.");
+      }
     } finally {
       setIsAnalyzing(false);
     }
@@ -238,20 +247,48 @@ export default function AnalyzePage() {
             )}
           </div>
 
+          {/* Contextual Inline Error Feedback */}
+          {errorMsg && (
+            <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 text-slate-300 space-y-2 text-sm">
+              <div className="flex items-center gap-2 text-red-400 font-semibold">
+                <AlertTriangle className="w-4.5 h-4.5" />
+                <span>Analysis Failed</span>
+              </div>
+              <p className="text-slate-300">
+                {errorMsg.includes("422") || errorMsg.includes("schema")
+                  ? "The request payload did not match the expected schema. Please verify prompt or response formats."
+                  : errorMsg}
+              </p>
+              {errorDetails && (
+                <div className="pt-2 border-t border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => setShowErrorDetails(!showErrorDetails)}
+                    className="text-xs text-slate-400 hover:text-white underline cursor-pointer flex items-center gap-1"
+                  >
+                    {showErrorDetails ? "Hide technical details" : "Show technical details"}
+                    <ChevronDown className={`w-3 h-3 transition-transform ${showErrorDetails ? "rotate-180" : ""}`} />
+                  </button>
+                  {showErrorDetails && (
+                    <pre className="mt-2 p-3 rounded-lg bg-black/40 text-xs font-mono text-red-300/80 overflow-x-auto leading-relaxed select-text">
+                      {JSON.stringify(errorDetails, null, 2)}
+                    </pre>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Action CTA */}
           <div className="flex items-center justify-between">
-            {errorMsg ? (
-              <p className="text-xs font-mono text-rose-400">{errorMsg}</p>
-            ) : (
-              <p className="text-xs text-slate-500">
-                Executes parallel NLI claim grounding, logit entropy, and self-consistency analysis on both outputs.
-              </p>
-            )}
+            <div className="text-xs text-slate-500 max-w-md">
+              Executes parallel NLI claim grounding, logit entropy, and self-consistency analysis on both outputs.
+            </div>
 
             <Button
               onClick={handleCompare}
               disabled={isAnalyzing || !responseA.trim() || !responseB.trim()}
-              className="shadow-[0_0_20px_rgba(99,102,241,0.4)]"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/20 rounded-xl cursor-pointer"
             >
               {isAnalyzing ? (
                 <>
@@ -267,8 +304,20 @@ export default function AnalyzePage() {
             </Button>
           </div>
 
+          {/* Loading Skeleton State */}
+          {isAnalyzing && (
+            <div className="space-y-6 pt-6 border-t border-white/[0.08] animate-pulse">
+              <div className="h-6 w-48 bg-white/5 rounded mb-4" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="h-48 bg-[#0b1220]/60 border border-white/5 rounded-2xl" />
+                <div className="h-48 bg-[#0b1220]/60 border border-white/5 rounded-2xl" />
+              </div>
+              <div className="h-36 bg-[#0b1220]/60 border border-white/5 rounded-2xl" />
+            </div>
+          )}
+
           {/* ── COMPARATIVE RESULTS PANEL ─────────────────────────────────── */}
-          {resultA && resultB && (
+          {resultA && resultB && !isAnalyzing && (
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}

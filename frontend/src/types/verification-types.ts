@@ -122,11 +122,9 @@ export interface AnalysisHistoryEntry {
 }
 
 export interface ExplainRequest {
-  analysis_response?: AnalysisResponse;
-  original_query?: string;
+  query?: string;
   response?: string;
-  h_score?: number;
-  risk_level?: RiskLevel;
+  model_name?: string;
 }
 
 export interface ExplainResponse {
@@ -145,11 +143,12 @@ export interface ExplainResponse {
 export interface MetricsResponse {
   requests: number;
   success_rate: number;
+  error_rate: number;
+  avg_h_score?: number;
   average_latency_ms: number;
   active_models?: number;
   total_requests?: number;
   verifications_completed?: number;
-  avg_h_score?: number;
   avg_confidence?: number;
   avg_latency_ms?: number;
   risk_distribution?: Record<string, number>;

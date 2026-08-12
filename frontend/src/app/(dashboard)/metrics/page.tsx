@@ -118,19 +118,19 @@ export default function MetricsPage() {
           <MetricCard
             icon={<TrendingUp className="w-4 h-4" />}
             label="Avg H-Score"
-            value={`${((metrics.avg_h_score ?? 0.23) * 100).toFixed(1)}%`}
+            value={metrics.requests > 0 ? `${((metrics.avg_h_score ?? 0) * 100).toFixed(1)}%` : "0.0%"}
             color="#F59E0B"
           />
           <MetricCard
             icon={<CheckCircle2 className="w-4 h-4" />}
             label="Success Rate"
-            value={`${metrics.success_rate.toFixed(1)}%`}
+            value={metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
             color="#22C55E"
           />
           <MetricCard
             icon={<XCircle className="w-4 h-4" />}
             label="Error Rate"
-            value={`${(100 - metrics.success_rate).toFixed(1)}%`}
+            value={metrics.requests > 0 ? `${metrics.error_rate.toFixed(1)}%` : "0.0%"}
             color="#EF4444"
           />
           <MetricCard

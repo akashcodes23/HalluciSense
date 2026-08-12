@@ -115,36 +115,30 @@ export default function LandingPage() {
           </FadeUp>
 
           <FadeUp delay={0.2}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-              Detect Hallucinations. <br className="hidden sm:inline" />
-              Measure Confidence. <span className="text-gradient">Verify Evidence.</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6.5xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.15]">
+              Detect Hallucinations.<br />
+              Measure Confidence. <span className="text-indigo-400">Verify Evidence.</span>
             </h1>
           </FadeUp>
 
           <FadeUp delay={0.3}>
-            <p className="text-base md:text-lg max-w-2xl mx-auto text-slate-400 leading-relaxed">
+            <p className="text-base md:text-lg max-w-2xl mx-auto text-slate-400 leading-relaxed font-normal">
               A confidence-aware verification framework combining evidence grounding, epistemic uncertainty, and structural consistency.
             </p>
           </FadeUp>
 
           <FadeUp delay={0.4}>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
               <Link href="/verify">
-                <Button size="xl" className="shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                <Button size="xl" className="bg-gradient-to-r from-purple-600 to-indigo-600 border-0 hover:from-purple-500 hover:to-indigo-500 text-white shadow-[0_0_32px_rgba(168,85,247,0.35)] rounded-xl cursor-pointer">
                   Start Analyzing
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
               <a href="#pillars">
-                <Button variant="secondary" size="xl">
+                <Button variant="outline" size="xl" className="border-white/10 hover:bg-white/[0.03] text-slate-300 hover:text-white rounded-xl flex items-center gap-2">
                   <BookOpen className="w-4 h-4" />
                   Explore Framework
-                </Button>
-              </a>
-              <a href="https://github.com/akashcodes23/HalluciSense" target="_blank" rel="noreferrer">
-                <Button variant="outline" size="xl">
-                  <GithubIcon size={18} />
-                  GitHub
                 </Button>
               </a>
             </div>
@@ -238,14 +232,14 @@ export default function LandingPage() {
 
             <GlassCard className="p-6 text-center space-y-1">
               <span className="text-3xl font-bold font-mono text-emerald-400">
-                {metrics ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
+                {metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
               </span>
               <p className="text-xs text-slate-500 uppercase tracking-wider">Pass Rate</p>
             </GlassCard>
 
             <GlassCard className="p-6 text-center space-y-1">
               <span className="text-3xl font-bold font-mono text-purple-400">
-                {metrics ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
+                {metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
               </span>
               <p className="text-xs text-slate-500 uppercase tracking-wider">Avg Latency</p>
             </GlassCard>

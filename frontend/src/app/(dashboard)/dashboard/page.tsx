@@ -22,13 +22,17 @@ import { GlassCard } from "@/components/ui/card";
 import { useMetrics, useHealth, useReady } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
 import { formatLatency, formatNumber, getRiskColor, getRiskLabel } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
   const { data: metrics, isLoading: metricsLoading, refetch: refetchMetrics } = useMetrics();
   const { data: health } = useHealth();
   const { data: ready } = useReady();
   const history = useAnalysisStore((s) => s.history);
+  const setSelectedTraceId = useAnalysisStore((s) => s.setSelectedTraceId);
+  const router = useRouter();
 
   const isHealthy = health?.status === "ok" || health?.status === "healthy";
   const componentsReady = ready?.components || {};
@@ -45,19 +49,15 @@ export default function DashboardPage() {
           <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
             HalluciSense Operational Control Center
           </h1>
-          <p className="text-sm text-slate-400 mt-1 max-w-2xl">
+          <p className="text-sm text-slate-500">
             Live execution statistics, framework component health, historical verification logs, and active risk distribution.
           </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/10 bg-white/[0.03] text-xs font-mono">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                isHealthy ? "bg-emerald-400 animate-pulse" : "bg-rose-400"
-              }`}
-            />
-            <span className="text-slate-300">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/[0.06] bg-[#0b1220]/60 text-xs">
+            <span className={cn("w-2 h-2 rounded-full", isHealthy ? "bg-emerald-500 animate-pulse" : "bg-red-500")} />
+            <span className="text-slate-400">
               Backend: {isHealthy ? "ONLINE" : "DISCONNECTED"}
             </span>
           </div>
@@ -91,7 +91,7 @@ export default function DashboardPage() {
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           </div>
           <div className="text-2xl md:text-3xl font-bold font-mono text-emerald-400">
-            {metrics ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
+            {metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
           </div>
           <p className="text-[11px] text-slate-500">Execution success ratio</p>
         </GlassCard>
@@ -102,7 +102,7 @@ export default function DashboardPage() {
             <Clock className="w-4 h-4 text-purple-400" />
           </div>
           <div className="text-2xl md:text-3xl font-bold font-mono text-purple-400">
-            {metrics ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
+            {metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
           </div>
           <p className="text-[11px] text-slate-500">End-to-end verification time</p>
         </GlassCard>
@@ -219,7 +219,17 @@ export default function DashboardPage() {
                   const latency = item.result.latency_ms ?? item.result.processing_time_ms ?? 0;
                   return (
                     <tr key={item.id} className="text-slate-300 hover:bg-white/[0.02]">
-                      <td className="py-3 text-blue-400 font-semibold">{item.id.slice(0, 12)}</td>
+                      <td className="py-3 font-semibold">
+                        <button
+                          onClick={() => {
+                            setSelectedTraceId(item.id);
+                            router.push("/traces");
+                          }}
+                          className="text-blue-400 hover:text-blue-300 hover:underline cursor-pointer text-left font-mono"
+                        >
+                          {item.id.slice(0, 12)}
+                        </button>
+                      </td>
                       <td className="py-3 text-slate-500">{new Date(item.timestamp).toLocaleTimeString()}</td>
                       <td className="py-3 font-sans truncate max-w-xs">{item.response}</td>
                       <td className="py-3 font-bold" style={{ color: getRiskColor(riskLevel) }}>

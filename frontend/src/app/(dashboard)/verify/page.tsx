@@ -59,6 +59,8 @@ export default function VerifyPage() {
   const [response, setResponse] = useState("");
   const [contextEvidence, setContextEvidence] = useState("");
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [validationError, setValidationError] = useState<{ message: string; details?: unknown } | null>(null);
+  const [showErrorDetails, setShowErrorDetails] = useState(false);
 
   const analysis = useAnalysis();
   const explain = useExplain();
@@ -77,6 +79,8 @@ export default function VerifyPage() {
     }
 
     reset();
+    setValidationError(null);
+    setShowErrorDetails(false);
 
     const providedEvidence: EvidenceItem[] = contextEvidence.trim()
       ? [
@@ -102,8 +106,16 @@ export default function VerifyPage() {
       explain.mutate(payload);
       toast.success("Verification complete");
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Verification failed";
-      toast.error(message);
+      if (err && typeof err === "object" && "body" in err) {
+        const apiErr = err as { message?: string; body?: { details?: unknown } };
+        setValidationError({
+          message: apiErr.message || "Invalid request payload schema or missing required fields.",
+          details: apiErr.body?.details || apiErr.body || null,
+        });
+      } else {
+        const message = err instanceof Error ? err.message : "Verification failed";
+        setValidationError({ message });
+      }
     }
   };
 
@@ -111,6 +123,8 @@ export default function VerifyPage() {
     setQuery("");
     setResponse("");
     setContextEvidence("");
+    setValidationError(null);
+    setShowErrorDetails(false);
     reset();
   };
 
@@ -118,6 +132,8 @@ export default function VerifyPage() {
     setQuery(preset.query);
     setResponse(preset.response);
     setContextEvidence("");
+    setValidationError(null);
+    setShowErrorDetails(false);
     reset();
   };
 
@@ -236,6 +252,38 @@ export default function VerifyPage() {
             )}
           </AnimatePresence>
 
+          {/* Contextual Inline Error Feedback */}
+          {validationError && (
+            <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 text-slate-300 space-y-2 mt-2 text-sm">
+              <div className="flex items-center gap-2 text-red-400 font-semibold">
+                <AlertTriangle className="w-4.5 h-4.5" />
+                <span>Verification Failed</span>
+              </div>
+              <p className="text-slate-300">
+                {validationError.message.includes("422") || validationError.message.includes("schema")
+                  ? "The request payload did not match the expected schema. Please check your query or response length."
+                  : validationError.message}
+              </p>
+              {validationError.details && (
+                <div className="pt-2 border-t border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => setShowErrorDetails(!showErrorDetails)}
+                    className="text-xs text-slate-400 hover:text-white underline cursor-pointer flex items-center gap-1"
+                  >
+                    {showErrorDetails ? "Hide technical details" : "Show technical details"}
+                    <ChevronDown className={`w-3 h-3 transition-transform ${showErrorDetails ? "rotate-180" : ""}`} />
+                  </button>
+                  {showErrorDetails && (
+                    <pre className="mt-2 p-3 rounded-lg bg-black/40 text-xs font-mono text-red-300/80 overflow-x-auto leading-relaxed select-text">
+                      {JSON.stringify(validationError.details, null, 2)}
+                    </pre>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Action Row */}
           <div className="flex items-center justify-between pt-2">
             <div>
@@ -251,7 +299,7 @@ export default function VerifyPage() {
               onClick={handleVerify}
               disabled={isLoading || !response.trim()}
               size="lg"
-              className="min-w-[180px] bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg shadow-blue-600/20 cursor-pointer"
+              className="min-w-[180px] bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/20 cursor-pointer"
             >
               {isLoading ? (
                 <>

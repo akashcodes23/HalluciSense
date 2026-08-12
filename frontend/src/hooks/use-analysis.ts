@@ -31,21 +31,19 @@ export function useAnalysis() {
     mutationFn: async (payload: AnalysisRequest) => {
       setIsAnalyzing(true);
       const textToAnalyze = payload.text || payload.response || "";
-      const reqPayload: AnalysisRequest = {
-        text: textToAnalyze,
-        response: textToAnalyze,
-        query: payload.query || "",
-        provided_evidence: payload.provided_evidence || [],
-        model_name: payload.model_name || "default",
+      const reqPayload = {
+        query: payload.query?.trim() || "General Factual Verification",
+        response: textToAnalyze.trim(),
+        model_name: payload.model_name || "GPT-4",
       };
-      return analyzeResponse(reqPayload);
+      return analyzeResponse(reqPayload as AnalysisRequest);
     },
     onSuccess: (data: AnalysisResponse, variables: AnalysisRequest) => {
       setIsAnalyzing(false);
       setCurrentResult(data);
       addToHistory({
         id: data.trace_id || `trace_${Date.now()}`,
-        query: variables.query || "",
+        query: variables.query?.trim() || "General Factual Verification",
         response: variables.text || variables.response || "",
         result: data,
         timestamp: new Date().toISOString(),
@@ -61,7 +59,15 @@ export function useExplain() {
   const setCurrentExplain = useAnalysisStore((s) => s.setCurrentExplain);
 
   return useMutation({
-    mutationFn: (payload: ExplainRequest) => explainResponse(payload),
+    mutationFn: async (payload: ExplainRequest) => {
+      const textToAnalyze = payload.response || (payload as AnalysisRequest).text || "";
+      const reqPayload = {
+        query: payload.query?.trim() || "General Factual Verification",
+        response: textToAnalyze.trim(),
+        model_name: payload.model_name || "GPT-4",
+      };
+      return explainResponse(reqPayload as ExplainRequest);
+    },
     onSuccess: (data: ExplainResponse) => {
       setCurrentExplain(data);
     },
