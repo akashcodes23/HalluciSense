@@ -8,6 +8,9 @@ const getApiUrl = (): string => {
   if (process.env.NEXT_PUBLIC_API_BASE_URL) {
     return `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1`;
   }
+  if (process.env.NODE_ENV === "production" || process.env.NEXT_PUBLIC_APP_ENV === "production") {
+    return "https://hallucisense-production.up.railway.app/api/v1";
+  }
   if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
     return "https://hallucisense-production.up.railway.app/api/v1";
   }

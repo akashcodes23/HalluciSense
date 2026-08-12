@@ -264,7 +264,7 @@ export default function VerifyPage() {
                   ? "The request payload did not match the expected schema. Please check your query or response length."
                   : validationError.message}
               </p>
-              {validationError.details && (
+              {!!validationError.details && (
                 <div className="pt-2 border-t border-white/5">
                   <button
                     type="button"

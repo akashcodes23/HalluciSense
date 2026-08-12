@@ -259,7 +259,7 @@ export default function AnalyzePage() {
                   ? "The request payload did not match the expected schema. Please verify prompt or response formats."
                   : errorMsg}
               </p>
-              {errorDetails && (
+              {!!errorDetails && (
                 <div className="pt-2 border-t border-white/5">
                   <button
                     type="button"
