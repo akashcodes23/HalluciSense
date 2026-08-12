@@ -42,7 +42,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
       initial={false}
       animate={{ width: isOpen ? 240 : 72 }}
       transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-      className="relative flex flex-col h-full border-r border-white/[0.06] bg-[#060a14] overflow-hidden z-30 shrink-0"
+      className="relative hidden md:flex flex-col h-full border-r border-white/[0.06] bg-[#060a14] overflow-hidden z-30 shrink-0"
     >
       {/* ── Brand ──────────────────────────────────────────────────────── */}
       <div className="flex items-center gap-3 px-4 h-16 shrink-0 border-b border-white/[0.06]">
@@ -140,7 +140,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
       {/* ── Toggle Button ──────────────────────────────────────────────── */}
       <button
         onClick={onToggle}
-        className="absolute top-20 -right-3 z-40 flex items-center justify-center w-6 h-6 rounded-full bg-[#111827] border border-white/[0.1] text-slate-400 hover:text-white transition-all cursor-pointer shadow-lg"
+        className="absolute top-20 -right-3 z-40 hidden md:flex items-center justify-center w-6 h-6 rounded-full bg-[#111827] border border-white/[0.1] text-slate-400 hover:text-white transition-all cursor-pointer shadow-lg"
         aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
       >
         {isOpen ? <ChevronLeft className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}

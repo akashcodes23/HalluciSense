@@ -32,7 +32,7 @@ export function useAnalysis() {
       setIsAnalyzing(true);
       const textToAnalyze = payload.text || payload.response || "";
       const reqPayload = {
-        query: payload.query?.trim() || "General Factual Verification",
+        query: payload.query?.trim() || undefined,
         response: textToAnalyze.trim(),
         model_name: payload.model_name || "GPT-4",
       };
@@ -43,7 +43,7 @@ export function useAnalysis() {
       setCurrentResult(data);
       addToHistory({
         id: data.trace_id || `trace_${Date.now()}`,
-        query: variables.query?.trim() || "General Factual Verification",
+        query: variables.query?.trim() || "(no query provided)",
         response: variables.text || variables.response || "",
         result: data,
         timestamp: new Date().toISOString(),
@@ -62,7 +62,7 @@ export function useExplain() {
     mutationFn: async (payload: ExplainRequest) => {
       const textToAnalyze = payload.response || (payload as AnalysisRequest).text || "";
       const reqPayload = {
-        query: payload.query?.trim() || "General Factual Verification",
+        query: payload.query?.trim() || undefined,
         response: textToAnalyze.trim(),
         model_name: payload.model_name || "GPT-4",
       };

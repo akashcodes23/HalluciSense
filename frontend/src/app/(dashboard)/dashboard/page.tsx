@@ -73,7 +73,7 @@ export default function DashboardPage() {
       </div>
 
       {/* ── Key Metrics Cards Row ───────────────────────────────────────── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <GlassCard className="p-5 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
             <span>Total Requests</span>

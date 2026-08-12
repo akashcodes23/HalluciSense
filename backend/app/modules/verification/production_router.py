@@ -75,15 +75,15 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
 
     # 2. Input Validation
     with timer.stage("input_validation"):
-        query = payload.query.strip() if payload.query else ""
+        query = payload.query.strip() if (payload.query and payload.query.strip()) else None
         response_text = payload.response.strip() if payload.response else ""
         model_name = (payload.model_name or "gpt-4").strip().lower()
 
-        if not query or not response_text:
+        if not response_text:
             _metrics_tracker.record_request(0.0, 0.0, is_success=False)
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Fields 'query' and 'response' must contain non-empty, non-whitespace string values.",
+                detail="Field 'response' must contain non-empty, non-whitespace string values.",
             )
 
         if model_name not in VALID_MODELS and not any(m in model_name for m in ["gpt", "gemini", "claude", "llama", "qwen", "mistral"]):

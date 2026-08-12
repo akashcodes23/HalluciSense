@@ -12,14 +12,14 @@ from pydantic import BaseModel, Field
 
 class AnalysisRequest(BaseModel):
     """Input request model for canonical hallucination analysis."""
-    query: str = Field(..., min_length=1, description="User query or context prompt", example="Who invented the telephone?")
+    query: Optional[str] = Field(None, description="User query or context prompt", example="Who invented the telephone?")
     response: str = Field(..., min_length=1, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
     model_name: Optional[str] = Field("GPT-4", description="Target LLM architecture name", example="GPT-4")
 
 
 class ExplainRequest(BaseModel):
     """Input request model for detailed hallucination explainability."""
-    query: str = Field(..., min_length=1, description="User query or context prompt", example="Who invented the telephone?")
+    query: Optional[str] = Field(None, description="User query or context prompt", example="Who invented the telephone?")
     response: str = Field(..., min_length=1, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
     model_name: Optional[str] = Field("GPT-4", description="Target LLM architecture name", example="GPT-4")
 

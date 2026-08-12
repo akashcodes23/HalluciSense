@@ -14,6 +14,8 @@ import {
   Loader2,
   ListFilter,
   FileText,
+  Server,
+  Database,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -36,8 +38,8 @@ export default function TracesPage() {
   // Sync selected trace from store
   useEffect(() => {
     if (selectedTraceId) {
-      setTraceIdInput(selectedTraceId); // eslint-disable-line
-      setSearchId(selectedTraceId); // eslint-disable-line
+      setTraceIdInput(selectedTraceId);
+      setSearchId(selectedTraceId);
       setSelectedTraceId(null); // Clear selected trace to avoid loop // eslint-disable-line
     }
   }, [selectedTraceId, setSelectedTraceId]);
@@ -121,7 +123,27 @@ export default function TracesPage() {
     return transformHistoryEntry(history[0]);
   }, [history]);
 
-  const displayTrace = localTrace || searchedTrace || latestTrace || fallbackLatestLocalTrace;
+  // Trace lookup priority:
+  // 1. If searching, prefer backend trace (searchedTrace)
+  // 2. If backend trace search fails or is empty, try local trace history fallback (localTrace)
+  // 3. If not searching, try latest server trace (latestTrace)
+  // 4. Fallback to latest local history entry (fallbackLatestLocalTrace)
+  const displayTrace = useMemo(() => {
+    if (searchId) {
+      if (searchedTrace) return searchedTrace;
+      if (!searchLoading && localTrace) return localTrace;
+      return searchedTrace || localTrace;
+    }
+    return latestTrace || fallbackLatestLocalTrace;
+  }, [searchId, searchedTrace, searchLoading, localTrace, latestTrace, fallbackLatestLocalTrace]);
+
+  const isLocalCache = useMemo(() => {
+    if (!displayTrace) return false;
+    if (searchId) {
+      return !searchedTrace && displayTrace === localTrace;
+    }
+    return !latestTrace && displayTrace === fallbackLatestLocalTrace;
+  }, [displayTrace, searchId, searchedTrace, latestTrace, localTrace, fallbackLatestLocalTrace]);
 
   const handleSearch = () => {
     if (traceIdInput.trim()) {
@@ -255,11 +277,22 @@ export default function TracesPage() {
                 <GlassCard className="p-6 border-white/[0.08] bg-[#070b13]/80 rounded-2xl">
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-[10px] bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded font-mono font-semibold uppercase tracking-wider">
                           Trace Log
                         </span>
                         <span className="text-xs font-mono text-slate-500">{displayTrace.trace_id}</span>
+                        {isLocalCache ? (
+                          <Badge variant="warning" className="text-[9px] py-0 px-1.5 flex items-center gap-1 font-mono font-semibold">
+                            <Database className="w-2.5 h-2.5" />
+                            from cache
+                          </Badge>
+                        ) : (
+                          <Badge variant="verified" className="text-[9px] py-0 px-1.5 flex items-center gap-1 font-mono font-semibold">
+                            <Server className="w-2.5 h-2.5" />
+                            from server
+                          </Badge>
+                        )}
                       </div>
                       <div className="flex items-center gap-3">
                         <h2 className="text-2xl font-bold text-white tracking-tight font-sans">

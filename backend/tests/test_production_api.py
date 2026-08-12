@@ -105,12 +105,37 @@ def test_debug_and_metrics_endpoints():
 
 
 def test_empty_string_validation():
-    """Verify empty string or whitespace-only inputs return 400 Bad Request."""
-    res = client.post("/api/v1/analyze", json={"query": "   ", "response": "Paris"})
+    """Verify empty string or whitespace-only response returns 400 Bad Request."""
+    res = client.post("/api/v1/analyze", json={"query": "France", "response": "   "})
     assert res.status_code == 400
     data = res.json()
     assert data["status"] == "error"
     assert data["error_code"] == "BAD_REQUEST"
+
+
+def test_no_query_validation():
+    """Verify that query can be omitted, null, or empty string and return 200."""
+    # Case 1: query omitted
+    res1 = client.post("/api/v1/analyze", json={"response": "The capital of France is Paris."})
+    assert res1.status_code == 200
+    assert res1.json()["risk_level"] == "VERIFIED"
+
+    # Case 2: query is None
+    res2 = client.post("/api/v1/analyze", json={"query": None, "response": "The capital of France is Paris."})
+    assert res2.status_code == 200
+    assert res2.json()["risk_level"] == "VERIFIED"
+
+    # Case 3: query is empty string
+    res3 = client.post("/api/v1/analyze", json={"query": "", "response": "The capital of France is Paris."})
+    assert res3.status_code == 200
+    assert res3.json()["risk_level"] == "VERIFIED"
+
+
+def test_no_query_explain():
+    """Verify that explain endpoint accepts omitted query."""
+    res = client.post("/api/v1/explain", json={"response": "The capital of France is Paris."})
+    assert res.status_code == 200
+    assert "retrieved_evidence" in res.json()
 
 
 def test_missing_fields_validation():
@@ -120,6 +145,7 @@ def test_missing_fields_validation():
     data = res.json()
     assert data["status"] == "error"
     assert data["error_code"] == "VALIDATION_ERROR"
+    assert "details" in data
 
 
 def test_oversized_payload_validation():
