@@ -5,6 +5,8 @@ real Gemini generation metadata instead of substituting values for P2/P3.
 
 Requirements:
     GEMINI_API_KEY must be present in the environment.
+    HALLUCISENSE_GEMINI_MODEL must identify a Gemini model that supports
+    response log-probabilities for the configured account/API surface.
 
 The controlled benchmark asks Gemini to reproduce each benchmark claim. This
 makes token log-probabilities measurable for the exact claim under test while
@@ -20,6 +22,7 @@ IMPORTANT:
 from __future__ import annotations
 
 import json
+import math
 import os
 import statistics
 import time
@@ -31,7 +34,6 @@ import google.generativeai as genai
 from app.core.engine.pipeline import HallucinationDetectionPipeline
 
 
-MODEL = os.getenv("HALLUCISENSE_GEMINI_MODEL", "gemini-2.5-flash")
 OUTPUT_DIR = Path(__file__).resolve().parents[1] / "reports"
 OUTPUT_FILE = OUTPUT_DIR / "phase4_gemini_three_pillar_report.json"
 
@@ -60,11 +62,7 @@ def _candidate_text(candidate: Any) -> str:
 
 
 def _extract_token_probabilities(candidate: Any) -> Optional[List[float]]:
-    """Extract chosen-token probabilities from Gemini logprobs output.
-
-    The SDK has changed object shapes over time, so this intentionally supports
-    both attribute-style and dictionary-style nested objects.
-    """
+    """Extract chosen-token probabilities from Gemini logprobs output."""
     result = getattr(candidate, "logprobs_result", None)
     if result is None and isinstance(candidate, dict):
         result = candidate.get("logprobs_result")
@@ -75,7 +73,6 @@ def _extract_token_probabilities(candidate: Any) -> Optional[List[float]]:
     if chosen is None and isinstance(result, dict):
         chosen = result.get("chosen_candidates")
     if not chosen:
-        # Some SDK/API representations expose chosen candidates under a camelCase key.
         chosen = getattr(result, "chosenCandidates", None)
         if chosen is None and isinstance(result, dict):
             chosen = result.get("chosenCandidates")
@@ -92,8 +89,6 @@ def _extract_token_probabilities(candidate: Any) -> Optional[List[float]]:
         if lp is None:
             continue
         try:
-            # Gemini returns natural-log probabilities. Convert to p in [0, 1].
-            import math
             probabilities.append(max(0.0, min(1.0, math.exp(float(lp)))))
         except (TypeError, ValueError, OverflowError):
             continue
@@ -129,7 +124,11 @@ Output the target statement exactly and nothing else."""
 
     primary = _candidate_text(candidates[0])
     probabilities = _extract_token_probabilities(candidates[0])
-    alternates = [_candidate_text(c) for c in candidates[1:] if _candidate_text(c)]
+    alternates = []
+    for candidate in candidates[1:]:
+        text = _candidate_text(candidate)
+        if text:
+            alternates.append(text)
 
     metadata = {
         "candidate_count_returned": len(candidates),
@@ -141,11 +140,17 @@ Output the target statement exactly and nothing else."""
 
 def run() -> Dict[str, Any]:
     api_key = os.getenv("GEMINI_API_KEY")
+    model_name = os.getenv("HALLUCISENSE_GEMINI_MODEL")
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY is required. No Gemini call was attempted.")
+    if not model_name:
+        raise RuntimeError(
+            "HALLUCISENSE_GEMINI_MODEL is required. Choose a Gemini model that "
+            "supports response log-probabilities for this account/API surface."
+        )
 
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(model_name=MODEL)
+    model = genai.GenerativeModel(model_name=model_name)
     pipeline = HallucinationDetectionPipeline()
 
     results: List[Dict[str, Any]] = []
@@ -219,7 +224,7 @@ def run() -> Dict[str, Any]:
     report = {
         "phase": "Phase 4",
         "validation": "real_gemini_full_three_pillar",
-        "model": MODEL,
+        "model": model_name,
         "cases": len(results),
         "strict_availability": {
             "p2_available_for_all": all(r["p2_confidence_gap"] is not None for r in results),
