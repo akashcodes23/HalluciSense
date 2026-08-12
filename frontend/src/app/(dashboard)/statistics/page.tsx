@@ -27,7 +27,7 @@ export default function StatisticsPage() {
           Statistical Significance & Confidence Intervals
         </h1>
         <p className="text-sm text-slate-400 mt-1">
-          Publication-grade statistical analysis including 95% Bootstrap CIs, McNemar tests, DeLong ROC tests, and Cohen's d effect sizes.
+          Publication-grade statistical analysis including 95% Bootstrap CIs, McNemar tests, DeLong ROC tests, and Cohen&apos;s d effect sizes.
         </p>
       </div>
 

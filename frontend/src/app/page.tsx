@@ -7,19 +7,11 @@ import {
   ArrowRight,
   ShieldCheck,
   Activity,
-  Zap,
   Database,
   GitBranch,
-  ChevronRight,
-  Globe,
-  Lock,
-  Layers,
-  Cpu,
-  BarChart2,
   BookOpen,
-  CheckCircle2,
   Sparkles,
-  ExternalLink,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -93,7 +85,7 @@ function Navbar() {
           >
             <GithubIcon size={18} />
           </a>
-          <Link href="/analyze">
+          <Link href="/verify">
             <Button size="sm" className="shadow-[0_0_20px_rgba(37,99,235,0.3)]">
               Start Analyzing
               <ArrowRight className="w-3.5 h-3.5" />
@@ -109,50 +101,44 @@ export default function LandingPage() {
   const { data: metrics } = useMetrics();
 
   return (
-    <div className="min-h-screen bg-[#050816] text-slate-100 relative overflow-hidden">
-      {/* Background Mesh Orbs */}
-      <div className="mesh-bg" aria-hidden="true">
-        <div className="mesh-orb mesh-orb-1" />
-        <div className="mesh-orb mesh-orb-2" />
-        <div className="mesh-orb mesh-orb-3" />
-      </div>
-
+    <div className="min-h-screen bg-[#050816] text-slate-100 relative overflow-hidden font-sans">
       <Navbar />
 
       {/* ── Hero Section ───────────────────────────────────────────────────── */}
-      <section className="relative pt-36 pb-24 px-6 z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+      <section className="relative pt-28 pb-20 px-6 z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
           <FadeUp delay={0.1}>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-xs font-semibold tracking-wide uppercase">
               <Sparkles className="w-3.5 h-3.5" />
-              Scientific Hallucination Detection Engine
+              CONFIDENCE-AWARE AI VERIFICATION
             </div>
           </FadeUp>
 
           <FadeUp delay={0.2}>
-            <h1 className="display-hero font-bold tracking-tight text-white max-w-3xl mx-auto">
-              Detect Hallucinations with <span className="text-gradient">Scientific Confidence</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+              Detect Hallucinations. <br className="hidden sm:inline" />
+              Measure Confidence. <span className="text-gradient">Verify Evidence.</span>
             </h1>
           </FadeUp>
 
           <FadeUp delay={0.3}>
-            <p className="body-lg max-w-2xl mx-auto text-slate-400">
-              Confidence-aware AI verification powered by a three-pillar hallucination detection framework. Evidence grounding, logit entropy, and structural consistency.
+            <p className="text-base md:text-lg max-w-2xl mx-auto text-slate-400 leading-relaxed">
+              A confidence-aware verification framework combining evidence grounding, epistemic uncertainty, and structural consistency.
             </p>
           </FadeUp>
 
           <FadeUp delay={0.4}>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <Link href="/analyze">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <Link href="/verify">
                 <Button size="xl" className="shadow-[0_0_30px_rgba(37,99,235,0.4)]">
                   Start Analyzing
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
-              <a href="#research">
+              <a href="#pillars">
                 <Button variant="secondary" size="xl">
                   <BookOpen className="w-4 h-4" />
-                  Research Paper
+                  Explore Framework
                 </Button>
               </a>
               <a href="https://github.com/akashcodes23/HalluciSense" target="_blank" rel="noreferrer">
@@ -170,46 +156,64 @@ export default function LandingPage() {
       <section id="pillars" className="py-20 px-6 relative z-10 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <h2 className="display-2 text-white">Three-Pillar Architecture</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Three-Pillar Architecture</h2>
             <p className="text-slate-400 max-w-xl mx-auto text-sm">
               Combining hybrid evidence retrieval, white-box uncertainty, and structural self-consistency for robust Platt-calibrated scoring.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Pillar 1 */}
             <FadeUp delay={0.1}>
-              <GlassCard className="p-8 space-y-4 h-full">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                  <Database className="w-6 h-6 text-indigo-400" />
+              <GlassCard className="p-8 space-y-5 h-full flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                    <Database className="w-6 h-6 text-indigo-400" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white">Pillar 1 — Evidence Grounding</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Hybrid BM25 + dense vector retrieval against external reference corpora with cross-encoder NLI entailment verification.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white">Pillar 1 — Evidence Grounding</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Hybrid BM25 + dense vector retrieval against external reference corpora with cross-encoder NLI entailment verification.
-                </p>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[11px] text-indigo-300 flex items-center justify-center gap-2">
+                  retrieval → evidence → entailment
+                </div>
               </GlassCard>
             </FadeUp>
 
+            {/* Pillar 2 */}
             <FadeUp delay={0.2}>
-              <GlassCard className="p-8 space-y-4 h-full">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                  <Activity className="w-6 h-6 text-purple-400" />
+              <GlassCard className="p-8 space-y-5 h-full flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                    <Activity className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white">Pillar 2 — Confidence Estimation</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Logit entropy analysis and epistemic uncertainty quantification to measure internal model confidence gaps.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white">Pillar 2 — Confidence Estimation</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Logit entropy analysis and epistemic uncertainty quantification to measure internal model confidence gaps.
-                </p>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[11px] text-purple-300 flex items-center justify-center gap-2">
+                  prediction → entropy → confidence
+                </div>
               </GlassCard>
             </FadeUp>
 
+            {/* Pillar 3 */}
             <FadeUp delay={0.3}>
-              <GlassCard className="p-8 space-y-4 h-full">
-                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                  <GitBranch className="w-6 h-6 text-blue-400" />
+              <GlassCard className="p-8 space-y-5 h-full flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                    <GitBranch className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white">Pillar 3 — Consistency Reasoning</h3>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Paraphrase-based self-consistency checks measuring semantic variance across multi-prompt generation runs.
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white">Pillar 3 — Consistency Reasoning</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Paraphrase-based self-consistency checks measuring semantic variance across multi-prompt generation runs.
-                </p>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[11px] text-blue-300 flex items-center justify-center gap-2">
+                  prompt → multi-gen → semantic variance
+                </div>
               </GlassCard>
             </FadeUp>
           </div>
@@ -220,8 +224,8 @@ export default function LandingPage() {
       <section id="statistics" className="py-20 px-6 relative z-10 border-t border-white/[0.06] bg-white/[0.01]">
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <h2 className="display-2 text-white">Live System Telemetry</h2>
-            <p className="text-slate-400 text-sm">Real-time metrics from the deployed production backend.</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Live System Telemetry</h2>
+            <p className="text-slate-400 text-sm">Real-time performance metrics from the deployed production backend.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -241,7 +245,7 @@ export default function LandingPage() {
 
             <GlassCard className="p-6 text-center space-y-1">
               <span className="text-3xl font-bold font-mono text-purple-400">
-                {metrics ? formatLatency(metrics.average_latency_ms) : "< 150ms"}
+                {metrics ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
               </span>
               <p className="text-xs text-slate-500 uppercase tracking-wider">Avg Latency</p>
             </GlassCard>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { useAnalysisStore } from "@/store/analysis-store";
 
@@ -9,10 +9,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const setSidebarOpen = useAnalysisStore((s) => s.setSidebarOpen);
 
   return (
-    <div className="app-shell">
+    <div className="min-h-screen bg-[#050816] text-slate-100 flex overflow-hidden font-sans">
       <AppSidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-
-      <main className="flex-1 flex flex-col h-dvh overflow-hidden min-w-0 relative">
+      <main className="min-w-0 flex-1 h-screen overflow-y-auto relative bg-[#050816]">
         {children}
       </main>
     </div>

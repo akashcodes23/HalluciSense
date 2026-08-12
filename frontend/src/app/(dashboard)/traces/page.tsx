@@ -107,16 +107,16 @@ export default function TracesPage() {
                   <p className="text-xs text-slate-500 font-mono mb-1">{displayTrace.trace_id}</p>
                   <div className="flex items-center gap-3">
                     <h2 className="text-xl font-bold text-white">
-                      H-Score: {(displayTrace.summary.final_h_score * 100).toFixed(1)}%
+                      H-Score: {displayTrace.summary ? (displayTrace.summary.final_h_score * 100).toFixed(1) : "0.0"}%
                     </h2>
-                    <Badge variant={displayTrace.summary.risk_level === "VERIFIED" ? "verified" : displayTrace.summary.risk_level === "LIKELY_HALLUCINATED" ? "danger" : "warning"}>
-                      {getRiskLabel(displayTrace.summary.risk_level)}
+                    <Badge variant={displayTrace.summary?.risk_level === "VERIFIED" ? "verified" : displayTrace.summary?.risk_level === "LIKELY_HALLUCINATED" ? "danger" : "warning"}>
+                      {getRiskLabel(displayTrace.summary?.risk_level || "VERIFIED")}
                     </Badge>
                   </div>
                 </div>
                 <div className="text-right text-xs text-slate-500">
                   <p>{formatTimestamp(displayTrace.timestamp)}</p>
-                  <p className="font-mono">{displayTrace.summary.root_cause_classification}</p>
+                  <p className="font-mono">{displayTrace.summary?.root_cause_classification || "VERIFIED"}</p>
                 </div>
               </div>
             </GlassCard>
@@ -205,13 +205,13 @@ function TraceStageRow({ stage, index }: { stage: TraceStage; index: number }) {
           </div>
         </button>
 
-        {expanded && stage.output && (
+        {expanded && stage.details && (
           <motion.pre
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             className="mt-2 ml-0 p-4 rounded-xl bg-black/30 border border-white/[0.06] text-xs font-mono text-slate-400 overflow-x-auto"
           >
-            {JSON.stringify(stage.output, null, 2)}
+            {JSON.stringify(stage.details, null, 2)}
           </motion.pre>
         )}
       </div>
