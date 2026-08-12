@@ -1,0 +1,157 @@
+{
+  "metrics": {
+    "accuracy": 0.7273,
+    "precision": 0.875,
+    "recall": 0.7778,
+    "f1_score": 0.8235,
+    "ece": 0.1337,
+    "brier_score": 0.1807
+  },
+  "confusion_matrix": {
+    "true_positive": 7,
+    "false_positive": 1,
+    "true_negative": 1,
+    "false_negative": 2
+  },
+  "latency_ms": {
+    "mean": 2126.53,
+    "p50": 2110.56,
+    "p95": 2921.84,
+    "p99": 3003.96
+  },
+  "total_samples": 11,
+  "detailed_results": [
+    {
+      "category": "TRUE_FACT",
+      "text": "Apollo 11 landed on the Moon in 1969.",
+      "ground_truth": "VERIFIED",
+      "predicted_risk": "VERIFIED",
+      "h_score": 0.0061,
+      "p1_factual_error": 0.0061,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 2091.38,
+      "correct": true
+    },
+    {
+      "category": "TRUE_FACT_2",
+      "text": "Water boils at 100 degrees Celsius at sea level.",
+      "ground_truth": "VERIFIED",
+      "predicted_risk": "MODERATE_RISK",
+      "h_score": 0.5053,
+      "p1_factual_error": 0.5053,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 2210.51,
+      "correct": false
+    },
+    {
+      "category": "FALSE_FACT",
+      "text": "Apollo 11 landed on Mars in 1969.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.9988,
+      "p1_factual_error": 0.9988,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 1671.81,
+      "correct": true
+    },
+    {
+      "category": "TEMPORAL_CONTAMINATION",
+      "text": "The Eiffel Tower was completed in 2020.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.9994,
+      "p1_factual_error": 0.9994,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 2401.1,
+      "correct": true
+    },
+    {
+      "category": "ENTITY_SWAP",
+      "text": "Albert Einstein discovered gravity when an apple fell on his head.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.999,
+      "p1_factual_error": 0.999,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 2110.56,
+      "correct": true
+    },
+    {
+      "category": "NUMERICAL_ERROR",
+      "text": "The distance from Earth to the Moon is 50 miles.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "VERIFIED",
+      "h_score": 0.15,
+      "p1_factual_error": 0.15,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 1758.73,
+      "correct": false
+    },
+    {
+      "category": "PARTIAL_TRUTH",
+      "text": "Neil Armstrong landed on the Moon in 1969 and became President of France in 1975.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.9,
+      "p1_factual_error": 0.9,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 3024.49,
+      "correct": true
+    },
+    {
+      "category": "UNVERIFIABLE",
+      "text": "Quantum computers will achieve sentient consciousness in 2045.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "VERIFIED",
+      "h_score": 0.0,
+      "p1_factual_error": 0.0,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 1286.58,
+      "correct": false
+    },
+    {
+      "category": "CONFLICTING_EVIDENCE",
+      "text": "Paris is the capital of Japan.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.9954,
+      "p1_factual_error": 0.9954,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 2437.46,
+      "correct": true
+    },
+    {
+      "category": "MULTI_CLAIM",
+      "text": "Apollo 11 landed on the Moon in 1969. Neil Armstrong was commander. They landed on Mars in 1975.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.9991,
+      "p1_factual_error": 0.9991,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 2819.19,
+      "correct": true
+    },
+    {
+      "category": "ADVERSARIAL_CONF",
+      "text": "Without a shadow of a doubt, Abraham Lincoln was elected President of the United States in 2024.",
+      "ground_truth": "HALLUCINATED",
+      "predicted_risk": "LIKELY_HALLUCINATED",
+      "h_score": 0.9994,
+      "p1_factual_error": 0.9994,
+      "p2_confidence_gap": 0.0,
+      "p3_consistency_failure": 0.0,
+      "latency_ms": 1580.04,
+      "correct": true
+    }
+  ]
+}
