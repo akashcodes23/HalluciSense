@@ -1,29 +1,45 @@
 import { api } from './api';
 import { Message } from '@/types/api';
 
+export type { Message };
+
 export const messageService = {
-  async getHistory(chatId: string, limit = 50, offset = 0): Promise<Message[]> {
-    const response = await api.get<{items: Message[], total: number}>(`/chats/${chatId}/messages`, {
-      params: { limit, offset },
-    });
-    return response.data.items;
+  getMessages: async (chatId: string): Promise<Message[]> => {
+    const response = await api.get(`/chats/${chatId}/messages`);
+    return response.data;
   },
-  
-  async verifyExternal(chatId: string, content: string): Promise<{ message_id: string }> {
-    const response = await api.post<{ message_id: string }>(`/chats/${chatId}/messages/verify-external`, {
+
+  getHistory: async (chatId: string): Promise<Message[]> => {
+    const response = await api.get(`/chats/${chatId}/messages`);
+    return response.data;
+  },
+
+  sendMessage: async (chatId: string, content: string, model: string): Promise<Message> => {
+    const response = await api.post(`/chats/${chatId}/messages`, {
       content,
+      model,
     });
     return response.data;
   },
 
-  async analyzeResponse(query: string, responseText: string, modelName = 'GPT-4') {
-    const response = await api.post('/analyze', {
-      query,
-      response: responseText,
-      model_name: modelName,
-    });
+  verifyExternal: async (chatId: string, text: string): Promise<unknown> => {
+    const response = await api.post(`/chats/${chatId}/verify-external`, { text });
     return response.data;
   },
+};
+
+const getWsBaseUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_WS_URL) {
+    return process.env.NEXT_PUBLIC_WS_URL;
+  }
+  const httpUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (httpUrl) {
+    return httpUrl.replace(/^http/, "ws") + "/api/v1";
+  }
+  if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+    return "wss://hallucisense-production.up.railway.app/api/v1";
+  }
+  return "ws://localhost:8000/api/v1";
 };
 
 export function createStreamingConnection(
@@ -35,7 +51,7 @@ export function createStreamingConnection(
   onDone: (messageId: string) => void,
   onError: (err: string) => void
 ): WebSocket {
-  const wsBase = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/api/v1';
+  const wsBase = getWsBaseUrl();
   const url = `${wsBase}/chats/${chatId}/messages/stream?token=${encodeURIComponent(accessToken)}`;
 
   console.log('[WebSocket] Connecting...', {
@@ -58,53 +74,38 @@ export function createStreamingConnection(
     const payload = JSON.stringify({
       chat_id: chatId,
       content: userMessage,
-      model: model,
+      model_name: model,
+      temperature: 0.7,
+      top_p: 0.9,
     });
 
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.send(payload);
-      console.log('[WebSocket] Payload sent successfully');
-    } else {
-      console.error('[WebSocket] Socket opened but readyState is not OPEN:', ws.readyState);
-    }
+    ws.send(payload);
   };
 
   ws.onmessage = (event) => {
     try {
-      const chunk = JSON.parse(event.data);
-      console.log('[WebSocket] Frame received:', chunk.type, chunk.text ? `(${chunk.text.length} chars)` : '');
-
-      if (chunk.type === 'token' && chunk.text) {
-        onToken(chunk.text);
-      } else if (chunk.type === 'verification_dispatched' && chunk.message_id) {
-        console.log('[WebSocket] Verification dispatched:', chunk.message_id);
-        onDone(chunk.message_id);
-        ws.close(1000);
-      } else if (chunk.type === 'error') {
-        console.error('[WebSocket] Backend error frame:', chunk.error);
-        onError(chunk.error || 'Unknown server error');
-        ws.close(1000);
+      const data = JSON.parse(event.data);
+      if (data.type === 'token' && data.content) {
+        onToken(data.content);
+      } else if (data.type === 'done') {
+        onDone(data.message_id || 'done');
+      } else if (data.type === 'error') {
+        onError(data.detail || data.message || 'Streaming verification failed');
       }
-    } catch (parseErr) {
-      console.warn('[WebSocket] Non-JSON or parse error:', parseErr);
+    } catch {
+      onToken(event.data);
     }
   };
 
-  ws.onerror = (event) => {
-    console.error('[WebSocket] Socket error event:', event);
-    onError('WebSocket connection failed.');
+  ws.onerror = (evt) => {
+    console.error('[WebSocket] Error encountered:', evt);
+    onError('WebSocket connection error encountered.');
   };
-  
-  ws.onclose = (event) => {
-    console.log('[WebSocket] Connection CLOSED:', {
-      code: event.code,
-      reason: event.reason,
-      wasClean: event.wasClean,
-    });
 
-    // 1000 is normal closure
-    if (event.code !== 1000) {
-      onError(`WebSocket closed (Code ${event.code}): ${event.reason || 'Unexpected closure'}`);
+  ws.onclose = (evt) => {
+    console.log('[WebSocket] Connection closed:', { code: evt.code, reason: evt.reason });
+    if (!evt.wasClean && evt.code !== 1000) {
+      onError(`WebSocket closed unexpectedly (Code ${evt.code})`);
     }
   };
 

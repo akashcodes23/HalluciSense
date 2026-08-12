@@ -64,11 +64,11 @@ export default function MetricsPage() {
     );
   }
 
-  // Build a simple sparkline-like mini dataset for the area chart
+  // Build deterministic telemetry distribution dataset for the area chart
   const sparkData = Array.from({ length: 12 }, (_, i) => ({
-    name: `${i}`,
-    latency: metrics.average_latency_ms * (0.7 + Math.random() * 0.6),
-    score: (metrics.avg_h_score ?? 0.23) * (0.8 + Math.random() * 0.4),
+    name: `${i + 1}h`,
+    latency: metrics.average_latency_ms,
+    score: metrics.avg_h_score ?? 0.05,
   }));
 
   return (
