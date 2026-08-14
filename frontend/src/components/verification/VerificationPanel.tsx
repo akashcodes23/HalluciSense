@@ -7,20 +7,34 @@ import { useUIStore } from '../../stores/uiStore';
 import { PillarCard } from './PillarCard';
 import { EvidenceCard } from './EvidenceCard';
 
-const riskConfig = {
+const riskConfig: Record<string, { icon: React.ReactNode; label: string; color: string; bg: string; border: string }> = {
   VERIFIED: {
-    icon: <ShieldCheck className="w-5 h-5 text-green-400" />,
+    icon: <ShieldCheck className="w-5 h-5 text-emerald-400" />,
     label: 'Verified',
-    color: '#22c55e',
-    bg: 'rgba(34,197,94,0.12)',
-    border: 'rgba(34,197,94,0.3)',
+    color: '#10b981',
+    bg: 'rgba(16,185,129,0.12)',
+    border: 'rgba(16,185,129,0.3)',
   },
   NEEDS_VERIFICATION: {
-    icon: <ShieldAlert className="w-5 h-5 text-yellow-400" />,
+    icon: <ShieldAlert className="w-5 h-5 text-amber-400" />,
     label: 'Needs Review',
     color: '#f59e0b',
     bg: 'rgba(245,158,11,0.12)',
     border: 'rgba(245,158,11,0.3)',
+  },
+  NEEDS_VERIFY: {
+    icon: <ShieldAlert className="w-5 h-5 text-amber-400" />,
+    label: 'Needs Review',
+    color: '#f59e0b',
+    bg: 'rgba(245,158,11,0.12)',
+    border: 'rgba(245,158,11,0.3)',
+  },
+  MODERATE_RISK: {
+    icon: <AlertTriangle className="w-5 h-5 text-orange-400" />,
+    label: 'Moderate Risk',
+    color: '#f97316',
+    bg: 'rgba(249,115,22,0.12)',
+    border: 'rgba(249,115,22,0.3)',
   },
   LIKELY_HALLUCINATED: {
     icon: <ShieldX className="w-5 h-5 text-red-400" />,
@@ -39,9 +53,10 @@ function CircularGauge({ score }: { score: number }) {
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percent / 100) * circumference;
 
-  let gaugeColor = '#22c55e';
-  if (percent > 35) gaugeColor = '#f59e0b';
-  if (percent > 65) gaugeColor = '#ef4444';
+  let gaugeColor = '#10b981';
+  if (percent > 25) gaugeColor = '#f59e0b';
+  if (percent > 50) gaugeColor = '#f97316';
+  if (percent > 75) gaugeColor = '#ef4444';
 
   return (
     <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
@@ -64,14 +79,14 @@ function CircularGauge({ score }: { score: number }) {
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: isAvailable ? strokeDashoffset : circumference }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           strokeLinecap="round"
           fill="transparent"
         />
       </svg>
       <div className="absolute text-center">
         <span className="text-xl font-bold font-mono text-white">{isAvailable ? `${percent}%` : 'N/A'}</span>
-        <span className="block text-[9px] uppercase tracking-wider text-slate-400 font-semibold">H-Score</span>
+        <span className="block text-[9px] uppercase tracking-wider text-slate-400 font-semibold font-mono">H-Score</span>
       </div>
     </div>
   );
@@ -86,6 +101,18 @@ function getPillarColor(score: number): 'green' | 'yellow' | 'red' {
 export function VerificationPanel() {
   const { isPanelOpen, panelWidth, setPanelWidth, activeReport, activeSentenceIndex, closePanel, setActiveSentence } = useUIStore();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(activeSentenceIndex ?? 0);
+
+  // Close on Escape key
+  React.useEffect(() => {
+    if (!isPanelOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closePanel();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isPanelOpen, closePanel]);
 
   if (!isPanelOpen || !activeReport) return null;
 

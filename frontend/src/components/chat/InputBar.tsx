@@ -55,24 +55,28 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
       {/* Sprint 7: Mode Toggle & Model Selector */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-3 px-2 gap-3">
         {/* Mode Toggle */}
-        <div className="flex bg-[#1a1d27] rounded-full p-1 border border-white/5">
+        <div className="flex bg-[#131722] rounded-full p-1 border border-white/5">
           <button
             onClick={() => setInputMode('chat')}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-              inputMode === 'chat' ? 'bg-indigo-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm transition-all cursor-pointer ${
+              inputMode === 'chat'
+                ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/30'
+                : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
             <MessageSquare className="w-4 h-4" />
-            Chat with AI
+            <span>Chat with AI</span>
           </button>
           <button
             onClick={() => setInputMode('verify')}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-              inputMode === 'verify' ? 'bg-indigo-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm transition-all cursor-pointer ${
+              inputMode === 'verify'
+                ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/30'
+                : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
             <CheckCircle className="w-4 h-4" />
-            Verify Existing Response
+            <span>Verify Existing Response</span>
           </button>
         </div>
 
@@ -81,10 +85,10 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
           <div className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1a1d27] border border-white/5 text-sm font-medium text-slate-300 hover:text-white transition-colors"
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#131722] border border-white/5 text-sm font-medium text-slate-200 hover:text-white transition-colors cursor-pointer"
             >
-              {models.find(m => m.id === selectedModel)?.name || 'Select Model'}
-              <ChevronDown className="w-4 h-4" />
+              <span>{models.find(m => m.id === selectedModel)?.name || 'Select Model'}</span>
+              <ChevronDown className="w-4 h-4 text-slate-400" />
             </button>
             <AnimatePresence>
               {isDropdownOpen && (
@@ -92,22 +96,27 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 5 }}
-                  className="absolute right-0 bottom-full mb-2 w-48 bg-[#1a1d27] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
+                  className="absolute right-0 bottom-full mb-2 w-48 bg-[#131722] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50 py-1 backdrop-blur-xl"
                 >
-                  {models.map(model => (
-                    <button
-                      key={model.id}
-                      onClick={() => {
-                        setSelectedModel(model.id);
-                        setIsDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                        selectedModel === model.id ? 'bg-indigo-500/20 text-indigo-400' : 'text-slate-300 hover:bg-white/5'
-                      }`}
-                    >
-                      {model.name}
-                    </button>
-                  ))}
+                  {models.map(model => {
+                    const isSelected = selectedModel === model.id;
+                    return (
+                      <button
+                        key={model.id}
+                        onClick={() => {
+                          setSelectedModel(model.id);
+                          setIsDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer ${
+                          isSelected
+                            ? 'bg-white/[0.08] text-indigo-300 font-semibold'
+                            : 'text-slate-300 hover:bg-white/5'
+                        }`}
+                      >
+                        {model.name}
+                      </button>
+                    );
+                  })}
                 </motion.div>
               )}
             </AnimatePresence>

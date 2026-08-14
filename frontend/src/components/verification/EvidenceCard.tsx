@@ -77,13 +77,13 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
       {/* Similarity Score Bar */}
       <div className="space-y-1">
         <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-          <span>Similarity Match</span>
-          <span>{confidence}%</span>
+          <span>Similarity Alignment</span>
+          <span className="font-semibold text-slate-200">{confidence}%</span>
         </div>
         <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"
-            style={{ width: `${confidence}%`, transition: 'width 0.6s ease' }}
+            className="h-full rounded-full bg-blue-500 origin-left"
+            style={{ width: `${confidence}%` }}
           />
         </div>
       </div>
