@@ -182,8 +182,8 @@ export default function MetricsPage() {
           <motion.div variants={item}>
             <StatCard
               label="Mean Latency"
-              value={formatLatency(metrics.average_latency_ms)}
-              caption="End-to-end multi-pillar execution time"
+              value={metrics.requests > 0 && metrics.average_latency_ms !== null ? formatLatency(metrics.average_latency_ms) : "—"}
+              caption={metrics.requests > 0 ? "End-to-end multi-pillar execution time" : "Awaiting first verification run"}
               icon={Clock}
               status="default"
             />
@@ -192,37 +192,37 @@ export default function MetricsPage() {
           <motion.div variants={item}>
             <StatCard
               label="Avg H-Score"
-              value={metrics.requests > 0 ? `${((metrics.avg_h_score ?? 0) * 100).toFixed(1)}%` : "0.0%"}
-              caption="Mean factual hallucination index"
+              value={metrics.requests > 0 && metrics.avg_h_score !== null && metrics.avg_h_score !== undefined ? `${(metrics.avg_h_score * 100).toFixed(1)}%` : "—"}
+              caption={metrics.requests > 0 ? "Mean factual hallucination index" : "No hallucination samples evaluated"}
               icon={TrendingUp}
-              status={(metrics.avg_h_score ?? 0) > 0.3 ? "warning" : "default"}
+              status={metrics.requests > 0 && (metrics.avg_h_score ?? 0) > 0.3 ? "warning" : "default"}
             />
           </motion.div>
 
           <motion.div variants={item}>
             <StatCard
               label="Pipeline Success Rate"
-              value={metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
-              caption="Successful claim verification queries"
+              value={metrics.requests > 0 && metrics.success_rate !== null ? `${metrics.success_rate.toFixed(1)}%` : "—"}
+              caption={metrics.requests > 0 ? "Successful claim verification queries" : "No executions recorded"}
               icon={CheckCircle2}
-              status={metrics.success_rate < 95 ? "warning" : "success"}
+              status={metrics.requests > 0 && (metrics.success_rate ?? 100) < 95 ? "warning" : "default"}
             />
           </motion.div>
 
           <motion.div variants={item}>
             <StatCard
               label="Error Rate"
-              value={metrics.requests > 0 ? `${metrics.error_rate.toFixed(1)}%` : "0.0%"}
-              caption="Failed or aborted executions"
+              value={metrics.requests > 0 && metrics.error_rate !== null ? `${metrics.error_rate.toFixed(1)}%` : "—"}
+              caption={metrics.requests > 0 ? "Failed or aborted executions" : "No executions recorded"}
               icon={XCircle}
-              status={metrics.error_rate > 5 ? "error" : "default"}
+              status={metrics.requests > 0 && (metrics.error_rate ?? 0) > 5 ? "error" : "default"}
             />
           </motion.div>
 
           <motion.div variants={item}>
             <StatCard
               label="Memory Allocation"
-              value={formatMemory(148)}
+              value={formatMemory(metrics.memory_mb ?? 256)}
               caption="Embedding & cross-encoder tensor memory"
               icon={Cpu}
               status="default"
@@ -277,77 +277,89 @@ export default function MetricsPage() {
               </div>
             </div>
 
-            {/* Recharts Area Chart */}
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={sparkData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#a855f7" stopOpacity={0.25} />
-                      <stop offset="100%" stopColor="#a855f7" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="emeraldGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#10b981" stopOpacity={0.25} />
-                      <stop offset="100%" stopColor="#10b981" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
+            {/* Recharts Area Chart or Honest Empty State */}
+            {metrics.requests === 0 ? (
+              <div className="py-12 px-4">
+                <EmptyState
+                  title="No Verification Telemetry Yet"
+                  description="Run your first verification to begin streaming real latency profiles, memory footprints, and H-Score calibration statistics."
+                  icon={BarChart3}
+                  actionLabel="Go to Verification Workspace"
+                  actionHref="/verify"
+                />
+              </div>
+            ) : (
+              <div className="h-64 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={sparkData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#a855f7" stopOpacity={0.25} />
+                        <stop offset="100%" stopColor="#a855f7" stopOpacity={0} />
+                      </linearGradient>
+                      <linearGradient id="emeraldGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#10b981" stopOpacity={0.25} />
+                        <stop offset="100%" stopColor="#10b981" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
 
-                  <CartesianGrid stroke="rgba(255,255,255,0.03)" strokeDasharray="3 3" vertical={false} />
+                    <CartesianGrid stroke="rgba(255,255,255,0.03)" strokeDasharray="3 3" vertical={false} />
 
-                  <XAxis
-                    dataKey="name"
-                    stroke="#64748b"
-                    fontSize={11}
-                    fontFamily="monospace"
-                    tickLine={false}
-                    axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
-                  />
-
-                  <YAxis
-                    stroke="#64748b"
-                    fontSize={11}
-                    fontFamily="monospace"
-                    tickLine={false}
-                    axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
-                    unit={chartMode === "latency" ? "ms" : "%"}
-                  />
-
-                  <RechartsTooltip
-                    contentStyle={{
-                      backgroundColor: "#131316",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                      borderRadius: "12px",
-                      fontSize: "12px",
-                      color: "#F8FAFC",
-                      fontFamily: "monospace",
-                      boxShadow: "0 10px 25px -5px rgba(0,0,0,0.5)",
-                    }}
-                    formatter={(value: any) => [
-                      chartMode === "latency" ? `${Number(value || 0).toFixed(0)} ms` : `${Number(value || 0).toFixed(1)}%`,
-                      chartMode === "latency" ? "Mean Latency" : "Hallucination Index",
-                    ]}
-                  />
-
-                  {chartMode === "latency" ? (
-                    <Area
-                      type="monotone"
-                      dataKey="latency"
-                      stroke="#a855f7"
-                      strokeWidth={2}
-                      fill="url(#purpleGradient)"
+                    <XAxis
+                      dataKey="name"
+                      stroke="#64748b"
+                      fontSize={11}
+                      fontFamily="monospace"
+                      tickLine={false}
+                      axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
                     />
-                  ) : (
-                    <Area
-                      type="monotone"
-                      dataKey="hscore"
-                      stroke="#10b981"
-                      strokeWidth={2}
-                      fill="url(#emeraldGradient)"
+
+                    <YAxis
+                      stroke="#64748b"
+                      fontSize={11}
+                      fontFamily="monospace"
+                      tickLine={false}
+                      axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
+                      unit={chartMode === "latency" ? "ms" : "%"}
                     />
-                  )}
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
+
+                    <RechartsTooltip
+                      contentStyle={{
+                        backgroundColor: "#131316",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        borderRadius: "12px",
+                        fontSize: "12px",
+                        color: "#F8FAFC",
+                        fontFamily: "monospace",
+                        boxShadow: "0 10px 25px -5px rgba(0,0,0,0.5)",
+                      }}
+                      formatter={(value: any) => [
+                        chartMode === "latency" ? `${Number(value || 0).toFixed(0)} ms` : `${Number(value || 0).toFixed(1)}%`,
+                        chartMode === "latency" ? "Mean Latency" : "Hallucination Index",
+                      ]}
+                    />
+
+                    {chartMode === "latency" ? (
+                      <Area
+                        type="monotone"
+                        dataKey="latency"
+                        stroke="#a855f7"
+                        strokeWidth={2}
+                        fill="url(#purpleGradient)"
+                      />
+                    ) : (
+                      <Area
+                        type="monotone"
+                        dataKey="hscore"
+                        stroke="#10b981"
+                        strokeWidth={2}
+                        fill="url(#emeraldGradient)"
+                      />
+                    )}
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            )}
           </Card>
         </motion.div>
       </div>

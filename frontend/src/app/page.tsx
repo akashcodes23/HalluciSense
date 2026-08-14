@@ -231,8 +231,8 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <ScrollReveal delay={0.1}>
               <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
-                <span className="text-heading-md font-bold font-mono text-blue-400">
-                  {metrics ? formatNumber(metrics.requests) : "1,600+"}
+                <span className="text-heading-md font-bold font-mono text-white">
+                  {metrics && metrics.requests > 0 ? formatNumber(metrics.requests) : "—"}
                 </span>
                 <p className="text-label-sm text-slate-500 font-mono">Total Requests</p>
               </GlassCard>
@@ -241,7 +241,7 @@ export default function LandingPage() {
             <ScrollReveal delay={0.2}>
               <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
                 <span className="text-heading-md font-bold font-mono text-status-success">
-                  {metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
+                  {metrics && metrics.requests > 0 && metrics.success_rate !== null ? `${metrics.success_rate.toFixed(1)}%` : "—"}
                 </span>
                 <p className="text-label-sm text-slate-500 font-mono">Pass Rate</p>
               </GlassCard>
@@ -250,7 +250,7 @@ export default function LandingPage() {
             <ScrollReveal delay={0.3}>
               <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
                 <span className="text-heading-md font-bold font-mono text-blue-400">
-                  {metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
+                  {metrics && metrics.requests > 0 && metrics.average_latency_ms !== null ? formatLatency(metrics.average_latency_ms) : "—"}
                 </span>
                 <p className="text-label-sm text-slate-500 font-mono">Avg Latency</p>
               </GlassCard>

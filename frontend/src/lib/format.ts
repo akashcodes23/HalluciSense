@@ -2,21 +2,26 @@
 // HalluciSense v1.0 — Formatting Utilities
 // ─────────────────────────────────────────────────────────────────────────────
 
-export function formatLatency(ms: number): string {
+export function formatLatency(ms: number | null | undefined): string {
+  if (ms === null || ms === undefined || isNaN(ms)) return "—";
+  if (ms <= 0) return "—";
   if (ms < 1) return `${(ms * 1000).toFixed(0)}μs`;
   if (ms < 1000) return `${ms.toFixed(0)}ms`;
   return `${(ms / 1000).toFixed(2)}s`;
 }
 
-export function formatScore(score: number): string {
+export function formatScore(score: number | null | undefined): string {
+  if (score === null || score === undefined || isNaN(score)) return "—";
   return (score * 100).toFixed(1);
 }
 
-export function formatPercentage(value: number): string {
+export function formatPercentage(value: number | null | undefined): string {
+  if (value === null || value === undefined || isNaN(value)) return "—";
   return `${value.toFixed(1)}%`;
 }
 
-export function formatMemory(mb: number): string {
+export function formatMemory(mb: number | null | undefined): string {
+  if (mb === null || mb === undefined || isNaN(mb)) return "—";
   if (mb < 1024) return `${mb.toFixed(0)} MB`;
   return `${(mb / 1024).toFixed(2)} GB`;
 }

@@ -7,6 +7,8 @@ import {
   Clock,
   CheckCircle2,
   XCircle,
+  MinusCircle,
+  HelpCircle,
   ChevronDown,
   ChevronUp,
   Search,
@@ -57,59 +59,83 @@ export default function TracesPage() {
 
   // Local helper to convert history entry to TraceData structure
   const transformHistoryEntry = (entry: AnalysisHistoryEntry): TraceData => {
-    const duration = entry.result.processing_time_ms || entry.result.latency_ms || 1200;
-    const stages = [
+    const res = entry.result;
+    const measured = res.measured_timings;
+    const pStatus = res.pillar_status;
+    const totalDuration = measured?.total_latency_ms ?? res.processing_time_ms ?? res.latency_ms ?? null;
+
+    const p1Available = pStatus?.p1_available ?? true;
+    const p2Available = pStatus?.p2_available ?? (res.pillar_scores?.confidence !== undefined && res.pillar_scores?.confidence !== null && res.confidence_analysis !== undefined);
+    const p3Available = pStatus?.p3_available ?? (res.pillar_scores?.consistency !== undefined && res.pillar_scores?.consistency !== null);
+
+    const stages: TraceStage[] = [
       {
         name: "Pillar 1 — Evidence Grounding",
-        duration_ms: duration * 0.45,
-        status: "completed",
-        details: { 
-          factual_error: entry.result.pillar_scores?.retrieval ?? 0,
-          root_cause: entry.result.root_cause_classification,
-          evidence_count: entry.result.evidence?.length || 0
+        duration_ms: measured?.p1_latency_ms ?? (p1Available && totalDuration ? totalDuration : null),
+        status: p1Available ? "completed" : "failed",
+        details: {
+          status: p1Available ? "EXECUTED" : "FAILED",
+          factual_error: res.pillar_scores?.retrieval ?? res.pillar_scores?.pillar1_factual_error ?? null,
+          evidence_count: res.evidence?.length || 0,
+          root_cause: res.root_cause_classification ?? "VERIFIED",
         }
       },
       {
         name: "Pillar 2 — Confidence Estimation",
-        duration_ms: duration * 0.3,
-        status: "completed",
-        details: { 
-          entropy: entry.result.pillar_scores?.confidence ?? 0,
-          confidence_score: entry.result.confidence ?? 0.5
+        duration_ms: p2Available ? (measured?.p2_latency_ms ?? null) : null,
+        status: p2Available ? "completed" : "unavailable",
+        details: p2Available ? {
+          status: "EXECUTED",
+          confidence_gap: res.pillar_scores?.confidence ?? null,
+          entropy: res.confidence_analysis?.whitebox_entropy ?? null,
+          methodology: res.confidence_analysis ? "Model Uncertainty Proxy / Logprobs" : "N/A"
+        } : {
+          status: "UNAVAILABLE",
+          reason: "Token-level logprobs not provided by active LLM provider. Excluded from fusion."
         }
       },
       {
         name: "Pillar 3 — Consistency Reasoning",
-        duration_ms: duration * 0.25,
-        status: "completed",
-        details: { 
-          consistency: entry.result.pillar_scores?.consistency ?? 0,
-          failure_taxonomy: entry.result.failure_taxonomy
+        duration_ms: p3Available ? (measured?.p3_latency_ms ?? null) : null,
+        status: p3Available ? "completed" : "unavailable",
+        details: p3Available ? {
+          status: "EXECUTED",
+          consistency_failure: res.pillar_scores?.consistency ?? null,
+          failure_taxonomy: res.failure_taxonomy ?? "NONE"
+        } : {
+          status: "UNAVAILABLE",
+          reason: "Single generation mode active. Multi-sampling consistency was not executed."
         }
       },
       {
         name: "Adaptive Fusion Engine",
-        duration_ms: 0.05,
+        duration_ms: measured?.fusion_latency_ms ?? 0.5,
         status: "completed",
-        details: { 
-          final_h_score: entry.result.overall_h_score,
-          risk_level: entry.result.risk_level
+        details: res.fusion_decomposition ? {
+          ...res.fusion_decomposition,
+        } : {
+          final_h_score: res.overall_h_score,
+          risk_level: res.risk_level,
+          is_full_analysis: pStatus?.is_full_analysis ?? (p1Available && p2Available && p3Available),
         }
       }
     ];
 
     return {
-      trace_id: entry.result.trace_id || entry.id,
+      trace_id: res.trace_id || entry.id,
       timestamp: entry.timestamp,
-      stages: stages as TraceStage[],
+      stages: stages,
       summary: {
-        total_duration_ms: duration,
+        total_duration_ms: totalDuration || 0,
         total_memory_mb: 256.0,
-        final_h_score: entry.result.overall_h_score,
-        risk_level: entry.result.risk_level,
-        root_cause_classification: entry.result.root_cause_classification || "VERIFIED",
+        final_h_score: res.overall_h_score,
+        risk_level: res.risk_level,
+        root_cause_classification: res.root_cause_classification || "VERIFIED",
         stage_count: stages.length
-      }
+      },
+      measured_timings: measured,
+      pillar_status: pStatus,
+      fusion_decomposition: res.fusion_decomposition,
     };
   };
 
@@ -353,7 +379,8 @@ export default function TracesPage() {
 
 function TraceStageRow({ stage, index }: { stage: TraceStage; index: number }) {
   const [expanded, setExpanded] = useState(false);
-  const isSuccess = stage.status === "completed" || stage.status === "success" || !stage.status;
+  const isUnavailable = stage.status === "unavailable" || stage.status === "skipped" || stage.duration_ms === null;
+  const isSuccess = !isUnavailable && (stage.status === "completed" || stage.status === "success" || !stage.status);
 
   return (
     <motion.div
@@ -368,6 +395,8 @@ function TraceStageRow({ stage, index }: { stage: TraceStage; index: number }) {
           "absolute left-0 top-3 w-[10px] h-[10px] rounded-full border-2",
           isSuccess
             ? "bg-emerald-500 border-emerald-500/30"
+            : isUnavailable
+            ? "bg-slate-600 border-slate-500/30"
             : "bg-red-500 border-red-500/30"
         )}
         style={{ transform: "translateX(-4.5px)" }}
@@ -377,22 +406,40 @@ function TraceStageRow({ stage, index }: { stage: TraceStage; index: number }) {
       <div className="ml-6">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="w-full text-left rounded-xl border border-white/[0.04] bg-bg-surface/40 px-4 py-3 hover:border-white/[0.08] hover:bg-bg-surface/60 transition-all cursor-pointer"
+          className={cn(
+            "w-full text-left rounded-xl border px-4 py-3 transition-all cursor-pointer",
+            isUnavailable
+              ? "border-white/[0.03] bg-bg-surface/20 opacity-80 hover:opacity-100 hover:border-white/[0.06]"
+              : "border-white/[0.04] bg-bg-surface/40 hover:border-white/[0.08] hover:bg-bg-surface/60"
+          )}
           aria-expanded={expanded}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               {isSuccess ? (
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              ) : isUnavailable ? (
+                <MinusCircle className="w-4 h-4 text-slate-400" />
               ) : (
                 <XCircle className="w-4 h-4 text-red-400" />
               )}
-              <span className="text-sm font-medium text-slate-200">{stage.name}</span>
+              <span className={cn("text-sm font-medium", isUnavailable ? "text-slate-400" : "text-slate-200")}>
+                {stage.name}
+              </span>
+              {isUnavailable && (
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-slate-400 border border-white/[0.06]">
+                  Unavailable
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 text-xs text-slate-500 font-mono">
                 <Clock className="w-3 h-3" />
-                {formatLatency(stage.duration_ms)}
+                {isUnavailable ? (
+                  <span className="text-slate-400">Not available</span>
+                ) : (
+                  formatLatency(stage.duration_ms)
+                )}
               </div>
               {expanded ? (
                 <ChevronUp className="w-4 h-4 text-slate-500" />

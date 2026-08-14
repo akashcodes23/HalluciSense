@@ -56,19 +56,58 @@ class EvidenceItem(BaseModel):
     source: str = Field(default="Wikipedia / BM25+Dense Index")
 
 
+class MeasuredTimingBreakdown(BaseModel):
+    """Real instrumented execution durations (measured with perf_counter). Never derived from weights."""
+    retrieval_ms: Optional[float] = Field(None, ge=0.0, description="Real BM25 + dense passage retrieval latency in ms")
+    bm25_ms: Optional[float] = Field(None, ge=0.0, description="BM25 lexical index search latency in ms")
+    dense_ms: Optional[float] = Field(None, ge=0.0, description="FAISS/Embedding dense vector search latency in ms")
+    nli_ms: Optional[float] = Field(None, ge=0.0, description="Cross-Encoder NLI inference latency in ms")
+    gemini_generation_ms: Optional[float] = Field(None, ge=0.0, description="LLM provider API generation latency in ms")
+    p1_latency_ms: float = Field(..., ge=0.0, description="Pillar 1 total measured execution latency in ms")
+    p2_latency_ms: float = Field(..., ge=0.0, description="Pillar 2 total measured execution latency in ms")
+    p3_latency_ms: float = Field(..., ge=0.0, description="Pillar 3 total measured execution latency in ms")
+    fusion_latency_ms: float = Field(..., ge=0.0, description="Mathematical fusion computation latency in ms")
+    total_latency_ms: float = Field(..., ge=0.0, description="End-to-end measured pipeline execution latency in ms")
+
+
+class PillarExecutionStatus(BaseModel):
+    """Explicit availability and execution status for each pillar."""
+    p1_status: str = Field(default="EXECUTED", description="EXECUTED, DEGRADED, or FAILED")
+    p2_status: str = Field(default="UNAVAILABLE", description="EXECUTED, UNAVAILABLE (no logprobs), PROXY, or SKIPPED")
+    p3_status: str = Field(default="UNAVAILABLE", description="EXECUTED, UNAVAILABLE (single response), or SKIPPED")
+    fusion_status: str = Field(default="FULL_THREE_PILLAR", description="FULL_THREE_PILLAR, PARTIAL_TWO_PILLAR, or PARTIAL_ONE_PILLAR")
+    p1_available: bool = Field(default=True)
+    p2_available: bool = Field(default=False)
+    p3_available: bool = Field(default=False)
+    is_full_analysis: bool = Field(default=False)
+
+
+class MathematicalFusionDecomposition(BaseModel):
+    """Mathematical provenance and linear contribution decomposition."""
+    equation: str = Field(default="H = alpha*P1 + beta*P2 + gamma*P3")
+    configured_weights: Dict[str, float] = Field(default_factory=lambda: {"alpha": 0.45, "beta": 0.30, "gamma": 0.25})
+    effective_weights: Dict[str, float] = Field(default_factory=dict)
+    pillar_scores: Dict[str, Optional[float]] = Field(default_factory=dict)
+    weighted_contributions: Dict[str, Optional[float]] = Field(default_factory=dict)
+    uncalibrated_h_score: float = Field(..., ge=0.0, le=1.0)
+    calibrated_h_score: float = Field(..., ge=0.0, le=1.0)
+    is_full_analysis: bool = Field(default=False)
+
+
 class ConfidenceAnalysis(BaseModel):
     """White-box logit entropy and epistemic uncertainty analysis."""
-    whitebox_entropy: float = Field(..., ge=0.0)
-    blackbox_variation_score: float = Field(..., ge=0.0, le=1.0)
-    epistemic_uncertainty: float = Field(..., ge=0.0, le=1.0)
-    aleatoric_uncertainty: float = Field(..., ge=0.0, le=1.0)
+    whitebox_entropy: Optional[float] = Field(None, ge=0.0)
+    blackbox_variation_score: Optional[float] = Field(None, ge=0.0, le=1.0)
+    epistemic_uncertainty: Optional[float] = Field(None, ge=0.0, le=1.0)
+    aleatoric_uncertainty: Optional[float] = Field(None, ge=0.0, le=1.0)
+    methodology: str = Field(default="UNAVAILABLE", description="TOKEN_LOGPROBS, UNCERTAINTY_PROXY, or UNAVAILABLE")
 
 
 class AnalysisResponse(BaseModel):
     """Canonical production response model for POST /api/v1/analyze."""
     trace_id: str = Field(..., description="Unique execution trace ID for pipeline debugging", example="TRACE_88CFA3E9")
     overall_h_score: float = Field(..., ge=0.0, le=1.0, description="Platt recalibrated hallucination risk H(q) in [0, 1]", example=0.08)
-    risk_level: str = Field(..., description="Categorical risk level: VERIFIED, LOW_RISK, MODERATE_RISK, LIKELY_HALLUCINATED", example="VERIFIED")
+    risk_level: str = Field(..., description="Categorical risk level: VERIFIED, NEEDS_VERIFICATION, MODERATE_RISK, LIKELY_HALLUCINATED", example="VERIFIED")
     confidence: float = Field(..., ge=0.0, le=1.0, description="Overall system confidence in classification [0, 1]", example=0.94)
     pillar_scores: PillarScores = Field(...)
     failure_taxonomy: str = Field(default="NONE", description="Single-label failure taxonomy category", example="NONE")
@@ -80,6 +119,11 @@ class AnalysisResponse(BaseModel):
     evidence: List[EvidenceItem] = Field(default_factory=list)
     confidence_analysis: Optional[ConfidenceAnalysis] = Field(None)
     root_cause_classification: Optional[str] = Field("VERIFIED", description="Single-label failure classification")
+    
+    # ── Real Timing & Fusion Provenance ──────────────────────────────────────
+    measured_timings: Optional[MeasuredTimingBreakdown] = Field(None, description="Actual measured sub-operation timings")
+    pillar_status: Optional[PillarExecutionStatus] = Field(None, description="Detailed execution and availability status")
+    fusion_decomposition: Optional[MathematicalFusionDecomposition] = Field(None, description="Step-by-step linear algebra contribution breakdown")
 
 
 class ExplainResponse(BaseModel):
@@ -96,13 +140,16 @@ class ExplainResponse(BaseModel):
     fusion_contribution: Dict[str, float] = Field(default_factory=dict)
     adaptive_weights: Dict[str, float] = Field(default_factory=dict)
     confidence_explanation: str = Field(...)
+    fusion_decomposition: Optional[MathematicalFusionDecomposition] = Field(None)
+    measured_timings: Optional[MeasuredTimingBreakdown] = Field(None)
 
 
 class MetricsResponse(BaseModel):
     """Production metrics response model for GET /api/v1/metrics."""
     requests: int = Field(..., ge=0, description="Total requests processed", example=152)
-    average_latency_ms: float = Field(..., ge=0.0, description="Average execution latency in ms", example=143.0)
-    average_h_score: float = Field(..., ge=0.0, le=1.0, description="Average overall hallucination score", example=0.18)
-    success_rate: float = Field(..., ge=0.0, le=100.0, description="Successful requests percentage", example=99.7)
-    error_rate: float = Field(..., ge=0.0, le=100.0, description="Failed requests percentage", example=0.3)
+    average_latency_ms: Optional[float] = Field(None, ge=0.0, description="Average execution latency in ms (null if 0 requests)", example=143.0)
+    average_h_score: Optional[float] = Field(None, ge=0.0, le=1.0, description="Average overall hallucination score (null if 0 requests)", example=0.18)
+    success_rate: Optional[float] = Field(None, ge=0.0, le=100.0, description="Successful requests percentage (null if 0 requests)", example=99.7)
+    error_rate: Optional[float] = Field(None, ge=0.0, le=100.0, description="Failed requests percentage (null if 0 requests)", example=0.3)
     memory_mb: float = Field(..., ge=0.0, description="Process RSS RAM memory usage in MB", example=421.0)
+    status: str = Field(default="READY")

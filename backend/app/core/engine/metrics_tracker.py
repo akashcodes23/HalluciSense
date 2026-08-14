@@ -80,15 +80,23 @@ class MetricsTracker:
             succ = self._successful_requests
             fails = self._failed_requests
 
-            avg_lat = round(self._total_latency_ms / float(max(1, succ)), 2)
-            avg_h = round(self._total_h_score / float(max(1, succ)), 4)
-            succ_rate = round((succ / float(max(1, reqs))) * 100.0, 2)
-            err_rate = round((fails / float(max(1, reqs))) * 100.0, 2)
-
-            avg_stage_latencies = {
-                k: round(v / float(max(1, succ)), 2)
-                for k, v in self._stage_latencies.items()
-            }
+            if reqs == 0:
+                avg_lat = None
+                avg_h = None
+                succ_rate = None
+                err_rate = None
+                avg_stage_latencies = {k: None for k in self._stage_latencies}
+                status_str = "AWAITING_FIRST_RUN"
+            else:
+                avg_lat = round(self._total_latency_ms / float(max(1, succ)), 2) if succ > 0 else None
+                avg_h = round(self._total_h_score / float(max(1, succ)), 4) if succ > 0 else None
+                succ_rate = round((succ / float(reqs)) * 100.0, 2)
+                err_rate = round((fails / float(reqs)) * 100.0, 2)
+                avg_stage_latencies = {
+                    k: round(v / float(max(1, succ)), 2) if succ > 0 else None
+                    for k, v in self._stage_latencies.items()
+                }
+                status_str = "READY"
 
             try:
                 mem_mb = round(self._process.memory_info().rss / (1024 * 1024), 2)
@@ -104,6 +112,7 @@ class MetricsTracker:
                 "success_rate": succ_rate,
                 "error_rate": err_rate,
                 "memory_mb": mem_mb,
+                "status": status_str,
                 "average_stage_latencies_ms": avg_stage_latencies,
             }
 

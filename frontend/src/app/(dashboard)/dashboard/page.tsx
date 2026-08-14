@@ -95,16 +95,16 @@ export default function DashboardPage() {
 
         <StatCard
           label="Success Rate"
-          value={metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
-          caption="Execution success ratio"
+          value={metrics && metrics.requests > 0 && metrics.success_rate !== null ? `${metrics.success_rate.toFixed(1)}%` : "—"}
+          caption={metrics && metrics.requests > 0 ? "Execution success ratio" : "Awaiting first execution"}
           icon={CheckCircle2}
-          status={metrics && metrics.success_rate < 95 ? "warning" : "success"}
+          status={metrics && metrics.success_rate !== null && metrics.success_rate < 95 ? "warning" : "default"}
         />
 
         <StatCard
           label="Avg Pipeline Latency"
-          value={metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : formatLatency(0)}
-          caption="End-to-end verification time"
+          value={metrics && metrics.requests > 0 && metrics.average_latency_ms !== null ? formatLatency(metrics.average_latency_ms) : "—"}
+          caption={metrics && metrics.requests > 0 ? "End-to-end verification time" : "Awaiting first execution"}
           icon={Clock}
           status="default"
         />

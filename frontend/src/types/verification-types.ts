@@ -94,6 +94,41 @@ export interface AnalysisRequest {
   sample_responses?: string[];
 }
 
+export interface MeasuredTimingBreakdown {
+  retrieval_ms?: number | null;
+  bm25_ms?: number | null;
+  dense_ms?: number | null;
+  nli_ms?: number | null;
+  gemini_generation_ms?: number | null;
+  p1_latency_ms: number;
+  p2_latency_ms: number;
+  p3_latency_ms: number;
+  fusion_latency_ms: number;
+  total_latency_ms: number;
+}
+
+export interface PillarExecutionStatus {
+  p1_status: string;
+  p2_status: string;
+  p3_status: string;
+  fusion_status: string;
+  p1_available: boolean;
+  p2_available: boolean;
+  p3_available: boolean;
+  is_full_analysis: boolean;
+}
+
+export interface MathematicalFusionDecomposition {
+  equation: string;
+  configured_weights: Record<string, number>;
+  effective_weights: Record<string, number>;
+  pillar_scores: Record<string, number | null>;
+  weighted_contributions: Record<string, number | null>;
+  uncalibrated_h_score: number;
+  calibrated_h_score: number;
+  is_full_analysis: boolean;
+}
+
 export interface AnalysisResponse {
   overall_h_score: number;
   risk_level: RiskLevel;
@@ -111,6 +146,9 @@ export interface AnalysisResponse {
   latency_ms?: number;
   processing_time_ms?: number;
   version?: string;
+  measured_timings?: MeasuredTimingBreakdown;
+  pillar_status?: PillarExecutionStatus;
+  fusion_decomposition?: MathematicalFusionDecomposition;
 }
 
 export interface AnalysisHistoryEntry {
@@ -138,19 +176,23 @@ export interface ExplainResponse {
   reasoning_chain?: string[];
   adaptive_weights?: Record<string, number>;
   fusion_contribution?: Record<string, number>;
+  fusion_decomposition?: MathematicalFusionDecomposition;
+  measured_timings?: MeasuredTimingBreakdown;
 }
 
 export interface MetricsResponse {
   requests: number;
-  success_rate: number;
-  error_rate: number;
-  avg_h_score?: number;
-  average_latency_ms: number;
+  success_rate: number | null;
+  error_rate: number | null;
+  avg_h_score?: number | null;
+  average_latency_ms: number | null;
   active_models?: number;
   total_requests?: number;
   verifications_completed?: number;
-  avg_confidence?: number;
-  avg_latency_ms?: number;
+  avg_confidence?: number | null;
+  avg_latency_ms?: number | null;
+  memory_mb?: number;
+  status?: string;
   risk_distribution?: Record<string, number>;
   pillar_averages?: Record<string, number>;
   throughput_rpm?: number;
@@ -159,8 +201,8 @@ export interface MetricsResponse {
 
 export interface TraceStage {
   name: string;
-  status: "completed" | "running" | "failed" | "pending" | "success";
-  duration_ms: number;
+  status: "completed" | "running" | "failed" | "pending" | "success" | "unavailable" | "skipped";
+  duration_ms: number | null;
   memory_mb?: number;
   details?: Record<string, unknown>;
 }
@@ -177,6 +219,10 @@ export interface TraceData {
     root_cause_classification: string;
     stage_count: number;
   };
+  performance_timings?: Record<string, unknown>;
+  measured_timings?: MeasuredTimingBreakdown;
+  pillar_status?: PillarExecutionStatus;
+  fusion_decomposition?: MathematicalFusionDecomposition;
 }
 
 export type VerificationState = 'IDLE' | 'CONNECTING' | 'ANALYZING' | 'COMPLETED' | 'FAILED';

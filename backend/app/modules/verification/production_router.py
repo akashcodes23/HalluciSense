@@ -25,6 +25,9 @@ from app.schemas.production_schemas import (
     TokenHeatmapItem,
     EvidenceItem,
     ConfidenceAnalysis,
+    MeasuredTimingBreakdown,
+    PillarExecutionStatus,
+    MathematicalFusionDecomposition,
 )
 from app.core.engine.pipeline import HallucinationDetectionPipeline
 from app.core.engine.token_localization import TokenLevelLocalizationEngine
@@ -102,41 +105,93 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         overall_h = float(report.overall_h_score)
         risk_level_str = str(report.overall_risk_level.value) if hasattr(report.overall_risk_level, "value") else str(report.overall_risk_level)
 
-        # Extract Pillar Scores & Timings from Report
+        # Extract Pillar Scores & Measured Timings from Report
         p1 = report.pillar1_summary
         p2 = report.pillar2_summary
         p3 = report.pillar3_summary
         p_timings = getattr(report, "performance_timings", {}) or {}
 
-        # Record pipeline stages into PipelineTimer from engine timing breakdown
+        # Measured sub-operation durations from perf_counter
         ret_perf = p_timings.get("retrieval", {})
         conf_perf = p_timings.get("confidence", {})
         cons_perf = p_timings.get("consistency", {})
         fus_perf = p_timings.get("fusion", {})
 
-        timer.record("query_preprocessing", ret_perf.get("claim_extraction_ms", 0.1))
-        timer.record("sentence_segmentation", 0.2)
-        timer.record("retrieval", ret_perf.get("duration_ms", p_dur * 0.4))
+        p1_dur_ms = float(ret_perf.get("duration_ms", 0.0))
+        p2_dur_ms = float(conf_perf.get("duration_ms", 0.0))
+        p3_dur_ms = float(cons_perf.get("duration_ms", 0.0))
+        fusion_dur_ms = float(fus_perf.get("duration_ms", 0.0))
+
+        timer.record("query_preprocessing", ret_perf.get("claim_extraction_ms", 0.0))
+        timer.record("sentence_segmentation", 0.0)
+        timer.record("retrieval", p1_dur_ms)
         timer.record("retrieval_bm25", ret_perf.get("bm25_ms", 0.0))
         timer.record("retrieval_dense", ret_perf.get("wikipedia_ms", 0.0) + ret_perf.get("faiss_ms", 0.0))
         timer.record("retrieval_hybrid_fusion", ret_perf.get("reranker_ms", 0.0))
         timer.record("nli_verification", ret_perf.get("nli_ms", 0.0) + cons_perf.get("nli_ms", 0.0))
-        timer.record("confidence_estimation", conf_perf.get("duration_ms", 0.0))
-        timer.record("consistency_reasoning", cons_perf.get("duration_ms", 0.0))
+        timer.record("confidence_estimation", p2_dur_ms)
+        timer.record("consistency_reasoning", p3_dur_ms)
         timer.record("consistency_paraphrase", cons_perf.get("sanitization_ms", 0.0))
-        timer.record("consistency_multi_run", 0.1)
+        timer.record("consistency_multi_run", 0.0)
         timer.record("consistency_comparison", cons_perf.get("semantic_ms", 0.0) + cons_perf.get("nli_ms", 0.0))
-        timer.record("adaptive_fusion", fus_perf.get("duration_ms", 0.0))
-        timer.record("calibration", 0.1)
+        timer.record("adaptive_fusion", fusion_dur_ms)
+        timer.record("calibration", 0.0)
 
-        fe_val = float(getattr(p1, "factual_error_score", 0.5))
-        cg_val = float(getattr(p2, "avg_entropy", 0.15)) if getattr(p2, "avg_entropy", None) is not None else 0.15
-        cf_val = float(getattr(p3, "consistency_failure_score", 0.17)) if getattr(p3, "consistency_failure_score", None) is not None else 0.17
+        p1_available = True
+        p2_available = bool(p2 and getattr(p2, "available", False) and getattr(p2, "confidence_gap_score", None) is not None)
+        p3_available = bool(p3 and getattr(p3, "available", False) and getattr(p3, "consistency_failure_score", None) is not None)
+        is_full_analysis = bool(p1_available and p2_available and p3_available)
+
+        fe_val = float(getattr(p1, "factual_error_score", 0.0))
+        cg_val = float(p2.confidence_gap_score) if p2_available else 0.0
+        cf_val = float(p3.consistency_failure_score) if p3_available else 0.0
 
         pillar_scores = PillarScores(
             retrieval=round(fe_val, 4),
             confidence=round(cg_val, 4),
             consistency=round(cf_val, 4),
+        )
+
+        p_status_obj = PillarExecutionStatus(
+            p1_status="EXECUTED" if p1 else "FAILED",
+            p2_status="EXECUTED" if p2_available else "UNAVAILABLE",
+            p3_status="EXECUTED" if p3_available else "UNAVAILABLE",
+            fusion_status="FULL_THREE_PILLAR" if is_full_analysis else ("PARTIAL_TWO_PILLAR" if (p2_available or p3_available) else "PARTIAL_ONE_PILLAR"),
+            p1_available=p1_available,
+            p2_available=p2_available,
+            p3_available=p3_available,
+            is_full_analysis=is_full_analysis,
+        )
+
+        # Mathematical fusion breakdown
+        weights_used = getattr(report, "weights_used", {}) or {"alpha": 1.0, "beta": 0.0, "gamma": 0.0}
+        w_alpha = float(weights_used.get("alpha", weights_used.get("alpha_factual_error", 0.45)))
+        w_beta = float(weights_used.get("beta", weights_used.get("beta_confidence_gap", 0.30)))
+        w_gamma = float(weights_used.get("gamma", weights_used.get("gamma_consistency_failure", 0.25)))
+
+        c_p1 = round(w_alpha * fe_val, 4)
+        c_p2 = round(w_beta * cg_val, 4) if p2_available else None
+        c_p3 = round(w_gamma * cf_val, 4) if p3_available else None
+
+        calibrated_h = float(getattr(report, "calibrated_probability", overall_h) or overall_h)
+
+        fusion_decomp = MathematicalFusionDecomposition(
+            equation="H = alpha*P1 + beta*P2 + gamma*P3",
+            configured_weights={"alpha": 0.45, "beta": 0.30, "gamma": 0.25},
+            effective_weights={"alpha": w_alpha, "beta": w_beta, "gamma": w_gamma},
+            pillar_scores={
+                "p1_factual_error": fe_val,
+                "p2_confidence_gap": cg_val if p2_available else None,
+                "p3_consistency_failure": cf_val if p3_available else None,
+            },
+            weighted_contributions={
+                "p1_contribution": c_p1,
+                "p2_contribution": c_p2,
+                "p3_contribution": c_p3,
+            },
+            uncalibrated_h_score=round(overall_h, 4),
+            calibrated_h_score=round(calibrated_h, 4),
+            is_full_analysis=is_full_analysis,
         )
 
         # 4. Token Localization Heatmap (Async Offloaded)
@@ -184,28 +239,20 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
                 )
             )
 
-        # 6. Evidence Citations
+        # 6. Real Evidence Citations (Zero Placeholders)
         evidence_items = []
         for idx, item in enumerate(p1.evidence):
-            p_dict = item if isinstance(item, dict) else (item.dict() if hasattr(item, "dict") else {})
+            p_dict = item if isinstance(item, dict) else (item.model_dump() if hasattr(item, "model_dump") else (item.dict() if hasattr(item, "dict") else {}))
+            snippet_str = str(p_dict.get("snippet", p_dict.get("text", ""))).strip()
+            if not snippet_str:
+                continue
             evidence_items.append(
                 EvidenceItem(
-                    id=str(p_dict.get("id", f"doc_{idx+1}")),
-                    title=str(p_dict.get("title", "Ground Truth Citation")),
-                    snippet=str(p_dict.get("text", p_dict.get("snippet", "Factual evidence snippet"))),
-                    score=float(p_dict.get("score", 0.88)),
-                    source="Wikipedia / BM25+Dense Index",
-                )
-            )
-
-        if not evidence_items:
-            evidence_items.append(
-                EvidenceItem(
-                    id="doc_1",
-                    title="Ground Truth Citation",
-                    snippet=f"Retrieved passage context supporting query: {query}",
-                    score=0.88,
-                    source="Wikipedia / BM25+Dense Index",
+                    id=str(p_dict.get("id", f"ev_{idx+1}")),
+                    title=str(p_dict.get("title", p_dict.get("source_name", "Retrieved Evidence"))),
+                    snippet=snippet_str,
+                    score=float(p_dict.get("similarity_score", p_dict.get("score", 0.5))),
+                    source=str(p_dict.get("source_name", "Wikipedia / BM25+Dense Index")),
                 )
             )
 
@@ -227,10 +274,11 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         with timer.stage("response_serialization"):
             unc = getattr(report, "uncertainty_analysis", {})
             confidence_info = ConfidenceAnalysis(
-                whitebox_entropy=float(unc.get("predictive_entropy", 0.12)),
-                blackbox_variation_score=float(unc.get("total_uncertainty", 0.15)),
-                epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.18)),
-                aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.20)),
+                whitebox_entropy=float(p2.avg_entropy) if (p2_available and p2.avg_entropy is not None) else None,
+                blackbox_variation_score=float(p3.consistency_failure_score) if (p3_available and p3.consistency_failure_score is not None) else None,
+                epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.0)) if p2_available or p3_available else None,
+                aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.0)) if p2_available else None,
+                methodology="TOKEN_LOGPROBS" if (p2_available and getattr(p2, "token_logprobs", None)) else ("UNCERTAINTY_PROXY" if p2_available else "UNAVAILABLE"),
             )
 
             confidence_val = round(1.0 - abs(overall_h - 0.5), 4)
@@ -241,31 +289,44 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         total_req_ms = timer.finish()
         timer.record("total_request", total_req_ms)
 
-        ret_total_ms = float(ret_perf.get("duration_ms", p_dur * 0.4))
-        nli_total_ms = float(ret_perf.get("nli_ms", 0.0)) + float(cons_perf.get("nli_ms", 0.0))
-        conf_total_ms = float(conf_perf.get("duration_ms", 0.0))
-        cons_total_ms = float(cons_perf.get("duration_ms", 0.0))
-        fusion_total_ms = float(fus_perf.get("duration_ms", 0.0))
+        measured_timings_obj = MeasuredTimingBreakdown(
+            retrieval_ms=round(p1_dur_ms, 2) if p1_dur_ms > 0 else None,
+            bm25_ms=round(float(ret_perf.get("bm25_ms", 0.0)), 2) if ret_perf.get("bm25_ms") else None,
+            dense_ms=round(float(ret_perf.get("wikipedia_ms", 0.0)) + float(ret_perf.get("faiss_ms", 0.0)), 2) if (ret_perf.get("wikipedia_ms") or ret_perf.get("faiss_ms")) else None,
+            nli_ms=round(float(ret_perf.get("nli_ms", 0.0)) + float(cons_perf.get("nli_ms", 0.0)), 2) if (ret_perf.get("nli_ms") or cons_perf.get("nli_ms")) else None,
+            gemini_generation_ms=None,
+            p1_latency_ms=round(p1_dur_ms, 2),
+            p2_latency_ms=round(p2_dur_ms, 2),
+            p3_latency_ms=round(p3_dur_ms, 2),
+            fusion_latency_ms=round(fusion_dur_ms, 2),
+            total_latency_ms=round(total_req_ms, 2),
+        )
 
         full_perf_dict = timer.get_summary()
 
-        # Record Pipeline Trace
-        tracer.record_stage("pipeline_execution", p_dur, {"num_claims": len(p1.claims), "num_evidence": len(evidence_items)}, confidence=1.0 - overall_h)
-        tracer.record_stage("pillar1_grounding", ret_total_ms, {"factual_error": fe_val}, confidence=1.0 - fe_val)
-        tracer.record_stage("adaptive_fusion", fusion_total_ms, {"weights": getattr(report, "weights_used", {})}, confidence=1.0 - overall_h)
+        # Record Real Pipeline Trace (No fake derivations)
+        tracer.record_stage("pillar1_evidence_grounding", p1_dur_ms, {"factual_error": fe_val, "evidence_count": len(evidence_items)}, confidence=1.0 - fe_val)
+        tracer.record_stage("pillar2_confidence_estimation", p2_dur_ms, {"available": p2_available, "confidence_gap": cg_val if p2_available else None}, confidence=1.0 - cg_val if p2_available else None)
+        tracer.record_stage("pillar3_consistency_reasoning", p3_dur_ms, {"available": p3_available, "consistency_failure": cf_val if p3_available else None}, confidence=1.0 - cf_val if p3_available else None)
+        tracer.record_stage("adaptive_fusion_engine", fusion_dur_ms, {"weights": weights_used, "is_full_analysis": is_full_analysis}, confidence=1.0 - overall_h)
         tracer.finalize(
             final_h_score=overall_h,
             risk_level=risk_level_str,
             root_cause=root_cause,
-            metadata={"performance_timings": full_perf_dict},
+            metadata={
+                "performance_timings": full_perf_dict,
+                "measured_timings": measured_timings_obj.model_dump(),
+                "pillar_status": p_status_obj.model_dump(),
+                "fusion_decomposition": fusion_decomp.model_dump(),
+            },
         )
 
         stage_timings_record = {
-            "retrieval_ms": ret_total_ms,
-            "nli_ms": nli_total_ms,
-            "confidence_ms": conf_total_ms,
-            "consistency_ms": cons_total_ms,
-            "fusion_ms": fusion_total_ms,
+            "retrieval_ms": p1_dur_ms,
+            "nli_ms": float(ret_perf.get("nli_ms", 0.0)) + float(cons_perf.get("nli_ms", 0.0)),
+            "confidence_ms": p2_dur_ms,
+            "consistency_ms": p3_dur_ms,
+            "fusion_ms": fusion_dur_ms,
             "risk_ms": risk_ms,
             "localization_ms": localization_ms,
             "serialization_ms": serialization_ms,
@@ -290,6 +351,9 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             evidence=evidence_items,
             confidence_analysis=confidence_info,
             root_cause_classification=root_cause,
+            measured_timings=measured_timings_obj,
+            pillar_status=p_status_obj,
+            fusion_decomposition=fusion_decomp,
         )
         return res_body
 
@@ -328,19 +392,23 @@ async def explain_analysis(payload: ExplainRequest, request: Request, response: 
         f"Step 6: Applied Platt recalibrated adaptive fusion resulting in overall H-score = {analysis.overall_h_score:.4f}.",
     ]
 
+    decomp = analysis.fusion_decomposition
+    eff_w = decomp.effective_weights if decomp else {"alpha": 0.45, "beta": 0.30, "gamma": 0.25}
+    w_contrib = decomp.weighted_contributions if decomp else {}
+
     fusion_contrib = {
-        "pillar1_retrieval_pct": 40.0,
-        "pillar2_confidence_pct": 30.0,
-        "pillar3_consistency_pct": 30.0,
+        "pillar1_retrieval_contribution": float(w_contrib.get("p1_contribution") or 0.0),
+        "pillar2_confidence_contribution": float(w_contrib.get("p2_contribution") or 0.0),
+        "pillar3_consistency_contribution": float(w_contrib.get("p3_contribution") or 0.0),
     }
 
     adaptive_weights = {
-        "alpha_retrieval": 0.40,
-        "beta_confidence": 0.30,
-        "gamma_consistency": 0.30,
+        "alpha_factual_error": float(eff_w.get("alpha", 0.45)),
+        "beta_confidence_gap": float(eff_w.get("beta", 0.30)),
+        "gamma_consistency_failure": float(eff_w.get("gamma", 0.25)),
     }
 
-    conf_exp = f"Calculated system confidence = {analysis.confidence:.4f}. The output is classified as '{analysis.risk_level}' with root cause '{analysis.root_cause_classification}'."
+    conf_exp = f"Calculated system confidence = {analysis.confidence:.4f}. The output is classified as '{analysis.risk_level}' with root cause '{analysis.root_cause_classification}' ({'Full 3-Pillar Analysis' if (decomp and decomp.is_full_analysis) else 'Partial Analysis'})."
 
     return ExplainResponse(
         trace_id=analysis.trace_id,
@@ -355,6 +423,8 @@ async def explain_analysis(payload: ExplainRequest, request: Request, response: 
         fusion_contribution=fusion_contrib,
         adaptive_weights=adaptive_weights,
         confidence_explanation=conf_exp,
+        fusion_decomposition=decomp,
+        measured_timings=analysis.measured_timings,
     )
 
 
