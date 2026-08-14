@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000687",
+  "sample_id": "pol_0687",
+  "timestamp": "2026-08-14T07:27:58.568564+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "How do democracies choose leaders?",
+    "response": "Democracies hold periodic elections for governance."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Politics",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 0.4026,
+    "claims": [
+      "Democracies hold periodic elections for governance."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.4026,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.4026
+  },
+  "risk_level": "NEEDS_VERIFICATION",
+  "timings": {
+    "total_ms": 3339.83,
+    "p1_ms": 67.17,
+    "p2_ms": 0.01,
+    "p3_ms": 3199.45,
+    "fusion_ms": 0.01
+  }
+}

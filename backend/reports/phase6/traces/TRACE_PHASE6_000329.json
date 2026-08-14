@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000329",
+  "sample_id": "com_0329",
+  "timestamp": "2026-08-14T07:07:28.870988+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What is the complexity of QuickSort?",
+    "response": "QuickSort has an average time complexity of O(N log N)."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Computer Science",
+    "difficulty": "medium"
+  },
+  "pillar_1": {
+    "score": 0.4999,
+    "claims": [
+      "QuickSort has an average time complexity of O(N log N)."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.4999,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.4999
+  },
+  "risk_level": "NEEDS_VERIFICATION",
+  "timings": {
+    "total_ms": 3269.8,
+    "p1_ms": 56.59,
+    "p2_ms": 0.02,
+    "p3_ms": 3144.52,
+    "fusion_ms": 0.0
+  }
+}

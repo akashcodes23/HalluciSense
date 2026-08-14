@@ -135,7 +135,7 @@ export default function LandingPage() {
 
           <FadeUp delay={0.3}>
             <p className="text-body max-w-2xl mx-auto text-slate-400 leading-relaxed">
-              A confidence-aware verification framework combining evidence grounding, epistemic uncertainty, and structural consistency.
+              Evidence-grounded verification with adaptive confidence and consistency analysis. Combines invariant external retrieval grounding with real-time model uncertainty and multi-sample consensus.
             </p>
           </FadeUp>
 
@@ -162,9 +162,12 @@ export default function LandingPage() {
       <section id="pillars" className="py-24 px-6 relative z-10 border-t border-white/[0.04] bg-bg-surface/10">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <h2 className="text-heading-lg text-white tracking-tight">Three-Pillar Architecture</h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-label-md">
-              Combining hybrid evidence retrieval, white-box uncertainty, and structural self-consistency for robust Platt-calibrated scoring.
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-400 text-[10px] font-semibold tracking-wide uppercase font-mono mb-2">
+              Availability-Aware Fusion Engine
+            </div>
+            <h2 className="text-heading-lg text-white tracking-tight">Adaptive Multi-Signal Architecture</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-label-md leading-relaxed">
+              Grounded evidence retrieval serves as the invariant foundation for every claim, with token uncertainty and stochastic consensus activating dynamically for live model generation streams.
             </p>
           </div>
 
@@ -173,14 +176,19 @@ export default function LandingPage() {
             <ScrollReveal delay={0.1}>
               <GlassCard className="p-8 space-y-6 h-full flex flex-col justify-between border-white/[0.04] bg-bg-surface/40">
                 <div className="space-y-4">
-                  <Database className="w-8 h-8 text-blue-400" />
+                  <div className="flex items-center justify-between">
+                    <Database className="w-8 h-8 text-blue-400" />
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold uppercase">
+                      Invariant Base
+                    </span>
+                  </div>
                   <h3 className="text-heading-sm font-bold text-white">Pillar 1 — Evidence Grounding</h3>
                   <p className="text-label-md text-slate-400 leading-relaxed">
-                    Hybrid BM25 + dense vector retrieval against external reference corpora with cross-encoder NLI entailment verification.
+                    Hybrid BM25 sparse + FAISS dense vector retrieval against external reference corpora with DeBERTa-v3 cross-encoder NLI entailment scoring. Evaluates all claims, including offline text.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.01] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-blue-400 flex items-center justify-center gap-2">
-                  retrieval → evidence → entailment
+                  Always Active · BM25 + FAISS + NLI
                 </div>
               </GlassCard>
             </ScrollReveal>
@@ -189,14 +197,19 @@ export default function LandingPage() {
             <ScrollReveal delay={0.2}>
               <GlassCard className="p-8 space-y-6 h-full flex flex-col justify-between border-white/[0.04] bg-bg-surface/40">
                 <div className="space-y-4">
-                  <Activity className="w-8 h-8 text-status-warning" />
-                  <h3 className="text-heading-sm font-bold text-white">Pillar 2 — Confidence Estimation</h3>
+                  <div className="flex items-center justify-between">
+                    <Activity className="w-8 h-8 text-status-warning" />
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold uppercase">
+                      Adaptive Signal
+                    </span>
+                  </div>
+                  <h3 className="text-heading-sm font-bold text-white">Pillar 2 — Predictive Confidence</h3>
                   <p className="text-label-md text-slate-400 leading-relaxed">
-                    Logit entropy analysis and epistemic uncertainty quantification to measure internal model confidence gaps.
+                    Token log-probability entropy analysis quantifying internal model uncertainty. Dynamically active during live streaming generation when provider logprobs are exposed.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.01] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-status-warning flex items-center justify-center gap-2">
-                  prediction → entropy → confidence
+                  Live Streams · Shannon Entropy H(p)
                 </div>
               </GlassCard>
             </ScrollReveal>
@@ -205,17 +218,37 @@ export default function LandingPage() {
             <ScrollReveal delay={0.3}>
               <GlassCard className="p-8 space-y-6 h-full flex flex-col justify-between border-white/[0.04] bg-bg-surface/40">
                 <div className="space-y-4">
-                  <GitBranch className="w-8 h-8 text-status-success" />
-                  <h3 className="text-heading-sm font-bold text-white">Pillar 3 — Consistency</h3>
+                  <div className="flex items-center justify-between">
+                    <GitBranch className="w-8 h-8 text-status-success" />
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold uppercase">
+                      Adaptive Signal
+                    </span>
+                  </div>
+                  <h3 className="text-heading-sm font-bold text-white">Pillar 3 — Semantic Consistency</h3>
                   <p className="text-label-md text-slate-400 leading-relaxed">
-                    Paraphrase-based self-consistency checks measuring semantic variance across multi-prompt generation runs.
+                    Evaluates semantic embedding cosine variance and claim-aligned contradiction across exactly 3 stochastic alternate generations during live multi-candidate runs.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.01] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-status-success flex items-center justify-center gap-2">
-                  prompt → multi-gen → variance
+                  Multi-Sample · 3 Stochastic Candidates
                 </div>
               </GlassCard>
             </ScrollReveal>
+          </div>
+
+          {/* Availability-Aware Explanation Banner */}
+          <div className="p-5 rounded-2xl bg-black/30 border border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono">
+            <div className="space-y-1">
+              <span className="text-slate-300 font-sans font-semibold text-sm">Execution Model Provenance</span>
+              <p className="text-slate-400 font-sans text-xs">
+                Static Text Verification is evaluated primarily via Pillar 1 Evidence Grounding ($H = P_1$). Live model streams unlock full three-pillar fusion ($H = 0.45 P_1 + 0.30 P_2 + 0.25 P_3$).
+              </p>
+            </div>
+            <div className="shrink-0 flex items-center gap-2 text-[11px]">
+              <span className="px-2.5 py-1 rounded-lg bg-white/[0.04] text-slate-300 border border-white/[0.08]">
+                Transparent Renormalization
+              </span>
+            </div>
           </div>
         </div>
       </section>

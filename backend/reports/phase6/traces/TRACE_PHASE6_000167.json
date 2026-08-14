@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000167",
+  "sample_id": "fin_0167",
+  "timestamp": "2026-08-14T06:58:12.099427+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What is liquidity?",
+    "response": "Liquidity measures how quickly assets convert into cash."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Finance",
+    "difficulty": "medium"
+  },
+  "pillar_1": {
+    "score": 0.4981,
+    "claims": [
+      "Liquidity measures how quickly assets convert into cash."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.4981,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.4981
+  },
+  "risk_level": "NEEDS_VERIFICATION",
+  "timings": {
+    "total_ms": 3375.17,
+    "p1_ms": 73.61,
+    "p2_ms": 0.01,
+    "p3_ms": 3209.14,
+    "fusion_ms": 0.0
+  }
+}

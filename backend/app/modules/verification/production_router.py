@@ -97,9 +97,41 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             )
 
     try:
-        # 3. Master Pipeline Execution (Async Offloaded)
+        # 3. Master Pipeline Execution (Async Offloaded with real payload arguments)
+        ev_items = None
+        if payload.provided_evidence:
+            from app.core.engine.types import EvidenceItem as CoreEvidenceItem
+            ev_items = []
+            for ev in payload.provided_evidence:
+                if isinstance(ev, str) and ev.strip():
+                    ev_items.append(
+                        CoreEvidenceItem(
+                            claim=query or response_text[:100],
+                            snippet=ev.strip(),
+                            source_name="Provided Evidence Context",
+                            similarity_score=1.0,
+                        )
+                    )
+                elif isinstance(ev, dict) and ev.get("snippet"):
+                    ev_items.append(
+                        CoreEvidenceItem(
+                            claim=ev.get("claim", query or response_text[:100]),
+                            snippet=ev["snippet"].strip(),
+                            source_name=ev.get("source_name", "Provided Evidence"),
+                            source_url=ev.get("source_url"),
+                            similarity_score=float(ev.get("similarity_score", ev.get("score", 1.0))),
+                        )
+                    )
+
         t0 = time.perf_counter()
-        report = await asyncio.to_thread(_pipeline.analyze, text=response_text, query=query)
+        report = await asyncio.to_thread(
+            _pipeline.analyze,
+            text=response_text,
+            query=query,
+            token_probabilities=payload.logprobs,
+            sample_responses=payload.sample_responses,
+            evidence_items=ev_items,
+        )
         p_dur = (time.perf_counter() - t0) * 1000.0
 
         overall_h = float(report.overall_h_score)
@@ -148,8 +180,8 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
 
         pillar_scores = PillarScores(
             retrieval=round(fe_val, 4),
-            confidence=round(cg_val, 4),
-            consistency=round(cf_val, 4),
+            confidence=round(cg_val, 4) if p2_available else None,
+            consistency=round(cf_val, 4) if p3_available else None,
         )
 
         p_status_obj = PillarExecutionStatus(
@@ -175,8 +207,37 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
 
         calibrated_h = float(getattr(report, "calibrated_probability", overall_h) or overall_h)
 
+        avail_pillars = []
+        if p1_available:
+            avail_pillars.append("Pillar 1: Evidence Grounding")
+        if p2_available:
+            avail_pillars.append("Pillar 2: Confidence Estimation")
+        if p3_available:
+            avail_pillars.append("Pillar 3: Consistency Reasoning")
+
+        missing_pillars = []
+        if not p2_available:
+            missing_pillars.append("Pillar 2: Confidence (Token logprobs omitted)")
+        if not p3_available:
+            missing_pillars.append("Pillar 3: Consistency (Single generation mode)")
+
+        fusion_mode_str = "FULL_THREE_PILLAR" if is_full_analysis else "PARTIAL_RENORMALIZED"
+
+        if is_full_analysis:
+            decomp_explanation = (
+                f"Full 3-Pillar weighted fusion: H = 0.45*P1 + 0.30*P2 + 0.25*P3 = "
+                f"{c_p1:.4f} + {c_p2 or 0.0:.4f} + {c_p3 or 0.0:.4f} = {overall_h:.4f} ({overall_h * 100:.2f}%)."
+            )
+        else:
+            missing_desc = "; ".join(missing_pillars)
+            decomp_explanation = (
+                f"Partial renormalized fusion: {missing_desc}. Score computed from available pillars with effective weights "
+                f"(α={w_alpha:.2f}, β={w_beta:.2f}, γ={w_gamma:.2f}) yielding H = {overall_h:.4f} ({overall_h * 100:.2f}%)."
+            )
+
         fusion_decomp = MathematicalFusionDecomposition(
             equation="H = alpha*P1 + beta*P2 + gamma*P3",
+            fusion_mode=fusion_mode_str,
             configured_weights={"alpha": 0.45, "beta": 0.30, "gamma": 0.25},
             effective_weights={"alpha": w_alpha, "beta": w_beta, "gamma": w_gamma},
             pillar_scores={
@@ -189,9 +250,12 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
                 "p2_contribution": c_p2,
                 "p3_contribution": c_p3,
             },
+            available_pillars=avail_pillars,
+            missing_pillars=missing_pillars,
             uncalibrated_h_score=round(overall_h, 4),
             calibrated_h_score=round(calibrated_h, 4),
             is_full_analysis=is_full_analysis,
+            explanation=decomp_explanation,
         )
 
         # 4. Token Localization Heatmap (Async Offloaded)
@@ -273,12 +337,24 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         # 8. Response Serialization Timing
         with timer.stage("response_serialization"):
             unc = getattr(report, "uncertainty_analysis", {})
+            sig_type = "MEASURED" if (p2_available and payload.logprobs) else ("PROXY" if p2_available else "UNAVAILABLE")
+            method_str = "TOKEN_LOGPROBS" if (p2_available and payload.logprobs) else ("UNCERTAINTY_PROXY" if p2_available else "UNAVAILABLE")
+            gen_count = len(payload.sample_responses) if payload.sample_responses else 1
             confidence_info = ConfidenceAnalysis(
                 whitebox_entropy=float(p2.avg_entropy) if (p2_available and p2.avg_entropy is not None) else None,
                 blackbox_variation_score=float(p3.consistency_failure_score) if (p3_available and p3.consistency_failure_score is not None) else None,
                 epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.0)) if p2_available or p3_available else None,
                 aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.0)) if p2_available else None,
-                methodology="TOKEN_LOGPROBS" if (p2_available and getattr(p2, "token_logprobs", None)) else ("UNCERTAINTY_PROXY" if p2_available else "UNAVAILABLE"),
+                methodology=method_str,
+                signal_type=sig_type,
+                uncertainty_measure="Binary Shannon Entropy H(p)" if (p2_available and payload.logprobs) else ("Multi-Sample Variance Proxy" if p2_available else "None"),
+                generations_used=gen_count,
+                raw_signal_metadata={
+                    "logprobs_provided": bool(payload.logprobs),
+                    "generations_count": gen_count,
+                    "model_name": model_name,
+                },
+                explanation=p2.reasoning if p2 else "Token-level logprobs not provided by active LLM provider. Excluded from fusion.",
             )
 
             confidence_val = round(1.0 - abs(overall_h - 0.5), 4)
@@ -383,12 +459,15 @@ async def explain_analysis(payload: ExplainRequest, request: Request, response: 
     supporting = [ev.snippet for ev in analysis.evidence if ev.score >= 0.70] or ["No explicit supporting passage retrieved."]
     contradiction = [ev.snippet for ev in analysis.evidence if ev.score < 0.50] or ["No explicit contradiction passage detected."]
 
+    p2_str = f"{analysis.pillar_scores.confidence:.4f}" if analysis.pillar_scores.confidence is not None else "UNAVAILABLE (no logprobs)"
+    p3_str = f"{analysis.pillar_scores.consistency:.4f}" if analysis.pillar_scores.consistency is not None else "UNAVAILABLE (single generation)"
+
     reasoning_chain = [
         f"Step 1: Decomposed response into {len(analysis.sentence_scores)} constituent sentences.",
         f"Step 2: Retrieved {len(analysis.evidence)} grounding passages from reference indices.",
         f"Step 3: Computed Pillar 1 factual error score (FE = {analysis.pillar_scores.retrieval:.4f}).",
-        f"Step 4: Evaluated Pillar 2 logit entropy (CG = {analysis.pillar_scores.confidence:.4f}).",
-        f"Step 5: Evaluated Pillar 3 paraphrase consistency (CF = {analysis.pillar_scores.consistency:.4f}).",
+        f"Step 4: Evaluated Pillar 2 logit entropy (CG = {p2_str}).",
+        f"Step 5: Evaluated Pillar 3 paraphrase consistency (CF = {p3_str}).",
         f"Step 6: Applied Platt recalibrated adaptive fusion resulting in overall H-score = {analysis.overall_h_score:.4f}.",
     ]
 

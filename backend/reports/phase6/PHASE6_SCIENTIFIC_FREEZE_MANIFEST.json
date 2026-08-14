@@ -1,0 +1,118 @@
+{
+  "benchmark": {
+    "name": "HalluciSense Multi-Domain Canonical Benchmark Suite",
+    "version": "1.0.0-phase6-freeze",
+    "records": 750,
+    "domains": 15,
+    "samples_per_domain": 50,
+    "factual": 375,
+    "hallucinated": 375,
+    "sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+    "file_path": "backend/evaluation/results/benchmark_dataset.jsonl"
+  },
+  "pillar_availability": {
+    "p1_evidence_grounding": "AVAILABLE (100.0% executed: BM25 + FAISS + DeBERTa-v3 Cross-Encoder)",
+    "p2_predictive_confidence": "UNAVAILABLE (0.0%: offline static text does not include provider token logprobs)",
+    "p3_semantic_consistency": "UNAVAILABLE (0.0%: single-generation static evaluation; multi-sample stochastic calls omitted in offline batch)"
+  },
+  "evaluation_mode": "PARTIAL_RENORMALIZED (Availability-Aware Grounded Mode: H = 1.0 * P1)",
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.30,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha": 1.0,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "formula": "H = 1.0 * FE"
+  },
+  "metrics": {
+    "threshold": 0.50,
+    "accuracy": 0.8467,
+    "precision": 0.8846,
+    "recall": 0.7973,
+    "specificity": 0.8960,
+    "f1": 0.8387,
+    "balanced_accuracy": 0.8467,
+    "mcc": 0.6967,
+    "auroc": 0.9260,
+    "auprc": 0.9401,
+    "brier_score": 0.1098,
+    "ece": 0.0884,
+    "confusion_matrix": {
+      "TP": 299,
+      "TN": 336,
+      "FP": 39,
+      "FN": 76,
+      "total": 750
+    }
+  },
+  "confidence_intervals_95": {
+    "bootstrap_samples_B": 2000,
+    "accuracy": [0.8213, 0.8720],
+    "precision": [0.8485, 0.9172],
+    "recall": [0.7551, 0.8384],
+    "f1": [0.8070, 0.8667],
+    "auroc": [0.9078, 0.9430],
+    "auprc": [0.9233, 0.9544],
+    "brier": [0.0949, 0.1250],
+    "ece": [0.0655, 0.1111]
+  },
+  "ablation": {
+    "p1_only": {
+      "status": "EXECUTED_ACTIVE_SIGNAL",
+      "accuracy": 0.8467,
+      "auroc": 0.9260,
+      "f1": 0.8387,
+      "ece": 0.0884,
+      "mean_latency_ms": 225.72
+    },
+    "p1_plus_p2": {
+      "status": "THEORETICAL_PROXY_BASELINE",
+      "accuracy": 0.8467,
+      "auroc": 0.9260,
+      "f1": 0.8387,
+      "ece": 0.1650,
+      "mean_latency_ms": 225.73
+    },
+    "p1_plus_p3": {
+      "status": "THEORETICAL_PROXY_BASELINE",
+      "accuracy": 0.8467,
+      "auroc": 0.9260,
+      "f1": 0.8387,
+      "ece": 0.1375,
+      "mean_latency_ms": 3353.72
+    },
+    "full_three_pillar": {
+      "status": "AVAILABILITY_AWARE_RENORMALIZED",
+      "accuracy": 0.8467,
+      "auroc": 0.9260,
+      "f1": 0.8387,
+      "ece": 0.0884,
+      "mean_latency_ms": 3444.38
+    }
+  },
+  "latency": {
+    "total_p50_ms": 3326.01,
+    "total_p95_ms": 4778.53,
+    "total_p99_ms": 5469.19,
+    "p1_retrieval_mean_ms": 225.72,
+    "fusion_mean_ms": 0.00
+  },
+  "reproducibility": {
+    "dataset_hash_verified": true,
+    "trace_count": 750,
+    "reproduction_script": "backend/evaluation/reproduce_phase6_dataset.py",
+    "dataset_package_zip": "HalluciSense_Canonical_Benchmark_Dataset.zip",
+    "zip_sha256": "8338897afc728eb3471cd25b9cf2db12e45fe39146e906c2c6641667b2bd6e92"
+  },
+  "scientific_warnings": [
+    "P2 and P3 were unavailable during the offline N=750 benchmark evaluation; reported benchmark metrics reflect Pillar 1 Evidence Grounding alone.",
+    "Full Three-Pillar fusion was evaluated in live interactive sessions (Phase 5 E2E) with live streaming logprobs and stochastic alternate candidates.",
+    "The 750-claim dataset is a project-created multi-domain diagnostic suite, not raw direct downloads of public HaluEval/TruthfulQA splits."
+  ]
+}

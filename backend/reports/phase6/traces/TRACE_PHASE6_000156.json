@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000156",
+  "sample_id": "fin_0156",
+  "timestamp": "2026-08-14T06:57:35.846267+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What does hyperinflation do?",
+    "response": "Hyperinflation causes currency value to double every hour permanently."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Finance",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.175,
+    "claims": [
+      "Hyperinflation causes currency value to double every hour permanently."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.175,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.175
+  },
+  "risk_level": "VERIFIED",
+  "timings": {
+    "total_ms": 3430.8,
+    "p1_ms": 85.83,
+    "p2_ms": 0.01,
+    "p3_ms": 3248.33,
+    "fusion_ms": 0.0
+  }
+}

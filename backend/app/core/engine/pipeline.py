@@ -102,6 +102,62 @@ class HallucinationDetectionPipeline:
             logger.warning("evidence_retrieval_failed", error=str(e))
             return []
 
+    def _generate_p3_samples(self, text: str, query: Optional[str] = None, count: int = 3) -> List[str]:
+        """Generate exactly `count` genuine stochastic alternate responses using active LLM provider.
+
+        Used when client does not supply pre-generated candidate responses and self-consistency is enabled.
+        """
+        try:
+            from app.core.config import settings
+            from app.modules.orchestrator.service import LLMOrchestrator
+            import asyncio
+
+            if not getattr(settings, "ENABLE_SELF_CONSISTENCY", False):
+                return []
+
+            target_prompt = query.strip() if (query and isinstance(query, str) and query.strip()) else f"Provide a complete, factual response for: {text[:120]}"
+            messages = [{"role": "user", "content": target_prompt}]
+
+            orchestrator = LLMOrchestrator(
+                primary_model=getattr(settings, "DEFAULT_LLM_MODEL", "gemini-2.0-flash")
+            )
+
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    import concurrent.futures
+                    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
+                        samples = pool.submit(
+                            asyncio.run,
+                            orchestrator.generate_samples(
+                                messages=messages,
+                                count=count,
+                                temperature=0.7,
+                            )
+                        ).result()
+                else:
+                    samples = loop.run_until_complete(
+                        orchestrator.generate_samples(
+                            messages=messages,
+                            count=count,
+                            temperature=0.7,
+                        )
+                    )
+            except Exception:
+                samples = asyncio.run(
+                    orchestrator.generate_samples(
+                        messages=messages,
+                        count=count,
+                        temperature=0.7,
+                    )
+                )
+
+            valid_samples = [s.strip() for s in (samples or []) if s and isinstance(s, str) and s.strip() and s.strip() != text.strip()]
+            return valid_samples[:count]
+        except Exception as exc:
+            logger.info("p3_dynamic_sample_generation_unavailable", error=str(exc))
+            return []
+
     # =========================================================
     # SENTENCE SPLITTING
     # =========================================================
@@ -361,12 +417,14 @@ Respond STRICTLY in JSON using this schema:
         provided_evidence: Optional[List[EvidenceItem]] = None,
         sample_responses: Optional[List[str]] = None,
         query: Optional[str] = None,
+        evidence_items: Optional[List[EvidenceItem]] = None,
     ) -> HallucinationReport:
         """Alias for analyze_response to support standard engine contract."""
+        ev = evidence_items if evidence_items is not None else provided_evidence
         return self.analyze_response(
             full_text=text,
             token_probabilities=token_probabilities,
-            evidence_items=provided_evidence,
+            evidence_items=ev,
             sample_responses=sample_responses,
             query=query,
         )
@@ -378,11 +436,14 @@ Respond STRICTLY in JSON using this schema:
         evidence_items: Optional[List[EvidenceItem]] = None,
         sample_responses: Optional[List[str]] = None,
         query: Optional[str] = None,
+        provided_evidence: Optional[List[EvidenceItem]] = None,
     ) -> HallucinationReport:
         """
         Run the complete hybrid hallucination detection pipeline
         on an LLM response.
         """
+        if evidence_items is None and provided_evidence is not None:
+            evidence_items = provided_evidence
 
         clean_text = full_text.strip()
 
@@ -491,6 +552,9 @@ Respond STRICTLY in JSON using this schema:
         # =====================================================
 
         t_p3_start = time.perf_counter()
+        if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False):
+            sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
+
         p3_global = self.p3_engine.analyze(
             clean_text,
             sample_responses,

@@ -23,6 +23,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAnalysis, useExplain } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
 import { formatLatency, getRiskColor, getRiskLabel } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import { ScoreGauge } from "@/components/features/analyzer/score-gauge";
 import { TokenHeatmap } from "@/components/features/heatmap/token-heatmap";
 import type { SentenceScore, EvidenceItem } from "@/types/hallucisense";
@@ -448,30 +449,148 @@ Claim Response & ${p1}\\% & ${p2}\\% & ${p3}\\% & \\textbf{${(currentResult.over
                   </div>
 
                   {/* Summary Meta Pills */}
-                  <div className="flex flex-wrap md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-white/[0.04] pt-4 md:pt-0 md:pl-6">
+                  <div className="flex flex-wrap md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-white/[0.04] pt-4 md:pt-0 md:pl-6 min-w-[240px]">
                     <MetaPill
-                      label="Pillar 1 FE (Factual)"
-                      tooltip="Hybrid BM25 + dense vector retrieval with Cross-Encoder NLI entailment."
+                      label="P1 Evidence (FE)"
+                      tooltip="Hybrid BM25 + dense retrieval with Cross-Encoder NLI entailment."
                       value={`${((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%`}
+                      status="success"
                     />
                     <MetaPill
-                      label="Pillar 2 CG (Uncertainty)"
-                      tooltip="Token entropy H(Y) and epistemic/aleatoric uncertainty quantification."
-                      value={currentResult.pillar_scores?.pillar2_confidence_gap != null ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "N/A (Protected)"}
+                      label="P2 Uncertainty (CG)"
+                      tooltip="Token Shannon entropy H(p) and epistemic/aleatoric uncertainty quantification."
+                      value={currentResult.pillar_scores?.pillar2_confidence_gap != null && (currentResult.pillar_status?.p2_available ?? true) ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "Unavailable"}
+                      status={currentResult.pillar_scores?.pillar2_confidence_gap != null && (currentResult.pillar_status?.p2_available ?? true) ? "success" : "neutral"}
                     />
                     <MetaPill
-                      label="Pillar 3 CF (Consistency)"
-                      tooltip="Multi-prompt paraphrase sampling and NLI contradiction graph variance."
-                      value={currentResult.pillar_scores?.pillar3_consistency_failure != null ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "N/A"}
+                      label="P3 Consistency (CF)"
+                      tooltip="Multi-prompt generation sampling and semantic contradiction variance."
+                      value={currentResult.pillar_scores?.pillar3_consistency_failure != null && (currentResult.pillar_status?.p3_available ?? true) ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "Unavailable"}
+                      status={currentResult.pillar_scores?.pillar3_consistency_failure != null && (currentResult.pillar_status?.p3_available ?? true) ? "success" : "neutral"}
                     />
                   </div>
                 </div>
 
+                {/* ── Signal Provenance & Availability Transparency Banner ──── */}
+                <div className="p-3.5 rounded-xl bg-blue-500/[0.03] border border-blue-500/10 flex flex-wrap items-center justify-between gap-2.5 text-[11px] font-mono">
+                  <div className="flex items-center gap-2 flex-wrap text-slate-300">
+                    <span className="text-slate-400 font-semibold font-sans">Signals used:</span>
+                    <span className="text-emerald-400 font-medium flex items-center gap-1">Evidence Grounding (P1) ✓</span>
+                    <span className="text-slate-600">·</span>
+                    <span className={cn((currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? "text-emerald-400 font-medium" : "text-slate-400")}>
+                      Confidence Estimation (P2) {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? "✓" : "— unavailable for static text"}
+                    </span>
+                    <span className="text-slate-600">·</span>
+                    <span className={cn((currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? "text-emerald-400 font-medium" : "text-slate-400")}>
+                      Consistency Reasoning (P3) {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? "✓" : "— unavailable for static text"}
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-sans italic">
+                    {(currentResult.pillar_status?.is_full_analysis || currentResult.fusion_decomposition?.fusion_mode === "FULL_THREE_PILLAR")
+                      ? "Full 3-Pillar Fusion Active"
+                      : "Evaluated via Invariant Grounded Evidence (P1)"}
+                  </span>
+                </div>
+
+                {/* ── Mathematical Fusion Decomposition Box ─────────────────── */}
+                <div className="p-4 rounded-xl bg-black/30 border border-white/[0.06] space-y-3 font-mono text-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 font-sans font-semibold text-xs">Three-Pillar Fusion Formula:</span>
+                      <code className="text-purple-300 font-bold">H = &alpha;P₁ + &beta;P₂ + &gamma;P₃</code>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={cn(
+                        "text-[10px] px-2 py-0.5 rounded font-semibold border",
+                        (currentResult.fusion_decomposition?.fusion_mode === "FULL_THREE_PILLAR" || currentResult.pillar_status?.is_full_analysis)
+                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                          : "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                      )}>
+                        {currentResult.fusion_decomposition?.fusion_mode || (currentResult.pillar_status?.is_full_analysis ? "FULL_THREE_PILLAR" : "PARTIAL_RENORMALIZED")}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 3-Pillar Step Calculation Matrix */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                    {/* P1 Box */}
+                    <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] space-y-1">
+                      <div className="flex items-center justify-between text-[11px] text-slate-400">
+                        <span className="font-sans">P1 Evidence Grounding</span>
+                        <span className="text-emerald-400 font-bold">w = {(currentResult.fusion_decomposition?.effective_weights?.alpha ?? 0.45).toFixed(2)}</span>
+                      </div>
+                      <div className="flex items-baseline justify-between text-slate-200">
+                        <span className="text-[11px]">Score: {((currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%</span>
+                        <span className="text-slate-400 text-[10px]">&rarr; +{((currentResult.fusion_decomposition?.weighted_contributions?.p1_contribution ?? ((currentResult.fusion_decomposition?.effective_weights?.alpha ?? 0.45) * (currentResult.pillar_scores?.retrieval ?? 0))) * 100).toFixed(2)}%</span>
+                      </div>
+                    </div>
+
+                    {/* P2 Box */}
+                    <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] space-y-1">
+                      <div className="flex items-center justify-between text-[11px] text-slate-400">
+                        <span className="font-sans">P2 Confidence Gap</span>
+                        <span className={cn("font-bold", (currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? "text-emerald-400" : "text-slate-500")}>
+                          {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? `w = ${(currentResult.fusion_decomposition?.effective_weights?.beta ?? 0.30).toFixed(2)}` : "Unavailable"}
+                        </span>
+                      </div>
+                      <div className="flex items-baseline justify-between text-slate-200">
+                        <span className="text-[11px]">
+                          {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null))
+                            ? `Score: ${((currentResult.pillar_scores?.confidence ?? 0) * 100).toFixed(1)}%`
+                            : "No logprobs"}
+                        </span>
+                        <span className="text-slate-400 text-[10px]">
+                          {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null))
+                            ? `&rarr; +${((currentResult.fusion_decomposition?.weighted_contributions?.p2_contribution ?? 0) * 100).toFixed(2)}%`
+                            : "—"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* P3 Box */}
+                    <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] space-y-1">
+                      <div className="flex items-center justify-between text-[11px] text-slate-400">
+                        <span className="font-sans">P3 Consistency Failure</span>
+                        <span className={cn("font-bold", (currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? "text-emerald-400" : "text-slate-500")}>
+                          {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? `w = ${(currentResult.fusion_decomposition?.effective_weights?.gamma ?? 0.25).toFixed(2)}` : "Unavailable"}
+                        </span>
+                      </div>
+                      <div className="flex items-baseline justify-between text-slate-200">
+                        <span className="text-[11px]">
+                          {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null))
+                            ? `Score: ${((currentResult.pillar_scores?.consistency ?? 0) * 100).toFixed(1)}%`
+                            : "Single sample"}
+                        </span>
+                        <span className="text-slate-400 text-[10px]">
+                          {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null))
+                            ? `&rarr; +${((currentResult.fusion_decomposition?.weighted_contributions?.p3_contribution ?? 0) * 100).toFixed(2)}%`
+                            : "—"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Plain Language Explanation */}
+                  {currentResult.fusion_decomposition?.explanation && (
+                    <p className="text-[11px] text-slate-400 font-sans leading-relaxed pt-1 border-t border-white/[0.04]">
+                      {currentResult.fusion_decomposition.explanation}
+                    </p>
+                  )}
+                </div>
+
                 {/* Academic Export Actions */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/[0.04]">
-                  <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+                  <div className="text-xs text-slate-400 font-mono flex items-center gap-2">
                     <ShieldCheck className="w-3.5 h-3.5 text-accent-primary" />
                     <span>Platt-Calibrated Hybrid Score (ECE &le; 0.0257)</span>
+                    {currentResult.trace_id && (
+                      <a
+                        href={`/traces`}
+                        className="text-[11px] text-blue-400 hover:text-blue-300 underline ml-2 flex items-center gap-1"
+                      >
+                        Inspect Trace ({currentResult.trace_id.slice(0, 12)}) <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -654,17 +773,20 @@ function RiskBadge({ level }: { level: string }) {
   return <StatusBadge label={label} status={status} />;
 }
 
-function MetaPill({ label, value, tooltip }: { label: string; value: string; tooltip?: string }) {
+function MetaPill({ label, value, tooltip, status = "neutral" }: { label: string; value: string; tooltip?: string; status?: "success" | "neutral" | "warning" | "error" }) {
   return (
     <div
       title={tooltip}
-      className="flex items-center justify-between gap-4 text-xs font-mono p-1.5 px-2 rounded-lg bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.1] transition-colors cursor-help group"
+      className={cn(
+        "flex items-center justify-between gap-4 text-xs font-mono p-1.5 px-2.5 rounded-lg border transition-colors cursor-help group",
+        status === "success" ? "bg-white/[0.02] border-white/[0.06] hover:border-white/[0.12]" : "bg-white/[0.01] border-white/[0.03] opacity-75 hover:opacity-100"
+      )}
     >
-      <span className="text-slate-400 flex items-center gap-1">
+      <span className="text-slate-400 flex items-center gap-1 font-sans">
         {label}
         {tooltip && <Info className="w-3 h-3 text-slate-500 group-hover:text-blue-400 transition-colors" />}
       </span>
-      <span className="font-semibold text-slate-200">{value}</span>
+      <span className={cn("font-semibold font-mono", status === "success" ? "text-slate-200" : "text-slate-500")}>{value}</span>
     </div>
   );
 }

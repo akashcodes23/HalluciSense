@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000454",
+  "sample_id": "che_0454",
+  "timestamp": "2026-08-14T07:14:41.023931+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Does helium form covalent bonds?",
+    "response": "Helium forms strong covalent bonds with noble gases."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Chemistry",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 0.5003,
+    "claims": [
+      "Helium forms strong covalent bonds with noble gases."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.5003,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.5003
+  },
+  "risk_level": "MODERATE_RISK",
+  "timings": {
+    "total_ms": 5475.98,
+    "p1_ms": 2187.68,
+    "p2_ms": 0.01,
+    "p3_ms": 3233.26,
+    "fusion_ms": 0.0
+  }
+}

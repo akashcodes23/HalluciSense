@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000636",
+  "sample_id": "geo_0636",
+  "timestamp": "2026-08-14T07:25:04.314185+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Where does the Nile River flow?",
+    "response": "The Nile River flows through Antarctica."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Geography",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.9996,
+    "claims": [
+      "The Nile River flows through Antarctica."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.9996,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.9996
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "timings": {
+    "total_ms": 3138.52,
+    "p1_ms": 64.66,
+    "p2_ms": 0.02,
+    "p3_ms": 2997.61,
+    "fusion_ms": 0.0
+  }
+}

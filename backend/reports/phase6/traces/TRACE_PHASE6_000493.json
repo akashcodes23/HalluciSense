@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000493",
+  "sample_id": "che_0493",
+  "timestamp": "2026-08-14T07:16:47.933156+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Who created the Periodic Table?",
+    "response": "Mendeleev created the Periodic Table of chemical elements."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Chemistry",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 0.0095,
+    "claims": [
+      "Mendeleev created the Periodic Table of chemical elements."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.0095,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.0095
+  },
+  "risk_level": "VERIFIED",
+  "timings": {
+    "total_ms": 3405.34,
+    "p1_ms": 136.13,
+    "p2_ms": 0.01,
+    "p3_ms": 3164.1,
+    "fusion_ms": 0.01
+  }
+}

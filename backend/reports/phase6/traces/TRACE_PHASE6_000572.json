@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000572",
+  "sample_id": "mat_0572",
+  "timestamp": "2026-08-14T07:21:23.572159+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Is Euler's number rational?",
+    "response": "Euler's constant e is a rational fraction equal to 22/7."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Mathematics",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 0.9968,
+    "claims": [
+      "Euler's constant e is a rational fraction equal to 22/7."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.9968,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.9968
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "timings": {
+    "total_ms": 3410.09,
+    "p1_ms": 154.91,
+    "p2_ms": 0.01,
+    "p3_ms": 3057.26,
+    "fusion_ms": 0.0
+  }
+}

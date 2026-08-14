@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000743",
+  "sample_id": "lit_0743",
+  "timestamp": "2026-08-14T07:31:13.556619+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Who composed the Odyssey?",
+    "response": "Homer composed the Iliad and the Odyssey."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Literature",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 0.0079,
+    "claims": [
+      "Homer composed the Iliad and the Odyssey."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.0079,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.0079
+  },
+  "risk_level": "VERIFIED",
+  "timings": {
+    "total_ms": 3505.93,
+    "p1_ms": 134.09,
+    "p2_ms": 0.01,
+    "p3_ms": 3248.81,
+    "fusion_ms": 0.01
+  }
+}

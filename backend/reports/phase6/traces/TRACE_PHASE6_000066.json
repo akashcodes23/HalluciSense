@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000066",
+  "sample_id": "med_0066",
+  "timestamp": "2026-08-14T06:52:24.220701+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Does chemotherapy cure bacterial pneumonia?",
+    "response": "Chemotherapy cures all stages of bacterial pneumonia."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Medicine",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 1.0,
+    "claims": [
+      "Chemotherapy cures all stages of bacterial pneumonia."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 1.0,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 1.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "timings": {
+    "total_ms": 3170.29,
+    "p1_ms": 28.43,
+    "p2_ms": 0.01,
+    "p3_ms": 3140.72,
+    "fusion_ms": 0.01
+  }
+}

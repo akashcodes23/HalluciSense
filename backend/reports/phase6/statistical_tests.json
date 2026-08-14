@@ -1,0 +1,23 @@
+{
+  "comparison": "Full Three-Pillar vs P1-Only Baseline",
+  "mcnemar_test": {
+    "chi2_statistic": 0.0,
+    "p_value": 1.0,
+    "is_significant_p_005": false,
+    "b_full_correct_p1_wrong": 0,
+    "c_full_wrong_p1_correct": 0
+  },
+  "wilcoxon_signed_rank_test": {
+    "statistic": 0.0,
+    "p_value": NaN,
+    "is_significant_p_005": false
+  },
+  "cohens_d_effect_size": 0.0,
+  "pillar_correlations_with_ground_truth": {
+    "p1_pearson": 0.7532,
+    "p1_spearman": 0.7382,
+    "p2_pearson": 0.0,
+    "p3_pearson": 0.0,
+    "overall_h_pearson": 0.7532
+  }
+}

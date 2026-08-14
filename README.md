@@ -68,7 +68,7 @@ fusion to detect hallucinations in Large Language Models.
 
 ## 🔬 Scientific Architecture & Research Overview
 
-HalluciSense establishes a **Complete Three-Pillar Hybrid Hallucination Detection Framework** for publication in top-tier Elsevier journals (*Information Fusion*, *Knowledge-Based Systems*, *Artificial Intelligence*).
+HalluciSense establishes an **Availability-Aware Hybrid Hallucination Detection Framework** for publication in top-tier Elsevier journals (*Information Fusion*, *Knowledge-Based Systems*, *Artificial Intelligence*).
 
 ```
                       +------------------------------------------+
@@ -76,34 +76,33 @@ HalluciSense establishes a **Complete Three-Pillar Hybrid Hallucination Detectio
                       +------------------------------------------+
                                            |
          +---------------------------------+---------------------------------+
-         |                                 |                                 |
+         | (Always Active)                 | (Adaptive on Live Stream)       | (Adaptive on Multi-Sample)
          v                                 v                                 v
 +------------------+             +-------------------+             +-------------------+
 | Pillar 1: FE     |             | Pillar 2: CG      |             | Pillar 3: CF      |
 | Retrieval        |             | Confidence        |             | Consistency       |
 | Evidence         |             | Estimation        |             | Reasoning         |
 +------------------+             +-------------------+             +-------------------+
-| • BM25 Sparse    |             | • White-Box:      |             | • Paraphrase Gen  |
-| • Dense Embedding|             |   Logprobs, Entropy|             |   (Q -> Q1...QN)  |
-| • Cross-Encoder  |             |   Mutual Info,    |             | • SBERT Matrix    |
-|   Reranker       |             |   Epistemic/Aleat.|             | • Claim-Aligned   |
-| • Citation Conf. |             | • Black-Box API:  |             |   NLI Graph       |
-| • Passage Align. |             |   Top-K Diff, Var.|             | • Sentence Match  |
+| • BM25 Sparse    |             | • Token Shannon   |             | • Stochastic Gen  |
+| • FAISS Vector   |             |   Entropy H(p)    |             |   (N = 3 Samples) |
+| • DeBERTa-v3 NLI |             | • Confidence Gap  |             | • SBERT Cosine    |
+|   Cross-Encoder  |             | • Subword Risk    |             | • Claim-Aligned   |
+| • Wikipedia/Corpus|            | • Model Aleatoric |             |   Contradiction   |
 +------------------+             +-------------------+             +-------------------+
          |                                 |                                 |
          +---------------------------------+---------------------------------+
                                            |
                                            v
                      +-------------------------------------------+
-                     |   Calibrated Hybrid Fusion Engine         |
-                     |   Modes: STATIC / ADAPTIVE / GRADIENT     |
+                     |   Availability-Aware Hybrid Fusion Engine |
+                     |   Modes: FULL_THREE_PILLAR / PARTIAL_RENORM |
                      |   Formula: H = α FE + β CG + γ CF (sum=1) |
-                     |   Platt Scaling (ECE = 0.0257)            |
+                     |   Calibration: Platt-Calibrated Risk Tiers|
                      +-------------------------------------------+
                                            |
                                            v
                      +-------------------------------------------+
-                     |   Token Localization & 4-Tier Heatmaps    |
+                     |   Token Localization & 4-Tier Risk Tiers  |
                      |   • Green  (#10B981) - VERIFIED           |
                      |   • Yellow (#F59E0B) - NEEDS_VERIFY       |
                      |   • Orange (#F97316) - MODERATE_RISK      |
@@ -113,22 +112,22 @@ HalluciSense establishes a **Complete Three-Pillar Hybrid Hallucination Detectio
 
 ### Key Pillars & Scientific Specifications
 
-1. **Pillar 1: Retrieval Evidence ($FE \in [0,1]$)**
-   - Integrates BM25 sparse lexical matching, dense embedding retrieval, and Cross-Encoder passage reranking (`ms-marco-MiniLM-L-6-v2`).
-   - Returns factual claim verification, citation confidence scores, and retrieved source passages.
+1. **Pillar 1: Retrieval Evidence ($FE \in [0,1]$ — Invariant Foundation)**
+   - Always active for all evaluation targets (including offline static text).
+   - Integrates BM25 sparse lexical matching, FAISS dense vector retrieval, and DeBERTa-v3 Cross-Encoder passage entailment verification.
+   - Computes factual claim verification, citation confidence scores, and source grounding.
 
-2. **Pillar 2: Confidence Estimation ($CG \in [0,1]$)**
-   - **White-Box Models**: Computes token logprobs, token entropy, attention entropy, predictive entropy $H(Y)$, mutual information $I(Y;W)$, epistemic uncertainty, and aleatoric uncertainty.
-   - **Black-Box API Models**: Approximates confidence using top-$k$ logprob differences, multi-query response variance, and Platt scaling calibration models.
+2. **Pillar 2: Predictive Confidence ($CG \in [0,1]$ — Adaptive Signal)**
+   - Dynamically active during live streaming LLM generation when provider token log-probabilities are exposed.
+   - Computes binary Shannon entropy $H(p) = -p\log_2(p) - (1-p)\log_2(1-p)$ and subword confidence gaps. Honestly marked `UNAVAILABLE` when logprobs are omitted.
 
-3. **Pillar 3: Consistency Reasoning ($CF \in [0,1]$)**
-   - Executes paraphrase sampling ($Q \rightarrow Q_1, \dots, Q_N$) and queries the target LLM.
-   - Constructs pairwise SBERT similarity matrices $S_{ij}$ and runs sentence-level NLI contradiction graph verification.
+3. **Pillar 3: Consistency Reasoning ($CF \in [0,1]$ — Adaptive Signal)**
+   - Dynamically active during live multi-candidate generation runs.
+   - Evaluates exactly $N=3$ stochastic alternate generations using Sentence-Transformer (`all-MiniLM-L6-v2`) embeddings and claim-aligned DeBERTa Cross-Encoder contradiction detection.
 
-4. **Calibrated Hybrid Fusion Layer**
-   - Combines pillars via $H = \alpha FE + \beta CG + \gamma CF$ ($\alpha + \beta + \gamma = 1$).
-   - Supports `STATIC`, `ADAPTIVE`, and `GRADIENT`-learned weight optimization modes.
-   - Generates parameter sensitivity analysis grids and weight importance vectors.
+4. **Availability-Aware Hybrid Fusion Layer**
+   - Combines active signals via $H = \alpha FE + \beta CG + \gamma CF$ ($\sum w_i = 1.0$) in `FULL_THREE_PILLAR` mode.
+   - Dynamically renormalizes weights across available signals in `PARTIAL_RENORMALIZED` mode when logprobs or multi-samples are not supplied, avoiding synthetic zero substitution.
 
 5. **Token Localization & 4-Tier Risk Heatmaps**
    - Propagates sentence H-scores down to token attributions and span boundaries.

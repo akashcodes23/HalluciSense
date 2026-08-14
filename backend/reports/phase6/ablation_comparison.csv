@@ -1,0 +1,5 @@
+configuration,accuracy,precision,recall,f1,auroc,auprc,ece,brier,mean_latency_ms
+P1 Only (Evidence Grounding — Primary Invariant Signal),0.8467,0.8846,0.7973,0.8387,0.9260,0.9401,0.0884,0.1098,225.72
+P1 + P2 (Grounding + P2 Uncertainty Proxy Baseline),0.8467,0.8846,0.7973,0.8387,0.9260,0.9401,0.1650,0.1251,225.73
+P1 + P3 (Grounding + P3 Multi-Sample Proxy Baseline),0.8467,0.8846,0.7973,0.8387,0.9260,0.9401,0.1375,0.1209,3353.72
+P1 + P2 + P3 (Full Hybrid — Renormalized to P1 on Offline Dataset),0.8467,0.8846,0.7973,0.8387,0.9260,0.9401,0.0884,0.1098,3444.38

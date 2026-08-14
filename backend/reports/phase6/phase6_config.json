@@ -1,0 +1,35 @@
+{
+  "framework": "HalluciSense",
+  "phase": "Phase 6 Scientific Benchmark Freeze",
+  "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "torch_version": "2.5.1",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "nli_model": "cross-encoder/nli-deberta-v3-small",
+  "retrieval": {
+    "bm25_enabled": true,
+    "faiss_dense_enabled": true,
+    "hybrid_reranker": true,
+    "wikipedia_anchor": true
+  },
+  "p3_stochasticity": {
+    "num_generations": 3,
+    "temperature": 0.7,
+    "similarity_metric": "cosine_embedding",
+    "contradiction_weight": 0.35
+  },
+  "fusion_weights": {
+    "alpha_factual_error": 0.45,
+    "beta_confidence_gap": 0.3,
+    "gamma_consistency_failure": 0.25,
+    "weight_sum": 1.0
+  },
+  "risk_thresholds": {
+    "verified": "< 0.35",
+    "needs_verification": "0.35 - 0.50",
+    "moderate_risk": "0.50 - 0.65",
+    "likely_hallucinated": ">= 0.65"
+  },
+  "benchmark_seed": 42,
+  "timestamp_utc": "2026-08-14T06:48:31.777191+00:00"
+}

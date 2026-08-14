@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000399",
+  "sample_id": "phy_0399",
+  "timestamp": "2026-08-14T07:11:26.328605+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What is Newton's third law?",
+    "response": "Newton's third law states that action equals opposite reaction."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Physics",
+    "difficulty": "easy"
+  },
+  "pillar_1": {
+    "score": 0.505,
+    "claims": [
+      "Newton's third law states that action equals opposite reaction."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.505,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.505
+  },
+  "risk_level": "MODERATE_RISK",
+  "timings": {
+    "total_ms": 3308.14,
+    "p1_ms": 76.75,
+    "p2_ms": 0.01,
+    "p3_ms": 3143.9,
+    "fusion_ms": 0.01
+  }
+}

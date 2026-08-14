@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000044",
+  "sample_id": "gen_0044",
+  "timestamp": "2026-08-14T06:51:06.543710+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What is the smallest ocean?",
+    "response": "The Pacific Ocean is the smallest ocean on Earth."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "General Knowledge",
+    "difficulty": "medium"
+  },
+  "pillar_1": {
+    "score": 0.7865,
+    "claims": [
+      "The Pacific Ocean is the smallest ocean on Earth."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.7865,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.7865
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "timings": {
+    "total_ms": 3277.93,
+    "p1_ms": 54.37,
+    "p2_ms": 0.01,
+    "p3_ms": 3152.17,
+    "fusion_ms": 0.0
+  }
+}

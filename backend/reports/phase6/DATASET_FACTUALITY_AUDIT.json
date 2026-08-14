@@ -1,0 +1,36 @@
+{
+  "records": 750,
+  "unique_ids": 750,
+  "duplicate_ids": 0,
+  "schema_valid": true,
+  "domains": {
+    "General Knowledge": 50,
+    "Medicine": 50,
+    "Law": 50,
+    "Finance": 50,
+    "History": 50,
+    "Science": 50,
+    "Computer Science": 50,
+    "Physics": 50,
+    "Biology": 50,
+    "Chemistry": 50,
+    "News": 50,
+    "Mathematics": 50,
+    "Geography": 50,
+    "Politics": 50,
+    "Literature": 50
+  },
+  "labels": {
+    "0": 375,
+    "1": 375
+  },
+  "difficulty": {
+    "easy": 255,
+    "medium": 255,
+    "hard": 240
+  },
+  "sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "contains_token_logprobs": false,
+  "contains_sample_responses": false,
+  "contains_multi_generation_data": false
+}

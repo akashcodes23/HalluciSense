@@ -1,0 +1,72 @@
+{
+  "benchmark_name": "HalluciSense Multi-Domain Canonical Benchmark Suite",
+  "benchmark_version": "1.0.0-phase6-freeze",
+  "freeze_timestamp": "2026-08-14T07:31:45Z",
+  "total_samples": 750,
+  "domains": 15,
+  "samples_per_domain": 50,
+  "factual_samples": 375,
+  "hallucinated_samples": 375,
+  "class_balance_ratio": 1.0,
+  "difficulty_distribution": {
+    "easy": 255,
+    "medium": 255,
+    "hard": 240
+  },
+  "canonical_benchmark_file": "backend/evaluation/results/benchmark_dataset.jsonl",
+  "canonical_benchmark_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "source_datasets": [
+    {
+      "name": "HalluciSense Multi-Domain Diagnostic Generator",
+      "official_url": "https://github.com/akashcodes23/HalluciSense",
+      "version": "1.0.0",
+      "license": "MIT",
+      "citation": "Patil et al. (2026) HalluciSense: Confidence-Aware Hybrid Framework for LLM Hallucination Detection.",
+      "role": "Canonical benchmark generator across 15 domains with deterministic seed 42"
+    },
+    {
+      "name": "HaluEval (Inspirational Framework & Query Patterns)",
+      "official_url": "https://github.com/RUCAIBox/HaluEval",
+      "version": "1.0.0",
+      "license": "MIT",
+      "citation": "Li et al. (2023) HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models.",
+      "role": "General knowledge & QA hallucination pattern reference"
+    },
+    {
+      "name": "TruthfulQA (Inspirational Framework & Factuality Questions)",
+      "official_url": "https://github.com/sylagirl/TruthfulQA",
+      "version": "1.0.0",
+      "license": "Apache-2.0",
+      "citation": "Lin et al. (2022) TruthfulQA: Measuring How Models Mimic Human Falsehoods.",
+      "role": "Adversarial factual misconception reference"
+    },
+    {
+      "name": "FEVER (Fact Extraction and VERification Reference)",
+      "official_url": "https://fever.ai/resources.html",
+      "version": "1.0.0",
+      "license": "CC BY-SA 3.0",
+      "citation": "Thorne et al. (2018) FEVER: a large-scale dataset for Fact Extraction and VERification.",
+      "role": "NLI claim-evidence verification paradigm reference"
+    }
+  ],
+  "transformation_pipeline": [
+    "Step 1: Domain Definition — 15 canonical research domains defined in backend/evaluation/benchmark_dataset/dataset_schema.py",
+    "Step 2: Fact-Check Query & Response Alignment — Balanced pairs of factual (0) and hallucinated (1) claim statements curated per domain",
+    "Step 3: Multi-Domain Deterministic Expansion — 50 claims generated per domain with cyclic difficulty assignment (easy, medium, hard) via seed 42",
+    "Step 4: Schema Normalization — Encoded into standardized BenchmarkExample data structure (id, question, response, ground_truth, domain, difficulty, claims, evidence_passages)",
+    "Step 5: Deduplication Audit — Verified 0 duplicate IDs and 0 duplicate (question, response) tuples",
+    "Step 6: Integrity Freeze — Persisted to backend/evaluation/results/benchmark_dataset.jsonl and cryptographic SHA-256 registered"
+  ],
+  "deduplication": {
+    "performed": true,
+    "duplicate_count": 0,
+    "unique_id_count": 750,
+    "unique_claim_count": 750
+  },
+  "schema_validation": {
+    "total_records": 750,
+    "valid_records": 750,
+    "invalid_records": 0,
+    "missing_required_fields": 0
+  }
+}

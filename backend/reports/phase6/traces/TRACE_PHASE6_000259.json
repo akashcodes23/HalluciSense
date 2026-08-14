@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000259",
+  "sample_id": "sci_0259",
+  "timestamp": "2026-08-14T07:03:32.383619+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What is the speed of light?",
+    "response": "Light travels at approximately 300,000 km per second in vacuum."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Science",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.1,
+    "claims": [
+      "Light travels at approximately 300,000 km per second in vacuum."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.1,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.1
+  },
+  "risk_level": "VERIFIED",
+  "timings": {
+    "total_ms": 3384.53,
+    "p1_ms": 89.65,
+    "p2_ms": 0.01,
+    "p3_ms": 3168.43,
+    "fusion_ms": 0.01
+  }
+}

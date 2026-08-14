@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000414",
+  "sample_id": "bio_0414",
+  "timestamp": "2026-08-14T07:12:22.757799+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What do mitochondria produce?",
+    "response": "Mitochondria produce starch through plant photosynthesis."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Biology",
+    "difficulty": "medium"
+  },
+  "pillar_1": {
+    "score": 0.998,
+    "claims": [
+      "Mitochondria produce starch through plant photosynthesis."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.998,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.998
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "timings": {
+    "total_ms": 3382.28,
+    "p1_ms": 75.31,
+    "p2_ms": 0.02,
+    "p3_ms": 3239.14,
+    "fusion_ms": 0.0
+  }
+}

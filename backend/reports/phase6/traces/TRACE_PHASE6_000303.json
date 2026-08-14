@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000303",
+  "sample_id": "com_0303",
+  "timestamp": "2026-08-14T07:06:02.063270+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "What does Dijkstra's algorithm do?",
+    "response": "Dijkstra's algorithm finds shortest paths in non-negative weighted graphs."
+  },
+  "ground_truth": {
+    "label": 0,
+    "category": "Computer Science",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.1125,
+    "claims": [
+      "Dijkstra's algorithm finds shortest paths in non-negative weighted graphs."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.1125,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.1125
+  },
+  "risk_level": "VERIFIED",
+  "timings": {
+    "total_ms": 4586.64,
+    "p1_ms": 1463.97,
+    "p2_ms": 0.01,
+    "p3_ms": 3046.15,
+    "fusion_ms": 0.0
+  }
+}

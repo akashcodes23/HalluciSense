@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-10T04:37:58.130463+00:00",
+  "timestamp": "2026-08-14T09:39:01.660291+00:00",
   "protocol_fingerprint": "405f6d33c1006b8b466c4557caefb635fa1f2c83245ca0bb73dab38b464cc57e",
   "production_scoring_hashes": {
     "app/core/engine/fusion.py": "MISSING",

@@ -91,7 +91,7 @@ export default function TracesPage() {
           methodology: res.confidence_analysis ? "Model Uncertainty Proxy / Logprobs" : "N/A"
         } : {
           status: "UNAVAILABLE",
-          reason: "Token-level logprobs not provided by active LLM provider. Excluded from fusion."
+          reason: "Token-level logprobs not provided by active LLM provider (unavailable for static text input). Excluded from fusion."
         }
       },
       {
@@ -104,7 +104,7 @@ export default function TracesPage() {
           failure_taxonomy: res.failure_taxonomy ?? "NONE"
         } : {
           status: "UNAVAILABLE",
-          reason: "Single generation mode active. Multi-sampling consistency was not executed."
+          reason: "Single generation mode active. Multi-sampling consistency was not executed (unavailable for static text input). Excluded from fusion."
         }
       },
       {

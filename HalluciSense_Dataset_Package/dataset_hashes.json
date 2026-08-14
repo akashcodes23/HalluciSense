@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-08-14T07:31:45Z",
+  "hash_algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "backend/evaluation/results/benchmark_dataset.jsonl",
+      "records": 750,
+      "size_bytes": 295354,
+      "sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+      "description": "Primary canonical frozen benchmark dataset in JSON Lines format"
+    },
+    {
+      "path": "backend/evaluation/results/benchmark_dataset.csv",
+      "records": 750,
+      "size_bytes": 117038,
+      "sha256": "cd6114e6b805cd997e6e6b19483c6524577c18dad4b35bb0f6dfaae722c3bae2",
+      "description": "Tabular export of canonical frozen benchmark dataset with header"
+    },
+    {
+      "path": "backend/reports/phase6/dataset_provenance_manifest.json",
+      "records": 1,
+      "size_bytes": 2841,
+      "sha256": "9b128ef87a5611f7c1703f269a84a6c0b3967aa52b801579d4692797e8b6159c",
+      "description": "Provenance manifest containing domain, schema, and source attribution"
+    }
+  ]
+}

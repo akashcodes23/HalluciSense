@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000080",
+  "sample_id": "med_0080",
+  "timestamp": "2026-08-14T06:53:09.724592+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "How is viral influenza treated?",
+    "response": "Aspirin is used to treat viral lung infections directly."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Medicine",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.5006,
+    "claims": [
+      "Aspirin is used to treat viral lung infections directly."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.5006,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.5006
+  },
+  "risk_level": "MODERATE_RISK",
+  "timings": {
+    "total_ms": 3246.11,
+    "p1_ms": 52.11,
+    "p2_ms": 0.01,
+    "p3_ms": 3126.42,
+    "fusion_ms": 0.0
+  }
+}

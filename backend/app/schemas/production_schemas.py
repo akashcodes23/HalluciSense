@@ -15,6 +15,9 @@ class AnalysisRequest(BaseModel):
     query: Optional[str] = Field(None, description="User query or context prompt", example="Who invented the telephone?")
     response: str = Field(..., min_length=1, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
     model_name: Optional[str] = Field("GPT-4", description="Target LLM architecture name", example="GPT-4")
+    provided_evidence: Optional[List[Any]] = Field(default=None, description="Optional ground-truth reference passages or evidence")
+    sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations for P3 consistency analysis")
+    logprobs: Optional[List[float]] = Field(default=None, description="Optional token generation probabilities from model provider")
 
 
 class ExplainRequest(BaseModel):
@@ -22,13 +25,16 @@ class ExplainRequest(BaseModel):
     query: Optional[str] = Field(None, description="User query or context prompt", example="Who invented the telephone?")
     response: str = Field(..., min_length=1, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
     model_name: Optional[str] = Field("GPT-4", description="Target LLM architecture name", example="GPT-4")
+    provided_evidence: Optional[List[Any]] = Field(default=None, description="Optional ground-truth reference passages or evidence")
+    sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations")
+    logprobs: Optional[List[float]] = Field(default=None, description="Optional token generation probabilities")
 
 
 class PillarScores(BaseModel):
-    """Pillar score breakdown (0.0 to 1.0 risk)."""
+    """Pillar score breakdown (0.0 to 1.0 risk). Null when pillar is unavailable."""
     retrieval: float = Field(..., ge=0.0, le=1.0, description="Pillar 1 Evidence Grounding risk score")
-    confidence: float = Field(..., ge=0.0, le=1.0, description="Pillar 2 Predictive Confidence risk score")
-    consistency: float = Field(..., ge=0.0, le=1.0, description="Pillar 3 Structural Consistency risk score")
+    confidence: Optional[float] = Field(None, ge=0.0, le=1.0, description="Pillar 2 Predictive Confidence risk score (None if logprobs omitted)")
+    consistency: Optional[float] = Field(None, ge=0.0, le=1.0, description="Pillar 3 Structural Consistency risk score (None if single generation)")
 
 
 class SentenceScore(BaseModel):
@@ -85,13 +91,17 @@ class PillarExecutionStatus(BaseModel):
 class MathematicalFusionDecomposition(BaseModel):
     """Mathematical provenance and linear contribution decomposition."""
     equation: str = Field(default="H = alpha*P1 + beta*P2 + gamma*P3")
+    fusion_mode: str = Field(default="FULL_THREE_PILLAR", description="FULL_THREE_PILLAR or PARTIAL_RENORMALIZED")
     configured_weights: Dict[str, float] = Field(default_factory=lambda: {"alpha": 0.45, "beta": 0.30, "gamma": 0.25})
     effective_weights: Dict[str, float] = Field(default_factory=dict)
     pillar_scores: Dict[str, Optional[float]] = Field(default_factory=dict)
     weighted_contributions: Dict[str, Optional[float]] = Field(default_factory=dict)
+    available_pillars: List[str] = Field(default_factory=list)
+    missing_pillars: List[str] = Field(default_factory=list)
     uncalibrated_h_score: float = Field(..., ge=0.0, le=1.0)
     calibrated_h_score: float = Field(..., ge=0.0, le=1.0)
     is_full_analysis: bool = Field(default=False)
+    explanation: Optional[str] = Field(None, description="Explicit human and machine-readable mathematical explanation")
 
 
 class ConfidenceAnalysis(BaseModel):
@@ -101,6 +111,11 @@ class ConfidenceAnalysis(BaseModel):
     epistemic_uncertainty: Optional[float] = Field(None, ge=0.0, le=1.0)
     aleatoric_uncertainty: Optional[float] = Field(None, ge=0.0, le=1.0)
     methodology: str = Field(default="UNAVAILABLE", description="TOKEN_LOGPROBS, UNCERTAINTY_PROXY, or UNAVAILABLE")
+    signal_type: str = Field(default="UNAVAILABLE", description="MEASURED, DERIVED, PROXY, or UNAVAILABLE")
+    uncertainty_measure: Optional[str] = Field(None)
+    generations_used: Optional[int] = Field(None)
+    raw_signal_metadata: Dict[str, Any] = Field(default_factory=dict)
+    explanation: Optional[str] = Field(None)
 
 
 class AnalysisResponse(BaseModel):

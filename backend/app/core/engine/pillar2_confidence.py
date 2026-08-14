@@ -63,18 +63,18 @@ class Pillar2ConfidenceEngine:
         # --------------------------------------------------
         # No real probability measurements available.
         # --------------------------------------------------
-
-        if probabilities is None:
+        if probabilities is None or len(probabilities) == 0:
             self.last_token_processing_ms = round((time.perf_counter() - t_proc_start) * 1000.0, 2)
             self.last_entropy_calculation_ms = 0.0
             return [], None, None, None
 
-        # Token/probability mismatch means confidence cannot
-        # be measured reliably.
-        if len(probabilities) != len(tokens):
-            self.last_token_processing_ms = round((time.perf_counter() - t_proc_start) * 1000.0, 2)
-            self.last_entropy_calculation_ms = 0.0
-            return [], None, None, None
+        # Handle subword vs whitespace tokenization length alignment gracefully
+        if len(probabilities) == len(tokens):
+            effective_tokens = tokens
+        elif tokens:
+            effective_tokens = [tokens[i] if i < len(tokens) else f"tok_{i}" for i in range(len(probabilities))]
+        else:
+            effective_tokens = [f"tok_{i}" for i in range(len(probabilities))]
 
         token_analyses: List[TokenAnalysis] = []
 
@@ -85,12 +85,12 @@ class Pillar2ConfidenceEngine:
 
         t_ent_start = time.perf_counter()
         for idx, (tok, prob) in enumerate(
-            zip(tokens, probabilities)
+            zip(effective_tokens, probabilities)
         ):
 
             prob_clamped = max(
                 0.0,
-                min(1.0, prob),
+                min(1.0, float(prob)),
             )
 
             entropy = self.calculate_entropy(

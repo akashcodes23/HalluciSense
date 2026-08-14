@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000606",
+  "sample_id": "geo_0606",
+  "timestamp": "2026-08-14T07:23:25.130624+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "Is Australia in Europe?",
+    "response": "Australia is a landlocked country in Central Europe."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Geography",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.9993,
+    "claims": [
+      "Australia is a landlocked country in Central Europe."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.9993,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.9993
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "timings": {
+    "total_ms": 3205.7,
+    "p1_ms": 78.28,
+    "p2_ms": 0.01,
+    "p3_ms": 3032.63,
+    "fusion_ms": 0.01
+  }
+}

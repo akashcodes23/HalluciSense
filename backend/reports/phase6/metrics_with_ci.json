@@ -1,0 +1,42 @@
+{
+  "accuracy": {
+    "point_estimate": 0.8463,
+    "ci_95_lower": 0.8213,
+    "ci_95_upper": 0.872
+  },
+  "precision": {
+    "point_estimate": 0.8842,
+    "ci_95_lower": 0.8485,
+    "ci_95_upper": 0.9172
+  },
+  "recall": {
+    "point_estimate": 0.797,
+    "ci_95_lower": 0.7551,
+    "ci_95_upper": 0.8384
+  },
+  "f1": {
+    "point_estimate": 0.8381,
+    "ci_95_lower": 0.807,
+    "ci_95_upper": 0.8667
+  },
+  "brier": {
+    "point_estimate": 0.11,
+    "ci_95_lower": 0.0949,
+    "ci_95_upper": 0.125
+  },
+  "auroc": {
+    "point_estimate": 0.9257,
+    "ci_95_lower": 0.9078,
+    "ci_95_upper": 0.943
+  },
+  "auprc": {
+    "point_estimate": 0.9399,
+    "ci_95_lower": 0.9233,
+    "ci_95_upper": 0.9544
+  },
+  "ece": {
+    "point_estimate": 0.0887,
+    "ci_95_lower": 0.0655,
+    "ci_95_upper": 0.1111
+  }
+}

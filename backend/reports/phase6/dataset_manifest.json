@@ -1,0 +1,40 @@
+{
+  "dataset_name": "HalluciSense Multi-Domain Scientific Benchmark",
+  "dataset_version": "v1.0-frozen-750",
+  "file_path": "/Users/akashgpatil/major_project/backend/evaluation/results/benchmark_dataset.jsonl",
+  "total_sample_count": 750,
+  "expected_sample_count": 750,
+  "actual_sample_count": 750,
+  "domain_distribution": {
+    "General Knowledge": 50,
+    "Medicine": 50,
+    "Law": 50,
+    "Finance": 50,
+    "History": 50,
+    "Science": 50,
+    "Computer Science": 50,
+    "Physics": 50,
+    "Biology": 50,
+    "Chemistry": 50,
+    "News": 50,
+    "Mathematics": 50,
+    "Geography": 50,
+    "Politics": 50,
+    "Literature": 50
+  },
+  "class_distribution": {
+    "factual_negative_0": 375,
+    "hallucinated_positive_1": 375
+  },
+  "difficulty_distribution": {
+    "easy": 255,
+    "medium": 255,
+    "hard": 240
+  },
+  "unique_id_count": 750,
+  "duplicate_count": 0,
+  "missing_field_count": 0,
+  "invalid_label_count": 0,
+  "is_schema_valid": true,
+  "timestamp_utc": "2026-08-14T06:48:31.769695+00:00"
+}

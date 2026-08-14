@@ -1,0 +1,56 @@
+{
+  "trace_id": "TRACE_PHASE6_000692",
+  "sample_id": "pol_0692",
+  "timestamp": "2026-08-14T07:28:15.081649+00:00",
+  "model": "GPT-4",
+  "input": {
+    "query": "How big is the UN Security Council?",
+    "response": "The UN Security Council consists of 500 permanent member states."
+  },
+  "ground_truth": {
+    "label": 1,
+    "category": "Politics",
+    "difficulty": "hard"
+  },
+  "pillar_1": {
+    "score": 0.1333,
+    "claims": [
+      "The UN Security Council consists of 500 permanent member states."
+    ],
+    "evidence_count": 0
+  },
+  "pillar_2": {
+    "score": null,
+    "signal_type": "UNAVAILABLE",
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "pillar_3": {
+    "score": null,
+    "sample_count": 0,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "contributions": {
+      "p1": 0.1333,
+      "p2": 0.0,
+      "p3": 0.0
+    },
+    "h_score": 0.1333
+  },
+  "risk_level": "VERIFIED",
+  "timings": {
+    "total_ms": 3328.45,
+    "p1_ms": 79.96,
+    "p2_ms": 0.01,
+    "p3_ms": 3170.29,
+    "fusion_ms": 0.01
+  }
+}

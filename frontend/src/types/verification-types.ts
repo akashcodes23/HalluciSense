@@ -67,10 +67,16 @@ export interface ConfidenceAnalysis {
   token_entropy_mean?: number;
   confidence_gap_score?: number;
   uncertainty_level?: string;
-  whitebox_entropy?: number;
-  blackbox_variation_score?: number;
-  epistemic_uncertainty?: number;
-  aleatoric_uncertainty?: number;
+  whitebox_entropy?: number | null;
+  blackbox_variation_score?: number | null;
+  epistemic_uncertainty?: number | null;
+  aleatoric_uncertainty?: number | null;
+  methodology?: string;
+  signal_type?: "MEASURED" | "DERIVED" | "PROXY" | "UNAVAILABLE";
+  uncertainty_measure?: string | null;
+  generations_used?: number | null;
+  raw_signal_metadata?: Record<string, unknown>;
+  explanation?: string | null;
 }
 
 export interface TokenHeatmapItem {
@@ -120,13 +126,17 @@ export interface PillarExecutionStatus {
 
 export interface MathematicalFusionDecomposition {
   equation: string;
+  fusion_mode: "FULL_THREE_PILLAR" | "PARTIAL_RENORMALIZED";
   configured_weights: Record<string, number>;
   effective_weights: Record<string, number>;
   pillar_scores: Record<string, number | null>;
   weighted_contributions: Record<string, number | null>;
+  available_pillars?: string[];
+  missing_pillars?: string[];
   uncalibrated_h_score: number;
   calibrated_h_score: number;
   is_full_analysis: boolean;
+  explanation?: string | null;
 }
 
 export interface AnalysisResponse {

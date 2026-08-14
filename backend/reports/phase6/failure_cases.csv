@@ -1,0 +1,116 @@
+sample_id,trace_id,domain,difficulty,query,response,ground_truth,predicted_label,h_score,p1,p2,p3,error_type
+law_0102,TRACE_PHASE6_000102,Law,medium,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0106,TRACE_PHASE6_000106,Law,hard,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0110,TRACE_PHASE6_000110,Law,easy,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0114,TRACE_PHASE6_000114,Law,medium,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0118,TRACE_PHASE6_000118,Law,hard,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0122,TRACE_PHASE6_000122,Law,easy,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0126,TRACE_PHASE6_000126,Law,medium,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0130,TRACE_PHASE6_000130,Law,hard,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0134,TRACE_PHASE6_000134,Law,easy,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0138,TRACE_PHASE6_000138,Law,medium,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0142,TRACE_PHASE6_000142,Law,hard,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0146,TRACE_PHASE6_000146,Law,easy,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+law_0150,TRACE_PHASE6_000150,Law,medium,Which court handles parking fines?,The Supreme Court tries all civil traffic parking violations.,1,0,0.1571,0.1571,,,FALSE_NEGATIVE
+fin_0152,TRACE_PHASE6_000152,Finance,medium,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0156,TRACE_PHASE6_000156,Finance,hard,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0160,TRACE_PHASE6_000160,Finance,easy,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0164,TRACE_PHASE6_000164,Finance,medium,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0168,TRACE_PHASE6_000168,Finance,hard,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0172,TRACE_PHASE6_000172,Finance,easy,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0176,TRACE_PHASE6_000176,Finance,medium,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0180,TRACE_PHASE6_000180,Finance,hard,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0184,TRACE_PHASE6_000184,Finance,easy,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0188,TRACE_PHASE6_000188,Finance,medium,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0192,TRACE_PHASE6_000192,Finance,hard,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0196,TRACE_PHASE6_000196,Finance,easy,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+fin_0200,TRACE_PHASE6_000200,Finance,medium,What does hyperinflation do?,Hyperinflation causes currency value to double every hour permanently.,1,0,0.175,0.175,,,FALSE_NEGATIVE
+his_0202,TRACE_PHASE6_000202,History,medium,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0206,TRACE_PHASE6_000206,History,hard,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0210,TRACE_PHASE6_000210,History,easy,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0214,TRACE_PHASE6_000214,History,medium,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0218,TRACE_PHASE6_000218,History,hard,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0222,TRACE_PHASE6_000222,History,easy,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0226,TRACE_PHASE6_000226,History,medium,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0230,TRACE_PHASE6_000230,History,hard,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0234,TRACE_PHASE6_000234,History,easy,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0238,TRACE_PHASE6_000238,History,medium,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0242,TRACE_PHASE6_000242,History,hard,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0246,TRACE_PHASE6_000246,History,easy,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+his_0250,TRACE_PHASE6_000250,History,medium,Who won the Battle of Waterloo?,Napoleon Bonaparte won the Battle of Waterloo in 1815.,1,0,0.05,0.05,,,FALSE_NEGATIVE
+sci_0254,TRACE_PHASE6_000254,Science,easy,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0258,TRACE_PHASE6_000258,Science,medium,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0262,TRACE_PHASE6_000262,Science,hard,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0266,TRACE_PHASE6_000266,Science,easy,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0270,TRACE_PHASE6_000270,Science,medium,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0274,TRACE_PHASE6_000274,Science,hard,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0278,TRACE_PHASE6_000278,Science,easy,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0282,TRACE_PHASE6_000282,Science,medium,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0286,TRACE_PHASE6_000286,Science,hard,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0290,TRACE_PHASE6_000290,Science,easy,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0294,TRACE_PHASE6_000294,Science,medium,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+sci_0298,TRACE_PHASE6_000298,Science,hard,What charge do electrons have?,Electrons have positive electrical charges.,1,0,0.4609,0.4609,,,FALSE_NEGATIVE
+com_0304,TRACE_PHASE6_000304,Computer Science,easy,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0308,TRACE_PHASE6_000308,Computer Science,medium,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0312,TRACE_PHASE6_000312,Computer Science,hard,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0316,TRACE_PHASE6_000316,Computer Science,easy,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0320,TRACE_PHASE6_000320,Computer Science,medium,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0324,TRACE_PHASE6_000324,Computer Science,hard,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0328,TRACE_PHASE6_000328,Computer Science,easy,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0332,TRACE_PHASE6_000332,Computer Science,medium,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0336,TRACE_PHASE6_000336,Computer Science,hard,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0340,TRACE_PHASE6_000340,Computer Science,easy,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0344,TRACE_PHASE6_000344,Computer Science,medium,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+com_0348,TRACE_PHASE6_000348,Computer Science,hard,Has P vs NP been solved?,P vs NP proved that all NP problems run in linear O(1) time.,1,0,0.15,0.15,,,FALSE_NEGATIVE
+phy_0351,TRACE_PHASE6_000351,Physics,easy,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0355,TRACE_PHASE6_000355,Physics,medium,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0359,TRACE_PHASE6_000359,Physics,hard,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0363,TRACE_PHASE6_000363,Physics,easy,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0367,TRACE_PHASE6_000367,Physics,medium,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0371,TRACE_PHASE6_000371,Physics,hard,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0375,TRACE_PHASE6_000375,Physics,easy,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0379,TRACE_PHASE6_000379,Physics,medium,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0383,TRACE_PHASE6_000383,Physics,hard,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0387,TRACE_PHASE6_000387,Physics,easy,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0391,TRACE_PHASE6_000391,Physics,medium,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0395,TRACE_PHASE6_000395,Physics,hard,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+phy_0399,TRACE_PHASE6_000399,Physics,easy,What is Newton's third law?,Newton's third law states that action equals opposite reaction.,0,1,0.505,0.505,,,FALSE_POSITIVE
+che_0451,TRACE_PHASE6_000451,Chemistry,easy,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0455,TRACE_PHASE6_000455,Chemistry,medium,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0459,TRACE_PHASE6_000459,Chemistry,hard,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0463,TRACE_PHASE6_000463,Chemistry,easy,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0467,TRACE_PHASE6_000467,Chemistry,medium,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0471,TRACE_PHASE6_000471,Chemistry,hard,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0475,TRACE_PHASE6_000475,Chemistry,easy,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0479,TRACE_PHASE6_000479,Chemistry,medium,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0483,TRACE_PHASE6_000483,Chemistry,hard,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0487,TRACE_PHASE6_000487,Chemistry,easy,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0491,TRACE_PHASE6_000491,Chemistry,medium,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0495,TRACE_PHASE6_000495,Chemistry,hard,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+che_0499,TRACE_PHASE6_000499,Chemistry,easy,What is the composition of water?,Water is composed of two hydrogen atoms and one oxygen atom.,0,1,0.5024,0.5024,,,FALSE_POSITIVE
+new_0501,TRACE_PHASE6_000501,News,easy,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0505,TRACE_PHASE6_000505,News,medium,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0509,TRACE_PHASE6_000509,News,hard,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0513,TRACE_PHASE6_000513,News,easy,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0517,TRACE_PHASE6_000517,News,medium,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0521,TRACE_PHASE6_000521,News,hard,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0525,TRACE_PHASE6_000525,News,easy,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0529,TRACE_PHASE6_000529,News,medium,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0533,TRACE_PHASE6_000533,News,hard,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0537,TRACE_PHASE6_000537,News,easy,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0541,TRACE_PHASE6_000541,News,medium,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0545,TRACE_PHASE6_000545,News,hard,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+new_0549,TRACE_PHASE6_000549,News,easy,What do climate summits discuss?,Global climate summits address carbon emission reductions.,0,1,0.5005,0.5005,,,FALSE_POSITIVE
+pol_0652,TRACE_PHASE6_000652,Politics,medium,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0656,TRACE_PHASE6_000656,Politics,hard,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0660,TRACE_PHASE6_000660,Politics,easy,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0664,TRACE_PHASE6_000664,Politics,medium,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0668,TRACE_PHASE6_000668,Politics,hard,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0672,TRACE_PHASE6_000672,Politics,easy,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0676,TRACE_PHASE6_000676,Politics,medium,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0680,TRACE_PHASE6_000680,Politics,hard,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0684,TRACE_PHASE6_000684,Politics,easy,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0688,TRACE_PHASE6_000688,Politics,medium,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0692,TRACE_PHASE6_000692,Politics,hard,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0696,TRACE_PHASE6_000696,Politics,easy,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE
+pol_0700,TRACE_PHASE6_000700,Politics,medium,How big is the UN Security Council?,The UN Security Council consists of 500 permanent member states.,1,0,0.1333,0.1333,,,FALSE_NEGATIVE

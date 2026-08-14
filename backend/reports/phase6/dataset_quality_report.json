@@ -1,0 +1,12 @@
+{
+  "dataset_status": "VALID_IMMUTABLE",
+  "total_records": 750,
+  "valid_count": 750,
+  "duplicate_count": 0,
+  "missing_count": 0,
+  "invalid_count": 0,
+  "class_balance_ratio": 1.0,
+  "is_perfectly_balanced": true,
+  "domain_count": 15,
+  "verification_result": "PASS"
+}
