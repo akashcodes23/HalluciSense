@@ -13,6 +13,12 @@ import type {
 } from "@/types/hallucisense";
 
 const getBaseUrl = (): string => {
+  if (typeof window !== "undefined") {
+    const savedUrl = localStorage.getItem("hallucisense_api_url");
+    if (savedUrl) {
+      return savedUrl;
+    }
+  }
   if (process.env.NEXT_PUBLIC_API_BASE_URL) {
     return process.env.NEXT_PUBLIC_API_BASE_URL;
   }

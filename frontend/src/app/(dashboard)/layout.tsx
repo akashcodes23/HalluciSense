@@ -34,7 +34,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           const Icon = item.icon;
           return (
             <Link key={item.href} href={item.href} className="flex-1">
-              <div className={`flex flex-col items-center justify-center py-1 gap-1 cursor-pointer transition-colors ${isActive ? "text-blue-400 font-semibold" : "text-slate-400 hover:text-slate-200"}`}>
+              <div className={`flex flex-col items-center justify-center py-1 gap-1 cursor-pointer transition-colors ${isActive ? "text-accent-primary font-semibold" : "text-slate-400 hover:text-slate-200"}`}>
                 <Icon className="w-5 h-5 shrink-0" />
                 <span className="text-[10px] tracking-tight">{item.label}</span>
               </div>

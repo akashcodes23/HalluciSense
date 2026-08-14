@@ -11,7 +11,6 @@ import {
   GitBranch,
   BookOpen,
   Sparkles,
-  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,14 +39,27 @@ function GithubIcon({ size = 20, color = "currentColor" }: { size?: number; colo
 }
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay, ease: [0.25, 1, 0.5, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function ScrollReveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay, ease: [0.25, 1, 0.5, 1] }}
       className={className}
     >
       {children}
@@ -101,42 +113,42 @@ export default function LandingPage() {
   const { data: metrics } = useMetrics();
 
   return (
-    <div className="min-h-screen bg-[#050816] text-slate-100 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-[#050816] text-slate-100 relative overflow-x-hidden font-sans">
       <Navbar />
 
       {/* ── Hero Section ───────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-20 px-6 z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+      <section className="relative pt-32 pb-24 px-6 z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
           <FadeUp delay={0.1}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-xs font-semibold tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent-primary/20 bg-accent-primary/5 text-accent-primary text-[10px] font-semibold tracking-wide uppercase font-mono">
               <Sparkles className="w-3.5 h-3.5" />
-              CONFIDENCE-AWARE AI VERIFICATION
+              Confidence-Aware AI Verification
             </div>
           </FadeUp>
 
           <FadeUp delay={0.2}>
-            <h1 className="text-4xl md:text-5xl lg:text-6.5xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.15]">
-              Detect Hallucinations.<br />
-              Measure Confidence. <span className="text-indigo-400">Verify Evidence.</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6.5xl font-[family-name:var(--font-space-grotesk)] font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.15]">
+              Detect Hallucinations.<br className="hidden sm:inline" />
+              Measure Confidence. <span className="text-accent-primary">Verify Evidence.</span>
             </h1>
           </FadeUp>
 
           <FadeUp delay={0.3}>
-            <p className="text-base md:text-lg max-w-2xl mx-auto text-slate-400 leading-relaxed font-normal">
+            <p className="text-body max-w-2xl mx-auto text-slate-400 leading-relaxed">
               A confidence-aware verification framework combining evidence grounding, epistemic uncertainty, and structural consistency.
             </p>
           </FadeUp>
 
           <FadeUp delay={0.4}>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link href="/verify">
-                <Button size="xl" className="bg-gradient-to-r from-purple-600 to-indigo-600 border-0 hover:from-purple-500 hover:to-indigo-500 text-white shadow-[0_0_32px_rgba(168,85,247,0.35)] rounded-xl cursor-pointer">
+                <Button size="xl" className="bg-accent-primary hover:bg-accent-primary/90 text-white shadow-[0_0_24px_rgba(168,85,247,0.2)] rounded-xl cursor-pointer">
                   Start Analyzing
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
               <a href="#pillars">
-                <Button variant="outline" size="xl" className="border-white/10 hover:bg-white/[0.03] text-slate-300 hover:text-white rounded-xl flex items-center gap-2">
+                <Button variant="outline" size="xl" className="border-white/5 bg-white/[0.01] hover:bg-white/[0.04] text-slate-400 hover:text-white rounded-xl flex items-center gap-2">
                   <BookOpen className="w-4 h-4" />
                   Explore Framework
                 </Button>
@@ -147,116 +159,118 @@ export default function LandingPage() {
       </section>
 
       {/* ── Three Pillars Section ────────────────────────────────────────── */}
-      <section id="pillars" className="py-20 px-6 relative z-10 border-t border-white/[0.06]">
+      <section id="pillars" className="py-24 px-6 relative z-10 border-t border-white/[0.04] bg-bg-surface/10">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Three-Pillar Architecture</h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-sm">
+            <h2 className="text-heading-lg text-white tracking-tight">Three-Pillar Architecture</h2>
+            <p className="text-slate-400 max-w-xl mx-auto text-label-md">
               Combining hybrid evidence retrieval, white-box uncertainty, and structural self-consistency for robust Platt-calibrated scoring.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Pillar 1 */}
-            <FadeUp delay={0.1}>
-              <GlassCard className="p-8 space-y-5 h-full flex flex-col justify-between">
+            <ScrollReveal delay={0.1}>
+              <GlassCard className="p-8 space-y-6 h-full flex flex-col justify-between border-white/[0.04] bg-bg-surface/40">
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                    <Database className="w-6 h-6 text-indigo-400" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">Pillar 1 — Evidence Grounding</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <Database className="w-8 h-8 text-blue-400" />
+                  <h3 className="text-heading-sm font-bold text-white">Pillar 1 — Evidence Grounding</h3>
+                  <p className="text-label-md text-slate-400 leading-relaxed">
                     Hybrid BM25 + dense vector retrieval against external reference corpora with cross-encoder NLI entailment verification.
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[11px] text-indigo-300 flex items-center justify-center gap-2">
+                <div className="p-3 rounded-xl bg-white/[0.01] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-blue-400 flex items-center justify-center gap-2">
                   retrieval → evidence → entailment
                 </div>
               </GlassCard>
-            </FadeUp>
+            </ScrollReveal>
 
             {/* Pillar 2 */}
-            <FadeUp delay={0.2}>
-              <GlassCard className="p-8 space-y-5 h-full flex flex-col justify-between">
+            <ScrollReveal delay={0.2}>
+              <GlassCard className="p-8 space-y-6 h-full flex flex-col justify-between border-white/[0.04] bg-bg-surface/40">
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                    <Activity className="w-6 h-6 text-purple-400" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">Pillar 2 — Confidence Estimation</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <Activity className="w-8 h-8 text-status-warning" />
+                  <h3 className="text-heading-sm font-bold text-white">Pillar 2 — Confidence Estimation</h3>
+                  <p className="text-label-md text-slate-400 leading-relaxed">
                     Logit entropy analysis and epistemic uncertainty quantification to measure internal model confidence gaps.
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[11px] text-purple-300 flex items-center justify-center gap-2">
+                <div className="p-3 rounded-xl bg-white/[0.01] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-status-warning flex items-center justify-center gap-2">
                   prediction → entropy → confidence
                 </div>
               </GlassCard>
-            </FadeUp>
+            </ScrollReveal>
 
             {/* Pillar 3 */}
-            <FadeUp delay={0.3}>
-              <GlassCard className="p-8 space-y-5 h-full flex flex-col justify-between">
+            <ScrollReveal delay={0.3}>
+              <GlassCard className="p-8 space-y-6 h-full flex flex-col justify-between border-white/[0.04] bg-bg-surface/40">
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                    <GitBranch className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">Pillar 3 — Consistency Reasoning</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <GitBranch className="w-8 h-8 text-status-success" />
+                  <h3 className="text-heading-sm font-bold text-white">Pillar 3 — Consistency</h3>
+                  <p className="text-label-md text-slate-400 leading-relaxed">
                     Paraphrase-based self-consistency checks measuring semantic variance across multi-prompt generation runs.
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[11px] text-blue-300 flex items-center justify-center gap-2">
-                  prompt → multi-gen → semantic variance
+                <div className="p-3 rounded-xl bg-white/[0.01] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-status-success flex items-center justify-center gap-2">
+                  prompt → multi-gen → variance
                 </div>
               </GlassCard>
-            </FadeUp>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* ── Live Telemetry Section ────────────────────────────────────────── */}
-      <section id="statistics" className="py-20 px-6 relative z-10 border-t border-white/[0.06] bg-white/[0.01]">
+      <section id="statistics" className="py-24 px-6 relative z-10 border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Live System Telemetry</h2>
-            <p className="text-slate-400 text-sm">Real-time performance metrics from the deployed production backend.</p>
+            <h2 className="text-heading-lg text-white tracking-tight">Live System Telemetry</h2>
+            <p className="text-slate-400 text-label-md">Real-time performance metrics from the deployed production backend.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <GlassCard className="p-6 text-center space-y-1">
-              <span className="text-3xl font-bold font-mono text-blue-400">
-                {metrics ? formatNumber(metrics.requests) : "1.6K+"}
-              </span>
-              <p className="text-xs text-slate-500 uppercase tracking-wider">Total Requests</p>
-            </GlassCard>
+            <ScrollReveal delay={0.1}>
+              <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
+                <span className="text-heading-md font-bold font-mono text-blue-400">
+                  {metrics ? formatNumber(metrics.requests) : "1,600+"}
+                </span>
+                <p className="text-label-sm text-slate-500 font-mono">Total Requests</p>
+              </GlassCard>
+            </ScrollReveal>
 
-            <GlassCard className="p-6 text-center space-y-1">
-              <span className="text-3xl font-bold font-mono text-emerald-400">
-                {metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
-              </span>
-              <p className="text-xs text-slate-500 uppercase tracking-wider">Pass Rate</p>
-            </GlassCard>
+            <ScrollReveal delay={0.2}>
+              <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
+                <span className="text-heading-md font-bold font-mono text-status-success">
+                  {metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
+                </span>
+                <p className="text-label-sm text-slate-500 font-mono">Pass Rate</p>
+              </GlassCard>
+            </ScrollReveal>
 
-            <GlassCard className="p-6 text-center space-y-1">
-              <span className="text-3xl font-bold font-mono text-purple-400">
-                {metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
-              </span>
-              <p className="text-xs text-slate-500 uppercase tracking-wider">Avg Latency</p>
-            </GlassCard>
+            <ScrollReveal delay={0.3}>
+              <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
+                <span className="text-heading-md font-bold font-mono text-blue-400">
+                  {metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
+                </span>
+                <p className="text-label-sm text-slate-500 font-mono">Avg Latency</p>
+              </GlassCard>
+            </ScrollReveal>
 
-            <GlassCard className="p-6 text-center space-y-1">
-              <span className="text-3xl font-bold font-mono text-amber-400">8+</span>
-              <p className="text-xs text-slate-500 uppercase tracking-wider">LLM Architectures</p>
-            </GlassCard>
+            <ScrollReveal delay={0.4}>
+              <GlassCard className="p-6 text-center space-y-2 border-white/[0.04] bg-bg-surface/40 h-full">
+                <span className="text-heading-md font-bold font-mono text-status-warning">8+</span>
+                <p className="text-label-sm text-slate-500 font-mono">Active Models</p>
+              </GlassCard>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* ── Footer ────────────────────────────────────────────────────────── */}
-      <footer className="py-12 px-6 border-t border-white/[0.06] text-center text-xs text-slate-500 relative z-10">
+      <footer className="py-6 px-6 border-t border-white/[0.04] text-center text-label-md text-slate-500 relative z-10 bg-[#050816]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-blue-400" />
+            <ShieldCheck className="w-4 h-4 text-accent-primary" />
             <span className="font-bold text-white">HalluciSense</span>
             <span>— Scientific Hallucination Detection</span>
           </div>

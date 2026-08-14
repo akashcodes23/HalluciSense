@@ -104,6 +104,7 @@ export function useLatestDebug() {
     queryKey: ["debug", "latest"],
     queryFn: getLatestDebug,
     staleTime: 5000,
+    retry: false,
   });
 }
 
@@ -114,5 +115,6 @@ export function useDebugTrace(traceId: string | null) {
     queryKey: ["debug", traceId],
     queryFn: () => getDebugTrace(traceId!),
     enabled: !!traceId,
+    retry: false,
   });
 }

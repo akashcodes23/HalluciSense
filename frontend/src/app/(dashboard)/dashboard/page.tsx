@@ -17,14 +17,25 @@ import {
   ShieldX,
   ExternalLink,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { GlassCard } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { StatCard } from "@/components/ui/StatCard";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { useMetrics, useHealth, useReady } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
 import { formatLatency, formatNumber, getRiskColor, getRiskLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+const truncateText = (text: string, maxLen: number = 60) => {
+  if (text.length <= maxLen) return text;
+  const truncated = text.slice(0, maxLen);
+  const lastSpace = truncated.lastIndexOf(" ");
+  if (lastSpace > maxLen * 0.75) {
+    return truncated.slice(0, lastSpace) + "...";
+  }
+  return truncated + "...";
+};
 
 export default function DashboardPage() {
   const { data: metrics, isLoading: metricsLoading, refetch: refetchMetrics } = useMetrics();
@@ -40,23 +51,23 @@ export default function DashboardPage() {
   return (
     <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto">
       {/* ── Page Header ─────────────────────────────────────────────────── */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-semibold tracking-wide uppercase mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.04] bg-white/[0.02] text-slate-400 text-xs font-semibold tracking-wide uppercase mb-2 font-mono">
             <LayoutDashboard className="w-3.5 h-3.5" />
             System Telemetry Overview
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-            HalluciSense Operational Control Center
+          <h1 className="text-heading-md md:text-heading-lg font-bold text-white tracking-tight leading-none">
+            HalluciSense Control Center
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-label-md text-slate-500">
             Live execution statistics, framework component health, historical verification logs, and active risk distribution.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/[0.06] bg-[#0b1220]/60 text-xs">
-            <span className={cn("w-2 h-2 rounded-full", isHealthy ? "bg-emerald-500 animate-pulse" : "bg-red-500")} />
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/[0.04] bg-bg-surface text-xs font-mono">
+            <span className={cn("w-2 h-2 rounded-full", isHealthy ? "bg-status-success animate-pulse" : "bg-status-error")} />
             <span className="text-slate-400">
               Backend: {isHealthy ? "ONLINE" : "DISCONNECTED"}
             </span>
@@ -64,7 +75,7 @@ export default function DashboardPage() {
 
           <button
             onClick={() => refetchMetrics()}
-            className="p-2 rounded-xl border border-white/10 bg-white/[0.03] text-slate-400 hover:text-white transition-colors"
+            className="p-2 rounded-xl border border-white/5 bg-white/[0.01] text-slate-500 hover:text-white transition-colors cursor-pointer"
             title="Refresh Telemetry"
           >
             <RefreshCw className={`w-4 h-4 ${metricsLoading ? "animate-spin" : ""}`} />
@@ -74,119 +85,107 @@ export default function DashboardPage() {
 
       {/* ── Key Metrics Cards Row ───────────────────────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <GlassCard className="p-5 space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
-            <span>Total Requests</span>
-            <Activity className="w-4 h-4 text-blue-400" />
-          </div>
-          <div className="text-2xl md:text-3xl font-bold font-mono text-white">
-            {metrics ? formatNumber(metrics.requests) : "0"}
-          </div>
-          <p className="text-[11px] text-slate-500">Live API requests processed</p>
-        </GlassCard>
+        <StatCard
+          label="Total Requests"
+          value={formatNumber(Math.max(metrics?.requests ?? 0, history.length))}
+          caption={metrics && metrics.requests > 0 ? "Server-side total" : history.length > 0 ? "From local session history" : "No requests recorded"}
+          icon={Activity}
+          status="default"
+        />
 
-        <GlassCard className="p-5 space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
-            <span>Success Rate</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-          </div>
-          <div className="text-2xl md:text-3xl font-bold font-mono text-emerald-400">
-            {metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
-          </div>
-          <p className="text-[11px] text-slate-500">Execution success ratio</p>
-        </GlassCard>
+        <StatCard
+          label="Success Rate"
+          value={metrics && metrics.requests > 0 ? `${metrics.success_rate.toFixed(1)}%` : "100.0%"}
+          caption="Execution success ratio"
+          icon={CheckCircle2}
+          status={metrics && metrics.success_rate < 95 ? "warning" : "success"}
+        />
 
-        <GlassCard className="p-5 space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
-            <span>Avg Pipeline Latency</span>
-            <Clock className="w-4 h-4 text-purple-400" />
-          </div>
-          <div className="text-2xl md:text-3xl font-bold font-mono text-purple-400">
-            {metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : "< 250ms"}
-          </div>
-          <p className="text-[11px] text-slate-500">End-to-end verification time</p>
-        </GlassCard>
+        <StatCard
+          label="Avg Pipeline Latency"
+          value={metrics && metrics.requests > 0 ? formatLatency(metrics.average_latency_ms) : formatLatency(0)}
+          caption="End-to-end verification time"
+          icon={Clock}
+          status="default"
+        />
 
-        <GlassCard className="p-5 space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-500 font-mono">
-            <span>Active Models</span>
-            <Cpu className="w-4 h-4 text-amber-400" />
-          </div>
-          <div className="text-2xl md:text-3xl font-bold font-mono text-amber-400">
-            {metrics?.active_models ?? 8}
-          </div>
-          <p className="text-[11px] text-slate-500">Supported LLM architectures</p>
-        </GlassCard>
+        <StatCard
+          label="Session Traces"
+          value={formatNumber(history.length)}
+          caption="Local verification executions"
+          icon={GitBranch}
+          status="default"
+        />
       </div>
 
       {/* ── System Health & Component Status Grid ────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <GlassCard className="p-6 md:col-span-2 space-y-4">
+        <Card className="p-6 md:col-span-2 space-y-4">
           <h2 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-blue-400" />
+            <Cpu className="w-4 h-4 text-slate-400" />
             Framework Pipeline Component Status
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <ComponentStatusCard
+          <div className="divide-y divide-white/[0.04] space-y-1">
+            <ComponentStatusRow
               name="BM25 + Dense Retriever"
               status={componentsReady.retriever ?? true}
               description="Hybrid evidence grounding index"
             />
-            <ComponentStatusCard
+            <ComponentStatusRow
               name="NLI Cross-Encoder"
               status={componentsReady.nli_model ?? true}
               description="Factual claim entailment model"
             />
-            <ComponentStatusCard
+            <ComponentStatusRow
               name="Logit Entropy Engine"
               status={componentsReady.cross_encoder ?? true}
               description="Whitebox uncertainty estimation"
             />
-            <ComponentStatusCard
+            <ComponentStatusRow
               name="Adaptive Fusion Engine"
               status={componentsReady.fusion_engine ?? true}
               description="Platt-calibrated H-Score fusion"
             />
           </div>
-        </GlassCard>
+        </Card>
 
         {/* Live Backend Telemetry Meta */}
-        <GlassCard className="p-6 space-y-4">
+        <Card className="p-6 space-y-4">
           <h2 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
-            <Database className="w-4 h-4 text-indigo-400" />
+            <Database className="w-4 h-4 text-slate-400" />
             System Environment
           </h2>
 
           <div className="space-y-3 text-xs font-mono">
-            <div className="flex justify-between py-1.5 border-b border-white/5">
+            <div className="flex justify-between py-1.5 border-b border-white/[0.04]">
               <span className="text-slate-500">API Endpoint</span>
               <span className="text-slate-300 truncate max-w-[140px]">Production</span>
             </div>
-            <div className="flex justify-between py-1.5 border-b border-white/5">
+            <div className="flex justify-between py-1.5 border-b border-white/[0.04]">
               <span className="text-slate-500">Framework Version</span>
-              <span className="text-blue-400">v1.0 Production</span>
+              <span className="text-accent-primary font-semibold">v1.0 Production</span>
             </div>
-            <div className="flex justify-between py-1.5 border-b border-white/5">
+            <div className="flex justify-between py-1.5 border-b border-white/[0.04]">
               <span className="text-slate-500">Epistemic Gate</span>
-              <span className="text-emerald-400">Enabled</span>
+              <span className="text-status-success font-semibold">Enabled</span>
             </div>
             <div className="flex justify-between py-1.5">
               <span className="text-slate-500">Fusion Weights</span>
               <span className="text-slate-300">α=0.45, β=0.30, γ=0.25</span>
             </div>
           </div>
-        </GlassCard>
+        </Card>
       </div>
 
       {/* ── Recent Verifications Table ───────────────────────────────────── */}
-      <GlassCard className="p-6 space-y-4">
+      <Card className="p-6 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
-            <GitBranch className="w-4 h-4 text-purple-400" />
+            <GitBranch className="w-4 h-4 text-slate-400" />
             Recent Verification Executions
           </h2>
-          <Link href="/traces" className="text-xs text-blue-400 hover:underline flex items-center gap-1">
+          <Link href="/traces" className="text-xs text-accent-primary hover:underline flex items-center gap-1">
             View All Traces <ExternalLink className="w-3 h-3" />
           </Link>
         </div>
@@ -194,7 +193,7 @@ export default function DashboardPage() {
         {history.length === 0 ? (
           <div className="text-center py-12 border border-dashed border-white/10 rounded-xl text-slate-500 text-xs">
             No local verification history recorded yet. Run a verification on the{" "}
-            <Link href="/verify" className="text-blue-400 underline">
+            <Link href="/verify" className="text-accent-primary underline">
               Verify Page
             </Link>{" "}
             to populate live telemetry logs.
@@ -225,23 +224,29 @@ export default function DashboardPage() {
                             setSelectedTraceId(item.id);
                             router.push("/traces");
                           }}
-                          className="text-blue-400 hover:text-blue-300 hover:underline cursor-pointer text-left font-mono"
+                          className="text-accent-primary hover:underline cursor-pointer text-left font-mono"
                         >
                           {item.id.slice(0, 12)}
                         </button>
                       </td>
                       <td className="py-3 text-slate-500">{new Date(item.timestamp).toLocaleTimeString()}</td>
-                      <td className="py-3 font-sans truncate max-w-xs">{item.response}</td>
-                      <td className="py-3 font-bold" style={{ color: getRiskColor(riskLevel) }}>
+                      <td className="py-3 font-sans truncate max-w-xs" title={item.response}>
+                        {truncateText(item.response)}
+                      </td>
+                      <td className="py-3 font-bold font-mono" style={{ color: getRiskColor(riskLevel) }}>
                         {(hScore * 100).toFixed(1)}%
                       </td>
                       <td className="py-3">
-                        <Badge
-                          variant={riskLevel === "VERIFIED" ? "verified" : "warning"}
-                          className="text-[10px]"
-                        >
-                          {getRiskLabel(riskLevel)}
-                        </Badge>
+                        <StatusBadge
+                          label={getRiskLabel(riskLevel)}
+                          status={
+                            riskLevel === "VERIFIED"
+                              ? "success"
+                              : riskLevel === "LIKELY_HALLUCINATED"
+                              ? "error"
+                              : "warning"
+                          }
+                        />
                       </td>
                       <td className="py-3 text-right text-slate-400">{formatLatency(latency)}</td>
                     </tr>
@@ -251,12 +256,12 @@ export default function DashboardPage() {
             </table>
           </div>
         )}
-      </GlassCard>
+      </Card>
     </div>
   );
 }
 
-function ComponentStatusCard({
+function ComponentStatusRow({
   name,
   status,
   description,
@@ -266,14 +271,16 @@ function ComponentStatusCard({
   description: string;
 }) {
   return (
-    <div className="p-3.5 rounded-xl border border-white/[0.06] bg-black/20 flex items-start justify-between gap-3">
+    <div className="flex items-center justify-between py-3 gap-3">
       <div className="space-y-0.5 min-w-0">
         <span className="text-xs font-semibold text-slate-200 block truncate">{name}</span>
         <span className="text-[11px] text-slate-500 block truncate">{description}</span>
       </div>
-      <Badge variant={status ? "verified" : "danger"} className="shrink-0 text-[10px]">
-        {status ? "READY" : "OFFLINE"}
-      </Badge>
+      <StatusBadge
+        label={status ? "READY" : "OFFLINE"}
+        status={status ? "success" : "error"}
+        className="shrink-0"
+      />
     </div>
   );
 }

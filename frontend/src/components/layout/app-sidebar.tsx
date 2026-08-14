@@ -46,7 +46,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
     >
       {/* ── Brand ──────────────────────────────────────────────────────── */}
       <div className="flex items-center gap-3 px-4 h-16 shrink-0 border-b border-white/[0.06]">
-        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400">
+        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-accent-primary/15 border border-accent-primary/30 text-accent-primary">
           <ShieldCheck className="w-5 h-5" />
         </div>
         <AnimatePresence>
@@ -77,19 +77,19 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
                 className={cn(
                   "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 cursor-pointer",
                   isActive
-                    ? "bg-blue-600/10 text-blue-400 font-semibold"
+                    ? "bg-accent-primary/10 text-accent-primary font-semibold"
                     : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200 font-normal"
                 )}
               >
                 {isActive && (
                   <motion.div
                     layoutId="sidebar-active"
-                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-full bg-blue-500"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-full bg-accent-primary"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
 
-                <Icon className={cn("w-[18px] h-[18px] shrink-0", isActive ? "text-blue-400" : "text-slate-400")} />
+                <Icon className={cn("w-[18px] h-[18px] shrink-0", isActive ? "text-accent-primary" : "text-slate-400")} />
 
                 <AnimatePresence>
                   {isOpen && (

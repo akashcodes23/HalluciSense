@@ -90,7 +90,7 @@ export function PipelineAnimation({ isActive }: PipelineAnimationProps) {
                 "flex items-center justify-center w-8 h-8 rounded-lg shrink-0",
                 isCompleted && "bg-emerald-500/20 text-emerald-400",
                 isActive && "bg-blue-500/20 text-blue-400",
-                isPending && "bg-white/[0.04] text-slate-600"
+                isPending && "bg-white/[0.04] text-slate-400"
               )}>
                 {isCompleted ? (
                   <CheckCircle2 className="w-4 h-4" />
@@ -107,11 +107,13 @@ export function PipelineAnimation({ isActive }: PipelineAnimationProps) {
                   "text-sm font-medium",
                   isCompleted && "text-emerald-400",
                   isActive && "text-blue-400",
-                  isPending && "text-slate-600"
+                  isPending && "text-slate-300"
                 )}>
                   {stage.label}
                 </p>
-                <p className="text-xs text-slate-600 truncate">{stage.sublabel}</p>
+                <p className={cn("text-xs truncate", isPending ? "text-slate-400/80" : "text-slate-500")}>
+                  {stage.sublabel}
+                </p>
               </div>
 
               {/* Progress bar for active stage */}

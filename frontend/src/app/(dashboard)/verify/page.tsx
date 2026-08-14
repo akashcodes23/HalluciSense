@@ -4,29 +4,18 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShieldCheck,
-  ShieldAlert,
-  ShieldX,
-  Zap,
   Loader2,
   RotateCcw,
-  Sparkles,
   ChevronDown,
   ChevronUp,
-  FileText,
   Clock,
-  Database,
-  Cpu,
-  CheckCircle2,
-  AlertTriangle,
-  Info,
   ExternalLink,
-  Layers,
-  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { GlassCard } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { StatusBadge } from "@/components/ui/StatusBadge";
+import { InlineError } from "@/components/ui/InlineError";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useAnalysis, useExplain } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
@@ -60,7 +49,6 @@ export default function VerifyPage() {
   const [contextEvidence, setContextEvidence] = useState("");
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [validationError, setValidationError] = useState<{ message: string; details?: unknown } | null>(null);
-  const [showErrorDetails, setShowErrorDetails] = useState(false);
 
   const analysis = useAnalysis();
   const explain = useExplain();
@@ -80,7 +68,6 @@ export default function VerifyPage() {
 
     reset();
     setValidationError(null);
-    setShowErrorDetails(false);
 
     const providedEvidence: EvidenceItem[] = contextEvidence.trim()
       ? [
@@ -93,12 +80,49 @@ export default function VerifyPage() {
         ]
       : [];
 
+    let modelToSend = "gpt-4o";
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("hallucisense_default_model");
+      if (saved) {
+        modelToSend = saved;
+      }
+    }
+
+    const VALID_FRONTEND_MODELS = [
+      "claude",
+      "claude-3-5-sonnet",
+      "deepseek",
+      "default",
+      "gemini",
+      "gpt-3.5-turbo",
+      "gpt-4",
+      "gpt-4.1",
+      "gpt-4o",
+      "llama-3",
+      "llama-3-70b",
+      "mistral",
+      "phi",
+      "qwen"
+    ];
+
+    const normalizedModel = modelToSend.trim().toLowerCase();
+    const isValid = VALID_FRONTEND_MODELS.includes(normalizedModel) ||
+                    ["gpt", "gemini", "claude", "llama", "qwen", "mistral"].some(m => normalizedModel.includes(m));
+
+    if (!isValid) {
+      setValidationError({
+        message: `Validation Error: Invalid or unsupported model name "${modelToSend}". Supported options include: ${VALID_FRONTEND_MODELS.join(", ")}.`
+      });
+      toast.error(`Invalid model "${modelToSend}" selected in settings.`);
+      return;
+    }
+
     const payload = {
       text: textToVerify,
       response: textToVerify,
       query: query.trim(),
       provided_evidence: providedEvidence,
-      model_name: "production",
+      model_name: modelToSend,
     };
 
     try {
@@ -124,7 +148,6 @@ export default function VerifyPage() {
     setResponse("");
     setContextEvidence("");
     setValidationError(null);
-    setShowErrorDetails(false);
     reset();
   };
 
@@ -133,7 +156,6 @@ export default function VerifyPage() {
     setResponse(preset.response);
     setContextEvidence("");
     setValidationError(null);
-    setShowErrorDetails(false);
     reset();
   };
 
@@ -145,27 +167,27 @@ export default function VerifyPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] pb-6"
+          className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6"
         >
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <ShieldCheck className="w-6 h-6 text-blue-400" />
-              <h1 className="text-2xl font-bold text-white tracking-tight">Verification Workspace</h1>
+              <ShieldCheck className="w-6 h-6 text-slate-400" />
+              <h1 className="text-heading-md font-bold text-white tracking-tight">Verification Workspace</h1>
             </div>
-            <p className="text-sm text-slate-400 max-w-xl">
+            <p className="text-label-md text-slate-400 max-w-xl">
               Determine whether an AI-generated response is factual, temporally consistent, and grounded using confidence-aware hybrid verification.
             </p>
           </div>
 
           {/* Quick Preset Buttons */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-slate-500 font-medium mr-1">Presets:</span>
+            <span className="text-label-sm text-slate-500 font-medium mr-1 font-mono">Presets:</span>
             {SAMPLE_PRESETS.map((p, idx) => (
               <button
                 key={idx}
                 onClick={() => applyPreset(p)}
                 disabled={isLoading}
-                className="px-2.5 py-1 text-xs rounded-lg border border-white/[0.08] bg-white/[0.03] text-slate-300 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer disabled:opacity-50"
+                className="px-2.5 py-1 text-[11px] rounded-lg border border-white/[0.04] bg-white/[0.01] text-slate-300 hover:text-white hover:bg-white/[0.04] transition-colors cursor-pointer disabled:opacity-50 font-mono"
               >
                 {p.label}
               </button>
@@ -183,10 +205,10 @@ export default function VerifyPage() {
           {/* Response Textarea */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label htmlFor="verify-response" className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                LLM Response to Verify <span className="text-rose-400">*</span>
+              <label htmlFor="verify-response" className="text-label-sm text-slate-400 font-sans">
+                LLM Response to Verify <span className="text-status-error">*</span>
               </label>
-              <span className="text-xs text-slate-500 font-mono">
+              <span className="text-label-sm text-slate-500 font-mono">
                 {response.length} chars • {response.trim() ? response.trim().split(/\s+/).length : 0} words
               </span>
             </div>
@@ -195,7 +217,7 @@ export default function VerifyPage() {
               value={response}
               onChange={(e) => setResponse(e.target.value)}
               placeholder="Paste the AI-generated text or claim to evaluate..."
-              className="min-h-[140px] text-base leading-relaxed bg-[#0b1220] border-white/[0.08] focus:border-blue-500/50"
+              className="min-h-[140px] text-sm leading-relaxed bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
               disabled={isLoading}
             />
           </div>
@@ -204,7 +226,7 @@ export default function VerifyPage() {
           <div className="flex items-center justify-between pt-1">
             <button
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors cursor-pointer font-mono"
             >
               {showAdvanced ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               {showAdvanced ? "Hide Optional Query & Context" : "Add Optional User Query & Reference Context"}
@@ -219,10 +241,10 @@ export default function VerifyPage() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                className="space-y-4 pt-2 border-t border-white/[0.06]"
+                className="space-y-4 pt-2 border-t border-white/[0.04]"
               >
                 <div className="space-y-2">
-                  <label htmlFor="verify-query" className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <label htmlFor="verify-query" className="text-label-sm text-slate-400 font-sans">
                     Original Prompt / Question (Optional)
                   </label>
                   <Textarea
@@ -230,13 +252,13 @@ export default function VerifyPage() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="e.g. When was James Webb Space Telescope launched?"
-                    className="min-h-[70px] bg-[#0b1220] border-white/[0.08]"
+                    className="min-h-[70px] text-sm bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
                     disabled={isLoading}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="verify-context" className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <label htmlFor="verify-context" className="text-label-sm text-slate-400 font-sans">
                     Reference Evidence / Context Excerpt (Optional)
                   </label>
                   <Textarea
@@ -244,7 +266,7 @@ export default function VerifyPage() {
                     value={contextEvidence}
                     onChange={(e) => setContextEvidence(e.target.value)}
                     placeholder="Paste reference text or ground-truth document against which to verify..."
-                    className="min-h-[90px] bg-[#0b1220] border-white/[0.08]"
+                    className="min-h-[90px] text-sm bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
                     disabled={isLoading}
                   />
                 </div>
@@ -254,34 +276,12 @@ export default function VerifyPage() {
 
           {/* Contextual Inline Error Feedback */}
           {validationError && (
-            <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 text-slate-300 space-y-2 mt-2 text-sm">
-              <div className="flex items-center gap-2 text-red-400 font-semibold">
-                <AlertTriangle className="w-4.5 h-4.5" />
-                <span>Verification Failed</span>
-              </div>
-              <p className="text-slate-300">
-                {validationError.message.includes("422") || validationError.message.includes("schema")
-                  ? "The request payload did not match the expected schema. Please check your query or response length."
-                  : validationError.message}
-              </p>
-              {!!validationError.details && (
-                <div className="pt-2 border-t border-white/5">
-                  <button
-                    type="button"
-                    onClick={() => setShowErrorDetails(!showErrorDetails)}
-                    className="text-xs text-slate-400 hover:text-white underline cursor-pointer flex items-center gap-1"
-                  >
-                    {showErrorDetails ? "Hide technical details" : "Show technical details"}
-                    <ChevronDown className={`w-3 h-3 transition-transform ${showErrorDetails ? "rotate-180" : ""}`} />
-                  </button>
-                  {showErrorDetails && (
-                    <pre className="mt-2 p-3 rounded-lg bg-black/40 text-xs font-mono text-red-300/80 overflow-x-auto leading-relaxed select-text">
-                      {JSON.stringify(validationError.details, null, 2)}
-                    </pre>
-                  )}
-                </div>
-              )}
-            </div>
+            <InlineError
+              message={validationError.message}
+              details={validationError.details}
+              onClear={() => setValidationError(null)}
+              className="mt-2"
+            />
           )}
 
           {/* Action Row */}
@@ -355,7 +355,7 @@ export default function VerifyPage() {
               className="space-y-6"
             >
               {/* 1. Primary Verdict Header */}
-              <GlassCard className="p-6 md:p-8 relative overflow-hidden border-white/[0.08]">
+              <Card className="p-6 md:p-8 relative overflow-hidden border-white/[0.04]">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                   {/* Gauge */}
                   <div className="flex items-center gap-6">
@@ -371,12 +371,12 @@ export default function VerifyPage() {
                         )}
                       </div>
 
-                      <h2 className="text-2xl font-bold text-white tracking-tight">
+                      <h2 className="text-heading-md font-bold text-white tracking-tight">
                         Verdict: {getRiskLabel(currentResult.risk_level)}
                       </h2>
-                      <p className="text-sm text-slate-400 mt-1 max-w-md">
+                      <p className="text-label-md text-slate-400 mt-1 max-w-md">
                         Overall Hallucination Index (H-Score):{" "}
-                        <span className="font-mono font-semibold text-white">
+                        <span className="font-mono font-semibold" style={{ color: getRiskColor(currentResult.risk_level) }}>
                           {(currentResult.overall_h_score * 100).toFixed(1)}%
                         </span>
                         {" • "}
@@ -386,17 +386,17 @@ export default function VerifyPage() {
                   </div>
 
                   {/* Summary Meta Pills */}
-                  <div className="flex flex-wrap md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-white/[0.06] pt-4 md:pt-0 md:pl-6">
+                  <div className="flex flex-wrap md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-white/[0.04] pt-4 md:pt-0 md:pl-6">
                     <MetaPill label="Pillar 1 Factual Error" value={`${((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%`} />
                     <MetaPill label="Pillar 2 Confidence Gap" value={currentResult.pillar_scores?.pillar2_confidence_gap != null ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "N/A (Protected)"} />
                     <MetaPill label="Pillar 3 Consistency" value={currentResult.pillar_scores?.pillar3_consistency_failure != null ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "N/A"} />
                   </div>
                 </div>
-              </GlassCard>
+              </Card>
 
               {/* 2. Progressive Disclosure Tab View */}
               <Tabs defaultValue="claims" className="space-y-6">
-                <TabsList className="bg-[#0b1220] border border-white/[0.08] p-1 rounded-xl">
+                <TabsList className="bg-bg-surface border border-white/[0.04] p-1 rounded-xl">
                   <TabsTrigger value="claims" className="cursor-pointer">Claim Breakdown ({currentResult.sentence_scores?.length || 0})</TabsTrigger>
                   <TabsTrigger value="evidence" className="cursor-pointer">Evidence Citations ({currentResult.evidence?.length || 0})</TabsTrigger>
                   <TabsTrigger value="technical" className="cursor-pointer">Technical Traces</TabsTrigger>
@@ -517,29 +517,16 @@ function ProgressStep({ label, active }: { label: string; active?: boolean }) {
 }
 
 function RiskBadge({ level }: { level: string }) {
-  const color = getRiskColor(level);
   const label = getRiskLabel(level);
-
-  return (
-    <span
-      className="px-2.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase flex items-center gap-1.5 w-fit border"
-      style={{
-        backgroundColor: `${color}15`,
-        borderColor: `${color}40`,
-        color: color,
-      }}
-    >
-      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
-      {label}
-    </span>
-  );
+  const status = level === "VERIFIED" ? "success" : level === "LIKELY_HALLUCINATED" ? "error" : "warning";
+  return <StatusBadge label={label} status={status} />;
 }
 
 function MetaPill({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 text-xs">
-      <span className="text-slate-400">{label}:</span>
-      <span className="font-mono font-semibold text-slate-200">{value}</span>
+    <div className="flex items-center justify-between gap-4 text-xs font-mono">
+      <span className="text-slate-500">{label}:</span>
+      <span className="font-semibold text-slate-200">{value}</span>
     </div>
   );
 }
@@ -551,10 +538,10 @@ function ClaimCard({ sentence, index }: { sentence: SentenceScore; index: number
   const isProtected = sentence.epistemic_category && sentence.epistemic_category !== "ASSERTED_FACT";
 
   return (
-    <div className="rounded-xl border border-white/[0.06] bg-[#0b1220] overflow-hidden transition-colors">
+    <Card className="overflow-hidden transition-colors">
       <div
         onClick={() => setOpen(!open)}
-        className="p-4 flex items-start gap-4 cursor-pointer hover:bg-white/[0.02] transition-colors"
+        className="p-4 flex items-start gap-4 cursor-pointer hover:bg-white/[0.01] transition-colors"
       >
         <span className="text-xs font-mono text-slate-500 mt-0.5 shrink-0">#{String(index + 1).padStart(2, "0")}</span>
         <div className="flex-1 min-w-0">
@@ -563,12 +550,10 @@ function ClaimCard({ sentence, index }: { sentence: SentenceScore; index: number
             <RiskBadge level={sentence.risk_level} />
 
             {sentence.epistemic_category && (
-              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold border ${
-                isProtected ? "border-indigo-500/40 bg-indigo-500/10 text-indigo-300" : "border-white/[0.08] text-slate-400"
-              }`}>
-                {sentence.epistemic_category}
-                {isProtected && " (Protected Gate)"}
-              </span>
+              <StatusBadge
+                label={sentence.epistemic_category + (isProtected ? " (Protected Gate)" : "")}
+                status={isProtected ? "info" : "default"}
+              />
             )}
 
             {sentence.temporal_anchor?.asserted_year && (
@@ -617,6 +602,6 @@ function ClaimCard({ sentence, index }: { sentence: SentenceScore; index: number
           )}
         </div>
       )}
-    </div>
+    </Card>
   );
 }

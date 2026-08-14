@@ -3,20 +3,28 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/* ── Base Card ─────────────────────────────────────────────────────────────── */
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'active';
+  status?: 'success' | 'warning' | 'error' | null;
+}
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-all duration-300",
-        "hover:border-white/[0.12] hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)]",
-        className
-      )}
-      {...props}
-    />
-  )
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = 'default', status = null, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "rounded-2xl border border-white/[0.04] bg-bg-surface text-slate-100 transition-all duration-300 relative overflow-hidden",
+          variant === 'active' && "border-accent-primary/40 shadow-[0_0_20px_rgba(168,85,247,0.1)]",
+          status === 'success' && "border-l-4 border-l-status-success",
+          status === 'warning' && "border-l-4 border-l-status-warning",
+          status === 'error' && "border-l-4 border-l-status-error",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
 );
 Card.displayName = "Card";
 
@@ -31,7 +39,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTML
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn("text-lg font-semibold tracking-tight text-slate-100", className)}
+      className={cn("text-heading-sm font-semibold tracking-tight text-slate-100", className)}
       {...props}
     />
   )
@@ -40,7 +48,7 @@ CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-slate-400", className)} {...props} />
+    <p ref={ref} className={cn("text-label-md text-slate-400", className)} {...props} />
   )
 );
 CardDescription.displayName = "CardDescription";
@@ -59,18 +67,17 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 );
 CardFooter.displayName = "CardFooter";
 
-/* ── Glass Card ────────────────────────────────────────────────────────────── */
-
-const GlassCard = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+// Keep GlassCard matching base Card style but with backdrop-blur
+const GlassCard = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = 'default', status = null, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
-        "rounded-2xl border border-white/[0.08]",
-        "bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150",
-        "transition-all duration-300",
-        "hover:border-white/[0.14] hover:bg-white/[0.05]",
-        "hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]",
+        "rounded-2xl border border-white/[0.04] bg-bg-surface/85 backdrop-blur-xl transition-all duration-300 relative overflow-hidden",
+        variant === 'active' && "border-accent-primary/40 shadow-[0_0_20px_rgba(168,85,247,0.1)]",
+        status === 'success' && "border-l-4 border-l-status-success",
+        status === 'warning' && "border-l-4 border-l-status-warning",
+        status === 'error' && "border-l-4 border-l-status-error",
         className
       )}
       {...props}

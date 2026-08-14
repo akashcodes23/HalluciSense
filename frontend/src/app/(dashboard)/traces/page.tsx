@@ -14,12 +14,11 @@ import {
   Loader2,
   ListFilter,
   FileText,
-  Server,
-  Database,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { GlassCard } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Input } from "@/components/ui/input";
 import { useLatestTrace, useDebugTrace } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
@@ -38,16 +37,23 @@ export default function TracesPage() {
   // Sync selected trace from store
   useEffect(() => {
     if (selectedTraceId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTraceIdInput(selectedTraceId);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchId(selectedTraceId);
-      setSelectedTraceId(null); // Clear selected trace to avoid loop // eslint-disable-line
+      setSelectedTraceId(null); // Clear selected trace to avoid loop
     }
   }, [selectedTraceId, setSelectedTraceId]);
 
   const { data: latestTrace, isLoading: latestLoading, refetch } = useLatestTrace();
   const { data: searchedTrace, isLoading: searchLoading } = useDebugTrace(searchId);
 
-  const isLoading = latestLoading || searchLoading;
+  // Context-dependent loading: when searching, only care about searchLoading
+  // (and skip it entirely if we already have a local fallback ready).
+  // When not searching, only care about latestLoading.
+  const isLoading = searchId
+    ? searchLoading && !history.find((h) => h.id === searchId || h.result.trace_id === searchId)
+    : latestLoading && history.length === 0;
 
   // Local helper to convert history entry to TraceData structure
   const transformHistoryEntry = (entry: AnalysisHistoryEntry): TraceData => {
@@ -160,14 +166,12 @@ export default function TracesPage() {
     <div className="flex-1 overflow-y-auto">
       <div className="max-w-6xl mx-auto px-6 py-8 space-y-8">
         {/* ── Header ─────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between border-b border-white/[0.06] pb-6">
+        <div className="flex items-center justify-between border-b border-white/[0.04] pb-6">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 shadow-[0_0_24px_rgba(168,85,247,0.25)]">
-              <GitBranch className="w-5 h-5 text-white" />
-            </div>
+            <GitBranch className="w-6 h-6 text-accent-primary shrink-0" />
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">Pipeline Traces</h1>
-              <p className="text-sm text-slate-500">Execution timeline & diagnostic logs</p>
+              <h1 className="text-heading-md font-bold text-white tracking-tight leading-none">Pipeline Traces</h1>
+              <p className="text-label-md text-slate-500">Execution timeline & diagnostic logs</p>
             </div>
           </div>
 
@@ -175,7 +179,7 @@ export default function TracesPage() {
             variant="secondary"
             size="sm"
             onClick={() => refetch()}
-            className="flex items-center gap-1.5 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 border border-white/5 bg-white/[0.01] hover:bg-white/[0.04] hover:text-white transition-all cursor-pointer font-mono text-xs"
           >
             <RefreshCw className={cn("w-3.5 h-3.5", isLoading && "animate-spin")} />
             Refresh Server
@@ -190,14 +194,14 @@ export default function TracesPage() {
               value={traceIdInput}
               onChange={(e) => setTraceIdInput(e.target.value)}
               placeholder="Search by trace ID (e.g. TRACE_88CFA3E9)"
-              className="pl-10 bg-slate-950/40 border-white/10 text-white rounded-xl focus-visible:ring-indigo-500"
+              className="pl-10 bg-bg-surface border-white/[0.04] text-white rounded-xl focus:border-accent-primary/40 focus:ring-accent-primary/10 font-mono text-sm"
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
           </div>
           <Button
             onClick={handleSearch}
             disabled={!traceIdInput.trim() || isLoading}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl px-5 cursor-pointer disabled:opacity-50"
+            className="bg-accent-primary hover:bg-accent-primary/90 text-white rounded-xl px-5 cursor-pointer disabled:opacity-50 font-mono text-xs shadow-[0_0_24px_rgba(168,85,247,0.2)]"
           >
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Search"}
           </Button>
@@ -207,14 +211,14 @@ export default function TracesPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Left Sidebar: Local Traces List */}
           <div className="md:col-span-1 space-y-4">
-            <GlassCard className="p-4 border-white/[0.08] bg-[#070b13]/60 rounded-xl space-y-3">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-white/5 pb-2">
-                <ListFilter className="w-3.5 h-3.5 text-indigo-400" />
-                <span>Session History ({history.length})</span>
+            <Card className="p-4 rounded-xl space-y-3">
+              <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-white/[0.04] pb-2 font-mono">
+                <ListFilter className="w-3.5 h-3.5 text-slate-400" />
+                <span>Session ({history.length})</span>
               </div>
 
               {history.length === 0 ? (
-                <div className="text-center py-6 text-slate-600 text-xs leading-relaxed">
+                <div className="text-center py-6 text-slate-400 text-xs leading-relaxed">
                   No local traces recorded in this browser session.
                 </div>
               ) : (
@@ -231,7 +235,7 @@ export default function TracesPage() {
                         className={cn(
                           "w-full text-left p-3 rounded-lg border text-xs font-mono transition-all duration-200 cursor-pointer block",
                           isActive
-                            ? "bg-indigo-500/10 border-indigo-500/30 text-white shadow-sm"
+                            ? "bg-accent-primary/10 border-accent-primary/30 text-white shadow-sm"
                             : "bg-white/[0.01] border-white/5 text-slate-400 hover:bg-white/[0.03] hover:border-white/10"
                         )}
                       >
@@ -255,61 +259,55 @@ export default function TracesPage() {
                   })}
                 </div>
               )}
-            </GlassCard>
+            </Card>
           </div>
 
           {/* Right Column: Active Trace details */}
           <div className="md:col-span-3 space-y-6">
             {isLoading ? (
-              <div className="flex items-center justify-center py-24 bg-[#070b13]/40 border border-white/5 rounded-2xl">
+              <div className="flex items-center justify-center py-24 bg-bg-surface border border-white/[0.04] rounded-2xl">
                 <div className="text-center space-y-3">
-                  <Loader2 className="w-8 h-8 text-indigo-400 animate-spin mx-auto" />
+                  <Loader2 className="w-8 h-8 text-accent-primary animate-spin mx-auto" />
                   <p className="text-xs text-slate-500">Retrieving diagnostic timeline data...</p>
                 </div>
               </div>
             ) : displayTrace ? (
               <motion.div
+                key={displayTrace.trace_id}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="space-y-6"
               >
                 {/* Trace Summary Card */}
-                <GlassCard className="p-6 border-white/[0.08] bg-[#070b13]/80 rounded-2xl">
+                <Card className="p-6 rounded-2xl">
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[10px] bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded font-mono font-semibold uppercase tracking-wider">
+                        <span className="text-[10px] bg-white/[0.02] border border-white/[0.04] text-slate-400 px-2 py-0.5 rounded font-mono font-semibold uppercase tracking-wider">
                           Trace Log
                         </span>
                         <span className="text-xs font-mono text-slate-500">{displayTrace.trace_id}</span>
                         {isLocalCache ? (
-                          <Badge variant="warning" className="text-[9px] py-0 px-1.5 flex items-center gap-1 font-mono font-semibold">
-                            <Database className="w-2.5 h-2.5" />
-                            from cache
-                          </Badge>
+                          <StatusBadge label="from cache" status="warning" className="font-mono text-[9px] py-0 px-1.5" />
                         ) : (
-                          <Badge variant="verified" className="text-[9px] py-0 px-1.5 flex items-center gap-1 font-mono font-semibold">
-                            <Server className="w-2.5 h-2.5" />
-                            from server
-                          </Badge>
+                          <StatusBadge label="from server" status="success" className="font-mono text-[9px] py-0 px-1.5" />
                         )}
                       </div>
                       <div className="flex items-center gap-3">
-                        <h2 className="text-2xl font-bold text-white tracking-tight font-sans">
+                        <h2 className="text-heading-md font-bold text-white tracking-tight font-sans leading-none">
                           H-Score: {displayTrace.summary ? (displayTrace.summary.final_h_score * 100).toFixed(1) : "0.0"}%
                         </h2>
-                        <Badge
-                          variant={
+                        <StatusBadge
+                          label={getRiskLabel(displayTrace.summary?.risk_level || "VERIFIED")}
+                          status={
                             displayTrace.summary?.risk_level === "VERIFIED"
-                              ? "verified"
+                              ? "success"
                               : displayTrace.summary?.risk_level === "LIKELY_HALLUCINATED"
-                              ? "danger"
+                              ? "error"
                               : "warning"
                           }
                           className="px-2.5 py-0.5 rounded-lg text-xs"
-                        >
-                          {getRiskLabel(displayTrace.summary?.risk_level || "VERIFIED")}
-                        </Badge>
+                        />
                       </div>
                     </div>
                     <div className="text-right text-xs text-slate-500 space-y-1 font-mono">
@@ -318,7 +316,7 @@ export default function TracesPage() {
                       <p className="text-slate-400">Verdict: {displayTrace.summary?.root_cause_classification || "VERIFIED"}</p>
                     </div>
                   </div>
-                </GlassCard>
+                </Card>
 
                 {/* Pipeline Timeline */}
                 <div className="space-y-4">
@@ -338,21 +336,13 @@ export default function TracesPage() {
               </motion.div>
             ) : (
               /* Designed Empty State */
-              <div className="flex flex-col items-center justify-center py-20 text-center bg-[#070b13]/40 border border-dashed border-white/10 rounded-2xl p-6">
-                <div className="w-14 h-14 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center mb-4">
-                  <FileText className="w-6 h-6 text-slate-500" />
-                </div>
-                <h3 className="text-sm font-semibold text-slate-300 mb-1">No Active Trace Selected</h3>
-                <p className="text-slate-500 text-xs max-w-sm leading-relaxed mb-6">
-                  Select a past execution trace from your session history sidebar on the left, or query a trace ID in the search bar.
-                </p>
-                <Button
-                  onClick={() => window.location.href = "/verify"}
-                  className="bg-white/5 hover:bg-white/10 text-white rounded-xl border border-white/10 text-xs px-4"
-                >
-                  Go to Verification Workspace
-                </Button>
-              </div>
+              <EmptyState
+                title="No Active Trace Selected"
+                description="Select a past execution trace from your session history sidebar on the left, or query a trace ID in the search bar."
+                icon={FileText}
+                actionLabel="Go to Verification Workspace"
+                actionHref="/verify"
+              />
             )}
           </div>
         </div>
@@ -387,7 +377,7 @@ function TraceStageRow({ stage, index }: { stage: TraceStage; index: number }) {
       <div className="ml-6">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="w-full text-left rounded-xl border border-white/[0.06] bg-[#070b13]/40 px-4 py-3 hover:border-white/[0.12] hover:bg-[#070b13]/60 transition-all cursor-pointer"
+          className="w-full text-left rounded-xl border border-white/[0.04] bg-bg-surface/40 px-4 py-3 hover:border-white/[0.08] hover:bg-bg-surface/60 transition-all cursor-pointer"
           aria-expanded={expanded}
         >
           <div className="flex items-center justify-between">

@@ -1,38 +1,64 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Settings, Server, Moon, Sun, Monitor, Cpu, Check, RotateCcw, Activity, RefreshCw } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { GlassCard } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { MODEL_OPTIONS } from "@/lib/constants";
 import { getHealth } from "@/services/hallucisense-api";
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
-  const [apiUrl, setApiUrl] = useState(
-    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://hallucisense-production.up.railway.app"
-  );
+  const [apiUrl, setApiUrl] = useState("https://hallucisense-production.up.railway.app");
   const [defaultModel, setDefaultModel] = useState("GPT-4o");
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedUrl = localStorage.getItem("hallucisense_api_url");
+      if (savedUrl) {
+        setApiUrl(savedUrl);
+      } else {
+        setApiUrl(
+          process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://hallucisense-production.up.railway.app"
+        );
+      }
+
+      const savedModel = localStorage.getItem("hallucisense_default_model");
+      if (savedModel) {
+        setDefaultModel(savedModel);
+      }
+    }
+  }, []);
 
   // Connection Test State
   const [testing, setTesting] = useState(false);
   const [connResult, setConnResult] = useState<{ success: boolean; latencyMs?: number; msg?: string } | null>(null);
 
   const handleSave = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("hallucisense_api_url", apiUrl);
+      localStorage.setItem("hallucisense_default_model", defaultModel);
+    }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
 
   const handleReset = () => {
-    setApiUrl("https://hallucisense-production.up.railway.app");
-    setDefaultModel("GPT-4o");
+    const defaultUrl = "https://hallucisense-production.up.railway.app";
+    const defaultModelVal = "GPT-4o";
+    setApiUrl(defaultUrl);
+    setDefaultModel(defaultModelVal);
     setTheme("dark");
     setConnResult(null);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("hallucisense_api_url", defaultUrl);
+      localStorage.setItem("hallucisense_default_model", defaultModelVal);
+    }
   };
 
   const handleTestConnection = async () => {
@@ -63,24 +89,24 @@ export default function SettingsPage() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between border-b border-white/[0.06] pb-6"
+        className="flex items-center justify-between border-b border-white/[0.04] pb-6"
       >
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 border border-white/10 shadow-lg">
-            <Settings className="w-5 h-5 text-slate-200" />
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/[0.01] border border-white/[0.04] shadow-lg">
+            <Settings className="w-5 h-5 text-slate-400" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">System Settings</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Configure API connectivity, model defaults, and runtime preferences</p>
+            <h1 className="text-heading-md font-bold text-white tracking-tight leading-none">System Settings</h1>
+            <p className="text-label-md text-slate-400 mt-0.5">Configure API connectivity, model defaults, and runtime preferences</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={handleReset} className="text-slate-400 hover:text-white">
+          <Button variant="ghost" size="sm" onClick={handleReset} className="text-slate-500 hover:text-white font-mono text-xs cursor-pointer">
             <RotateCcw className="w-4 h-4" />
             Reset
           </Button>
-          <Button onClick={handleSave} size="sm">
+          <Button onClick={handleSave} size="sm" className="bg-accent-primary hover:bg-accent-primary/90 text-white font-mono text-xs cursor-pointer shadow-[0_0_24px_rgba(168,85,247,0.2)] rounded-xl">
             {saved ? <Check className="w-4 h-4" /> : null}
             {saved ? "Saved" : "Save Changes"}
           </Button>
@@ -89,10 +115,10 @@ export default function SettingsPage() {
 
       <div className="space-y-6">
         {/* ── API Connection Settings ────────────────────────────────────── */}
-        <GlassCard className="p-6 space-y-4">
+        <Card className="p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-slate-200 font-semibold text-sm">
-              <Server className="w-4 h-4 text-blue-400" />
+              <Server className="w-4 h-4 text-slate-400" />
               <span>Backend REST API Base Endpoint</span>
             </div>
 
@@ -101,9 +127,9 @@ export default function SettingsPage() {
               size="sm"
               onClick={handleTestConnection}
               disabled={testing}
-              className="text-xs border-white/10"
+              className="text-xs border-white/5 bg-white/[0.01] hover:bg-white/[0.04] text-slate-300 font-mono cursor-pointer"
             >
-              {testing ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Activity className="w-3.5 h-3.5 text-emerald-400" />}
+              {testing ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Activity className="w-3.5 h-3.5 text-status-success animate-pulse" />}
               Test Connection
             </Button>
           </div>
@@ -113,7 +139,7 @@ export default function SettingsPage() {
               value={apiUrl}
               onChange={(e) => setApiUrl(e.target.value)}
               placeholder="https://hallucisense-production.up.railway.app"
-              className="font-mono text-xs"
+              className="font-mono text-xs bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 focus:ring-accent-primary/10 text-slate-300"
             />
             <p className="text-xs text-slate-500">
               Target production endpoint for `/api/v1/analyze`, `/api/v1/explain`, and `/api/v1/metrics`.
@@ -125,8 +151,8 @@ export default function SettingsPage() {
             <div
               className={`p-3 rounded-xl border text-xs font-mono flex items-center justify-between ${
                 connResult.success
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                  : "bg-rose-500/10 border-rose-500/30 text-rose-400"
+                  ? "bg-status-success/10 border-status-success/30 text-status-success"
+                  : "bg-status-error/10 border-status-error/30 text-status-error"
               }`}
             >
               <span>
@@ -136,84 +162,93 @@ export default function SettingsPage() {
               </span>
             </div>
           )}
-        </GlassCard>
+        </Card>
 
         {/* ── Model Preferences ─────────────────────────────────────────── */}
-        <GlassCard className="p-6 space-y-4">
+        <Card className="p-6 space-y-4">
           <div className="flex items-center gap-2 text-slate-200 font-semibold text-sm">
-            <Cpu className="w-4 h-4 text-purple-400" />
+            <Cpu className="w-4 h-4 text-slate-400" />
             <span>Default Target Architecture</span>
           </div>
           <div className="space-y-2">
             <select
               value={defaultModel}
               onChange={(e) => setDefaultModel(e.target.value)}
-              className="w-full h-10 px-3 rounded-xl border border-white/[0.08] bg-[#0b1220] text-xs font-mono text-slate-200 focus:outline-none focus:border-blue-500/50 cursor-pointer"
+              className="w-full h-10 px-3 rounded-xl border border-white/[0.04] bg-bg-surface text-xs font-mono text-slate-300 focus:outline-none focus:border-accent-primary/40 cursor-pointer"
             >
               {MODEL_OPTIONS.map((m) => (
-                <option key={m.value} value={m.value} className="bg-[#0b1220]">
+                <option key={m.value} value={m.value} className="bg-bg-surface">
                   {m.label}
                 </option>
               ))}
             </select>
           </div>
-        </GlassCard>
+        </Card>
 
         {/* ── Appearance & Theme ────────────────────────────────────────── */}
-        <GlassCard className="p-6 space-y-4">
+        <Card className="p-6 space-y-4">
           <div className="flex items-center gap-2 text-slate-200 font-semibold text-sm">
-            <Sun className="w-4 h-4 text-amber-400" />
+            <Sun className="w-4 h-4 text-slate-400" />
             <span>Appearance & Theme</span>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="flex p-1 rounded-xl bg-white/[0.02] border border-white/[0.04] gap-1">
             <button
               onClick={() => setTheme("dark")}
-              className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border transition-all ${
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg transition-all cursor-pointer text-xs font-medium ${
                 theme === "dark"
-                  ? "border-blue-500 bg-blue-500/10 text-white"
-                  : "border-white/10 bg-white/[0.02] text-slate-400 hover:text-slate-200"
+                  ? "bg-accent-primary text-white shadow-sm"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]"
               }`}
             >
-              <Moon className="w-5 h-5" />
-              <span className="text-xs font-medium">Dark Mode</span>
+              <Moon className="w-4 h-4" />
+              <span>Dark Mode</span>
             </button>
             <button
               onClick={() => setTheme("light")}
-              className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border transition-all ${
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg transition-all cursor-pointer text-xs font-medium ${
                 theme === "light"
-                  ? "border-blue-500 bg-blue-500/10 text-white"
-                  : "border-white/10 bg-white/[0.02] text-slate-400 hover:text-slate-200"
+                  ? "bg-accent-primary text-white shadow-sm"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]"
               }`}
             >
-              <Sun className="w-5 h-5" />
-              <span className="text-xs font-medium">Light Mode</span>
+              <Sun className="w-4 h-4" />
+              <span>Light Mode</span>
             </button>
             <button
               onClick={() => setTheme("system")}
-              className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border transition-all ${
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg transition-all cursor-pointer text-xs font-medium ${
                 theme === "system"
-                  ? "border-blue-500 bg-blue-500/10 text-white"
-                  : "border-white/10 bg-white/[0.02] text-slate-400 hover:text-slate-200"
+                  ? "bg-accent-primary text-white shadow-sm"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]"
               }`}
             >
-              <Monitor className="w-5 h-5" />
-              <span className="text-xs font-medium">System Default</span>
+              <Monitor className="w-4 h-4" />
+              <span>System Default</span>
             </button>
           </div>
-        </GlassCard>
+        </Card>
 
         {/* ── System Environment Metadata ───────────────────────────────── */}
-        <GlassCard className="p-6 space-y-4">
+        <Card className="p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-slate-300">Frontend Environment</span>
-            <Badge variant="verified">v1.0 Production Release</Badge>
+            <span className="text-sm font-medium text-slate-300 font-sans">Frontend Environment</span>
+            <StatusBadge label="v1.0 Production Release" status="success" />
           </div>
-          <div className="text-xs text-slate-500 space-y-1 font-mono">
-            <p>Framework: Next.js 16 (App Router) + React 19</p>
-            <p>Styling: Vanilla TailwindCSS v4 Design System</p>
-            <p>State: TanStack Query v5 + Zustand</p>
-          </div>
-        </GlassCard>
+          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-white/[0.04] text-[11px]">
+            <div>
+              <dt className="text-slate-500 font-sans">Framework</dt>
+              <dd className="text-slate-200 font-mono font-medium mt-0.5">Next.js 16 (App Router) + React 19</dd>
+            </div>
+            <div>
+              <dt className="text-slate-500 font-sans">Styling</dt>
+              <dd className="text-slate-200 font-mono font-medium mt-0.5">Vanilla TailwindCSS v4 Design System</dd>
+            </div>
+            <div>
+              <dt className="text-slate-500 font-sans">State</dt>
+              <dd className="text-slate-200 font-mono font-medium mt-0.5">TanStack Query v5 + Zustand</dd>
+            </div>
+          </dl>
+        </Card>
       </div>
     </div>
   );
