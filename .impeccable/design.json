@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-14T10:19:15.000Z",
+  "title": "Design System: HalluciSense",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Spectral Violet",
+        "canonical": "#a855f7",
+        "tonalRamp": ["#3b0764", "#581c87", "#7e22ce", "#9333ea", "#a855f7", "#c084fc", "#e9d5ff", "#faf5ff"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Electric Cobalt",
+        "canonical": "#3b82f6",
+        "tonalRamp": ["#172554", "#1e3a8a", "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#bfdbfe", "#eff6ff"]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Obsidian Canvas",
+        "canonical": "#0a0a0c",
+        "tonalRamp": ["#000000", "#050816", "#0a0a0c", "#131316", "#1e293b", "#334155", "#64748b", "#f8fafc"]
+      },
+      "status-success": {
+        "role": "status",
+        "displayName": "Calibrated Emerald",
+        "canonical": "#10b981",
+        "tonalRamp": ["#022c22", "#064e3b", "#047857", "#059669", "#10b981", "#34d399", "#a7f3d0", "#ecfdf5"]
+      },
+      "status-danger": {
+        "role": "status",
+        "displayName": "Rose Alert",
+        "canonical": "#ef4444",
+        "tonalRamp": ["#450a0a", "#7f1d1d", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fca5a5", "#fef2f2"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only." },
+      "headline": { "displayName": "Headline", "purpose": "Section headers and primary page titles." },
+      "title": { "displayName": "Title", "purpose": "Card titles and widget headers." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs and descriptive text." },
+      "label": { "displayName": "Label", "purpose": "Quantitative indicators and table headers in monospace." }
+    },
+    "shadows": [
+      {
+        "name": "glow-primary",
+        "value": "0 0 20px rgba(168, 85, 247, 0.2)",
+        "purpose": "Active card glow and primary button focus"
+      },
+      {
+        "name": "glow-cobalt",
+        "value": "0 4px 16px rgba(37, 99, 235, 0.3)",
+        "purpose": "Action button elevation glow"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-cubic",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Default easing for card reveals and hover translations"
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main call-to-action button with glowing hover effect.",
+      "html": "<button class=\"ds-btn-primary\">Start Analyzing <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; items-center; justify-content: center; gap: 8px; background: #a855f7; color: #ffffff; padding: 10px 20px; font-size: 14px; font-weight: 600; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 0 20px rgba(168,85,247,0.25); } .ds-btn-primary:hover { background: #b86df9; transform: translateY(-2px); box-shadow: 0 0 24px rgba(168,85,247,0.4); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Muted translucent action button for secondary navigation.",
+      "html": "<button class=\"ds-btn-secondary\">Explore Framework</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; items-center; justify-content: center; background: rgba(255,255,255,0.04); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.08); padding: 10px 20px; font-size: 14px; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; } .ds-btn-secondary:hover { background: rgba(255,255,255,0.08); color: #ffffff; border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }"
+    },
+    {
+      "name": "Verified Status Badge",
+      "kind": "chip",
+      "refersTo": "badge-default",
+      "description": "High-confidence status tag for grounded LLM claims.",
+      "html": "<span class=\"ds-badge-verified\">✓ VERIFIED (99.4%)</span>",
+      "css": ".ds-badge-verified { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: 700; font-family: monospace; letter-spacing: 0.05em; background: rgba(16,185,129,0.1); color: #10b981; border: 1px solid rgba(16,185,129,0.25); }"
+    },
+    {
+      "name": "Glass Container Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Translucent glass card with subtle border and telemetry padding.",
+      "html": "<div class=\"ds-card-glass\"><h3>Evidence Grounding</h3><p>Hybrid BM25 + dense retrieval verification</p></div>",
+      "css": ".ds-card-glass { background: rgba(19,19,22,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; padding: 24px; color: #f8fafc; transition: all 0.3s ease; } .ds-card-glass:hover { border-color: rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Precision Observatory",
+    "overview": "HalluciSense visualizes multi-pillar AI hallucination analysis through the lens of a deep-space astronomical observatory. The canvas is a pitch-dark, vacuum-like obsidian void upon which translucent frosted-glass instrumentation panels float with quiet authority.",
+    "keyCharacteristics": [
+      "Deep Space Atmosphere: Infinite dark backdrop with layered translucent glass surfaces.",
+      "Tactile Scientific Instrumentation: Rounded-xl panels, crisp 1px borders with subtle hover highlights.",
+      "Spectral Signal Precision: Vibrant primary accents and strict 4-tier risk tokens for instant cognitive scanning.",
+      "Mathematical Typography: Space Grotesk titles paired with high-contrast Monospace metrics."
+    ],
+    "rules": [
+      {
+        "name": "The Signal Rarity Rule",
+        "body": "Vibrant primary accents are reserved for active actions, key confidence metrics, and focus states, occupying <= 10% of any given viewport.",
+        "section": "colors"
+      },
+      {
+        "name": "The Semantic Invariance Rule",
+        "body": "Status hues are strictly reserved for verification risk classifications and must never be repurposed for generic decorative styling.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Metric Rule",
+        "body": "All floating-point scores, execution latencies, and probability values must be rendered in font-mono with tabular numbers.",
+        "section": "typography"
+      },
+      {
+        "name": "The Luminescent Border Rule",
+        "body": "Depth is primarily established by micro-contrast border luminance rather than heavy drop shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do wrap tabular floating-point readouts and latencies in font-mono.",
+      "Do maintain the 4-tier risk color taxonomy consistently across graphs, badges, cards, and token heatmaps.",
+      "Do use GlassCard with backdrop-blur-xl and 1px translucent borders for all content containers.",
+      "Do provide smooth transitions on hover and active states."
+    ],
+    "donts": [
+      "Don't use opaque solid white or light-gray backgrounds for cards on dark views.",
+      "Don't create aggressive multi-colored drop shadows that detract from data readability.",
+      "Don't use status colors (emerald, amber, red) for non-status decorative accents.",
+      "Don't remove monospace alignment from quantitative evaluation scores."
+    ]
+  }
+}

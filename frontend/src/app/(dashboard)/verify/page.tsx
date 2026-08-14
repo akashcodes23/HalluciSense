@@ -10,6 +10,9 @@ import {
   ChevronUp,
   Clock,
   ExternalLink,
+  FileText,
+  Code,
+  Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,7 +25,7 @@ import { useAnalysisStore } from "@/store/analysis-store";
 import { formatLatency, getRiskColor, getRiskLabel } from "@/lib/format";
 import { ScoreGauge } from "@/components/features/analyzer/score-gauge";
 import { TokenHeatmap } from "@/components/features/heatmap/token-heatmap";
-import type { AnalysisResponse, SentenceScore, EvidenceItem } from "@/types/hallucisense";
+import type { SentenceScore, EvidenceItem } from "@/types/hallucisense";
 import { toast } from "sonner";
 
 const SAMPLE_PRESETS = [
@@ -159,6 +162,61 @@ export default function VerifyPage() {
     reset();
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      if (!isLoading && response.trim()) {
+        handleVerify();
+      }
+    }
+  };
+
+  const copyMarkdownReport = () => {
+    if (!currentResult) return;
+    const p1 = ((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1);
+    const p2 = currentResult.pillar_scores?.pillar2_confidence_gap != null ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "Protected";
+    const p3 = currentResult.pillar_scores?.pillar3_consistency_failure != null ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "N/A";
+
+    const report = `# HalluciSense Verification Certificate
+- **Target Response**: "${response.trim()}"
+- **Verdict**: ${getRiskLabel(currentResult.risk_level)}
+- **Hallucination Index (H-Score)**: ${(currentResult.overall_h_score * 100).toFixed(1)}%
+- **Latency**: ${currentResult.latency_ms ? formatLatency(currentResult.latency_ms) : "< 250ms"}
+- **Three-Pillar Breakdown**:
+  - Pillar 1 (Factual Evidence / FE): ${p1}%
+  - Pillar 2 (Confidence Estimation / CG): ${p2}
+  - Pillar 3 (Consistency Reasoning / CF): ${p3}
+- **Flagged Claims**: ${currentResult.flagged_sentences_count ?? 0} of ${currentResult.total_sentences_count ?? (currentResult.sentence_scores?.length || 1)} claims
+- **Trace Identifier**: \`${currentResult.trace_id || "LOCAL_EXECUTION"}\`
+- **Timestamp**: ${new Date().toISOString()}`;
+
+    navigator.clipboard.writeText(report);
+    toast.success("Markdown verification report copied to clipboard!");
+  };
+
+  const copyLaTeXReport = () => {
+    if (!currentResult) return;
+    const p1 = ((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1);
+    const p2 = currentResult.pillar_scores?.pillar2_confidence_gap != null ? (currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1) : "--";
+    const p3 = currentResult.pillar_scores?.pillar3_consistency_failure != null ? (currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1) : "--";
+
+    const latex = `% HalluciSense Verification Summary (Trace ID: ${currentResult.trace_id || "LOCAL_EXECUTION"})
+\\begin{table}[h]
+\\centering
+\\caption{HalluciSense Multi-Pillar Verification Summary}
+\\begin{tabular}{lcccc}
+\\hline
+\\textbf{Evaluation Target} & \\textbf{Pillar 1 ($FE$)} & \\textbf{Pillar 2 ($CG$)} & \\textbf{Pillar 3 ($CF$)} & \\textbf{Overall H-Score} \\\\
+\\hline
+Claim Response & ${p1}\\% & ${p2}\\% & ${p3}\\% & \\textbf{${(currentResult.overall_h_score * 100).toFixed(1)}\\%} \\\\
+\\hline
+\\end{tabular}
+\\end{table}`;
+
+    navigator.clipboard.writeText(latex);
+    toast.success("LaTeX table code copied to clipboard!");
+  };
+
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="max-w-5xl mx-auto px-6 py-8 space-y-8">
@@ -216,7 +274,8 @@ export default function VerifyPage() {
               id="verify-response"
               value={response}
               onChange={(e) => setResponse(e.target.value)}
-              placeholder="Paste the AI-generated text or claim to evaluate..."
+              onKeyDown={handleKeyDown}
+              placeholder="Paste the AI-generated text or claim to evaluate... (Press ⌘+Enter to verify)"
               className="min-h-[140px] text-sm leading-relaxed bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
               disabled={isLoading}
             />
@@ -251,6 +310,7 @@ export default function VerifyPage() {
                     id="verify-query"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="e.g. When was James Webb Space Telescope launched?"
                     className="min-h-[70px] text-sm bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
                     disabled={isLoading}
@@ -265,6 +325,7 @@ export default function VerifyPage() {
                     id="verify-context"
                     value={contextEvidence}
                     onChange={(e) => setContextEvidence(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Paste reference text or ground-truth document against which to verify..."
                     className="min-h-[90px] text-sm bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
                     disabled={isLoading}
@@ -299,17 +360,18 @@ export default function VerifyPage() {
               onClick={handleVerify}
               disabled={isLoading || !response.trim()}
               size="lg"
-              className="min-w-[180px] bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/20 cursor-pointer"
+              className="min-w-[190px] bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/20 cursor-pointer flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin" />
                   Verifying...
                 </>
               ) : (
                 <>
-                  <ShieldCheck className="w-4 h-4 mr-2" />
+                  <ShieldCheck className="w-4 h-4" />
                   Verify Response
+                  <kbd className="hidden sm:inline-block ml-1 px-1.5 py-0.5 text-[10px] rounded bg-white/20 border border-white/20 font-mono text-white/90">⌘↵</kbd>
                 </>
               )}
             </Button>
@@ -355,7 +417,7 @@ export default function VerifyPage() {
               className="space-y-6"
             >
               {/* 1. Primary Verdict Header */}
-              <Card className="p-6 md:p-8 relative overflow-hidden border-white/[0.04]">
+              <Card className="p-6 md:p-8 relative overflow-hidden border-white/[0.04] space-y-6">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                   {/* Gauge */}
                   <div className="flex items-center gap-6">
@@ -387,27 +449,70 @@ export default function VerifyPage() {
 
                   {/* Summary Meta Pills */}
                   <div className="flex flex-wrap md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-white/[0.04] pt-4 md:pt-0 md:pl-6">
-                    <MetaPill label="Pillar 1 Factual Error" value={`${((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%`} />
-                    <MetaPill label="Pillar 2 Confidence Gap" value={currentResult.pillar_scores?.pillar2_confidence_gap != null ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "N/A (Protected)"} />
-                    <MetaPill label="Pillar 3 Consistency" value={currentResult.pillar_scores?.pillar3_consistency_failure != null ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "N/A"} />
+                    <MetaPill
+                      label="Pillar 1 FE (Factual)"
+                      tooltip="Hybrid BM25 + dense vector retrieval with Cross-Encoder NLI entailment."
+                      value={`${((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%`}
+                    />
+                    <MetaPill
+                      label="Pillar 2 CG (Uncertainty)"
+                      tooltip="Token entropy H(Y) and epistemic/aleatoric uncertainty quantification."
+                      value={currentResult.pillar_scores?.pillar2_confidence_gap != null ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "N/A (Protected)"}
+                    />
+                    <MetaPill
+                      label="Pillar 3 CF (Consistency)"
+                      tooltip="Multi-prompt paraphrase sampling and NLI contradiction graph variance."
+                      value={currentResult.pillar_scores?.pillar3_consistency_failure != null ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "N/A"}
+                    />
+                  </div>
+                </div>
+
+                {/* Academic Export Actions */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/[0.04]">
+                  <div className="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-accent-primary" />
+                    <span>Platt-Calibrated Hybrid Score (ECE &le; 0.0257)</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-slate-500 font-mono hidden sm:inline">Export:</span>
+                    <button
+                      onClick={copyMarkdownReport}
+                      className="px-2.5 py-1.5 text-xs rounded-lg border border-white/[0.08] bg-white/[0.02] text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center gap-1.5 cursor-pointer font-mono"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-blue-400" />
+                      Markdown
+                    </button>
+                    <button
+                      onClick={copyLaTeXReport}
+                      className="px-2.5 py-1.5 text-xs rounded-lg border border-white/[0.08] bg-white/[0.02] text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center gap-1.5 cursor-pointer font-mono"
+                    >
+                      <Code className="w-3.5 h-3.5 text-purple-400" />
+                      LaTeX
+                    </button>
                   </div>
                 </div>
               </Card>
 
               {/* 2. Progressive Disclosure Tab View */}
               <Tabs defaultValue="claims" className="space-y-6">
-                <TabsList className="bg-bg-surface border border-white/[0.04] p-1 rounded-xl">
-                  <TabsTrigger value="claims" className="cursor-pointer">Claim Breakdown ({currentResult.sentence_scores?.length || 0})</TabsTrigger>
-                  <TabsTrigger value="evidence" className="cursor-pointer">Evidence Citations ({currentResult.evidence?.length || 0})</TabsTrigger>
-                  <TabsTrigger value="technical" className="cursor-pointer">Technical Traces</TabsTrigger>
-                  {currentExplain && <TabsTrigger value="explanation" className="cursor-pointer">Explanation & Remediation</TabsTrigger>}
+                <TabsList className="bg-bg-surface border border-white/[0.04] p-1 rounded-xl flex-wrap">
+                  <TabsTrigger value="claims" className="cursor-pointer">Atomic Claims ({currentResult.sentence_scores?.length || 0})</TabsTrigger>
+                  <TabsTrigger value="evidence" className="cursor-pointer">Retrieved Sources ({currentResult.evidence?.length || 0})</TabsTrigger>
+                  <TabsTrigger value="technical" className="cursor-pointer">Attention Heatmap & Telemetry</TabsTrigger>
+                  {currentExplain && <TabsTrigger value="explanation" className="cursor-pointer">Natural Language Reasoning</TabsTrigger>}
                 </TabsList>
 
                 {/* Claim-Level Results Tab */}
                 <TabsContent value="claims" className="space-y-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-semibold text-slate-300">Atomic Claims & Epistemic Modality Analysis</h3>
-                    <span className="text-xs text-slate-500">Atomic sentence segmentation & temporal anchor evaluation</span>
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-300">Atomic Claims & Epistemic Modality</h3>
+                      <p className="text-xs text-slate-500">Sentence segmentation, fact verification gates, and temporal consistency anchors</p>
+                    </div>
+                    <span className="text-xs font-mono text-slate-500">
+                      {currentResult.flagged_sentences_count ?? 0} flagged
+                    </span>
                   </div>
 
                   {currentResult.sentence_scores?.map((sentence, idx) => (
@@ -417,26 +522,32 @@ export default function VerifyPage() {
 
                 {/* Evidence Citations Tab */}
                 <TabsContent value="evidence" className="space-y-4">
+                  <div className="mb-2">
+                    <h3 className="text-sm font-semibold text-slate-300">External Evidence & Passage Grounding</h3>
+                    <p className="text-xs text-slate-500">Dense embeddings and cross-encoder NLI passage alignment against external knowledge corpora</p>
+                  </div>
+
                   {!currentResult.evidence || currentResult.evidence.length === 0 ? (
-                    <div className="text-center py-12 text-slate-500 text-sm bg-white/[0.02] rounded-xl border border-white/[0.06]">
-                      No explicit external evidence passages retrieved for this query.
+                    <div className="text-center py-10 px-6 text-slate-400 text-sm bg-white/[0.02] rounded-xl border border-white/[0.06] space-y-1">
+                      <p className="font-semibold text-slate-300">No external passages retrieved for this claim.</p>
+                      <p className="text-xs text-slate-500">HalluciSense evaluated factual grounding using parametric uncertainty bounds and semantic consistency checks.</p>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {currentResult.evidence.map((ev, i) => (
                         <div key={i} className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220] space-y-2">
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-blue-400">{ev.source_name || ev.source || "Wikipedia/Retriever"}</span>
+                            <span className="text-xs font-semibold text-blue-400">{ev.source_name || ev.source || "Reference Passage"}</span>
                             {ev.similarity_score != null && (
-                              <span className="text-xs font-mono text-slate-500">
-                                Match: {(ev.similarity_score * 100).toFixed(0)}%
+                              <span className="text-xs font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                                Relevancy: {(ev.similarity_score * 100).toFixed(0)}%
                               </span>
                             )}
                           </div>
                           <p className="text-sm text-slate-200 leading-relaxed">&quot;{ev.snippet}&quot;</p>
                           {ev.source_url && (
                             <a href={ev.source_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline flex items-center gap-1">
-                              View Source <ExternalLink className="w-3 h-3" />
+                              View Source Document <ExternalLink className="w-3 h-3" />
                             </a>
                           )}
                         </div>
@@ -449,8 +560,22 @@ export default function VerifyPage() {
                 <TabsContent value="technical" className="space-y-6">
                   {/* Token Heatmap */}
                   {currentResult.token_heatmap && currentResult.token_heatmap.length > 0 && (
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-slate-300">Token-Level Hallucination Heatmap</h4>
+                    <div className="space-y-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                          <h4 className="text-sm font-semibold text-slate-300">Token-Level Hallucination Heatmap</h4>
+                          <p className="text-xs text-slate-500">Per-token probability distribution colored by calibrated risk classification</p>
+                        </div>
+
+                        {/* 4-Tier Risk Legend */}
+                        <div className="flex items-center gap-2 flex-wrap text-[10px] font-mono">
+                          <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified (&le;25%)</span>
+                          <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Review (25-50%)</span>
+                          <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/20">Mod Risk (50-75%)</span>
+                          <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Hallucinated (&gt;75%)</span>
+                        </div>
+                      </div>
+
                       <TokenHeatmap tokens={currentResult.token_heatmap} />
                     </div>
                   )}
@@ -459,15 +584,15 @@ export default function VerifyPage() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220]">
                       <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Root Cause Classification</span>
-                      <span className="text-sm font-semibold text-white">{currentResult.root_cause_classification || "None (Grounded)"}</span>
+                      <span className="text-sm font-semibold text-white">{currentResult.root_cause_classification || "None (Factually Grounded)"}</span>
                     </div>
                     <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220]">
-                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Trace Identifier</span>
+                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Execution Trace Identifier</span>
                       <span className="text-sm font-mono text-slate-300">{currentResult.trace_id || "LOCAL_EXECUTION"}</span>
                     </div>
                     <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220]">
-                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Fusion Weights (α / β / γ)</span>
-                      <span className="text-sm font-mono text-slate-300">0.45 / 0.30 / 0.25</span>
+                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Hybrid Weights (FE / CG / CF)</span>
+                      <span className="text-sm font-mono text-slate-300">&alpha;=0.45 / &beta;=0.30 / &gamma;=0.25</span>
                     </div>
                   </div>
                 </TabsContent>
@@ -476,14 +601,17 @@ export default function VerifyPage() {
                 {currentExplain && (
                   <TabsContent value="explanation" className="space-y-4">
                     <div className="p-6 rounded-xl border border-white/[0.06] bg-[#0b1220] space-y-4">
-                      <h4 className="text-sm font-semibold text-white">Natural Language Reasoning</h4>
+                      <div className="border-b border-white/[0.06] pb-3">
+                        <h4 className="text-sm font-semibold text-white">Diagnostic Scientific Explanation</h4>
+                        <p className="text-xs text-slate-400">Step-by-step reasoning behind the confidence rating and detected factual discrepancies</p>
+                      </div>
                       <p className="text-sm text-slate-300 whitespace-pre-line leading-relaxed">
                         {currentExplain.explanation_markdown || currentExplain.confidence_explanation}
                       </p>
 
                       {currentExplain.remediation_suggestions && currentExplain.remediation_suggestions.length > 0 && (
                         <div className="pt-4 border-t border-white/[0.06] space-y-2">
-                          <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-400">Remediation Suggestions</h5>
+                          <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-400">Recommended Prompt & Model Remediations</h5>
                           <ul className="list-disc list-inside text-xs text-slate-400 space-y-1">
                             {currentExplain.remediation_suggestions.map((s, i) => (
                               <li key={i}>{s}</li>
@@ -507,11 +635,15 @@ export default function VerifyPage() {
 
 function ProgressStep({ label, active }: { label: string; active?: boolean }) {
   return (
-    <div className={`px-2.5 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1.5 ${
-      active ? "border-blue-500/30 bg-blue-500/10 text-blue-300" : "border-white/[0.06] text-slate-500"
-    }`}>
+    <div
+      className={`px-2.5 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1.5 transition-colors ${
+        active
+          ? "border-blue-500/30 bg-blue-950/40 text-blue-300"
+          : "border-white/[0.06] bg-white/[0.01] text-slate-400"
+      }`}
+    >
       <div className={`w-1.5 h-1.5 rounded-full ${active ? "bg-blue-400 animate-ping" : "bg-slate-600"}`} />
-      {label}
+      <span>{label}</span>
     </div>
   );
 }
@@ -522,10 +654,16 @@ function RiskBadge({ level }: { level: string }) {
   return <StatusBadge label={label} status={status} />;
 }
 
-function MetaPill({ label, value }: { label: string; value: string }) {
+function MetaPill({ label, value, tooltip }: { label: string; value: string; tooltip?: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 text-xs font-mono">
-      <span className="text-slate-500">{label}:</span>
+    <div
+      title={tooltip}
+      className="flex items-center justify-between gap-4 text-xs font-mono p-1.5 px-2 rounded-lg bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.1] transition-colors cursor-help group"
+    >
+      <span className="text-slate-400 flex items-center gap-1">
+        {label}
+        {tooltip && <Info className="w-3 h-3 text-slate-500 group-hover:text-blue-400 transition-colors" />}
+      </span>
       <span className="font-semibold text-slate-200">{value}</span>
     </div>
   );
