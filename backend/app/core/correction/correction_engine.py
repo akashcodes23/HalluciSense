@@ -34,7 +34,8 @@ class CorrectionEngine:
     """Production Closed-Loop Correction Engine with Re-Verification Gating."""
 
     def __init__(self, pipeline: Optional[HallucinationDetectionPipeline] = None):
-        self.pipeline = pipeline or HallucinationDetectionPipeline()
+        from app.core.engine.model_registry import ModelRegistry
+        self.pipeline = pipeline if pipeline is not None else ModelRegistry.get_pipeline()
         self.policy = CorrectionPolicy()
         self.decomposer = ClaimDecomposer()
 
@@ -49,7 +50,7 @@ class CorrectionEngine:
         start_time = time.perf_counter()
         
         # Check initial verification risk
-        h_score = float(getattr(initial_verification, "hallucination_score", 0.0))
+        h_score = float(getattr(initial_verification, "overall_h_score", getattr(initial_verification, "hallucination_score", 0.0)))
         is_verified = (h_score < 0.35) and not getattr(initial_verification, "requires_verification", False)
 
         if is_verified:
@@ -61,7 +62,11 @@ class CorrectionEngine:
             )
 
         # Decompose initial text and analyze claims
-        evidence_items = getattr(initial_verification, "evidence", [])
+        evidence_items = (
+            getattr(initial_verification, "evidence_items", None)
+            or getattr(getattr(initial_verification, "pillar1_summary", None), "evidence", None)
+            or getattr(initial_verification, "evidence", [])
+        )
         evidence_dicts = [
             {
                 "source_name": getattr(e, "source_name", "Authoritative Source"),
@@ -154,16 +159,33 @@ class CorrectionEngine:
         for orig, corr in corrected_spans:
             if orig in candidate_text:
                 candidate_text = candidate_text.replace(orig, corr, 1)
+            elif orig.replace(",", "") in candidate_text.replace(",", ""):
+                # Replace when commas or minor punctuation differ
+                if len(corrected_spans) == 1:
+                    candidate_text = corr
+                else:
+                    candidate_text = candidate_text.replace(orig.replace(",", ""), corr, 1)
+            elif len(corrected_spans) == 1:
+                candidate_text = corr
 
         # RE-VERIFICATION GATE (Attempt 1 & 2)
         rever_passed = False
         final_h_score = h_score
-        rever_status = "FAILED"
-
+        ev_items = evidence_items
         for attempt in range(1, max_attempts + 1):
             try:
-                rever_analysis = self.pipeline.analyze_response(candidate_text, user_query)
-                rever_h_score = float(getattr(rever_analysis, "hallucination_score", 0.0))
+                rever_analysis = self.pipeline.analyze_response(
+                    full_text=candidate_text,
+                    query=user_query,
+                    evidence_items=ev_items,
+                )
+                raw_score = getattr(rever_analysis, "overall_h_score", None)
+                if raw_score is None or not isinstance(raw_score, (int, float)):
+                    raw_score = getattr(rever_analysis, "hallucination_score", 0.0)
+                try:
+                    rever_h_score = float(raw_score)
+                except (TypeError, ValueError):
+                    rever_h_score = 0.0
                 
                 # Check if re-verification passed
                 if rever_h_score < 0.35 and not getattr(rever_analysis, "requires_verification", False):

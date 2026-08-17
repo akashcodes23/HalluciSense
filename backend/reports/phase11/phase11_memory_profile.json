@@ -1,0 +1,43 @@
+{
+  "telemetry": {
+    "startup_baseline_mb": 15.95,
+    "after_registry_init_mb": 253.05,
+    "after_embedding_model_mb": 784.17,
+    "after_deberta_nli_mb": 930.86,
+    "after_cross_encoder_reranker_mb": 941.56,
+    "after_pipeline_orchestrator_mb": 585.28,
+    "after_first_verification_mb": 720.11,
+    "after_correction_and_reverification_mb": 905.97,
+    "peak_rss_mb": 905.97,
+    "model_initialization_counts": {
+      "nli_model": 1,
+      "sentence_transformer": 1,
+      "cross_encoder_reranker": 1,
+      "pipeline": 1
+    }
+  },
+  "component_breakdown": {
+    "SentenceTransformer": {
+      "memory_delta_mb": 531.12,
+      "load_time_ms": 8851.98,
+      "model": "all-MiniLM-L6-v2"
+    },
+    "DeBERTa_NLI": {
+      "memory_delta_mb": 146.69,
+      "load_time_ms": 1491.52,
+      "model": "cross-encoder/nli-deberta-v3-small"
+    },
+    "CrossEncoder_Reranker": {
+      "memory_delta_mb": 10.7,
+      "load_time_ms": 2138.53,
+      "model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    },
+    "PipelineOrchestrator": {
+      "memory_delta_mb": -356.28,
+      "load_time_ms": 675.29
+    }
+  },
+  "first_verification_ms": 6037.06,
+  "correction_reverification_ms": 0.01,
+  "single_instance_guarantee": true
+}

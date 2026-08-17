@@ -1,0 +1,16 @@
+{
+  "failure_semantics": {
+    "status": "FAILED",
+    "h_score": null,
+    "risk_level": null,
+    "claims_total": null,
+    "claims_flagged": null,
+    "error_message": "Verification could not be completed because the verification service encountered an internal error.",
+    "invariant": "NEVER use 1.0 or 100% as an error fallback. Infrastructure exceptions must produce h_score=null and status=FAILED."
+  },
+  "ui_presentation": {
+    "badge_text": "FAILED",
+    "badge_color": "rose",
+    "h_score_display": "Verification unavailable"
+  }
+}

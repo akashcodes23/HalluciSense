@@ -1,0 +1,34 @@
+{
+  "start_rss_mb": 253.27,
+  "peak_rss_mb": 1223.36,
+  "benchmarks": {
+    "single_request": {
+      "latency_ms": 1919.64,
+      "rss_mb": 900.81,
+      "h_score": 0.0
+    },
+    "5_sequential": {
+      "total_ms": 9077.97,
+      "mean_ms": 1815.59,
+      "rss_mb": 1212.59
+    },
+    "10_sequential": {
+      "total_ms": 1297.89,
+      "mean_ms": 129.78,
+      "rss_mb": 1213.55
+    },
+    "10_concurrent": {
+      "total_ms": 1256.56,
+      "mean_ms": 481.61,
+      "rss_mb": 1223.36
+    }
+  },
+  "model_initialization_counts": {
+    "nli_model": 1,
+    "sentence_transformer": 0,
+    "cross_encoder_reranker": 1,
+    "pipeline": 1
+  },
+  "single_instance_guarantee": true,
+  "errors": 0
+}

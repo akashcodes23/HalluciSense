@@ -345,7 +345,7 @@ class GeminiProvider(AbstractLLMProvider):
                     error=str(quota_err),
                 )
                 raise GeminiQuotaExceededError(str(quota_err)) from quota_err
-            except (TRANSIENT_EXCEPTIONS, asyncio.TimeoutError) as transient:
+            except (*TRANSIENT_EXCEPTIONS, asyncio.TimeoutError) as transient:
                 last_error = transient
                 self._internal_metrics.retries += 1
                 if isinstance(transient, asyncio.TimeoutError):

@@ -153,13 +153,10 @@ export default function ClosedLoopChatPage() {
       const errorMsg: ChatMessage = {
         id: `asst_err_${Date.now()}`,
         role: "assistant",
-        content: "An internal verification error occurred while processing the closed-loop chat request.",
+        content: "Verification could not be completed because the verification service encountered an internal error.",
         verification: {
           status: "FAILED",
-          h_score: 1.0,
-          risk_level: "HIGH",
-          claims_total: 1,
-          claims_flagged: 1,
+          error_message: "Verification could not be completed because the verification service encountered an internal error.",
         },
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
@@ -293,9 +290,15 @@ export default function ClosedLoopChatPage() {
                           FAILED
                         </span>
                       )}
-                      <span className="text-[11px] font-mono text-slate-400">
-                        H-Score: {(msg.verification.h_score * 100).toFixed(1)}%
-                      </span>
+                      {msg.verification.h_score !== undefined && msg.verification.h_score !== null ? (
+                        <span className="text-[11px] font-mono text-slate-400">
+                          H-Score: {(msg.verification.h_score * 100).toFixed(1)}%
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-mono text-slate-400">
+                          Verification unavailable
+                        </span>
+                      )}
                     </div>
 
                     <button

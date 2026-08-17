@@ -1,0 +1,12 @@
+{
+  "startup_rss_mb": 294.0,
+  "peak_rss_mb": 1049.98,
+  "model_initializations": {
+    "nli_model": 1,
+    "sentence_transformer": 0,
+    "cross_encoder_reranker": 1,
+    "pipeline": 1
+  },
+  "single_instance_guaranteed": true,
+  "oom_detected": false
+}

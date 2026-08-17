@@ -3,6 +3,7 @@ Chat router — HTTP interface for Chat CRUD and Closed-Loop Answer Generation +
 """
 import time
 import uuid
+import structlog
 from typing import Annotated, Optional
 from uuid import UUID
 
@@ -22,12 +23,15 @@ from app.modules.chat.schemas import (
     CorrectionSummary,
 )
 from app.modules.chat.service import ChatService
-from app.core.engine.pipeline import HallucinationDetectionPipeline
+from app.core.engine.model_registry import ModelRegistry
 from app.core.correction.correction_engine import CorrectionEngine
 
+logger = structlog.get_logger(__name__)
 router = APIRouter(tags=["Chats"])
-_pipeline = HallucinationDetectionPipeline()
-_correction_engine = CorrectionEngine(pipeline=_pipeline)
+
+
+def _get_correction_engine() -> CorrectionEngine:
+    return CorrectionEngine(pipeline=ModelRegistry.get_pipeline())
 
 
 @router.post(
@@ -47,67 +51,105 @@ async def closed_loop_chat(
     trace_id = f"TRACE_{uuid.uuid4().hex[:12].upper()}"
 
     # 1. Answer Generation (Draft)
-    # Use simple standard responder or provider
     draft_response = _generate_draft_answer(payload.message, payload.model_name)
 
-    # 2. Initial Verification
+    # 2. Initial Verification & Closed-Loop Correction
     if payload.enable_verification:
-        init_verification = _pipeline.analyze_response(draft_response, payload.message)
-        h_score = float(getattr(init_verification, "hallucination_score", 0.0))
-        risk_level = getattr(init_verification, "risk_level", "LOW")
-        if hasattr(risk_level, "value"):
-            risk_level = risk_level.value
+        try:
+            pipeline = ModelRegistry.get_pipeline()
+            init_verification = pipeline.analyze_response(full_text=draft_response, query=payload.message)
+            h_score = float(getattr(init_verification, "hallucination_score", 0.0))
+            risk_level = getattr(init_verification, "risk_level", "LOW")
+            if hasattr(risk_level, "value"):
+                risk_level = risk_level.value
 
-        evidence_items = getattr(init_verification, "evidence", [])
-        evidence_dicts = [
-            {
-                "source_name": getattr(e, "source_name", "Authoritative Source"),
-                "snippet": getattr(e, "snippet", ""),
-                "claim": getattr(e, "claim", ""),
-            }
-            for e in evidence_items
-        ]
-        sources = [e.get("source_name", "") for e in evidence_dicts if e.get("source_name")]
-    else:
-        init_verification = None
-        h_score = 0.0
-        risk_level = "UNVERIFIED"
-        evidence_dicts = []
-        sources = []
+            evidence_items = getattr(init_verification, "evidence", [])
+            evidence_dicts = [
+                {
+                    "source_name": getattr(e, "source_name", "Authoritative Source"),
+                    "snippet": getattr(e, "snippet", ""),
+                    "claim": getattr(e, "claim", ""),
+                }
+                for e in evidence_items
+            ]
+            sources = [e.get("source_name", "") for e in evidence_dicts if e.get("source_name")]
 
-    # 3. Correction & Re-Verification Gate
-    if payload.enable_verification and payload.auto_correct and h_score >= 0.35:
-        corr_result = _correction_engine.execute_closed_loop_repair(
-            user_query=payload.message,
-            initial_text=draft_response,
-            initial_verification=init_verification,
-            max_attempts=2,
-        )
-        final_response = corr_result.final_text
-        corr_performed = corr_result.performed
-        corr_reason = corr_result.reason
-        claims_corr = [c.model_dump() for c in corr_result.claims_corrected]
-        orig_to_corr = corr_result.original_to_corrected
-        
-        if corr_result.reverification and corr_result.reverification.passed:
-            status_str = "CORRECTED"
-            final_h_score = corr_result.reverification.h_score
-        else:
-            status_str = "REVIEW"
-            final_h_score = corr_result.reverification.h_score if corr_result.reverification else h_score
-        
-        claims_flagged = len(claims_corr)
-        claims_total = corr_result.reverification.claims_analyzed if corr_result.reverification else 1
+            # 3. Correction & Re-Verification Gate
+            if payload.auto_correct and h_score >= 0.35:
+                corr_engine = _get_correction_engine()
+                corr_result = corr_engine.execute_closed_loop_repair(
+                    user_query=payload.message,
+                    initial_text=draft_response,
+                    initial_verification=init_verification,
+                    max_attempts=2,
+                )
+                final_response = corr_result.final_text
+                corr_performed = corr_result.performed
+                corr_reason = corr_result.reason
+                claims_corr = [c.model_dump() for c in corr_result.claims_corrected]
+                orig_to_corr = corr_result.original_to_corrected
+
+                if corr_result.reverification and corr_result.reverification.passed:
+                    status_str = "CORRECTED"
+                    final_h_score = corr_result.reverification.h_score
+                else:
+                    status_str = "REVIEW"
+                    final_h_score = corr_result.reverification.h_score if corr_result.reverification else h_score
+
+                claims_flagged = len(claims_corr)
+                claims_total = corr_result.reverification.claims_analyzed if corr_result.reverification else 1
+            else:
+                final_response = draft_response
+                corr_performed = False
+                corr_reason = "NO_CORRECTION_NEEDED"
+                claims_corr = []
+                orig_to_corr = []
+                status_str = "VERIFIED" if h_score < 0.35 else "UNVERIFIED"
+                final_h_score = h_score
+                claims_flagged = 0
+                claims_total = 1
+
+            verif_summary = VerificationSummary(
+                status=status_str,
+                h_score=round(final_h_score, 4),
+                risk_level=str(risk_level),
+                claims_total=claims_total,
+                claims_flagged=claims_flagged,
+            )
+
+        except Exception as exc:
+            logger.error("closed_loop_verification_error", error=str(exc))
+            # PROPER FAILURE SEMANTICS (NEVER 100% FALLBACK)
+            final_response = draft_response
+            corr_performed = False
+            corr_reason = "VERIFICATION_SERVICE_ERROR"
+            claims_corr = []
+            orig_to_corr = []
+            evidence_dicts = []
+            sources = []
+            verif_summary = VerificationSummary(
+                status="FAILED",
+                h_score=None,
+                risk_level=None,
+                claims_total=None,
+                claims_flagged=None,
+                error_message="Verification could not be completed because the verification service encountered an internal error.",
+            )
     else:
         final_response = draft_response
         corr_performed = False
-        corr_reason = "NO_CORRECTION_NEEDED"
+        corr_reason = "VERIFICATION_DISABLED"
         claims_corr = []
         orig_to_corr = []
-        status_str = "VERIFIED" if (h_score < 0.35 and payload.enable_verification) else "UNVERIFIED"
-        final_h_score = h_score
-        claims_flagged = 0
-        claims_total = 1
+        evidence_dicts = []
+        sources = []
+        verif_summary = VerificationSummary(
+            status="UNVERIFIED",
+            h_score=None,
+            risk_level=None,
+            claims_total=None,
+            claims_flagged=None,
+        )
 
     total_latency_ms = (time.perf_counter() - start_time) * 1000.0
 
@@ -116,13 +158,7 @@ async def closed_loop_chat(
         message_id=msg_id,
         original_response=draft_response,
         final_response=final_response,
-        verification=VerificationSummary(
-            status=status_str,
-            h_score=round(final_h_score, 4),
-            risk_level=str(risk_level),
-            claims_total=claims_total,
-            claims_flagged=claims_flagged,
-        ),
+        verification=verif_summary,
         correction=CorrectionSummary(
             performed=corr_performed,
             reason=corr_reason,

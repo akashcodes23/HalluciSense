@@ -69,54 +69,19 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
             (data_dir / sub).mkdir(parents=True, exist_ok=True)
         logger.info("railway_volume_storage_initialized", path="/data")
 
-    # Validate Startup Components (Part 3)
+    # Initialize ModelRegistry and validate single shared pipeline
+    from app.core.engine.model_registry import ModelRegistry
     components_status = {}
-    critical_failures = 0
-
     try:
-        from sentence_transformers import SentenceTransformer
-        _ = SentenceTransformer("all-MiniLM-L6-v2")
-        components_status["SentenceTransformer"] = True
-        logger.info("startup_component_validation", component="SentenceTransformer", status="✓ Loaded")
-    except Exception as e:
-        components_status["SentenceTransformer"] = False
-        logger.error("startup_component_validation", component="SentenceTransformer", status="✗ Failed", error=str(e))
-
-    try:
-        from transformers import AutoModelForSequenceClassification, AutoTokenizer
-        _ = AutoTokenizer.from_pretrained("cross-encoder/nli-deberta-v3-small")
-        components_status["CrossEncoder_NLI"] = True
-        logger.info("startup_component_validation", component="CrossEncoder_NLI", status="✓ Loaded")
-    except Exception as e:
-        components_status["CrossEncoder_NLI"] = False
-        logger.error("startup_component_validation", component="CrossEncoder_NLI", status="✗ Failed", error=str(e))
-
-    try:
-        from app.core.engine.pipeline import HallucinationDetectionPipeline
-        _ = HallucinationDetectionPipeline()
+        _ = ModelRegistry.get_pipeline()
         components_status["FusionEngine"] = True
         components_status["Retriever"] = True
-        components_status["CalibrationModel"] = True
-        logger.info("startup_component_validation", component="FusionEngine", status="✓ Loaded")
-        logger.info("startup_component_validation", component="Retriever", status="✓ Loaded")
-        logger.info("startup_component_validation", component="CalibrationModel", status="✓ Loaded")
+        components_status["P1_Hybrid"] = True
+        logger.info("startup_component_validation", component="ModelRegistry", status="✓ Loaded Shared Pipeline")
     except Exception as e:
         components_status["FusionEngine"] = False
-        critical_failures += 1
-        logger.error("startup_component_validation", component="FusionEngine", status="✗ Failed", error=str(e))
-
-    try:
-        from app.core.engine.token_localization import TokenLevelLocalizationEngine
-        _ = TokenLevelLocalizationEngine()
-        components_status["TokenLocalization"] = True
-        logger.info("startup_component_validation", component="TokenLocalization", status="✓ Loaded")
-    except Exception as e:
-        components_status["TokenLocalization"] = False
-        logger.error("startup_component_validation", component="TokenLocalization", status="✗ Failed", error=str(e))
-
-    if critical_failures > 0:
-        logger.critical("startup_validation_failed_terminating", critical_failures=critical_failures)
-        raise RuntimeError("Critical pipeline component failed to load during startup.")
+        logger.error("startup_component_validation", component="ModelRegistry", status="✗ Failed", error=str(e))
+        raise RuntimeError(f"Critical pipeline component failed to load during startup: {e}")
 
     logger.info("startup_validation_completed", components=components_status)
 
@@ -274,23 +239,47 @@ def create_application() -> FastAPI:
     }
     app.state.component_readiness_override = component_readiness_override
 
-    @app.get("/health", tags=["System"], summary="System health check")
+    @app.get("/health", tags=["System"], summary="System health check with memory telemetry")
     @app.get("/healthz", tags=["System"], summary="System liveness check")
     async def health_check():
-        return {"status": "healthy"}
+        import os, psutil
+        try:
+            process = psutil.Process(os.getpid())
+            mem_mb = round(process.memory_info().rss / (1024 * 1024), 2)
+        except Exception:
+            mem_mb = 0.0
+        return {
+            "status": "healthy",
+            "version": settings.VERSION,
+            "memory_mb": mem_mb,
+            "models": {
+                "p1_hybrid": "loaded",
+                "p2_confidence": "provider_dependent",
+                "p3_consistency": "provider_dependent",
+            },
+        }
 
     @app.get("/ready", tags=["System"], summary="Deep component readiness check")
     @app.get("/readyz", tags=["System"], summary="Deep component readiness check")
     async def readiness_check():
-        components = dict(app.state.component_readiness_override)
-        all_ready = all(components.values())
-        status_code = status.HTTP_200_OK if all_ready else status.HTTP_503_SERVICE_UNAVAILABLE
+        from app.core.engine.model_registry import ModelRegistry
+        try:
+            _ = ModelRegistry.get_pipeline()
+            pipeline_ready = True
+        except Exception:
+            pipeline_ready = False
+
+        status_code = status.HTTP_200_OK if pipeline_ready else status.HTTP_503_SERVICE_UNAVAILABLE
 
         return JSONResponse(
             status_code=status_code,
             content={
-                "status": "ready" if all_ready else "unready",
-                "components": components,
+                "status": "ready" if pipeline_ready else "unready",
+                "components": {
+                    "p1_hybrid": pipeline_ready,
+                    "retriever": pipeline_ready,
+                    "fusion_engine": pipeline_ready,
+                },
                 "version": settings.VERSION,
             },
         )

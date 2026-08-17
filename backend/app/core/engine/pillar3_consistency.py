@@ -33,17 +33,13 @@ class Pillar3ConsistencyEngine:
 
     @classmethod
     def _get_embedding_model(cls):
-        if cls._embedding_model is None:
-            from sentence_transformers import SentenceTransformer
-            logger.info("loading_pillar3_embedding_model", model_name="all-MiniLM-L6-v2")
-            cls._embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-        return cls._embedding_model
+        from app.core.engine.model_registry import ModelRegistry
+        return ModelRegistry.get_sentence_transformer("all-MiniLM-L6-v2")
 
     @classmethod
     def _get_nli_engine(cls):
         if cls._nli_engine is None:
             from app.core.engine.entailment import EvidenceEntailmentEngine
-            logger.info("loading_pillar3_nli_engine", model_name="cross-encoder/nli-deberta-v3-small")
             cls._nli_engine = EvidenceEntailmentEngine()
         return cls._nli_engine
 

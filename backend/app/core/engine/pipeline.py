@@ -552,7 +552,8 @@ Respond STRICTLY in JSON using this schema:
         # =====================================================
 
         t_p3_start = time.perf_counter()
-        if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False):
+        has_llm_key = bool(getattr(settings, "GEMINI_API_KEY", "") or getattr(settings, "OPENAI_API_KEY", ""))
+        if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False) and has_llm_key:
             sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
 
         p3_global = self.p3_engine.analyze(

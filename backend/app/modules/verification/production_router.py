@@ -37,10 +37,13 @@ from app.core.engine.metrics_tracker import get_metrics_tracker
 
 router = APIRouter(tags=["Analysis"])
 
-# Lazy singletons for production engines
-_pipeline = HallucinationDetectionPipeline()
+# Lazy singletons for production engines via ModelRegistry
+from app.core.engine.model_registry import ModelRegistry
 _localization_engine = TokenLevelLocalizationEngine()
 _metrics_tracker = get_metrics_tracker()
+
+def get_pipeline():
+    return ModelRegistry.get_pipeline()
 
 MAX_PAYLOAD_BYTES = 100 * 1024  # 100 KB limit
 
@@ -125,7 +128,7 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
 
         t0 = time.perf_counter()
         report = await asyncio.to_thread(
-            _pipeline.analyze,
+            get_pipeline().analyze,
             text=response_text,
             query=query,
             token_probabilities=payload.logprobs,

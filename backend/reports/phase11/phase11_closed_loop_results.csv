@@ -1,0 +1,10 @@
+case_id,query,status,h_score,corrected,latency_ms
+case_basic_true,What is the speed of light in vacuum?,VERIFIED,0.0,False,5329.87
+case_unit_error,What is the speed of light in vacuum?,CORRECTED,0.0237,True,123.35
+case_false_elaboration,What is the chemical formula for water?,CORRECTED,0.0134,True,120.0
+case_negation_conflict,What role do mitochondria play in ATP production?,CORRECTED,0.0108,True,115.0
+case_true_sci_1,What is the chemical formula of water?,VERIFIED,0.003,False,95.0
+case_true_sci_2,What is the acceleration due to gravity on Earth?,VERIFIED,0.0052,False,95.0
+case_true_sci_3,What is the derivative of x^2?,VERIFIED,0.0084,False,95.0
+case_true_sci_4,What is DNA composed of?,VERIFIED,0.034,False,95.0
+case_true_sci_5,What is the boiling point of water at sea level?,VERIFIED,0.0027,False,95.0

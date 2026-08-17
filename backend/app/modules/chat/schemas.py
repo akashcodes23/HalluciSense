@@ -54,10 +54,11 @@ class ClosedLoopChatRequest(BaseModel):
 
 class VerificationSummary(BaseModel):
     status: str = Field(..., description="VERIFIED | CORRECTED | REVIEW | FAILED")
-    h_score: float = Field(..., ge=0.0, le=1.0)
-    risk_level: str
-    claims_total: int
-    claims_flagged: int
+    h_score: Optional[float] = Field(default=None, ge=0.0, le=1.0)
+    risk_level: Optional[str] = Field(default=None)
+    claims_total: Optional[int] = Field(default=None)
+    claims_flagged: Optional[int] = Field(default=None)
+    error_message: Optional[str] = Field(default=None)
 
 
 class CorrectionSummary(BaseModel):

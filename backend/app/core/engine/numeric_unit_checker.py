@@ -159,10 +159,10 @@ class NumericUnitChecker:
             except Exception:
                 pass
 
-        # 3. Standard decimal / integer with trailing unit or standalone
-        std_pattern = r"(?<!\w)([+-]?\d+(?:\.\d+)?)\s*([a-zA-Z°μ/·\^²³⁻¹]+|\b[a-zA-Z\s]{2,15}\b)?"
+        # 3. Standard decimal / integer (with optional thousands commas) with trailing unit or standalone
+        std_pattern = r"(?<!\w)([+-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?)\s*([a-zA-Z°μ/·\^²³⁻¹\s]{1,30})?"
         for match in re.finditer(std_pattern, text):
-            val_str = match.group(1)
+            val_str = match.group(1).replace(",", "")
             raw_unit_str = match.group(2) or ""
             # Avoid re-adding numbers matched by scientific / multiplier regex
             if any(q.raw_text in match.group(0) or match.group(0) in q.raw_text for q in quantities):
@@ -211,75 +211,90 @@ class NumericUnitChecker:
         if not evidence_quantities:
             return NumericUnitStatus.NO_NUMBERS, 0.0, "No numerical quantities found in evidence to verify."
 
+        best_conflict: Optional[Tuple[NumericUnitStatus, float, str]] = None
+
         for cq in claim_quantities:
+            cq_matched = False
             for eq in evidence_quantities:
                 # 1. Check if both have matching or convertible units
                 c_unit = cq.canonical_unit
                 e_unit = eq.canonical_unit
 
                 if c_unit and e_unit:
-                    # Same physical dimension?
                     c_scale = SCALE_FACTORS.get(c_unit)
                     e_scale = SCALE_FACTORS.get(e_unit)
 
                     if c_scale and e_scale:
-                        # Convert to common base
                         c_val_base = cq.value * c_scale
                         e_val_base = eq.value * e_scale
 
                         ratio = c_val_base / e_val_base if e_val_base != 0 else float("inf")
                         if abs(ratio - 1.0) < self.tolerance_pct:
-                            return (
-                                NumericUnitStatus.NUMERIC_MATCH,
-                                0.0,
-                                f"Numerical and unit match (Claim: {cq.value} {cq.unit} ≈ Evidence: {eq.value} {eq.unit})",
-                            )
+                            cq_matched = True
+                            break
                         elif abs(math.log10(max(1e-12, abs(ratio)))) >= 1.0:
-                            # Off by order of magnitude or scale
-                            return (
+                            best_conflict = (
                                 NumericUnitStatus.SCALE_CONFLICT,
                                 0.90,
                                 f"Scale/Unit conflict: claim={cq.value} {cq.unit} vs evidence={eq.value} {eq.unit} (ratio={ratio:.2e})",
                             )
                         else:
-                            return (
+                            best_conflict = (
                                 NumericUnitStatus.NUMERIC_CONFLICT,
                                 0.85,
                                 f"Numerical conflict: claim={cq.value} {cq.unit} vs evidence={eq.value} {eq.unit}",
                             )
-
+                    elif c_unit == e_unit:
+                        ratio = cq.value / eq.value if eq.value != 0 else float("inf")
+                        if abs(ratio - 1.0) < self.tolerance_pct:
+                            cq_matched = True
+                            break
+                        elif abs(math.log10(max(1e-12, abs(ratio)))) >= 1.0:
+                            best_conflict = (
+                                NumericUnitStatus.SCALE_CONFLICT,
+                                0.90,
+                                f"Scale conflict with matching unit {cq.unit}: claim={cq.value} vs evidence={eq.value}",
+                            )
+                        else:
+                            best_conflict = (
+                                NumericUnitStatus.NUMERIC_CONFLICT,
+                                0.85,
+                                f"Numerical conflict with matching unit {cq.unit}: claim={cq.value} vs evidence={eq.value}",
+                            )
                     elif c_unit != e_unit:
-                        # Incompatible units
-                        return (
+                        best_conflict = (
                             NumericUnitStatus.UNIT_CONFLICT,
                             0.80,
                             f"Unit conflict: claim uses {cq.unit} but evidence discusses {eq.unit}",
                         )
 
                 # 2. If units are not explicitly tagged, compare raw values / exponents
-                if cq.exponent != 0 or eq.exponent != 0:
-                    if abs(cq.exponent - eq.exponent) >= 2:
-                        return (
+                elif cq.value != 0 and eq.value != 0:
+                    ratio = cq.value / eq.value
+                    if abs(ratio - 1.0) < self.tolerance_pct:
+                        cq_matched = True
+                        break
+                    elif abs(cq.exponent - eq.exponent) >= 2 or abs(math.log10(max(1e-12, abs(ratio)))) >= 1.0:
+                        best_conflict = (
                             NumericUnitStatus.SCALE_CONFLICT,
                             0.88,
                             f"Order of magnitude error: claim exponent 10^{cq.exponent} vs evidence 10^{eq.exponent}",
                         )
-
-                # Compare direct numerical values if within comparable range
-                if eq.value != 0:
-                    ratio = cq.value / eq.value
-                    if abs(ratio - 1.0) < self.tolerance_pct:
-                        return (
-                            NumericUnitStatus.NUMERIC_MATCH,
-                            0.0,
-                            f"Numerical match: {cq.value} ≈ {eq.value}",
-                        )
                     elif ratio > 1.5 or ratio < 0.67:
-                        # Significant numerical mismatch
-                        return (
+                        best_conflict = (
                             NumericUnitStatus.NUMERIC_CONFLICT,
                             0.75,
                             f"Numerical value mismatch: claim states {cq.value}, evidence states {eq.value}",
                         )
+
+            if cq_matched:
+                return (
+                    NumericUnitStatus.NUMERIC_MATCH,
+                    0.0,
+                    f"Numerical and unit match verified in reference evidence.",
+                )
+
+        if best_conflict:
+            return best_conflict
 
         return NumericUnitStatus.NO_NUMBERS, 0.0, "No direct numerical conflict detected."

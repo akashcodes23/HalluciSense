@@ -6,6 +6,9 @@ import httpx
 from .types import Pillar1Result, EvidenceItem
 from .entailment import EvidenceEntailmentEngine
 from .temporal import TemporalClaimEngine, TemporalStatus, EpistemicModality
+from .numeric_unit_checker import NumericUnitChecker, NumericUnitStatus
+from .negation_detector import NegationDetector
+from .causal_direction import CausalDirectionChecker
 
 
 class EventTemporalAnchorResolver:
@@ -201,6 +204,9 @@ class Pillar1RetrievalEngine:
         self.entailment_engine = EvidenceEntailmentEngine()
         self.temporal_engine = TemporalClaimEngine()
         self.event_anchor_resolver = EventTemporalAnchorResolver()
+        self.numeric_checker = NumericUnitChecker()
+        self.negation_detector = NegationDetector()
+        self.causal_checker = CausalDirectionChecker()
 
     def extract_claims(self, text: str) -> List[str]:
         import time
@@ -329,9 +335,6 @@ class Pillar1RetrievalEngine:
         elif event_anchor_score is not None and event_anchor_score > 0.0:
             fe_score = round(max(fe_score, event_anchor_score), 4)
         elif temp_res.protected_from_temporal_penalty and temp_res.modality != EpistemicModality.ASSERTED_FACT:
-            # Preserve Phase 4's non-assertion semantics for prediction,
-            # hypothetical, conditional, counterfactual and fictional claims.
-            # Negated/quoted claims remain evidence-dependent.
             if temp_res.modality in {
                 EpistemicModality.PREDICTION,
                 EpistemicModality.HYPOTHETICAL,
@@ -340,6 +343,22 @@ class Pillar1RetrievalEngine:
                 EpistemicModality.FICTIONAL,
             }:
                 fe_score = 0.0
+
+        # Symbolic checks against top retrieved evidence
+        ev_snippets = [e.snippet for e in evidence if getattr(e, "snippet", "")]
+        if ev_snippets:
+            ev_combined = " ".join(ev_snippets[:3])
+            num_status, num_penalty, _ = self.numeric_checker.check_consistency(text, ev_combined)
+            if num_status in (NumericUnitStatus.NUMERIC_CONFLICT, NumericUnitStatus.SCALE_CONFLICT, NumericUnitStatus.UNIT_CONFLICT):
+                fe_score = round(max(fe_score, num_penalty), 4)
+
+            pol_res = self.negation_detector.analyze(text, ev_combined)
+            if pol_res.negation_inversion_detected or pol_res.antonym_inversion_detected:
+                fe_score = round(max(fe_score, pol_res.confidence_penalty), 4)
+
+            caus_res = self.causal_checker.check_inversion(text, ev_combined)
+            if caus_res.is_inversion_detected:
+                fe_score = round(max(fe_score, caus_res.confidence_penalty), 4)
 
         if not claims:
             reasoning = "No discrete factual claims identified."

@@ -1,0 +1,49 @@
+{
+  "health_check": {
+    "status": "healthy",
+    "memory_mb": 549.69,
+    "models": {
+      "p1_hybrid": "loaded"
+    }
+  },
+  "model_singleton": {
+    "nli_model": 1,
+    "sentence_transformer": 0,
+    "cross_encoder_reranker": 1,
+    "pipeline": 1
+  },
+  "basic_true_case": {
+    "status": "VERIFIED",
+    "h_score": 0.0,
+    "trace_id": "TRACE_F2130C520ACF",
+    "latency_ms": 5329.87
+  },
+  "numerical_unit_case": {
+    "performed": true,
+    "reverification_passed": true,
+    "final_text": "The speed of light in vacuum is approximately 299,792,458 m/s."
+  },
+  "failure_semantics_validation": {
+    "status": "FAILED",
+    "h_score": null,
+    "error_message": "Verification could not be completed because the verification service encountered an internal error."
+  },
+  "20_sequential_benchmark": {
+    "total_duration_ms": 1088.42,
+    "mean_latency_ms": 54.42,
+    "errors": 0,
+    "rss_mb": 1020.02
+  },
+  "concurrent_benchmarks": {
+    "5_concurrent_mean_ms": 117.22,
+    "10_concurrent_mean_ms": 102.14,
+    "peak_rss_mb": 1023.11
+  },
+  "verify_workspace_test": {
+    "claim": "Bengaluru is the capital of Maharashtra.",
+    "h_score": 0.9547,
+    "flagged_correctly": true
+  },
+  "acceptance_decision": "PRODUCTION_ACCEPTED",
+  "peak_rss_mb": 1049.98
+}

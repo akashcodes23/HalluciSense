@@ -1,0 +1,6 @@
+{
+  "verified_chat_latency_ms": 5329.89,
+  "corrected_chat_latency_ms": 123.35,
+  "20_sequential_mean_latency_ms": 54.42,
+  "10_concurrent_mean_latency_ms": 102.14
+}
