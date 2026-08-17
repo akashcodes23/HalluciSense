@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000263",
+  "sample_id": "sci_0263",
+  "timestamp": "2026-08-14T13:03:01Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the speed of light?",
+  "generated_response": "The speed of light is approximately 299,792,458 meters per second (m/s) or about 670,616,629 miles per hour (mph). This speed is the fastest known for any physical phenomenon and has been measured to an accuracy of around one part in a billion.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5003,
+    "claims": [
+      "The speed of light is approximately 299,792,458 meters per second (m/s) or about 670,616,629 miles per hour (mph). This speed is the fastest known for any physical phenomenon and has been measured to an accuracy of around one part in a billion."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3493,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8287,
+      0.8321,
+      0.8077
+    ],
+    "contradiction_score": 0.6689
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4464,
+    "reconstructed_h_score": 0.4464,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 6197.49,
+    "llm_gen_ms": 1166.51,
+    "p1_ms": 1750.8,
+    "p2_ms": 0.0,
+    "p3_ms": 6341.36,
+    "fusion_ms": 0.01
+  }
+}

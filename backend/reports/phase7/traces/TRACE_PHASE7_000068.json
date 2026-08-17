@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000068",
+  "sample_id": "med_0068",
+  "timestamp": "2026-08-14T12:19:50Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a common respiratory illness caused by various types of influenza viruses. Here are some basic treatment options for treating viral influenza:\n\n1. Supportive care: This includes rest, hydration, and providing nutrients to help the body fight off infection.\n\n2. Antivirals: While there are no antiviral drugs specifically targeted at influenza, many medications can help reduce symptoms and shorten the duration of illness. Some commonly used medications include:\n\n   - Oseltamivir (Tamiflu)\n   - Zidovudine (Antivir)\n   - Amantadine\n\n3. Acetaminophen: This medication can be used to relieve fever and pain associated with influenza symptoms.\n\n4. Influenza vaccines: While they are not a cure, influenza vaccines can help prevent the spread of influenza and reduce the likelihood of developing severe illness.\n\n5. Antifungal medications: If you have a fungal infection that is complicating your influenza symptoms, you may be prescribed antifungal medications.\n\nIt's important to note that while these treatments can help manage symptoms, they do not cure the virus itself. Therefore, it's important to continue to practice good hygiene and social distancing practices to prevent the spread of influenza.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a common respiratory illness caused by various types of influenza viruses. Here are some basic treatment options for treating viral influenza:\n\n1. Supportive care: This includes rest",
+      "and providing nutrients to help the body fight off infection.\n\n2. Antivirals: While there are no antiviral drugs specifically targeted at influenza",
+      "many medications can help reduce symptoms and shorten the duration of illness. Some commonly used medications include:\n\n   - Oseltamivir (Tamiflu)\n   - Zidovudine (Antivir)\n   - Amantadine\n\n3. Acetaminophen: This medication can be used to relieve fever and pain associated with influenza symptoms.\n\n4. Influenza vaccines: While they are not a cure",
+      "influenza vaccines can help prevent the spread of influenza and reduce the likelihood of developing severe illness.\n\n5. Antifungal medications: If you have a fungal infection that is complicating your influenza symptoms",
+      "you may be prescribed antifungal medications.\n\nIt's important to note that while these treatments can help manage symptoms",
+      "they do not cure the virus itself. Therefore",
+      "it's important to continue to practice good hygiene and social distancing practices to prevent the spread of influenza."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0951,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8105,
+      0.8833,
+      0.8691
+    ],
+    "contradiction_score": 0.0012
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.034,
+    "reconstructed_h_score": 0.034,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17094.81,
+    "llm_gen_ms": 4904.99,
+    "p1_ms": 1834.86,
+    "p2_ms": 0.01,
+    "p3_ms": 20075.13,
+    "fusion_ms": 0.01
+  }
+}

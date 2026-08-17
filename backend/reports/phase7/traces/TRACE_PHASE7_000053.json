@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000053",
+  "sample_id": "med_0053",
+  "timestamp": "2026-08-14T12:16:51Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar is regulated by several hormones and pathways in the human body:\n\n1. **Insulin**: This hormone is produced by the pancreas and plays a crucial role in regulating glucose levels. It helps cells absorb and use glucose for energy.\n\n2. **Glucagon**: Produced by the pancreas, glucagon promotes glycogen synthesis (the storage of glucose) and decreases blood sugar levels.\n\n3. **Pancreatic Islets**: These are small, sensitive clusters of cells in the pancreas that produce insulin and glucagon.\n\n4. **Hormones from the Endocrine Pancreas**: These hormones include:\n\n   - **Glucagon-like Polypeptide (GLP-1)**: This hormone is released by the pancreas to regulate blood sugar levels and hunger.\n   \n   - **Glycated Glucose Binding Protein (GABP)**: This hormone helps stabilize blood glucose levels.\n\n5. **Metabolic Rate**: The body's metabolic rate also affects blood sugar regulation. When you exercise, your body burns more energy and produces more insulin to keep blood sugar stable.\n\n6. **Insulin Resistance**: If the body becomes resistant to insulin due to factors like age, obesity, lack of physical activity, or certain medications, it can lead to hyperglycemia (high blood sugar levels).\n\nThe balance between these hormones helps maintain a normal blood sugar level, which is essential for energy production and overall health.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Blood sugar is regulated by several hormones and pathways in the human body:\n\n1. **Insulin**: This hormone is produced by the pancreas and plays a crucial role in regulating glucose levels. It helps cells absorb and use glucose for energy.\n\n2. **Glucagon**: Produced by the pancreas",
+      "glucagon promotes glycogen synthesis (the storage of glucose) and decreases blood sugar levels.\n\n3. **Pancreatic Islets**: These are small",
+      "sensitive clusters of cells in the pancreas that produce insulin and glucagon.\n\n4. **Hormones from the Endocrine Pancreas**: These hormones include:\n\n   - **Glucagon-like Polypeptide (GLP-1)**: This hormone is released by the pancreas to regulate blood sugar levels and hunger.\n   \n   - **Glycated Glucose Binding Protein (GABP)**: This hormone helps stabilize blood glucose levels.\n\n5. **Metabolic Rate**: The body's metabolic rate also affects blood sugar regulation. When you exercise",
+      "your body burns more energy and produces more insulin to keep blood sugar stable.\n\n6. **Insulin Resistance**: If the body becomes resistant to insulin due to factors like age",
+      "lack of physical activity",
+      "it can lead to hyperglycemia (high blood sugar levels).\n\nThe balance between these hormones helps maintain a normal blood sugar level",
+      "which is essential for energy production and overall health."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0858,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8608,
+      0.8686,
+      0.8755
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0306,
+    "reconstructed_h_score": 0.0306,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20729.99,
+    "llm_gen_ms": 5708.36,
+    "p1_ms": 2084.16,
+    "p2_ms": 0.02,
+    "p3_ms": 24179.35,
+    "fusion_ms": 0.01
+  }
+}

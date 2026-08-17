@@ -1,0 +1,18 @@
+{
+  "n": 750,
+  "TP": 266,
+  "TN": 390,
+  "FP": 0,
+  "FN": 94,
+  "accuracy": 0.8747,
+  "precision": 1.0,
+  "recall": 0.7389,
+  "specificity": 1.0,
+  "f1": 0.8498,
+  "balanced_accuracy": 0.8694,
+  "mcc": 0.7716,
+  "auroc": 1.0,
+  "auprc": 1.0,
+  "ece": 0.315,
+  "brier_score": 0.1977
+}

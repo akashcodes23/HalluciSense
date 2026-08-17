@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000482",
+  "sample_id": "che_0482",
+  "timestamp": "2026-08-14T13:52:34Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does helium form covalent bonds?",
+  "generated_response": "No, helium does not form covalent bonds. Covalent bonds involve the sharing of electrons between atoms in order to achieve an equal number of valence electrons on each atom. Helium is a noble gas and its electron configuration is \\(1s^2\\). Since helium has one electron in its outer shell and it doesn't have enough electrons to satisfy the octet rule (which requires that each element have 8 electrons), it cannot form any covalent bonds with other atoms.\n\nIn fact, helium exhibits a very stable state as an inert gas.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.83,
+    "claims": [
+      "helium does not form covalent bonds. Covalent bonds involve the sharing of electrons between atoms in order to achieve an equal number of valence electrons on each atom. Helium is a noble gas and its electron configuration is \\(1s^2\\). Since helium has one electron in its outer shell and it doesn't have enough electrons to satisfy the octet rule (which requires that each element have 8 electrons)",
+      "it cannot form any covalent bonds with other atoms.\n\nIn fact",
+      "helium exhibits a very stable state as an inert gas."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0523,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8666,
+      0.9497,
+      0.9427
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.5523,
+    "reconstructed_h_score": 0.5523,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 12877.87,
+    "llm_gen_ms": 2502.53,
+    "p1_ms": 3122.01,
+    "p2_ms": 0.01,
+    "p3_ms": 12853.58,
+    "fusion_ms": 0.01
+  }
+}

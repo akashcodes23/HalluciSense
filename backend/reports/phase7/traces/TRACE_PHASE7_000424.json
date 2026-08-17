@@ -1,0 +1,75 @@
+{
+  "trace_id": "TRACE_PHASE7_000424",
+  "sample_id": "bio_0424",
+  "timestamp": "2026-08-14T13:42:35Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through the process of fertilization, which involves two key steps: ovulation and insemination.\n\n1. **Ovulation**: In females (females), the ovaries produce an egg, also known as an oocyte. This process occurs during the menstrual cycle and typically happens about 4 to 6 days after a woman's last menstrual period. The egg is released from the follicle that contains it.\n\n2. **Insemination**: In males (males), the sperm cells are produced in the testes and travel through the vas deferens, which leads to the uterus. When a male encounters an ovulating female during sex, the sperm travels into the fallopian tube, where they combine with the egg.\n\n3. **Fertilization**: The combination of sperm and egg forms a zygote (fertilized egg). The zygote then travels down the fallopian tube to the uterus, where it implants itself in the lining of the uterine wall.\n\n4. **Implantation**: Once the fertilized egg reaches the uterus, it attaches to the lining through a process called implantation. This attachment is crucial as it allows the growing embryo to receive nutrients and oxygen from the mother's blood.\n\n5. **Development**: The zygote then develops into a fetus over several weeks, with the presence of organs such as a liver, kidneys, heart, and lungs that are unique to mammals.\n\nUnderstanding these steps helps explain how all mammals reproduce, and it provides insights into evolutionary processes involving sexual reproduction.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4427,
+    "claims": [
+      "Mammals reproduce through the process of fertilization",
+      "which involves two key steps: ovulation and insemination.\n\n1. **Ovulation**: In females (females)",
+      "the ovaries produce an egg",
+      "also known as an oocyte. This process occurs during the menstrual cycle and typically happens about 4 to 6 days after a woman's last menstrual period. The egg is released from the follicle that contains it.\n\n2. **Insemination**: In males (males)",
+      "the sperm cells are produced in the testes and travel through the vas deferens",
+      "which leads to the uterus. When a male encounters an ovulating female during sex",
+      "the sperm travels into the fallopian tube",
+      "where they combine with the egg.\n\n3. **Fertilization**: The combination of sperm and egg forms a zygote (fertilized egg). The zygote then travels down the fallopian tube to the uterus",
+      "where it implants itself in the lining of the uterine wall.\n\n4. **Implantation**: Once the fertilized egg reaches the uterus",
+      "it attaches to the lining through a process called implantation. This attachment is crucial as it allows the growing embryo to receive nutrients and oxygen from the mother's blood.\n\n5. **Development**: The zygote then develops into a fetus over several weeks",
+      "with the presence of organs such as a liver",
+      "and lungs that are unique to mammals.\n\nUnderstanding these steps helps explain how all mammals reproduce",
+      "and it provides insights into evolutionary processes involving sexual reproduction."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2743,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7745,
+      0.629,
+      0.7175
+    ],
+    "contradiction_score": 0.2397
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3826,
+    "reconstructed_h_score": 0.3826,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23836.56,
+    "llm_gen_ms": 6948.15,
+    "p1_ms": 5225.64,
+    "p2_ms": 0.06,
+    "p3_ms": 22567.31,
+    "fusion_ms": 0.02
+  }
+}

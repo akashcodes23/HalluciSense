@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000357",
+  "sample_id": "phy_0357",
+  "timestamp": "2026-08-14T13:25:50Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity scales with the square of the mass. This is known as Newton's law of universal gravitation, which states that every particle in the universe attracts every other particle through a force proportional to their masses and inversely proportional to the square of the distance between them. The constant of proportionality is called the gravitational constant, denoted by G.\n\nThe relationship can be expressed mathematically as:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere:\n- \\( F \\) is the force of gravity between two masses,\n- \\( G \\) is the gravitational constant (approximately 6.674 \u00d7 10^-11 N\u00b7m\u00b2/kg\u00b2),\n- \\( m_1 \\) and \\( m_2 \\) are the masses of the two objects, and\n- \\( r \\) is the distance between their centers.\n\nAs you can see from this equation, doubling the mass of an object increases the force of gravity by a factor of four (since \\( m_1^2 \\times m_2^2 = 4 \\times (m_1 \\times m_2)^2 \\)). The distance does not affect the scaling because the constant G is independent of distance.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gravity scales with the square of the mass. This is known as Newton's law of universal gravitation",
+      "which states that every particle in the universe attracts every other particle through a force proportional to their masses and inversely proportional to the square of the distance between them. The constant of proportionality is called the gravitational constant",
+      "denoted by G.\n\nThe relationship can be expressed mathematically as:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere:\n- \\( F \\) is the force of gravity between two masses",
+      "- \\( G \\) is the gravitational constant (approximately 6.674 \u00d7 10^-11 N\u00b7m\u00b2/kg\u00b2)",
+      "- \\( m_1 \\) and \\( m_2 \\) are the masses of the two objects",
+      "and\n- \\( r \\) is the distance between their centers.\n\nAs you can see from this equation",
+      "doubling the mass of an object increases the force of gravity by a factor of four (since \\( m_1^2 \\times m_2^2 = 4 \\times (m_1 \\times m_2)^2 \\)). The distance does not affect the scaling because the constant G is independent of distance."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2975,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7922,
+      0.7042,
+      0.6664
+    ],
+    "contradiction_score": 0.3316
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1062,
+    "reconstructed_h_score": 0.1062,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21506.67,
+    "llm_gen_ms": 5071.49,
+    "p1_ms": 3320.43,
+    "p2_ms": 0.01,
+    "p3_ms": 24740.68,
+    "fusion_ms": 0.01
+  }
+}

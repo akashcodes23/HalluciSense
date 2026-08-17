@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000280",
+  "sample_id": "sci_0280",
+  "timestamp": "2026-08-14T13:05:43Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does sound travel in vacuum?",
+  "generated_response": "Yes, sound travels through the air and solid materials. Sound travels at approximately 340 meters per second (or about 122 miles per hour) in normal temperature and pressure conditions.\n\nSound travels differently depending on its frequency and properties. In general:\n\n1. **Low Frequency Sound**: Lower frequencies propagate faster than higher frequencies due to their shorter wavelengths.\n2. **Higher Frequency Sound**: Higher frequencies propagate slower than lower frequencies because they have longer wavelengths.\n\nFor example, the human ear can hear frequencies between 20 Hz (low) and 20 kHz (high). Below about 20 Hz, sound waves are not audible to humans.\n\nIn a vacuum, there is no medium for sound to travel through. Sound cannot propagate without a medium, so it cannot travel in a vacuum.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "sound travels through the air and solid materials. Sound travels at approximately 340 meters per second (or about 122 miles per hour) in normal temperature and pressure conditions.\n\nSound travels differently depending on its frequency and properties. In general:\n\n1. **Low Frequency Sound**: Lower frequencies propagate faster than higher frequencies due to their shorter wavelengths.\n2. **Higher Frequency Sound**: Higher frequencies propagate slower than lower frequencies because they have longer wavelengths.\n\nFor example",
+      "the human ear can hear frequencies between 20 Hz (low) and 20 kHz (high). Below about 20 Hz",
+      "sound waves are not audible to humans.\n\nIn a vacuum",
+      "there is no medium for sound to travel through. Sound cannot propagate without a medium",
+      "so it cannot travel in a vacuum."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4742,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8183,
+      0.7883,
+      0.8158
+    ],
+    "contradiction_score": 0.9973
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.8122,
+    "reconstructed_h_score": 0.8122,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 11331.4,
+    "llm_gen_ms": 3424.47,
+    "p1_ms": 1556.16,
+    "p2_ms": 0.01,
+    "p3_ms": 11037.17,
+    "fusion_ms": 0.01
+  }
+}

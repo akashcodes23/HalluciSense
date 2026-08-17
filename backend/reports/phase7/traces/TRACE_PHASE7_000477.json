@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000477",
+  "sample_id": "che_0477",
+  "timestamp": "2026-08-14T13:51:49Z",
+  "domain": "Chemistry",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Who created the Periodic Table?",
+  "generated_response": "The Periodic Table was created by Dmitri Mendeleev in 1869. He organized the known chemical elements based on their atomic numbers and properties, including their physical states, valence electrons, and tendencies to form compounds with each other. The table includes not only the first 83 elements but also a few predicted elements that have since been discovered.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4583,
+    "claims": [
+      "The Periodic Table was created by Dmitri Mendeleev in 1869. He organized the known chemical elements based on their atomic numbers and properties",
+      "including their physical states",
+      "and tendencies to form compounds with each other. The table includes not only the first 83 elements but also a few predicted elements that have since been discovered."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2699,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8423,
+      0.6573,
+      0.7938
+    ],
+    "contradiction_score": 0.3339
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.391,
+    "reconstructed_h_score": 0.391,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7531.34,
+    "llm_gen_ms": 1265.23,
+    "p1_ms": 2819.11,
+    "p2_ms": 0.01,
+    "p3_ms": 6445.62,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000656",
+  "sample_id": "pol_0656",
+  "timestamp": "2026-08-14T14:36:46Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How big is the UN Security Council?",
+  "generated_response": "The United Nations Security Council (UNSC) is composed of 15 member states, each represented by a non-voting member and two voting members. The total number of seats in the UNSC is 19, with 10 being elected annually by the General Assembly and one by the five permanent members of the UNSC: China, France, Russia, United Kingdom, and United States.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1252,
+    "claims": [
+      "The United Nations Security Council (UNSC) is composed of 15 member states",
+      "each represented by a non-voting member and two voting members. The total number of seats in the UNSC is 19, with 10 being elected annually by the General Assembly and one by the five permanent members of the UNSC: China"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1743,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7957,
+      0.6998,
+      0.7442
+    ],
+    "contradiction_score": 0.0273
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1427,
+    "reconstructed_h_score": 0.1427,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7405.42,
+    "llm_gen_ms": 1503.94,
+    "p1_ms": 3149.43,
+    "p2_ms": 0.01,
+    "p3_ms": 5057.38,
+    "fusion_ms": 0.0
+  }
+}

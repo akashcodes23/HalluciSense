@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000339",
+  "sample_id": "com_0339",
+  "timestamp": "2026-08-14T13:20:21Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is a popular shortest path algorithm used to find the shortest path between two nodes in a graph. It works by maintaining a list of the shortest known distances from the source node to all other nodes. The algorithm iteratively selects the unvisited node with the smallest distance, updates its neighbors' distances, and marks them as visited. This process continues until it reaches the destination node or exhausts all possible paths.\n\nThe algorithm is particularly useful in network routing problems, where you need to find the most efficient path between different nodes on a network.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3359,
+    "claims": [
+      "Dijkstra's algorithm is a popular shortest path algorithm used to find the shortest path between two nodes in a graph. It works by maintaining a list of the shortest known distances from the source node to all other nodes. The algorithm iteratively selects the unvisited node with the smallest distance",
+      "updates its neighbors' distances",
+      "and marks them as visited. This process continues until it reaches the destination node or exhausts all possible paths.\n\nThe algorithm is particularly useful in network routing problems",
+      "where you need to find the most efficient path between different nodes on a network."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1118,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8412,
+      0.8184,
+      0.9168
+    ],
+    "contradiction_score": 0.0572
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2559,
+    "reconstructed_h_score": 0.2559,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16773.57,
+    "llm_gen_ms": 2523.13,
+    "p1_ms": 3008.65,
+    "p2_ms": 0.01,
+    "p3_ms": 20958.78,
+    "fusion_ms": 0.01
+  }
+}

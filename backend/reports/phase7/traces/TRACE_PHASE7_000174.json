@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000174",
+  "sample_id": "fin_0174",
+  "timestamp": "2026-08-14T12:46:49Z",
+  "domain": "Finance",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Do financial derivatives have risk?",
+  "generated_response": "Yes, financial derivatives do inherently involve some level of risk. These derivatives provide an opportunity for speculators to profit from changes in the value of underlying assets or interest rates. However, as with any investment, there is always the potential for loss. It's important to understand the risks associated with financial derivatives and to carefully analyze the terms and conditions before entering into any derivative positions. Additionally, it's crucial to diversify your investments and seek professional advice if you're unsure about the risks involved.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "financial derivatives do inherently involve some level of risk. These derivatives provide an opportunity for speculators to profit from changes in the value of underlying assets or interest rates. However",
+      "as with any investment",
+      "there is always the potential for loss. It's important to understand the risks associated with financial derivatives and to carefully analyze the terms and conditions before entering into any derivative positions. Additionally",
+      "it's crucial to diversify your investments and seek professional advice if you're unsure about the risks involved."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0994,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8312,
+      0.8265,
+      0.8838
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0355,
+    "reconstructed_h_score": 0.0355,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18012.67,
+    "llm_gen_ms": 2132.71,
+    "p1_ms": 2021.77,
+    "p2_ms": 0.01,
+    "p3_ms": 26412.08,
+    "fusion_ms": 0.01
+  }
+}

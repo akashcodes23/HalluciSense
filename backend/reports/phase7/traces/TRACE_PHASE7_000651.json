@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000651",
+  "sample_id": "pol_0651",
+  "timestamp": "2026-08-14T14:35:37Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "In democracies, the choice of leadership typically follows a series of steps designed to ensure that the country's people can make decisions that benefit them most. Here is a simplified overview:\n\n1. **Initiation**: The process begins with elections where citizens vote for their preferred candidate. This process involves multiple rounds of voting to ensure a representative democracy.\n\n2. **Election Process**:\n   - **Voting System**: There are various types of election systems, including first-past-the-post, proportional representation (PR), or mixed-methods that combine both.\n   - **Candidates**: Candidates are chosen from among the eligible voters based on their party affiliations or the specific criteria set by the political system.\n\n3. **Campaigning and Advertising**:\n   - Candidates prepare detailed campaign materials to communicate their vision for the future, their policies, and how they plan to solve problems facing the country.\n   - These campaigns involve rallies, speeches, debates, and advertising in various media outlets to inform voters about the candidates and their positions.\n\n4. **Ballot**: After the voting process, citizens cast their ballots at designated voting stations, marking their choice for a candidate. This ensures that every citizen has an equal opportunity to express their preferences.\n\n5. **Transition**: Once the election is over, the new leader is sworn in as the head of state or government. The transition can involve several steps:\n   - **Formation of the Executive Branch**: A new executive branch (e.g., presidency, prime minister) is formed based on the vote.\n   - **Legislative Assembly**: A new legislative assembly (e.g., parliament, congress) is established to oversee and develop laws.\n   - **Economic System**: The new government may introduce new economic policies or reforms.\n\n6. **National Governance**: Under the leadership of the elected officials, the country transitions into a new political system and begins implementing its policies and plans.\n\n7. **Continuity**: The democratic process is often reinforced through periodic elections to ensure that the people have an opportunity to vote for their leaders again, thereby maintaining democracy in place.\n\nThis process aims to ensure that the country's citizens are engaged and have a say in who holds power, promoting accountable governance and citizen participation.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "the choice of leadership typically follows a series of steps designed to ensure that the country's people can make decisions that benefit them most. Here is a simplified overview:\n\n1. **Initiation**: The process begins with elections where citizens vote for their preferred candidate. This process involves multiple rounds of voting to ensure a representative democracy.\n\n2. **Election Process**:\n   - **Voting System**: There are various types of election systems",
+      "or mixed-methods that combine both.\n   - **Candidates**: Candidates are chosen from among the eligible voters based on their party affiliations or the specific criteria set by the political system.\n\n3. **Campaigning and Advertising**:\n   - Candidates prepare detailed campaign materials to communicate their vision for the future",
+      "and how they plan to solve problems facing the country.\n   - These campaigns involve rallies",
+      "and advertising in various media outlets to inform voters about the candidates and their positions.\n\n4. **Ballot**: After the voting process",
+      "citizens cast their ballots at designated voting stations",
+      "marking their choice for a candidate. This ensures that every citizen has an equal opportunity to express their preferences.\n\n5. **Transition**: Once the election is over",
+      "the new leader is sworn in as the head of state or government. The transition can involve several steps:\n   - **Formation of the Executive Branch**: A new executive branch (e.g.",
+      "prime minister) is formed based on the vote.\n   - **Legislative Assembly**: A new legislative assembly (e.g.",
+      "congress) is established to oversee and develop laws.\n   - **Economic System**: The new government may introduce new economic policies or reforms.\n\n6. **National Governance**: Under the leadership of the elected officials",
+      "the country transitions into a new political system and begins implementing its policies and plans.\n\n7. **Continuity**: The democratic process is often reinforced through periodic elections to ensure that the people have an opportunity to vote for their leaders again",
+      "thereby maintaining democracy in place.\n\nThis process aims to ensure that the country's citizens are engaged and have a say in who holds power",
+      "promoting accountable governance and citizen participation."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1811,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.7252,
+      0.7182
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0647,
+    "reconstructed_h_score": 0.0647,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 28100.85,
+    "llm_gen_ms": 9646.36,
+    "p1_ms": 2783.83,
+    "p2_ms": 0.04,
+    "p3_ms": 30678.27,
+    "fusion_ms": 0.02
+  }
+}

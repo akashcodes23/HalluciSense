@@ -1,0 +1,10 @@
+{
+  "category_breakdown": {
+    "HIGH_CONSISTENCY_TRUE": 319,
+    "CONSISTENT_HALLUCINATION": 278,
+    "INCONSISTENT_HALLUCINATION": 97,
+    "INCONSISTENT_TRUE": 56
+  },
+  "consistent_hallucination_rate": 0.3707,
+  "finding": "Pillar 3 Self-Consistency frequently exhibits 'Consistent Hallucinations' where the LLM repeats the same false prior across all 3 stochastic generations with zero semantic contradiction, demonstrating why P3 alone cannot replace P1 Evidence Grounding."
+}

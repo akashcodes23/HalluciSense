@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000569",
+  "sample_id": "mat_0569",
+  "timestamp": "2026-08-14T14:17:12Z",
+  "domain": "Mathematics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of angles in any triangle is always \\(180^\\circ\\). This property is fundamental in Euclidean geometry and can be proven using angle addition postulate, which states that if two angles are adjacent to a third angle, then their sum is equal to the third angle. By considering the triangle as three adjacent angles plus a fourth right angle (which is \\(90^\\circ\\)), we can show that the sum of all four angles equals \\(180^\\circ\\).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The sum of angles in any triangle is always \\(180^\\circ\\). This property is fundamental in Euclidean geometry and can be proven using angle addition postulate",
+      "which states that if two angles are adjacent to a third angle",
+      "then their sum is equal to the third angle. By considering the triangle as three adjacent angles plus a fourth right angle (which is \\(90^\\circ\\))",
+      "we can show that the sum of all four angles equals \\(180^\\circ\\)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.107,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8756,
+      0.8649,
+      0.7694
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0382,
+    "reconstructed_h_score": 0.0382,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16461.03,
+    "llm_gen_ms": 3025.71,
+    "p1_ms": 3389.55,
+    "p2_ms": 0.01,
+    "p3_ms": 17177.46,
+    "fusion_ms": 0.01
+  }
+}

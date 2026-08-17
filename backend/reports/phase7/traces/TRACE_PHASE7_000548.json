@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000548",
+  "sample_id": "new_0548",
+  "timestamp": "2026-08-14T14:10:07Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are generally regulated to protect investors and maintain the stability of the financial system. Regulatory measures vary between countries and regions, but they typically include rules for asset prices, trading behavior, and company governance. Some key regulatory frameworks may include:\n\n1. **Securities Laws**: These laws outline the basic requirements for companies seeking to operate as public securities. They cover areas such as registration, disclosure of information, and anti-fraud measures.\n\n2. **Exchange Regulation**: Regulatory bodies oversee stock exchanges, which are platforms where securities can be traded. They ensure that trading is fair, transparent, and compliant with regulatory rules.\n\n3. **Regulatory Authorities**: Central banks or financial regulators are responsible for overseeing a country's stock market. These authorities enforce regulations to maintain order, prevent fraudulent activities, and promote investor protection.\n\n4. **Investment Risks**: Regulatory bodies also emphasize the importance of understanding investment risks and diversifying portfolios. They provide guidance on financial management strategies to help investors mitigate potential losses.\n\nOverall, stock markets are regulated to ensure that they operate in a safe, orderly manner, protect investors, and support the overall stability of the financial system.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3986,
+    "claims": [
+      "stock markets are generally regulated to protect investors and maintain the stability of the financial system. Regulatory measures vary between countries and regions",
+      "but they typically include rules for asset prices",
+      "and company governance. Some key regulatory frameworks may include:\n\n1. **Securities Laws**: These laws outline the basic requirements for companies seeking to operate as public securities. They cover areas such as registration",
+      "and anti-fraud measures.\n\n2. **Exchange Regulation**: Regulatory bodies oversee stock exchanges",
+      "which are platforms where securities can be traded. They ensure that trading is fair",
+      "and compliant with regulatory rules.\n\n3. **Regulatory Authorities**: Central banks or financial regulators are responsible for overseeing a country's stock market. These authorities enforce regulations to maintain order",
+      "and promote investor protection.\n\n4. **Investment Risks**: Regulatory bodies also emphasize the importance of understanding investment risks and diversifying portfolios. They provide guidance on financial management strategies to help investors mitigate potential losses.\n\nOverall",
+      "stock markets are regulated to ensure that they operate in a safe",
+      "and support the overall stability of the financial system."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0804,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8992,
+      0.8896,
+      0.8413
+    ],
+    "contradiction_score": 0.0007
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.285,
+    "reconstructed_h_score": 0.285,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20847.36,
+    "llm_gen_ms": 5157.89,
+    "p1_ms": 3434.99,
+    "p2_ms": 0.04,
+    "p3_ms": 20947.24,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000472",
+  "sample_id": "che_0472",
+  "timestamp": "2026-08-14T13:51:02Z",
+  "domain": "Chemistry",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does gold rust in water?",
+  "generated_response": "No, gold does not rust in water. Rust is a chemical process that occurs when certain substances react with oxygen to form a reddish-brown substance called verdigris or patina. This reaction typically happens in the presence of moisture and other chemicals, such as acids or saltwater.\nGold, on the other hand, is a highly stable metal that does not rust under normal conditions. It is resistant to corrosion, including chemical attacks like those caused by water.\nIt's worth noting that while gold may not rust, it can be attacked by certain environmental factors such as exposure to acid rain, extreme temperatures, or pollutants. In some cases, it may form a protective coating over time called patina that resists further wear and tear.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "gold does not rust in water. Rust is a chemical process that occurs when certain substances react with oxygen to form a reddish-brown substance called verdigris or patina. This reaction typically happens in the presence of moisture and other chemicals",
+      "such as acids or saltwater.\nGold",
+      "on the other hand",
+      "is a highly stable metal that does not rust under normal conditions. It is resistant to corrosion",
+      "including chemical attacks like those caused by water.\nIt's worth noting that while gold may not rust",
+      "it can be attacked by certain environmental factors such as exposure to acid rain",
+      "or pollutants. In some cases",
+      "it may form a protective coating over time called patina that resists further wear and tear."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.049,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9336,
+      0.9455,
+      0.8953
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6604,
+    "reconstructed_h_score": 0.6604,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 14676.36,
+    "llm_gen_ms": 3376.68,
+    "p1_ms": 2284.84,
+    "p2_ms": 0.01,
+    "p3_ms": 17086.43,
+    "fusion_ms": 0.01
+  }
+}

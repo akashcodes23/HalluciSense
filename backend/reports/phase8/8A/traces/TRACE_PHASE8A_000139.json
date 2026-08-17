@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000139",
+  "sample_id": "8A_MED_TRU_0139",
+  "timestamp": "2026-08-17T05:54:11Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Medicine",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "easy",
+  "input": "mRNA COVID-19 vaccines cause the body to produce spike protein antibodies and permanently alter the recipient's DNA.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: COVID-19 vaccine",
+  "source_url": "https://en.wikipedia.org/wiki/COVID-19_vaccine",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1643.23
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

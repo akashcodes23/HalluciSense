@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000740",
+  "sample_id": "lit_0740",
+  "timestamp": "2026-08-14T14:51:24Z",
+  "domain": "Literature",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Who wrote Pride and Prejudice?",
+  "generated_response": "Pride and Prejudice was written by Jane Austen, an English novelist of the early 19th century.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0878,
+    "claims": [
+      "Pride and Prejudice was written by Jane Austen",
+      "an English novelist of the early 19th century."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0689,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9313,
+      0.8642,
+      0.8864
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0811,
+    "reconstructed_h_score": 0.0811,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4042.29,
+    "llm_gen_ms": 581.01,
+    "p1_ms": 2426.95,
+    "p2_ms": 0.0,
+    "p3_ms": 1884.46,
+    "fusion_ms": 0.01
+  }
+}

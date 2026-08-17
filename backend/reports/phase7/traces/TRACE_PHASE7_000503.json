@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000503",
+  "sample_id": "new_0503",
+  "timestamp": "2026-08-14T13:56:14Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks change interest rates to influence the economy and help manage inflation. They can increase or decrease interest rates depending on whether they want to stimulate economic growth or reduce it, as well as to control inflation.\n\nHere are some of the reasons why central banks change rates:\n\n1. Inflation: Central banks often raise interest rates when inflation is rising, which increases the cost of borrowing money for businesses and consumers. This can help reduce inflation and stabilize prices.\n\n2. Economic growth: When inflation is high, it can make it difficult for businesses to earn a profit. By raising interest rates, central banks can encourage investment in new technologies, products, and services, which can lead to increased economic growth.\n\n3. Financial stability: Higher interest rates can also help maintain financial stability by reducing the amount of money that banks need to hold as reserves. This reduces the risk of a bank failing and causes a financial crisis.\n\n4. Macroeconomic policy: Central banks may use interest rate changes as part of their macroeconomic policy toolkit, such as adjusting monetary policy to keep inflation in check or stimulate economic growth when necessary.\n\nOverall, central banks use interest rate changes to influence the economy through various mechanisms, including controlling inflation, promoting economic growth, and maintaining financial stability.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4591,
+    "claims": [
+      "Central banks change interest rates to influence the economy and help manage inflation. They can increase or decrease interest rates depending on whether they want to stimulate economic growth or reduce it",
+      "as well as to control inflation.\n\nHere are some of the reasons why central banks change rates:\n\n1. Inflation: Central banks often raise interest rates when inflation is rising",
+      "which increases the cost of borrowing money for businesses and consumers. This can help reduce inflation and stabilize prices.\n\n2. Economic growth: When inflation is high",
+      "it can make it difficult for businesses to earn a profit. By raising interest rates",
+      "central banks can encourage investment in new technologies",
+      "which can lead to increased economic growth.\n\n3. Financial stability: Higher interest rates can also help maintain financial stability by reducing the amount of money that banks need to hold as reserves. This reduces the risk of a bank failing and causes a financial crisis.\n\n4. Macroeconomic policy: Central banks may use interest rate changes as part of their macroeconomic policy toolkit",
+      "such as adjusting monetary policy to keep inflation in check or stimulate economic growth when necessary.\n\nOverall",
+      "central banks use interest rate changes to influence the economy through various mechanisms",
+      "and maintaining financial stability."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0465,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.9206,
+      0.937
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3118,
+    "reconstructed_h_score": 0.3118,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 24240.18,
+    "llm_gen_ms": 5198.86,
+    "p1_ms": 2561.67,
+    "p2_ms": 0.01,
+    "p3_ms": 31485.89,
+    "fusion_ms": 0.02
+  }
+}

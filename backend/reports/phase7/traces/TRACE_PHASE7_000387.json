@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000387",
+  "sample_id": "phy_0387",
+  "timestamp": "2026-08-14T13:34:14Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is Newton's third law?",
+  "generated_response": "Newton's third law states that for every action, there is an equal and opposite reaction. This means that if object A exerts a force on object B, then object B will exert an equal and opposite force back on object A. The magnitude of the reaction force is equal to the magnitude of the action force, but in the opposite direction.\n\nNewton's third law is fundamental in physics and has many practical applications, including:\n\n1. Understanding motion: By understanding the forces acting on an object, we can predict its behavior and motion.\n2. Designing machines: Engineers use Newton's third law to design machines that operate according to specific rules.\n3. Predicting celestial phenomena: In astronomy, Newton's third law is used to explain how objects move in space and interact with each other.\n\nNewton's third law also has important implications for our understanding of gravity, as it explains why objects fall towards the ground and why we feel weightlessness when standing on a frictionless surface.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.329,
+    "claims": [
+      "Newton's third law states that for every action",
+      "there is an equal and opposite reaction. This means that if object A exerts a force on object B",
+      "then object B will exert an equal and opposite force back on object A. The magnitude of the reaction force is equal to the magnitude of the action force",
+      "but in the opposite direction.\n\nNewton's third law is fundamental in physics and has many practical applications",
+      "including:\n\n1. Understanding motion: By understanding the forces acting on an object",
+      "we can predict its behavior and motion.\n2. Designing machines: Engineers use Newton's third law to design machines that operate according to specific rules.\n3. Predicting celestial phenomena: In astronomy",
+      "Newton's third law is used to explain how objects move in space and interact with each other.\n\nNewton's third law also has important implications for our understanding of gravity",
+      "as it explains why objects fall towards the ground and why we feel weightlessness when standing on a frictionless surface."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1405,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8093,
+      0.7942,
+      0.7521
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2617,
+    "reconstructed_h_score": 0.2617,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13219.5,
+    "llm_gen_ms": 4203.67,
+    "p1_ms": 1289.76,
+    "p2_ms": 0.01,
+    "p3_ms": 14075.16,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000145",
+  "sample_id": "law_0145",
+  "timestamp": "2026-08-14T12:38:25Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas Corpus is a legal principle in the United States and other countries that allows an individual to have a court review their ability to assert a legal claim or proceed with certain actions. The most famous instance of habeas corpus occurred in the case of King Charles II of England, who was accused of treason and had his property seized without due process.\n\nIn habeas corpus cases, the defendant raises a claim that they are unable to satisfy any requirements necessary for their case to be heard or resolved. If the court finds that the defendant is properly served with the proceedings and has received proper notice of the charges, it can then decide whether to release the defendant from custody or require them to appear in court.\n\nIf the defendant cannot present a valid claim, the court may issue a habeas corpus writ, which orders the defendant to appear in court for further proceedings. If the defendant appears and does not raise a valid claim, they will be released from custody.\n\nThe concept of habeas corpus is important because it ensures that individuals have a fair trial by requiring them to present evidence and make arguments in support of their legal claims. It also protects defendants against arbitrary or illegal actions taken by the government or by law enforcement officials.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3896,
+    "claims": [
+      "Habeas Corpus is a legal principle in the United States and other countries that allows an individual to have a court review their ability to assert a legal claim or proceed with certain actions. The most famous instance of habeas corpus occurred in the case of King Charles II of England",
+      "who was accused of treason and had his property seized without due process.\n\nIn habeas corpus cases",
+      "the defendant raises a claim that they are unable to satisfy any requirements necessary for their case to be heard or resolved. If the court finds that the defendant is properly served with the proceedings and has received proper notice of the charges",
+      "it can then decide whether to release the defendant from custody or require them to appear in court.\n\nIf the defendant cannot present a valid claim",
+      "the court may issue a habeas corpus writ",
+      "which orders the defendant to appear in court for further proceedings. If the defendant appears and does not raise a valid claim",
+      "they will be released from custody.\n\nThe concept of habeas corpus is important because it ensures that individuals have a fair trial by requiring them to present evidence and make arguments in support of their legal claims. It also protects defendants against arbitrary or illegal actions taken by the government or by law enforcement officials."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0757,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.877,
+      0.892,
+      0.8945
+    ],
+    "contradiction_score": 0.0079
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2775,
+    "reconstructed_h_score": 0.2775,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20562.92,
+    "llm_gen_ms": 4486.57,
+    "p1_ms": 2566.18,
+    "p2_ms": 0.02,
+    "p3_ms": 26127.84,
+    "fusion_ms": 0.01
+  }
+}

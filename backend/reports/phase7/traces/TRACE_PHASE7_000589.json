@@ -1,0 +1,60 @@
+{
+  "trace_id": "TRACE_PHASE7_000589",
+  "sample_id": "mat_0589",
+  "timestamp": "2026-08-14T14:24:59Z",
+  "domain": "Mathematics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of the angles in any triangle is always 180 degrees.\n\nHere's a simple Python code snippet to demonstrate this:\n\n```python\ndef sum_of_angles_in_triangle():\n    # The sum of angles in a triangle is always 180 degrees\n    return 180\n\nprint(sum_of_angles_in_triangle())\n```\n\nWhen you run this code, it will output `180`.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The sum of the angles in any triangle is always 180 degrees.\n\nHere's a simple Python code snippet to demonstrate this:\n\n```python\ndef sum_of_angles_in_triangle():\n    # The sum of angles in a triangle is always 180 degrees\n    return 180\n\nprint(sum_of_angles_in_triangle())\n```\n\nWhen you run this code",
+      "it will output `180`."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": false,
+    "score": null,
+    "sample_count": 1,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "h_score": 0.0,
+    "reconstructed_h_score": 0.0,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20146.46,
+    "llm_gen_ms": 1838.99,
+    "p1_ms": 3302.16,
+    "p2_ms": 0.0,
+    "p3_ms": 30010.55,
+    "fusion_ms": 0.01
+  }
+}

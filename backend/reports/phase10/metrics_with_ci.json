@@ -1,0 +1,27 @@
+{
+  "accuracy": {
+    "mean": 0.8747,
+    "ci_95_lower": 0.852,
+    "ci_95_upper": 0.8973
+  },
+  "f1": {
+    "mean": 0.8497,
+    "ci_95_lower": 0.8199,
+    "ci_95_upper": 0.8793
+  },
+  "auroc": {
+    "mean": 1.0,
+    "ci_95_lower": 1.0,
+    "ci_95_upper": 1.0
+  },
+  "ece": {
+    "mean": 0.3151,
+    "ci_95_lower": 0.2927,
+    "ci_95_upper": 0.3376
+  },
+  "brier_score": {
+    "mean": 0.1977,
+    "ci_95_lower": 0.1953,
+    "ci_95_upper": 0.2001
+  }
+}

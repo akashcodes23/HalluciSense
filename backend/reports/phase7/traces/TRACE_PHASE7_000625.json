@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000625",
+  "sample_id": "geo_0625",
+  "timestamp": "2026-08-14T14:32:23Z",
+  "domain": "Geography",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "Where is the Amazon River?",
+  "generated_response": "The Amazon River is located in South America. It begins at the confluence of the Orinoco and R\u00edo Negro rivers, just north of Venezuela. The river flows through Central and South America until it empties into the Atlantic Ocean at Rio de Janeiro, Brazil. The Amazon is one of the world's longest rivers, measuring over 6,400 kilometers (3,970 miles) long and draining an area of about 2 million square kilometers (758,195 square miles).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2765,
+    "claims": [
+      "The Amazon River is located in South America. It begins at the confluence of the Orinoco and R\u00edo Negro rivers",
+      "just north of Venezuela. The river flows through Central and South America until it empties into the Atlantic Ocean at Rio de Janeiro",
+      "Brazil. The Amazon is one of the world's longest rivers",
+      "measuring over 6,400 kilometers (3,970 miles) long and draining an area of about 2 million square kilometers (758,195 square miles)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0775,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8911,
+      0.8417,
+      0.91
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2054,
+    "reconstructed_h_score": 0.2054,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9549.25,
+    "llm_gen_ms": 1496.0,
+    "p1_ms": 3740.26,
+    "p2_ms": 0.02,
+    "p3_ms": 8076.99,
+    "fusion_ms": 0.02
+  }
+}

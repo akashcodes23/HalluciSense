@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000275",
+  "sample_id": "sci_0275",
+  "timestamp": "2026-08-14T13:04:54Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the speed of light?",
+  "generated_response": "The speed of light in a vacuum is approximately 299,792,458 meters per second (m/s), or about 670,616,629 miles per hour (mph). This constant, denoted by \\( c \\), is fundamental to our understanding of the universe and the workings of physics.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4601,
+    "claims": [
+      "The speed of light in a vacuum is approximately 299,792,458 meters per second (m/s)",
+      "or about 670,616,629 miles per hour (mph). This constant",
+      "denoted by \\( c \\)",
+      "is fundamental to our understanding of the universe and the workings of physics."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.302,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8346,
+      0.9317,
+      0.9056
+    ],
+    "contradiction_score": 0.6596
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4036,
+    "reconstructed_h_score": 0.4036,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8065.11,
+    "llm_gen_ms": 1656.68,
+    "p1_ms": 2822.64,
+    "p2_ms": 0.0,
+    "p3_ms": 5975.96,
+    "fusion_ms": 0.01
+  }
+}

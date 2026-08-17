@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000689",
+  "sample_id": "pol_0689",
+  "timestamp": "2026-08-14T14:44:50Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a system of government in which the federal government exercises powers over multiple levels of government. In the United States, this means that state governments and local governments each have certain powers, but they also share some powers with the federal government. The federal government, represented by Congress, has the power to make laws that affect all states and citizens, while state governments are responsible for implementing those laws in their own jurisdictions. Local governments, such as towns and cities, are responsible for providing public services like roads, parks, and schools.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3917,
+    "claims": [
+      "Federalism is a system of government in which the federal government exercises powers over multiple levels of government. In the United States",
+      "this means that state governments and local governments each have certain powers",
+      "but they also share some powers with the federal government. The federal government",
+      "has the power to make laws that affect all states and citizens",
+      "while state governments are responsible for implementing those laws in their own jurisdictions. Local governments",
+      "such as towns and cities",
+      "are responsible for providing public services like roads"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2175,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.891,
+      0.9163,
+      0.8099
+    ],
+    "contradiction_score": 0.3846
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3295,
+    "reconstructed_h_score": 0.3295,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11987.0,
+    "llm_gen_ms": 2655.62,
+    "p1_ms": 2703.13,
+    "p2_ms": 0.01,
+    "p3_ms": 12732.41,
+    "fusion_ms": 0.0
+  }
+}

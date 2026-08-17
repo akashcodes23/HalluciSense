@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000471",
+  "sample_id": "che_0471",
+  "timestamp": "2026-08-14T13:50:47Z",
+  "domain": "Chemistry",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the composition of water?",
+  "generated_response": "Water is composed of two main components: hydrogen and oxygen. Water molecules consist of one hydrogen atom and two oxygen atoms bonded together by covalent bonds. The chemical formula for water is H2O, which indicates that each molecule contains two hydrogen atoms and one oxygen atom. Water has a unique molecular structure that allows it to form numerous compounds such as acids, bases, and salts.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3396,
+    "claims": [
+      "Water is composed of two main components: hydrogen and oxygen. Water molecules consist of one hydrogen atom and two oxygen atoms bonded together by covalent bonds. The chemical formula for water is H2O",
+      "which indicates that each molecule contains two hydrogen atoms and one oxygen atom. Water has a unique molecular structure that allows it to form numerous compounds such as acids"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1083,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8312,
+      0.7937,
+      0.8765
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.257,
+    "reconstructed_h_score": 0.257,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 5733.13,
+    "llm_gen_ms": 1542.28,
+    "p1_ms": 2666.27,
+    "p2_ms": 0.01,
+    "p3_ms": 2687.38,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000418",
+  "sample_id": "bio_0418",
+  "timestamp": "2026-08-14T13:41:20Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What do mitochondria produce?",
+  "generated_response": "Mitochondria are organelles found in the cells of all organisms. They play a crucial role in cellular metabolism and energy production. Here is a brief overview of what they produce:\n\n1. ATP (Adenosine Triphosphate): Mitochondria convert glucose, oxygen, and water into ATP through a process called cellular respiration. ATP is the primary source of energy for cells and powers all chemical reactions in the body.\n\n2. Adenylylsugar Phosphate: This compound is produced when ATP binds to adenylic acid (adenosine triphosphate). It plays a role in energy storage and activation of some enzymes.\n\n3. NAD+ and NADP+: These are coenzymes that assist with the production of ATP by mitochondrial electron transport chains. They are essential for many cellular processes, including glycolysis and oxidative phosphorylation.\n\n4. Fatty acids: Mitochondria produce fatty acids from glucose through a process called beta-oxidation. This is important for energy storage in cells as well as helping to build cell membranes.\n\n5. Carbohydrates: The citric acid cycle in mitochondria can convert carbohydrates into ATP, producing carbon dioxide and water as byproducts. This cycle also produces several other compounds that are important in cellular processes.\n\n6. Hydrogen: Mitochondria play a role in the electron transport chain and can generate hydrogen ions that are used to produce ATP through proton pumps.\n\n7. Lipoic acids: These fatty acids are produced in mitochondria and are important for maintaining antioxidant properties in cells.\n\nOverall, mitochondria are responsible for providing the energy required by most cellular processes in the body.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4954,
+    "claims": [
+      "Mitochondria are organelles found in the cells of all organisms. They play a crucial role in cellular metabolism and energy production. Here is a brief overview of what they produce:\n\n1. ATP (Adenosine Triphosphate): Mitochondria convert glucose",
+      "and water into ATP through a process called cellular respiration. ATP is the primary source of energy for cells and powers all chemical reactions in the body.\n\n2. Adenylylsugar Phosphate: This compound is produced when ATP binds to adenylic acid (adenosine triphosphate). It plays a role in energy storage and activation of some enzymes.\n\n3. NAD+ and NADP+: These are coenzymes that assist with the production of ATP by mitochondrial electron transport chains. They are essential for many cellular processes",
+      "including glycolysis and oxidative phosphorylation.\n\n4. Fatty acids: Mitochondria produce fatty acids from glucose through a process called beta-oxidation. This is important for energy storage in cells as well as helping to build cell membranes.\n\n5. Carbohydrates: The citric acid cycle in mitochondria can convert carbohydrates into ATP",
+      "producing carbon dioxide and water as byproducts. This cycle also produces several other compounds that are important in cellular processes.\n\n6. Hydrogen: Mitochondria play a role in the electron transport chain and can generate hydrogen ions that are used to produce ATP through proton pumps.\n\n7. Lipoic acids: These fatty acids are produced in mitochondria and are important for maintaining antioxidant properties in cells.\n\nOverall",
+      "mitochondria are responsible for providing the energy required by most cellular processes in the body."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1284,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8063,
+      0.8017,
+      0.7995
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3643,
+    "reconstructed_h_score": 0.3643,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12986.31,
+    "llm_gen_ms": 6605.0,
+    "p1_ms": 2094.69,
+    "p2_ms": 0.02,
+    "p3_ms": 6617.7,
+    "fusion_ms": 0.03
+  }
+}

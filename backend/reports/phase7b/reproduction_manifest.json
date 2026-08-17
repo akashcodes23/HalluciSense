@@ -1,0 +1,15 @@
+{
+  "analysis_phase": "Phase 7B Live Integrity & Discrepancy Forensic Audit",
+  "timestamp": "2026-08-17T04:56:20Z",
+  "sample_count": 750,
+  "domains": 15,
+  "dataset_hash": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "phase6_metrics_hash": "ef3f37348a09bca19b19ff4c39fc4e8ed06c383f0a4a1486b773c171edd806f4",
+  "phase7_metrics_hash": "3d4a536881bfb24ee48bd7ba8a8f1f6248ffb7d29bf55592828521dd97b92290",
+  "random_seeds": {
+    "bootstrap": 42,
+    "train_val_split": 42
+  },
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama"
+}

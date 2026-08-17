@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000570",
+  "sample_id": "mat_0570",
+  "timestamp": "2026-08-14T14:17:29Z",
+  "domain": "Mathematics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Are all prime numbers even?",
+  "generated_response": "No, not all prime numbers are even. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. The smallest prime number is 2, which is the only even prime number. Other prime numbers, such as 3, 5, 7, 11, etc., are odd.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3086,
+    "claims": [
+      "not all prime numbers are even. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. The smallest prime number is 2, which is the only even prime number. Other prime numbers",
+      "such as 3, 5, 7, 11, etc."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0302,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9698,
+      0.9725,
+      0.9213
+    ],
+    "contradiction_score": 0.0019
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2092,
+    "reconstructed_h_score": 0.2092,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16533.93,
+    "llm_gen_ms": 1212.53,
+    "p1_ms": 3275.71,
+    "p2_ms": 0.01,
+    "p3_ms": 21637.69,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000698",
+  "sample_id": "pol_0698",
+  "timestamp": "2026-08-14T14:46:51Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power is a political concept that refers to the ability of an individual or body to override a law or decision made by another entity. In some countries, veto power can be exercised by a single member of parliament, while in others it may be exercised by multiple members or even the entire government.\n\nWhen a country's government passes a law or makes a decision that is opposed by the country's opposition party or other influential groups, they may choose to override it through the use of veto power. This can happen for a variety of reasons, such as:\n\n  * Lack of consensus: The government and opposition party may disagree on what should be done, making it difficult to reach a compromise.\n  * Economic concerns: The government may be facing economic problems that require immediate action, even if it means bypassing the opposition party's views.\n  * Cultural or religious differences: The government and opposition party may have different cultural or religious beliefs that prevent them from agreeing on what should be done.\n\nIn some countries, veto power is used to ensure that the country remains true to its principles and values, regardless of public opinion. However, in other countries, veto power is seen as a tool for maintaining power and controlling the actions of the government.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Veto power is a political concept that refers to the ability of an individual or body to override a law or decision made by another entity. In some countries",
+      "veto power can be exercised by a single member of parliament",
+      "while in others it may be exercised by multiple members or even the entire government.\n\nWhen a country's government passes a law or makes a decision that is opposed by the country's opposition party or other influential groups",
+      "they may choose to override it through the use of veto power. This can happen for a variety of reasons",
+      "such as:\n\n  * Lack of consensus: The government and opposition party may disagree on what should be done",
+      "making it difficult to reach a compromise.\n  * Economic concerns: The government may be facing economic problems that require immediate action",
+      "even if it means bypassing the opposition party's views.\n  * Cultural or religious differences: The government and opposition party may have different cultural or religious beliefs that prevent them from agreeing on what should be done.\n\nIn some countries",
+      "veto power is used to ensure that the country remains true to its principles and values",
+      "regardless of public opinion. However",
+      "veto power is seen as a tool for maintaining power and controlling the actions of the government."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1547,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8473,
+      0.8606,
+      0.8542
+    ],
+    "contradiction_score": 0.171
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0552,
+    "reconstructed_h_score": 0.0552,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20690.42,
+    "llm_gen_ms": 5272.31,
+    "p1_ms": 6750.19,
+    "p2_ms": 0.17,
+    "p3_ms": 14561.63,
+    "fusion_ms": 0.03
+  }
+}

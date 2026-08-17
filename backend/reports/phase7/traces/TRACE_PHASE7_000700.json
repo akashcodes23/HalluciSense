@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000700",
+  "sample_id": "pol_0700",
+  "timestamp": "2026-08-14T14:47:29Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How big is the UN Security Council?",
+  "generated_response": "As of my last update in October 2023, the United Nations Security Council has 15 members, which includes five permanent members (the United States, Russia, China, France, and Britain) and ten non-permanent members, who are elected by consensus. This arrangement allows the council to balance its decision-making between maintaining world peace and security and ensuring that all member states have equal representation.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2335,
+    "claims": [
+      "As of my last update in October 2023, the United Nations Security Council has 15 members",
+      "which includes five permanent members (the United States",
+      "and Britain) and ten non-permanent members",
+      "who are elected by consensus. This arrangement allows the council to balance its decision-making between maintaining world peace and security and ensuring that all member states have equal representation."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2218,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8215,
+      0.8856,
+      0.9184
+    ],
+    "contradiction_score": 0.402
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2293,
+    "reconstructed_h_score": 0.2293,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12300.54,
+    "llm_gen_ms": 1626.23,
+    "p1_ms": 4301.1,
+    "p2_ms": 0.03,
+    "p3_ms": 10732.84,
+    "fusion_ms": 0.02
+  }
+}

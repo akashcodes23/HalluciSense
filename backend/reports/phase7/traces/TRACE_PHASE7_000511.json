@@ -1,0 +1,78 @@
+{
+  "trace_id": "TRACE_PHASE7_000511",
+  "sample_id": "new_0511",
+  "timestamp": "2026-08-14T13:58:50Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks (CBs) change interest rates to influence the money supply and economic conditions. Here are some reasons why:\n\n1. **Controling Money Supply**: Central banks can adjust their target for the money supply, which is the amount of money in circulation that the central bank aims to maintain over time. By changing interest rates, CBs can control the amount of money available for borrowing, affecting investment and consumer spending.\n\n2. **Stimulating Economic Growth**: When central banks lower interest rates, it makes borrowing cheaper for businesses and consumers. This leads to increased investment and production, which is essential for economic growth.\n\n3. **Inflation Control**: Lowering interest rates can lead to an increase in the price level of goods and services (inflation), although this depends on several factors including the demand for money versus the supply of it. Central banks try to control inflation by adjusting interest rates accordingly.\n\n4. **Regulating Asset Prices**: By influencing interest rates, central banks can affect asset prices such as stocks, real estate, and bonds. This is often done through open market operations or other monetary policy tools.\n\n5. **Promoting Exchange Rate Stability**: If the currency of a country becomes too strong relative to others (hyperinflation), central banks might lower interest rates to make it more attractive for foreign investment. Conversely, if the currency becomes too weak, they might raise interest rates to discourage foreign inflows and stabilize the exchange rate.\n\n6. **Regulating Credit Markets**: Central banks can use interest rates to regulate credit markets by influencing lending rates and other credit-related instruments. This helps maintain financial stability and prevents excessive debt levels.\n\n7. **Controlling Money Flows into Country**: By adjusting interest rates, central banks can influence how much money flows into a country, which is crucial for economic development and fiscal policy.\n\n8. **Incentivizing Savings and Investing**: Lowering interest rates can encourage people to save more, which can be used to fund infrastructure projects or invest in the stock market. This can lead to economic growth by creating jobs and stimulating economic activity.\n\nThe goal of central banks is generally to promote economic stability, growth, and price stability within a country.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Central banks (CBs) change interest rates to influence the money supply and economic conditions. Here are some reasons why:\n\n1. **Controling Money Supply**: Central banks can adjust their target for the money supply",
+      "which is the amount of money in circulation that the central bank aims to maintain over time. By changing interest rates",
+      "CBs can control the amount of money available for borrowing",
+      "affecting investment and consumer spending.\n\n2. **Stimulating Economic Growth**: When central banks lower interest rates",
+      "it makes borrowing cheaper for businesses and consumers. This leads to increased investment and production",
+      "which is essential for economic growth.\n\n3. **Inflation Control**: Lowering interest rates can lead to an increase in the price level of goods and services (inflation)",
+      "although this depends on several factors including the demand for money versus the supply of it. Central banks try to control inflation by adjusting interest rates accordingly.\n\n4. **Regulating Asset Prices**: By influencing interest rates",
+      "central banks can affect asset prices such as stocks",
+      "and bonds. This is often done through open market operations or other monetary policy tools.\n\n5. **Promoting Exchange Rate Stability**: If the currency of a country becomes too strong relative to others (hyperinflation)",
+      "central banks might lower interest rates to make it more attractive for foreign investment. Conversely",
+      "if the currency becomes too weak",
+      "they might raise interest rates to discourage foreign inflows and stabilize the exchange rate.\n\n6. **Regulating Credit Markets**: Central banks can use interest rates to regulate credit markets by influencing lending rates and other credit-related instruments. This helps maintain financial stability and prevents excessive debt levels.\n\n7. **Controlling Money Flows into Country**: By adjusting interest rates",
+      "central banks can influence how much money flows into a country",
+      "which is crucial for economic development and fiscal policy.\n\n8. **Incentivizing Savings and Investing**: Lowering interest rates can encourage people to save more",
+      "which can be used to fund infrastructure projects or invest in the stock market. This can lead to economic growth by creating jobs and stimulating economic activity.\n\nThe goal of central banks is generally to promote economic stability",
+      "and price stability within a country."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0678,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9041,
+      0.8817,
+      0.9036
+    ],
+    "contradiction_score": 0.0014
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0242,
+    "reconstructed_h_score": 0.0242,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 31261.03,
+    "llm_gen_ms": 9373.38,
+    "p1_ms": 6324.17,
+    "p2_ms": 0.06,
+    "p3_ms": 29737.21,
+    "fusion_ms": 0.02
+  }
+}

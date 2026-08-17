@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000364",
+  "sample_id": "phy_0364",
+  "timestamp": "2026-08-14T13:27:38Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero is the lowest temperature possible in Celsius or Kelvin, denoted as -273.15\u00b0C or -459.67\u00b0F. At this point, matter ceases to exist and becomes a form of energy known as blackbody radiation.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2674,
+    "claims": [
+      "Absolute zero is the lowest temperature possible in Celsius or Kelvin",
+      "denoted as -273.15\u00b0C or -459.67\u00b0F. At this point",
+      "matter ceases to exist and becomes a form of energy known as blackbody radiation."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0656,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9129,
+      0.8838,
+      0.9036
+    ],
+    "contradiction_score": 0.002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1953,
+    "reconstructed_h_score": 0.1953,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10477.08,
+    "llm_gen_ms": 1011.23,
+    "p1_ms": 2862.42,
+    "p2_ms": 0.0,
+    "p3_ms": 12289.81,
+    "fusion_ms": 0.01
+  }
+}

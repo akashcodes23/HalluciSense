@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000033",
+  "sample_id": "8A_PHY_TRU_0033",
+  "timestamp": "2026-08-17T05:50:49Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "hard",
+  "input": "Superconductivity, observed in some materials below a critical temperature, allows electrical resistance to become exactly zero and also increases magnetic permeability.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Superconductivity",
+  "source_url": "https://en.wikipedia.org/wiki/Superconductivity",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 2201.15
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

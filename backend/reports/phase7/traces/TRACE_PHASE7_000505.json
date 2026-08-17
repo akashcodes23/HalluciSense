@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000505",
+  "sample_id": "new_0505",
+  "timestamp": "2026-08-14T13:56:58Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits typically focus on discussing various aspects of climate change, including but not limited to:\n\n1. **Global Warming**: The long-term rise in Earth's average temperature caused by human activities.\n\n2. **Changes in Weather Patterns**: Changes in rainfall, temperature fluctuations, and extreme weather events like hurricanes, droughts, and wildfires.\n\n3. **Impact on Natural Systems**: The effects of climate change on ecosystems, such as changes in plant species, animal migration patterns, and biodiversity.\n\n4. **Human Adaptations**: Efforts to mitigate the impacts of climate change, including adaptation strategies for infrastructure, agriculture, and energy systems.\n\n5. **Policy and Decision Making**: How governments, organizations, and businesses can respond to climate change policies and initiatives.\n\n6. **Technology Solutions**: Advances in renewable energy sources, sustainable farming practices, and other technologies that help reduce carbon emissions.\n\n7. **Public Awareness and Education**: Programs and campaigns to educate people about the causes of climate change and how individuals can make changes to protect the planet.\n\n8. **International Cooperation**: The importance of international cooperation and partnerships to address climate change effectively.\n\nThese summits often involve a wide range of stakeholders, including scientists, policymakers, environmental activists, businesses, and local communities, to discuss and develop strategies for addressing climate change.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.466,
+    "claims": [
+      "Climate summits typically focus on discussing various aspects of climate change",
+      "including but not limited to:\n\n1. **Global Warming**: The long-term rise in Earth's average temperature caused by human activities.\n\n2. **Changes in Weather Patterns**: Changes in rainfall",
+      "and extreme weather events like hurricanes",
+      "and wildfires.\n\n3. **Impact on Natural Systems**: The effects of climate change on ecosystems",
+      "such as changes in plant species",
+      "and biodiversity.\n\n4. **Human Adaptations**: Efforts to mitigate the impacts of climate change",
+      "including adaptation strategies for infrastructure",
+      "and energy systems.\n\n5. **Policy and Decision Making**: How governments",
+      "and businesses can respond to climate change policies and initiatives.\n\n6. **Technology Solutions**: Advances in renewable energy sources",
+      "and other technologies that help reduce carbon emissions.\n\n7. **Public Awareness and Education**: Programs and campaigns to educate people about the causes of climate change and how individuals can make changes to protect the planet.\n\n8. **International Cooperation**: The importance of international cooperation and partnerships to address climate change effectively.\n\nThese summits often involve a wide range of stakeholders",
+      "to discuss and develop strategies for addressing climate change."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0848,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9122,
+      0.8502,
+      0.8477
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3299,
+    "reconstructed_h_score": 0.3299,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22620.2,
+    "llm_gen_ms": 5816.84,
+    "p1_ms": 7051.7,
+    "p2_ms": 0.02,
+    "p3_ms": 17960.78,
+    "fusion_ms": 0.01
+  }
+}

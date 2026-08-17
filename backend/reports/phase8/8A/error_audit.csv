@@ -1,0 +1,31 @@
+id,domain,category,claim,ground_truth,h_score,predicted_label,error_type,primary_failure_cause,secondary_failure_cause,nli_score,nli_label,latency_ms
+8A_PHY_TRU_0001,Physics,TRUE_CONTROL,The speed of light in a vacuum is approximately 3×10⁸ metres per second.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5000.96
+8A_PHY_TRU_0002,Physics,TRUE_CONTROL,An electron has a rest mass of approximately 9.11×10⁻³¹ kilograms.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5661.06
+8A_PHY_TRU_0003,Physics,TRUE_CONTROL,The gravitational acceleration at Earth's surface is approximately 9.8 m/s².,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5630.89
+8A_PHY_TRU_0004,Physics,TRUE_CONTROL,Planck's constant has a value of approximately 6.626×10⁻³⁴ joule-seconds.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4806.68
+8A_PHY_TRU_0005,Physics,TRUE_CONTROL,The wavelength of visible light ranges from approximately 380 nm to 740 nm.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4800.5
+8A_CHE_TRU_0036,Chemistry,TRUE_CONTROL,Water has a molecular formula of H₂O and a molar mass of approximately 18 g/mol.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4906.69
+8A_CHE_TRU_0037,Chemistry,TRUE_CONTROL,The pH of a neutral aqueous solution at 25°C is 7.0.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,9465.97
+8A_CHE_TRU_0038,Chemistry,TRUE_CONTROL,Carbon-12 is the most abundant stable isotope of carbon.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4995.73
+8A_CHE_TRU_0039,Chemistry,TRUE_CONTROL,The Avogadro constant is approximately 6.022×10²³ per mole.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4975.81
+8A_CHE_TRU_0040,Chemistry,TRUE_CONTROL,Sodium chloride (NaCl) dissociates completely into Na⁺ and Cl⁻ ions when dissolved in water.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4634.53
+8A_BIO_TRU_0071,Biology,TRUE_CONTROL,Human DNA contains approximately 3 billion base pairs.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4905.99
+8A_BIO_TRU_0072,Biology,TRUE_CONTROL,The mitochondrion is the primary site of ATP synthesis via oxidative phosphorylation in eukaryotic cells.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5466.19
+8A_BIO_TRU_0073,Biology,TRUE_CONTROL,DNA replication is semi-conservative: each daughter strand retains one original parental strand.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5649.01
+8A_BIO_TRU_0074,Biology,TRUE_CONTROL,"The human body has 23 pairs of chromosomes, totalling 46.",0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4911.6
+8A_BIO_TRU_0075,Biology,TRUE_CONTROL,Photosynthesis in plants occurs in the chloroplast and converts CO₂ and water into glucose using light energy.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5113.84
+8A_BIO_UNI_0084,Biology,UNIT_SCALE,A ribosome is approximately 25 nm in diameter.,0,0.5,1,FP,NLI_FAILURE,RETRIEVAL_FAILURE,,,4534.62
+8A_BIO_NEG_0087,Biology,NEGATION,Enzymes are not used up or permanently altered during the biochemical reactions they catalyse.,0,0.5,1,FP,NLI_FAILURE,RETRIEVAL_FAILURE,,,4717.82
+8A_BIO_NEG_0089,Biology,NEGATION,The central dogma of molecular biology states that protein sequences cannot be used to determine DNA sequences.,0,0.5,1,FP,NLI_FAILURE,RETRIEVAL_FAILURE,,,4647.32
+8A_MED_TRU_0106,Medicine,TRUE_CONTROL,"Penicillin, the first widely used antibiotic, was discovered by Alexander Fleming in 1928.",0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4797.29
+8A_MED_TRU_0107,Medicine,TRUE_CONTROL,Type 1 diabetes is caused by autoimmune destruction of insulin-producing beta cells in the pancreatic islets of Langerhans.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5310.34
+8A_MED_TRU_0108,Medicine,TRUE_CONTROL,Hypertension is defined as a sustained systolic blood pressure of ≥140 mmHg or diastolic ≥90 mmHg.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4568.97
+8A_MED_TRU_0109,Medicine,TRUE_CONTROL,The ABO blood group system involves antigens on red blood cell surfaces and corresponding antibodies in plasma.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5461.42
+8A_MED_TRU_0110,Medicine,TRUE_CONTROL,"Statins reduce cardiovascular risk primarily by inhibiting HMG-CoA reductase, the rate-limiting enzyme in cholesterol synthesis.",0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,7063.96
+8A_MED_UNI_0119,Medicine,UNIT_SCALE,A typical CT scan radiation dose is approximately 10 millisieverts.,0,0.5,1,FP,NLI_FAILURE,RETRIEVAL_FAILURE,,,4473.19
+8A_MED_TRU_0137,Medicine,TRUE_CORE_FALSE_ELABORATION,HIV antiretroviral therapy suppresses viral replication; it was approved for use in 1987 and includes the drug azidothymidine (AZT).,0,0.5,1,FP,NLI_FAILURE,RETRIEVAL_FAILURE,,,5698.48
+8A_MAT_TRU_0140,Mathematics,TRUE_CONTROL,The sum of the interior angles of any triangle in Euclidean geometry is exactly 180 degrees.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,4957.01
+8A_MAT_TRU_0141,Mathematics,TRUE_CONTROL,The number π is irrational and cannot be expressed as a ratio of two integers.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5200.8
+8A_MAT_TRU_0142,Mathematics,TRUE_CONTROL,Euler's identity states that e^(iπ) + 1 = 0.,0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5687.11
+8A_MAT_TRU_0143,Mathematics,TRUE_CONTROL,"There are infinitely many prime numbers, as proved by Euclid.",0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5196.44
+8A_MAT_TRU_0144,Mathematics,TRUE_CONTROL,"The Pythagorean theorem states that in a right triangle a² + b² = c², where c is the hypotenuse.",0,0.5,1,FP,RETRIEVAL_FAILURE,NLI_FAILURE,,,5207.15

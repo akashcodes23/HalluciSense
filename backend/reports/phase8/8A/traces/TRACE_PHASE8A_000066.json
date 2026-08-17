@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000066",
+  "sample_id": "8A_CHE_TRU_0066",
+  "timestamp": "2026-08-17T05:51:50Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Chemistry",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "medium",
+  "input": "The Haber process synthesises ammonia from nitrogen and hydrogen gas and requires a temperature of exactly 300°C to proceed.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Haber process",
+  "source_url": "https://en.wikipedia.org/wiki/Haber_process",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1692.38
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

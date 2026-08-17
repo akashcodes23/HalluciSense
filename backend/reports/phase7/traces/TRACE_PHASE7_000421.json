@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000421",
+  "sample_id": "bio_0421",
+  "timestamp": "2026-08-14T13:41:50Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What nitrogen bases are in DNA?",
+  "generated_response": "The nitrogen bases in DNA are adenine (A), thymine (T), cytosine (C), and guanine (G).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.05,
+    "claims": [
+      "The nitrogen bases in DNA are adenine (A)"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0199,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9524,
+      0.9598,
+      1.0
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0393,
+    "reconstructed_h_score": 0.0393,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7163.23,
+    "llm_gen_ms": 550.41,
+    "p1_ms": 151.08,
+    "p2_ms": 0.0,
+    "p3_ms": 11324.7,
+    "fusion_ms": 0.01
+  }
+}

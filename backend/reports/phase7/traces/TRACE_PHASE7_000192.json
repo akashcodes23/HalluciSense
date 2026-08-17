@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000192",
+  "sample_id": "fin_0192",
+  "timestamp": "2026-08-14T12:52:34Z",
+  "domain": "Finance",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation occurs when the currency's value decreases rapidly because it has been printed or debited excessively to keep up with rapid economic growth. This leads to widespread economic distress and deflation, as goods and services become more expensive compared to their nominal values.\n\nHere are some key points about hyperinflation:\n\n1. **High Currency Values**: In hyperinflation, the currency's value drops rapidly relative to its purchasing power. For example, if a currency prints 50% more paper per day, by the end of a year, it could lose half its value.\n\n2. **Inflation Rate**: Hyperinflation is often measured by the rate of inflation, which represents the change in the general price level of goods and services relative to the base period (such as the first month of the year).\n\n3. **Economic Distress**: As prices rise rapidly, households, businesses, and governments face significant financial stress. This can lead to job losses, reduced consumer spending, and increased interest rates.\n\n4. **Political Impact**: Hyperinflation often leads to political instability due to a lack of faith in currency's value and the government's ability to control inflation.\n\n5. **Long-term Consequences**: If hyperinflation persists, it can have lasting effects on global economies, including a loss of confidence in currencies, increased trade barriers, and decreased foreign investment.\n\n6. **Financial Risks**: Many people and businesses become trapped with debts they cannot repay due to the rapid depreciation of the currency.\n\n7. **Economic Reforms**: In response to hyperinflation, many countries implement economic reforms such as reducing government spending, increasing taxes, and implementing price controls to stabilize the economy.\n\nHyperinflation is a severe economic crisis that can lead to widespread misery and instability. It requires swift and aggressive measures by policymakers to prevent further escalation of inflation and return the economy to a more stable state.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Hyperinflation occurs when the currency's value decreases rapidly because it has been printed or debited excessively to keep up with rapid economic growth. This leads to widespread economic distress and deflation",
+      "as goods and services become more expensive compared to their nominal values.\n\nHere are some key points about hyperinflation:\n\n1. **High Currency Values**: In hyperinflation",
+      "the currency's value drops rapidly relative to its purchasing power. For example",
+      "if a currency prints 50% more paper per day",
+      "by the end of a year",
+      "it could lose half its value.\n\n2. **Inflation Rate**: Hyperinflation is often measured by the rate of inflation",
+      "which represents the change in the general price level of goods and services relative to the base period (such as the first month of the year).\n\n3. **Economic Distress**: As prices rise rapidly",
+      "and governments face significant financial stress. This can lead to job losses",
+      "and increased interest rates.\n\n4. **Political Impact**: Hyperinflation often leads to political instability due to a lack of faith in currency's value and the government's ability to control inflation.\n\n5. **Long-term Consequences**: If hyperinflation persists",
+      "it can have lasting effects on global economies",
+      "including a loss of confidence in currencies",
+      "and decreased foreign investment.\n\n6. **Financial Risks**: Many people and businesses become trapped with debts they cannot repay due to the rapid depreciation of the currency.\n\n7. **Economic Reforms**: In response to hyperinflation",
+      "many countries implement economic reforms such as reducing government spending",
+      "and implementing price controls to stabilize the economy.\n\nHyperinflation is a severe economic crisis that can lead to widespread misery and instability. It requires swift and aggressive measures by policymakers to prevent further escalation of inflation and return the economy to a more stable state."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1098,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8903,
+      0.7582,
+      0.8456
+    ],
+    "contradiction_score": 0.0007
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0392,
+    "reconstructed_h_score": 0.0392,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23219.3,
+    "llm_gen_ms": 7502.32,
+    "p1_ms": 3550.73,
+    "p2_ms": 0.03,
+    "p3_ms": 22856.67,
+    "fusion_ms": 0.02
+  }
+}

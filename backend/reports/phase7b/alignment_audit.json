@@ -1,0 +1,12 @@
+{
+  "total_records": 750,
+  "matched_records": 750,
+  "mismatched_records": 0,
+  "missing_phase6_records": 0,
+  "missing_phase7_records": 0,
+  "duplicate_ids": 0,
+  "label_mismatches": 0,
+  "domain_mismatches": 0,
+  "query_mismatches": 0,
+  "alignment_status": "EXACT_MATCH_VERIFIED"
+}

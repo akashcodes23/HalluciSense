@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000191",
+  "sample_id": "fin_0191",
+  "timestamp": "2026-08-14T12:52:11Z",
+  "domain": "Finance",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is liquidity?",
+  "generated_response": "Liquidity refers to the ability of a financial asset or asset class to be easily bought and sold in the market without significant price fluctuations. It measures the ease with which an asset can be exchanged for other assets, typically in order to provide quick and convenient access to funds. The liquidity of an asset is influenced by various factors such as its supply and demand dynamics, regulatory environment, and economic conditions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3356,
+    "claims": [
+      "Liquidity refers to the ability of a financial asset or asset class to be easily bought and sold in the market without significant price fluctuations. It measures the ease with which an asset can be exchanged for other assets",
+      "typically in order to provide quick and convenient access to funds. The liquidity of an asset is influenced by various factors such as its supply and demand dynamics"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.154,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8972,
+      0.9048,
+      0.9383
+    ],
+    "contradiction_score": 0.2792
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2708,
+    "reconstructed_h_score": 0.2708,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9304.75,
+    "llm_gen_ms": 1668.63,
+    "p1_ms": 2283.58,
+    "p2_ms": 0.0,
+    "p3_ms": 9677.01,
+    "fusion_ms": 0.01
+  }
+}

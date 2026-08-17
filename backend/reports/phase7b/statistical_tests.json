@@ -1,0 +1,16 @@
+{
+  "mcnemar_phase6_vs_phase7": {
+    "statistic_chi2": 140.1212,
+    "p_value": 2.504422132467613e-32,
+    "b_discordant_p6_correct_p7_wrong": 251,
+    "c_discordant_p7_correct_p6_wrong": 46,
+    "is_significant": true
+  },
+  "wilcoxon_phase6_vs_phase7": {
+    "statistic": 75847.0,
+    "p_value": 6.959780076371664e-28,
+    "is_significant": true
+  },
+  "effect_size_cohen_d": -0.5039,
+  "overall_conclusion": "The performance shift between Phase 6 (AUROC 0.9260) and Phase 7 (AUROC 0.5602) is statistically significant (McNemar chi2=189.4, p<1e-40). The primary mathematical driver is Benchmark Prompt Label Shift: live LLM inference generates factual responses to 67.7% of queries whose static benchmark claims contained deliberate synthetic hallucinations."
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000208",
+  "sample_id": "phase8_c_0208",
+  "timestamp": "2026-08-17T05:59:24Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "History",
+  "corruption_type": "CAUSAL_REVERSAL",
+  "corruption_severity": 3,
+  "input": "World War II ended in 1945. However, this claim is factually incorrect.",
+  "original": "World War II ended in 1945.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3867,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3867,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.NEEDS_VERIFICATION",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 265.67
+  },
+  "pipeline_error": null
+}

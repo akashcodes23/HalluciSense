@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000262",
+  "sample_id": "sci_0262",
+  "timestamp": "2026-08-14T13:02:55Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What charge do electrons have?",
+  "generated_response": "The charge of an electron is approximately -1.6 x 10^-19 coulombs. This means that each electron has a negative electric charge, which is why it can interact with positively charged atoms to form bonds and participate in chemical reactions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3366,
+    "claims": [
+      "The charge of an electron is approximately -1.6 x 10^-19 coulombs. This means that each electron has a negative electric charge",
+      "which is why it can interact with positively charged atoms to form bonds and participate in chemical reactions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1307,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8033,
+      0.7972,
+      0.7972
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2631,
+    "reconstructed_h_score": 0.2631,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4170.97,
+    "llm_gen_ms": 1032.75,
+    "p1_ms": 2493.89,
+    "p2_ms": 0.0,
+    "p3_ms": 1117.14,
+    "fusion_ms": 0.01
+  }
+}

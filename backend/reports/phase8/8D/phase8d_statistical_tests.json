@@ -1,0 +1,20 @@
+{
+  "mcnemar": {
+    "contingency_table": {
+      "A_stable_correct": 45,
+      "B_regression": 5,
+      "C_recovery": 10,
+      "D_stable_wrong": 40
+    },
+    "chi2_statistic": 1.0667,
+    "exact_p_value": 0.30175781249999994,
+    "discordant_pairs": 15,
+    "interpretation": "McNemar p=3.0176e-01. Baseline correctly classified 50/175 vs Enhanced 55/175. Recovery=10, Regression=5."
+  },
+  "wilcoxon_signed_rank": {
+    "statistic": 0.0,
+    "p_value": 0.00010751117672950054,
+    "median_score_diff": 0.0,
+    "mean_score_diff": 0.09
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_MED_NEG_0121",
+  "claim": "Metformin, a first-line treatment for type 2 diabetes, does not lower blood glucose levels.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Metformin, a first-line treatment for type 2 diabetes, does not lower blood glucose levels",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'not' while evidence affirms the predicate."
+  ],
+  "latency_ms": 2043.14
+}

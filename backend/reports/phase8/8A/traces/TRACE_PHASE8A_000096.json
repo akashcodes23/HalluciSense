@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000096",
+  "sample_id": "8A_BIO_OUT_0096",
+  "timestamp": "2026-08-17T05:52:49Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Biology",
+  "category": "OUTDATED_SCIENTIFIC_CLAIM",
+  "difficulty": "easy",
+  "input": "Acquired characteristics are inherited by offspring, as proposed by Lamarck.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Lamarckism",
+  "source_url": "https://en.wikipedia.org/wiki/Lamarckism",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1955.48
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

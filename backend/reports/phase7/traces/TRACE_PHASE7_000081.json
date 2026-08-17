@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000081",
+  "sample_id": "med_0081",
+  "timestamp": "2026-08-14T12:22:38Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar regulation is primarily managed through the body's endocrine system and a series of physiological mechanisms. Key components include:\n\n1. **Insulin**: An hormone produced by the pancreas that helps regulate blood glucose levels by promoting its uptake and storage in muscle and fat cells.\n\n2. **Glucagon**: Another hormone produced by the pancreas that stimulates the breakdown of glycogen into glucose and releases it into the bloodstream to help lower blood sugar levels.\n\n3. **Pancreatic Beta Cells**: These cells are responsible for secreting insulin when blood glucose levels rise, and glucagon when they fall. They work in conjunction with other hormones like cortisol to maintain homeostasis.\n\n4. **Liver Regulating Hormones**: The liver produces various hormones such as cortisol and glucose control hormones that help regulate blood sugar levels.\n\n5. **Muscle and Fat Cells**: These cells have receptors for insulin and glucagon, which help regulate blood glucose uptake by these tissues.\n\n6. **Neurotransmitters**: The body's nervous system sends signals between different parts of the body to regulate blood sugar balance.\n\n7. **Metabolic Feedback Mechanisms**: The body continuously monitors its blood sugar levels through sensors and feedback loops to adjust insulin production and release as needed.\n\nThe overall goal is to keep blood glucose levels within a narrow range that supports life functions without leading to high or low blood sugar levels, which can be harmful.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4997,
+    "claims": [
+      "Blood sugar regulation is primarily managed through the body's endocrine system and a series of physiological mechanisms. Key components include:\n\n1. **Insulin**: An hormone produced by the pancreas that helps regulate blood glucose levels by promoting its uptake and storage in muscle and fat cells.\n\n2. **Glucagon**: Another hormone produced by the pancreas that stimulates the breakdown of glycogen into glucose and releases it into the bloodstream to help lower blood sugar levels.\n\n3. **Pancreatic Beta Cells**: These cells are responsible for secreting insulin when blood glucose levels rise",
+      "and glucagon when they fall. They work in conjunction with other hormones like cortisol to maintain homeostasis.\n\n4. **Liver Regulating Hormones**: The liver produces various hormones such as cortisol and glucose control hormones that help regulate blood sugar levels.\n\n5. **Muscle and Fat Cells**: These cells have receptors for insulin and glucagon",
+      "which help regulate blood glucose uptake by these tissues.\n\n6. **Neurotransmitters**: The body's nervous system sends signals between different parts of the body to regulate blood sugar balance.\n\n7. **Metabolic Feedback Mechanisms**: The body continuously monitors its blood sugar levels through sensors and feedback loops to adjust insulin production and release as needed.\n\nThe overall goal is to keep blood glucose levels within a narrow range that supports life functions without leading to high or low blood sugar levels",
+      "which can be harmful."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0931,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8086,
+      0.884,
+      0.8829
+    ],
+    "contradiction_score": 0.0033
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3545,
+    "reconstructed_h_score": 0.3545,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18893.59,
+    "llm_gen_ms": 6167.65,
+    "p1_ms": 1624.03,
+    "p2_ms": 0.03,
+    "p3_ms": 21392.98,
+    "fusion_ms": 0.01
+  }
+}

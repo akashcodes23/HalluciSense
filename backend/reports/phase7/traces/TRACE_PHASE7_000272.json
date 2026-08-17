@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000272",
+  "sample_id": "sci_0272",
+  "timestamp": "2026-08-14T13:04:26Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does sound travel in vacuum?",
+  "generated_response": "Yes, sound does travel in vacuum. Sound is a mechanical wave that requires a medium to propagate through, such as air or water. In a vacuum, there is no medium available for sound waves to travel, so they cannot travel at all. The speed of sound in a vacuum depends on the temperature and pressure of the surrounding environment, but it is typically around 340 meters per second (122 feet per second).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "sound does travel in vacuum. Sound is a mechanical wave that requires a medium to propagate through",
+      "such as air or water. In a vacuum",
+      "there is no medium available for sound waves to travel",
+      "so they cannot travel at all. The speed of sound in a vacuum depends on the temperature and pressure of the surrounding environment",
+      "but it is typically around 340 meters per second (122 feet per second)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0786,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.938,
+      0.8013,
+      0.8987
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.671,
+    "reconstructed_h_score": 0.671,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 8092.79,
+    "llm_gen_ms": 1705.23,
+    "p1_ms": 1385.75,
+    "p2_ms": 0.0,
+    "p3_ms": 9178.03,
+    "fusion_ms": 0.01
+  }
+}

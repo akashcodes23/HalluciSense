@@ -1,0 +1,11 @@
+{
+  "mcnemar_baseline_vs_hybrid": {
+    "b_baseline_better": 72,
+    "c_hybrid_better": 209,
+    "p_value": 1.1905895958010245e-16
+  },
+  "wilcoxon_signed_rank": {
+    "p_value": 3.531153307965141e-40
+  },
+  "multiple_testing_correction": "Benjamini-Hochberg FDR Applied"
+}

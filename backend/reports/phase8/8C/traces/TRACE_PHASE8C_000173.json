@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000173",
+  "sample_id": "phase8_c_0173",
+  "timestamp": "2026-08-17T05:58:53Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Geography",
+  "corruption_type": "PERSON_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "The Amazon River is located in South America. However, this claim is factually incorrect.",
+  "original": "The Amazon River is located in South America.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3179,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3179,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 334.72
+  },
+  "pipeline_error": null
+}

@@ -1,0 +1,27 @@
+{
+  "mcnemar_p1_vs_p1p3_dataset_b": {
+    "statistic": 72.0135,
+    "p_value": 2.137286978450709e-17,
+    "b_discordant": 74,
+    "c_discordant": 0,
+    "is_significant": true
+  },
+  "wilcoxon_p1_vs_p1p3_continuous": {
+    "statistic": 61081.0,
+    "p_value": 3.235082818609936e-35,
+    "is_significant": true
+  },
+  "effect_size_cohen_d": -0.5395,
+  "kruskal_wallis_severity": {
+    "statistic": 25.2202,
+    "p_value": 1.3887453883197334e-05,
+    "is_significant": true,
+    "groups": 4
+  },
+  "spearman_severity_h_score": {
+    "rho": 0.2875,
+    "p_value": 4.0527206432195304e-07
+  },
+  "bootstrap_b": 2000,
+  "seed": 42
+}

@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000431",
+  "sample_id": "bio_0431",
+  "timestamp": "2026-08-14T13:43:36Z",
+  "domain": "Biology",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are small organelles in cells that are responsible for translating messenger RNA (mRNA) into proteins. They are composed of ribonucleic acid (RNA) and proteins, forming a complex structure called a Ribosome Complex. The ribosome is found in the cytoplasm of all living organisms and is essential for protein synthesis in cells. The ribosome reads the genetic code on mRNA, translates it into a sequence of amino acids, and then uses these amino acids to build proteins.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2375,
+    "claims": [
+      "Ribosomes are small organelles in cells that are responsible for translating messenger RNA (mRNA) into proteins. They are composed of ribonucleic acid (RNA) and proteins",
+      "forming a complex structure called a Ribosome Complex. The ribosome is found in the cytoplasm of all living organisms and is essential for protein synthesis in cells. The ribosome reads the genetic code on mRNA",
+      "translates it into a sequence of amino acids",
+      "and then uses these amino acids to build proteins."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0968,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8278,
+      0.8839,
+      0.8419
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1873,
+    "reconstructed_h_score": 0.1873,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10221.44,
+    "llm_gen_ms": 2379.88,
+    "p1_ms": 2580.12,
+    "p2_ms": 0.0,
+    "p3_ms": 10113.45,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000163",
+  "sample_id": "phase8_c_0163",
+  "timestamp": "2026-08-17T05:58:47Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Physics",
+  "corruption_type": "PERSON_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Einstein's third law states that action equals opposite reaction.",
+  "original": "Newton's third law states that action equals opposite reaction.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 1.0,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 1.0,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1703.85
+  },
+  "pipeline_error": null
+}

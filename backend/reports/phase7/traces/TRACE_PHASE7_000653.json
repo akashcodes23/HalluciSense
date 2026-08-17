@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000653",
+  "sample_id": "pol_0653",
+  "timestamp": "2026-08-14T14:36:03Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a system of government in which the national government shares power with a state government or local governments. In this system, decisions about various issues are made at both the national and state levels, but some powers remain with the federal government or the individual states.\n\nSome key features of federalism include:\n\n1. The division of responsibilities: The federal government is responsible for certain areas such as foreign policy, defense, taxation, and international affairs. The state governments are responsible for other areas such as healthcare, education, transportation, and infrastructure.\n\n2. State autonomy: Each state has some degree of autonomy in its own policies and laws. This means that the states can make decisions about their own issues without having to go through the federal government.\n\n3. Dual executive branch system: The federal government is divided into a presidency and a Congress. The president serves as the head of state, while Congress is responsible for making laws and overseeing the executive branch.\n\n4. Federalism in practice: In practice, federalism has been used by many countries around the world, including the United States, Canada, France, Germany, Japan, and India.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3678,
+    "claims": [
+      "Federalism is a system of government in which the national government shares power with a state government or local governments. In this system",
+      "decisions about various issues are made at both the national and state levels",
+      "but some powers remain with the federal government or the individual states.\n\nSome key features of federalism include:\n\n1. The division of responsibilities: The federal government is responsible for certain areas such as foreign policy",
+      "and international affairs. The state governments are responsible for other areas such as healthcare",
+      "and infrastructure.\n\n2. State autonomy: Each state has some degree of autonomy in its own policies and laws. This means that the states can make decisions about their own issues without having to go through the federal government.\n\n3. Dual executive branch system: The federal government is divided into a presidency and a Congress. The president serves as the head of state",
+      "while Congress is responsible for making laws and overseeing the executive branch.\n\n4. Federalism in practice: In practice",
+      "federalism has been used by many countries around the world",
+      "including the United States"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2037,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8778,
+      0.848,
+      0.8537
+    ],
+    "contradiction_score": 0.3217
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3092,
+    "reconstructed_h_score": 0.3092,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20583.76,
+    "llm_gen_ms": 5571.77,
+    "p1_ms": 7914.06,
+    "p2_ms": 0.04,
+    "p3_ms": 12403.4,
+    "fusion_ms": 0.02
+  }
+}

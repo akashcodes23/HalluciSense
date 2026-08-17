@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000524",
+  "sample_id": "new_0524",
+  "timestamp": "2026-08-14T14:02:46Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are subject to various regulations and oversight from government bodies. These regulations vary depending on the country or region, but generally include:\n\n1. **Regulatory Bodies**: Governments establish regulatory bodies such as central banks, finance ministries, and securities commissions to oversee stock market operations.\n\n2. **Regulation of Exchange Listings**: The Securities and Exchange Commission (SEC) is one of the most prominent in the United States. It regulates companies listed on exchanges, including listing requirements, trading regulations, and disclosure rules.\n\n3. **Disclosure Rules**: Companies are required to disclose financial information, regulatory filings, and other relevant documents that investors need to make informed decisions about their investments.\n\n4. **Regulation of Trading**: Trading activities must comply with rules to prevent fraud, market manipulation, and insider trading.\n\n5. **Market Conduct**: Securities regulators also monitor market conduct and enforce compliance with regulations to maintain investor confidence.\n\n6. **Regulation of Derivatives**: In some countries, regulations are in place to regulate financial instruments like options, futures, and swaps, which can be highly leveraged and risky.\n\n7. **Regulation of Financial Products**: The Securities and Exchange Commission also oversees the regulation of financial products such as mutual funds, hedge funds, and private equity firms.\n\n8. **Consumer Protection Laws**: Many countries have consumer protection laws to protect investors from unfair practices in the stock market.\n\nThese regulations are designed to ensure that the stock market operates transparently and fairly, safeguarding investor rights and maintaining investor confidence.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4643,
+    "claims": [
+      "stock markets are subject to various regulations and oversight from government bodies. These regulations vary depending on the country or region",
+      "but generally include:\n\n1. **Regulatory Bodies**: Governments establish regulatory bodies such as central banks",
+      "and securities commissions to oversee stock market operations.\n\n2. **Regulation of Exchange Listings**: The Securities and Exchange Commission (SEC) is one of the most prominent in the United States. It regulates companies listed on exchanges",
+      "and disclosure rules.\n\n3. **Disclosure Rules**: Companies are required to disclose financial information",
+      "and other relevant documents that investors need to make informed decisions about their investments.\n\n4. **Regulation of Trading**: Trading activities must comply with rules to prevent fraud",
+      "and insider trading.\n\n5. **Market Conduct**: Securities regulators also monitor market conduct and enforce compliance with regulations to maintain investor confidence.\n\n6. **Regulation of Derivatives**: In some countries",
+      "regulations are in place to regulate financial instruments like options",
+      "which can be highly leveraged and risky.\n\n7. **Regulation of Financial Products**: The Securities and Exchange Commission also oversees the regulation of financial products such as mutual funds",
+      "and private equity firms.\n\n8. **Consumer Protection Laws**: Many countries have consumer protection laws to protect investors from unfair practices in the stock market.\n\nThese regulations are designed to ensure that the stock market operates transparently and fairly",
+      "safeguarding investor rights and maintaining investor confidence."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0904,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8545,
+      0.8518,
+      0.8769
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3308,
+    "reconstructed_h_score": 0.3308,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 24230.95,
+    "llm_gen_ms": 6539.73,
+    "p1_ms": 3336.86,
+    "p2_ms": 0.05,
+    "p3_ms": 26523.25,
+    "fusion_ms": 0.01
+  }
+}

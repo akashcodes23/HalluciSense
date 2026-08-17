@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000691",
+  "sample_id": "pol_0691",
+  "timestamp": "2026-08-14T14:45:18Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies choose leaders through various mechanisms, including free and fair elections for national or local offices, referendums in certain cases, and other forms of direct democracy. The process can involve multiple rounds of voting to select individuals who represent the will of the electorate. The key elements of a democratic election include:\n\n1. Freedom of speech: All citizens are given the right to voice their opinions and concerns during elections.\n\n2. Fair representation: Candidates compete on the basis of qualifications, experience, and expertise, ensuring that they reflect the diversity of the population.\n\n3. Public participation: Electors have the ability to cast their ballots by mail or in person, making the process accessible to a wide range of citizens.\n\n4. Proportional representation: In many democracies, candidates are chosen based on the number of votes they receive rather than their qualifications.\n\n5. Protection of minorities: Democratic leaders must prioritize the well-being and rights of all citizens, including marginalized groups.\n\n6. Transparency: Elections are transparent to ensure that citizens can see how decisions are made and who has been elected.\n\n7. Accountability: Leaders are held accountable for their actions by the electorate, through voting, protests, and other forms of direct democracy.\n\nOverall, democracies choose leaders through a democratic process that is designed to protect individual rights, promote equality, and ensure the well-being of citizens.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Democracies choose leaders through various mechanisms",
+      "including free and fair elections for national or local offices",
+      "referendums in certain cases",
+      "and other forms of direct democracy. The process can involve multiple rounds of voting to select individuals who represent the will of the electorate. The key elements of a democratic election include:\n\n1. Freedom of speech: All citizens are given the right to voice their opinions and concerns during elections.\n\n2. Fair representation: Candidates compete on the basis of qualifications",
+      "ensuring that they reflect the diversity of the population.\n\n3. Public participation: Electors have the ability to cast their ballots by mail or in person",
+      "making the process accessible to a wide range of citizens.\n\n4. Proportional representation: In many democracies",
+      "candidates are chosen based on the number of votes they receive rather than their qualifications.\n\n5. Protection of minorities: Democratic leaders must prioritize the well-being and rights of all citizens",
+      "including marginalized groups.\n\n6. Transparency: Elections are transparent to ensure that citizens can see how decisions are made and who has been elected.\n\n7. Accountability: Leaders are held accountable for their actions by the electorate",
+      "and other forms of direct democracy.\n\nOverall",
+      "democracies choose leaders through a democratic process that is designed to protect individual rights",
+      "and ensure the well-being of citizens."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.162,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7607,
+      0.8082,
+      0.6843
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0579,
+    "reconstructed_h_score": 0.0579,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17811.29,
+    "llm_gen_ms": 5790.61,
+    "p1_ms": 2438.38,
+    "p2_ms": 0.04,
+    "p3_ms": 17109.32,
+    "fusion_ms": 0.01
+  }
+}

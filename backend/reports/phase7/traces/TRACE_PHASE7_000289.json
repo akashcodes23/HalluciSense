@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000289",
+  "sample_id": "sci_0289",
+  "timestamp": "2026-08-14T13:06:58Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants convert light energy into chemical energy stored in glucose and oxygen. It occurs primarily in the chloroplasts of plant cells. The light energy is used to break down carbon dioxide from the atmosphere and water, using a process called light-dependent reactions. This produces a molecule called ATP (adenosine triphosphate), which is used by the Calvin cycle, the second stage of photosynthesis. The oxygen produced during this process is released into the atmosphere, while glucose is stored in the plant for future use.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4495,
+    "claims": [
+      "Photosynthesis is the process by which plants convert light energy into chemical energy stored in glucose and oxygen. It occurs primarily in the chloroplasts of plant cells. The light energy is used to break down carbon dioxide from the atmosphere and water",
+      "using a process called light-dependent reactions. This produces a molecule called ATP (adenosine triphosphate)",
+      "which is used by the Calvin cycle",
+      "the second stage of photosynthesis. The oxygen produced during this process is released into the atmosphere",
+      "while glucose is stored in the plant for future use."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0539,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.942,
+      0.9201,
+      0.8895
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3082,
+    "reconstructed_h_score": 0.3082,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12802.99,
+    "llm_gen_ms": 2385.74,
+    "p1_ms": 2125.48,
+    "p2_ms": 0.01,
+    "p3_ms": 14755.99,
+    "fusion_ms": 0.03
+  }
+}

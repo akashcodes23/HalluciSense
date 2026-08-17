@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000309",
+  "sample_id": "com_0309",
+  "timestamp": "2026-08-14T13:11:34Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the complexity of QuickSort?",
+  "generated_response": "QuickSort has an average time complexity of O(n log n) in its worst-case scenario and can be up to O(n^2) in the worst case due to the worst pivot choice.\n\n```python\n# QuickSort function implementation\ndef quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n```\n\nThis function takes an array `arr` as input and returns a sorted version of the array using QuickSort. The main idea is to partition the array into three parts: elements less than the pivot, elements equal to the pivot, and elements greater than the pivot. It then recursively sorts these partitions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "QuickSort has an average time complexity of O(n log n) in its worst-case scenario and can be up to O(n^2) in the worst case due to the worst pivot choice.\n\n```python\n# QuickSort function implementation\ndef quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quicksort(left) + middle + quicksort(right)\n```\n\nThis function takes an array `arr` as input and returns a sorted version of the array using QuickSort. The main idea is to partition the array into three parts: elements less than the pivot",
+      "elements equal to the pivot",
+      "and elements greater than the pivot. It then recursively sorts these partitions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1647,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7036,
+      0.7829,
+      0.7541
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0588,
+    "reconstructed_h_score": 0.0588,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10085.61,
+    "llm_gen_ms": 3885.61,
+    "p1_ms": 3103.54,
+    "p2_ms": 0.02,
+    "p3_ms": 4892.39,
+    "fusion_ms": 0.01
+  }
+}

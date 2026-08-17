@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000470",
+  "sample_id": "che_0470",
+  "timestamp": "2026-08-14T13:50:42Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does helium form covalent bonds?",
+  "generated_response": "Helium does not form covalent bonds. Covalent bonding occurs when two atoms share one or more pairs of electrons to achieve the stable electron configuration of the neutral atom. Helium has no valence electrons, so it cannot bond with other atoms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.7503,
+    "claims": [
+      "Helium does not form covalent bonds. Covalent bonding occurs when two atoms share one or more pairs of electrons to achieve the stable electron configuration of the neutral atom. Helium has no valence electrons",
+      "so it cannot bond with other atoms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0377,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9612,
+      0.9036,
+      0.9619
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4958,
+    "reconstructed_h_score": 0.4958,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7206.75,
+    "llm_gen_ms": 1180.88,
+    "p1_ms": 1945.14,
+    "p2_ms": 0.0,
+    "p3_ms": 7340.27,
+    "fusion_ms": 0.01
+  }
+}

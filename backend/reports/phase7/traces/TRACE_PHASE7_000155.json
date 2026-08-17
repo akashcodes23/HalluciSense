@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000155",
+  "sample_id": "fin_0155",
+  "timestamp": "2026-08-14T12:40:50Z",
+  "domain": "Finance",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is liquidity?",
+  "generated_response": "Liquidity refers to the ability of an asset to be quickly and easily bought or sold in the market without significant price fluctuations. It is one of the key factors that determine how valuable an asset is in the financial markets, as it affects its price and availability for trading. Assets with high liquidity are easier to sell at a reasonable price than assets with low liquidity.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4967,
+    "claims": [
+      "Liquidity refers to the ability of an asset to be quickly and easily bought or sold in the market without significant price fluctuations. It is one of the key factors that determine how valuable an asset is in the financial markets",
+      "as it affects its price and availability for trading. Assets with high liquidity are easier to sell at a reasonable price than assets with low liquidity."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0515,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8974,
+      0.935,
+      0.9341
+    ],
+    "contradiction_score": 0.0028
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3377,
+    "reconstructed_h_score": 0.3377,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8896.37,
+    "llm_gen_ms": 1421.15,
+    "p1_ms": 2153.75,
+    "p2_ms": 0.0,
+    "p3_ms": 9830.55,
+    "fusion_ms": 0.0
+  }
+}

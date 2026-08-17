@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_PHY_NEG_0016",
+  "claim": "The speed of light is not constant in a vacuum.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.994,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "The speed of light is not constant in a vacuum",
+      "base_nli_score": 0.994,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.994
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'not' while evidence affirms the predicate."
+  ],
+  "latency_ms": 2572.8
+}

@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000703",
+  "sample_id": "lit_0703",
+  "timestamp": "2026-08-14T14:47:48Z",
+  "domain": "Literature",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Who composed the Odyssey?",
+  "generated_response": "The Odyssey is primarily composed by Homer, an ancient Greek poet who lived around 750 BC. He wrote it in about 8th century BC and was one of the earliest known works of Western literature. The Odyssey tells the story of Odysseus, a Greek king and navigator who embarks on a long journey to find his wife Penelope after she is abducted by the monster Calypso. Along the way, he faces many challenges including the sea monsters, the dangers of the underworld, and the betrayal of friends and family. The Odyssey is considered one of the seven great epic poems in Western literature and has had a profound impact on subsequent generations of writers and cultures around the world.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The Odyssey is primarily composed by Homer",
+      "an ancient Greek poet who lived around 750 BC. He wrote it in about 8th century BC and was one of the earliest known works of Western literature. The Odyssey tells the story of Odysseus",
+      "a Greek king and navigator who embarks on a long journey to find his wife Penelope after she is abducted by the monster Calypso. Along the way",
+      "he faces many challenges including the sea monsters",
+      "the dangers of the underworld",
+      "and the betrayal of friends and family. The Odyssey is considered one of the seven great epic poems in Western literature and has had a profound impact on subsequent generations of writers and cultures around the world."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2411,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8273,
+      0.7865,
+      0.8011
+    ],
+    "contradiction_score": 0.3266
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0861,
+    "reconstructed_h_score": 0.0861,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8794.04,
+    "llm_gen_ms": 3670.55,
+    "p1_ms": 3580.07,
+    "p2_ms": 0.02,
+    "p3_ms": 2566.19,
+    "fusion_ms": 0.02
+  }
+}

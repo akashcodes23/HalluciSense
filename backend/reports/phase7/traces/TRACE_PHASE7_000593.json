@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000593",
+  "sample_id": "mat_0593",
+  "timestamp": "2026-08-14T14:26:33Z",
+  "domain": "Mathematics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of the angles in any triangle is always \\(180^\\circ\\). This is a fundamental geometric property that applies to all triangles, regardless of their shape or size. The theorem states that the sum of the interior angles of a triangle is always 180 degrees, which can be proven using various methods such as drawing lines and measuring them, or by applying the concept of symmetry and congruence in more complex cases.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5023,
+    "claims": [
+      "The sum of the angles in any triangle is always \\(180^\\circ\\). This is a fundamental geometric property that applies to all triangles",
+      "regardless of their shape or size. The theorem states that the sum of the interior angles of a triangle is always 180 degrees",
+      "which can be proven using various methods such as drawing lines and measuring them",
+      "or by applying the concept of symmetry and congruence in more complex cases."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0933,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7975,
+      0.8929,
+      0.8814
+    ],
+    "contradiction_score": 0.0015
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3562,
+    "reconstructed_h_score": 0.3562,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13169.31,
+    "llm_gen_ms": 2154.75,
+    "p1_ms": 3620.74,
+    "p2_ms": 0.01,
+    "p3_ms": 12973.31,
+    "fusion_ms": 0.01
+  }
+}

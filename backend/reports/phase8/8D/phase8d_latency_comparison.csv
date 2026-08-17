@@ -1,0 +1,5 @@
+Metric,Baseline,Enhanced,Delta_ms,Percentage_Change
+Mean Latency (ms),2269.72,2082.43,-187.29,-8.3%
+Median P50 (ms),1878.02,1975.54,97.52,+5.2%
+P95 (ms),5145.5,3305.91,-1839.59,-35.8%
+P99 (ms),5647.77,4533.33,-1114.44,-19.7%

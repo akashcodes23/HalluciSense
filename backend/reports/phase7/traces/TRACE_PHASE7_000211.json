@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000211",
+  "sample_id": "his_0211",
+  "timestamp": "2026-08-14T12:56:40Z",
+  "domain": "History",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "When was the Magna Carta signed?",
+  "generated_response": "The Magna Carta was signed on July 15, 1215, in London. It was an important document that established basic principles of governance for the British monarchy and laid the groundwork for future constitutional developments.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.891,
+    "claims": [
+      "The Magna Carta was signed on July 15, 1215, in London. It was an important document that established basic principles of governance for the British monarchy and laid the groundwork for future constitutional developments."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3164,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8512,
+      0.884,
+      0.8809
+    ],
+    "contradiction_score": 0.6663
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6858,
+    "reconstructed_h_score": 0.6858,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 6742.57,
+    "llm_gen_ms": 849.83,
+    "p1_ms": 2385.03,
+    "p2_ms": 0.01,
+    "p3_ms": 5355.52,
+    "fusion_ms": 0.01
+  }
+}

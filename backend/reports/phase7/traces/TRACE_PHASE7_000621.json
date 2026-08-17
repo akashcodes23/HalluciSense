@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000621",
+  "sample_id": "geo_0621",
+  "timestamp": "2026-08-14T14:31:51Z",
+  "domain": "Geography",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Where is the Amazon River?",
+  "generated_response": "The Amazon River flows in South America from its source in the Andes Mountains in Peru to the Atlantic Ocean at the mouth of Rio de Janeiro in Brazil. The river is approximately 6,457 kilometers (4,016 miles) long and has a total drainage area of over 3 million square kilometers (12 million acres).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5,
+    "claims": [
+      "The Amazon River flows in South America from its source in the Andes Mountains in Peru to the Atlantic Ocean at the mouth of Rio de Janeiro in Brazil. The river is approximately 6,457 kilometers (4,016 miles) long and has a total drainage area of over 3 million square kilometers (12 million acres)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1429,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8992,
+      0.8471,
+      0.8505
+    ],
+    "contradiction_score": 0.1586
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3725,
+    "reconstructed_h_score": 0.3725,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8834.78,
+    "llm_gen_ms": 1507.0,
+    "p1_ms": 3236.65,
+    "p2_ms": 0.0,
+    "p3_ms": 7597.5,
+    "fusion_ms": 0.01
+  }
+}

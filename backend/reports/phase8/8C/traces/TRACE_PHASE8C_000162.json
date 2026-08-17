@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000162",
+  "sample_id": "phase8_c_0162",
+  "timestamp": "2026-08-17T05:58:45Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Physics",
+  "corruption_type": "PERSON_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Gravitational attraction is proportional to object mass. However, this claim is factually incorrect.",
+  "original": "Gravitational attraction is proportional to object mass.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3997,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3997,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.NEEDS_VERIFICATION",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 260.54
+  },
+  "pipeline_error": null
+}

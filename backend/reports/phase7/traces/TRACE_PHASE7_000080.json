@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000080",
+  "sample_id": "med_0080",
+  "timestamp": "2026-08-14T12:22:19Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza, also known as the flu, can be effectively managed and treated with appropriate medications. Here are some key steps to manage the symptoms of viral influenza:\n\n1. **Rest**: Get plenty of rest to help your body fight off the virus. Aim for 7-9 hours a night.\n\n2. **Hydration**: Drink plenty of water to stay hydrated. This helps maintain your overall health and can also provide relief from coughing and sore throat.\n\n3. **Over-the-counter Medications**: Take over-the-counter medications like acetaminophen or ibuprofen to relieve pain and fever. Follow the dosage instructions carefully, and if you experience severe symptoms, contact a healthcare professional.\n\n4. **Antiviral Treatments**: If you have been exposed to influenza within 72 hours of symptoms starting, your healthcare provider may recommend antiviral medications. These medications can help reduce the duration and severity of your symptoms.\n\n5. **Symptom Management**: Use cough suppressants, such as acetaminophen or ibuprofen, to manage coughs and sore throats.\n\n6. **Avoid Transmission**: Avoid spreading influenza by practicing good hygiene, such as washing hands frequently with soap and water, covering your mouth when you cough or sneeze, and staying home if possible.\n\n7. **Follow Up**: If you have severe symptoms or do not improve within a week of treatment, contact a healthcare professional for further evaluation and treatment.\n\nIt's important to consult with a healthcare provider if your symptoms persist or worsen, especially if you are at high risk for influenza, such as individuals with chronic medical conditions, age over 60, pregnant women, or anyone who has had a previous severe illness.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "also known as the flu",
+      "can be effectively managed and treated with appropriate medications. Here are some key steps to manage the symptoms of viral influenza:\n\n1. **Rest**: Get plenty of rest to help your body fight off the virus. Aim for 7-9 hours a night.\n\n2. **Hydration**: Drink plenty of water to stay hydrated. This helps maintain your overall health and can also provide relief from coughing and sore throat.\n\n3. **Over-the-counter Medications**: Take over-the-counter medications like acetaminophen or ibuprofen to relieve pain and fever. Follow the dosage instructions carefully",
+      "and if you experience severe symptoms",
+      "contact a healthcare professional.\n\n4. **Antiviral Treatments**: If you have been exposed to influenza within 72 hours of symptoms starting",
+      "your healthcare provider may recommend antiviral medications. These medications can help reduce the duration and severity of your symptoms.\n\n5. **Symptom Management**: Use cough suppressants",
+      "such as acetaminophen or ibuprofen",
+      "to manage coughs and sore throats.\n\n6. **Avoid Transmission**: Avoid spreading influenza by practicing good hygiene",
+      "such as washing hands frequently with soap and water",
+      "covering your mouth when you cough or sneeze",
+      "and staying home if possible.\n\n7. **Follow Up**: If you have severe symptoms or do not improve within a week of treatment",
+      "contact a healthcare professional for further evaluation and treatment.\n\nIt's important to consult with a healthcare provider if your symptoms persist or worsen",
+      "especially if you are at high risk for influenza",
+      "such as individuals with chronic medical conditions",
+      "age over 60, pregnant women",
+      "or anyone who has had a previous severe illness."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0853,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8555,
+      0.8828
+    ],
+    "contradiction_score": 0.0009
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0305,
+    "reconstructed_h_score": 0.0305,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23584.51,
+    "llm_gen_ms": 5992.1,
+    "p1_ms": 2043.04,
+    "p2_ms": 0.06,
+    "p3_ms": 30556.81,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000341",
+  "sample_id": "com_0341",
+  "timestamp": "2026-08-14T13:20:53Z",
+  "domain": "Computer Science",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the complexity of QuickSort?",
+  "generated_response": "The complexity of QuickSort depends on the choice of pivot and the distribution of the input data. In the worst case scenario, where all elements in the array are equal or close to each other, the time complexity of QuickSort is O(n^2). However, if we choose an appropriate pivot, such as the median of the first, middle, and last elements, the average time complexity of QuickSort is O(n log n), making it a very efficient sorting algorithm for large datasets.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The complexity of QuickSort depends on the choice of pivot and the distribution of the input data. In the worst case scenario",
+      "where all elements in the array are equal or close to each other",
+      "the time complexity of QuickSort is O(n^2). However",
+      "if we choose an appropriate pivot",
+      "such as the median of the first",
+      "the average time complexity of QuickSort is O(n log n)",
+      "making it a very efficient sorting algorithm for large datasets."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0858,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8753,
+      0.8345,
+      0.9102
+    ],
+    "contradiction_score": 0.0097
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0306,
+    "reconstructed_h_score": 0.0306,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8668.33,
+    "llm_gen_ms": 2354.24,
+    "p1_ms": 2385.59,
+    "p2_ms": 0.01,
+    "p3_ms": 6603.9,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000607",
+  "sample_id": "geo_0607",
+  "timestamp": "2026-08-14T14:30:03Z",
+  "domain": "Geography",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the largest hot desert?",
+  "generated_response": "The largest hot desert is in Australia, known as the Red Bedland Deserts. It covers an area of approximately 103,920 square kilometers (40.66 square miles). The Red Bedland Deserts are located in western Australia, particularly in the Northern Territory and Western Australia.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.988,
+    "claims": [
+      "The largest hot desert is in Australia",
+      "known as the Red Bedland Deserts. It covers an area of approximately 103,920 square kilometers (40.66 square miles). The Red Bedland Deserts are located in western Australia",
+      "particularly in the Northern Territory and Western Australia."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.5257,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7234,
+      0.7467,
+      0.7178
+    ],
+    "contradiction_score": 0.9993
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.8229,
+    "reconstructed_h_score": 0.8229,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 10702.21,
+    "llm_gen_ms": 1621.97,
+    "p1_ms": 4421.71,
+    "p2_ms": 0.0,
+    "p3_ms": 8645.67,
+    "fusion_ms": 0.01
+  }
+}

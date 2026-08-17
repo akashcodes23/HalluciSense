@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000242",
+  "sample_id": "his_0242",
+  "timestamp": "2026-08-14T13:00:08Z",
+  "domain": "History",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who won the Battle of Waterloo?",
+  "generated_response": "The Battle of Waterloo was fought on June 18 to July 21, 1815, between French forces led by Napoleon Bonaparte and British forces under General Wellington in the Napoleonic Wars. The French army, led by Napoleon Bonaparte, won this battle.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1027,
+    "claims": [
+      "The Battle of Waterloo was fought on June 18 to July 21, 1815, between French forces led by Napoleon Bonaparte and British forces under General Wellington in the Napoleonic Wars. The French army",
+      "led by Napoleon Bonaparte"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.8325,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.0,
+      0.0,
+      0.7701
+    ],
+    "contradiction_score": 0.9983
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3633,
+    "reconstructed_h_score": 0.3633,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12075.31,
+    "llm_gen_ms": 1270.26,
+    "p1_ms": 2606.65,
+    "p2_ms": 0.02,
+    "p3_ms": 15507.12,
+    "fusion_ms": 0.02
+  }
+}

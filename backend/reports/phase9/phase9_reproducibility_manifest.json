@@ -1,0 +1,78 @@
+{
+  "experiment": "Phase9_Calibrated_Hybrid_P1_Optimization",
+  "decision": "HYBRID_TARGETED_BENEFIT_WITH_TRADEOFF",
+  "criteria_evaluations": {
+    "c1_auroc_preserved": true,
+    "c2_brier_improved": true,
+    "c3_control_preserved": false,
+    "c4_regression_recovery_ge_50pct": true,
+    "c5_recovery_preservation_ge_80pct": false
+  },
+  "held_out_test_metrics": {
+    "baseline_p1": {
+      "n": 53,
+      "TP": 44,
+      "TN": 0,
+      "FP": 9,
+      "FN": 0,
+      "accuracy": 0.8302,
+      "precision": 0.8302,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 0.9072,
+      "balanced_accuracy": 0.5,
+      "mcc": 0.0,
+      "auroc": 0.5,
+      "auprc": 0.9151,
+      "ece": 0.3302,
+      "brier_score": 0.25
+    },
+    "enhanced_p1": {
+      "n": 53,
+      "TP": 33,
+      "TN": 7,
+      "FP": 2,
+      "FN": 11,
+      "accuracy": 0.7547,
+      "precision": 0.9429,
+      "recall": 0.75,
+      "specificity": 0.7778,
+      "f1": 0.8354,
+      "balanced_accuracy": 0.7639,
+      "mcc": 0.4184,
+      "auroc": 0.8788,
+      "auprc": 0.972,
+      "ece": 0.1974,
+      "brier_score": 0.1683
+    },
+    "hybrid_p1": {
+      "n": 53,
+      "TP": 44,
+      "TN": 0,
+      "FP": 9,
+      "FN": 0,
+      "accuracy": 0.8302,
+      "precision": 0.8302,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 0.9072,
+      "balanced_accuracy": 0.5,
+      "mcc": 0.0,
+      "auroc": 0.625,
+      "auprc": 0.9363,
+      "ece": 0.0604,
+      "brier_score": 0.1371
+    }
+  },
+  "regression_recovery_summary": {
+    "group_b_regressions_count": 36,
+    "group_b_recovered": 36,
+    "group_b_still_wrong": 0,
+    "group_b_recovery_rate": 1.0,
+    "group_c_recoveries_count": 17,
+    "group_c_preserved": 0,
+    "group_c_lost": 17,
+    "group_c_preservation_rate": 0.0
+  },
+  "timestamp": "2026-08-17T06:17:39Z"
+}

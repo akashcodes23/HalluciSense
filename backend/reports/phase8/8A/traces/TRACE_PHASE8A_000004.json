@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000004",
+  "sample_id": "8A_PHY_TRU_0004",
+  "timestamp": "2026-08-17T05:49:55Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "TRUE_CONTROL",
+  "difficulty": "medium",
+  "input": "Planck's constant has a value of approximately 6.626×10⁻³⁴ joule-seconds.",
+  "ground_truth": 0,
+  "ground_truth_label": "factual",
+  "source": "NIST CODATA 2018",
+  "source_url": "https://physics.nist.gov/cgi-bin/cuu/Value?h",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": false,
+  "failure_classification": {
+    "primary": "RETRIEVAL_FAILURE",
+    "secondary": "NLI_FAILURE"
+  },
+  "latency": {
+    "total_ms": 2749.89
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

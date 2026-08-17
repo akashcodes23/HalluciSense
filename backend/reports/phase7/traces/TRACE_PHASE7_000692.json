@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000692",
+  "sample_id": "pol_0692",
+  "timestamp": "2026-08-14T14:45:21Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How big is the UN Security Council?",
+  "generated_response": "The UN Security Council has 15 members.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.05,
+    "claims": [
+      "The UN Security Council has 15 members."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1245,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7543,
+      0.8785,
+      0.7932
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0766,
+    "reconstructed_h_score": 0.0766,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 3483.04,
+    "llm_gen_ms": 306.22,
+    "p1_ms": 1691.33,
+    "p2_ms": 0.0,
+    "p3_ms": 2472.23,
+    "fusion_ms": 0.0
+  }
+}

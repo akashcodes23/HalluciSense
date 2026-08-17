@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000541",
+  "sample_id": "new_0541",
+  "timestamp": "2026-08-14T14:07:53Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits discuss global issues related to climate change and its impact on the environment, economy, and society. They aim to identify common challenges, develop strategies for mitigation and adaptation, and promote international cooperation to address climate-related issues. Climate summits often involve representatives from governments, organizations, non-governmental entities, and individuals who share a concern about the health of our planet. They also consider the economic implications of climate change and how it can affect people's lives and livelihoods, as well as its impact on natural resources and ecosystems.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Climate summits discuss global issues related to climate change and its impact on the environment",
+      "and society. They aim to identify common challenges",
+      "develop strategies for mitigation and adaptation",
+      "and promote international cooperation to address climate-related issues. Climate summits often involve representatives from governments",
+      "and individuals who share a concern about the health of our planet. They also consider the economic implications of climate change and how it can affect people's lives and livelihoods",
+      "as well as its impact on natural resources and ecosystems."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0782,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8838,
+      0.8437,
+      0.9119
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0279,
+    "reconstructed_h_score": 0.0279,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15222.11,
+    "llm_gen_ms": 2076.22,
+    "p1_ms": 2706.92,
+    "p2_ms": 0.05,
+    "p3_ms": 19741.47,
+    "fusion_ms": 0.04
+  }
+}

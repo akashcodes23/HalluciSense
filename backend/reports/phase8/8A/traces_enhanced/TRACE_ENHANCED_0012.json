@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_UNI_0012",
+  "claim": "Planck's constant is approximately 6.626\u00d710\u207b\u00b3\u2074 electron-volts per second.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Planck's constant is approximately 6.626\u00d710\u207b\u00b3\u2074 electron-volts per second",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2064.32
+}

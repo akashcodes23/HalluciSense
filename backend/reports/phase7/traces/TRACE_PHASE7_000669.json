@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000669",
+  "sample_id": "pol_0669",
+  "timestamp": "2026-08-14T14:40:06Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a system of government in which a country is divided into regions or territories that have some autonomy over their governance and internal affairs. In the United States, for example, state governments have significant authority over law-making, budgeting, and education, while the federal government maintains oversight and makes certain policies. Other examples of federalism include Canada's division of sovereignty between its three main provinces and the Canadian Government; India's federal structure involving states and a central government; and the European Union's decentralized governance system where national and regional governments share decision-making powers.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5261,
+    "claims": [
+      "Federalism is a system of government in which a country is divided into regions or territories that have some autonomy over their governance and internal affairs. In the United States",
+      "state governments have significant authority over law-making",
+      "while the federal government maintains oversight and makes certain policies. Other examples of federalism include Canada's division of sovereignty between its three main provinces and the Canadian Government",
+      "India's federal structure involving states and a central government",
+      "and the European Union's decentralized governance system where national and regional governments share decision-making powers."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2139,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8387,
+      0.8887,
+      0.8263
+    ],
+    "contradiction_score": 0.3347
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4146,
+    "reconstructed_h_score": 0.4146,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22092.38,
+    "llm_gen_ms": 2853.7,
+    "p1_ms": 3607.92,
+    "p2_ms": 0.01,
+    "p3_ms": 27579.97,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "record_id": "8A_BIO_TRU_0104",
+  "claim": "Antibiotics kill bacteria by disrupting cell wall synthesis; they are equally effective against viral infections.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Antibiotics kill bacteria by disrupting cell wall synthesis",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    },
+    {
+      "proposition": "They are equally effective against viral infections",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 3826.53
+}

@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000122",
+  "sample_id": "law_0122",
+  "timestamp": "2026-08-14T12:32:39Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "The court responsible for handling parking fines varies depending on the location in the country. In some countries, such as the United States, the local jurisdiction is typically responsible for enforcing parking regulations and issuing parking tickets. In other countries, such as England and Wales, the county court or high court may handle parking fines.\n\nIt's important to note that parking fines can vary widely depending on the severity of the violation and the location of the parking spot. It's also advisable to contact a parking enforcement agency in your area for more information and guidance.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4996,
+    "claims": [
+      "The court responsible for handling parking fines varies depending on the location in the country. In some countries",
+      "such as the United States",
+      "the local jurisdiction is typically responsible for enforcing parking regulations and issuing parking tickets. In other countries",
+      "such as England and Wales",
+      "the county court or high court may handle parking fines.\n\nIt's important to note that parking fines can vary widely depending on the severity of the violation and the location of the parking spot. It's also advisable to contact a parking enforcement agency in your area for more information and guidance."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2528,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8772,
+      0.8977,
+      0.9244
+    ],
+    "contradiction_score": 0.5363
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4115,
+    "reconstructed_h_score": 0.4115,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9259.98,
+    "llm_gen_ms": 2094.91,
+    "p1_ms": 2497.76,
+    "p2_ms": 0.01,
+    "p3_ms": 8465.32,
+    "fusion_ms": 0.01
+  }
+}

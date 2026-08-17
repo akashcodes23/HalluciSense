@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000176",
+  "sample_id": "fin_0176",
+  "timestamp": "2026-08-14T12:47:20Z",
+  "domain": "Finance",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation is a situation where the value of money decreases rapidly due to excessive demand for goods and services. This results in extreme price increases and widespread financial instability. Hyperinflation can be caused by several factors, such as currency devaluation, debt accumulation, or political instability. If left unchecked, hyperinflation can lead to severe economic crisis and social upheaval.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Hyperinflation is a situation where the value of money decreases rapidly due to excessive demand for goods and services. This results in extreme price increases and widespread financial instability. Hyperinflation can be caused by several factors",
+      "such as currency devaluation",
+      "or political instability. If left unchecked",
+      "hyperinflation can lead to severe economic crisis and social upheaval."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3004,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8971,
+      0.9136,
+      0.8393
+    ],
+    "contradiction_score": 0.6416
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1073,
+    "reconstructed_h_score": 0.1073,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14115.38,
+    "llm_gen_ms": 1420.72,
+    "p1_ms": 3753.28,
+    "p2_ms": 0.01,
+    "p3_ms": 16799.42,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,3 @@
+failure_cause,count,pct_of_errors,fp_count,fn_count,domains,categories
+RETRIEVAL_FAILURE,25,83.3,25,0,"Physics, Chemistry, Biology, Medicine, Mathematics",TRUE_CONTROL
+NLI_FAILURE,5,16.7,5,0,"Biology, Medicine","UNIT_SCALE, NEGATION, TRUE_CORE_FALSE_ELABORATION"

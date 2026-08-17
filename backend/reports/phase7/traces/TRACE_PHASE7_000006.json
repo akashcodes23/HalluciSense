@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000006",
+  "sample_id": "gen_0006",
+  "timestamp": "2026-08-14T12:13:51Z",
+  "domain": "General Knowledge",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Where is the Eiffel Tower located?",
+  "generated_response": "The Eiffel Tower is located in Paris, France. It was built between 1889 and 1893 as the tallest structure of its time and is considered one of the most recognizable landmarks in the world. The tower has a height of 324 meters (1063 feet) and stands on the Champ de Mars in Paris' Place de la R\u00e9publique square.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5236,
+    "claims": [
+      "The Eiffel Tower is located in Paris",
+      "France. It was built between 1889 and 1893 as the tallest structure of its time and is considered one of the most recognizable landmarks in the world. The tower has a height of 324 meters (1063 feet) and stands on the Champ de Mars in Paris' Place de la R\u00e9publique square."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0575,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8922,
+      0.8922,
+      0.951
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3572,
+    "reconstructed_h_score": 0.3572,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4990.58,
+    "llm_gen_ms": 1450.35,
+    "p1_ms": 1695.86,
+    "p2_ms": 0.01,
+    "p3_ms": 3320.38,
+    "fusion_ms": 0.01
+  }
+}

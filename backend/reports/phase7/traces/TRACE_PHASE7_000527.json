@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000527",
+  "sample_id": "new_0527",
+  "timestamp": "2026-08-14T14:03:42Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks change interest rates to influence the economy and maintain price stability. By adjusting monetary policy, they can stimulate or slow down economic activity. Lowering interest rates encourages borrowing and investment, while raising them restricts borrowing and investment. Central banks also use other tools such as open market operations and quantitative easing to manage money supply and interest rates. These changes can have significant effects on the stock market, consumer behavior, and overall economic health.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4998,
+    "claims": [
+      "Central banks change interest rates to influence the economy and maintain price stability. By adjusting monetary policy",
+      "they can stimulate or slow down economic activity. Lowering interest rates encourages borrowing and investment",
+      "while raising them restricts borrowing and investment. Central banks also use other tools such as open market operations and quantitative easing to manage money supply and interest rates. These changes can have significant effects on the stock market",
+      "and overall economic health."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0815,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.871,
+      0.8805
+    ],
+    "contradiction_score": 0.0023
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3504,
+    "reconstructed_h_score": 0.3504,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21470.6,
+    "llm_gen_ms": 1968.19,
+    "p1_ms": 2483.83,
+    "p2_ms": 0.01,
+    "p3_ms": 32024.04,
+    "fusion_ms": 0.02
+  }
+}

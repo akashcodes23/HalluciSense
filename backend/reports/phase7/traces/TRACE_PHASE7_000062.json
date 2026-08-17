@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000062",
+  "sample_id": "med_0062",
+  "timestamp": "2026-08-14T12:18:33Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does chemotherapy cure bacterial pneumonia?",
+  "generated_response": "No, chemotherapy does not cure bacterial pneumonia. Bacterial pneumonia is an infection caused by bacteria that invade the airways of the lungs. The disease progresses through various stages, and once it reaches the advanced stage, antibiotics may no longer be effective.\n\nThe treatment for bacterial pneumonia typically involves:\n\n1. Initial antibiotic therapy: Antibiotics are used to kill or prevent the growth of the bacteria that cause pneumonia.\n2. Supportive care: This includes providing oxygen therapy to help manage hypoxia (low oxygen in the blood), maintaining hydration, and managing other symptoms such as fever, fatigue, and coughing.\n3. Inhaled antibiotics: For severe cases or when antibiotics are ineffective, doctors may prescribe intravenous antibiotics or administer inhalation medications.\n4. Surgery for serious bacterial pneumonia: In some cases, surgery is necessary to remove infected tissue.\n\nIt's important to follow the treatment plan provided by your healthcare provider carefully and continue taking any prescribed medications until they have completed their course of treatment. If you experience symptoms that do not improve or if you develop new symptoms, contact your doctor immediately.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "chemotherapy does not cure bacterial pneumonia. Bacterial pneumonia is an infection caused by bacteria that invade the airways of the lungs. The disease progresses through various stages",
+      "and once it reaches the advanced stage",
+      "antibiotics may no longer be effective.\n\nThe treatment for bacterial pneumonia typically involves:\n\n1. Initial antibiotic therapy: Antibiotics are used to kill or prevent the growth of the bacteria that cause pneumonia.\n2. Supportive care: This includes providing oxygen therapy to help manage hypoxia (low oxygen in the blood)",
+      "and managing other symptoms such as fever",
+      "and coughing.\n3. Inhaled antibiotics: For severe cases or when antibiotics are ineffective",
+      "doctors may prescribe intravenous antibiotics or administer inhalation medications.\n4. Surgery for serious bacterial pneumonia: In some cases",
+      "surgery is necessary to remove infected tissue.\n\nIt's important to follow the treatment plan provided by your healthcare provider carefully and continue taking any prescribed medications until they have completed their course of treatment. If you experience symptoms that do not improve or if you develop new symptoms",
+      "contact your doctor immediately."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0541,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9086,
+      0.9188,
+      0.9233
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0193,
+    "reconstructed_h_score": 0.0193,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9265.47,
+    "llm_gen_ms": 2782.99,
+    "p1_ms": 1357.85,
+    "p2_ms": 0.01,
+    "p3_ms": 9552.93,
+    "fusion_ms": 0.01
+  }
+}

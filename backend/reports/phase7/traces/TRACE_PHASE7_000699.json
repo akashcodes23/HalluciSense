@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000699",
+  "sample_id": "pol_0699",
+  "timestamp": "2026-08-14T14:47:16Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies generally elect leaders through an electoral process that includes polling and voting. The primary goal of this process is to identify the best candidate who can represent the will of the people and deliver the most favorable outcomes for their country.\n\nHere are some key aspects of how democracies choose leaders:\n\n1. **Polling**: Polls are conducted to gather public opinion on various candidates. These polls aim to provide a snapshot of the preferences and beliefs of citizens, helping to identify potential leaders who align with their values and priorities.\n\n2. **Voting**: The voting process allows voters to choose the candidate they believe will best serve the country's interests. This can involve simple majority voting or ranked-choice voting (where voters rank candidates in order of preference).\n\n3. **Election Process**: The election is often conducted by a democratic system, where each vote counts equally. Candidates may campaign and engage with the electorate to build their support.\n\n4. **Rules of Procedure**: There are rules that govern the election process, including how voting is counted, who can be elected (such as President or Vice President), and how electoral votes are distributed.\n\n5. **Judicial Review**: In some democracies, there may be a judicial review of elections to ensure fairness and transparency. This involves independent third parties evaluating whether the voting process was conducted fairly and in accordance with laws.\n\n6. **Transition Period**: After an election, there is usually a period of transition for new leaders. During this time, the new leader may lead through a period of stability or change based on public opinion and political considerations.\n\n7. **Consequences of Election**: The outcome of elections can have significant consequences for individuals, groups, and the country as a whole. For example, if one candidate wins, they might receive significant power, while others may face challenges or loss of influence.\n\nOverall, democracies choose leaders through an electoral process that is designed to reflect public opinion, ensure fairness, and promote democratic governance.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Democracies generally elect leaders through an electoral process that includes polling and voting. The primary goal of this process is to identify the best candidate who can represent the will of the people and deliver the most favorable outcomes for their country.\n\nHere are some key aspects of how democracies choose leaders:\n\n1. **Polling**: Polls are conducted to gather public opinion on various candidates. These polls aim to provide a snapshot of the preferences and beliefs of citizens",
+      "helping to identify potential leaders who align with their values and priorities.\n\n2. **Voting**: The voting process allows voters to choose the candidate they believe will best serve the country's interests. This can involve simple majority voting or ranked-choice voting (where voters rank candidates in order of preference).\n\n3. **Election Process**: The election is often conducted by a democratic system",
+      "where each vote counts equally. Candidates may campaign and engage with the electorate to build their support.\n\n4. **Rules of Procedure**: There are rules that govern the election process",
+      "including how voting is counted",
+      "who can be elected (such as President or Vice President)",
+      "and how electoral votes are distributed.\n\n5. **Judicial Review**: In some democracies",
+      "there may be a judicial review of elections to ensure fairness and transparency. This involves independent third parties evaluating whether the voting process was conducted fairly and in accordance with laws.\n\n6. **Transition Period**: After an election",
+      "there is usually a period of transition for new leaders. During this time",
+      "the new leader may lead through a period of stability or change based on public opinion and political considerations.\n\n7. **Consequences of Election**: The outcome of elections can have significant consequences for individuals",
+      "and the country as a whole. For example",
+      "if one candidate wins",
+      "they might receive significant power",
+      "while others may face challenges or loss of influence.\n\nOverall",
+      "democracies choose leaders through an electoral process that is designed to reflect public opinion",
+      "and promote democratic governance."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1162,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8388,
+      0.8041
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0415,
+    "reconstructed_h_score": 0.0415,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 25504.81,
+    "llm_gen_ms": 7124.88,
+    "p1_ms": 2331.16,
+    "p2_ms": 0.05,
+    "p3_ms": 31056.36,
+    "fusion_ms": 0.01
+  }
+}

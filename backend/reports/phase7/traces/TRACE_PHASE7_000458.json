@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000458",
+  "sample_id": "che_0458",
+  "timestamp": "2026-08-14T13:49:00Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does helium form covalent bonds?",
+  "generated_response": "Yes, helium forms covalent bonds with other atoms. Its atomic number is 2, meaning it has two electrons in its outermost shell. When two helium atoms combine, they share one of their electrons to achieve a stable electron configuration. This process results in the formation of helium dioxide (HeO\u2082) or helium monoxide (HeO), both of which are covalent compounds.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4981,
+    "claims": [
+      "helium forms covalent bonds with other atoms. Its atomic number is 2, meaning it has two electrons in its outermost shell. When two helium atoms combine",
+      "they share one of their electrons to achieve a stable electron configuration. This process results in the formation of helium dioxide (HeO\u2082) or helium monoxide (HeO)",
+      "both of which are covalent compounds."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4058,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9235,
+      0.9041,
+      0.9145
+    ],
+    "contradiction_score": 0.9998
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4651,
+    "reconstructed_h_score": 0.4651,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11118.45,
+    "llm_gen_ms": 2012.58,
+    "p1_ms": 2880.34,
+    "p2_ms": 0.0,
+    "p3_ms": 10802.42,
+    "fusion_ms": 0.01
+  }
+}

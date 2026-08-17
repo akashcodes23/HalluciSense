@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000366",
+  "sample_id": "phy_0366",
+  "timestamp": "2026-08-14T13:28:21Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does entropy decrease in isolated systems?",
+  "generated_response": "Entropy is a thermodynamic property that describes the amount of disorder or randomness in a system. In an isolated system, which is one that does not exchange heat with its surroundings, entropy generally decreases over time due to the second law of thermodynamics. The Law states that for an isolated system and any process occurring within it, the total entropy of the system must always increase or remain constant.\n\nHere's a simple explanation:\n\n1. **Initial Entropy**: When you start with an isolated system, all the available energy is in the form of thermal energy. This energy has a certain amount of disorder (entropy).\n\n2. **Process Occurs**: As this system undergoes processes, such as heat exchange or changes in chemical composition, some of the energy is converted into different forms (like electrical energy). The remaining energy that was previously thermal becomes other types of energy.\n\n3. **Entropy Change**: Since the total amount of energy in the system has decreased, but some energy has been transformed into other forms, there is still a loss of disorder. This means that the entropy of the system decreases over time.\n\nIn summary, even though an isolated system does not exchange heat with its surroundings, it can still experience a decrease in entropy due to the conversion of thermal energy into different forms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.679,
+    "claims": [
+      "Entropy is a thermodynamic property that describes the amount of disorder or randomness in a system. In an isolated system",
+      "which is one that does not exchange heat with its surroundings",
+      "entropy generally decreases over time due to the second law of thermodynamics. The Law states that for an isolated system and any process occurring within it",
+      "the total entropy of the system must always increase or remain constant.\n\nHere's a simple explanation:\n\n1. **Initial Entropy**: When you start with an isolated system",
+      "all the available energy is in the form of thermal energy. This energy has a certain amount of disorder (entropy).\n\n2. **Process Occurs**: As this system undergoes processes",
+      "such as heat exchange or changes in chemical composition",
+      "some of the energy is converted into different forms (like electrical energy). The remaining energy that was previously thermal becomes other types of energy.\n\n3. **Entropy Change**: Since the total amount of energy in the system has decreased",
+      "but some energy has been transformed into other forms",
+      "there is still a loss of disorder. This means that the entropy of the system decreases over time.\n\nIn summary",
+      "even though an isolated system does not exchange heat with its surroundings",
+      "it can still experience a decrease in entropy due to the conversion of thermal energy into different forms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.259,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6891,
+      0.7763,
+      0.857
+    ],
+    "contradiction_score": 0.3205
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.529,
+    "reconstructed_h_score": 0.529,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 26863.51,
+    "llm_gen_ms": 5375.02,
+    "p1_ms": 6859.77,
+    "p2_ms": 0.13,
+    "p3_ms": 28105.88,
+    "fusion_ms": 0.01
+  }
+}

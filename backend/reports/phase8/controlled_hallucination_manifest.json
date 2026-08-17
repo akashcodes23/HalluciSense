@@ -1,0 +1,42 @@
+{
+  "dataset_name": "Phase8_Dataset_C_ControlledHallucinationInjection",
+  "version": "1.0.0",
+  "creation_timestamp": "2026-08-17T05:11:13Z",
+  "source_dataset": "Phase6_canonical_benchmark (factual records only)",
+  "source_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "output_sha256": "2fcba8c9e32b52ea51c181ea89750fe768fe12eb2dca9c2dc672f25478886aff",
+  "generation_script": "backend/evaluation/phase8/build_dataset_c.py",
+  "random_seed": 42,
+  "total_samples": 300,
+  "actually_corrupted_count": 300,
+  "fallback_corruption_count": 0,
+  "corruption_types": [
+    "ENTITY_SUBSTITUTION",
+    "NUMERIC_SUBSTITUTION",
+    "DATE_SUBSTITUTION",
+    "TEMPORAL_ERROR",
+    "LOCATION_SUBSTITUTION",
+    "PERSON_SUBSTITUTION",
+    "CAUSAL_REVERSAL",
+    "CONTRADICTION",
+    "PARTIAL_CLAIM_CORRUPTION",
+    "MULTI_CLAIM_CORRUPTION"
+  ],
+  "samples_per_type": 30,
+  "severity_scale": {
+    "ENTITY_SUBSTITUTION": 2,
+    "NUMERIC_SUBSTITUTION": 2,
+    "DATE_SUBSTITUTION": 2,
+    "TEMPORAL_ERROR": 2,
+    "LOCATION_SUBSTITUTION": 2,
+    "PERSON_SUBSTITUTION": 2,
+    "CAUSAL_REVERSAL": 3,
+    "CONTRADICTION": 4,
+    "PARTIAL_CLAIM_CORRUPTION": 1,
+    "MULTI_CLAIM_CORRUPTION": 3
+  },
+  "all_ground_truth": 1,
+  "ground_truth_method": "rule_based_transformation_self_evident",
+  "schema_version": "phase8_v1",
+  "note": "All corruptions are deterministic rule-based transformations. Ground truth (GT=1 hallucinated) is self-evident from the transformation. No LLM was used to generate or annotate this dataset. No HalluciSense H-score was used as ground truth."
+}

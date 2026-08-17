@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000381",
+  "sample_id": "phy_0381",
+  "timestamp": "2026-08-14T13:32:30Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity scales with the cube of the mass. This means if you double the mass of an object, its gravitational pull will increase by eight times. For example, if an object has a mass of 10 kg, its gravitational force would be approximately \\(9.8 \\text{ m/s}^2\\). If you doubled this to 20 kg, the gravitational force would be \\(78.4 \\text{ m/s}^2\\), or eight times larger.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gravity scales with the cube of the mass. This means if you double the mass of an object",
+      "its gravitational pull will increase by eight times. For example",
+      "if an object has a mass of 10 kg",
+      "its gravitational force would be approximately \\(9.8 \\text{ m/s}^2\\). If you doubled this to 20 kg",
+      "the gravitational force would be \\(78.4 \\text{ m/s}^2\\)",
+      "or eight times larger."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.351,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.6895,
+      0.7708
+    ],
+    "contradiction_score": 0.5017
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1253,
+    "reconstructed_h_score": 0.1253,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20998.73,
+    "llm_gen_ms": 2032.38,
+    "p1_ms": 2425.55,
+    "p2_ms": 0.0,
+    "p3_ms": 31545.32,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "trace_id": "TRACE_PHASE7_000520",
+  "sample_id": "new_0520",
+  "timestamp": "2026-08-14T14:01:37Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are generally regulated by government bodies to ensure that they operate within legal and ethical frameworks. These regulations can vary widely depending on the country or region in which the stock market operates, but some key aspects of stock market regulation include:\n\n1. Capital Controls: Governments may have controls over who can invest in the stock market, such as requirements for foreign investment or limitations on certain types of shares.\n\n2. Securities Laws: These laws govern the creation, sale, and trading of stocks and other securities, including their value, liquidity, and regulations related to fraud, insider trading, and market manipulation.\n\n3. Trading Rules: Governments may impose rules to regulate trading in the stock market, such as minimum bid and ask prices, daily limits on trade size, and requirements for transparency in pricing information.\n\n4. Regulatory bodies: Governments often have regulatory bodies that oversee the stock market, including the Securities and Exchange Commission (SEC) in the United States, the Financial Conduct Authority (FCA) in the UK, and other international organizations.\n\nOverall, the goal of stock market regulation is to protect investors by ensuring that the market operates fairly, transparently, and safely.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3937,
+    "claims": [
+      "stock markets are generally regulated by government bodies to ensure that they operate within legal and ethical frameworks. These regulations can vary widely depending on the country or region in which the stock market operates",
+      "but some key aspects of stock market regulation include:\n\n1. Capital Controls: Governments may have controls over who can invest in the stock market",
+      "such as requirements for foreign investment or limitations on certain types of shares.\n\n2. Securities Laws: These laws govern the creation",
+      "and trading of stocks and other securities",
+      "and regulations related to fraud",
+      "and market manipulation.\n\n3. Trading Rules: Governments may impose rules to regulate trading in the stock market",
+      "such as minimum bid and ask prices",
+      "daily limits on trade size",
+      "and requirements for transparency in pricing information.\n\n4. Regulatory bodies: Governments often have regulatory bodies that oversee the stock market",
+      "including the Securities and Exchange Commission (SEC) in the United States",
+      "the Financial Conduct Authority (FCA) in the UK",
+      "and other international organizations.\n\nOverall",
+      "the goal of stock market regulation is to protect investors by ensuring that the market operates fairly"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0755,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9217,
+      0.8946,
+      0.8358
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2801,
+    "reconstructed_h_score": 0.2801,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18763.76,
+    "llm_gen_ms": 4889.89,
+    "p1_ms": 4211.26,
+    "p2_ms": 0.02,
+    "p3_ms": 17807.63,
+    "fusion_ms": 0.01
+  }
+}

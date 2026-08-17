@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000226",
+  "sample_id": "his_0226",
+  "timestamp": "2026-08-14T12:58:25Z",
+  "domain": "History",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Who won the Battle of Waterloo?",
+  "generated_response": "The Battle of Waterloo took place on June 18-23, 1815 in Napoleon Bonaparte's attempt to invade Britain. The British forces under Nelson defeated the French army led by Marshal Ney in a decisive victory.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.175,
+    "claims": [
+      "The Battle of Waterloo took place on June 18-23, 1815 in Napoleon Bonaparte's attempt to invade Britain. The British forces under Nelson defeated the French army led by Marshal Ney in a decisive victory."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2542,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7812,
+      0.7486,
+      0.837
+    ],
+    "contradiction_score": 0.3342
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2033,
+    "reconstructed_h_score": 0.2033,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12286.26,
+    "llm_gen_ms": 1217.13,
+    "p1_ms": 2033.5,
+    "p2_ms": 0.0,
+    "p3_ms": 16975.64,
+    "fusion_ms": 0.01
+  }
+}

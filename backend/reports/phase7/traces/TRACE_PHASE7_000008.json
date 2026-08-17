@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000008",
+  "sample_id": "gen_0008",
+  "timestamp": "2026-08-14T12:14:00Z",
+  "domain": "General Knowledge",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What is the smallest ocean?",
+  "generated_response": "The smallest ocean is the Arctic Ocean. It covers about 14 million square kilometers (5.4 million square miles) and has an area of about 36% of the Earth's surface. The Arctic Ocean is located in the northernmost part of the globe, extending from the North Pole to the North Atlantic Ocean.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5008,
+    "claims": [
+      "The smallest ocean is the Arctic Ocean. It covers about 14 million square kilometers (5.4 million square miles) and has an area of about 36% of the Earth's surface. The Arctic Ocean is located in the northernmost part of the globe",
+      "extending from the North Pole to the North Atlantic Ocean."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2696,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9303,
+      0.9633,
+      0.9253
+    ],
+    "contradiction_score": 0.6581
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4182,
+    "reconstructed_h_score": 0.4182,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 5446.37,
+    "llm_gen_ms": 943.18,
+    "p1_ms": 1517.98,
+    "p2_ms": 0.0,
+    "p3_ms": 5426.19,
+    "fusion_ms": 0.01
+  }
+}

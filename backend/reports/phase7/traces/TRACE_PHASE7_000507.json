@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000507",
+  "sample_id": "new_0507",
+  "timestamp": "2026-08-14T13:57:34Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks typically change interest rates to influence economic conditions and monetary policy decisions in their respective countries. Here's a brief explanation of why central banks might change interest rates:\n\n1. **Regulation**: Central banks set interest rates to regulate the money supply, which influences borrowing costs. This helps control inflation and stabilize the economy.\n\n2. **Monetary Policy**: Interest rate changes can be used to influence inflation by adjusting the amount of money in circulation. Higher interest rates slow down economic growth and reduce spending, which leads to lower prices. Lower interest rates encourage more spending, stimulating economic activity.\n\n3. **Economic Growth**: By changing interest rates, central banks can affect overall economic growth by influencing borrowing decisions of businesses and consumers. In a stronger economy, interest rates may be higher because companies have more incentive to borrow money for expansion and investment.\n\n4. **Exchange Rates**: Changes in interest rates can also influence exchange rates. When the domestic currency is overpriced relative to foreign currencies, central banks might lower interest rates to encourage imports from other countries, which boosts economic growth. Conversely, when a country's currency is undervalued, central banks might raise interest rates to discourage exports and stabilize the economy.\n\n5. **Market Feedback**: Central banks use market feedback to adjust their policies. If they see inflation rising too quickly or if there are signs of overheating in the economy, they may increase interest rates to reduce demand and lower prices.\n\n6. **Cyclical Adjustments**: Interest rate changes can help manage fluctuations in economic activity during economic cycles. When the economy is in a downturn, central banks might raise interest rates to slow down spending and stabilize the economy. In an upturn, central banks might lower interest rates to encourage investment and growth.\n\n7. **Compliance with Regulations**: Central banks may change interest rates to comply with international regulations or meet their own regulatory requirements for monetary policy.\n\nIn summary, central bank interest rate changes are a crucial tool in managing economic conditions and stimulating the economy, reflecting their role as regulators, policymakers, and financial intermediaries.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Central banks typically change interest rates to influence economic conditions and monetary policy decisions in their respective countries. Here's a brief explanation of why central banks might change interest rates:\n\n1. **Regulation**: Central banks set interest rates to regulate the money supply",
+      "which influences borrowing costs. This helps control inflation and stabilize the economy.\n\n2. **Monetary Policy**: Interest rate changes can be used to influence inflation by adjusting the amount of money in circulation. Higher interest rates slow down economic growth and reduce spending",
+      "which leads to lower prices. Lower interest rates encourage more spending",
+      "stimulating economic activity.\n\n3. **Economic Growth**: By changing interest rates",
+      "central banks can affect overall economic growth by influencing borrowing decisions of businesses and consumers. In a stronger economy",
+      "interest rates may be higher because companies have more incentive to borrow money for expansion and investment.\n\n4. **Exchange Rates**: Changes in interest rates can also influence exchange rates. When the domestic currency is overpriced relative to foreign currencies",
+      "central banks might lower interest rates to encourage imports from other countries",
+      "which boosts economic growth. Conversely",
+      "when a country's currency is undervalued",
+      "central banks might raise interest rates to discourage exports and stabilize the economy.\n\n5. **Market Feedback**: Central banks use market feedback to adjust their policies. If they see inflation rising too quickly or if there are signs of overheating in the economy",
+      "they may increase interest rates to reduce demand and lower prices.\n\n6. **Cyclical Adjustments**: Interest rate changes can help manage fluctuations in economic activity during economic cycles. When the economy is in a downturn",
+      "central banks might raise interest rates to slow down spending and stabilize the economy. In an upturn",
+      "central banks might lower interest rates to encourage investment and growth.\n\n7. **Compliance with Regulations**: Central banks may change interest rates to comply with international regulations or meet their own regulatory requirements for monetary policy.\n\nIn summary",
+      "central bank interest rate changes are a crucial tool in managing economic conditions and stimulating the economy",
+      "reflecting their role as regulators"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0528,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.9457,
+      0.8923
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0189,
+    "reconstructed_h_score": 0.0189,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 26984.38,
+    "llm_gen_ms": 8512.47,
+    "p1_ms": 2229.33,
+    "p2_ms": 0.06,
+    "p3_ms": 31249.78,
+    "fusion_ms": 0.01
+  }
+}

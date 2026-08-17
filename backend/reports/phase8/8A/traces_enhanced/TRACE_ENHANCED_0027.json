@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_OUT_0027",
+  "claim": "The luminiferous ether is the medium through which light propagates.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.1214,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "The luminiferous ether is the medium through which light propagates",
+      "base_nli_score": 0.1214,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.1214
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1698.2
+}

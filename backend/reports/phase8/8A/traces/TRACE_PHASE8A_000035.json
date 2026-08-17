@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000035",
+  "sample_id": "8A_PHY_TRU_0035",
+  "timestamp": "2026-08-17T05:50:53Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "medium",
+  "input": "Nuclear fission, the process of splitting heavy nuclei to release energy, was first demonstrated by Marie Curie in 1934.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Nuclear fission",
+  "source_url": "https://en.wikipedia.org/wiki/Nuclear_fission",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 2069.03
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_CHE_OUT_0061",
+  "claim": "Phlogiston is the substance released during combustion.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.8816,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Phlogiston is the substance released during combustion",
+      "base_nli_score": 0.8816,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.8816
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1557.86
+}

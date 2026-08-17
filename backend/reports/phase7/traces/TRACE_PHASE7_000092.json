@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000092",
+  "sample_id": "med_0092",
+  "timestamp": "2026-08-14T12:25:19Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is typically not treatable with medications, but symptoms can be managed to reduce severity and discomfort. Here are some common treatments:\n\n1. **Hydration**: Ensure you stay hydrated by drinking plenty of water throughout the day.\n\n2. **Rest**: Get plenty of rest to allow your body to fight off the virus.\n\n3. **Over-the-counter pain relievers**: You may take over-the-counter pain medications such as acetaminophen (Tylenol) or ibuprofen (Advil, Motrin) to relieve symptoms like fever and muscle aches. Do not give aspirin to children under 18 years old unless directed by a healthcare provider.\n\n4. **Antiviral medications**: If you have been infected within the past few days, your healthcare provider may recommend antiviral medications. These medications can help reduce the severity of symptoms and shorten the illness duration.\n\n5. **Supportive care**: You may need additional support such as nutritional supplements, vitamins, and fluids to meet your body's needs during recovery.\n\n6. **Avoid exposure**: If possible, avoid close contact with people who are sick or who have had influenza to limit the spread of the virus.\n\n7. **Stay home**: Try to stay home to reduce contact with others and help prevent the spread of the virus.\n\nIt's important to consult with your healthcare provider if you experience severe symptoms, fever over 100\u00b0F (38\u00b0C), or other concerning signs before seeking treatment.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is typically not treatable with medications",
+      "but symptoms can be managed to reduce severity and discomfort. Here are some common treatments:\n\n1. **Hydration**: Ensure you stay hydrated by drinking plenty of water throughout the day.\n\n2. **Rest**: Get plenty of rest to allow your body to fight off the virus.\n\n3. **Over-the-counter pain relievers**: You may take over-the-counter pain medications such as acetaminophen (Tylenol) or ibuprofen (Advil",
+      "Motrin) to relieve symptoms like fever and muscle aches. Do not give aspirin to children under 18 years old unless directed by a healthcare provider.\n\n4. **Antiviral medications**: If you have been infected within the past few days",
+      "your healthcare provider may recommend antiviral medications. These medications can help reduce the severity of symptoms and shorten the illness duration.\n\n5. **Supportive care**: You may need additional support such as nutritional supplements",
+      "and fluids to meet your body's needs during recovery.\n\n6. **Avoid exposure**: If possible",
+      "avoid close contact with people who are sick or who have had influenza to limit the spread of the virus.\n\n7. **Stay home**: Try to stay home to reduce contact with others and help prevent the spread of the virus.\n\nIt's important to consult with your healthcare provider if you experience severe symptoms",
+      "fever over 100\u00b0F (38\u00b0C)",
+      "or other concerning signs before seeking treatment."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3165,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6174,
+      0.8262,
+      0.6358
+    ],
+    "contradiction_score": 0.3344
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.113,
+    "reconstructed_h_score": 0.113,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15206.9,
+    "llm_gen_ms": 5394.84,
+    "p1_ms": 2287.18,
+    "p2_ms": 0.04,
+    "p3_ms": 14237.63,
+    "fusion_ms": 0.01
+  }
+}

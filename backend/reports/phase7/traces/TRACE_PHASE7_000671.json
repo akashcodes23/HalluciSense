@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000671",
+  "sample_id": "pol_0671",
+  "timestamp": "2026-08-14T14:40:40Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies choose leaders through a process of elections, with the voter being able to cast their vote for a candidate they believe will be best suited to lead the country. This is done in accordance with the democratic principles and values of the country's constitution and legal system. The election process typically includes various procedures such as primary voting, runoff voting, or direct democracy where voters cast their votes for candidates through ballot boxes or other electronic means.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Democracies choose leaders through a process of elections",
+      "with the voter being able to cast their vote for a candidate they believe will be best suited to lead the country. This is done in accordance with the democratic principles and values of the country's constitution and legal system. The election process typically includes various procedures such as primary voting",
+      "or direct democracy where voters cast their votes for candidates through ballot boxes or other electronic means."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1021,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8485,
+      0.8535,
+      0.8277
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0365,
+    "reconstructed_h_score": 0.0365,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19286.91,
+    "llm_gen_ms": 2100.78,
+    "p1_ms": 2715.24,
+    "p2_ms": 0.01,
+    "p3_ms": 28345.64,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000090",
+  "sample_id": "med_0090",
+  "timestamp": "2026-08-14T12:24:57Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does chemotherapy cure bacterial pneumonia?",
+  "generated_response": "No, chemotherapy is not a cure for bacterial pneumonia. It is used to treat bacterial infections and reduce symptoms, but it does not remove the bacteria from the lungs. The treatment plan usually includes antibiotics to kill the bacteria, supportive care to help manage the disease, and often a course of oxygen therapy to maintain high blood oxygen levels in the lungs.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "chemotherapy is not a cure for bacterial pneumonia. It is used to treat bacterial infections and reduce symptoms",
+      "but it does not remove the bacteria from the lungs. The treatment plan usually includes antibiotics to kill the bacteria",
+      "supportive care to help manage the disease",
+      "and often a course of oxygen therapy to maintain high blood oxygen levels in the lungs."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1417,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9296,
+      0.9518,
+      0.9201
+    ],
+    "contradiction_score": 0.2819
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0506,
+    "reconstructed_h_score": 0.0506,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8728.58,
+    "llm_gen_ms": 1206.98,
+    "p1_ms": 1466.15,
+    "p2_ms": 0.0,
+    "p3_ms": 11380.09,
+    "fusion_ms": 0.01
+  }
+}

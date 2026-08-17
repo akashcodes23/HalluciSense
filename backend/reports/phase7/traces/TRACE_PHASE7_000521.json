@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000521",
+  "sample_id": "new_0521",
+  "timestamp": "2026-08-14T14:01:54Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits discuss global issues related to climate change and the need for action to mitigate its effects. These discussions typically involve discussing various aspects of climate science, such as temperature trends, changes in precipitation patterns, and rising sea levels. They also cover how these changes affect ecosystems, human populations, and infrastructure, and explore the potential solutions that can be implemented to reduce greenhouse gas emissions and address other climate challenges. Additionally, climate summits often involve discussions on strategies for adapting to changing climates, such as building resilient infrastructure and developing sustainable agricultural practices.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.499,
+    "claims": [
+      "Climate summits discuss global issues related to climate change and the need for action to mitigate its effects. These discussions typically involve discussing various aspects of climate science",
+      "such as temperature trends",
+      "changes in precipitation patterns",
+      "and rising sea levels. They also cover how these changes affect ecosystems",
+      "and explore the potential solutions that can be implemented to reduce greenhouse gas emissions and address other climate challenges. Additionally",
+      "climate summits often involve discussions on strategies for adapting to changing climates",
+      "such as building resilient infrastructure and developing sustainable agricultural practices."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0988,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8616,
+      0.8081,
+      0.8749
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3561,
+    "reconstructed_h_score": 0.3561,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16822.31,
+    "llm_gen_ms": 2360.98,
+    "p1_ms": 3228.26,
+    "p2_ms": 0.01,
+    "p3_ms": 21109.25,
+    "fusion_ms": 0.01
+  }
+}

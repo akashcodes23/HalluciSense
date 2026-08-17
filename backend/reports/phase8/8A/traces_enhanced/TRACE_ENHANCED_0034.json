@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_TRU_0034",
+  "claim": "Black holes, regions of spacetime where gravity prevents even light from escaping, were first observed directly by the Hubble Space Telescope in 1995.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.9,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Black holes, regions of spacetime where gravity prevents even light from escaping, were first observed directly by the Hubble Space Telescope in 1995",
+      "base_nli_score": 0.9,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.9
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1601.84
+}

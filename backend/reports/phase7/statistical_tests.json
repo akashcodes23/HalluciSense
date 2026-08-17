@@ -1,0 +1,22 @@
+{
+  "mcnemar_test_vs_p1": {
+    "statistic_chi2": 0.0135,
+    "p_value": 0.907456,
+    "b_discordant_full_correct": 38,
+    "c_discordant_p1_correct": 36,
+    "is_significant_alpha_005": false
+  },
+  "wilcoxon_signed_rank_vs_p1": {
+    "statistic": 61081.0,
+    "p_value": 0.0,
+    "is_significant_alpha_005": true
+  },
+  "effect_size_cohen_d": -0.5395,
+  "delta_metrics": {
+    "delta_accuracy": 0.0026,
+    "delta_f1": -0.0827,
+    "delta_auroc": 0.006,
+    "delta_ece": 0.0084,
+    "delta_brier": -0.015
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000565",
+  "sample_id": "mat_0565",
+  "timestamp": "2026-08-14T14:15:41Z",
+  "domain": "Mathematics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of angles in any triangle is always \\(180^\\circ\\). This is a fundamental property of triangles and can be proven using basic geometric principles. Here is a simple Python code snippet to verify this:\n\n```python\n# Define the function to calculate the sum of angles in a triangle\ndef sum_of_angles_in_triangle():\n    # The sum of angles in any triangle\n    return 180\n\n# Call the function and print the result\nprint(sum_of_angles_in_triangle())\n```\n```output\n180\n```\nThe sum of angles in a triangle is \\(\\boxed{180^\\circ}\\).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4975,
+    "claims": [
+      "The sum of angles in any triangle is always \\(180^\\circ\\). This is a fundamental property of triangles and can be proven using basic geometric principles. Here is a simple Python code snippet to verify this:\n\n```python\n# Define the function to calculate the sum of angles in a triangle\ndef sum_of_angles_in_triangle():\n    # The sum of angles in any triangle\n    return 180\n\n# Call the function and print the result\nprint(sum_of_angles_in_triangle())\n```\n```output\n180\n```\nThe sum of angles in a triangle is \\(\\boxed{180^\\circ}\\)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1009,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8428,
+      0.8437,
+      0.8504
+    ],
+    "contradiction_score": 0.0016
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3559,
+    "reconstructed_h_score": 0.3559,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12092.52,
+    "llm_gen_ms": 3064.05,
+    "p1_ms": 3436.6,
+    "p2_ms": 0.01,
+    "p3_ms": 8854.57,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000474",
+  "sample_id": "che_0474",
+  "timestamp": "2026-08-14T13:51:17Z",
+  "domain": "Chemistry",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does helium form covalent bonds?",
+  "generated_response": "Helium is not known to form covalent bonds with other atoms, including carbon or hydrogen. Covalent bonding involves the sharing of electrons between atoms, typically involving two or more atoms that share electrons equally.\n\nIn helium, there are no valence electrons to participate in covalent bonding. Instead, helium exists as a diatomic molecule (He\u2082) because its valence electrons are all filled in the lowest energy electronic states and have a full outer shell of eight electrons. This makes it inert and does not react with other atoms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.8134,
+    "claims": [
+      "Helium is not known to form covalent bonds with other atoms",
+      "including carbon or hydrogen. Covalent bonding involves the sharing of electrons between atoms",
+      "typically involving two or more atoms that share electrons equally.\n\nIn helium",
+      "there are no valence electrons to participate in covalent bonding. Instead",
+      "helium exists as a diatomic molecule (He\u2082) because its valence electrons are all filled in the lowest energy electronic states and have a full outer shell of eight electrons. This makes it inert and does not react with other atoms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2067,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8762,
+      0.8804,
+      0.8261
+    ],
+    "contradiction_score": 0.3323
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.5967,
+    "reconstructed_h_score": 0.5967,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 10403.56,
+    "llm_gen_ms": 2011.46,
+    "p1_ms": 2663.0,
+    "p2_ms": 0.03,
+    "p3_ms": 10941.4,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000184",
+  "sample_id": "fin_0184",
+  "timestamp": "2026-08-14T12:49:52Z",
+  "domain": "Finance",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation refers to rapid and sustained increases in the general price level of goods and services, leading to severe deflation as money loses its purchasing power. It often occurs when central banks print more currency than they need to control inflation. The effects of hyperinflation include:\n\n1. **Loss of Purchasing Power**: As prices rise, people can buy fewer goods and services with the same amount of money.\n\n2. **Depression in Economic Activity**: Businesses may cut costs or shut down to reduce expenses, leading to a slowdown in economic activity.\n\n3. **Devaluation of Currency**: The value of the currency degrades significantly due to inflation, making it difficult for people to buy goods and services.\n\n4. **Increased Unemployment**: High levels of unemployment can occur as businesses lay off workers who lose their jobs due to economic contraction.\n\n5. **Financial Instability**: Hyperinflation can lead to financial instability, with many individuals and organizations struggling to make ends meet.\n\nHyperinflation is generally considered a serious threat to the economy and should be managed by central banks through strict monetary policy measures such as raising interest rates and controlling currency issuance.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5,
+    "claims": [
+      "Hyperinflation refers to rapid and sustained increases in the general price level of goods and services",
+      "leading to severe deflation as money loses its purchasing power. It often occurs when central banks print more currency than they need to control inflation. The effects of hyperinflation include:\n\n1. **Loss of Purchasing Power**: As prices rise",
+      "people can buy fewer goods and services with the same amount of money.\n\n2. **Depression in Economic Activity**: Businesses may cut costs or shut down to reduce expenses",
+      "leading to a slowdown in economic activity.\n\n3. **Devaluation of Currency**: The value of the currency degrades significantly due to inflation",
+      "making it difficult for people to buy goods and services.\n\n4. **Increased Unemployment**: High levels of unemployment can occur as businesses lay off workers who lose their jobs due to economic contraction.\n\n5. **Financial Instability**: Hyperinflation can lead to financial instability",
+      "with many individuals and organizations struggling to make ends meet.\n\nHyperinflation is generally considered a serious threat to the economy and should be managed by central banks through strict monetary policy measures such as raising interest rates and controlling currency issuance."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0715,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8975,
+      0.9,
+      0.874
+    ],
+    "contradiction_score": 0.0009
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.347,
+    "reconstructed_h_score": 0.347,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17496.13,
+    "llm_gen_ms": 4464.04,
+    "p1_ms": 3100.93,
+    "p2_ms": 0.03,
+    "p3_ms": 19081.18,
+    "fusion_ms": 0.02
+  }
+}

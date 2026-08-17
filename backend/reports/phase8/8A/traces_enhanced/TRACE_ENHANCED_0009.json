@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_NUM_0009",
+  "claim": "The gravitational acceleration at Earth's surface is approximately 19.6 m/s\u00b2.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.9646,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "The gravitational acceleration at Earth's surface is approximately 19.6 m/s\u00b2",
+      "base_nli_score": 0.9646,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.9646
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1673.12
+}

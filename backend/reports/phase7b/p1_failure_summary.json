@@ -1,0 +1,10 @@
+{
+  "total_evaluated": 750,
+  "failure_categories": {
+    "NONE": 428,
+    "BENCHMARK_PROMPT_LABEL_SHIFT": 190,
+    "RETRIEVAL_EVIDENCE_MISMATCH": 67,
+    "NLI_CONTRADICTION_UNDERDETECTION": 65
+  },
+  "primary_cause": "BENCHMARK_PROMPT_LABEL_SHIFT: In 254/375 hallucinated benchmark prompts (67.7%), the live LLM (Qwen 1.5B) produced a truthful answer rather than the synthetic hallucination from the static Phase 6 dataset. Pillar 1 correctly verified these truthful statements against evidence (P1 < 0.35), but comparing against the prompt's static GT=1 label produced 254 false negatives."
+}

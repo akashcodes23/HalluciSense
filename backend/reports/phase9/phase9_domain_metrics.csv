@@ -1,0 +1,6 @@
+domain,n,baseline_accuracy,enhanced_accuracy,hybrid_accuracy,baseline_f1,enhanced_f1,hybrid_f1
+Physics,35,0.8571,0.6857,0.8571,0.9231,0.7925,0.9231
+Chemistry,35,0.8571,0.7429,0.8571,0.9231,0.8302,0.9231
+Biology,35,0.8571,0.7429,0.8571,0.9231,0.8364,0.9231
+Medicine,35,0.8571,0.7714,0.8571,0.9231,0.8571,0.9231
+Mathematics,35,0.8571,0.8,0.8571,0.9231,0.8727,0.9231

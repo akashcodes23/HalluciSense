@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000040",
+  "sample_id": "phase8_c_0040",
+  "timestamp": "2026-08-17T05:56:46Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Science",
+  "corruption_type": "NUMERIC_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Light travels at approximately 300,-11 km per second in vacuum.",
+  "original": "Light travels at approximately 300,000 km per second in vacuum.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.1,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.1,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1681.43
+  },
+  "pipeline_error": null
+}

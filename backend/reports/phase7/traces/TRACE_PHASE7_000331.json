@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000331",
+  "sample_id": "com_0331",
+  "timestamp": "2026-08-14T13:18:16Z",
+  "domain": "Computer Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is an algorithm for finding the shortest paths between all pairs of vertices in a graph. It works by repeatedly updating the distances to neighboring vertices based on the current path and the known shortest paths.\n\nThe algorithm maintains a set of unvisited vertices and calculates the tentative distance from the starting vertex to each vertex. Initially, the tentative distance to all vertices is infinity except for the starting vertex, which has a distance of zero. Then, it repeatedly selects the vertex with the smallest tentative distance that has not been visited yet, updates its distance to neighboring vertices, and adds it to the set of visited vertices. This process continues until all vertices have been visited or no more vertices can be selected. The algorithm returns the distances from the starting vertex to each vertex.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6925,
+    "claims": [
+      "Dijkstra's algorithm is an algorithm for finding the shortest paths between all pairs of vertices in a graph. It works by repeatedly updating the distances to neighboring vertices based on the current path and the known shortest paths.\n\nThe algorithm maintains a set of unvisited vertices and calculates the tentative distance from the starting vertex to each vertex. Initially",
+      "the tentative distance to all vertices is infinity except for the starting vertex",
+      "which has a distance of zero. Then",
+      "it repeatedly selects the vertex with the smallest tentative distance that has not been visited yet",
+      "updates its distance to neighboring vertices",
+      "and adds it to the set of visited vertices. This process continues until all vertices have been visited or no more vertices can be selected. The algorithm returns the distances from the starting vertex to each vertex."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0979,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8409,
+      0.8908,
+      0.8182
+    ],
+    "contradiction_score": 0.0011
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4802,
+    "reconstructed_h_score": 0.4802,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21518.62,
+    "llm_gen_ms": 3462.16,
+    "p1_ms": 2742.42,
+    "p2_ms": 0.01,
+    "p3_ms": 29683.28,
+    "fusion_ms": 0.01
+  }
+}

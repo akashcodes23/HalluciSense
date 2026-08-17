@@ -1,0 +1,78 @@
+{
+  "trace_id": "TRACE_PHASE7_000152",
+  "sample_id": "fin_0152",
+  "timestamp": "2026-08-14T12:39:53Z",
+  "domain": "Finance",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation refers to a sustained period of extremely high inflation rates that significantly erode the purchasing power of money and lead to widespread economic turmoil. It occurs when there is an increase in the supply of goods and services relative to demand, causing prices to rise rapidly. This can be caused by various factors such as government policy, natural disasters, or technological advancements.\n\nHyperinflation has severe consequences for individuals, businesses, and governments. Here are some of the key effects:\n\n1. **Purchasing Power Erasure**: Money becomes worthless because it can no longer buy a fixed amount of goods and services. This leads to significant financial strain for households and businesses.\n\n2. **Economic Instability**: Hyperinflation undermines economic stability by creating uncertainty and instability in business operations, consumer behavior, and political decisions.\n\n3. **Resource Scarcity**: With limited purchasing power, resources become scarce as more people compete for the same goods and services.\n\n4. **Inflated Debt**: As debts accumulate due to hyperinflation, the interest payments can be astronomical, exacerbating financial distress.\n\n5. **Global Economic Impact**: Hyperinflation can spread across borders, leading to currency exchange rates plummeting and destabilizing international trade.\n\n6. **Political Instability**: In some cases, hyperinflation can lead to political instability as governments struggle to maintain control over the economy and stabilize prices.\n\n7. **Economic Disruption**: Hyperinflation can cause widespread economic disruption, including businesses going bankrupt, consumer spending falling, and unemployment rising.\n\nTo prevent or manage hyperinflation, central banks and governments often implement monetary policies such as lowering interest rates, increasing liquidity in the financial system, and implementing exchange rate controls. However, hyperinflation is generally considered a major threat to economic stability and must be managed with extreme caution.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4993,
+    "claims": [
+      "Hyperinflation refers to a sustained period of extremely high inflation rates that significantly erode the purchasing power of money and lead to widespread economic turmoil. It occurs when there is an increase in the supply of goods and services relative to demand",
+      "causing prices to rise rapidly. This can be caused by various factors such as government policy",
+      "or technological advancements.\n\nHyperinflation has severe consequences for individuals",
+      "and governments. Here are some of the key effects:\n\n1. **Purchasing Power Erasure**: Money becomes worthless because it can no longer buy a fixed amount of goods and services. This leads to significant financial strain for households and businesses.\n\n2. **Economic Instability**: Hyperinflation undermines economic stability by creating uncertainty and instability in business operations",
+      "and political decisions.\n\n3. **Resource Scarcity**: With limited purchasing power",
+      "resources become scarce as more people compete for the same goods and services.\n\n4. **Inflated Debt**: As debts accumulate due to hyperinflation",
+      "the interest payments can be astronomical",
+      "exacerbating financial distress.\n\n5. **Global Economic Impact**: Hyperinflation can spread across borders",
+      "leading to currency exchange rates plummeting and destabilizing international trade.\n\n6. **Political Instability**: In some cases",
+      "hyperinflation can lead to political instability as governments struggle to maintain control over the economy and stabilize prices.\n\n7. **Economic Disruption**: Hyperinflation can cause widespread economic disruption",
+      "including businesses going bankrupt",
+      "and unemployment rising.\n\nTo prevent or manage hyperinflation",
+      "central banks and governments often implement monetary policies such as lowering interest rates",
+      "increasing liquidity in the financial system",
+      "and implementing exchange rate controls. However",
+      "hyperinflation is generally considered a major threat to economic stability and must be managed with extreme caution."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1007,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8816,
+      0.8468,
+      0.878
+    ],
+    "contradiction_score": 0.0441
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.357,
+    "reconstructed_h_score": 0.357,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21271.65,
+    "llm_gen_ms": 6946.67,
+    "p1_ms": 3661.29,
+    "p2_ms": 0.02,
+    "p3_ms": 20245.38,
+    "fusion_ms": 0.01
+  }
+}

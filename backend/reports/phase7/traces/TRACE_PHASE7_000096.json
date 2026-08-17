@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000096",
+  "sample_id": "med_0096",
+  "timestamp": "2026-08-14T12:26:18Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza, also known as flu, is a highly contagious respiratory infection caused by viruses in the Influenza Virus family. Treatment for viral influenza typically includes symptomatic relief and prevention of complications. Here's an overview of how it's generally treated:\n\n### Symptomatic Relief\n\n1. **Hydration**: Ensure adequate hydration to help manage fever and coughing.\n2. **Rest**: Get plenty of rest to allow the body to fight off the virus.\n3. **Over-the-counter Medications**:\n   - **Antipyretics**: For fever, acetaminophen or ibuprofen can be taken as directed by a healthcare provider.\n   - **Decongestants**: For coughing and congestion, decongestant sprays or oral solutions can help clear nasal passages.\n4. **Antivirals**: While effective against some strains, antiviral medications are only considered for treatment when diagnosed with influenza B or severe symptoms.\n\n### Prevention\n\n1. **Get Vaccinated**: The most effective way to prevent influenza is by getting vaccinated each year.\n2. **Practice Good Hygiene**: Regular handwashing and avoiding close contact with infected individuals can help reduce the spread of the virus.\n3. **Stay Home When Sick**: Avoid going to work or school unless you are feeling well and can be contagious.\n4. **Eat a Balanced Diet**: A healthy diet can help strengthen your immune system.\n\n### Complications\n\n- **Severe Infections**: In some cases, viral influenza can lead to complications such as pneumonia, bronchitis, and severe dehydration.\n- **Recovery Time**: Recovery from the flu typically takes several days or weeks. While you will be contagious for about 10-72 hours after symptoms start.\n\n### Monitoring\n\nIf your symptoms persist or worsen, it's important to seek medical attention. In some cases, a healthcare provider may prescribe additional medications or recommend further treatment.\n\nRemember that while these treatments can help manage the flu, they cannot cure it entirely. It's crucial to get vaccinated and take other preventive measures to protect yourself and others from influenza.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "also known as flu",
+      "is a highly contagious respiratory infection caused by viruses in the Influenza Virus family. Treatment for viral influenza typically includes symptomatic relief and prevention of complications. Here's an overview of how it's generally treated:\n\n### Symptomatic Relief\n\n1. **Hydration**: Ensure adequate hydration to help manage fever and coughing.\n2. **Rest**: Get plenty of rest to allow the body to fight off the virus.\n3. **Over-the-counter Medications**:\n   - **Antipyretics**: For fever",
+      "acetaminophen or ibuprofen can be taken as directed by a healthcare provider.\n   - **Decongestants**: For coughing and congestion",
+      "decongestant sprays or oral solutions can help clear nasal passages.\n4. **Antivirals**: While effective against some strains",
+      "antiviral medications are only considered for treatment when diagnosed with influenza B or severe symptoms.\n\n### Prevention\n\n1. **Get Vaccinated**: The most effective way to prevent influenza is by getting vaccinated each year.\n2. **Practice Good Hygiene**: Regular handwashing and avoiding close contact with infected individuals can help reduce the spread of the virus.\n3. **Stay Home When Sick**: Avoid going to work or school unless you are feeling well and can be contagious.\n4. **Eat a Balanced Diet**: A healthy diet can help strengthen your immune system.\n\n### Complications\n\n- **Severe Infections**: In some cases",
+      "viral influenza can lead to complications such as pneumonia",
+      "and severe dehydration.\n- **Recovery Time**: Recovery from the flu typically takes several days or weeks. While you will be contagious for about 10-72 hours after symptoms start.\n\n### Monitoring\n\nIf your symptoms persist or worsen",
+      "it's important to seek medical attention. In some cases",
+      "a healthcare provider may prescribe additional medications or recommend further treatment.\n\nRemember that while these treatments can help manage the flu",
+      "they cannot cure it entirely. It's crucial to get vaccinated and take other preventive measures to protect yourself and others from influenza."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0864,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.9145,
+      0.8207
+    ],
+    "contradiction_score": 0.0009
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0309,
+    "reconstructed_h_score": 0.0309,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 25239.67,
+    "llm_gen_ms": 7579.97,
+    "p1_ms": 2117.98,
+    "p2_ms": 0.02,
+    "p3_ms": 30548.41,
+    "fusion_ms": 0.01
+  }
+}

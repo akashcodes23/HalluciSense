@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000123",
+  "sample_id": "law_0123",
+  "timestamp": "2026-08-14T12:32:53Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare decisis is a Latin phrase that translates to \"to do what has been decided\" or \"to follow precedent.\" In the context of law, it refers to adhering to the laws and rules established by previous court decisions. This principle ensures consistency in legal judgments across different jurisdictions and cases, as well as maintaining a fair and predictable judicial process.\n\nIn courts, stare decisis is often used to uphold decisions made by previous judges that have been determined to be correct. It prevents new cases from being decided based on conflicting evidence or interpretations of the law, which could lead to inconsistent outcomes. By adhering to precedent, courts help maintain a high level of fairness and predictability in legal judgments.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4429,
+    "claims": [
+      "Stare decisis is a Latin phrase that translates to \"to do what has been decided\" or \"to follow precedent.\" In the context of law",
+      "it refers to adhering to the laws and rules established by previous court decisions. This principle ensures consistency in legal judgments across different jurisdictions and cases",
+      "as well as maintaining a fair and predictable judicial process.\n\nIn courts",
+      "stare decisis is often used to uphold decisions made by previous judges that have been determined to be correct. It prevents new cases from being decided based on conflicting evidence or interpretations of the law",
+      "which could lead to inconsistent outcomes. By adhering to precedent",
+      "courts help maintain a high level of fairness and predictability in legal judgments."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0661,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9047,
+      0.869,
+      0.9251
+    ],
+    "contradiction_score": 0.0025
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3083,
+    "reconstructed_h_score": 0.3083,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14188.31,
+    "llm_gen_ms": 2843.18,
+    "p1_ms": 1942.36,
+    "p2_ms": 0.01,
+    "p3_ms": 16985.26,
+    "fusion_ms": 0.01
+  }
+}

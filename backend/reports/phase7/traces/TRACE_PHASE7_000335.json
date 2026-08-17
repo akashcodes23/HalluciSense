@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000335",
+  "sample_id": "com_0335",
+  "timestamp": "2026-08-14T13:19:22Z",
+  "domain": "Computer Science",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is an algorithm used to find the shortest path between two nodes in a graph with non-negative edge weights. It works by maintaining a priority queue (or heap) of nodes, always selecting the node with the smallest distance from the source. This process repeats until it has explored all reachable nodes or has found the target node. Each time it selects the closest node, it updates the distances to its neighboring nodes based on the shortest path through the selected node. This process is repeated until all nodes are visited or a destination node is reached.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3829,
+    "claims": [
+      "Dijkstra's algorithm is an algorithm used to find the shortest path between two nodes in a graph with non-negative edge weights. It works by maintaining a priority queue (or heap) of nodes",
+      "always selecting the node with the smallest distance from the source. This process repeats until it has explored all reachable nodes or has found the target node. Each time it selects the closest node",
+      "it updates the distances to its neighboring nodes based on the shortest path through the selected node. This process is repeated until all nodes are visited or a destination node is reached."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0724,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9099,
+      0.9092,
+      0.9175
+    ],
+    "contradiction_score": 0.0437
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.272,
+    "reconstructed_h_score": 0.272,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11240.04,
+    "llm_gen_ms": 2647.96,
+    "p1_ms": 2327.08,
+    "p2_ms": 0.01,
+    "p3_ms": 10945.06,
+    "fusion_ms": 0.01
+  }
+}

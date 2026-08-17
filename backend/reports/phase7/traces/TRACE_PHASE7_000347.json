@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000347",
+  "sample_id": "com_0347",
+  "timestamp": "2026-08-14T13:22:57Z",
+  "domain": "Computer Science",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is a popular algorithm used for finding the shortest path between all pairs of vertices in a weighted graph. It works by starting from a source vertex and iteratively updating the tentative distances to all other vertices until it reaches the target vertex or determines that no further improvement can be made. The algorithm maintains two lists: the open list (also known as the priority queue) and the closed list. Initially, only the source vertex is in the open list, and its distance from the source is set to 0. As the algorithm progresses, it selects the vertex with the smallest tentative distance from the open list, updates its neighbors' distances based on the current path, and removes the selected vertex from the open list and adds it to the closed list. This process repeats until all vertices are in the closed list or the target vertex is found. Dijkstra's algorithm is particularly useful for finding the shortest paths in networks with non-negative weights, and it can be implemented efficiently using a priority queue to keep track of the vertices that need to be processed.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6071,
+    "claims": [
+      "Dijkstra's algorithm is a popular algorithm used for finding the shortest path between all pairs of vertices in a weighted graph. It works by starting from a source vertex and iteratively updating the tentative distances to all other vertices until it reaches the target vertex or determines that no further improvement can be made. The algorithm maintains two lists: the open list (also known as the priority queue) and the closed list. Initially",
+      "only the source vertex is in the open list",
+      "and its distance from the source is set to 0. As the algorithm progresses",
+      "it selects the vertex with the smallest tentative distance from the open list",
+      "updates its neighbors' distances based on the current path",
+      "and removes the selected vertex from the open list and adds it to the closed list. This process repeats until all vertices are in the closed list or the target vertex is found. Dijkstra's algorithm is particularly useful for finding the shortest paths in networks with non-negative weights",
+      "and it can be implemented efficiently using a priority queue to keep track of the vertices that need to be processed."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": false,
+    "score": null,
+    "sample_count": 1,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "h_score": 0.6071,
+    "reconstructed_h_score": 0.6071,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 21599.76,
+    "llm_gen_ms": 4391.9,
+    "p1_ms": 2201.53,
+    "p2_ms": 0.01,
+    "p3_ms": 30011.92,
+    "fusion_ms": 0.02
+  }
+}

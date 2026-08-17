@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000367",
+  "sample_id": "phy_0367",
+  "timestamp": "2026-08-14T13:28:44Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is Newton's third law?",
+  "generated_response": "Newton's third law states that for every action, there is an equal and opposite reaction. This means that when two objects interact with each other, they apply forces on each other in such a way that the net force on both objects is zero. This law is one of the fundamental principles of physics.\n\nHere are some key points about Newton's third law:\n\n1. **Inertia**: Newton's first law (also known as the law of inertia) states that an object at rest remains at rest, and an object in motion continues to move with a constant velocity unless acted upon by an external force. This principle is directly related to Newton's third law because if there were no external forces acting on an object, it would remain at rest.\n\n2. **Action-Reaction Pairs**: For every action, there is an equal and opposite reaction. This means that if an object exerts a force on another object, the second object will exert an equal force in the opposite direction, but with the same magnitude.\n\n3. **Newton's Third Law in Everyday Life**: Newton's third law can be observed in many everyday situations. For example:\n   - When you push a book across a table, the book pushes back on your hand with an equal amount of force.\n   - When you jump, you push your feet against the ground and the ground pushes you back up.\n\n4. **Applications**: Newton's third law has numerous applications in science, engineering, and everyday life. It is used in:\n   - Motion of planets around stars\n   - The motion of satellites in orbit\n   - Understanding the behavior of fluids (e.g., fluid dynamics)\n   - Designing bridges and buildings\n\nIn summary, Newton's third law is a fundamental principle that describes the interaction between objects where for every action, there is an equal and opposite reaction. It has significant implications for our understanding of the physical world and is essential in many scientific fields.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Newton's third law states that for every action",
+      "there is an equal and opposite reaction. This means that when two objects interact with each other",
+      "they apply forces on each other in such a way that the net force on both objects is zero. This law is one of the fundamental principles of physics.\n\nHere are some key points about Newton's third law:\n\n1. **Inertia**: Newton's first law (also known as the law of inertia) states that an object at rest remains at rest",
+      "and an object in motion continues to move with a constant velocity unless acted upon by an external force. This principle is directly related to Newton's third law because if there were no external forces acting on an object",
+      "it would remain at rest.\n\n2. **Action-Reaction Pairs**: For every action",
+      "there is an equal and opposite reaction. This means that if an object exerts a force on another object",
+      "the second object will exert an equal force in the opposite direction",
+      "but with the same magnitude.\n\n3. **Newton's Third Law in Everyday Life**: Newton's third law can be observed in many everyday situations. For example:\n   - When you push a book across a table",
+      "the book pushes back on your hand with an equal amount of force.\n   - When you jump",
+      "you push your feet against the ground and the ground pushes you back up.\n\n4. **Applications**: Newton's third law has numerous applications in science",
+      "and everyday life. It is used in:\n   - Motion of planets around stars\n   - The motion of satellites in orbit\n   - Understanding the behavior of fluids (e.g.",
+      "fluid dynamics)\n   - Designing bridges and buildings\n\nIn summary",
+      "Newton's third law is a fundamental principle that describes the interaction between objects where for every action",
+      "there is an equal and opposite reaction. It has significant implications for our understanding of the physical world and is essential in many scientific fields."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0996,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8434,
+      0.8646,
+      0.8364
+    ],
+    "contradiction_score": 0.0025
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0356,
+    "reconstructed_h_score": 0.0356,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23720.51,
+    "llm_gen_ms": 7836.42,
+    "p1_ms": 4234.05,
+    "p2_ms": 0.03,
+    "p3_ms": 21467.7,
+    "fusion_ms": 0.01
+  }
+}

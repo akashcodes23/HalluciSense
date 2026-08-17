@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000103",
+  "sample_id": "8A_BIO_TRU_0103",
+  "timestamp": "2026-08-17T05:53:02Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Biology",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "medium",
+  "input": "The HIV virus causes AIDS by infecting and destroying CD4+ T-cells, and it was first identified in the 1970s.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: HIV/AIDS",
+  "source_url": "https://en.wikipedia.org/wiki/HIV/AIDS",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1919.0
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

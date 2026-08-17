@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000440",
+  "sample_id": "bio_0440",
+  "timestamp": "2026-08-14T13:45:40Z",
+  "domain": "Biology",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through fertilization. This involves two main stages: ovulation and implantation.\n\n1. **Ovulation**: In most mammals, there is only one ovary in the female body, which produces eggs. During each menstrual cycle, about 20-30 mature egg cells are released from the ovaries into the fallopian tubes. These eggs, also known as oocytes, undergo maturation and ripen.\n\n2. **Implantation**: The fertilized egg (zygote) enters the uterine cavity through the Fallopian tube and implants in the endometrium of the uterus. Implantation occurs when the zona pellucida, a protective layer around the zygote, interacts with specific molecules released by the lining of the uterine cavity.\n\nOnce implantation occurs, the embryo can continue to grow and develop into a fetus inside the mother's womb.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5375,
+    "claims": [
+      "Mammals reproduce through fertilization. This involves two main stages: ovulation and implantation.\n\n1. **Ovulation**: In most mammals",
+      "there is only one ovary in the female body",
+      "which produces eggs. During each menstrual cycle",
+      "about 20-30 mature egg cells are released from the ovaries into the fallopian tubes. These eggs",
+      "also known as oocytes",
+      "undergo maturation and ripen.\n\n2. **Implantation**: The fertilized egg (zygote) enters the uterine cavity through the Fallopian tube and implants in the endometrium of the uterus. Implantation occurs when the zona pellucida",
+      "a protective layer around the zygote",
+      "interacts with specific molecules released by the lining of the uterine cavity.\n\nOnce implantation occurs",
+      "the embryo can continue to grow and develop into a fetus inside the mother's womb."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3112,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6712,
+      0.8165,
+      0.6892
+    ],
+    "contradiction_score": 0.3796
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4567,
+    "reconstructed_h_score": 0.4567,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19616.26,
+    "llm_gen_ms": 4281.86,
+    "p1_ms": 6529.61,
+    "p2_ms": 0.03,
+    "p3_ms": 15929.36,
+    "fusion_ms": 0.02
+  }
+}

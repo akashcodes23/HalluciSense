@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_CHE_OUT_0062",
+  "claim": "Chemical elements cannot be interconverted and all matter is made of four elements: earth, water, fire, and air.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Chemical elements cannot be interconverted and all matter is made of four elements: earth, water, fire, and air",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'cannot' while evidence affirms the predicate."
+  ],
+  "latency_ms": 1964.85
+}

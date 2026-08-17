@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000380",
+  "sample_id": "phy_0380",
+  "timestamp": "2026-08-14T13:32:09Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero is the lowest temperature that can be measured on the Celsius scale. It is -273.15 degrees Celsius. Absolute zero represents the point at which all particles in a substance have no kinetic energy, and they are at their most stable state. The Kelvin scale, used for thermodynamics, starts from absolute zero and measures temperature by adding 273.15 to the Celsius temperature.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1334,
+    "claims": [
+      "Absolute zero is the lowest temperature that can be measured on the Celsius scale. It is -273.15 degrees Celsius. Absolute zero represents the point at which all particles in a substance have no kinetic energy",
+      "and they are at their most stable state. The Kelvin scale",
+      "starts from absolute zero and measures temperature by adding 273.15 to the Celsius temperature."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0444,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9443,
+      0.9336,
+      0.9192
+    ],
+    "contradiction_score": 0.0013
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1016,
+    "reconstructed_h_score": 0.1016,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9577.05,
+    "llm_gen_ms": 1558.62,
+    "p1_ms": 2123.57,
+    "p2_ms": 0.01,
+    "p3_ms": 10443.66,
+    "fusion_ms": 0.01
+  }
+}

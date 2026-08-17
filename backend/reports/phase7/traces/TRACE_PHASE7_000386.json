@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000386",
+  "sample_id": "phy_0386",
+  "timestamp": "2026-08-14T13:34:01Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does entropy decrease in isolated systems?",
+  "generated_response": "Yes, entropy decreases in isolated systems. According to the Second Law of Thermodynamics, entropy cannot be created or destroyed in isolated systems; it can only change from one state to another. Therefore, if an isolated system is left to operate according to its own laws without being influenced by external factors, the total amount of entropy in the system will always decrease over time.\n\nThe Second Law states that:\n\n1. Entropy is a measure of disorder or randomness in a system.\n2. In an isolated system, the sum of the internal energy and the entropy cannot increase over time.\n3. The entropy change (\u0394S) of an isolated system can be positive, negative, or zero, depending on the specific processes occurring.\n\nIn summary, if an isolated system is allowed to operate freely, its entropy will tend to decrease over time, regardless of any external influences.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.492,
+    "claims": [
+      "entropy decreases in isolated systems. According to the Second Law of Thermodynamics",
+      "entropy cannot be created or destroyed in isolated systems",
+      "it can only change from one state to another. Therefore",
+      "if an isolated system is left to operate according to its own laws without being influenced by external factors",
+      "the total amount of entropy in the system will always decrease over time.\n\nThe Second Law states that:\n\n1. Entropy is a measure of disorder or randomness in a system.\n2. In an isolated system",
+      "the sum of the internal energy and the entropy cannot increase over time.\n3. The entropy change (\u0394S) of an isolated system can be positive",
+      "depending on the specific processes occurring.\n\nIn summary",
+      "if an isolated system is allowed to operate freely",
+      "its entropy will tend to decrease over time",
+      "regardless of any external influences."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3349,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8976,
+      0.8965,
+      0.7305
+    ],
+    "contradiction_score": 0.6625
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4359,
+    "reconstructed_h_score": 0.4359,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16231.97,
+    "llm_gen_ms": 4091.05,
+    "p1_ms": 2400.11,
+    "p2_ms": 0.04,
+    "p3_ms": 17533.68,
+    "fusion_ms": 0.01
+  }
+}

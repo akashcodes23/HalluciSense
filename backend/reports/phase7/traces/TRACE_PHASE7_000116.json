@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000116",
+  "sample_id": "law_0116",
+  "timestamp": "2026-08-14T12:31:22Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does double jeopardy apply to felonies?",
+  "generated_response": "No, double jeopardy does not apply to felonies in the United States. Double jeopardy is a constitutional principle that prevents a person from being tried twice for the same crime. It applies to civil cases only and cannot be used to protect individuals from being prosecuted for offenses they have already committed. In criminal cases, it can be used to prevent retrial of individuals who have been convicted based on different evidence or testimony.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3113,
+    "claims": [
+      "double jeopardy does not apply to felonies in the United States. Double jeopardy is a constitutional principle that prevents a person from being tried twice for the same crime. It applies to civil cases only and cannot be used to protect individuals from being prosecuted for offenses they have already committed. In criminal cases",
+      "it can be used to prevent retrial of individuals who have been convicted based on different evidence or testimony."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1469,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.939,
+      0.9619,
+      0.9597
+    ],
+    "contradiction_score": 0.3333
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2526,
+    "reconstructed_h_score": 0.2526,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13039.76,
+    "llm_gen_ms": 1393.61,
+    "p1_ms": 2386.64,
+    "p2_ms": 0.01,
+    "p3_ms": 17598.81,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000543",
+  "sample_id": "new_0543",
+  "timestamp": "2026-08-14T14:08:28Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks change interest rates to influence the money supply and the economy. These changes can help stabilize inflation, promote economic growth, and manage monetary policy objectives such as controlling the level of unemployment or interest rates.\n\nWhen a central bank raises interest rates, it makes borrowing more expensive for businesses and individuals, which can lead to reduced spending and slower economic growth. This can help control inflation by reducing the money supply and slowing down the economy's expansion.\n\nOn the other hand, when a central bank lowers interest rates, it makes borrowing cheaper for businesses and individuals, which can encourage increased spending and economic growth. This can help stimulate inflation by increasing the money supply and speeding up the economy's expansion.\n\nCentral banks also use interest rate changes to manage monetary policy objectives such as controlling the level of unemployment or interest rates. For example, if a central bank wants to reduce unemployment, it might lower interest rates to make borrowing cheaper for businesses, which could encourage more hiring. If a central bank wants to stabilize inflation, it might raise interest rates to make borrowing expensive and reduce the money supply, which could slow down economic growth.\n\nOverall, central banks use interest rate changes to influence the money supply and the economy in order to achieve their monetary policy objectives.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Central banks change interest rates to influence the money supply and the economy. These changes can help stabilize inflation",
+      "and manage monetary policy objectives such as controlling the level of unemployment or interest rates.\n\nWhen a central bank raises interest rates",
+      "it makes borrowing more expensive for businesses and individuals",
+      "which can lead to reduced spending and slower economic growth. This can help control inflation by reducing the money supply and slowing down the economy's expansion.\n\nOn the other hand",
+      "when a central bank lowers interest rates",
+      "it makes borrowing cheaper for businesses and individuals",
+      "which can encourage increased spending and economic growth. This can help stimulate inflation by increasing the money supply and speeding up the economy's expansion.\n\nCentral banks also use interest rate changes to manage monetary policy objectives such as controlling the level of unemployment or interest rates. For example",
+      "if a central bank wants to reduce unemployment",
+      "it might lower interest rates to make borrowing cheaper for businesses",
+      "which could encourage more hiring. If a central bank wants to stabilize inflation",
+      "it might raise interest rates to make borrowing expensive and reduce the money supply",
+      "which could slow down economic growth.\n\nOverall",
+      "central banks use interest rate changes to influence the money supply and the economy in order to achieve their monetary policy objectives."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0568,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.9055,
+      0.9201
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0203,
+    "reconstructed_h_score": 0.0203,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23292.75,
+    "llm_gen_ms": 5290.72,
+    "p1_ms": 2685.06,
+    "p2_ms": 0.04,
+    "p3_ms": 30324.77,
+    "fusion_ms": 0.02
+  }
+}

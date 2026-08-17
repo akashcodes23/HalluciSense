@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000130",
+  "sample_id": "phase8_c_0130",
+  "timestamp": "2026-08-17T05:58:23Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "General Knowledge",
+  "corruption_type": "LOCATION_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Mount Everest is the highest mountain above sea level. However, this claim is factually incorrect.",
+  "original": "Mount Everest is the highest mountain above sea level.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.7934,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.7934,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1463.12
+  },
+  "pipeline_error": null
+}

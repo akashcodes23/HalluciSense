@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000475",
+  "sample_id": "che_0475",
+  "timestamp": "2026-08-14T13:51:29Z",
+  "domain": "Chemistry",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the composition of water?",
+  "generated_response": "Water is composed of two elements: hydrogen and oxygen. The ratio of hydrogen to oxygen in water is approximately 2:1. Water has many unique properties that make it essential for life on Earth, including its ability to dissolve substances, transport nutrients, and maintain temperature balance.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5006,
+    "claims": [
+      "Water is composed of two elements: hydrogen and oxygen. The ratio of hydrogen to oxygen in water is approximately 2:1. Water has many unique properties that make it essential for life on Earth",
+      "including its ability to dissolve substances",
+      "and maintain temperature balance."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1401,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8706,
+      0.6443,
+      0.8426
+    ],
+    "contradiction_score": 0.0025
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3719,
+    "reconstructed_h_score": 0.3719,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11743.62,
+    "llm_gen_ms": 1015.91,
+    "p1_ms": 2680.26,
+    "p2_ms": 0.0,
+    "p3_ms": 15169.15,
+    "fusion_ms": 0.03
+  }
+}

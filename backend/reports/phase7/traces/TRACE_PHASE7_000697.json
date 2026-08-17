@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000697",
+  "sample_id": "pol_0697",
+  "timestamp": "2026-08-14T14:46:30Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a political system where power is divided between the central government and state governments. In this system, each state has some control over its own affairs, but the federal government also has a significant role in overseeing the states' policies and providing services to all citizens. The division of powers ensures that the states can make their own decisions while still receiving support from the national government.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3424,
+    "claims": [
+      "Federalism is a political system where power is divided between the central government and state governments. In this system",
+      "each state has some control over its own affairs",
+      "but the federal government also has a significant role in overseeing the states' policies and providing services to all citizens. The division of powers ensures that the states can make their own decisions while still receiving support from the national government."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0635,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9367,
+      0.9216,
+      0.8652
+    ],
+    "contradiction_score": 0.0101
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2428,
+    "reconstructed_h_score": 0.2428,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13865.68,
+    "llm_gen_ms": 1685.69,
+    "p1_ms": 3523.39,
+    "p2_ms": 0.03,
+    "p3_ms": 16863.29,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000133",
+  "sample_id": "law_0133",
+  "timestamp": "2026-08-14T12:35:31Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas corpus is a constitutional provision in the United States that requires courts to release individuals held in custody when they are not serving their sentence or otherwise have been arrested without probable cause. The term was derived from the Latin word \"habeas corpus\" meaning \"a body of oneself\" and originally referred to the right of an individual to have his or her personal liberty restored upon arrest. The concept of habeas corpus is a fundamental principle in American jurisprudence and has become an essential tool for safeguarding the rights of individuals detained by law enforcement agencies.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Habeas corpus is a constitutional provision in the United States that requires courts to release individuals held in custody when they are not serving their sentence or otherwise have been arrested without probable cause. The term was derived from the Latin word \"habeas corpus\" meaning \"a body of oneself\" and originally referred to the right of an individual to have his or her personal liberty restored upon arrest. The concept of habeas corpus is a fundamental principle in American jurisprudence and has become an essential tool for safeguarding the rights of individuals detained by law enforcement agencies."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3029,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8985,
+      0.8615,
+      0.8808
+    ],
+    "contradiction_score": 0.6431
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1082,
+    "reconstructed_h_score": 0.1082,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15492.57,
+    "llm_gen_ms": 2310.17,
+    "p1_ms": 1740.0,
+    "p2_ms": 0.01,
+    "p3_ms": 21909.41,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000690",
+  "sample_id": "pol_0690",
+  "timestamp": "2026-08-14T14:45:00Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power is the power to refuse or prevent the passage of laws, regulations, and other measures in the legislative process. It allows for checks on the authority of the executive branch by giving the president or Senate the ability to override any law that may be proposed by the legislature. Veto power is an important constitutional principle that helps to ensure that laws are not imposed without proper consideration and approval from both branches of government.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4958,
+    "claims": [
+      "Veto power is the power to refuse or prevent the passage of laws",
+      "and other measures in the legislative process. It allows for checks on the authority of the executive branch by giving the president or Senate the ability to override any law that may be proposed by the legislature. Veto power is an important constitutional principle that helps to ensure that laws are not imposed without proper consideration and approval from both branches of government."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0413,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9594,
+      0.937,
+      0.9159
+    ],
+    "contradiction_score": 0.0016
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3335,
+    "reconstructed_h_score": 0.3335,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10061.83,
+    "llm_gen_ms": 1738.98,
+    "p1_ms": 2533.59,
+    "p2_ms": 0.01,
+    "p3_ms": 11111.97,
+    "fusion_ms": 0.01
+  }
+}

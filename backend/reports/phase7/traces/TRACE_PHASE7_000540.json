@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000540",
+  "sample_id": "new_0540",
+  "timestamp": "2026-08-14T14:07:38Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are regulated to ensure that the trading and trading practices are fair, transparent, and secure for all participants. These regulations include rules on insider transactions, market manipulation, corporate governance, and investor protection. In addition, some countries have implemented additional regulations designed to protect against fraud, manipulation, and other unethical behaviors in the stock market.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4295,
+    "claims": [
+      "stock markets are regulated to ensure that the trading and trading practices are fair",
+      "and secure for all participants. These regulations include rules on insider transactions",
+      "and investor protection. In addition",
+      "some countries have implemented additional regulations designed to protect against fraud",
+      "and other unethical behaviors in the stock market."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1016,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8782,
+      0.8096
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3124,
+    "reconstructed_h_score": 0.3124,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20125.4,
+    "llm_gen_ms": 1361.9,
+    "p1_ms": 2292.84,
+    "p2_ms": 0.01,
+    "p3_ms": 31476.02,
+    "fusion_ms": 0.01
+  }
+}

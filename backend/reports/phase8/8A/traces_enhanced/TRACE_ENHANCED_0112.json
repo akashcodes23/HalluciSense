@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MED_NUM_0112",
+  "claim": "The normal fasting blood glucose level in a healthy adult is approximately 7.0\u20138.0 mmol/L.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.1611,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "The normal fasting blood glucose level in a healthy adult is approximately 7.0\u20138.0 mmol/L",
+      "base_nli_score": 0.1611,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.1611
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2326.4
+}

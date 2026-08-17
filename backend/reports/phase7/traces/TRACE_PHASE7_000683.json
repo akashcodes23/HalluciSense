@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000683",
+  "sample_id": "pol_0683",
+  "timestamp": "2026-08-14T14:43:32Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies generally choose leaders through direct and free elections to determine who holds the highest office in their country. This process involves several steps:\n\n1. **Election Process**: The election is typically open to all citizens, regardless of age or political affiliation. Candidates for leadership are usually nominated by parties or individuals with strong backing.\n\n2. **Nomination**: Candidates are often nominated by political parties, and they must agree to run in the election. This process helps ensure that candidates have a broad base of support and expertise.\n\n3. **Campaigning**: Candidates campaign vigorously to gain public support and votes. They may use various tactics such as advertising, speeches, rallies, and social media to reach their target audience.\n\n4. **Voting**: After the campaigning period is over, voters select their preferred candidate by casting their ballots. The election results are typically announced after a set time period, usually several weeks or months.\n\n5. **Announcement**: Once the results are announced, the new leader takes office and begins their duties. They may announce their term of service or other important information about themselves.\n\n6. **Term of Service**: Most democracies have strict term limits for leaders to prevent abuse of power. If a leader is found guilty of misconduct or failure in their duties, they may be impeached by the legislature or dismissed from office.\n\n7. **Re-election**: After completing their term, most democratic countries require new leadership through another election process, which repeats the steps above until a new leader is chosen.\n\nIt's important to note that democracies differ slightly in how they choose leaders, with some allowing more extensive campaigning and others requiring less direct input from voters. Additionally, some countries have systems of indirect leadership or may have multiple levels of government, depending on their constitution.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Democracies generally choose leaders through direct and free elections to determine who holds the highest office in their country. This process involves several steps:\n\n1. **Election Process**: The election is typically open to all citizens",
+      "regardless of age or political affiliation. Candidates for leadership are usually nominated by parties or individuals with strong backing.\n\n2. **Nomination**: Candidates are often nominated by political parties",
+      "and they must agree to run in the election. This process helps ensure that candidates have a broad base of support and expertise.\n\n3. **Campaigning**: Candidates campaign vigorously to gain public support and votes. They may use various tactics such as advertising",
+      "and social media to reach their target audience.\n\n4. **Voting**: After the campaigning period is over",
+      "voters select their preferred candidate by casting their ballots. The election results are typically announced after a set time period",
+      "usually several weeks or months.\n\n5. **Announcement**: Once the results are announced",
+      "the new leader takes office and begins their duties. They may announce their term of service or other important information about themselves.\n\n6. **Term of Service**: Most democracies have strict term limits for leaders to prevent abuse of power. If a leader is found guilty of misconduct or failure in their duties",
+      "they may be impeached by the legislature or dismissed from office.\n\n7. **Re-election**: After completing their term",
+      "most democratic countries require new leadership through another election process",
+      "which repeats the steps above until a new leader is chosen.\n\nIt's important to note that democracies differ slightly in how they choose leaders",
+      "with some allowing more extensive campaigning and others requiring less direct input from voters. Additionally",
+      "some countries have systems of indirect leadership or may have multiple levels of government",
+      "depending on their constitution."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1481,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.7753,
+      0.7699
+    ],
+    "contradiction_score": 0.0009
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0529,
+    "reconstructed_h_score": 0.0529,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 25571.5,
+    "llm_gen_ms": 7826.37,
+    "p1_ms": 2152.95,
+    "p2_ms": 0.03,
+    "p3_ms": 30596.98,
+    "fusion_ms": 0.01
+  }
+}

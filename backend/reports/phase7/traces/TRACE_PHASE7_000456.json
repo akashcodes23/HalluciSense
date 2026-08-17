@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000456",
+  "sample_id": "che_0456",
+  "timestamp": "2026-08-14T13:48:44Z",
+  "domain": "Chemistry",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does gold rust in water?",
+  "generated_response": "Yes, gold can rust in water, but not under normal circumstances. Rust is caused by oxygen reacting with metal, particularly when exposed to moisture and humidity. Gold, however, has a relatively low tendency to rust compared to other metals like steel or copper.\n\nGold's resistance to corrosion is due to its chemical properties, such as the presence of impurities like arsenic that can act as catalysts for corrosion. Additionally, gold's high temperature resistance and ability to withstand extreme temperatures make it a desirable material in various industries, including electronics, jewelry, and aerospace.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "gold can rust in water",
+      "but not under normal circumstances. Rust is caused by oxygen reacting with metal",
+      "particularly when exposed to moisture and humidity. Gold",
+      "has a relatively low tendency to rust compared to other metals like steel or copper.\n\nGold's resistance to corrosion is due to its chemical properties",
+      "such as the presence of impurities like arsenic that can act as catalysts for corrosion. Additionally",
+      "gold's high temperature resistance and ability to withstand extreme temperatures make it a desirable material in various industries"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1734,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.878,
+      0.9376,
+      0.9568
+    ],
+    "contradiction_score": 0.3544
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.7048,
+    "reconstructed_h_score": 0.7048,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 9802.64,
+    "llm_gen_ms": 2257.18,
+    "p1_ms": 1299.98,
+    "p2_ms": 0.01,
+    "p3_ms": 11297.86,
+    "fusion_ms": 0.01
+  }
+}

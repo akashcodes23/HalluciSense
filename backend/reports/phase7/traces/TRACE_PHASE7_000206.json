@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000206",
+  "sample_id": "his_0206",
+  "timestamp": "2026-08-14T12:56:04Z",
+  "domain": "History",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who won the Battle of Waterloo?",
+  "generated_response": "The Battle of Waterloo was fought on June 18-22, 1815, between the armies of Napoleon Bonaparte and his allies against the French Army led by Jean-Baptiste Jourdan, who was also known as Duke Wellington. On June 13, 1815, the Battle of Waterloo began with a small skirmish that resulted in a defeat for the English forces under William Ivor Warren. Subsequently, Napoleon's Grande Arm\u00e9e marched north, and on June 18, they arrived at Waterloo to confront the French army. The battle lasted two days, during which the English forces held their ground against the superior numbers of the French Army led by Jourdan. In the end, Napoleon Bonaparte was defeated, and he committed suicide in a boat near Waterloo Bridge on June 18.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.338,
+    "claims": [
+      "The Battle of Waterloo was fought on June 18-22, 1815, between the armies of Napoleon Bonaparte and his allies against the French Army led by Jean-Baptiste Jourdan",
+      "who was also known as Duke Wellington. On June 13, 1815, the Battle of Waterloo began with a small skirmish that resulted in a defeat for the English forces under William Ivor Warren. Subsequently",
+      "Napoleon's Grande Arm\u00e9e marched north",
+      "and on June 18, they arrived at Waterloo to confront the French army. The battle lasted two days",
+      "during which the English forces held their ground against the superior numbers of the French Army led by Jourdan. In the end",
+      "Napoleon Bonaparte was defeated",
+      "and he committed suicide in a boat near Waterloo Bridge on June 18."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2489,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.803,
+      0.8226,
+      0.7542
+    ],
+    "contradiction_score": 0.3272
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3062,
+    "reconstructed_h_score": 0.3062,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16398.56,
+    "llm_gen_ms": 3800.99,
+    "p1_ms": 2851.51,
+    "p2_ms": 0.01,
+    "p3_ms": 18561.63,
+    "fusion_ms": 0.01
+  }
+}

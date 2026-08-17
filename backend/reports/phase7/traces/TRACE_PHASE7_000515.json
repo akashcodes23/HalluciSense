@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000515",
+  "sample_id": "new_0515",
+  "timestamp": "2026-08-14T14:00:10Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks use interest rate changes to influence the money supply in an economy and affect inflation levels. When central banks raise interest rates, they make borrowing more expensive for businesses and consumers, which can slow down economic growth by reducing investment and consumption. Conversely, when central banks lower interest rates, they make borrowing cheaper, which can stimulate economic growth by encouraging investment and consumption.\n\nAdditionally, changing interest rates can help to manage inflation by adjusting the money supply in a way that reduces prices in the economy. By lowering interest rates, central banks can encourage businesses and consumers to spend more of their income on goods and services, which can lead to an increase in aggregate demand and lower inflation.\n\nOverall, central banks use interest rate changes to achieve a variety of economic goals, including promoting stability in the currency exchange rate, managing inflation levels, and encouraging economic growth.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4999,
+    "claims": [
+      "Central banks use interest rate changes to influence the money supply in an economy and affect inflation levels. When central banks raise interest rates",
+      "they make borrowing more expensive for businesses and consumers",
+      "which can slow down economic growth by reducing investment and consumption. Conversely",
+      "when central banks lower interest rates",
+      "they make borrowing cheaper",
+      "which can stimulate economic growth by encouraging investment and consumption.\n\nAdditionally",
+      "changing interest rates can help to manage inflation by adjusting the money supply in a way that reduces prices in the economy. By lowering interest rates",
+      "central banks can encourage businesses and consumers to spend more of their income on goods and services",
+      "which can lead to an increase in aggregate demand and lower inflation.\n\nOverall",
+      "central banks use interest rate changes to achieve a variety of economic goals",
+      "including promoting stability in the currency exchange rate",
+      "and encouraging economic growth."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0642,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8959,
+      0.9121,
+      0.8969
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3443,
+    "reconstructed_h_score": 0.3443,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23000.73,
+    "llm_gen_ms": 3660.47,
+    "p1_ms": 3129.22,
+    "p2_ms": 0.01,
+    "p3_ms": 30548.05,
+    "fusion_ms": 0.02
+  }
+}

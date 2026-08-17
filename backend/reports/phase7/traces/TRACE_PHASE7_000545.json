@@ -1,0 +1,77 @@
+{
+  "trace_id": "TRACE_PHASE7_000545",
+  "sample_id": "new_0545",
+  "timestamp": "2026-08-14T14:09:14Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits discuss various issues related to the planet's climate and weather patterns. These topics include:\n\n1. **Global Warming**: Addressing the rise in global temperatures caused by human activities, including fossil fuel combustion and deforestation.\n\n2. **Climate Change Mitigation and Adaptation**: Strategies to reduce greenhouse gas emissions and adapt to the changing climate conditions, such as increasing renewable energy use, developing drought-resistant crops, and managing coastal erosion.\n\n3. **Sea Level Rise**: The impact of rising sea levels on coastal regions, including infrastructure damage, loss of habitat, and displacement of populations.\n\n4. **Climate Displacement**: The humanitarian consequences of climate change, particularly focusing on how global warming leads to the displacement of people from their homes due to flooding, droughts, and extreme weather events.\n\n5. **Energy Efficiency**: Improving energy efficiency in buildings, transportation, and industry to reduce greenhouse gas emissions.\n\n6. **Sea-Level Change Adaptation**: Strategies for managing sea-level rise, including infrastructure upgrades, building designs that can withstand rising waters, and wetland restoration projects.\n\n7. **Climate Governance**: The mechanisms and frameworks used to address climate change globally, such as the Paris Agreement and international forums like the United Nations Framework Convention on Climate Change (UNFCCC).\n\n8. **Biodiversity Conservation**: Strategies for protecting biodiversity in response to changes in climate and habitat loss.\n\n9. **Natural Disasters Management**: Improved disaster prevention and response capabilities in areas affected by extreme weather events, such as hurricanes, floods, and droughts.\n\n10. **Climate Change Policy**: The development and implementation of policies to address climate change, including carbon pricing, renewable energy incentives, and international agreements.\n\nThese summits aim to bring together global leaders, scientists, policymakers, and communities from different parts of the world to discuss, share ideas, and develop actionable strategies for tackling the challenges posed by climate change.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Climate summits discuss various issues related to the planet's climate and weather patterns. These topics include:\n\n1. **Global Warming**: Addressing the rise in global temperatures caused by human activities",
+      "including fossil fuel combustion and deforestation.\n\n2. **Climate Change Mitigation and Adaptation**: Strategies to reduce greenhouse gas emissions and adapt to the changing climate conditions",
+      "such as increasing renewable energy use",
+      "and managing coastal erosion.\n\n3. **Sea Level Rise**: The impact of rising sea levels on coastal regions",
+      "and displacement of populations.\n\n4. **Climate Displacement**: The humanitarian consequences of climate change",
+      "particularly focusing on how global warming leads to the displacement of people from their homes due to flooding",
+      "and extreme weather events.\n\n5. **Energy Efficiency**: Improving energy efficiency in buildings",
+      "and industry to reduce greenhouse gas emissions.\n\n6. **Sea-Level Change Adaptation**: Strategies for managing sea-level rise",
+      "building designs that can withstand rising waters",
+      "and wetland restoration projects.\n\n7. **Climate Governance**: The mechanisms and frameworks used to address climate change globally",
+      "such as the Paris Agreement and international forums like the United Nations Framework Convention on Climate Change (UNFCCC).\n\n8. **Biodiversity Conservation**: Strategies for protecting biodiversity in response to changes in climate and habitat loss.\n\n9. **Natural Disasters Management**: Improved disaster prevention and response capabilities in areas affected by extreme weather events",
+      "and droughts.\n\n10. **Climate Change Policy**: The development and implementation of policies to address climate change",
+      "and international agreements.\n\nThese summits aim to bring together global leaders",
+      "and communities from different parts of the world to discuss",
+      "and develop actionable strategies for tackling the challenges posed by climate change."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1623,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7696,
+      0.7298,
+      0.7515
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.058,
+    "reconstructed_h_score": 0.058,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17756.49,
+    "llm_gen_ms": 7832.05,
+    "p1_ms": 2537.99,
+    "p2_ms": 0.04,
+    "p3_ms": 11754.88,
+    "fusion_ms": 0.01
+  }
+}

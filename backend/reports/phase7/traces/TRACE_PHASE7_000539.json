@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000539",
+  "sample_id": "new_0539",
+  "timestamp": "2026-08-14T14:07:18Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks change interest rates to control the money supply in an economy and influence economic growth, inflation, employment, and other factors. This is part of their primary monetary policy objectives such as maintaining price stability, promoting full employment, managing financial stability, and ensuring sufficient liquidity.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4998,
+    "claims": [
+      "Central banks change interest rates to control the money supply in an economy and influence economic growth",
+      "and other factors. This is part of their primary monetary policy objectives such as maintaining price stability",
+      "and ensuring sufficient liquidity."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0927,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8374,
+      0.8775
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3544,
+    "reconstructed_h_score": 0.3544,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19417.3,
+    "llm_gen_ms": 1156.14,
+    "p1_ms": 2607.67,
+    "p2_ms": 0.01,
+    "p3_ms": 30662.25,
+    "fusion_ms": 0.01
+  }
+}

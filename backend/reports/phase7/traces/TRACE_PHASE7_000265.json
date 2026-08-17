@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000265",
+  "sample_id": "sci_0265",
+  "timestamp": "2026-08-14T13:03:24Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy in the form of glucose through a series of biochemical reactions. This process takes place in specialized structures called chloroplasts within plant cells. During photosynthesis, green substances called chlorophyll absorb sunlight, water from the soil, and carbon dioxide from the air to produce oxygen and glucose. The glucose can be used by plants for energy or stored as starch in leaves or stems. Photosynthesis is crucial for maintaining life on Earth and plays a vital role in nutrient cycling throughout ecosystems.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2676,
+    "claims": [
+      "Photosynthesis is the process by which plants",
+      "and some bacteria convert light energy into chemical energy in the form of glucose through a series of biochemical reactions. This process takes place in specialized structures called chloroplasts within plant cells. During photosynthesis",
+      "green substances called chlorophyll absorb sunlight",
+      "water from the soil",
+      "and carbon dioxide from the air to produce oxygen and glucose. The glucose can be used by plants for energy or stored as starch in leaves or stems. Photosynthesis is crucial for maintaining life on Earth and plays a vital role in nutrient cycling throughout ecosystems."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0533,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9242,
+      0.8802,
+      0.9508
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1911,
+    "reconstructed_h_score": 0.1911,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12269.94,
+    "llm_gen_ms": 2433.54,
+    "p1_ms": 2378.62,
+    "p2_ms": 0.02,
+    "p3_ms": 13752.08,
+    "fusion_ms": 0.01
+  }
+}

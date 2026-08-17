@@ -1,0 +1,8 @@
+{
+  "phase6_mean_tokens": 8.34,
+  "phase7_mean_tokens": 93.8,
+  "phase6_mean_claims": 1.0,
+  "phase7_mean_claims": 4.46,
+  "phase6_mean_lexical_diversity": 0.9864,
+  "phase7_mean_lexical_diversity": 0.7842
+}

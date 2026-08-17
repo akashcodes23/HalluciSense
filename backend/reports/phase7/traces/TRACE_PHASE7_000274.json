@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000274",
+  "sample_id": "sci_0274",
+  "timestamp": "2026-08-14T13:04:46Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What charge do electrons have?",
+  "generated_response": "Electrons have a negative electric charge.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.25,
+    "claims": [
+      "Electrons have a negative electric charge."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.141,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6532,
+      0.97,
+      0.7289
+    ],
+    "contradiction_score": 0.0016
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2111,
+    "reconstructed_h_score": 0.2111,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 5425.84,
+    "llm_gen_ms": 292.07,
+    "p1_ms": 1843.08,
+    "p2_ms": 0.0,
+    "p3_ms": 5258.86,
+    "fusion_ms": 0.01
+  }
+}

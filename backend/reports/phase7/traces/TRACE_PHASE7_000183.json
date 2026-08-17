@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000183",
+  "sample_id": "fin_0183",
+  "timestamp": "2026-08-14T12:49:34Z",
+  "domain": "Finance",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is liquidity?",
+  "generated_response": "Liquidity refers to the ability of an asset to be quickly converted into cash without significant loss. It measures how easily an asset can be bought or sold in the financial market. In finance, liquidity is often used as a measure of an investment's value. A high level of liquidity means that an investor can quickly turn their investments into cash if needed, while a low level of liquidity means that it takes longer to convert an investment into cash.\n\nLiquidity is important for many reasons, including:\n\n1. Investment diversification: Liquidity assets are often used as part of a diversified portfolio to help reduce the risk of financial loss.\n\n2. Access to funds: Liquidity assets can be easily bought or sold in the market, allowing investors to quickly access funds when needed.\n\n3. Marketability: Liquidity assets are easier to trade and sell on exchanges, which can lead to higher prices.\n\n4. Risk management: Liquidity assets provide a buffer against fluctuations in the value of investments, helping to manage risk.\n\nIn summary, liquidity is an important concept in finance that measures how easily an asset can be converted into cash without significant loss. It is used as a measure of an investment's value and plays a crucial role in financial decision-making.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Liquidity refers to the ability of an asset to be quickly converted into cash without significant loss. It measures how easily an asset can be bought or sold in the financial market. In finance",
+      "liquidity is often used as a measure of an investment's value. A high level of liquidity means that an investor can quickly turn their investments into cash if needed",
+      "while a low level of liquidity means that it takes longer to convert an investment into cash.\n\nLiquidity is important for many reasons",
+      "including:\n\n1. Investment diversification: Liquidity assets are often used as part of a diversified portfolio to help reduce the risk of financial loss.\n\n2. Access to funds: Liquidity assets can be easily bought or sold in the market",
+      "allowing investors to quickly access funds when needed.\n\n3. Marketability: Liquidity assets are easier to trade and sell on exchanges",
+      "which can lead to higher prices.\n\n4. Risk management: Liquidity assets provide a buffer against fluctuations in the value of investments",
+      "helping to manage risk.\n\nIn summary",
+      "liquidity is an important concept in finance that measures how easily an asset can be converted into cash without significant loss. It is used as a measure of an investment's value and plays a crucial role in financial decision-making."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0753,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8738,
+      0.8947,
+      0.8846
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0269,
+    "reconstructed_h_score": 0.0269,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13156.8,
+    "llm_gen_ms": 4970.05,
+    "p1_ms": 2078.1,
+    "p2_ms": 0.03,
+    "p3_ms": 11885.96,
+    "fusion_ms": 0.01
+  }
+}

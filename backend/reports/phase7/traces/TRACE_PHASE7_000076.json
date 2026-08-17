@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000076",
+  "sample_id": "med_0076",
+  "timestamp": "2026-08-14T12:21:25Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a respiratory infection caused by various types of influenza viruses. It can cause mild to severe symptoms, including fever, cough, sore throat, muscle aches, and fatigue. In most cases, the illness resolves on its own with rest and fluids.\n\nHere are some general treatment recommendations for viral influenza:\n\n1. **Rest:** Get plenty of sleep and rest to help your body recover quickly from the infection.\n\n2. **Hydration:** Drink plenty of water or other fluids to stay hydrated and help prevent dehydration.\n\n3. **Over-the-counter medication:** Some people may experience mild symptoms and can take over-the-counter medications such as acetaminophen (Tylenol) for fever and pain, and ibuprofen (Advil/Motrin) for pain and fever.\n\n4. **Ventilation:** If you are experiencing severe symptoms or if your infection is progressing to pneumonia, you may need medical attention from a healthcare provider. This can include oxygen therapy, intravenous fluids, or antibiotics if the infection involves bacteria.\n\n5. **Antiviral medication:** In some cases, especially in people with severe symptoms or those at high risk for complications, antiviral medications can be prescribed. These medications are highly effective but may not work for everyone and may have side effects.\n\n6. **Follow-up care:** After you have recovered from influenza, it's important to follow up with your healthcare provider to monitor for any potential long-term health issues or complications.\n\nIt's worth noting that while these measures can help manage symptoms and reduce the risk of complications, they are not a cure. If you experience severe symptoms or if you have underlying medical conditions, it may be necessary to seek medical attention from a healthcare provider.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a respiratory infection caused by various types of influenza viruses. It can cause mild to severe symptoms",
+      "and fatigue. In most cases",
+      "the illness resolves on its own with rest and fluids.\n\nHere are some general treatment recommendations for viral influenza:\n\n1. **Rest:** Get plenty of sleep and rest to help your body recover quickly from the infection.\n\n2. **Hydration:** Drink plenty of water or other fluids to stay hydrated and help prevent dehydration.\n\n3. **Over-the-counter medication:** Some people may experience mild symptoms and can take over-the-counter medications such as acetaminophen (Tylenol) for fever and pain",
+      "and ibuprofen (Advil/Motrin) for pain and fever.\n\n4. **Ventilation:** If you are experiencing severe symptoms or if your infection is progressing to pneumonia",
+      "you may need medical attention from a healthcare provider. This can include oxygen therapy",
+      "or antibiotics if the infection involves bacteria.\n\n5. **Antiviral medication:** In some cases",
+      "especially in people with severe symptoms or those at high risk for complications",
+      "antiviral medications can be prescribed. These medications are highly effective but may not work for everyone and may have side effects.\n\n6. **Follow-up care:** After you have recovered from influenza",
+      "it's important to follow up with your healthcare provider to monitor for any potential long-term health issues or complications.\n\nIt's worth noting that while these measures can help manage symptoms and reduce the risk of complications",
+      "they are not a cure. If you experience severe symptoms or if you have underlying medical conditions",
+      "it may be necessary to seek medical attention from a healthcare provider."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0967,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8938,
+      0.7355,
+      0.9248
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0345,
+    "reconstructed_h_score": 0.0345,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20190.54,
+    "llm_gen_ms": 5919.36,
+    "p1_ms": 1928.45,
+    "p2_ms": 0.04,
+    "p3_ms": 24082.74,
+    "fusion_ms": 0.01
+  }
+}

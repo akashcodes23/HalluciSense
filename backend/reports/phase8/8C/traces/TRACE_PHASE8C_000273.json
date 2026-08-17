@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000273",
+  "sample_id": "phase8_c_0273",
+  "timestamp": "2026-08-17T06:00:26Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "General Knowledge",
+  "corruption_type": "MULTI_CLAIM_CORRUPTION",
+  "corruption_severity": 3,
+  "input": "Paris is the capital of Germany. However, this claim is factually incorrect.",
+  "original": "Paris is the capital of France.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.7159,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.7159,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1590.31
+  },
+  "pipeline_error": null
+}

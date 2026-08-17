@@ -1,0 +1,75 @@
+{
+  "trace_id": "TRACE_PHASE7_000085",
+  "sample_id": "med_0085",
+  "timestamp": "2026-08-14T12:23:44Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar is regulated by the endocrine system, which includes the pancreas, liver, and kidneys. The primary hormones involved in regulating blood sugar include insulin and glucagon.\n\n1. **Insulin**: Produced by the pancreas, insulin helps regulate blood sugar levels by allowing cells to take up glucose from the bloodstream.\n   - Mechanism: Insulin binds to receptors on the cell membrane, causing a signal that triggers the entry of glucose into the cell.\n   - Effect: This increases blood glucose levels in cells, helping to stabilize them and prevent hyperglycemia.\n\n2. **Glucagon**: Produced by the pancreas, glucagon helps regulate blood sugar levels by promoting the breakdown of stored glucose from glycogen into glucose in the bloodstream.\n   - Mechanism: Glucagon binds to receptors on muscle and fat cells, causing a signal that triggers the release of glucose into the bloodstream.\n   - Effect: This decreases blood glucose levels in cells, helping to stabilize them and prevent hypoglycemia.\n\n3. **Liver**: The liver plays a crucial role in regulating blood sugar levels by both producing insulin and glucagon.\n   - Insulin production: In response to high blood sugar levels, the liver releases insulin to lower glucose levels.\n   - Glucagon production: In response to low blood sugar levels, the liver releases glucagon to raise glucose levels.\n\n4. **Kidneys**: The kidneys are also involved in regulating blood sugar levels by excreting excess glucose as urine or by increasing insulin sensitivity.\n   - Mechanism: Kidneys respond to high blood sugar levels by secreting more insulin, which in turn helps regulate blood sugar levels.\n   - Effect: This increases blood glucose levels in the bloodstream, helping to stabilize them and prevent hyperglycemia.\n\nThe feedback mechanism that regulates these hormones is complex and involves multiple cells and organs working together to maintain blood sugar balance. This includes various receptors on cells and tissues that detect changes in blood glucose levels and signal the release of appropriate hormones.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5033,
+    "claims": [
+      "Blood sugar is regulated by the endocrine system",
+      "which includes the pancreas",
+      "and kidneys. The primary hormones involved in regulating blood sugar include insulin and glucagon.\n\n1. **Insulin**: Produced by the pancreas",
+      "insulin helps regulate blood sugar levels by allowing cells to take up glucose from the bloodstream.\n   - Mechanism: Insulin binds to receptors on the cell membrane",
+      "causing a signal that triggers the entry of glucose into the cell.\n   - Effect: This increases blood glucose levels in cells",
+      "helping to stabilize them and prevent hyperglycemia.\n\n2. **Glucagon**: Produced by the pancreas",
+      "glucagon helps regulate blood sugar levels by promoting the breakdown of stored glucose from glycogen into glucose in the bloodstream.\n   - Mechanism: Glucagon binds to receptors on muscle and fat cells",
+      "causing a signal that triggers the release of glucose into the bloodstream.\n   - Effect: This decreases blood glucose levels in cells",
+      "helping to stabilize them and prevent hypoglycemia.\n\n3. **Liver**: The liver plays a crucial role in regulating blood sugar levels by both producing insulin and glucagon.\n   - Insulin production: In response to high blood sugar levels",
+      "the liver releases insulin to lower glucose levels.\n   - Glucagon production: In response to low blood sugar levels",
+      "the liver releases glucagon to raise glucose levels.\n\n4. **Kidneys**: The kidneys are also involved in regulating blood sugar levels by excreting excess glucose as urine or by increasing insulin sensitivity.\n   - Mechanism: Kidneys respond to high blood sugar levels by secreting more insulin",
+      "which in turn helps regulate blood sugar levels.\n   - Effect: This increases blood glucose levels in the bloodstream",
+      "helping to stabilize them and prevent hyperglycemia.\n\nThe feedback mechanism that regulates these hormones is complex and involves multiple cells and organs working together to maintain blood sugar balance. This includes various receptors on cells and tissues that detect changes in blood glucose levels and signal the release of appropriate hormones."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1036,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7714,
+      0.8503,
+      0.9022
+    ],
+    "contradiction_score": 0.0013
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3606,
+    "reconstructed_h_score": 0.3606,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20426.47,
+    "llm_gen_ms": 7003.38,
+    "p1_ms": 2102.59,
+    "p2_ms": 0.1,
+    "p3_ms": 21792.31,
+    "fusion_ms": 0.02
+  }
+}

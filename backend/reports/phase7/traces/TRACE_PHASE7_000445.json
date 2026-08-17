@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000445",
+  "sample_id": "bio_0445",
+  "timestamp": "2026-08-14T13:46:57Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What nitrogen bases are in DNA?",
+  "generated_response": "The nitrogen bases found in DNA are adenine (A), cytosine (C), guanine (G), and thymine (T). These bases pair together to form the backbone of the DNA molecule, creating a double helix structure. The specific pairing is as follows:\n\n- Adenine (A) pairs with Thymine (T)\n- Cytosine (C) pairs with Guanine (G)\n\nThis arrangement allows for the storage and replication of genetic information in cells.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2273,
+    "claims": [
+      "The nitrogen bases found in DNA are adenine (A)",
+      "and thymine (T). These bases pair together to form the backbone of the DNA molecule",
+      "creating a double helix structure. The specific pairing is as follows:\n\n- Adenine (A) pairs with Thymine (T)\n- Cytosine (C) pairs with Guanine (G)\n\nThis arrangement allows for the storage and replication of genetic information in cells."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0615,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9042,
+      0.907,
+      0.9089
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1681,
+    "reconstructed_h_score": 0.1681,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9508.16,
+    "llm_gen_ms": 2048.96,
+    "p1_ms": 2540.49,
+    "p2_ms": 0.0,
+    "p3_ms": 8007.84,
+    "fusion_ms": 0.01
+  }
+}

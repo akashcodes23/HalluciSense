@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000053",
+  "sample_id": "phase8_c_0053",
+  "timestamp": "2026-08-17T05:57:01Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "History",
+  "corruption_type": "NUMERIC_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "World War II ended in 1934.",
+  "original": "World War II ended in 1945.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.9964,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.9964,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1572.93
+  },
+  "pipeline_error": null
+}

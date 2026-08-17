@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000100",
+  "sample_id": "med_0100",
+  "timestamp": "2026-08-14T12:27:18Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a highly contagious respiratory illness caused by various strains of influenza viruses. It can be divided into two main types: seasonal and pandemic. The treatment of viral influenza primarily focuses on managing the symptoms, preventing complications, and sometimes controlling the spread of the infection.\n\n### Treatment Overview\n\n1. **Symptom Management**:\n   - **Rest**: Ensure\u5145\u8db3\u7684 rest to help your body recover from illness.\n   - **Hydration**: Drink plenty of fluids to keep your mouth moist and prevent dehydration.\n   - **Pain Relief**: Over-the-counter medications can be used to relieve pain and reduce fever, but it's important to follow the instructions on the packaging.\n\n2. **Antiviral Medications**:\n   - **Acetaminophen**: This is typically used for pain relief without serious side effects.\n   - **Paracetamol**: Another over-the-counter option that can be effective for fever and muscle aches.\n   - **Amantadine or Zidovudine**: These are prescription antiviral medications that can reduce the severity of symptoms but may not prevent complications.\n\n3. **Supportive Care**:\n   - **Ventilation Support**: For severe cases, especially those with underlying health issues, mechanical ventilation may be required.\n   - **Nutritional Support**: Ensure you have access to a balanced diet and hydration.\n\n4. **Prevention**:\n   - **Get Vaccinated**: Regularly get the flu shot to protect against influenza.\n   - **Stay Home**: Stay home from work or school until you are no longer feeling sick.\n   - **Cover Mouth and Nose**: Cover your nose and mouth with a tissue or your elbow when coughing or sneezing to prevent spreading the virus.\n\n5. **Hygiene Practices**:\n   - Practice good hygiene, including frequent hand washing with soap and water for at least 20 seconds, especially before handling food.\n   - Avoid touching your eyes, nose, and mouth with unwashed hands.\n\n### Complications\n\n- **Severe Illness**: Some cases of viral influenza can lead to severe complications such as pneumonia, bronchitis, or dehydration.\n- **Death**: While uncommon, it is possible for very young children, elderly individuals, and people with underlying health conditions to experience serious complications from influenza.\n\nIt's important to consult a healthcare professional if you suspect you have influenza or if your symptoms persist or worsen. They can provide personalized advice based on your specific situation and recommend appropriate treatment options.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a highly contagious respiratory illness caused by various strains of influenza viruses. It can be divided into two main types: seasonal and pandemic. The treatment of viral influenza primarily focuses on managing the symptoms",
+      "and sometimes controlling the spread of the infection.\n\n### Treatment Overview\n\n1. **Symptom Management**:\n   - **Rest**: Ensure\u5145\u8db3\u7684 rest to help your body recover from illness.\n   - **Hydration**: Drink plenty of fluids to keep your mouth moist and prevent dehydration.\n   - **Pain Relief**: Over-the-counter medications can be used to relieve pain and reduce fever",
+      "but it's important to follow the instructions on the packaging.\n\n2. **Antiviral Medications**:\n   - **Acetaminophen**: This is typically used for pain relief without serious side effects.\n   - **Paracetamol**: Another over-the-counter option that can be effective for fever and muscle aches.\n   - **Amantadine or Zidovudine**: These are prescription antiviral medications that can reduce the severity of symptoms but may not prevent complications.\n\n3. **Supportive Care**:\n   - **Ventilation Support**: For severe cases",
+      "especially those with underlying health issues",
+      "mechanical ventilation may be required.\n   - **Nutritional Support**: Ensure you have access to a balanced diet and hydration.\n\n4. **Prevention**:\n   - **Get Vaccinated**: Regularly get the flu shot to protect against influenza.\n   - **Stay Home**: Stay home from work or school until you are no longer feeling sick.\n   - **Cover Mouth and Nose**: Cover your nose and mouth with a tissue or your elbow when coughing or sneezing to prevent spreading the virus.\n\n5. **Hygiene Practices**:\n   - Practice good hygiene",
+      "including frequent hand washing with soap and water for at least 20 seconds",
+      "especially before handling food.\n   - Avoid touching your eyes",
+      "and mouth with unwashed hands.\n\n### Complications\n\n- **Severe Illness**: Some cases of viral influenza can lead to severe complications such as pneumonia",
+      "or dehydration.\n- **Death**: While uncommon",
+      "it is possible for very young children",
+      "and people with underlying health conditions to experience serious complications from influenza.\n\nIt's important to consult a healthcare professional if you suspect you have influenza or if your symptoms persist or worsen. They can provide personalized advice based on your specific situation and recommend appropriate treatment options."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1128,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.7517,
+      0.9017
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0403,
+    "reconstructed_h_score": 0.0403,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 28144.66,
+    "llm_gen_ms": 9236.37,
+    "p1_ms": 2204.84,
+    "p2_ms": 0.1,
+    "p3_ms": 31712.55,
+    "fusion_ms": 0.03
+  }
+}

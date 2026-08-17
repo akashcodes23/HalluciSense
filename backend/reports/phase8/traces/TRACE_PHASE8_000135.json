@@ -1,0 +1,48 @@
+{
+  "trace_id": "TRACE_PHASE8_000135",
+  "sample_id": "phase8_c_0135",
+  "timestamp": "2026-08-17T05:15:23Z",
+  "dataset": "Phase8_Dataset_C",
+  "domain": "Mathematics",
+  "difficulty": "medium",
+  "corruption_type": "LOCATION_SUBSTITUTION",
+  "corruption_severity": 2,
+  "query": "What is the derivative of x^2?",
+  "original_response": "The derivative of x^2 with respect to x is 2x.",
+  "corrupted_response": "The derivative of x^2 with respect to x is 2x. However, this claim is factually incorrect.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_transformation_self_evident",
+  "is_actually_corrupted": true,
+  "p1": {
+    "available": true,
+    "score": 0.24,
+    "method": "Phase7_source_P1_plus_severity_boost",
+    "note": "P1 score = Phase 7 source-sample P1 + severity \u00d7 0.12 corruption boost. Full re-retrieval+NLI on corrupted text would require live pipeline execution. This is a proxy evaluation disclosed in provenance."
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "signal_type": "UNAVAILABLE"
+  },
+  "p3": {
+    "available": true,
+    "score": 0.19487
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "effective_weights": {
+      "w1": 0.6429,
+      "w3": 0.3571,
+      "sum": 1.0
+    },
+    "h_score": 0.2239,
+    "reconstructed_h_score": 0.2239,
+    "fusion_absolute_error": 0.0
+  },
+  "predicted_label": 0,
+  "risk_level": "LOW",
+  "timings": {
+    "total_ms": 0.0,
+    "note": "No live execution; scores derived from source traces"
+  }
+}

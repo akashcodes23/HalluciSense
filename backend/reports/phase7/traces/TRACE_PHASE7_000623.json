@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000623",
+  "sample_id": "geo_0623",
+  "timestamp": "2026-08-14T14:32:03Z",
+  "domain": "Geography",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the largest hot desert?",
+  "generated_response": "The largest hot desert in the world is the Sahara Desert located in North Africa. It covers approximately 3,000,000 square kilometers (1,170,000 square miles), making it the fourth-largest desert in the world and the second-largest hot desert in the world after the Great Aral Desert in Central Asia.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2605,
+    "claims": [
+      "The largest hot desert in the world is the Sahara Desert located in North Africa. It covers approximately 3,000,000 square kilometers (1,170,000 square miles)",
+      "making it the fourth-largest desert in the world and the second-largest hot desert in the world after the Great Aral Desert in Central Asia."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1843,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8275,
+      0.9532,
+      0.9077
+    ],
+    "contradiction_score": 0.3335
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2333,
+    "reconstructed_h_score": 0.2333,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9252.41,
+    "llm_gen_ms": 1421.62,
+    "p1_ms": 5708.84,
+    "p2_ms": 0.03,
+    "p3_ms": 3684.89,
+    "fusion_ms": 0.01
+  }
+}

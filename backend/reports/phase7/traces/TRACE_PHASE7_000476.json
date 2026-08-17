@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000476",
+  "sample_id": "che_0476",
+  "timestamp": "2026-08-14T13:51:41Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does gold rust in water?",
+  "generated_response": "Gold does not rust in water. Rusting is the process of metal corroding and becoming brittle when exposed to air or moisture. Gold is a highly resistant material that has an intrinsic ability to resist corrosion due to its unique chemical composition. It contains trace amounts of sulfur, which helps to protect it from rust formation. However, even gold can become oxidized over time if left in humid conditions without proper protection.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gold does not rust in water. Rusting is the process of metal corroding and becoming brittle when exposed to air or moisture. Gold is a highly resistant material that has an intrinsic ability to resist corrosion due to its unique chemical composition. It contains trace amounts of sulfur",
+      "which helps to protect it from rust formation. However",
+      "even gold can become oxidized over time if left in humid conditions without proper protection."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0778,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9055,
+      0.8833,
+      0.8524
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0278,
+    "reconstructed_h_score": 0.0278,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12134.32,
+    "llm_gen_ms": 2322.78,
+    "p1_ms": 2198.93,
+    "p2_ms": 0.01,
+    "p3_ms": 13991.6,
+    "fusion_ms": 0.01
+  }
+}

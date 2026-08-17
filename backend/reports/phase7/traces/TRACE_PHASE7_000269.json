@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000269",
+  "sample_id": "sci_0269",
+  "timestamp": "2026-08-14T13:04:07Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants and other organisms convert light energy into chemical energy in the form of glucose (sugar). It occurs in the chloroplasts within plant cells, where the light is captured and used to produce oxygen gas as a byproduct. This process is essential for life on Earth, as it provides the energy needed for almost all living organisms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3663,
+    "claims": [
+      "Photosynthesis is the process by which plants and other organisms convert light energy into chemical energy in the form of glucose (sugar). It occurs in the chloroplasts within plant cells",
+      "where the light is captured and used to produce oxygen gas as a byproduct. This process is essential for life on Earth",
+      "as it provides the energy needed for almost all living organisms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0697,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8558,
+      0.9257,
+      0.8979
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2604,
+    "reconstructed_h_score": 0.2604,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13217.96,
+    "llm_gen_ms": 1148.57,
+    "p1_ms": 2451.04,
+    "p2_ms": 0.02,
+    "p3_ms": 18120.71,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000313",
+  "sample_id": "com_0313",
+  "timestamp": "2026-08-14T13:12:51Z",
+  "domain": "Computer Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the complexity of QuickSort?",
+  "generated_response": "The time complexity of QuickSort can be analyzed as follows:\n\n- In the worst case scenario, QuickSort has a time complexity of O(n^2). This occurs when the pivot chosen divides the array into two nearly identical halves.\n- In the best case scenario, QuickSort has a time complexity of O(n log n), which happens when the pivot is always the median of the elements in the array.\n\nThis is because on average, QuickSort partitions the array such that one half contains elements less than the pivot and the other half contains elements greater than the pivot. This results in a balanced partitioning, which optimizes the algorithm's performance.\n\nQuickSort can be implemented using recursive calls to divide the subarrays into smaller parts until each subarray is of size 1 or 0, at which point the sorting process can be completed. The recursive calls continue as long as there are still elements to sort.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5,
+    "claims": [
+      "The time complexity of QuickSort can be analyzed as follows:\n\n- In the worst case scenario",
+      "QuickSort has a time complexity of O(n^2). This occurs when the pivot chosen divides the array into two nearly identical halves.\n- In the best case scenario",
+      "QuickSort has a time complexity of O(n log n)",
+      "which happens when the pivot is always the median of the elements in the array.\n\nThis is because on average",
+      "QuickSort partitions the array such that one half contains elements less than the pivot and the other half contains elements greater than the pivot. This results in a balanced partitioning",
+      "which optimizes the algorithm's performance.\n\nQuickSort can be implemented using recursive calls to divide the subarrays into smaller parts until each subarray is of size 1 or 0, at which point the sorting process can be completed. The recursive calls continue as long as there are still elements to sort."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1968,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8499,
+      0.8032,
+      0.8509
+    ],
+    "contradiction_score": 0.2552
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3917,
+    "reconstructed_h_score": 0.3917,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9195.97,
+    "llm_gen_ms": 3667.04,
+    "p1_ms": 2351.12,
+    "p2_ms": 0.01,
+    "p3_ms": 5101.69,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000244",
+  "sample_id": "his_0244",
+  "timestamp": "2026-08-14T13:00:19Z",
+  "domain": "History",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Who was the first US President?",
+  "generated_response": "The first U.S. President was George Washington. He served from 1789 to 1797 and is often referred to as \"The Father of His Country.\" Washington led the country through its transition from a colonial state to a republic, establishing many of the institutions that would shape American government and culture for years to come.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3354,
+    "claims": [
+      "The first U.S. President was George Washington. He served from 1789 to 1797 and is often referred to as \"The Father of His Country.\" Washington led the country through its transition from a colonial state to a republic",
+      "establishing many of the institutions that would shape American government and culture for years to come."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0878,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8843,
+      0.8555,
+      0.8555
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.247,
+    "reconstructed_h_score": 0.247,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 6466.31,
+    "llm_gen_ms": 1640.81,
+    "p1_ms": 1942.72,
+    "p2_ms": 0.0,
+    "p3_ms": 3550.35,
+    "fusion_ms": 0.01
+  }
+}

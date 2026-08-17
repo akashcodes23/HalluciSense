@@ -1,0 +1,112 @@
+{
+  "threshold": 0.5,
+  "confusion_matrix": {
+    "TP": 84,
+    "TN": 346,
+    "FP": 29,
+    "FN": 291
+  },
+  "accuracy": 0.5733,
+  "precision": 0.7434,
+  "recall": 0.224,
+  "specificity": 0.9227,
+  "f1": 0.3443,
+  "balanced_accuracy": 0.5733,
+  "mcc": 0.205,
+  "auroc": 0.5602,
+  "auprc": 0.5839,
+  "brier_score": 0.3265,
+  "ece": 0.2514,
+  "bins_data": [
+    {
+      "bin_idx": 1,
+      "bin_range": "[0.00, 0.10]",
+      "sample_count": 276,
+      "mean_predicted_h": 0.0387,
+      "observed_hallucination_rate": 0.4746,
+      "calibration_error": 0.4359,
+      "weighted_ece_contribution": 0.1604
+    },
+    {
+      "bin_idx": 2,
+      "bin_range": "[0.10, 0.20]",
+      "sample_count": 77,
+      "mean_predicted_h": 0.1427,
+      "observed_hallucination_rate": 0.4156,
+      "calibration_error": 0.2729,
+      "weighted_ece_contribution": 0.028
+    },
+    {
+      "bin_idx": 3,
+      "bin_range": "[0.20, 0.30]",
+      "sample_count": 93,
+      "mean_predicted_h": 0.253,
+      "observed_hallucination_rate": 0.4301,
+      "calibration_error": 0.1771,
+      "weighted_ece_contribution": 0.022
+    },
+    {
+      "bin_idx": 4,
+      "bin_range": "[0.30, 0.40]",
+      "sample_count": 146,
+      "mean_predicted_h": 0.3506,
+      "observed_hallucination_rate": 0.4247,
+      "calibration_error": 0.074,
+      "weighted_ece_contribution": 0.0144
+    },
+    {
+      "bin_idx": 5,
+      "bin_range": "[0.40, 0.50]",
+      "sample_count": 45,
+      "mean_predicted_h": 0.4462,
+      "observed_hallucination_rate": 0.5778,
+      "calibration_error": 0.1316,
+      "weighted_ece_contribution": 0.0079
+    },
+    {
+      "bin_idx": 6,
+      "bin_range": "[0.50, 0.60]",
+      "sample_count": 24,
+      "mean_predicted_h": 0.5473,
+      "observed_hallucination_rate": 0.7083,
+      "calibration_error": 0.161,
+      "weighted_ece_contribution": 0.0052
+    },
+    {
+      "bin_idx": 7,
+      "bin_range": "[0.60, 0.70]",
+      "sample_count": 66,
+      "mean_predicted_h": 0.6503,
+      "observed_hallucination_rate": 0.7576,
+      "calibration_error": 0.1072,
+      "weighted_ece_contribution": 0.0094
+    },
+    {
+      "bin_idx": 8,
+      "bin_range": "[0.70, 0.80]",
+      "sample_count": 16,
+      "mean_predicted_h": 0.7262,
+      "observed_hallucination_rate": 0.8125,
+      "calibration_error": 0.0863,
+      "weighted_ece_contribution": 0.0018
+    },
+    {
+      "bin_idx": 9,
+      "bin_range": "[0.80, 0.90]",
+      "sample_count": 7,
+      "mean_predicted_h": 0.8169,
+      "observed_hallucination_rate": 0.5714,
+      "calibration_error": 0.2455,
+      "weighted_ece_contribution": 0.0023
+    },
+    {
+      "bin_idx": 10,
+      "bin_range": "[0.90, 1.00]",
+      "sample_count": 0,
+      "mean_predicted_h": 0.95,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.0,
+      "weighted_ece_contribution": 0.0
+    }
+  ]
+}

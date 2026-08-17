@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000113",
+  "sample_id": "law_0113",
+  "timestamp": "2026-08-14T12:30:38Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas corpus is an ancient English law that refers to a legal action initiated against the holder of a legal document or the person holding it in possession when there is suspicion of forgery or misuse of the document. It is designed to preserve the integrity and authenticity of documents, prevent corruption and fraud, and protect individuals from unfair claims or unjustly obtained information.\n\nThe term \"habeas corpus\" comes from Latin, where it means \"to ask for a release.\" When someone sues under habeas corpus, they are asking the court to order the government to release them from any imprisonment or other restraint. In legal terms, this is a fundamental constitutional right that protects individuals from illegal detention and provides a way for them to defend themselves against arbitrary arrests.\n\nHabeas corpus has been an important tool in protecting individual rights and ensuring that laws and regulations are applied fairly. It is used in many different jurisdictions around the world, including the United States, the European Union, and other countries with similar legal systems.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3966,
+    "claims": [
+      "Habeas corpus is an ancient English law that refers to a legal action initiated against the holder of a legal document or the person holding it in possession when there is suspicion of forgery or misuse of the document. It is designed to preserve the integrity and authenticity of documents",
+      "prevent corruption and fraud",
+      "and protect individuals from unfair claims or unjustly obtained information.\n\nThe term \"habeas corpus\" comes from Latin",
+      "where it means \"to ask for a release.\" When someone sues under habeas corpus",
+      "they are asking the court to order the government to release them from any imprisonment or other restraint. In legal terms",
+      "this is a fundamental constitutional right that protects individuals from illegal detention and provides a way for them to defend themselves against arbitrary arrests.\n\nHabeas corpus has been an important tool in protecting individual rights and ensuring that laws and regulations are applied fairly. It is used in many different jurisdictions around the world",
+      "including the United States",
+      "and other countries with similar legal systems."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1945,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8874,
+      0.8043,
+      0.8261
+    ],
+    "contradiction_score": 0.2573
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3244,
+    "reconstructed_h_score": 0.3244,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22890.22,
+    "llm_gen_ms": 4098.6,
+    "p1_ms": 2811.89,
+    "p2_ms": 0.03,
+    "p3_ms": 30523.49,
+    "fusion_ms": 0.01
+  }
+}

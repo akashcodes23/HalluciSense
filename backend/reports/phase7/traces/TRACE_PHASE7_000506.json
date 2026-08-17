@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000506",
+  "sample_id": "new_0506",
+  "timestamp": "2026-08-14T13:57:07Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Is the UN still active?",
+  "generated_response": "Yes, the United Nations (UN) remains active and continues to operate around the world. It is an intergovernmental organization composed of 193 member states that works to promote peace, security, development, humanitarian aid, and democracy.\n\nThe UN is responsible for maintaining global peace, ensuring international cooperation in solving crises, promoting human rights, protecting the environment, and promoting sustainable development. The organization plays a critical role in addressing some of the most pressing issues facing the world today, including poverty, hunger, inequality, and climate change.\n\nWhile there have been times when tensions between member states have grown, the UN remains committed to working together to address these challenges and promote positive outcomes for all countries.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4176,
+    "claims": [
+      "the United Nations (UN) remains active and continues to operate around the world. It is an intergovernmental organization composed of 193 member states that works to promote peace",
+      "and democracy.\n\nThe UN is responsible for maintaining global peace",
+      "ensuring international cooperation in solving crises",
+      "and promoting sustainable development. The organization plays a critical role in addressing some of the most pressing issues facing the world today",
+      "and climate change.\n\nWhile there have been times when tensions between member states have grown",
+      "the UN remains committed to working together to address these challenges and promote positive outcomes for all countries."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0736,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.909,
+      0.9281,
+      0.8232
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2948,
+    "reconstructed_h_score": 0.2948,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8745.26,
+    "llm_gen_ms": 3179.01,
+    "p1_ms": 2465.0,
+    "p2_ms": 0.01,
+    "p3_ms": 5879.74,
+    "fusion_ms": 0.01
+  }
+}

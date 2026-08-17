@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_BIO_TRU_0072",
+  "claim": "The mitochondrion is the primary site of ATP synthesis via oxidative phosphorylation in eukaryotic cells.",
+  "ground_truth": 0,
+  "enhanced_h_score": 0.5822,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "The mitochondrion is the primary site of ATP synthesis via oxidative phosphorylation in eukaryotic cells",
+      "base_nli_score": 0.5822,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.5822
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2302.67
+}

@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000388",
+  "sample_id": "phy_0388",
+  "timestamp": "2026-08-14T13:34:25Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero is the lowest temperature that a material can exist without any measurable change in its physical properties. It is defined as -273.15 degrees Celsius (or -460.15 degrees Fahrenheit). At this temperature, all molecules have no kinetic energy and the average speed of their particles is zero. This means there are no vibrational modes present, making it impossible for any substance to exist at absolute zero. Absolute zero is an important concept in physics because it helps explain why matter has mass and that it expands without limit as it approaches this temperature.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6625,
+    "claims": [
+      "Absolute zero is the lowest temperature that a material can exist without any measurable change in its physical properties. It is defined as -273.15 degrees Celsius (or -460.15 degrees Fahrenheit). At this temperature",
+      "all molecules have no kinetic energy and the average speed of their particles is zero. This means there are no vibrational modes present",
+      "making it impossible for any substance to exist at absolute zero. Absolute zero is an important concept in physics because it helps explain why matter has mass and that it expands without limit as it approaches this temperature."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0604,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.903,
+      0.9103,
+      0.9112
+    ],
+    "contradiction_score": 0.0021
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4475,
+    "reconstructed_h_score": 0.4475,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11100.17,
+    "llm_gen_ms": 2443.41,
+    "p1_ms": 2562.65,
+    "p2_ms": 0.01,
+    "p3_ms": 10683.06,
+    "fusion_ms": 0.01
+  }
+}

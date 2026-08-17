@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000467",
+  "sample_id": "che_0467",
+  "timestamp": "2026-08-14T13:50:17Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the composition of water?",
+  "generated_response": "Water is composed primarily of two elements: hydrogen and oxygen. It can exist in three main forms depending on its temperature and pressure:\n\n1. **Dissolved Water**: In its liquid form, water consists of molecules where hydrogen bonds are relatively weak compared to those between hydrogen and oxygen. These molecules are held together by a hydrogen bond network.\n\n2. **Ice** (Solid): At 0\u00b0C and below, water exists as a solid called ice. Ice contains fewer hydrogen bonds than in liquid water, resulting in lower density and slightly different properties such as higher melting point and lower boiling point compared to liquid water.\n\n3. **Steam** (Gas): At 100\u00b0C and above, water vapor exists as a gas. Steam is composed of molecules that are highly polarized and can have both hydrogen and oxygen atoms bonded together in various ways.\n\nWater molecules consist of a central oxygen atom with two hydrogen atoms attached to each end. The chemical formula for water is H2O.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4287,
+    "claims": [
+      "Water is composed primarily of two elements: hydrogen and oxygen. It can exist in three main forms depending on its temperature and pressure:\n\n1. **Dissolved Water**: In its liquid form",
+      "water consists of molecules where hydrogen bonds are relatively weak compared to those between hydrogen and oxygen. These molecules are held together by a hydrogen bond network.\n\n2. **Ice** (Solid): At 0\u00b0C and below",
+      "water exists as a solid called ice. Ice contains fewer hydrogen bonds than in liquid water",
+      "resulting in lower density and slightly different properties such as higher melting point and lower boiling point compared to liquid water.\n\n3. **Steam** (Gas): At 100\u00b0C and above",
+      "water vapor exists as a gas. Steam is composed of molecules that are highly polarized and can have both hydrogen and oxygen atoms bonded together in various ways.\n\nWater molecules consist of a central oxygen atom with two hydrogen atoms attached to each end. The chemical formula for water is H2O."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1395,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7372,
+      0.8007,
+      0.819
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3254,
+    "reconstructed_h_score": 0.3254,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11260.07,
+    "llm_gen_ms": 3997.79,
+    "p1_ms": 2164.08,
+    "p2_ms": 0.01,
+    "p3_ms": 8931.66,
+    "fusion_ms": 0.02
+  }
+}

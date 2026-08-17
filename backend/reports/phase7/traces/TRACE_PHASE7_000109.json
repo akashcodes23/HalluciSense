@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000109",
+  "sample_id": "law_0109",
+  "timestamp": "2026-08-14T12:29:33Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas corpus is a constitutional right of the accused person to challenge their detention or to require that their case be heard by a judge before they can be sentenced.\n\nIn English, habeas corpus means \"to declare someone's freedom\" and originally referred to the right of the person to have his sentence reviewed by a judge before it is enforced. In the United States, the right of habeas corpus was declared in 1773 when John Jay wrote to George Washington that he had \"the right to be discharged from any imprisonment, whether lawful or unlawful, which I have been informed may have been imposed upon me.\"\n\nThe use of habeas corpus has evolved over time and is now a fundamental constitutional right of individuals in the United States. It is a way for defendants to challenge their detention before it is enforced by the authorities, and it provides a mechanism for ensuring that individuals are held only if they have committed an actual crime or if they are otherwise entitled to be kept in custody.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Habeas corpus is a constitutional right of the accused person to challenge their detention or to require that their case be heard by a judge before they can be sentenced.\n\nIn English",
+      "habeas corpus means \"to declare someone's freedom\" and originally referred to the right of the person to have his sentence reviewed by a judge before it is enforced. In the United States",
+      "the right of habeas corpus was declared in 1773 when John Jay wrote to George Washington that he had \"the right to be discharged from any imprisonment",
+      "whether lawful or unlawful",
+      "which I have been informed may have been imposed upon me.\"\n\nThe use of habeas corpus has evolved over time and is now a fundamental constitutional right of individuals in the United States. It is a way for defendants to challenge their detention before it is enforced by the authorities",
+      "and it provides a mechanism for ensuring that individuals are held only if they have committed an actual crime or if they are otherwise entitled to be kept in custody."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.212,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8614,
+      0.8368,
+      0.86
+    ],
+    "contradiction_score": 0.3322
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0757,
+    "reconstructed_h_score": 0.0757,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16938.14,
+    "llm_gen_ms": 4099.03,
+    "p1_ms": 2389.35,
+    "p2_ms": 0.04,
+    "p3_ms": 19393.23,
+    "fusion_ms": 0.01
+  }
+}

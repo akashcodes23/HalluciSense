@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000084",
+  "sample_id": "med_0084",
+  "timestamp": "2026-08-14T12:23:24Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a contagious respiratory disease caused by influenza viruses. It can be mild or severe depending on factors such as the person's age, underlying health conditions, and exposure to other people with influenza. There are several treatments available for viral influenza:\n\n1. Antiviral medications: These drugs help reduce the severity of the illness and shorten the duration of symptoms. They may include oseltavir, amantadine, zidovudine, and ribavirin. It is important to take these medications as soon as possible after infection to prevent progression to more severe forms of the disease.\n\n2. Rest: Getting plenty of rest is essential for recovery from viral influenza. Make sure to get enough sleep and avoid fatigue, which can make symptoms worse.\n\n3. Drink fluids: Drinking plenty of fluids can help keep your body hydrated and alleviate congestion.\n\n4. Over-the-counter medications: Over-the-counter medications such as acetaminophen or ibuprofen can help reduce fever and pain. However, they should not be used for severe cases of influenza.\n\n5. Personal hygiene: Washing your hands regularly with soap and water is important to prevent the spread of germs and viruses.\n\n6. Avoid spreading germs: Avoid close contact with others who are sick, especially if you are experiencing symptoms. Use a mask or cloth face cover when around people who are ill.\n\nIt's important to consult with a healthcare provider for personalized treatment recommendations based on your individual health status and the severity of your symptoms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a contagious respiratory disease caused by influenza viruses. It can be mild or severe depending on factors such as the person's age",
+      "and exposure to other people with influenza. There are several treatments available for viral influenza:\n\n1. Antiviral medications: These drugs help reduce the severity of the illness and shorten the duration of symptoms. They may include oseltavir",
+      "and ribavirin. It is important to take these medications as soon as possible after infection to prevent progression to more severe forms of the disease.\n\n2. Rest: Getting plenty of rest is essential for recovery from viral influenza. Make sure to get enough sleep and avoid fatigue",
+      "which can make symptoms worse.\n\n3. Drink fluids: Drinking plenty of fluids can help keep your body hydrated and alleviate congestion.\n\n4. Over-the-counter medications: Over-the-counter medications such as acetaminophen or ibuprofen can help reduce fever and pain. However",
+      "they should not be used for severe cases of influenza.\n\n5. Personal hygiene: Washing your hands regularly with soap and water is important to prevent the spread of germs and viruses.\n\n6. Avoid spreading germs: Avoid close contact with others who are sick",
+      "especially if you are experiencing symptoms. Use a mask or cloth face cover when around people who are ill.\n\nIt's important to consult with a healthcare provider for personalized treatment recommendations based on your individual health status and the severity of your symptoms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0778,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.885,
+      0.9224,
+      0.8351
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0278,
+    "reconstructed_h_score": 0.0278,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21790.47,
+    "llm_gen_ms": 6037.77,
+    "p1_ms": 2522.1,
+    "p2_ms": 0.02,
+    "p3_ms": 25662.94,
+    "fusion_ms": 0.01
+  }
+}

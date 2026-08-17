@@ -1,0 +1,8 @@
+Failure_Class,Frequency,Primary_Domain,Severity,Mitigation
+PARTIAL_CLAIM_FAILURE,32,Biomedicine / Chemistry,CRITICAL,Claim Decomposition (ClaimDecomposer)
+NUMERICAL_REASONING_FAILURE,28,Physics / Mathematics,HIGH,Deterministic Number Parser (NumericUnitChecker)
+UNIT_REASONING_FAILURE,24,Physics / Medicine,HIGH,SI Unit Dimension Checker (NumericUnitChecker)
+CAUSAL_DIRECTION_FAILURE,22,Medicine / Biology,HIGH,Causal Asymmetry Rule (CausalDirectionChecker)
+NEGATION_FAILURE,20,Biology / General Science,MEDIUM,Polarity Reversal Detector (NegationDetector)
+RETRIEVAL_FAILURE,18,Mathematics / Medicine,MEDIUM,Hybrid Dense + Lexical Fusion
+TEMPORAL_REASONING_FAILURE,14,History / Medicine,LOW,Temporal Metadata Filter

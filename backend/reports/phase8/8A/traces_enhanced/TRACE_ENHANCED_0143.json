@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MAT_TRU_0143",
+  "claim": "Euler's identity states that e^(i\u03c0) + 1 = 0.",
+  "ground_truth": 0,
+  "enhanced_h_score": 0.0434,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Euler's identity states that e^(i\u03c0) + 1 = 0",
+      "base_nli_score": 0.0434,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.0434
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2599.21
+}

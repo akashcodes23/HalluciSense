@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000224",
+  "sample_id": "his_0224",
+  "timestamp": "2026-08-14T12:58:06Z",
+  "domain": "History",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who was the first US President?",
+  "generated_response": "The first U. S. President was George Washington, who served from 1789 to 1797. He is often referred to as the \"Father of Our Country.\"",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5155,
+    "claims": [
+      "The first U. S. President was George Washington",
+      "who served from 1789 to 1797. He is often referred to as the \"Father of Our Country.\""
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0889,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8495,
+      0.8856,
+      0.8552
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3632,
+    "reconstructed_h_score": 0.3632,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 5730.05,
+    "llm_gen_ms": 876.88,
+    "p1_ms": 2605.67,
+    "p2_ms": 0.01,
+    "p3_ms": 3068.33,
+    "fusion_ms": 0.01
+  }
+}

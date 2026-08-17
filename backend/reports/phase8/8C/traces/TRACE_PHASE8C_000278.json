@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000278",
+  "sample_id": "phase8_c_0278",
+  "timestamp": "2026-08-17T06:00:35Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Politics",
+  "corruption_type": "MULTI_CLAIM_CORRUPTION",
+  "corruption_severity": 3,
+  "input": "Federalism divides power between central and state governments. However, this claim is factually incorrect. However, this claim is factually incorrect.",
+  "original": "Federalism divides power between central and state governments.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3706,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3706,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.NEEDS_VERIFICATION",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1893.9
+  },
+  "pipeline_error": null
+}

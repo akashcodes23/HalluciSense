@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000455",
+  "sample_id": "che_0455",
+  "timestamp": "2026-08-14T13:48:34Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the composition of water?",
+  "generated_response": "Water consists primarily of hydrogen and oxygen atoms bonded in a molecule known as H2O.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5029,
+    "claims": [
+      "Water consists primarily of hydrogen and oxygen atoms bonded in a molecule known as H2O."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1117,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.82,
+      0.8473,
+      0.8198
+    ],
+    "contradiction_score": 0.0017
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3632,
+    "reconstructed_h_score": 0.3632,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4247.63,
+    "llm_gen_ms": 402.92,
+    "p1_ms": 1536.45,
+    "p2_ms": 0.0,
+    "p3_ms": 4044.66,
+    "fusion_ms": 0.01
+  }
+}

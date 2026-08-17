@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000659",
+  "sample_id": "pol_0659",
+  "timestamp": "2026-08-14T14:37:44Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies choose leaders through various democratic processes that include elections, referendums, and other voting mechanisms. Here is a step-by-step explanation of how democracies choose leaders:\n\n1. **Election**: The most common way to choose leaders in democracies is through an election process where voters cast ballots for their preferred candidate(s) based on certain criteria such as party affiliation, experience, popularity, etc.\n\n2. **Referendum**: In some democracies, a referendum may be used as a means to elect a leader when there are multiple candidates or when the majority of voters prefer a new leader over the existing one.\n\n3. **Direct Rule**: In direct rule, where the government is directly controlled by the people, leaders may be chosen through various means such as running for office or appointing leaders without any formal election process.\n\n4. **Leadership Selection Process**: In some democracies, leadership selection is done in a more deliberative and participatory manner, with leaders selected based on their performance, contributions to society, and the support of the people.\n\n5. **Judicial System**: In democracies, legal processes are used to determine the legitimacy and qualifications of a leader before they are allowed to assume power.\n\nOverall, democracies choose leaders through a process that involves the citizenry, with the aim of selecting individuals who can effectively govern and serve the citizens' interests.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2844,
+    "claims": [
+      "Democracies choose leaders through various democratic processes that include elections",
+      "and other voting mechanisms. Here is a step-by-step explanation of how democracies choose leaders:\n\n1. **Election**: The most common way to choose leaders in democracies is through an election process where voters cast ballots for their preferred candidate(s) based on certain criteria such as party affiliation",
+      "etc.\n\n2. **Referendum**: In some democracies",
+      "a referendum may be used as a means to elect a leader when there are multiple candidates or when the majority of voters prefer a new leader over the existing one.\n\n3. **Direct Rule**: In direct rule",
+      "where the government is directly controlled by the people",
+      "leaders may be chosen through various means such as running for office or appointing leaders without any formal election process.\n\n4. **Leadership Selection Process**: In some democracies",
+      "leadership selection is done in a more deliberative and participatory manner",
+      "with leaders selected based on their performance",
+      "and the support of the people.\n\n5. **Judicial System**: In democracies",
+      "legal processes are used to determine the legitimacy and qualifications of a leader before they are allowed to assume power.\n\nOverall",
+      "democracies choose leaders through a process that involves the citizenry",
+      "with the aim of selecting individuals who can effectively govern and serve the citizens' interests."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.121,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.828,
+      0.7923,
+      0.8223
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.226,
+    "reconstructed_h_score": 0.226,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 24374.9,
+    "llm_gen_ms": 5773.83,
+    "p1_ms": 4508.5,
+    "p2_ms": 0.04,
+    "p3_ms": 26856.77,
+    "fusion_ms": 0.0
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000686",
+  "sample_id": "pol_0686",
+  "timestamp": "2026-08-14T14:44:00Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power is a power granted to the president of the United States or any state governor that allows them to reject legislation proposed by Congress without being forced to pass it. This means that the president can deny approval or veto bills before they become law, giving the legislature a chance to reconsider their decisions and possibly approve them after all. The concept of veto power is important in the American political system, as it gives the president some control over the direction of government and ensures that Congress cannot pass laws without the president's consent.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4995,
+    "claims": [
+      "Veto power is a power granted to the president of the United States or any state governor that allows them to reject legislation proposed by Congress without being forced to pass it. This means that the president can deny approval or veto bills before they become law",
+      "giving the legislature a chance to reconsider their decisions and possibly approve them after all. The concept of veto power is important in the American political system",
+      "as it gives the president some control over the direction of government and ensures that Congress cannot pass laws without the president's consent."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0814,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9109,
+      0.8771,
+      0.8394
+    ],
+    "contradiction_score": 0.0019
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3502,
+    "reconstructed_h_score": 0.3502,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9745.92,
+    "llm_gen_ms": 1935.6,
+    "p1_ms": 4747.31,
+    "p2_ms": 0.03,
+    "p3_ms": 5831.53,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000428",
+  "sample_id": "bio_0428",
+  "timestamp": "2026-08-14T13:43:14Z",
+  "domain": "Biology",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through sexual reproduction. During this process, the male and female mammals produce gametes, which are typically sperm cells (in males) and egg cells (in females). These gametes fuse together during fertilization to form a zygote, which then develops into an embryo. The embryo then matures and is born as a live birth mammal.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2115,
+    "claims": [
+      "Mammals reproduce through sexual reproduction. During this process",
+      "the male and female mammals produce gametes",
+      "which are typically sperm cells (in males) and egg cells (in females). These gametes fuse together during fertilization to form a zygote",
+      "which then develops into an embryo. The embryo then matures and is born as a live birth mammal."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0984,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8706,
+      0.7894,
+      0.8871
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1711,
+    "reconstructed_h_score": 0.1711,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15101.43,
+    "llm_gen_ms": 1359.05,
+    "p1_ms": 2292.42,
+    "p2_ms": 0.01,
+    "p3_ms": 21581.12,
+    "fusion_ms": 0.01
+  }
+}

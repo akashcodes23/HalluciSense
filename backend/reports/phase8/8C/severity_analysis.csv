@@ -1,0 +1,5 @@
+severity,severity_label,n,detection_rate,mean_h_score,ci_lo,ci_hi
+1,MINOR,30,0.6667,0.7197,0.5835,0.8431
+2,MODERATE,180,0.4111,0.5523,0.5084,0.5995
+3,MAJOR,60,0.4,0.546,0.4815,0.618
+4,CRITICAL,30,0.6667,0.6886,0.5761,0.8026

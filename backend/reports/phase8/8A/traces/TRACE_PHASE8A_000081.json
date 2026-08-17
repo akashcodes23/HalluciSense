@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000081",
+  "sample_id": "8A_BIO_UNI_0081",
+  "timestamp": "2026-08-17T05:52:20Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Biology",
+  "category": "UNIT_SCALE",
+  "difficulty": "medium",
+  "input": "A typical human cell nucleus has a diameter of approximately 6 mm.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Cell nucleus",
+  "source_url": "https://en.wikipedia.org/wiki/Cell_nucleus",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1990.99
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

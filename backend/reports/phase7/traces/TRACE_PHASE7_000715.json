@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000715",
+  "sample_id": "lit_0715",
+  "timestamp": "2026-08-14T14:49:01Z",
+  "domain": "Literature",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Who composed the Odyssey?",
+  "generated_response": "The Odyssey was written by Homer.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0092,
+    "claims": [
+      "The Odyssey was written by Homer."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1103,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7964,
+      0.8168,
+      0.8777
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0453,
+    "reconstructed_h_score": 0.0453,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7922.93,
+    "llm_gen_ms": 283.67,
+    "p1_ms": 1488.98,
+    "p2_ms": 0.0,
+    "p3_ms": 11932.07,
+    "fusion_ms": 0.02
+  }
+}

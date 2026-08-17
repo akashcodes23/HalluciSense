@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000058",
+  "sample_id": "med_0058",
+  "timestamp": "2026-08-14T12:17:44Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does chemotherapy cure bacterial pneumonia?",
+  "generated_response": "Chemotherapy does not cure bacterial pneumonia. Bacterial pneumonia is an infectious disease caused by bacteria or other microorganisms in the respiratory system. Chemotherapy is used to treat bacterial infections by killing bacteria that are causing the illness, such as antibiotics.\n\nHowever, some antibiotics may be effective against certain types of bacterial pneumonia, and they can help reduce symptoms and improve recovery. However, many antibiotic-resistant strains of bacteria continue to cause bacterial pneumonia, and these strains require alternative treatment options or combinations of medications.\n\nIn addition to chemotherapy, other treatments for bacterial pneumonia include treating the underlying cause of the infection, such as pneumonia caused by lung cancer or heart failure, or managing symptoms such as fever, coughing, and shortness of breath.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "Chemotherapy does not cure bacterial pneumonia. Bacterial pneumonia is an infectious disease caused by bacteria or other microorganisms in the respiratory system. Chemotherapy is used to treat bacterial infections by killing bacteria that are causing the illness",
+      "such as antibiotics.\n\nHowever",
+      "some antibiotics may be effective against certain types of bacterial pneumonia",
+      "and they can help reduce symptoms and improve recovery. However",
+      "many antibiotic-resistant strains of bacteria continue to cause bacterial pneumonia",
+      "and these strains require alternative treatment options or combinations of medications.\n\nIn addition to chemotherapy",
+      "other treatments for bacterial pneumonia include treating the underlying cause of the infection",
+      "such as pneumonia caused by lung cancer or heart failure",
+      "or managing symptoms such as fever",
+      "and shortness of breath."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0568,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9072,
+      0.9323,
+      0.8985
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6632,
+    "reconstructed_h_score": 0.6632,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 9908.68,
+    "llm_gen_ms": 1881.44,
+    "p1_ms": 1969.49,
+    "p2_ms": 0.01,
+    "p3_ms": 11394.76,
+    "fusion_ms": 0.01
+  }
+}

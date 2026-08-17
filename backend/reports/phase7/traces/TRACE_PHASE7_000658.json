@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000658",
+  "sample_id": "pol_0658",
+  "timestamp": "2026-08-14T14:37:19Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power is the ability to prevent legislation from being passed by a government or legislature. It is used when there is a disagreement between different parties or when a certain aspect of legislation is considered harmful. The person with veto power can block the legislation from becoming law, effectively preventing it from being implemented.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4881,
+    "claims": [
+      "Veto power is the ability to prevent legislation from being passed by a government or legislature. It is used when there is a disagreement between different parties or when a certain aspect of legislation is considered harmful. The person with veto power can block the legislation from becoming law",
+      "effectively preventing it from being implemented."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0694,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9353,
+      0.9177,
+      0.8271
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3386,
+    "reconstructed_h_score": 0.3386,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13049.8,
+    "llm_gen_ms": 1211.67,
+    "p1_ms": 2795.87,
+    "p2_ms": 0.0,
+    "p3_ms": 17375.2,
+    "fusion_ms": 0.01
+  }
+}

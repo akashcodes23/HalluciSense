@@ -1,0 +1,16 @@
+domain,n,static_factual,static_hallucinated,response_factual,response_hallucinated,response_partial,label_shift_count,label_shift_pct
+General Knowledge,50,25,25,32,11,7,12,24.0
+Medicine,50,25,25,26,7,17,19,38.0
+Law,50,25,25,27,3,20,14,28.0
+Finance,50,25,25,27,1,22,13,26.0
+History,50,25,25,33,12,5,17,34.0
+Science,50,25,25,18,16,16,6,12.0
+Computer Science,50,25,25,34,6,10,22,44.0
+Physics,50,25,25,35,4,11,12,24.0
+Biology,50,25,25,31,4,15,11,22.0
+Chemistry,50,25,25,15,18,17,5,10.0
+News,50,25,25,15,7,28,1,2.0
+Mathematics,50,25,25,40,3,7,20,40.0
+Geography,50,25,25,17,27,6,4,8.0
+Politics,50,25,25,28,5,17,13,26.0
+Literature,50,25,25,42,5,3,21,42.0

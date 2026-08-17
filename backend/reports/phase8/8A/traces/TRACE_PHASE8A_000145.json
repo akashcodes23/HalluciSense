@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000145",
+  "sample_id": "8A_MAT_TRU_0145",
+  "timestamp": "2026-08-17T05:54:23Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Mathematics",
+  "category": "TRUE_CONTROL",
+  "difficulty": "easy",
+  "input": "The Pythagorean theorem states that in a right triangle a² + b² = c², where c is the hypotenuse.",
+  "ground_truth": 0,
+  "ground_truth_label": "factual",
+  "source": "Wikipedia: Pythagorean theorem",
+  "source_url": "https://en.wikipedia.org/wiki/Pythagorean_theorem",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": false,
+  "failure_classification": {
+    "primary": "RETRIEVAL_FAILURE",
+    "secondary": "NLI_FAILURE"
+  },
+  "latency": {
+    "total_ms": 1893.09
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

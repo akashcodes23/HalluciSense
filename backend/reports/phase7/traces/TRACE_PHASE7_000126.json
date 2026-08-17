@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000126",
+  "sample_id": "law_0126",
+  "timestamp": "2026-08-14T12:33:33Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "Parking fines are handled by various courts in different countries and regions. In many cases, the fine is typically paid directly to the court or a designated agency. In some jurisdictions, there may be specific laws that require parking violators to pay certain fees before their case can be heard.\n\nIt's important to note that the exact process for receiving and paying parking fines varies by country and region, so it's best to consult local laws or seek legal advice for your specific situation.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5014,
+    "claims": [
+      "Parking fines are handled by various courts in different countries and regions. In many cases",
+      "the fine is typically paid directly to the court or a designated agency. In some jurisdictions",
+      "there may be specific laws that require parking violators to pay certain fees before their case can be heard.\n\nIt's important to note that the exact process for receiving and paying parking fines varies by country and region",
+      "so it's best to consult local laws or seek legal advice for your specific situation."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2875,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.863,
+      0.582,
+      0.7665
+    ],
+    "contradiction_score": 0.3334
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.425,
+    "reconstructed_h_score": 0.425,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 6660.19,
+    "llm_gen_ms": 1762.34,
+    "p1_ms": 2107.62,
+    "p2_ms": 0.02,
+    "p3_ms": 4921.48,
+    "fusion_ms": 0.01
+  }
+}

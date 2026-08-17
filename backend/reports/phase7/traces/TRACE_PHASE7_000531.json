@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000531",
+  "sample_id": "new_0531",
+  "timestamp": "2026-08-14T14:04:57Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "Why do central banks change rates?",
+  "generated_response": "Central banks change interest rates as part of their economic and monetary policy decisions to influence the economy and stabilize financial markets. This process is often guided by various factors such as inflation expectations, economic growth, and external macroeconomic conditions.\n\nHere are some reasons why central banks might change rates:\n\n1. **Inflation Control**: By raising interest rates, central banks can make borrowing more expensive for businesses and households. This increases the cost of production, which helps curb inflation. Conversely, lowering interest rates can encourage investment and economic growth but also leads to higher interest payments for borrowers.\n\n2. **Regulation and Stability**: Central banks may change interest rates to enforce monetary policies that maintain price stability. For example, setting low interest rates during recessions to stimulate economic activity is designed to reduce unemployment and stabilize prices.\n\n3. **External Factors**: Changes in global markets can affect central bank policy. If there are increased foreign borrowing costs due to geopolitical tensions or changes in international financial conditions, central banks might raise rates to protect their domestic economy from these external shocks.\n\n4. **Economic Growth Goals**: Central banks aim to promote economic growth by lowering interest rates and stimulating spending. This can lead to higher inflation, which the central bank might then adjust to meet its inflation target.\n\n5. **Regulatory Interventions**: In extreme cases, central banks may intervene in financial markets through buying or selling stocks and bonds. This can have a dramatic impact on interest rates and market outcomes.\n\nIt's important to note that central bank decisions are typically guided by complex economic models and involve multiple factors, making it challenging for everyone to predict exactly what changes will occur in interest rates.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Central banks change interest rates as part of their economic and monetary policy decisions to influence the economy and stabilize financial markets. This process is often guided by various factors such as inflation expectations",
+      "and external macroeconomic conditions.\n\nHere are some reasons why central banks might change rates:\n\n1. **Inflation Control**: By raising interest rates",
+      "central banks can make borrowing more expensive for businesses and households. This increases the cost of production",
+      "which helps curb inflation. Conversely",
+      "lowering interest rates can encourage investment and economic growth but also leads to higher interest payments for borrowers.\n\n2. **Regulation and Stability**: Central banks may change interest rates to enforce monetary policies that maintain price stability. For example",
+      "setting low interest rates during recessions to stimulate economic activity is designed to reduce unemployment and stabilize prices.\n\n3. **External Factors**: Changes in global markets can affect central bank policy. If there are increased foreign borrowing costs due to geopolitical tensions or changes in international financial conditions",
+      "central banks might raise rates to protect their domestic economy from these external shocks.\n\n4. **Economic Growth Goals**: Central banks aim to promote economic growth by lowering interest rates and stimulating spending. This can lead to higher inflation",
+      "which the central bank might then adjust to meet its inflation target.\n\n5. **Regulatory Interventions**: In extreme cases",
+      "central banks may intervene in financial markets through buying or selling stocks and bonds. This can have a dramatic impact on interest rates and market outcomes.\n\nIt's important to note that central bank decisions are typically guided by complex economic models and involve multiple factors",
+      "making it challenging for everyone to predict exactly what changes will occur in interest rates."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0735,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8579,
+      0.9404,
+      0.8632
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0262,
+    "reconstructed_h_score": 0.0262,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19741.64,
+    "llm_gen_ms": 6660.38,
+    "p1_ms": 2721.01,
+    "p2_ms": 0.02,
+    "p3_ms": 19895.5,
+    "fusion_ms": 0.02
+  }
+}

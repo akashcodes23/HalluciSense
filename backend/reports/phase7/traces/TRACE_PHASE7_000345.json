@@ -1,0 +1,78 @@
+{
+  "trace_id": "TRACE_PHASE7_000345",
+  "sample_id": "com_0345",
+  "timestamp": "2026-08-14T13:22:08Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the complexity of QuickSort?",
+  "generated_response": "The time complexity of QuickSort depends on several factors:\n\n1. **Choosing a Pivot**: The choice of the pivot can significantly impact the performance of QuickSort. In the worst case, if the pivot chosen is always the smallest or largest element, the worst-case scenario occurs, and the time complexity becomes O(n^2).\n\n2. **Partitioning Strategy**: The partition strategy used in QuickSort affects the number of comparisons and swaps required. A good partitioning strategy can reduce the average-case time complexity to O(n log n). Common partition strategies include:\n\n   - **Hoare Partition**: This is the simplest and most commonly used partition strategy.\n     ```python\n     def hoar_partition(arr, low, high):\n         pivot = arr[high]\n         i = low - 1\n         for j in range(low, high):\n             if arr[j] < pivot:\n                 i += 1\n                 arr[i], arr[j] = arr[j], arr[i]\n         arr[i + 1], arr[high] = arr[high], arr[i + 1]\n         return i + 1\n     ```\n   - **Lomuto Partition**: This is another popular partition strategy.\n     ```python\n     def lomuto_partition(arr, low, high):\n         pivot = arr[high]\n         i = low - 1\n         for j in range(low, high):\n             if arr[j] <= pivot:\n                 i += 1\n                 arr[i], arr[j] = arr[j], arr[i]\n         arr[i + 1], arr[high] = arr[high], arr[i + 1]\n         return i + 1\n     ```\n\n3. **Recursive Calls**: The recursive calls to QuickSort divide the array into subarrays of smaller size, and these subarrays are sorted recursively.\n\nIn summary, the worst-case time complexity of QuickSort is O(n^2), but on average, it performs well with a good pivot choice and partition strategy. The best-case scenario occurs when the pivot is chosen as the median of the first, middle, or last element, resulting in an average-time complexity of O(n log n).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The time complexity of QuickSort depends on several factors:\n\n1. **Choosing a Pivot**: The choice of the pivot can significantly impact the performance of QuickSort. In the worst case",
+      "if the pivot chosen is always the smallest or largest element",
+      "the worst-case scenario occurs",
+      "and the time complexity becomes O(n^2).\n\n2. **Partitioning Strategy**: The partition strategy used in QuickSort affects the number of comparisons and swaps required. A good partitioning strategy can reduce the average-case time complexity to O(n log n). Common partition strategies include:\n\n   - **Hoare Partition**: This is the simplest and most commonly used partition strategy.\n     ```python\n     def hoar_partition(arr",
+      "high):\n         pivot = arr[high]\n         i = low - 1\n         for j in range(low",
+      "high):\n             if arr[j] < pivot:\n                 i += 1\n                 arr[i]",
+      "arr[i]\n         arr[i + 1]",
+      "arr[i + 1]\n         return i + 1\n     ```\n   - **Lomuto Partition**: This is another popular partition strategy.\n     ```python\n     def lomuto_partition(arr",
+      "high):\n         pivot = arr[high]\n         i = low - 1\n         for j in range(low",
+      "high):\n             if arr[j] <= pivot:\n                 i += 1\n                 arr[i]",
+      "arr[i]\n         arr[i + 1]",
+      "arr[i + 1]\n         return i + 1\n     ```\n\n3. **Recursive Calls**: The recursive calls to QuickSort divide the array into subarrays of smaller size",
+      "and these subarrays are sorted recursively.\n\nIn summary",
+      "the worst-case time complexity of QuickSort is O(n^2)",
+      "it performs well with a good pivot choice and partition strategy. The best-case scenario occurs when the pivot is chosen as the median of the first",
+      "resulting in an average-time complexity of O(n log n)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1689,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7213,
+      0.7003,
+      0.8003
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0603,
+    "reconstructed_h_score": 0.0603,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21012.82,
+    "llm_gen_ms": 8942.1,
+    "p1_ms": 2776.01,
+    "p2_ms": 0.07,
+    "p3_ms": 15480.95,
+    "fusion_ms": 0.04
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000493",
+  "sample_id": "che_0493",
+  "timestamp": "2026-08-14T13:54:16Z",
+  "domain": "Chemistry",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "Who created the Periodic Table?",
+  "generated_response": "The periodic table was created by Dmitri Mendeleev in 1869.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0331,
+    "claims": [
+      "The periodic table was created by Dmitri Mendeleev in 1869."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0285,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8944,
+      0.9755,
+      1.0
+    ],
+    "contradiction_score": 0.0009
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0315,
+    "reconstructed_h_score": 0.0315,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 3677.87,
+    "llm_gen_ms": 418.63,
+    "p1_ms": 144.02,
+    "p2_ms": 0.0,
+    "p3_ms": 5835.11,
+    "fusion_ms": 0.04
+  }
+}

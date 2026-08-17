@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000102",
+  "sample_id": "phase8_c_0102",
+  "timestamp": "2026-08-17T05:57:56Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Geography",
+  "corruption_type": "TEMPORAL_ERROR",
+  "corruption_severity": 2,
+  "input": "The Sahara is the largest hot desert in the world. However, this claim is factually incorrect.",
+  "original": "The Sahara is the largest hot desert in the world.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3258,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3258,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1571.94
+  },
+  "pipeline_error": null
+}

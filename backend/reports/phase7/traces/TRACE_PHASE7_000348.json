@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000348",
+  "sample_id": "com_0348",
+  "timestamp": "2026-08-14T13:23:18Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Has P vs NP been solved?",
+  "generated_response": "P vs NP is a fundamental question in computer science that has puzzled the field for over 50 years. As of my last update in October 2023, no definitive answer has been found to determine whether P equals NP or if NP contains problems that are not in P.\n\nP and NP are two complexity classes in computer science:\n\n- **P**: This class contains all decision problems that can be solved by a deterministic Turing machine in polynomial time.\n- **NP**: This class contains all decision problems for which a solution can be verified efficiently (i.e., in polynomial time) given a certificate.\n\nIf P equals NP, then every problem in NP can be solved in polynomial time. If P does not equal NP, there exist problems in NP that cannot be solved by a deterministic Turing machine in polynomial time.\n\nThe unsolved nature of P vs NP has led to significant advances in various fields such as cryptography, artificial intelligence, and optimization. Researchers are actively working on proving or disproving the conjecture using techniques from computational complexity theory.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "P vs NP is a fundamental question in computer science that has puzzled the field for over 50 years. As of my last update in October 2023, no definitive answer has been found to determine whether P equals NP or if NP contains problems that are not in P.\n\nP and NP are two complexity classes in computer science:\n\n- **P**: This class contains all decision problems that can be solved by a deterministic Turing machine in polynomial time.\n- **NP**: This class contains all decision problems for which a solution can be verified efficiently (i.e.",
+      "in polynomial time) given a certificate.\n\nIf P equals NP",
+      "then every problem in NP can be solved in polynomial time. If P does not equal NP",
+      "there exist problems in NP that cannot be solved by a deterministic Turing machine in polynomial time.\n\nThe unsolved nature of P vs NP has led to significant advances in various fields such as cryptography",
+      "and optimization. Researchers are actively working on proving or disproving the conjecture using techniques from computational complexity theory."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2224,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9101,
+      0.8267,
+      0.7837
+    ],
+    "contradiction_score": 0.3386
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0794,
+    "reconstructed_h_score": 0.0794,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20245.55,
+    "llm_gen_ms": 4451.57,
+    "p1_ms": 3536.79,
+    "p2_ms": 0.03,
+    "p3_ms": 23691.38,
+    "fusion_ms": 0.02
+  }
+}

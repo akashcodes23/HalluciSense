@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000687",
+  "sample_id": "pol_0687",
+  "timestamp": "2026-08-14T14:44:30Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies typically have processes for choosing leaders that involve multiple steps and considerations. Here's an overview of the typical process:\n\n1. **Primary Voting**: The first step in democratic elections is usually primary voting, where voters select candidates from a pool of candidates who are generally considered to be strong supporters of the party or platform they represent.\n\n2. **General Election**: Once the primary votes are complete, the general election takes place. In this step, all eligible voters cast their ballots for the candidate they believe will most effectively serve them and the community as a whole.\n\n3. **Party Platform**: Each candidate has a platform that outlines their vision of how the country should be run. The candidates' platforms often include proposals on issues such as healthcare, education, infrastructure, economy, security, and foreign policy.\n\n4. **Constitutional Checks**: In democracies, there are constitutional checks to ensure that elected leaders do not abuse power. For example, there may be limits on the number of terms a leader can serve, or provisions for impeachment if they engage in certain behaviors.\n\n5. **Supreme Court Review**: A review by the Supreme Court is often involved in deciding whether the election was fair and whether any violations of democratic principles were detected.\n\n6. **Leader Selection**: Based on the results of the election, the new leader is typically chosen through a method such as proportional representation or first-past-the-post, depending on the country's electoral system.\n\n7. **Election Renewal**: Leaders in democracies may be expected to serve for limited terms (e.g., four years) and are usually elected again at regular intervals unless they voluntarily choose to step down from office.\n\n8. **Campaigning and Debate**: Before the general election, there is often a period of campaigning and debate where candidates can address their supporters and opponents about their positions and policies.\n\n9. **Public Engagement**: In some democracies, there is an increased emphasis on public engagement with the democratic process, including voter registration drives, educational initiatives, and participation in civic activities.\n\n10. **Social Media and Online Participation**: The internet has also become a significant tool for voters in many democracies to stay informed about elections and to participate in the democratic process through social media platforms.\n\nThese steps help ensure that elected leaders are chosen based on the best interests of the country, its citizens, and its institutions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Democracies typically have processes for choosing leaders that involve multiple steps and considerations. Here's an overview of the typical process:\n\n1. **Primary Voting**: The first step in democratic elections is usually primary voting",
+      "where voters select candidates from a pool of candidates who are generally considered to be strong supporters of the party or platform they represent.\n\n2. **General Election**: Once the primary votes are complete",
+      "the general election takes place. In this step",
+      "all eligible voters cast their ballots for the candidate they believe will most effectively serve them and the community as a whole.\n\n3. **Party Platform**: Each candidate has a platform that outlines their vision of how the country should be run. The candidates' platforms often include proposals on issues such as healthcare",
+      "and foreign policy.\n\n4. **Constitutional Checks**: In democracies",
+      "there are constitutional checks to ensure that elected leaders do not abuse power. For example",
+      "there may be limits on the number of terms a leader can serve",
+      "or provisions for impeachment if they engage in certain behaviors.\n\n5. **Supreme Court Review**: A review by the Supreme Court is often involved in deciding whether the election was fair and whether any violations of democratic principles were detected.\n\n6. **Leader Selection**: Based on the results of the election",
+      "the new leader is typically chosen through a method such as proportional representation or first-past-the-post",
+      "depending on the country's electoral system.\n\n7. **Election Renewal**: Leaders in democracies may be expected to serve for limited terms (e.g.",
+      "four years) and are usually elected again at regular intervals unless they voluntarily choose to step down from office.\n\n8. **Campaigning and Debate**: Before the general election",
+      "there is often a period of campaigning and debate where candidates can address their supporters and opponents about their positions and policies.\n\n9. **Public Engagement**: In some democracies",
+      "there is an increased emphasis on public engagement with the democratic process",
+      "including voter registration drives",
+      "and participation in civic activities.\n\n10. **Social Media and Online Participation**: The internet has also become a significant tool for voters in many democracies to stay informed about elections and to participate in the democratic process through social media platforms.\n\nThese steps help ensure that elected leaders are chosen based on the best interests of the country"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1601,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.7768,
+      0.7366
+    ],
+    "contradiction_score": 0.0055
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0572,
+    "reconstructed_h_score": 0.0572,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 29467.38,
+    "llm_gen_ms": 10061.48,
+    "p1_ms": 2117.02,
+    "p2_ms": 0.03,
+    "p3_ms": 32302.89,
+    "fusion_ms": 0.05
+  }
+}

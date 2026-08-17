@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000195",
+  "sample_id": "fin_0195",
+  "timestamp": "2026-08-14T12:53:46Z",
+  "domain": "Finance",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is liquidity?",
+  "generated_response": "Liquidity refers to the ability of an asset or liability to be converted into cash quickly and without significant loss of value. It measures how easy it is for buyers to sell an asset for money, typically expressed as the ratio of demand to supply in a market. In financial markets, liquidity is often used to evaluate the health and stability of a currency or financial instrument, as well as its ability to absorb losses during economic downturns.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4897,
+    "claims": [
+      "Liquidity refers to the ability of an asset or liability to be converted into cash quickly and without significant loss of value. It measures how easy it is for buyers to sell an asset for money",
+      "typically expressed as the ratio of demand to supply in a market. In financial markets",
+      "liquidity is often used to evaluate the health and stability of a currency or financial instrument",
+      "as well as its ability to absorb losses during economic downturns."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1028,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8751,
+      0.8558,
+      0.7986
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3515,
+    "reconstructed_h_score": 0.3515,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17614.93,
+    "llm_gen_ms": 1708.35,
+    "p1_ms": 2656.16,
+    "p2_ms": 0.0,
+    "p3_ms": 26116.73,
+    "fusion_ms": 0.01
+  }
+}

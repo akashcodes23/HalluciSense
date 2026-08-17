@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000018",
+  "sample_id": "gen_0018",
+  "timestamp": "2026-08-14T12:14:33Z",
+  "domain": "General Knowledge",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Where is the Eiffel Tower located?",
+  "generated_response": "The Eiffel Tower is located in Paris, France. It is the tallest man-made structure in the world at 324 meters (1,063 feet) tall. The tower was constructed between 1889 and 1907 by Gustave Eiffel, a French architect and engineer.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3654,
+    "claims": [
+      "The Eiffel Tower is located in Paris",
+      "France. It is the tallest man-made structure in the world at 324 meters (1,063 feet) tall. The tower was constructed between 1889 and 1907 by Gustave Eiffel",
+      "a French architect and engineer."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0968,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8405,
+      0.8405,
+      0.873
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2695,
+    "reconstructed_h_score": 0.2695,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4664.71,
+    "llm_gen_ms": 996.86,
+    "p1_ms": 1741.0,
+    "p2_ms": 0.01,
+    "p3_ms": 3442.87,
+    "fusion_ms": 0.01
+  }
+}

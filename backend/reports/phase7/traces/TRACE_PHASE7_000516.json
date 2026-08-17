@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000516",
+  "sample_id": "new_0516",
+  "timestamp": "2026-08-14T14:00:26Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are regulated by various regulatory bodies around the world to protect investors and ensure that the market functions fairly and efficiently. These regulations include laws and regulations on trading rules, corporate governance practices, investor protection, and financial stability. The purpose of these regulations is to promote transparency and accountability in the stock market, prevent fraud, and maintain investor confidence.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4983,
+    "claims": [
+      "stock markets are regulated by various regulatory bodies around the world to protect investors and ensure that the market functions fairly and efficiently. These regulations include laws and regulations on trading rules",
+      "and financial stability. The purpose of these regulations is to promote transparency and accountability in the stock market",
+      "and maintain investor confidence."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0688,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9192,
+      0.8789,
+      0.8858
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3449,
+    "reconstructed_h_score": 0.3449,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16228.86,
+    "llm_gen_ms": 1355.38,
+    "p1_ms": 3994.6,
+    "p2_ms": 0.02,
+    "p3_ms": 19349.32,
+    "fusion_ms": 0.04
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000668",
+  "sample_id": "pol_0668",
+  "timestamp": "2026-08-14T14:39:44Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How big is the UN Security Council?",
+  "generated_response": "As of my last update in 2021, the United Nations Security Council (UNSC) has 15 permanent members: China, France, Russia, India, the United Kingdom, Germany, the United States, Brazil, Australia, Canada, Japan, South Korea, Turkey, and Egypt.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.9,
+    "claims": [
+      "As of my last update in 2021, the United Nations Security Council (UNSC) has 15 permanent members: China"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1101,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8448,
+      0.8662,
+      0.8598
+    ],
+    "contradiction_score": 0.0489
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6179,
+    "reconstructed_h_score": 0.6179,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 10458.68,
+    "llm_gen_ms": 1046.69,
+    "p1_ms": 1643.98,
+    "p2_ms": 0.0,
+    "p3_ms": 11593.49,
+    "fusion_ms": 0.01
+  }
+}

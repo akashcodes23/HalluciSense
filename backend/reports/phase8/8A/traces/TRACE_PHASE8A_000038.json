@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000038",
+  "sample_id": "8A_CHE_TRU_0038",
+  "timestamp": "2026-08-17T05:50:58Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Chemistry",
+  "category": "TRUE_CONTROL",
+  "difficulty": "easy",
+  "input": "Carbon-12 is the most abundant stable isotope of carbon.",
+  "ground_truth": 0,
+  "ground_truth_label": "factual",
+  "source": "Wikipedia: Carbon-12",
+  "source_url": "https://en.wikipedia.org/wiki/Carbon-12",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": false,
+  "failure_classification": {
+    "primary": "RETRIEVAL_FAILURE",
+    "secondary": "NLI_FAILURE"
+  },
+  "latency": {
+    "total_ms": 1548.44
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

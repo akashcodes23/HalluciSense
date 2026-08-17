@@ -1,0 +1,32 @@
+{
+  "freeze_timestamp": "2026-08-17T06:24:27Z",
+  "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "frozen_artifacts": {
+    "phase9_hybrid_model": {
+      "path": "/Users/akashgpatil/major_project/backend/reports/phase9/phase9_hybrid_model.json",
+      "sha256": "22f48928d86cbdd3a931b78fa948816d8d9e4ad91bf45da7c4d31911520d9209"
+    },
+    "phase9_split_manifest": {
+      "path": "/Users/akashgpatil/major_project/backend/reports/phase9/phase9_split_manifest.json",
+      "sha256": "5b8fe29d8805f832c63eaa7b6eec8f54a135bce0d631e654084b640e2796c500"
+    },
+    "phase9_paired_results": {
+      "path": "/Users/akashgpatil/major_project/backend/reports/phase9/phase9_paired_results.csv",
+      "sha256": "64bd05c74cc0b15fd17283852c528cf0ac50c2a98aba7dfd22f3a59de96266f5"
+    },
+    "phase8a_dataset": {
+      "path": "/Users/akashgpatil/major_project/backend/reports/phase8/8A/dataset_8a.jsonl",
+      "sha256": "5a8bc3df48a31ef58bba376a23cb415ba4c7c2f25821c8f3a5275365de2e6710"
+    },
+    "phase8c_dataset": {
+      "path": "/Users/akashgpatil/major_project/backend/reports/phase8/8C/controlled_hallucination_dataset.jsonl",
+      "sha256": "2fcba8c9e32b52ea51c181ea89750fe768fe12eb2dca9c2dc672f25478886aff"
+    },
+    "phase6_benchmark": {
+      "path": "/Users/akashgpatil/major_project/backend/evaluation/results/benchmark_dataset.jsonl",
+      "sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5"
+    }
+  },
+  "canonical_operating_threshold": 0.5,
+  "phase6_canonical_hash": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5"
+}

@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000036",
+  "sample_id": "gen_0036",
+  "timestamp": "2026-08-14T12:15:27Z",
+  "domain": "General Knowledge",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What is the smallest ocean?",
+  "generated_response": "The smallest ocean in terms of surface area and depth is the Dead Sea, which lies between Israel, Jordan, and Egypt. It has an area of about 29,800 square kilometers and a maximum depth of approximately 1,497 meters (4,893 feet).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "The smallest ocean in terms of surface area and depth is the Dead Sea",
+      "which lies between Israel",
+      "and Egypt. It has an area of about 29,800 square kilometers and a maximum depth of approximately 1,497 meters (4,893 feet)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3733,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7586,
+      0.7595,
+      0.8359
+    ],
+    "contradiction_score": 0.6668
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.7762,
+    "reconstructed_h_score": 0.7762,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 3718.12,
+    "llm_gen_ms": 943.83,
+    "p1_ms": 1304.09,
+    "p2_ms": 0.0,
+    "p3_ms": 2717.95,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000416",
+  "sample_id": "bio_0416",
+  "timestamp": "2026-08-14T13:40:59Z",
+  "domain": "Biology",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through ovulation and fertilization of sperm into the egg in the uterus. This process is called sexual reproduction, which produces offspring that can grow and develop into viable individuals. Mammals produce eggs in ovaries and have reproductive glands called ovaries that produce hormones such as estrogen and progesterone to regulate the menstrual cycle and prepare for conception. During this time, fertilization occurs in a fallopian tube, where sperm are released during sexual intercourse. The egg is then transferred into the uterus by the fallopian tube, where it is fertilized with a sperm. The resulting offspring are carried through pregnancy until they are born.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4238,
+    "claims": [
+      "Mammals reproduce through ovulation and fertilization of sperm into the egg in the uterus. This process is called sexual reproduction",
+      "which produces offspring that can grow and develop into viable individuals. Mammals produce eggs in ovaries and have reproductive glands called ovaries that produce hormones such as estrogen and progesterone to regulate the menstrual cycle and prepare for conception. During this time",
+      "fertilization occurs in a fallopian tube",
+      "where sperm are released during sexual intercourse. The egg is then transferred into the uterus by the fallopian tube",
+      "where it is fertilized with a sperm. The resulting offspring are carried through pregnancy until they are born."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1037,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8852,
+      0.8217,
+      0.8345
+    ],
+    "contradiction_score": 0.0122
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3095,
+    "reconstructed_h_score": 0.3095,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21690.98,
+    "llm_gen_ms": 3723.23,
+    "p1_ms": 2900.32,
+    "p2_ms": 0.08,
+    "p3_ms": 29130.59,
+    "fusion_ms": 0.02
+  }
+}

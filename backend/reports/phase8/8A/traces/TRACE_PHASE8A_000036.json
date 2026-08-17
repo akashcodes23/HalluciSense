@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000036",
+  "sample_id": "8A_CHE_TRU_0036",
+  "timestamp": "2026-08-17T05:50:55Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Chemistry",
+  "category": "TRUE_CONTROL",
+  "difficulty": "easy",
+  "input": "Water has a molecular formula of H₂O and a molar mass of approximately 18 g/mol.",
+  "ground_truth": 0,
+  "ground_truth_label": "factual",
+  "source": "Wikipedia: Water",
+  "source_url": "https://en.wikipedia.org/wiki/Water",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": false,
+  "failure_classification": {
+    "primary": "RETRIEVAL_FAILURE",
+    "secondary": "NLI_FAILURE"
+  },
+  "latency": {
+    "total_ms": 1588.59
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

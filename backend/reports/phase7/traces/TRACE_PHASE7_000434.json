@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000434",
+  "sample_id": "bio_0434",
+  "timestamp": "2026-08-14T13:44:09Z",
+  "domain": "Biology",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What do mitochondria produce?",
+  "generated_response": "Mitochondria produce energy for cells through the process of cellular respiration. This process breaks down glucose and other organic molecules into carbon dioxide, water, and ATP (adenosine triphosphate), which are used by the cell to perform various functions such as producing hormones, signaling, and energy production.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6899,
+    "claims": [
+      "Mitochondria produce energy for cells through the process of cellular respiration. This process breaks down glucose and other organic molecules into carbon dioxide",
+      "and ATP (adenosine triphosphate)",
+      "which are used by the cell to perform various functions such as producing hormones"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0947,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.871,
+      0.7929,
+      0.8991
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4774,
+    "reconstructed_h_score": 0.4774,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7176.61,
+    "llm_gen_ms": 1053.58,
+    "p1_ms": 2303.5,
+    "p2_ms": 0.0,
+    "p3_ms": 6246.16,
+    "fusion_ms": 0.01
+  }
+}

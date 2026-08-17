@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MAT_OUT_0169",
+  "claim": "Fermat's Last Theorem remained unproved and may be unprovable.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Fermat's Last Theorem remained unproved and may be unprovable",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1662.76
+}

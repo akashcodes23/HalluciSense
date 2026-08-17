@@ -1,0 +1,24 @@
+{
+  "model_type": "Regularized_Logistic_Regression_Calibrated",
+  "regularization": "L2 (C=1.0)",
+  "features": [
+    "nli_factual_err",
+    "evidence_coverage",
+    "numeric_unit_severity",
+    "negation_severity",
+    "causal_severity",
+    "decomposition_severity"
+  ],
+  "coefficients": {
+    "nli_factual_err": 0.5756,
+    "evidence_coverage": -0.0825,
+    "numeric_unit_severity": 0.3321,
+    "negation_severity": 0.3668,
+    "causal_severity": 0.0,
+    "decomposition_severity": 0.0815
+  },
+  "intercept": -0.3748,
+  "dev_samples": 4,
+  "dev_brier_raw": 0.1692,
+  "dev_brier_isotonic": 0.0
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000247",
+  "sample_id": "his_0247",
+  "timestamp": "2026-08-14T13:00:40Z",
+  "domain": "History",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "When was the Magna Carta signed?",
+  "generated_response": "The Magna Carta was signed in 1215 by King John of England and his advisors at Runnymede in Windsor Castle, England. It is considered one of the most important legal documents in world history and marked a significant shift from feudalism to constitutional monarchy in England.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.7498,
+    "claims": [
+      "The Magna Carta was signed in 1215 by King John of England and his advisors at Runnymede in Windsor Castle",
+      "England. It is considered one of the most important legal documents in world history and marked a significant shift from feudalism to constitutional monarchy in England."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0802,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8484,
+      0.8386,
+      0.9439
+    ],
+    "contradiction_score": 0.0007
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.5107,
+    "reconstructed_h_score": 0.5107,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 8920.96,
+    "llm_gen_ms": 1197.16,
+    "p1_ms": 2028.58,
+    "p2_ms": 0.0,
+    "p3_ms": 10262.94,
+    "fusion_ms": 0.01
+  }
+}

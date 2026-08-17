@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000016",
+  "sample_id": "8A_PHY_NEG_0016",
+  "timestamp": "2026-08-17T05:50:16Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "NEGATION",
+  "difficulty": "easy",
+  "input": "The speed of light is not constant in a vacuum.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Speed of light",
+  "source_url": "https://en.wikipedia.org/wiki/Speed_of_light",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1696.94
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

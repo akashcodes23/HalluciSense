@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000015",
+  "sample_id": "8A_PHY_UNI_0015",
+  "timestamp": "2026-08-17T05:50:15Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "UNIT_SCALE",
+  "difficulty": "medium",
+  "input": "Visible light wavelengths range from 380 to 740 micrometres.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Visible spectrum",
+  "source_url": "https://en.wikipedia.org/wiki/Visible_spectrum",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 2253.47
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

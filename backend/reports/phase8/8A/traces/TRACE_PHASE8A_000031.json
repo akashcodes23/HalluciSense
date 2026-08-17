@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000031",
+  "sample_id": "8A_PHY_TRU_0031",
+  "timestamp": "2026-08-17T05:50:44Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "medium",
+  "input": "The photoelectric effect, discovered by Albert Einstein in 1905, shows that electrons are emitted from metal surfaces when exposed to UV light of any frequency.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Photoelectric effect",
+  "source_url": "https://en.wikipedia.org/wiki/Photoelectric_effect",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 2421.21
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

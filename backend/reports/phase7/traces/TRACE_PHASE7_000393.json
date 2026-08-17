@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000393",
+  "sample_id": "phy_0393",
+  "timestamp": "2026-08-14T13:35:50Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity scales directly with the mass of an object. According to Newton's law of universal gravitation, the gravitational force \\( F \\) between two masses \\( m_1 \\) and \\( m_2 \\) separated by a distance \\( r \\) is given by:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere \\( G \\) is the gravitational constant, approximately equal to \\( 6.67430 \\times 10^{-11} \\, \\text{N\u00b7m}^2/\\text{kg}^2 \\).\n\nThis equation shows that as the mass of one object increases, the gravitational force between it and another object also increases proportionally. Therefore, if you double the mass of an object, its gravitational effect on another object will quadruple.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2908,
+    "claims": [
+      "Gravity scales directly with the mass of an object. According to Newton's law of universal gravitation",
+      "the gravitational force \\( F \\) between two masses \\( m_1 \\) and \\( m_2 \\) separated by a distance \\( r \\) is given by:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere \\( G \\) is the gravitational constant",
+      "approximately equal to \\( 6.67430 \\times 10^{-11} \\",
+      "\\text{N\u00b7m}^2/\\text{kg}^2 \\).\n\nThis equation shows that as the mass of one object increases",
+      "the gravitational force between it and another object also increases proportionally. Therefore",
+      "if you double the mass of an object",
+      "its gravitational effect on another object will quadruple."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2162,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6976,
+      0.7369,
+      0.8033
+    ],
+    "contradiction_score": 0.1457
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2642,
+    "reconstructed_h_score": 0.2642,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18134.4,
+    "llm_gen_ms": 4382.33,
+    "p1_ms": 4764.06,
+    "p2_ms": 0.04,
+    "p3_ms": 16792.05,
+    "fusion_ms": 0.02
+  }
+}

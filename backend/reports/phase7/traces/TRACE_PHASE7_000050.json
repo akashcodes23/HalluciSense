@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000050",
+  "sample_id": "gen_0050",
+  "timestamp": "2026-08-14T12:16:06Z",
+  "domain": "General Knowledge",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Where is the Eiffel Tower located?",
+  "generated_response": "The Eiffel Tower is located in Paris, France.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.05,
+    "claims": [
+      "The Eiffel Tower is located in Paris"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0402,
+    "sample_count": 3,
+    "semantic_similarity": [
+      1.0,
+      0.9238,
+      0.8913
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0465,
+    "reconstructed_h_score": 0.0465,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 1933.4,
+    "llm_gen_ms": 335.51,
+    "p1_ms": 127.82,
+    "p2_ms": 0.0,
+    "p3_ms": 2800.67,
+    "fusion_ms": 0.01
+  }
+}

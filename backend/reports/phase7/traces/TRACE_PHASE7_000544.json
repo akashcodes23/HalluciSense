@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000544",
+  "sample_id": "new_0544",
+  "timestamp": "2026-08-14T14:08:56Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are regulated to ensure their functioning is transparent and fair, protect investors, and maintain market stability. Regulatory bodies such as the Securities and Exchange Commission (SEC) in the United States, European Union's Financial Supervision Authority (FSMA), and the Financial Conduct Authority (FCA) around Europe regulate various aspects of stock markets, including:\n\n1. **Regulatory Frameworks**: These include laws and regulations that govern trading, listing requirements, and corporate governance.\n\n2. **Disclosure Requirements**: Companies are required to disclose financial information, earnings reports, and other important documents to investors.\n\n3. **Investor Protection**: The securities industry is regulated to protect investors from fraudulent practices and market manipulation.\n\n4. **Market Stability**: Regulatory bodies ensure that the stock market operates in a healthy manner, with no significant price fluctuations or market disruptions.\n\n5. **Regulatory Enforcement**: Regulatory authorities can take enforcement actions against non-compliance, including fines, suspensions, and even bans on certain activities.\n\n6. **Transparency and Accountability**: The financial markets are monitored by independent regulators to ensure that there is accountability for misconduct.\n\n7. **Market Access**: Many countries have laws that regulate who can enter the stock market, such as which companies can be listed or which individuals can trade.\n\nThese regulations help maintain a safe and stable environment for the stock market, ensuring that investors can make informed decisions based on accurate information.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4137,
+    "claims": [
+      "stock markets are regulated to ensure their functioning is transparent and fair",
+      "and maintain market stability. Regulatory bodies such as the Securities and Exchange Commission (SEC) in the United States",
+      "European Union's Financial Supervision Authority (FSMA)",
+      "and the Financial Conduct Authority (FCA) around Europe regulate various aspects of stock markets",
+      "including:\n\n1. **Regulatory Frameworks**: These include laws and regulations that govern trading",
+      "and corporate governance.\n\n2. **Disclosure Requirements**: Companies are required to disclose financial information",
+      "and other important documents to investors.\n\n3. **Investor Protection**: The securities industry is regulated to protect investors from fraudulent practices and market manipulation.\n\n4. **Market Stability**: Regulatory bodies ensure that the stock market operates in a healthy manner",
+      "with no significant price fluctuations or market disruptions.\n\n5. **Regulatory Enforcement**: Regulatory authorities can take enforcement actions against non-compliance",
+      "and even bans on certain activities.\n\n6. **Transparency and Accountability**: The financial markets are monitored by independent regulators to ensure that there is accountability for misconduct.\n\n7. **Market Access**: Many countries have laws that regulate who can enter the stock market",
+      "such as which companies can be listed or which individuals can trade.\n\nThese regulations help maintain a safe and stable environment for the stock market",
+      "ensuring that investors can make informed decisions based on accurate information."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0766,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8512,
+      0.92,
+      0.8759
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2933,
+    "reconstructed_h_score": 0.2933,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 27967.49,
+    "llm_gen_ms": 5943.61,
+    "p1_ms": 6457.76,
+    "p2_ms": 0.1,
+    "p3_ms": 27843.48,
+    "fusion_ms": 0.01
+  }
+}

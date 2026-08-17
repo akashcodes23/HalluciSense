@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000168",
+  "sample_id": "fin_0168",
+  "timestamp": "2026-08-14T12:44:57Z",
+  "domain": "Finance",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation occurs when the general price level of goods and services significantly increases quickly. This can happen due to various reasons such as an increase in money supply, a decrease in productivity, or excessive government spending. Hyperinflation can have severe consequences for the economy, including:\n\n  * Inflationary pressures that make it difficult for businesses to operate\n  * Difficulty in finding jobs and earning wages\n  * Loss of confidence in financial institutions and assets\n  * The collapse of industries and companies as they struggle to compete with cheaper foreign goods\n\nHyperinflation can also lead to a decline in currency value, making it increasingly difficult for people to buy necessities and other goods. In extreme cases, hyperinflation can result in the complete destruction of currencies and the loss of economic stability.\n\nIt is important for governments and central banks to manage inflation within a reasonable range that does not cause significant damage to the economy. This may involve implementing monetary policies such as interest rates or price controls, as well as adjusting fiscal policy to ensure that there is enough money available for businesses to operate and citizens to have access to essential goods and services.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4998,
+    "claims": [
+      "Hyperinflation occurs when the general price level of goods and services significantly increases quickly. This can happen due to various reasons such as an increase in money supply",
+      "a decrease in productivity",
+      "or excessive government spending. Hyperinflation can have severe consequences for the economy",
+      "including:\n\n  * Inflationary pressures that make it difficult for businesses to operate\n  * Difficulty in finding jobs and earning wages\n  * Loss of confidence in financial institutions and assets\n  * The collapse of industries and companies as they struggle to compete with cheaper foreign goods\n\nHyperinflation can also lead to a decline in currency value",
+      "making it increasingly difficult for people to buy necessities and other goods. In extreme cases",
+      "hyperinflation can result in the complete destruction of currencies and the loss of economic stability.\n\nIt is important for governments and central banks to manage inflation within a reasonable range that does not cause significant damage to the economy. This may involve implementing monetary policies such as interest rates or price controls",
+      "as well as adjusting fiscal policy to ensure that there is enough money available for businesses to operate and citizens to have access to essential goods and services."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.063,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8968,
+      0.9196,
+      0.8933
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3438,
+    "reconstructed_h_score": 0.3438,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12283.99,
+    "llm_gen_ms": 4345.13,
+    "p1_ms": 2714.1,
+    "p2_ms": 0.02,
+    "p3_ms": 9647.64,
+    "fusion_ms": 0.01
+  }
+}

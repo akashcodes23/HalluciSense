@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000353",
+  "sample_id": "phy_0353",
+  "timestamp": "2026-08-14T13:24:38Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity scales with the square of the object's mass. This is known as Newton's law of universal gravitation. The formula for gravitational force \\( F \\) between two objects with masses \\( m_1 \\) and \\( m_2 \\) separated by a distance \\( r \\) is given by:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere \\( G \\) is the gravitational constant.\n\nTo understand why gravity scales with the square of the mass, let's break it down:\n\n1. **Increase in Mass**: If you double the mass of an object, its gravitational force increases by a factor of 4. This is because you are increasing the numerator \\( m_1 m_2 \\) by a factor of 4.\n\n2. **Distance Factor**: The gravitational force between two objects decreases as the distance between them increases. Therefore, if you double the distance between two objects, their gravitational force decreases by a factor of 4.\n\n3. **Combining These Effects**: When both mass and distance are doubled, the gravitational force is given by:\n\n\\[ F = G \\frac{(2m_1)(2m_2)}{(2r)^2} = G \\frac{4m_1 m_2}{4r^2} = G \\frac{m_1 m_2}{r^2} = F \\]\n\nSo, you can see that the gravitational force scales with the square of the mass. This means that if you increase both the mass and distance by a factor of 2, the gravitational force will also increase by a factor of 4.\n\nTo summarize, gravity scales with the square of the object's mass because:\n\n\\[ F \\propto m^2 r^{-2} \\]\n\nwhere \\( F \\) is the gravitational force, \\( m \\) is the mass of the object, and \\( r \\) is the distance between the objects.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gravity scales with the square of the object's mass. This is known as Newton's law of universal gravitation. The formula for gravitational force \\( F \\) between two objects with masses \\( m_1 \\) and \\( m_2 \\) separated by a distance \\( r \\) is given by:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere \\( G \\) is the gravitational constant.\n\nTo understand why gravity scales with the square of the mass",
+      "let's break it down:\n\n1. **Increase in Mass**: If you double the mass of an object",
+      "its gravitational force increases by a factor of 4. This is because you are increasing the numerator \\( m_1 m_2 \\) by a factor of 4.\n\n2. **Distance Factor**: The gravitational force between two objects decreases as the distance between them increases. Therefore",
+      "if you double the distance between two objects",
+      "their gravitational force decreases by a factor of 4.\n\n3. **Combining These Effects**: When both mass and distance are doubled",
+      "the gravitational force is given by:\n\n\\[ F = G \\frac{(2m_1)(2m_2)}{(2r)^2} = G \\frac{4m_1 m_2}{4r^2} = G \\frac{m_1 m_2}{r^2} = F \\]\n\nSo",
+      "you can see that the gravitational force scales with the square of the mass. This means that if you increase both the mass and distance by a factor of 2, the gravitational force will also increase by a factor of 4.\n\nTo summarize",
+      "gravity scales with the square of the object's mass because:\n\n\\[ F \\propto m^2 r^{-2} \\]\n\nwhere \\( F \\) is the gravitational force",
+      "\\( m \\) is the mass of the object",
+      "and \\( r \\) is the distance between the objects."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.142,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8502,
+      0.8178,
+      0.6888
+    ],
+    "contradiction_score": 0.0075
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0507,
+    "reconstructed_h_score": 0.0507,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21925.34,
+    "llm_gen_ms": 7994.7,
+    "p1_ms": 2955.57,
+    "p2_ms": 0.04,
+    "p3_ms": 18725.19,
+    "fusion_ms": 0.03
+  }
+}

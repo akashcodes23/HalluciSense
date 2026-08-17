@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_PHY_NEG_0018",
+  "claim": "The gravitational force between two masses does not depend on the distance between them.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.989,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "The gravitational force between two masses does not depend on the distance between them",
+      "base_nli_score": 0.989,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.989
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'not' while evidence affirms the predicate."
+  ],
+  "latency_ms": 1975.54
+}

@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000147",
+  "sample_id": "law_0147",
+  "timestamp": "2026-08-14T12:38:52Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare decisis is the principle of judicial authority in English law that requires judges to adhere to past decisions of the same court in similar cases or to follow precedents if they are relevant and authoritative. It was first codified in English common law in the Middle Ages and has become a fundamental principle of constitutional jurisprudence around the world.\n\nThe idea behind stare decisis is to maintain judicial stability, consistency, and predictability in legal judgments. This is particularly important in jurisdictions that have complex laws with many exceptions and decisions made by different judges over time. By adhering to past cases, judges can provide a framework for similar situations in the future, reducing the likelihood of inconsistent rulings.\n\nStare decisis serves as a form of judicial restraint, allowing judges to avoid overturning previously established legal principles unless they are clearly flawed or if new evidence arises that necessitates an interpretation of the law. The principle is often contrasted with the concept of \"judicial activism,\" which involves judges actively changing the law based on their own beliefs and priorities.\n\nIn summary, stare decisis is a fundamental principle in English law that ensures judicial stability, consistency, and predictability in legal judgments by requiring judges to adhere to past cases if they are relevant and authoritative.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Stare decisis is the principle of judicial authority in English law that requires judges to adhere to past decisions of the same court in similar cases or to follow precedents if they are relevant and authoritative. It was first codified in English common law in the Middle Ages and has become a fundamental principle of constitutional jurisprudence around the world.\n\nThe idea behind stare decisis is to maintain judicial stability",
+      "and predictability in legal judgments. This is particularly important in jurisdictions that have complex laws with many exceptions and decisions made by different judges over time. By adhering to past cases",
+      "judges can provide a framework for similar situations in the future",
+      "reducing the likelihood of inconsistent rulings.\n\nStare decisis serves as a form of judicial restraint",
+      "allowing judges to avoid overturning previously established legal principles unless they are clearly flawed or if new evidence arises that necessitates an interpretation of the law. The principle is often contrasted with the concept of \"judicial activism",
+      "\" which involves judges actively changing the law based on their own beliefs and priorities.\n\nIn summary",
+      "stare decisis is a fundamental principle in English law that ensures judicial stability",
+      "and predictability in legal judgments by requiring judges to adhere to past cases if they are relevant and authoritative."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1878,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8656,
+      0.8773,
+      0.9293
+    ],
+    "contradiction_score": 0.3337
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0671,
+    "reconstructed_h_score": 0.0671,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19196.89,
+    "llm_gen_ms": 4840.65,
+    "p1_ms": 2358.09,
+    "p2_ms": 0.01,
+    "p3_ms": 22648.17,
+    "fusion_ms": 0.01
+  }
+}

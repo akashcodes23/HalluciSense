@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000522",
+  "sample_id": "new_0522",
+  "timestamp": "2026-08-14T14:02:02Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Is the UN still active?",
+  "generated_response": "Yes, the United Nations (UN) is still actively engaged in its work to promote international peace and security, address global challenges such as climate change, poverty, inequality, and conflict resolution. The UN has been operating since 1945 under the leadership of Secretary-General Antonio Guterres, with 193 member states.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5431,
+    "claims": [
+      "the United Nations (UN) is still actively engaged in its work to promote international peace and security",
+      "address global challenges such as climate change",
+      "and conflict resolution. The UN has been operating since 1945 under the leadership of Secretary-General Antonio Guterres",
+      "with 193 member states."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0937,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8905,
+      0.8354,
+      0.8422
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3826,
+    "reconstructed_h_score": 0.3826,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8446.77,
+    "llm_gen_ms": 1214.84,
+    "p1_ms": 3048.62,
+    "p2_ms": 0.0,
+    "p3_ms": 7666.67,
+    "fusion_ms": 0.01
+  }
+}

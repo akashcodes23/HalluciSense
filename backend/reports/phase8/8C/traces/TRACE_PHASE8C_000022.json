@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000022",
+  "sample_id": "phase8_c_0022",
+  "timestamp": "2026-08-17T05:56:18Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Mathematics",
+  "corruption_type": "ENTITY_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "The derivative of x^2 with respect to x is 2x. However, this claim is factually incorrect.",
+  "original": "The derivative of x^2 with respect to x is 2x.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3071,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3071,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1800.05
+  },
+  "pipeline_error": null
+}

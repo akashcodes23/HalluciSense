@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000121",
+  "sample_id": "law_0121",
+  "timestamp": "2026-08-14T12:32:29Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas corpus refers to a fundamental right in law that allows a person or entity to petition the court to compel the execution of legal orders or duties, particularly when there are allegations of violation of basic rights or interests. The purpose of habeas corpus is to ensure that individuals are not deprived of their liberty without a fair hearing and trial, as guaranteed by constitutional law. In some countries, habeas corpus is also used as a tool for challenging the legality of a particular legal process or decision.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.45,
+    "claims": [
+      "Habeas corpus refers to a fundamental right in law that allows a person or entity to petition the court to compel the execution of legal orders or duties",
+      "particularly when there are allegations of violation of basic rights or interests. The purpose of habeas corpus is to ensure that individuals are not deprived of their liberty without a fair hearing and trial",
+      "as guaranteed by constitutional law. In some countries",
+      "habeas corpus is also used as a tool for challenging the legality of a particular legal process or decision."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1042,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8799,
+      0.8187,
+      0.8298
+    ],
+    "contradiction_score": 0.0058
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3265,
+    "reconstructed_h_score": 0.3265,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13429.5,
+    "llm_gen_ms": 2041.95,
+    "p1_ms": 2212.96,
+    "p2_ms": 0.02,
+    "p3_ms": 16678.46,
+    "fusion_ms": 0.01
+  }
+}

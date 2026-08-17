@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000199",
+  "sample_id": "fin_0199",
+  "timestamp": "2026-08-14T12:55:06Z",
+  "domain": "Finance",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is liquidity?",
+  "generated_response": "Liquidity refers to the ability of an asset or security to be quickly converted into cash without significant loss. In finance, liquidity is often used to describe the ease with which assets can be bought or sold in the market. Assets are said to have high liquidity if they can be quickly traded for cash or other similar assets at a fair price. This is important because high liquidity allows for quick transactions and capital markets operations.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Liquidity refers to the ability of an asset or security to be quickly converted into cash without significant loss. In finance",
+      "liquidity is often used to describe the ease with which assets can be bought or sold in the market. Assets are said to have high liquidity if they can be quickly traded for cash or other similar assets at a fair price. This is important because high liquidity allows for quick transactions and capital markets operations."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0282,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9513,
+      0.9493,
+      0.9697
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0101,
+    "reconstructed_h_score": 0.0101,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10062.49,
+    "llm_gen_ms": 2077.57,
+    "p1_ms": 2739.83,
+    "p2_ms": 0.01,
+    "p3_ms": 9492.91,
+    "fusion_ms": 0.01
+  }
+}

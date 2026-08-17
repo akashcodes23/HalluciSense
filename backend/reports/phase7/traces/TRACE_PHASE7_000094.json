@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000094",
+  "sample_id": "med_0094",
+  "timestamp": "2026-08-14T12:25:43Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does chemotherapy cure bacterial pneumonia?",
+  "generated_response": "Chemotherapy is used to treat various types of infections, including bacterial pneumonia. It works by targeting the bacteria directly with medications that kill or inhibit their growth and spread. However, it may not be effective against all forms of bacterial pneumonia, particularly those caused by more resistant bacteria.\n\nThe effectiveness of chemotherapy can vary depending on several factors, such as the type of bacteria, the severity of the infection, the patient's overall health, and whether the bacteria have developed resistance to antibiotics. In some cases, combining chemotherapy with other treatments, such as antivirals or antifungal drugs, may be necessary.\n\nIt is important for patients with bacterial pneumonia to follow their treatment plan closely and seek medical attention if they experience any side effects or complications during treatment.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Chemotherapy is used to treat various types of infections",
+      "including bacterial pneumonia. It works by targeting the bacteria directly with medications that kill or inhibit their growth and spread. However",
+      "it may not be effective against all forms of bacterial pneumonia",
+      "particularly those caused by more resistant bacteria.\n\nThe effectiveness of chemotherapy can vary depending on several factors",
+      "such as the type of bacteria",
+      "the severity of the infection",
+      "the patient's overall health",
+      "and whether the bacteria have developed resistance to antibiotics. In some cases",
+      "combining chemotherapy with other treatments",
+      "such as antivirals or antifungal drugs",
+      "may be necessary.\n\nIt is important for patients with bacterial pneumonia to follow their treatment plan closely and seek medical attention if they experience any side effects or complications during treatment."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3136,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8705,
+      0.8998,
+      0.8593
+    ],
+    "contradiction_score": 0.6667
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.112,
+    "reconstructed_h_score": 0.112,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12459.93,
+    "llm_gen_ms": 3498.53,
+    "p1_ms": 1504.33,
+    "p2_ms": 0.01,
+    "p3_ms": 13815.83,
+    "fusion_ms": 0.02
+  }
+}

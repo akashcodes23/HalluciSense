@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000061",
+  "sample_id": "med_0061",
+  "timestamp": "2026-08-14T12:18:24Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar is regulated by the endocrine system and primarily through insulin. When\u8840\u7cd6 levels rise, insulin is released to help cells convert glucose into energy, which maintains normal blood sugar levels. The pancreas produces insulin in response to rising blood sugar levels. Additionally, the body also uses other hormones like glucagon to lower blood sugar when it's too low.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4121,
+    "claims": [
+      "Blood sugar is regulated by the endocrine system and primarily through insulin. When\u8840\u7cd6 levels rise",
+      "insulin is released to help cells convert glucose into energy",
+      "which maintains normal blood sugar levels. The pancreas produces insulin in response to rising blood sugar levels. Additionally",
+      "the body also uses other hormones like glucagon to lower blood sugar when it's too low."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1438,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.767,
+      0.8129,
+      0.7611
+    ],
+    "contradiction_score": 0.0028
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3163,
+    "reconstructed_h_score": 0.3163,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15763.1,
+    "llm_gen_ms": 1012.68,
+    "p1_ms": 1993.23,
+    "p2_ms": 0.0,
+    "p3_ms": 24955.07,
+    "fusion_ms": 0.01
+  }
+}

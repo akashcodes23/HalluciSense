@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000679",
+  "sample_id": "pol_0679",
+  "timestamp": "2026-08-14T14:42:28Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies choose leaders through various methods and mechanisms, including:\n\n1. **Voting**: The most common method of choosing leaders in many democracies is voting. This involves citizens casting ballots to select representatives who will form the government.\n\n2. **Electoral Processes**: For example, in a presidential election, voters vote for a candidate who they believe will represent their interests and lead them to success.\n\n3. **Direct Democracy**: In some democracies, leaders are chosen directly by the people through plebiscites or referendums. This means that citizens get to decide their own leader without intermediaries.\n\n4. **Parliamentary Systems**: In parliamentary systems, leaders emerge from within political parties. These leaders are typically elected by majority vote in a parliament.\n\n5. **Constitutional Referendums**: Some democracies allow for constitutional referendums, where the people directly vote on changes to their country's constitution or other significant issues.\n\n6. **Adoption of Presidential Systems**: In presidential systems, the leader is generally chosen by the electorate and assumed power if they win a majority in the election.\n\n7. **Judicial Appointments**: While not a direct democratic process, in some countries, particularly those with bicameral parliaments, judges are appointed to their positions by the heads of state or government rather than being directly elected by voters.\n\nEach democracy has its own unique system for choosing leaders, reflecting the country's political traditions and governance structures.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Democracies choose leaders through various methods and mechanisms",
+      "including:\n\n1. **Voting**: The most common method of choosing leaders in many democracies is voting. This involves citizens casting ballots to select representatives who will form the government.\n\n2. **Electoral Processes**: For example",
+      "in a presidential election",
+      "voters vote for a candidate who they believe will represent their interests and lead them to success.\n\n3. **Direct Democracy**: In some democracies",
+      "leaders are chosen directly by the people through plebiscites or referendums. This means that citizens get to decide their own leader without intermediaries.\n\n4. **Parliamentary Systems**: In parliamentary systems",
+      "leaders emerge from within political parties. These leaders are typically elected by majority vote in a parliament.\n\n5. **Constitutional Referendums**: Some democracies allow for constitutional referendums",
+      "where the people directly vote on changes to their country's constitution or other significant issues.\n\n6. **Adoption of Presidential Systems**: In presidential systems",
+      "the leader is generally chosen by the electorate and assumed power if they win a majority in the election.\n\n7. **Judicial Appointments**: While not a direct democratic process",
+      "particularly those with bicameral parliaments",
+      "judges are appointed to their positions by the heads of state or government rather than being directly elected by voters.\n\nEach democracy has its own unique system for choosing leaders",
+      "reflecting the country's political traditions and governance structures."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0978,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8519,
+      0.8477
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0349,
+    "reconstructed_h_score": 0.0349,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 25371.61,
+    "llm_gen_ms": 6163.48,
+    "p1_ms": 2881.49,
+    "p2_ms": 0.19,
+    "p3_ms": 31349.43,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000097",
+  "sample_id": "med_0097",
+  "timestamp": "2026-08-14T12:26:28Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar regulation involves several components working together to maintain stable levels of glucose in the body. Key factors include:\n\n1. **Pancreas**: Responsible for producing insulin and glucagon.\n2. **Insulin**: The primary hormone that helps regulate blood sugar levels by promoting uptake of glucose into cells. It binds to insulin receptors on the cell surface, allowing glucose entry.\n3. **Glucagon**: A hormone produced by the pancreas that inhibits glucose uptake in cells, helping to lower blood sugar levels when they are high.\n4. **Muscles and Fat Cells**: These cells are sensitive to insulin and can produce their own insulin if needed.\n5. **Liver**: The liver produces glucagon when blood sugar is low to help stabilize blood sugar levels.\n\nThe body maintains these mechanisms through feedback loops, which monitor blood glucose levels in real-time and adjust hormone production accordingly. For example:\n- When\u8840\u7cd6 rises, insulin is secreted by the pancreas to lower it.\n- When blood sugar falls, glucagon is released by the pancreas to increase it.\n\nThese regulatory systems ensure that the body has an appropriate balance of glucose for energy production and storage, preventing conditions like diabetes where blood sugar levels are too high or too low.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Blood sugar regulation involves several components working together to maintain stable levels of glucose in the body. Key factors include:\n\n1. **Pancreas**: Responsible for producing insulin and glucagon.\n2. **Insulin**: The primary hormone that helps regulate blood sugar levels by promoting uptake of glucose into cells. It binds to insulin receptors on the cell surface",
+      "allowing glucose entry.\n3. **Glucagon**: A hormone produced by the pancreas that inhibits glucose uptake in cells",
+      "helping to lower blood sugar levels when they are high.\n4. **Muscles and Fat Cells**: These cells are sensitive to insulin and can produce their own insulin if needed.\n5. **Liver**: The liver produces glucagon when blood sugar is low to help stabilize blood sugar levels.\n\nThe body maintains these mechanisms through feedback loops",
+      "which monitor blood glucose levels in real-time and adjust hormone production accordingly. For example:\n- When\u8840\u7cd6 rises",
+      "insulin is secreted by the pancreas to lower it.\n- When blood sugar falls",
+      "glucagon is released by the pancreas to increase it.\n\nThese regulatory systems ensure that the body has an appropriate balance of glucose for energy production and storage",
+      "preventing conditions like diabetes where blood sugar levels are too high or too low."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1126,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8297,
+      0.8206,
+      0.8311
+    ],
+    "contradiction_score": 0.0007
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0402,
+    "reconstructed_h_score": 0.0402,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10244.4,
+    "llm_gen_ms": 4506.9,
+    "p1_ms": 1589.37,
+    "p2_ms": 0.02,
+    "p3_ms": 7436.08,
+    "fusion_ms": 0.01
+  }
+}

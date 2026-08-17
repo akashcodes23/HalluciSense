@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000072",
+  "sample_id": "8A_BIO_TRU_0072",
+  "timestamp": "2026-08-17T05:52:04Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Biology",
+  "category": "TRUE_CONTROL",
+  "difficulty": "easy",
+  "input": "The mitochondrion is the primary site of ATP synthesis via oxidative phosphorylation in eukaryotic cells.",
+  "ground_truth": 0,
+  "ground_truth_label": "factual",
+  "source": "Wikipedia: Mitochondrion",
+  "source_url": "https://en.wikipedia.org/wiki/Mitochondrion",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": false,
+  "failure_classification": {
+    "primary": "RETRIEVAL_FAILURE",
+    "secondary": "NLI_FAILURE"
+  },
+  "latency": {
+    "total_ms": 2321.08
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000057",
+  "sample_id": "med_0057",
+  "timestamp": "2026-08-14T12:17:34Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar regulation is primarily managed by two hormones in the body: insulin and glucagon.\n\n1. **Insulin**:\n   - Controls the uptake of glucose from the bloodstream into cells.\n   - Acts as an inhibitor of glycogen synthesis and a stimulant of gluconeogenesis.\n   - Is produced mainly in the pancreas, particularly in beta cells located in the islets of Langerhans.\n   - It plays a crucial role in maintaining blood sugar levels within normal ranges by allowing for glucose to be utilized by tissues.\n\n2. **Glucagon**:\n   - Promotes the breakdown of glycogen into glucose.\n   - Acts as a stimulant of glycogen synthesis and an inhibitor of gluconeogenesis.\n   - Is produced mainly in the pancreas, particularly in alpha cells located in the islets of Langerhans.\n   - It helps to regulate blood sugar levels by preventing excess glucose from entering tissues.\n\nThese hormones work together to ensure that blood sugar levels remain within a safe range, helping to maintain homeostasis. When blood sugar rises, insulin is released to lower it; when blood sugar drops, glucagon is released to raise it. This dynamic balance is crucial for maintaining energy and proper functioning of various organs in the body.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4045,
+    "claims": [
+      "Blood sugar regulation is primarily managed by two hormones in the body: insulin and glucagon.\n\n1. **Insulin**:\n   - Controls the uptake of glucose from the bloodstream into cells.\n   - Acts as an inhibitor of glycogen synthesis and a stimulant of gluconeogenesis.\n   - Is produced mainly in the pancreas",
+      "particularly in beta cells located in the islets of Langerhans.\n   - It plays a crucial role in maintaining blood sugar levels within normal ranges by allowing for glucose to be utilized by tissues.\n\n2. **Glucagon**:\n   - Promotes the breakdown of glycogen into glucose.\n   - Acts as a stimulant of glycogen synthesis and an inhibitor of gluconeogenesis.\n   - Is produced mainly in the pancreas",
+      "particularly in alpha cells located in the islets of Langerhans.\n   - It helps to regulate blood sugar levels by preventing excess glucose from entering tissues.\n\nThese hormones work together to ensure that blood sugar levels remain within a safe range",
+      "helping to maintain homeostasis. When blood sugar rises",
+      "insulin is released to lower it",
+      "when blood sugar drops",
+      "glucagon is released to raise it. This dynamic balance is crucial for maintaining energy and proper functioning of various organs in the body."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1235,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8412,
+      0.8259,
+      0.8085
+    ],
+    "contradiction_score": 0.0281
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3042,
+    "reconstructed_h_score": 0.3042,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12808.85,
+    "llm_gen_ms": 3239.41,
+    "p1_ms": 1467.13,
+    "p2_ms": 0.01,
+    "p3_ms": 15667.43,
+    "fusion_ms": 0.01
+  }
+}

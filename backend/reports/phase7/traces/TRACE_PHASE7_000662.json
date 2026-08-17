@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000662",
+  "sample_id": "pol_0662",
+  "timestamp": "2026-08-14T14:38:16Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power is the ability of an elected official or group to prevent a bill from becoming law. It is typically exercised through the procedure of a \"no-confidence\" motion, where the people vote against the bill and demand that the government be re-elected or that the bill be vetoed by the president. The veto power gives the elected officials some control over the legislative process and can help to prevent some bills from becoming law if they are seen as unconstitutional or problematic.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Veto power is the ability of an elected official or group to prevent a bill from becoming law. It is typically exercised through the procedure of a \"no-confidence\" motion",
+      "where the people vote against the bill and demand that the government be re-elected or that the bill be vetoed by the president. The veto power gives the elected officials some control over the legislative process and can help to prevent some bills from becoming law if they are seen as unconstitutional or problematic."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0617,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.922,
+      0.8897,
+      0.9046
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.022,
+    "reconstructed_h_score": 0.022,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8727.31,
+    "llm_gen_ms": 1803.99,
+    "p1_ms": 3540.74,
+    "p2_ms": 0.01,
+    "p3_ms": 5952.16,
+    "fusion_ms": 0.01
+  }
+}

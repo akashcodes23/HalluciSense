@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000720",
+  "sample_id": "lit_0720",
+  "timestamp": "2026-08-14T14:49:41Z",
+  "domain": "Literature",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Who wrote Pride and Prejudice?",
+  "generated_response": "Pride and Prejudice was written by Jane Austen, an English novelist who lived from 1775 to 1817. She is best known for her novel of manners and social etiquette, which explores themes such as love, marriage, class, and gender roles. The book was first published in 1813 and has since become one of the most famous novels of all time.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5312,
+    "claims": [
+      "Pride and Prejudice was written by Jane Austen",
+      "an English novelist who lived from 1775 to 1817. She is best known for her novel of manners and social etiquette",
+      "which explores themes such as love",
+      "and gender roles. The book was first published in 1813 and has since become one of the most famous novels of all time."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1505,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8763,
+      0.8763,
+      0.8828
+    ],
+    "contradiction_score": 0.2045
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3953,
+    "reconstructed_h_score": 0.3953,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9474.8,
+    "llm_gen_ms": 1835.16,
+    "p1_ms": 3931.43,
+    "p2_ms": 0.07,
+    "p3_ms": 6856.03,
+    "fusion_ms": 0.02
+  }
+}

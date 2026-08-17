@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000277",
+  "sample_id": "sci_0277",
+  "timestamp": "2026-08-14T13:05:22Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which green plants and some other organisms convert light energy into chemical energy stored in glucose (sugar). This process occurs in the chloroplasts of plant cells.\n\nIn the process of photosynthesis, plants capture sunlight through their leaves, which contain chlorophyll. Chlorophyll absorbs light energy from the sun, while other pigments absorb specific wavelengths of light to produce sugars. The process can be divided into three main stages: light absorption, carbon fixation, and oxygen production.\n\nDuring the light absorption stage, water molecules in the plant cells are split into hydrogen ions and oxygen gas, which are released into the atmosphere. During the carbon fixation stage, the hydrogen ions combine with carbon dioxide from the air to form glucose, which is then stored in the plant's cells as energy-rich sugars. Finally, during the oxygen production stage, the excess oxygen produced by the Calvin cycle is released into the atmosphere as oxygen gas.\n\nOverall, photosynthesis is an essential process that provides food and oxygen for most life on Earth. It is responsible for producing about half of our planet's oxygen and supporting a large variety of plant species.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2819,
+    "claims": [
+      "Photosynthesis is the process by which green plants and some other organisms convert light energy into chemical energy stored in glucose (sugar). This process occurs in the chloroplasts of plant cells.\n\nIn the process of photosynthesis",
+      "plants capture sunlight through their leaves",
+      "which contain chlorophyll. Chlorophyll absorbs light energy from the sun",
+      "while other pigments absorb specific wavelengths of light to produce sugars. The process can be divided into three main stages: light absorption",
+      "and oxygen production.\n\nDuring the light absorption stage",
+      "water molecules in the plant cells are split into hydrogen ions and oxygen gas",
+      "which are released into the atmosphere. During the carbon fixation stage",
+      "the hydrogen ions combine with carbon dioxide from the air to form glucose",
+      "which is then stored in the plant's cells as energy-rich sugars. Finally",
+      "during the oxygen production stage",
+      "the excess oxygen produced by the Calvin cycle is released into the atmosphere as oxygen gas.\n\nOverall",
+      "photosynthesis is an essential process that provides food and oxygen for most life on Earth. It is responsible for producing about half of our planet's oxygen and supporting a large variety of plant species."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.057,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9151,
+      0.8951,
+      0.9299
+    ],
+    "contradiction_score": 0.0021
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2016,
+    "reconstructed_h_score": 0.2016,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18386.99,
+    "llm_gen_ms": 4598.41,
+    "p1_ms": 4155.15,
+    "p2_ms": 0.02,
+    "p3_ms": 18377.69,
+    "fusion_ms": 0.01
+  }
+}

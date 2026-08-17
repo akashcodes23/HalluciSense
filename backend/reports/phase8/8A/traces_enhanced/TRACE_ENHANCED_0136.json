@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MED_TRU_0136",
+  "claim": "Insulin, a hormone that regulates blood glucose, is produced by the alpha cells of the islets of Langerhans in the pancreas.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.0334,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Insulin, a hormone that regulates blood glucose, is produced by the alpha cells of the islets of Langerhans in the pancreas",
+      "base_nli_score": 0.0334,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.0334
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 3177.57
+}

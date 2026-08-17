@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000128",
+  "sample_id": "phase8_c_0128",
+  "timestamp": "2026-08-17T05:58:20Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Computer Science",
+  "corruption_type": "LOCATION_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Dijkstra's algorithm finds shortest paths in non-negative weighted graphs. However, this claim is factually incorrect.",
+  "original": "Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3155,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3155,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1514.98
+  },
+  "pipeline_error": null
+}

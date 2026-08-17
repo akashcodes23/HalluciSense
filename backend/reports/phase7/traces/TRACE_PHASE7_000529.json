@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000529",
+  "sample_id": "new_0529",
+  "timestamp": "2026-08-14T14:04:32Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits typically discuss various aspects of climate change and its impacts on the environment. They aim to bring together international leaders, governments, non-governmental organizations, scientific experts, and other stakeholders to develop and implement comprehensive strategies to address climate challenges. The topics covered can include:\n\n1. **Global Goals and Targets**: Setting global goals for reducing greenhouse gas emissions and adapting to climate change impacts.\n\n2. **Climate Change Mitigation**: Developing policies and practices to reduce carbon footprints, transitioning to renewable energy sources, and improving energy efficiency.\n\n3. **Adaptation Strategies**: Planning for the adverse effects of climate change such as sea level rise, droughts, floods, and extreme weather events.\n\n4. **Public Awareness and Engagement**: Increasing public awareness about climate science, policies, and its consequences.\n\n5. **International Cooperation**: Collaborating on global initiatives, treaties, and agreements to address climate challenges.\n\n6. **Research and Development**: Funding research to advance our understanding of climate change and develop new technologies to mitigate and adapt.\n\n7. **Policy Implementation and Monitoring**: Ensuring that climate mitigation and adaptation policies are effective and monitored for their impact.\n\n8. **Social Responsibility and Corporate Responsibility**: Encouraging businesses and organizations to take responsibility for reducing their carbon footprint and engaging in sustainable practices.\n\nClimate summits often serve as key platforms for decision-making, collaboration, and dialogue among countries and international communities to tackle the complex challenges of climate change effectively.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Climate summits typically discuss various aspects of climate change and its impacts on the environment. They aim to bring together international leaders",
+      "and other stakeholders to develop and implement comprehensive strategies to address climate challenges. The topics covered can include:\n\n1. **Global Goals and Targets**: Setting global goals for reducing greenhouse gas emissions and adapting to climate change impacts.\n\n2. **Climate Change Mitigation**: Developing policies and practices to reduce carbon footprints",
+      "transitioning to renewable energy sources",
+      "and improving energy efficiency.\n\n3. **Adaptation Strategies**: Planning for the adverse effects of climate change such as sea level rise",
+      "and extreme weather events.\n\n4. **Public Awareness and Engagement**: Increasing public awareness about climate science",
+      "and its consequences.\n\n5. **International Cooperation**: Collaborating on global initiatives",
+      "and agreements to address climate challenges.\n\n6. **Research and Development**: Funding research to advance our understanding of climate change and develop new technologies to mitigate and adapt.\n\n7. **Policy Implementation and Monitoring**: Ensuring that climate mitigation and adaptation policies are effective and monitored for their impact.\n\n8. **Social Responsibility and Corporate Responsibility**: Encouraging businesses and organizations to take responsibility for reducing their carbon footprint and engaging in sustainable practices.\n\nClimate summits often serve as key platforms for decision-making",
+      "and dialogue among countries and international communities to tackle the complex challenges of climate change effectively."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0652,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8771,
+      0.9269,
+      0.8962
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0233,
+    "reconstructed_h_score": 0.0233,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 28093.48,
+    "llm_gen_ms": 6236.25,
+    "p1_ms": 3678.18,
+    "p2_ms": 0.05,
+    "p3_ms": 32944.95,
+    "fusion_ms": 0.01
+  }
+}

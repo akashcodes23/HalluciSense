@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000107",
+  "sample_id": "law_0107",
+  "timestamp": "2026-08-14T12:29:03Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare decisis is the Latin term used in jurisprudence to describe the principle that the Court should adhere strictly to its previous decisions on similar issues. It means \"to decide according to precedent\" or \"by the rules.\" In other words, if a court has made a decision on a particular question of law or fact, it will not change that decision unless there is a clear and compelling reason to do so.\n\nThe principle of stare decisis is often used as an argument in favor of judicial stability and predictability. By following precedent, courts can avoid the need for frequent reexamination of complex legal issues, which can be time-consuming and costly. Additionally, by adhering to a consistent approach, courts can ensure that the same results are achieved across different cases, thereby maintaining consistency in public opinion and understanding of the law.\n\nHowever, it is important to recognize that while stare decisis provides stability and predictability, it also means that judges must be careful not to overrule existing decisions unless they have a compelling reason. If a court makes an error or inconsistent decision based on its own reasoning, it may face criticism from other courts and potentially even from the public at large.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4991,
+    "claims": [
+      "Stare decisis is the Latin term used in jurisprudence to describe the principle that the Court should adhere strictly to its previous decisions on similar issues. It means \"to decide according to precedent\" or \"by the rules.\" In other words",
+      "if a court has made a decision on a particular question of law or fact",
+      "it will not change that decision unless there is a clear and compelling reason to do so.\n\nThe principle of stare decisis is often used as an argument in favor of judicial stability and predictability. By following precedent",
+      "courts can avoid the need for frequent reexamination of complex legal issues",
+      "which can be time-consuming and costly. Additionally",
+      "by adhering to a consistent approach",
+      "courts can ensure that the same results are achieved across different cases",
+      "thereby maintaining consistency in public opinion and understanding of the law.\n\nHowever",
+      "it is important to recognize that while stare decisis provides stability and predictability",
+      "it also means that judges must be careful not to overrule existing decisions unless they have a compelling reason. If a court makes an error or inconsistent decision based on its own reasoning",
+      "it may face criticism from other courts and potentially even from the public at large."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1822,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9304,
+      0.8877,
+      0.8851
+    ],
+    "contradiction_score": 0.3369
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3859,
+    "reconstructed_h_score": 0.3859,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19524.62,
+    "llm_gen_ms": 5453.9,
+    "p1_ms": 2652.55,
+    "p2_ms": 0.04,
+    "p3_ms": 21781.04,
+    "fusion_ms": 0.01
+  }
+}

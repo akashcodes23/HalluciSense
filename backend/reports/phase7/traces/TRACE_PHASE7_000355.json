@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000355",
+  "sample_id": "phy_0355",
+  "timestamp": "2026-08-14T13:25:11Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is Newton's third law?",
+  "generated_response": "Newton's third law states that for every action, there is an equal and opposite reaction. This law describes the relationship between two interacting objects, where the force acting on one object is equal in magnitude to the force acting on the other object but in the opposite direction.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1235,
+    "claims": [
+      "Newton's third law states that for every action",
+      "there is an equal and opposite reaction. This law describes the relationship between two interacting objects",
+      "where the force acting on one object is equal in magnitude to the force acting on the other object but in the opposite direction."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0653,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9349,
+      0.9072,
+      0.8607
+    ],
+    "contradiction_score": 0.0025
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1027,
+    "reconstructed_h_score": 0.1027,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9424.01,
+    "llm_gen_ms": 919.54,
+    "p1_ms": 2179.21,
+    "p2_ms": 0.01,
+    "p3_ms": 11736.06,
+    "fusion_ms": 0.01
+  }
+}

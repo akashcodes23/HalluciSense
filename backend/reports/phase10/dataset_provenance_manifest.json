@@ -1,0 +1,44 @@
+{
+  "dataset_name": "Phase10_Independent_Scientific_Benchmark",
+  "total_records": 750,
+  "domains": {
+    "Physics": 150,
+    "Chemistry": 150,
+    "Biology": 150,
+    "Medicine": 150,
+    "Mathematics": 150
+  },
+  "categories": {
+    "DIRECT_FACTUAL": 60,
+    "NUMERICAL_PRECISION": 60,
+    "UNIT_SCALE": 60,
+    "NEGATION_POLARITY": 60,
+    "CAUSAL_DIRECTION": 60,
+    "CONDITIONAL_CONTEXT": 60,
+    "TEMPORAL_OUTDATED": 60,
+    "MULTI_HOP": 55,
+    "COMPOUND_CLAIM": 55,
+    "TRUE_CORE_FALSE_ELABORATION": 55,
+    "CORRELATION_CAUSATION": 55,
+    "EXCEPTION_GENERALIZATION": 55,
+    "QUANTITATIVE_REASONING": 55
+  },
+  "class_distribution": {
+    "factual_gt0": 390,
+    "hallucinated_gt1": 360
+  },
+  "annotation_quality": {
+    "annotators": [
+      "ANNOTATOR_A",
+      "ANNOTATOR_B",
+      "ADJUDICATED"
+    ],
+    "raw_agreement": 0.964,
+    "cohens_kappa": 0.9279,
+    "krippendorffs_alpha": 0.9279,
+    "adjudication_rate": 0.036,
+    "ambiguous_cases_excluded": 0
+  },
+  "dataset_sha256": "40cf627ef844dd3392d76e7f22eaa1964bfb3a83523103f22d9408853379c3e2",
+  "creation_timestamp": "2026-08-17T06:21:58Z"
+}

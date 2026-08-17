@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000103",
+  "sample_id": "law_0103",
+  "timestamp": "2026-08-14T12:27:58Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare decisis is a Latin phrase that means \"to look at the decision\" or \"to see what has been decided.\" It refers to the principle of judicial precedent in law and jurisprudence, where decisions made by courts in one jurisdiction are considered binding for courts located elsewhere. This principle ensures that the laws and rules of a particular country are not arbitrarily changed without a clear legal basis. Stare decisis also helps maintain consistency and predictability in the legal system.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.337,
+    "claims": [
+      "Stare decisis is a Latin phrase that means \"to look at the decision\" or \"to see what has been decided.\" It refers to the principle of judicial precedent in law and jurisprudence",
+      "where decisions made by courts in one jurisdiction are considered binding for courts located elsewhere. This principle ensures that the laws and rules of a particular country are not arbitrarily changed without a clear legal basis. Stare decisis also helps maintain consistency and predictability in the legal system."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0701,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9311,
+      0.8282,
+      0.9176
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2417,
+    "reconstructed_h_score": 0.2417,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17324.38,
+    "llm_gen_ms": 2098.09,
+    "p1_ms": 2338.73,
+    "p2_ms": 0.01,
+    "p3_ms": 24639.17,
+    "fusion_ms": 0.01
+  }
+}

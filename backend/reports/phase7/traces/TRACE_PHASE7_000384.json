@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000384",
+  "sample_id": "phy_0384",
+  "timestamp": "2026-08-14T13:33:21Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero refers to the temperature at which all molecular motion and all other forms of energy in matter come to a complete stop. It is defined as 0 Kelvin (0 K) or -273.15 degrees Celsius (\u2212460\u00b0F). At absolute zero, particles have no kinetic energy, and their only form of energy is potential energy due to the forces between them.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4344,
+    "claims": [
+      "Absolute zero refers to the temperature at which all molecular motion and all other forms of energy in matter come to a complete stop. It is defined as 0 Kelvin (0 K) or -273.15 degrees Celsius (\u2212460\u00b0F). At absolute zero",
+      "particles have no kinetic energy",
+      "and their only form of energy is potential energy due to the forces between them."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0672,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8986,
+      0.943,
+      0.8609
+    ],
+    "contradiction_score": 0.0077
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3033,
+    "reconstructed_h_score": 0.3033,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11112.93,
+    "llm_gen_ms": 1843.06,
+    "p1_ms": 2765.28,
+    "p2_ms": 0.0,
+    "p3_ms": 12597.79,
+    "fusion_ms": 0.01
+  }
+}

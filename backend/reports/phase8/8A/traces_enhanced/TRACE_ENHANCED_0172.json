@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MAT_TRU_0172",
+  "claim": "The central limit theorem states that the sample mean of any distribution converges to a normal distribution as n increases, regardless of whether the population has finite variance.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.2855,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "The central limit theorem states that the sample mean of any distribution converges to a normal distribution as n increases, regardless of whether the population has finite variance",
+      "base_nli_score": 0.2855,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.2855
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2564.5
+}

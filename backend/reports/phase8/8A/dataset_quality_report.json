@@ -1,0 +1,29 @@
+{
+  "total_records": 174,
+  "unique_ids": 174,
+  "duplicate_ids": 0,
+  "malformed_records": 174,
+  "domains_found": [
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Medicine",
+    "Mathematics"
+  ],
+  "categories_found": [
+    "TRUE_CONTROL",
+    "NUMERICAL_PRECISION",
+    "UNIT_SCALE",
+    "NEGATION",
+    "CAUSAL_INVERSION",
+    "OUTDATED_SCIENTIFIC_CLAIM",
+    "TRUE_CORE_FALSE_ELABORATION"
+  ],
+  "label_balance": {
+    "factual": 30,
+    "hallucinated": 144
+  },
+  "all_sources_present": true,
+  "hallucisense_used_for_gt": false,
+  "p1_used_for_gt": false
+}

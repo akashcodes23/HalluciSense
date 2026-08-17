@@ -1,0 +1,77 @@
+{
+  "trace_id": "TRACE_PHASE7_000558",
+  "sample_id": "mat_0558",
+  "timestamp": "2026-08-14T14:13:14Z",
+  "domain": "Mathematics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Are all prime numbers even?",
+  "generated_response": "No, not all prime numbers are even. Prime numbers greater than 2 are always odd. This is because any number divisible by 2 (the smallest even number) would be even itself and thus not prime. To verify this, consider that for any prime number \\( p \\geq 3 \\):\n\n1. If \\( p = 2 \\), it is a prime number.\n2. For any odd prime number \\( p > 2 \\), it cannot be divisible by 2 because the sum of the digits of \\( p \\) (if all digits are different) will always end in an even number, and thus cannot be 2.\n\nTo illustrate this, let's check a few prime numbers:\n\n- The smallest odd prime number is 3. Its digits are all odd, so \\( 3 + 3 = 6 \\), which ends in an even digit. Therefore, 3 is not prime.\n- The next odd prime number is 5. Its digits are all odd, so \\( 5 + 5 = 10 \\), which ends in an even digit. Therefore, 5 is not prime.\n- The next odd prime number is 7. Its digits are all odd, so \\( 7 + 7 = 14 \\), which ends in an even digit. Therefore, 7 is not prime.\n\nThis pattern continues for any odd prime number greater than 2.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "not all prime numbers are even. Prime numbers greater than 2 are always odd. This is because any number divisible by 2 (the smallest even number) would be even itself and thus not prime. To verify this",
+      "consider that for any prime number \\( p \\geq 3 \\):\n\n1. If \\( p = 2 \\)",
+      "it is a prime number.\n2. For any odd prime number \\( p > 2 \\)",
+      "it cannot be divisible by 2 because the sum of the digits of \\( p \\) (if all digits are different) will always end in an even number",
+      "and thus cannot be 2.\n\nTo illustrate this",
+      "let's check a few prime numbers:\n\n- The smallest odd prime number is 3. Its digits are all odd",
+      "so \\( 3 + 3 = 6 \\)",
+      "which ends in an even digit. Therefore",
+      "3 is not prime.\n- The next odd prime number is 5. Its digits are all odd",
+      "so \\( 5 + 5 = 10 \\)",
+      "which ends in an even digit. Therefore",
+      "5 is not prime.\n- The next odd prime number is 7. Its digits are all odd",
+      "so \\( 7 + 7 = 14 \\)",
+      "which ends in an even digit. Therefore",
+      "7 is not prime.\n\nThis pattern continues for any odd prime number greater than 2."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1837,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8324,
+      0.8192,
+      0.7906
+    ],
+    "contradiction_score": 0.1795
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0656,
+    "reconstructed_h_score": 0.0656,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19103.53,
+    "llm_gen_ms": 5961.06,
+    "p1_ms": 5769.36,
+    "p2_ms": 0.09,
+    "p3_ms": 11955.62,
+    "fusion_ms": 0.02
+  }
+}

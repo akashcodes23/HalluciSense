@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_MED_OUT_0133",
+  "claim": "The human heart is controlled by the brain via direct neural connections only, with no intrinsic pacemaker.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "The human heart is controlled by the brain via direct neural connections only, with no intrinsic pacemaker",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'no' while evidence affirms the predicate."
+  ],
+  "latency_ms": 2213.54
+}

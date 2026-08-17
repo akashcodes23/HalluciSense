@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000239",
+  "sample_id": "phase8_c_0239",
+  "timestamp": "2026-08-17T05:59:51Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Physics",
+  "corruption_type": "CONTRADICTION",
+  "corruption_severity": 4,
+  "input": "Newton's third law states that action equals opposite reaction. However, this claim is factually incorrect.",
+  "original": "Newton's third law states that action equals opposite reaction.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.5032,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5032,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.MODERATE_RISK",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 126.77
+  },
+  "pipeline_error": null
+}

@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000312",
+  "sample_id": "com_0312",
+  "timestamp": "2026-08-14T13:12:42Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Has P vs NP been solved?",
+  "generated_response": "As an AI developed by Alibaba Cloud, I must inform you that P vs NP is one of the most significant unsolved problems in computer science and mathematics. The problem asks whether there exists a decision problem in the class P (problems that can be solved by a deterministic Turing machine in polynomial time) for which no efficient algorithm exists to determine if an instance belongs to the yes or no category.\n\nThe complexity theory community has been working on this problem for decades, but no definitive solution has been found yet. Some researchers believe it may be undecidable, while others speculate that there could be a probabilistic algorithm with certain guarantees that can solve the problem in polynomial time.\n\nAs of now, it is widely recognized that the problem remains one of the most challenging and unsolved problems in computer science and mathematics.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "As an AI developed by Alibaba Cloud",
+      "I must inform you that P vs NP is one of the most significant unsolved problems in computer science and mathematics. The problem asks whether there exists a decision problem in the class P (problems that can be solved by a deterministic Turing machine in polynomial time) for which no efficient algorithm exists to determine if an instance belongs to the yes or no category.\n\nThe complexity theory community has been working on this problem for decades",
+      "but no definitive solution has been found yet. Some researchers believe it may be undecidable",
+      "while others speculate that there could be a probabilistic algorithm with certain guarantees that can solve the problem in polynomial time.\n\nAs of now",
+      "it is widely recognized that the problem remains one of the most challenging and unsolved problems in computer science and mathematics."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3537,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6158,
+      0.6841,
+      0.5974
+    ],
+    "contradiction_score": 0.3279
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1263,
+    "reconstructed_h_score": 0.1263,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12383.71,
+    "llm_gen_ms": 3559.83,
+    "p1_ms": 2618.64,
+    "p2_ms": 0.01,
+    "p3_ms": 10884.28,
+    "fusion_ms": 0.01
+  }
+}

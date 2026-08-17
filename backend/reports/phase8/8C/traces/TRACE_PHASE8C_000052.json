@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000052",
+  "sample_id": "phase8_c_0052",
+  "timestamp": "2026-08-17T05:57:00Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Computer Science",
+  "corruption_type": "NUMERIC_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "QuickSort has an average time complexity of O(N log N). However, this claim is factually incorrect.",
+  "original": "QuickSort has an average time complexity of O(N log N).",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 1.0,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 1.0,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 40.15
+  },
+  "pipeline_error": null
+}

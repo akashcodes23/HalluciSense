@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000293",
+  "sample_id": "sci_0293",
+  "timestamp": "2026-08-14T13:07:38Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants, algae, and certain bacteria convert sunlight, water, and carbon dioxide into glucose and oxygen. It occurs in the chloroplasts of plant cells, where chlorophyll captures light energy. This energy is used to produce ATP (adenosine triphosphate) and NADPH (nicotinamide adenine dinucleotide phosphate), which are then used to convert water into glucose. The process also involves the production of oxygen as a byproduct. Photosynthesis is essential for life on Earth, providing the oxygen we breathe and supporting most life forms through food production.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2407,
+    "claims": [
+      "Photosynthesis is the process by which plants",
+      "and certain bacteria convert sunlight",
+      "and carbon dioxide into glucose and oxygen. It occurs in the chloroplasts of plant cells",
+      "where chlorophyll captures light energy. This energy is used to produce ATP (adenosine triphosphate) and NADPH (nicotinamide adenine dinucleotide phosphate)",
+      "which are then used to convert water into glucose. The process also involves the production of oxygen as a byproduct. Photosynthesis is essential for life on Earth",
+      "providing the oxygen we breathe and supporting most life forms through food production."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0561,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9262,
+      0.899,
+      0.9169
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1748,
+    "reconstructed_h_score": 0.1748,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15941.96,
+    "llm_gen_ms": 2731.27,
+    "p1_ms": 2117.19,
+    "p2_ms": 0.05,
+    "p3_ms": 21218.5,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_CHE_TRU_0037",
+  "claim": "The pH of a neutral aqueous solution at 25\u00b0C is 7.0.",
+  "ground_truth": 0,
+  "enhanced_h_score": 0.1333,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "The pH of a neutral aqueous solution at 25\u00b0C is 7.0",
+      "base_nli_score": 0.1333,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.1333
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1800.55
+}

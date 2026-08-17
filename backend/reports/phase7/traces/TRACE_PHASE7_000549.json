@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000549",
+  "sample_id": "new_0549",
+  "timestamp": "2026-08-14T14:10:26Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits are important gatherings of experts and policymakers to address global issues related to climate change and the environment. They typically focus on the following topics:\n\n1. **Global Climate Goals**: These include setting long-term targets for reducing greenhouse gas emissions, protecting natural habitats, and promoting sustainable development.\n\n2. **Science and Research**: Discussing current scientific discoveries in climate science, including models of climate change, atmospheric processes, and human influence on the planet.\n\n3. **Policy Implementation**: Examining how governments around the world are implementing policies to reduce carbon footprints, adapt to climate change, and mitigate its impacts.\n\n4. **Technology Development**: Highlighting innovations in renewable energy, sustainable transportation, and other technologies that can help combat climate change.\n\n5. **International Cooperation**: Addressing issues such as the Paris Agreement, the role of developed and developing countries in climate action, and global governance frameworks for environmental protection.\n\n6. **Public Awareness and Engagement**: Encouraging public participation in understanding climate issues, supporting policy changes, and advocating for sustainable practices.\n\n7. **Disaster Risk Reduction**: Discussing how to mitigate and prepare for natural disasters that can have severe impacts on the environment and communities.\n\nThese summits aim to promote international cooperation, share knowledge, and develop coordinated strategies to address the complex challenges of climate change, ensuring a livable planet for future generations.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Climate summits are important gatherings of experts and policymakers to address global issues related to climate change and the environment. They typically focus on the following topics:\n\n1. **Global Climate Goals**: These include setting long-term targets for reducing greenhouse gas emissions",
+      "and promoting sustainable development.\n\n2. **Science and Research**: Discussing current scientific discoveries in climate science",
+      "including models of climate change",
+      "and human influence on the planet.\n\n3. **Policy Implementation**: Examining how governments around the world are implementing policies to reduce carbon footprints",
+      "adapt to climate change",
+      "and mitigate its impacts.\n\n4. **Technology Development**: Highlighting innovations in renewable energy",
+      "and other technologies that can help combat climate change.\n\n5. **International Cooperation**: Addressing issues such as the Paris Agreement",
+      "the role of developed and developing countries in climate action",
+      "and global governance frameworks for environmental protection.\n\n6. **Public Awareness and Engagement**: Encouraging public participation in understanding climate issues",
+      "and advocating for sustainable practices.\n\n7. **Disaster Risk Reduction**: Discussing how to mitigate and prepare for natural disasters that can have severe impacts on the environment and communities.\n\nThese summits aim to promote international cooperation",
+      "and develop coordinated strategies to address the complex challenges of climate change",
+      "ensuring a livable planet for future generations."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1139,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8995,
+      0.7059,
+      0.8694
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0407,
+    "reconstructed_h_score": 0.0407,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19613.04,
+    "llm_gen_ms": 5702.86,
+    "p1_ms": 2295.89,
+    "p2_ms": 0.1,
+    "p3_ms": 21893.76,
+    "fusion_ms": 0.01
+  }
+}

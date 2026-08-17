@@ -1,0 +1,23 @@
+{
+  "mcnemar_baseline_vs_hybrid": {
+    "b": 0,
+    "c": 0,
+    "p_value": 1.0
+  },
+  "mcnemar_enhanced_vs_hybrid": {
+    "b": 7,
+    "c": 11,
+    "p_value": 0.480682373046875
+  },
+  "mcnemar_baseline_vs_enhanced": {
+    "b": 11,
+    "c": 7,
+    "p_value": 0.480682373046875
+  },
+  "wilcoxon_baseline_vs_hybrid": {
+    "p_value": 1.3425801851225073e-11
+  },
+  "wilcoxon_enhanced_vs_hybrid": {
+    "p_value": 0.020090624598042905
+  }
+}

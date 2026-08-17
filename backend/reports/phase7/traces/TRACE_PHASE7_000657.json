@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000657",
+  "sample_id": "pol_0657",
+  "timestamp": "2026-08-14T14:37:06Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism refers to a system of government in which power is divided between the central government and the states or other subdivisions. This means that each state has its own government with its own laws, but also contributes to the federal government through taxes and other financial contributions.\n\nThe federal government includes the president, Congress, and the Supreme Court. The states contribute to the federal government by paying a proportionate share of their federal tax burden based on their population size or other criteria. This allows for a balance between national policy-making and local governance.\n\nFederalism is a system that has been adopted in many countries around the world, including Canada, Australia, Japan, and several others. It has been criticized for its perceived lack of direct control over states' economies and social policies, as well as for its potential to lead to uneven distribution of power between the central government and the states.\n\nOverall, federalism is a complex system that requires careful consideration of political, economic, and social factors to ensure that it functions effectively and promotes the welfare of all citizens.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4502,
+    "claims": [
+      "Federalism refers to a system of government in which power is divided between the central government and the states or other subdivisions. This means that each state has its own government with its own laws",
+      "but also contributes to the federal government through taxes and other financial contributions.\n\nThe federal government includes the president",
+      "and the Supreme Court. The states contribute to the federal government by paying a proportionate share of their federal tax burden based on their population size or other criteria. This allows for a balance between national policy-making and local governance.\n\nFederalism is a system that has been adopted in many countries around the world",
+      "and several others. It has been criticized for its perceived lack of direct control over states' economies and social policies",
+      "as well as for its potential to lead to uneven distribution of power between the central government and the states.\n\nOverall",
+      "federalism is a complex system that requires careful consideration of political",
+      "and social factors to ensure that it functions effectively and promotes the welfare of all citizens."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0844,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8814,
+      0.8569,
+      0.8759
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3196,
+    "reconstructed_h_score": 0.3196,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20391.53,
+    "llm_gen_ms": 5055.78,
+    "p1_ms": 3845.56,
+    "p2_ms": 0.05,
+    "p3_ms": 21626.22,
+    "fusion_ms": 0.02
+  }
+}

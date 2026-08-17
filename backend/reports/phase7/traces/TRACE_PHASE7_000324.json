@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000324",
+  "sample_id": "com_0324",
+  "timestamp": "2026-08-14T13:16:11Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Has P vs NP been solved?",
+  "generated_response": "P and NP are two classes of problems in computer science that are fundamental to understanding the limits of computational power. The question \"Is there an algorithm that can solve all problems in P or NP within polynomial time?\" is known as the P vs NP problem.\n\nThe answer to this question is still open, and it remains one of the most important unsolved problems in computer science. Even though many researchers have made significant progress in understanding the complexity of various algorithms and problems, no general algorithm has been found that can solve all problems in P or NP within polynomial time.\n\nSome researchers believe that there may exist an algorithm that solves all problems in P or NP, while others argue that this is impossible due to the nature of certain problems and the limitations of computational resources. The P vs NP problem continues to be a central focus of research in computer science and theoretical computer science.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4122,
+    "claims": [
+      "P and NP are two classes of problems in computer science that are fundamental to understanding the limits of computational power. The question \"Is there an algorithm that can solve all problems in P or NP within polynomial time?\" is known as the P vs NP problem.\n\nThe answer to this question is still open",
+      "and it remains one of the most important unsolved problems in computer science. Even though many researchers have made significant progress in understanding the complexity of various algorithms and problems",
+      "no general algorithm has been found that can solve all problems in P or NP within polynomial time.\n\nSome researchers believe that there may exist an algorithm that solves all problems in P or NP",
+      "while others argue that this is impossible due to the nature of certain problems and the limitations of computational resources. The P vs NP problem continues to be a central focus of research in computer science and theoretical computer science."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2689,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7884,
+      0.1627,
+      0.809
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.361,
+    "reconstructed_h_score": 0.361,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14043.5,
+    "llm_gen_ms": 3750.32,
+    "p1_ms": 1829.82,
+    "p2_ms": 0.01,
+    "p3_ms": 15281.9,
+    "fusion_ms": 0.0
+  }
+}

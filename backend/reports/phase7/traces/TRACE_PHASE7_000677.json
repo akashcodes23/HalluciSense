@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000677",
+  "sample_id": "pol_0677",
+  "timestamp": "2026-08-14T14:41:55Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a political system where the government is divided into two or more levels of government, with the central government holding some power but delegating some to subordinate governments at lower levels.\n\nIn a federal system, each state has its own government, including executive, legislative, and judicial branches. The federal government is responsible for certain functions such as providing defense, international relations, and managing foreign affairs. The states are responsible for certain functions such as education, healthcare, and social services. In addition, the federal government can influence the policies of the states through its budgetary powers.\n\nFederalism has been a widely used system in many countries around the world, including the United States, Canada, and Australia. It provides some degree of autonomy to the states while still maintaining a strong central government that is responsible for important functions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3083,
+    "claims": [
+      "Federalism is a political system where the government is divided into two or more levels of government",
+      "with the central government holding some power but delegating some to subordinate governments at lower levels.\n\nIn a federal system",
+      "each state has its own government",
+      "and judicial branches. The federal government is responsible for certain functions such as providing defense",
+      "and managing foreign affairs. The states are responsible for certain functions such as education",
+      "and social services. In addition",
+      "the federal government can influence the policies of the states through its budgetary powers.\n\nFederalism has been a widely used system in many countries around the world",
+      "including the United States",
+      "and Australia. It provides some degree of autonomy to the states while still maintaining a strong central government that is responsible for important functions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0737,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9336,
+      0.899,
+      0.8655
+    ],
+    "contradiction_score": 0.0237
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2245,
+    "reconstructed_h_score": 0.2245,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19146.22,
+    "llm_gen_ms": 3480.97,
+    "p1_ms": 4954.68,
+    "p2_ms": 0.03,
+    "p3_ms": 19174.49,
+    "fusion_ms": 0.02
+  }
+}

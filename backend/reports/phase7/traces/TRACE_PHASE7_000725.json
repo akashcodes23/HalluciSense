@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000725",
+  "sample_id": "lit_0725",
+  "timestamp": "2026-08-14T14:50:02Z",
+  "domain": "Literature",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "Who wrote Hamlet?",
+  "generated_response": "Hamlet is the work of William Shakespeare.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0032,
+    "claims": [
+      "Hamlet is the work of William Shakespeare."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0969,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.894,
+      0.894,
+      0.7651
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0367,
+    "reconstructed_h_score": 0.0367,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 3520.01,
+    "llm_gen_ms": 342.09,
+    "p1_ms": 2191.63,
+    "p2_ms": 0.0,
+    "p3_ms": 1728.14,
+    "fusion_ms": 0.01
+  }
+}

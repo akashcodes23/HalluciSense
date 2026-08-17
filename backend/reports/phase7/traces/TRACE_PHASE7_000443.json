@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000443",
+  "sample_id": "bio_0443",
+  "timestamp": "2026-08-14T13:46:28Z",
+  "domain": "Biology",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are small organelles found in all eukaryotic cells that play a crucial role in protein synthesis. They are composed of ribosomal RNA (rRNA) and proteins, and they are involved in translating messenger RNA (mRNA) into polypeptide chains.\n\nThe primary function of ribosomes is to carry out the process of translation. Here's how it works:\n\n1. **Transcription**: Before ribosomes can begin translating mRNA, the gene is transcribed into a long strand of nucleic acid called mRNA by an enzyme called RNA polymerase.\n\n2. **Binding to mRNAs**: Ribosomes attach themselves specifically to mRNA molecules. This attachment usually occurs at a specific codon on the mRNA, which determines the amino acid sequence of the protein.\n\n3. **Initiation**: The ribosome reads the first three nucleotides (codons) of the mRNA and begins reading in the direction of the gene's transcription. Each codon corresponds to a specific amino acid in the polypeptide chain.\n\n4. **Translational Process**:\n   - The ribosome moves along the mRNA one codon at a time.\n   - As it moves, it reads the next codon and uses its RNA complement (the anticodon) to determine which tRNA molecule will bring the correct amino acid to the ribosome for attachment to the polypeptide chain.\n   - Once all three codons are read, the ribosome releases the polypeptide chain.\n\n5. **Stop Signal**: After completing a certain number of codons or when it reaches the end of the mRNA strand, the ribosome synthesizes the protein and stops translating by detaching from the mRNA strand.\n\nRibosomes operate as follows:\n- They read codons on the mRNA strand.\n- They use their RNA complement to identify the correct tRNA molecule for each codon.\n- They synthesize the amino acid chain according to the order of the codons.\n- They stop when they reach a stop codon or complete the translation process.\n\nThe intricate machinery of ribosomes ensures that proteins are synthesized efficiently and accurately, contributing significantly to the diversity and complexity of life forms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3552,
+    "claims": [
+      "Ribosomes are small organelles found in all eukaryotic cells that play a crucial role in protein synthesis. They are composed of ribosomal RNA (rRNA) and proteins",
+      "and they are involved in translating messenger RNA (mRNA) into polypeptide chains.\n\nThe primary function of ribosomes is to carry out the process of translation. Here's how it works:\n\n1. **Transcription**: Before ribosomes can begin translating mRNA",
+      "the gene is transcribed into a long strand of nucleic acid called mRNA by an enzyme called RNA polymerase.\n\n2. **Binding to mRNAs**: Ribosomes attach themselves specifically to mRNA molecules. This attachment usually occurs at a specific codon on the mRNA",
+      "which determines the amino acid sequence of the protein.\n\n3. **Initiation**: The ribosome reads the first three nucleotides (codons) of the mRNA and begins reading in the direction of the gene's transcription. Each codon corresponds to a specific amino acid in the polypeptide chain.\n\n4. **Translational Process**:\n   - The ribosome moves along the mRNA one codon at a time.\n   - As it moves",
+      "it reads the next codon and uses its RNA complement (the anticodon) to determine which tRNA molecule will bring the correct amino acid to the ribosome for attachment to the polypeptide chain.\n   - Once all three codons are read",
+      "the ribosome releases the polypeptide chain.\n\n5. **Stop Signal**: After completing a certain number of codons or when it reaches the end of the mRNA strand",
+      "the ribosome synthesizes the protein and stops translating by detaching from the mRNA strand.\n\nRibosomes operate as follows:\n- They read codons on the mRNA strand.\n- They use their RNA complement to identify the correct tRNA molecule for each codon.\n- They synthesize the amino acid chain according to the order of the codons.\n- They stop when they reach a stop codon or complete the translation process.\n\nThe intricate machinery of ribosomes ensures that proteins are synthesized efficiently and accurately",
+      "contributing significantly to the diversity and complexity of life forms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.138,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8479,
+      0.7754,
+      0.8261
+    ],
+    "contradiction_score": 0.0535
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2776,
+    "reconstructed_h_score": 0.2776,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20977.24,
+    "llm_gen_ms": 8881.37,
+    "p1_ms": 6844.9,
+    "p2_ms": 0.19,
+    "p3_ms": 8525.03,
+    "fusion_ms": 0.02
+  }
+}

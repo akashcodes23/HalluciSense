@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000114",
+  "sample_id": "law_0114",
+  "timestamp": "2026-08-14T12:30:50Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "The court that handles parking fines is the People's Court. In most cases, you can file your parking fine case directly with the local court in the area where your vehicle was parked.\n\nHere are some steps to follow:\n\n1. Go to the local courthouse and find the parking enforcement section.\n2. Check if there is a specific department or office responsible for handling parking fines.\n3. If not, ask the court clerk for assistance.\n4. Fill out the necessary paperwork, including your driver's license number and vehicle registration number.\n5. Present your ticket as proof of the parking fine.\n\nMake sure to follow all local laws and regulations regarding parking enforcement and payment.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The court that handles parking fines is the People's Court. In most cases",
+      "you can file your parking fine case directly with the local court in the area where your vehicle was parked.\n\nHere are some steps to follow:\n\n1. Go to the local courthouse and find the parking enforcement section.\n2. Check if there is a specific department or office responsible for handling parking fines.\n3. If not",
+      "ask the court clerk for assistance.\n4. Fill out the necessary paperwork",
+      "including your driver's license number and vehicle registration number.\n5. Present your ticket as proof of the parking fine.\n\nMake sure to follow all local laws and regulations regarding parking enforcement and payment."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1741,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.847,
+      0.722,
+      0.6884
+    ],
+    "contradiction_score": 0.0377
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0622,
+    "reconstructed_h_score": 0.0622,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11833.51,
+    "llm_gen_ms": 2756.69,
+    "p1_ms": 2327.09,
+    "p2_ms": 0.01,
+    "p3_ms": 11713.86,
+    "fusion_ms": 0.03
+  }
+}

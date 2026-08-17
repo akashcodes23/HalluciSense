@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000248",
+  "sample_id": "his_0248",
+  "timestamp": "2026-08-14T13:00:45Z",
+  "domain": "History",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who was the first US President?",
+  "generated_response": "The first United States President is George Washington. He took office in 1789 and served for two terms: from 1789 to 1797 and then from 1797 to 1799. Washington was elected by the Continental Congress and was the only man who had never held a prior position in government before assuming the presidency.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The first United States President is George Washington. He took office in 1789 and served for two terms: from 1789 to 1797 and then from 1797 to 1799. Washington was elected by the Continental Congress and was the only man who had never held a prior position in government before assuming the presidency."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.066,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9119,
+      0.9024,
+      0.8816
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0236,
+    "reconstructed_h_score": 0.0236,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4851.04,
+    "llm_gen_ms": 1211.36,
+    "p1_ms": 1961.57,
+    "p2_ms": 0.01,
+    "p3_ms": 2619.13,
+    "fusion_ms": 0.58
+  }
+}

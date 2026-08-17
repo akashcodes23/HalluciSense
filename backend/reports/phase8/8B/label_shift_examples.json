@@ -1,0 +1,182 @@
+[
+  {
+    "sample_id": "gen_0002",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0010",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France. It was built between 1889 and 1903 as a symbol of French technological progress and beauty.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.3357 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0014",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0022",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0024",
+    "domain": "General Knowledge",
+    "prompt": "What is the smallest ocean?",
+    "generated_response": "The smallest ocean is the Arctic Ocean.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0046 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0026",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France. It stands at 300 meters (984 feet) tall and has a diameter of approximately 125 meters (412 feet). The tower was built between 1887 and 1889 for the World's Fair to celebrate the centennial of the French Revolution.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0339 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0030",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0034",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0038",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0042",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0046",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France. It was completed and opened to the public on March 30, 1889.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.1000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "gen_0050",
+    "domain": "General Knowledge",
+    "prompt": "Where is the Eiffel Tower located?",
+    "generated_response": "The Eiffel Tower is located in Paris, France.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0500 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0052",
+    "domain": "Medicine",
+    "prompt": "How is viral influenza treated?",
+    "generated_response": "Viral influenza is a respiratory infection caused by various types of influenza viruses. Treatment options vary depending on the type of influenza and the specific symptoms. Here are some general guidelines:\n\n1. **Rest**: Rest is essential to help your body recover from the illness.\n2. **Hydration**: Drink plenty of fluids to keep your body hydrated, especially if you are experiencing a fever or other symptoms that could cause dehydration.\n3. **Over-the-counter medications**: Over-the-counter pain relievers such as acetaminophen or ibuprofen can be used to reduce fever and relieve discomfort. Be sure to follow the instructions on the label carefully.\n4. **Antiviral drugs**: In some cases, antiviral drugs may be prescribed by a doctor. These drugs can help reduce the severity of symptoms and shorten the duration of the illness.\n5. **Seek medical attention**: If you experience severe symptoms such as difficulty breathing, chest pain, or severe fever, it is important to seek medical attention immediately.\n\nIt's important to note that while some antiviral medications are available over-the-counter, others may require a prescription from a healthcare provider due to their potential side effects and interactions with other medications. If you have any concerns about the treatment options available for viral influenza or if you experience worsening symptoms, it is best to consult with a healthcare professional.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0054",
+    "domain": "Medicine",
+    "prompt": "Does chemotherapy cure bacterial pneumonia?",
+    "generated_response": "Chemotherapy is primarily used to treat bacterial infections, including pneumonia. However, it does not cure bacterial pneumonia. Bacterial pneumonia typically requires antibiotic treatment, which can be administered intravenously or orally, depending on the severity of the infection and patient circumstances.\n\nChemotherapy works by killing bacteria directly or by interfering with their metabolic processes. It is effective against a wide range of bacterial pathogens, including those that cause pneumonia. In contrast to chemotherapy, antibiotics are designed to target specific bacteria rather than causing any side effects on the host organism.\n\nIf you have bacterial pneumonia, it's important to follow your healthcare provider's guidance regarding treatment and recovery.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0056",
+    "domain": "Medicine",
+    "prompt": "How is viral influenza treated?",
+    "generated_response": "Viral influenza is typically treated with antiviral medications. However, there are no approved vaccines available for all strains of the virus. In cases where antiviral medication is ineffective, it may be necessary to seek treatment from a medical professional who can provide alternative therapies or manage the illness at home if possible.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0060",
+    "domain": "Medicine",
+    "prompt": "How is viral influenza treated?",
+    "generated_response": "Viral influenza can be treated using various methods depending on the severity of the illness and the presence of underlying conditions. Here are some common treatment options:\n\n1. Antivirals: These drugs work by inhibiting viral replication, reducing symptoms and speeding up recovery. Common antivirals for influenza include Tamiflu (oseltamivir) and Relenza (zidovudine). They can be taken in a single dose or as part of a combination treatment.\n\n2. Decongestants and cough suppressants: These medications help clear nasal congestion and reduce coughing, which can make the illness more uncomfortable but also helpful for some patients.\n\n3. Rest: Adequate rest is essential to recovery from viral influenza. It helps the body fight off infections and repairs damaged tissues.\n\n4. Fluids: Drinking plenty of fluids can help prevent dehydration and keep the mucous membranes moist, making it easier to cough and sneeze.\n\n5. Vitamin C and E: These vitamins have been shown to be effective in boosting immune function during flu season.\n\n6. Acetaminophen or ibuprofen: These medications can be used for pain relief, but they should not be taken without consulting a healthcare provider if you have underlying conditions that could make the flu more severe.\n\n7. Hospitalization: In some cases, especially if the illness is severe or if it's accompanied by complications such as pneumonia, patients may need to stay in the hospital for several days to receive proper treatment and monitoring.\n\nIt's important to note that while these treatments can help manage symptoms and improve recovery, they do not cure the virus. Therefore, it's crucial to follow your healthcare provider's advice on how to treat your influenza.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0062",
+    "domain": "Medicine",
+    "prompt": "Does chemotherapy cure bacterial pneumonia?",
+    "generated_response": "No, chemotherapy does not cure bacterial pneumonia. Bacterial pneumonia is an infection caused by bacteria that invade the airways of the lungs. The disease progresses through various stages, and once it reaches the advanced stage, antibiotics may no longer be effective.\n\nThe treatment for bacterial pneumonia typically involves:\n\n1. Initial antibiotic therapy: Antibiotics are used to kill or prevent the growth of the bacteria that cause pneumonia.\n2. Supportive care: This includes providing oxygen therapy to help manage hypoxia (low oxygen in the blood), maintaining hydration, and managing other symptoms such as fever, fatigue, and coughing.\n3. Inhaled antibiotics: For severe cases or when antibiotics are ineffective, doctors may prescribe intravenous antibiotics or administer inhalation medications.\n4. Surgery for serious bacterial pneumonia: In some cases, surgery is necessary to remove infected tissue.\n\nIt's important to follow the treatment plan provided by your healthcare provider carefully and continue taking any prescribed medications until they have completed their course of treatment. If you experience symptoms that do not improve or if you develop new symptoms, contact your doctor immediately.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0064",
+    "domain": "Medicine",
+    "prompt": "How is viral influenza treated?",
+    "generated_response": "Viral influenza is a contagious respiratory disease caused by various types of influenza viruses. It typically spreads through coughing, sneezing, and person-to-person contact. The symptoms of influenza can vary widely, ranging from mild to severe.\n\nHere are some general treatments for viral influenza:\n\n1. **Rest**: Getting enough rest is crucial as it helps your body recover faster.\n\n2. **Hydration**: Drink plenty of water and other fluids to stay hydrated.\n\n3. **Over-the-counter medications**: You may take over-the-counter medications such as acetaminophen (Tylenol) or paracetamol (Advil/Colin) to reduce fever and pain, especially in mild cases. If you have severe symptoms like high fever, difficulty breathing, or chest pain, you should seek medical attention immediately.\n\n4. **Antivirals**: Some antiviral medications are available over the counter for certain types of influenza. However, they are not effective against all strains of flu and some people might experience side effects.\n\n5. **Ventilator support**: In severe cases where oxygen levels in the lungs become critical, a ventilator may be necessary to help breathe.\n\n6. **Stay home**: To reduce the spread of infection and minimize symptoms, stay home from work or school for at least 24 hours after your fever is gone and you do not have any other symptoms.\n\nIt's important to note that while these treatments can help manage the symptoms of influenza, they cannot cure it. If you experience severe symptoms or if your symptoms persist, seek medical attention promptly.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0068",
+    "domain": "Medicine",
+    "prompt": "How is viral influenza treated?",
+    "generated_response": "Viral influenza is a common respiratory illness caused by various types of influenza viruses. Here are some basic treatment options for treating viral influenza:\n\n1. Supportive care: This includes rest, hydration, and providing nutrients to help the body fight off infection.\n\n2. Antivirals: While there are no antiviral drugs specifically targeted at influenza, many medications can help reduce symptoms and shorten the duration of illness. Some commonly used medications include:\n\n   - Oseltamivir (Tamiflu)\n   - Zidovudine (Antivir)\n   - Amantadine\n\n3. Acetaminophen: This medication can be used to relieve fever and pain associated with influenza symptoms.\n\n4. Influenza vaccines: While they are not a cure, influenza vaccines can help prevent the spread of influenza and reduce the likelihood of developing severe illness.\n\n5. Antifungal medications: If you have a fungal infection that is complicating your influenza symptoms, you may be prescribed antifungal medications.\n\nIt's important to note that while these treatments can help manage symptoms, they do not cure the virus itself. Therefore, it's important to continue to practice good hygiene and social distancing practices to prevent the spread of influenza.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  },
+  {
+    "sample_id": "med_0070",
+    "domain": "Medicine",
+    "prompt": "Does chemotherapy cure bacterial pneumonia?",
+    "generated_response": "Chemotherapy is not effective for treating bacterial pneumonia. Bacterial pneumonia is an infection caused by bacteria that can lead to inflammation and damage of the lungs. Chemotherapy is typically used to treat fungal infections or cancer, not bacterial pneumonia.\n\nTo treat bacterial pneumonia effectively, your healthcare provider will prescribe antibiotics that are specifically designed to kill the bacteria causing the infection. These drugs work by targeting specific protein receptors on the bacteria's cell surface, which allow them to bind and enter cells.\n\nIf you have bacterial pneumonia, it is important to follow your treatment plan closely with your healthcare provider to ensure proper medication administration and recovery.",
+    "original_static_label_meaning": "hallucinated",
+    "response_ground_truth": "factual",
+    "ground_truth_reason": "P1 NLI evidence score 0.0000 < 0.35 threshold. Retrieved evidence strongly entails response claims."
+  }
+]

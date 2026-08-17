@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000448",
+  "sample_id": "bio_0448",
+  "timestamp": "2026-08-14T13:47:47Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through sexual reproduction. In this process, females produce eggs (ova), and males produce sperm. These reproductive cells then combine to form embryos that develop into offspring. The fertilization of the egg by the sperm occurs in the uterus of the female mammal. This process can result in either live births (bears, cows, dogs) or clonal reproduction (monkeys, elephants).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4038,
+    "claims": [
+      "Mammals reproduce through sexual reproduction. In this process",
+      "females produce eggs (ova)",
+      "and males produce sperm. These reproductive cells then combine to form embryos that develop into offspring. The fertilization of the egg by the sperm occurs in the uterus of the female mammal. This process can result in either live births (bears",
+      "dogs) or clonal reproduction (monkeys"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0973,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8603,
+      0.8176,
+      0.8746
+    ],
+    "contradiction_score": 0.0009
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2943,
+    "reconstructed_h_score": 0.2943,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17866.37,
+    "llm_gen_ms": 1980.96,
+    "p1_ms": 2687.59,
+    "p2_ms": 0.02,
+    "p3_ms": 24214.44,
+    "fusion_ms": 0.02
+  }
+}

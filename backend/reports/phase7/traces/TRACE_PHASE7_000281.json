@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000281",
+  "sample_id": "sci_0281",
+  "timestamp": "2026-08-14T13:05:54Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is a process by which plants and other organisms convert light energy into chemical energy through the process of capturing carbon dioxide from the air and water, using it to produce glucose, oxygen, and other molecules that serve as food for the plant. This process occurs in green plants, algae, some bacteria, and certain other organisms. Photosynthesis is a fundamental process for life on Earth, providing most of the oxygen in the atmosphere and the energy that drives much of biological activity.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3321,
+    "claims": [
+      "Photosynthesis is a process by which plants and other organisms convert light energy into chemical energy through the process of capturing carbon dioxide from the air and water",
+      "using it to produce glucose",
+      "and other molecules that serve as food for the plant. This process occurs in green plants",
+      "and certain other organisms. Photosynthesis is a fundamental process for life on Earth",
+      "providing most of the oxygen in the atmosphere and the energy that drives much of biological activity."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0402,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.931,
+      0.9433,
+      0.9436
+    ],
+    "contradiction_score": 0.0022
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2279,
+    "reconstructed_h_score": 0.2279,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11620.71,
+    "llm_gen_ms": 1850.03,
+    "p1_ms": 2071.19,
+    "p2_ms": 0.01,
+    "p3_ms": 13572.35,
+    "fusion_ms": 0.01
+  }
+}

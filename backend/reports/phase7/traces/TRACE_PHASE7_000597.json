@@ -1,0 +1,62 @@
+{
+  "trace_id": "TRACE_PHASE7_000597",
+  "sample_id": "mat_0597",
+  "timestamp": "2026-08-14T14:27:59Z",
+  "domain": "Mathematics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of the interior angles in any triangle is always 180 degrees. This fundamental property holds true for all types of triangles, whether they are equilateral, isosceles, or scalene. The sum of the exterior angles around a point inside the triangle equals 360 degrees, but this is not directly related to the sum of the interior angles in a triangle.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4955,
+    "claims": [
+      "The sum of the interior angles in any triangle is always 180 degrees. This fundamental property holds true for all types of triangles",
+      "whether they are equilateral",
+      "or scalene. The sum of the exterior angles around a point inside the triangle equals 360 degrees",
+      "but this is not directly related to the sum of the interior angles in a triangle."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": false,
+    "score": null,
+    "sample_count": 1,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "h_score": 0.4955,
+    "reconstructed_h_score": 0.4955,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20034.78,
+    "llm_gen_ms": 1852.58,
+    "p1_ms": 3176.74,
+    "p2_ms": 0.0,
+    "p3_ms": 30010.83,
+    "fusion_ms": 0.01
+  }
+}

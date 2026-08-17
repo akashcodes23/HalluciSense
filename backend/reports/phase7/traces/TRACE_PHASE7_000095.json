@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000095",
+  "sample_id": "med_0095",
+  "timestamp": "2026-08-14T12:25:53Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is penicillin?",
+  "generated_response": "Penicillin is a type of antibiotic that is used to treat bacterial infections. It works by inhibiting the growth of bacteria, which can be dangerous for people who are infected with bacteria, such as streptococcus or E. coli. Penicillin has been around for many years and has been used to treat various types of infections, including urinary tract infections, pneumonia, and sinusitis.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.295,
+    "claims": [
+      "Penicillin is a type of antibiotic that is used to treat bacterial infections. It works by inhibiting the growth of bacteria",
+      "which can be dangerous for people who are infected with bacteria",
+      "such as streptococcus or E. coli. Penicillin has been around for many years and has been used to treat various types of infections",
+      "including urinary tract infections"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1442,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7573,
+      0.7423,
+      0.8359
+    ],
+    "contradiction_score": 0.0007
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2411,
+    "reconstructed_h_score": 0.2411,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10126.01,
+    "llm_gen_ms": 1302.75,
+    "p1_ms": 2556.59,
+    "p2_ms": 0.01,
+    "p3_ms": 11293.03,
+    "fusion_ms": 0.01
+  }
+}

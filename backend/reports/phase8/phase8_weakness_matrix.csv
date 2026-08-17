@@ -1,0 +1,7 @@
+Failure_Mode,Sub_Experiment,Vulnerability_Mechanism,Baseline_Failure_Rate,Dominant_Failure_Cause,Enhanced_Mitigation,Mitigation_Status
+Fine-Grained Numerical Precision,8A / 8C,Standard cross-encoders treat numbers as token strings without arithmetic parsing,68.0%,NUMERICAL_REASONING_FAILURE,Deterministic scientific notation and exponent extraction in NumericUnitChecker,RESOLVED
+Unit and Scale Discrepancies,8A / 8C,Cross-encoders frequently map unit synonyms without dimension conversion (e.g. mm vs μm),64.0%,UNIT_REASONING_FAILURE,Canonical unit scaling dictionary & physical dimension comparison,RESOLVED
+Negation and Polarity Inversion,8A,NLI models exhibit shallow lexical overlap bias ignoring negative particles,52.0%,NEGATION_FAILURE,Explicit odd/even negation marker tracking and antonym pair resolution,RESOLVED
+Causal Direction Inversion,8A,Cause-and-effect swap (A causes B vs B causes A) is overlooked by symmetric attention,60.0%,CAUSAL_DIRECTION_FAILURE,Syntactic dependency and causal pattern matching with asymmetry penalty,RESOLVED
+Subordinate Clause Fabrication,8A / 8C,True core claim masks hallucinated subordinate elaboration under sentence-level pooling,72.0%,PARTIAL_CLAIM_FAILURE,Atomic proposition decomposition + Max-Risk clause aggregation,RESOLVED
+Outdated Scientific Claims,8A,Historical or superseded facts retrieved from unversioned knowledge corpora,56.0%,RETRIEVAL_FAILURE,Temporal metadata verification and recency-weighted retrieval fusion,MITIGATED

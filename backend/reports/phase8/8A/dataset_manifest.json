@@ -1,0 +1,36 @@
+{
+  "dataset_name": "Phase8A_Scientific_Adversarial_Benchmark",
+  "version": "1.0.0",
+  "creation_timestamp": "2026-08-17T05:48:20Z",
+  "sha256": "5a8bc3df48a31ef58bba376a23cb415ba4c7c2f25821c8f3a5275365de2e6710",
+  "total_records": 175,
+  "domain_distribution": {
+    "Physics": 35,
+    "Chemistry": 35,
+    "Biology": 35,
+    "Medicine": 35,
+    "Mathematics": 35
+  },
+  "category_distribution": {
+    "TRUE_CONTROL": 25,
+    "NUMERICAL_PRECISION": 25,
+    "UNIT_SCALE": 25,
+    "NEGATION": 25,
+    "CAUSAL_INVERSION": 25,
+    "OUTDATED_SCIENTIFIC_CLAIM": 25,
+    "TRUE_CORE_FALSE_ELABORATION": 25
+  },
+  "label_distribution": {
+    "factual_0": 25,
+    "hallucinated_1": 150
+  },
+  "annotation_method": "investigator_authored_from_cited_reference",
+  "hallucisense_used_for_gt": false,
+  "p1_used_for_gt": false,
+  "source_types": [
+    "encyclopedia",
+    "standards_body"
+  ],
+  "generation_script": "backend/evaluation/phase8a/build_dataset_8a.py",
+  "seed": "N/A \u2014 deterministic dataset, no randomness"
+}

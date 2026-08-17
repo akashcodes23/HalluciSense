@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000167",
+  "sample_id": "8A_MAT_OUT_0167",
+  "timestamp": "2026-08-17T05:56:00Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Mathematics",
+  "category": "OUTDATED_SCIENTIFIC_CLAIM",
+  "difficulty": "medium",
+  "input": "The set of real numbers has the same cardinality as the set of natural numbers.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Cantor's diagonal argument",
+  "source_url": "https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 5080.04
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

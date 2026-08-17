@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000032",
+  "sample_id": "8A_PHY_TRU_0032",
+  "timestamp": "2026-08-17T05:50:47Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "difficulty": "hard",
+  "input": "Special relativity, formulated by Einstein in 1905, predicts that mass increases with velocity and that objects can exceed the speed of light with sufficient energy.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Special relativity",
+  "source_url": "https://en.wikipedia.org/wiki/Special_relativity",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 2853.64
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

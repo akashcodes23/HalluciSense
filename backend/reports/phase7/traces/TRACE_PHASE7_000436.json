@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000436",
+  "sample_id": "bio_0436",
+  "timestamp": "2026-08-14T13:44:45Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through two methods: sexual reproduction and asexual reproduction.\n\nSexual reproduction involves the combination of genetic material from two parents to produce offspring. The parents pass on their genetic information, which determines the characteristics of the offspring, including their appearance, behavior, and physiology.\n\nAsynchronous Sexual Reproduction:\nIn asynchronous sexual reproduction, the parents have separate cycles for producing gametes (sex cells) that can be fertilized at different times. This is common in some plants and some animals.\n\nSyncylogenic Reproduction:\nIn syncylogenic reproduction, both male and female gametes are produced simultaneously. The offspring are then formed by fusing the haploid nuclei of the parent cells.\n\nAsexual Reproduction involves the production of offspring without the involvement of a partner. This can occur through meiosis, where chromosomes are divided in half to produce gametes, or through cloning, where an organism's DNA is replicated and used to create identical copies.\n\nThe choice between sexual and asexual reproduction depends on various factors, including the species' reproductive strategy and environmental conditions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.313,
+    "claims": [
+      "Mammals reproduce through two methods: sexual reproduction and asexual reproduction.\n\nSexual reproduction involves the combination of genetic material from two parents to produce offspring. The parents pass on their genetic information",
+      "which determines the characteristics of the offspring",
+      "and physiology.\n\nAsynchronous Sexual Reproduction:\nIn asynchronous sexual reproduction",
+      "the parents have separate cycles for producing gametes (sex cells) that can be fertilized at different times. This is common in some plants and some animals.\n\nSyncylogenic Reproduction:\nIn syncylogenic reproduction",
+      "both male and female gametes are produced simultaneously. The offspring are then formed by fusing the haploid nuclei of the parent cells.\n\nAsexual Reproduction involves the production of offspring without the involvement of a partner. This can occur through meiosis",
+      "where chromosomes are divided in half to produce gametes",
+      "where an organism's DNA is replicated and used to create identical copies.\n\nThe choice between sexual and asexual reproduction depends on various factors",
+      "including the species' reproductive strategy and environmental conditions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": false,
+    "score": null,
+    "sample_count": 1,
+    "semantic_similarity": [],
+    "contradiction_score": null
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 1.0,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.0
+    },
+    "h_score": 0.313,
+    "reconstructed_h_score": 0.313,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23258.49,
+    "llm_gen_ms": 4475.97,
+    "p1_ms": 3772.04,
+    "p2_ms": 0.03,
+    "p3_ms": 30020.64,
+    "fusion_ms": 0.07
+  }
+}

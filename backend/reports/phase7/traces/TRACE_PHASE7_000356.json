@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000356",
+  "sample_id": "phy_0356",
+  "timestamp": "2026-08-14T13:25:28Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero is the lowest temperature at which matter can exist in its liquid form. At absolute zero, all molecular motions cease and the substance becomes completely stationary. The temperature of absolute zero is theoretically -273.15\u00b0C (or -459.67\u00b0F), but it is not possible to achieve this temperature in practical terms due to the limitations of current technology.\n\nTo understand why absolute zero cannot be reached, consider the following:\n\n1. **Thermal Expansion**: As a substance cools, its atoms and molecules increase in size due to quantum fluctuations. This expansion causes the substance to expand beyond its previous volume.\n\n2. **Heat Capacity**: The specific heat capacity of most substances decreases as temperature decreases. This means that more energy is required to raise the temperature of a given mass of substance by a small amount at lower temperatures.\n\n3. **Entropy**: Entropy is a measure of disorder or randomness in a system. As a substance cools, its entropy increases, and it becomes harder to arrange the molecules in any specific order.\n\n4. **Quantum Mechanics**: Quantum mechanics dictates that there are no absolute states for particles. The energy levels available to particles cannot be precisely defined at absolute zero.\n\nThese factors combine to make it impossible to achieve true absolute zero. However, scientists have been able to reach temperatures very close to absolute zero using techniques such as cryogenic cooling or trapping and manipulating atoms to move them closer together without causing significant expansion.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5747,
+    "claims": [
+      "Absolute zero is the lowest temperature at which matter can exist in its liquid form. At absolute zero",
+      "all molecular motions cease and the substance becomes completely stationary. The temperature of absolute zero is theoretically -273.15\u00b0C (or -459.67\u00b0F)",
+      "but it is not possible to achieve this temperature in practical terms due to the limitations of current technology.\n\nTo understand why absolute zero cannot be reached",
+      "consider the following:\n\n1. **Thermal Expansion**: As a substance cools",
+      "its atoms and molecules increase in size due to quantum fluctuations. This expansion causes the substance to expand beyond its previous volume.\n\n2. **Heat Capacity**: The specific heat capacity of most substances decreases as temperature decreases. This means that more energy is required to raise the temperature of a given mass of substance by a small amount at lower temperatures.\n\n3. **Entropy**: Entropy is a measure of disorder or randomness in a system. As a substance cools",
+      "and it becomes harder to arrange the molecules in any specific order.\n\n4. **Quantum Mechanics**: Quantum mechanics dictates that there are no absolute states for particles. The energy levels available to particles cannot be precisely defined at absolute zero.\n\nThese factors combine to make it impossible to achieve true absolute zero. However",
+      "scientists have been able to reach temperatures very close to absolute zero using techniques such as cryogenic cooling or trapping and manipulating atoms to move them closer together without causing significant expansion."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2255,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8339,
+      0.8003,
+      0.8481
+    ],
+    "contradiction_score": 0.3237
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.45,
+    "reconstructed_h_score": 0.45,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16818.25,
+    "llm_gen_ms": 5837.29,
+    "p1_ms": 5713.44,
+    "p2_ms": 0.07,
+    "p3_ms": 9862.95,
+    "fusion_ms": 0.02
+  }
+}

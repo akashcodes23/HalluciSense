@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000532",
+  "sample_id": "new_0532",
+  "timestamp": "2026-08-14T14:05:12Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are typically regulated to protect the interests of investors and maintain market stability. Regulatory bodies are responsible for setting rules, guidelines, and enforcement mechanisms to ensure that stock markets operate within legal frameworks. These regulations cover various aspects such as corporate governance,\u4fe1\u606f\u62ab\u9732, trading practices, and investor protection. Additionally, many countries have specific laws and regulations governing stocks, such as anti-money laundering laws, regulatory requirements for financial institutions, and securities regulation bodies.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4166,
+    "claims": [
+      "stock markets are typically regulated to protect the interests of investors and maintain market stability. Regulatory bodies are responsible for setting rules",
+      "and enforcement mechanisms to ensure that stock markets operate within legal frameworks. These regulations cover various aspects such as corporate governance",
+      "and investor protection. Additionally",
+      "many countries have specific laws and regulations governing stocks",
+      "such as anti-money laundering laws",
+      "regulatory requirements for financial institutions",
+      "and securities regulation bodies."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0581,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.917,
+      0.9007,
+      0.9143
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2886,
+    "reconstructed_h_score": 0.2886,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15393.25,
+    "llm_gen_ms": 1700.95,
+    "p1_ms": 2686.87,
+    "p2_ms": 0.02,
+    "p3_ms": 19707.87,
+    "fusion_ms": 0.02
+  }
+}

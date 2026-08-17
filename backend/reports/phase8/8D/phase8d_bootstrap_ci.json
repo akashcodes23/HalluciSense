@@ -1,0 +1,32 @@
+{
+  "delta_accuracy": {
+    "mean_delta": 0.0505,
+    "ci_95_lower": -0.02,
+    "ci_95_upper": 0.1305
+  },
+  "delta_f1": {
+    "mean_delta": 0.0814,
+    "ci_95_lower": 0.0099,
+    "ci_95_upper": 0.1478
+  },
+  "delta_auroc": {
+    "mean_delta": 0.0487,
+    "ci_95_lower": -0.0275,
+    "ci_95_upper": 0.1184
+  },
+  "delta_auprc": {
+    "mean_delta": 0.0616,
+    "ci_95_lower": 0.0108,
+    "ci_95_upper": 0.1086
+  },
+  "delta_ece": {
+    "mean_delta": -0.0485,
+    "ci_95_lower": -0.1305,
+    "ci_95_upper": 0.0221
+  },
+  "delta_brier": {
+    "mean_delta": -0.0303,
+    "ci_95_lower": -0.0783,
+    "ci_95_upper": 0.012
+  }
+}

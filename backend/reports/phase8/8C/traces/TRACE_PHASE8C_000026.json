@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000026",
+  "sample_id": "phase8_c_0026",
+  "timestamp": "2026-08-17T05:56:23Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Literature",
+  "corruption_type": "ENTITY_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Homer composed the Iliad and the Odyssey. However, this claim is factually incorrect.",
+  "original": "Homer composed the Iliad and the Odyssey.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3253,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3253,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 2715.56
+  },
+  "pipeline_error": null
+}

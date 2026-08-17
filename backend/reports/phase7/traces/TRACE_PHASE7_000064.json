@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000064",
+  "sample_id": "med_0064",
+  "timestamp": "2026-08-14T12:19:07Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a contagious respiratory disease caused by various types of influenza viruses. It typically spreads through coughing, sneezing, and person-to-person contact. The symptoms of influenza can vary widely, ranging from mild to severe.\n\nHere are some general treatments for viral influenza:\n\n1. **Rest**: Getting enough rest is crucial as it helps your body recover faster.\n\n2. **Hydration**: Drink plenty of water and other fluids to stay hydrated.\n\n3. **Over-the-counter medications**: You may take over-the-counter medications such as acetaminophen (Tylenol) or paracetamol (Advil/Colin) to reduce fever and pain, especially in mild cases. If you have severe symptoms like high fever, difficulty breathing, or chest pain, you should seek medical attention immediately.\n\n4. **Antivirals**: Some antiviral medications are available over the counter for certain types of influenza. However, they are not effective against all strains of flu and some people might experience side effects.\n\n5. **Ventilator support**: In severe cases where oxygen levels in the lungs become critical, a ventilator may be necessary to help breathe.\n\n6. **Stay home**: To reduce the spread of infection and minimize symptoms, stay home from work or school for at least 24 hours after your fever is gone and you do not have any other symptoms.\n\nIt's important to note that while these treatments can help manage the symptoms of influenza, they cannot cure it. If you experience severe symptoms or if your symptoms persist, seek medical attention promptly.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a contagious respiratory disease caused by various types of influenza viruses. It typically spreads through coughing",
+      "and person-to-person contact. The symptoms of influenza can vary widely",
+      "ranging from mild to severe.\n\nHere are some general treatments for viral influenza:\n\n1. **Rest**: Getting enough rest is crucial as it helps your body recover faster.\n\n2. **Hydration**: Drink plenty of water and other fluids to stay hydrated.\n\n3. **Over-the-counter medications**: You may take over-the-counter medications such as acetaminophen (Tylenol) or paracetamol (Advil/Colin) to reduce fever and pain",
+      "especially in mild cases. If you have severe symptoms like high fever",
+      "you should seek medical attention immediately.\n\n4. **Antivirals**: Some antiviral medications are available over the counter for certain types of influenza. However",
+      "they are not effective against all strains of flu and some people might experience side effects.\n\n5. **Ventilator support**: In severe cases where oxygen levels in the lungs become critical",
+      "a ventilator may be necessary to help breathe.\n\n6. **Stay home**: To reduce the spread of infection and minimize symptoms",
+      "stay home from work or school for at least 24 hours after your fever is gone and you do not have any other symptoms.\n\nIt's important to note that while these treatments can help manage the symptoms of influenza",
+      "they cannot cure it. If you experience severe symptoms or if your symptoms persist",
+      "seek medical attention promptly."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0889,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9174,
+      0.8105,
+      0.8629
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0317,
+    "reconstructed_h_score": 0.0317,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18835.63,
+    "llm_gen_ms": 4237.49,
+    "p1_ms": 2277.49,
+    "p2_ms": 0.05,
+    "p3_ms": 24060.69,
+    "fusion_ms": 0.01
+  }
+}

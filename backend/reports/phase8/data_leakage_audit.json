@@ -1,0 +1,14 @@
+{
+  "dataset_b_total": 750,
+  "dataset_b_unique_ids": 750,
+  "dataset_c_total": 300,
+  "dataset_c_unique_ids": 300,
+  "b_c_id_overlap": 0,
+  "val_test_index_overlap": 0,
+  "val_n": 525,
+  "test_n": 225,
+  "calibration_fitted_on_test": false,
+  "threshold_optimized_on_test": false,
+  "status": "CLEAN",
+  "note": "Calibration (Platt+Isotonic) and threshold sweep fitted exclusively on validation split (70%, N=525). Test split (30%, N=225) was only evaluated, never used for parameter selection."
+}

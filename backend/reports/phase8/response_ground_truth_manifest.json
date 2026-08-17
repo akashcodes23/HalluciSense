@@ -1,0 +1,30 @@
+{
+  "dataset_name": "Phase8_Dataset_B_LiveResponseBenchmark",
+  "version": "1.0.0",
+  "creation_timestamp": "2026-08-17T05:11:13Z",
+  "source_dataset": "Phase7_live_generation_traces",
+  "source_sha256_phase6_canonical": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "output_sha256": "e0da63385e80171f48439928f2f7383a85c79b7f9bdcb25ca8644e46dffd4541",
+  "generation_script": "backend/evaluation/phase8/build_dataset_b.py",
+  "random_seed": null,
+  "sample_count": 750,
+  "ground_truth_method": "P1_NLI_Evidence_Grounding (independent of H-score fusion)",
+  "ground_truth_threshold_factual": 0.35,
+  "ground_truth_threshold_hallucinated": 0.55,
+  "label_distribution_rich": {
+    "factual": 420,
+    "hallucinated": 129,
+    "partially_hallucinated": 201,
+    "unverifiable": 0
+  },
+  "label_distribution_binary": {
+    "factual_binary_0": 420,
+    "hallucinated_or_partial_binary_1": 330,
+    "unverifiable_excluded": 0
+  },
+  "binary_usable_count": 750,
+  "label_shift_count": 190,
+  "label_shift_pct": 50.67,
+  "schema_version": "phase8_v1",
+  "note": "response_ground_truth is determined independently via P1 NLI evidence grounding. It is NOT the same as original_static_label (the benchmark prompt label). unverifiable records are excluded from binary classification metrics."
+}

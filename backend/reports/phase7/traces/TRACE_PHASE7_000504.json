@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000504",
+  "sample_id": "new_0504",
+  "timestamp": "2026-08-14T13:56:36Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are generally regulated by government bodies around the world to ensure fair competition, protect investors, and maintain investor confidence in the market. These regulatory bodies include:\n\n1. Securities Regulatory Commission (SAR) or Financial Services Authority (FSA): These are responsible for setting rules and regulations that govern the trading of stocks, bonds, and other securities.\n\n2. National Stock Exchange (NSE) and National Association of Securities Dealers Automated Quotations (NASDAQ): In many countries, stock exchanges regulate the trading of stocks by setting minimum requirements for broker-dealers to conduct business and setting prices.\n\n3. Central Bank: Many governments also have central banks that oversee financial markets, including the banking industry and regulation of money creation and currency exchange.\n\n4. International Financial Regulators (IFR): These are responsible for ensuring that international financial institutions operate within the rules and regulations of their respective countries.\n\nOverall, stock market regulations help to protect investors by ensuring that there is a level playing field, preventing fraudulent activities, and maintaining investor confidence in the market.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4514,
+    "claims": [
+      "stock markets are generally regulated by government bodies around the world to ensure fair competition",
+      "and maintain investor confidence in the market. These regulatory bodies include:\n\n1. Securities Regulatory Commission (SAR) or Financial Services Authority (FSA): These are responsible for setting rules and regulations that govern the trading of stocks",
+      "and other securities.\n\n2. National Stock Exchange (NSE) and National Association of Securities Dealers Automated Quotations (NASDAQ): In many countries",
+      "stock exchanges regulate the trading of stocks by setting minimum requirements for broker-dealers to conduct business and setting prices.\n\n3. Central Bank: Many governments also have central banks that oversee financial markets",
+      "including the banking industry and regulation of money creation and currency exchange.\n\n4. International Financial Regulators (IFR): These are responsible for ensuring that international financial institutions operate within the rules and regulations of their respective countries.\n\nOverall",
+      "stock market regulations help to protect investors by ensuring that there is a level playing field",
+      "and maintaining investor confidence in the market."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0856,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8425,
+      0.8931,
+      0.8702
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3208,
+    "reconstructed_h_score": 0.3208,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21958.12,
+    "llm_gen_ms": 5065.97,
+    "p1_ms": 3564.99,
+    "p2_ms": 0.01,
+    "p3_ms": 24258.91,
+    "fusion_ms": 0.02
+  }
+}

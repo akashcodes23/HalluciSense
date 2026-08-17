@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_BIO_NUM_0080",
+  "claim": "Cellular respiration of one molecule of glucose yields approximately 2 ATP molecules in total.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Cellular respiration of one molecule of glucose yields approximately 2 ATP molecules in total",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2124.19
+}

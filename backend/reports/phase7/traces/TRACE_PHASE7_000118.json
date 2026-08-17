@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000118",
+  "sample_id": "law_0118",
+  "timestamp": "2026-08-14T12:31:48Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "In China, the court responsible for handling parking fines is the People's Court of the district level or above where the parking ticket was issued. This ensures that laws and regulations are enforced fairly and impartially across different regions and levels of government. Additionally, some cities have implemented regional courts for park management, further expanding the jurisdiction of these courts in the field of parking management.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5009,
+    "claims": [
+      "the court responsible for handling parking fines is the People's Court of the district level or above where the parking ticket was issued. This ensures that laws and regulations are enforced fairly and impartially across different regions and levels of government. Additionally",
+      "some cities have implemented regional courts for park management",
+      "further expanding the jurisdiction of these courts in the field of parking management."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3759,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8012,
+      0.7074,
+      0.8569
+    ],
+    "contradiction_score": 0.6813
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4563,
+    "reconstructed_h_score": 0.4563,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14083.69,
+    "llm_gen_ms": 1351.62,
+    "p1_ms": 2321.95,
+    "p2_ms": 0.0,
+    "p3_ms": 19495.41,
+    "fusion_ms": 0.01
+  }
+}

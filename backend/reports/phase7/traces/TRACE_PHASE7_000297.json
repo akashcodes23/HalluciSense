@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000297",
+  "sample_id": "sci_0297",
+  "timestamp": "2026-08-14T13:08:16Z",
+  "domain": "Science",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants, algae, and some bacteria convert sunlight into chemical energy stored in glucose. This energy can be used by living organisms to grow and reproduce. The basic equation for photosynthesis is:\n\n6CO2 + 6H2O \u2192 C6H12O6 + 6O2\n\nThis reaction occurs in the chloroplasts of plant cells, where water from the leaves is split into oxygen and hydrogen ions (which are then used to produce ATP). In turn, carbon dioxide from the atmosphere is absorbed by plants, which is converted into glucose.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1117,
+    "claims": [
+      "Photosynthesis is the process by which plants",
+      "and some bacteria convert sunlight into chemical energy stored in glucose. This energy can be used by living organisms to grow and reproduce. The basic equation for photosynthesis is:\n\n6CO2 + 6H2O \u2192 C6H12O6 + 6O2\n\nThis reaction occurs in the chloroplasts of plant cells",
+      "where water from the leaves is split into oxygen and hydrogen ions (which are then used to produce ATP). In turn",
+      "carbon dioxide from the atmosphere is absorbed by plants",
+      "which is converted into glucose."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0636,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8538,
+      0.9322,
+      0.9208
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0945,
+    "reconstructed_h_score": 0.0945,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20164.39,
+    "llm_gen_ms": 3020.18,
+    "p1_ms": 2749.12,
+    "p2_ms": 0.02,
+    "p3_ms": 27190.85,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000153",
+  "sample_id": "8A_MAT_UNI_0153",
+  "timestamp": "2026-08-17T05:54:51Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Mathematics",
+  "category": "UNIT_SCALE",
+  "difficulty": "easy",
+  "input": "A megabyte contains 1000 bytes.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Megabyte",
+  "source_url": "https://en.wikipedia.org/wiki/Megabyte",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 5089.53
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

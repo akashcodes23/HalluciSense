@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000553",
+  "sample_id": "mat_0553",
+  "timestamp": "2026-08-14T14:11:42Z",
+  "domain": "Mathematics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of angles in any triangle is always 180 degrees. This is a fundamental geometric property that can be proven using basic trigonometry or properties of parallel lines and transversals.\n\nHere's a simple Python code snippet to demonstrate this concept:\n\n```python\n# Define the sum of angles in a triangle\nsum_of_angles = 180\n\n# Print the result\nprint(\"The sum of angles in a triangle is:\", sum_of_angles)\n```\n\nWhen you run this code, it will output: \"The sum of angles in a triangle is: 180\".",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The sum of angles in any triangle is always 180 degrees. This is a fundamental geometric property that can be proven using basic trigonometry or properties of parallel lines and transversals.\n\nHere's a simple Python code snippet to demonstrate this concept:\n\n```python\n# Define the sum of angles in a triangle\nsum_of_angles = 180\n\n# Print the result\nprint(\"The sum of angles in a triangle is:\"",
+      "sum_of_angles)\n```\n\nWhen you run this code",
+      "it will output: \"The sum of angles in a triangle is: 180\"."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1363,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.875,
+      0.7535,
+      0.7438
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0487,
+    "reconstructed_h_score": 0.0487,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17210.59,
+    "llm_gen_ms": 3137.32,
+    "p1_ms": 3565.51,
+    "p2_ms": 0.01,
+    "p3_ms": 17870.26,
+    "fusion_ms": 0.01
+  }
+}

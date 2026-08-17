@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000007",
+  "sample_id": "8A_PHY_NUM_0007",
+  "timestamp": "2026-08-17T05:49:59Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Physics",
+  "category": "NUMERICAL_PRECISION",
+  "difficulty": "hard",
+  "input": "An electron has a rest mass of approximately 9.11×10⁻²⁷ kilograms.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "NIST CODATA 2018",
+  "source_url": "https://physics.nist.gov/cgi-bin/cuu/Value?me",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1690.39
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

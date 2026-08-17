@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000011",
+  "sample_id": "phase8_c_0011",
+  "timestamp": "2026-08-17T05:56:03Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Medicine",
+  "corruption_type": "ENTITY_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Insulin regulates glucose levels in the human bloodstream. However, this claim is factually incorrect.",
+  "original": "Insulin regulates glucose levels in the human bloodstream.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3327,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3327,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 2075.23
+  },
+  "pipeline_error": null
+}

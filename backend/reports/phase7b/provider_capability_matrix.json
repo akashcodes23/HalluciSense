@@ -1,0 +1,42 @@
+[
+  {
+    "model": "qwen2.5-coder:1.5b",
+    "provider": "Ollama (Local)",
+    "supports_generation": true,
+    "supports_temperature": true,
+    "supports_multiple_samples": true,
+    "supports_token_logprobs": false,
+    "supports_streaming": true,
+    "confidence_signal_status": "UNAVAILABLE (Endpoint omits token logits)"
+  },
+  {
+    "model": "llama3:latest",
+    "provider": "Ollama (Local)",
+    "supports_generation": true,
+    "supports_temperature": true,
+    "supports_multiple_samples": true,
+    "supports_token_logprobs": false,
+    "supports_streaming": true,
+    "confidence_signal_status": "UNAVAILABLE (Endpoint omits token logits)"
+  },
+  {
+    "model": "gpt-4o-mini",
+    "provider": "OpenAI (REST API)",
+    "supports_generation": true,
+    "supports_temperature": true,
+    "supports_multiple_samples": true,
+    "supports_token_logprobs": true,
+    "supports_streaming": true,
+    "confidence_signal_status": "BLOCKED (API quota / billing threshold reached)"
+  },
+  {
+    "model": "gemini-2.0-flash",
+    "provider": "Google Gemini",
+    "supports_generation": true,
+    "supports_temperature": true,
+    "supports_multiple_samples": true,
+    "supports_token_logprobs": false,
+    "supports_streaming": true,
+    "confidence_signal_status": "UNAVAILABLE (Standard SDK does not expose logits)"
+  }
+]

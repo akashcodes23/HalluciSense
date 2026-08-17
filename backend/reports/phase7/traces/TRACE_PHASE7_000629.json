@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000629",
+  "sample_id": "geo_0629",
+  "timestamp": "2026-08-14T14:32:49Z",
+  "domain": "Geography",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "Where is the Amazon River?",
+  "generated_response": "The Amazon River originates in Brazil and flows through South America into the Pacific Ocean. It is one of the world's longest rivers by length, with an average width of around 50 miles (80 kilometers). The river system spans across nine countries in South America, including Brazil, Peru, Bolivia, Ecuador, Colombia, Venezuela, Guyana, Suriname, and French Guiana.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3336,
+    "claims": [
+      "The Amazon River originates in Brazil and flows through South America into the Pacific Ocean. It is one of the world's longest rivers by length",
+      "with an average width of around 50 miles (80 kilometers). The river system spans across nine countries in South America"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1859,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8631,
+      0.8829,
+      0.9393
+    ],
+    "contradiction_score": 0.3362
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2809,
+    "reconstructed_h_score": 0.2809,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9121.74,
+    "llm_gen_ms": 1467.27,
+    "p1_ms": 3314.39,
+    "p2_ms": 0.02,
+    "p3_ms": 8228.6,
+    "fusion_ms": 0.03
+  }
+}

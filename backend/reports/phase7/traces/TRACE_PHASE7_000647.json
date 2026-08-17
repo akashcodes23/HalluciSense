@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000647",
+  "sample_id": "geo_0647",
+  "timestamp": "2026-08-14T14:34:48Z",
+  "domain": "Geography",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the largest hot desert?",
+  "generated_response": "The largest hot desert in the world is the Sahara Desert, which spans over 4 million square kilometers (1.56 million square miles) across North Africa. The Sahara is home to many unique features and animals, including sand dunes, lakes, mountains, and deserts that rise up to 2,000 meters above sea level.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3366,
+    "claims": [
+      "The largest hot desert in the world is the Sahara Desert",
+      "which spans over 4 million square kilometers (1.56 million square miles) across North Africa. The Sahara is home to many unique features and animals",
+      "and deserts that rise up to 2,000 meters above sea level."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3443,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.774,
+      0.767,
+      0.9488
+    ],
+    "contradiction_score": 0.6677
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3393,
+    "reconstructed_h_score": 0.3393,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10903.86,
+    "llm_gen_ms": 1927.32,
+    "p1_ms": 4129.32,
+    "p2_ms": 0.01,
+    "p3_ms": 9329.58,
+    "fusion_ms": 0.02
+  }
+}

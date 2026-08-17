@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000534",
+  "sample_id": "new_0534",
+  "timestamp": "2026-08-14T14:05:42Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Is the UN still active?",
+  "generated_response": "Yes, the United Nations (UN) is still active and continues to play a crucial role in international affairs. It serves as a forum for nations to exchange ideas, resolve conflicts, and promote global peace and security. The UN has 193 member states and works on various issues such as peacekeeping, humanitarian aid, human rights, international law, and development assistance.\n\nThe UN is actively involved in addressing global challenges, including climate change, poverty, terrorism, and conflict resolution. It operates through a network of organizations, including the Secretariat, which coordinates the day-to-day operations of the UN. The UN's mandate includes promoting peace and security, fostering cooperation among nations, and ensuring that all member states respect international laws and norms.\n\nThe UN has been instrumental in providing a platform for dialogue and understanding between nations, helping to reduce tensions and conflicts and promote a more peaceful world.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4188,
+    "claims": [
+      "the United Nations (UN) is still active and continues to play a crucial role in international affairs. It serves as a forum for nations to exchange ideas",
+      "and promote global peace and security. The UN has 193 member states and works on various issues such as peacekeeping",
+      "and development assistance.\n\nThe UN is actively involved in addressing global challenges",
+      "and conflict resolution. It operates through a network of organizations",
+      "which coordinates the day-to-day operations of the UN. The UN's mandate includes promoting peace and security",
+      "fostering cooperation among nations",
+      "and ensuring that all member states respect international laws and norms.\n\nThe UN has been instrumental in providing a platform for dialogue and understanding between nations",
+      "helping to reduce tensions and conflicts and promote a more peaceful world."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0693,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9468,
+      0.8316,
+      0.9018
+    ],
+    "contradiction_score": 0.0
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.294,
+    "reconstructed_h_score": 0.294,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11677.52,
+    "llm_gen_ms": 3849.63,
+    "p1_ms": 2227.5,
+    "p2_ms": 0.01,
+    "p3_ms": 9744.66,
+    "fusion_ms": 0.01
+  }
+}

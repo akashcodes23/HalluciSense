@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000327",
+  "sample_id": "com_0327",
+  "timestamp": "2026-08-14T13:17:02Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is a popular algorithm in computer science for finding the shortest path between two points in a graph. It works by maintaining a priority queue to always consider the next shortest path available. Here's a basic overview of how it operates:\n\n1. **Initialization**: \n   - Start from the source node.\n   - Set the distance of the source node to zero and all other nodes to infinity.\n   - Create a priority queue (min-heap) where the smallest distance is always at the front.\n\n2. **Main Loop**:\n   - While there are still nodes in the priority queue:\n     - Extract the node with the smallest distance from the priority queue.\n     - For each neighbor of the extracted node:\n       - Calculate the tentative distance through the current node to the neighbor.\n       - If this new distance is shorter than the previously recorded distance, update the distance and set the predecessor node.\n     - Add the updated node back into the priority queue.\n\n3. **Termination**:\n   - Once all nodes have been processed (the priority queue is empty), the shortest path from the source to each other node can be reconstructed by following the predecessors.\n\nDijkstra's algorithm is particularly useful in network routing and finding the most efficient paths in telecommunications networks, transportation systems, and more.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Dijkstra's algorithm is a popular algorithm in computer science for finding the shortest path between two points in a graph. It works by maintaining a priority queue to always consider the next shortest path available. Here's a basic overview of how it operates:\n\n1. **Initialization**: \n   - Start from the source node.\n   - Set the distance of the source node to zero and all other nodes to infinity.\n   - Create a priority queue (min-heap) where the smallest distance is always at the front.\n\n2. **Main Loop**:\n   - While there are still nodes in the priority queue:\n     - Extract the node with the smallest distance from the priority queue.\n     - For each neighbor of the extracted node:\n       - Calculate the tentative distance through the current node to the neighbor.\n       - If this new distance is shorter than the previously recorded distance",
+      "update the distance and set the predecessor node.\n     - Add the updated node back into the priority queue.\n\n3. **Termination**:\n   - Once all nodes have been processed (the priority queue is empty)",
+      "the shortest path from the source to each other node can be reconstructed by following the predecessors.\n\nDijkstra's algorithm is particularly useful in network routing and finding the most efficient paths in telecommunications networks"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.273,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8403,
+      0.8467
+    ],
+    "contradiction_score": 0.4893
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0975,
+    "reconstructed_h_score": 0.0975,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23569.36,
+    "llm_gen_ms": 5672.94,
+    "p1_ms": 2090.9,
+    "p2_ms": 0.02,
+    "p3_ms": 30811.38,
+    "fusion_ms": 0.01
+  }
+}

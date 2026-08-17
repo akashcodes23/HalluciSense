@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000123",
+  "sample_id": "phase8_c_0123",
+  "timestamp": "2026-08-17T05:58:13Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "History",
+  "corruption_type": "LOCATION_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "The Magna Carta was signed in 1215. However, this claim is factually incorrect.",
+  "original": "The Magna Carta was signed in 1215.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.4344,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.4344,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.NEEDS_VERIFICATION",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 294.8
+  },
+  "pipeline_error": null
+}

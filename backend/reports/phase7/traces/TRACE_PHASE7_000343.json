@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000343",
+  "sample_id": "com_0343",
+  "timestamp": "2026-08-14T13:21:34Z",
+  "domain": "Computer Science",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is an algorithm used to find the shortest path between two nodes in a graph with non-negative edge weights. It starts from the source node and iteratively explores the neighboring nodes, selecting the one that has the smallest distance until it reaches the destination node or all nodes have been visited.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.32,
+    "claims": [
+      "Dijkstra's algorithm is an algorithm used to find the shortest path between two nodes in a graph with non-negative edge weights. It starts from the source node and iteratively explores the neighboring nodes",
+      "selecting the one that has the smallest distance until it reaches the destination node or all nodes have been visited."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0568,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9092,
+      0.9451,
+      0.8865
+    ],
+    "contradiction_score": 0.0019
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.226,
+    "reconstructed_h_score": 0.226,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10321.71,
+    "llm_gen_ms": 1214.86,
+    "p1_ms": 2451.72,
+    "p2_ms": 0.0,
+    "p3_ms": 12316.38,
+    "fusion_ms": 0.01
+  }
+}

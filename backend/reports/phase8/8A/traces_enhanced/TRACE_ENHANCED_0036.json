@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_CHE_TRU_0036",
+  "claim": "Water has a molecular formula of H\u2082O and a molar mass of approximately 18 g/mol.",
+  "ground_truth": 0,
+  "enhanced_h_score": 0.1333,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Water has a molecular formula of H\u2082O and a molar mass of approximately 18 g/mol",
+      "base_nli_score": 0.1333,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.1333
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1782.09
+}

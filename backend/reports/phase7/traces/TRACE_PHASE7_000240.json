@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000240",
+  "sample_id": "his_0240",
+  "timestamp": "2026-08-14T12:59:52Z",
+  "domain": "History",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Who was the first US President?",
+  "generated_response": "The first US President was George Washington. He served from 1789 to 1797.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.9,
+    "claims": [
+      "The first US President was George Washington. He served from 1789 to 1797."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0511,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.91,
+      0.933,
+      0.9214
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.5969,
+    "reconstructed_h_score": 0.5969,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 5221.72,
+    "llm_gen_ms": 616.13,
+    "p1_ms": 1384.1,
+    "p2_ms": 0.0,
+    "p3_ms": 4738.15,
+    "fusion_ms": 0.02
+  }
+}

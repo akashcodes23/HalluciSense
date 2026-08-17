@@ -1,0 +1,7 @@
+Cell,Count,Percentage,Description
+A_Stable_Correct,114,65.14,Both Baseline and Enhanced correct
+B_Regression,36,20.57,"Baseline correct, Enhanced made error"
+C_Recovery,17,9.71,"Baseline wrong, Enhanced fixed error"
+D_Stable_Wrong,8,4.57,Both Baseline and Enhanced wrong
+SUMMARY_Recovery_Rate,17,68.0,C / (C + D)
+SUMMARY_Regression_Rate,36,24.0,B / (A + B)

@@ -1,0 +1,8 @@
+Enhancement,Target_Category,Mechanism,Baseline_Acc,Enhanced_Acc,Delta_Acc,CI_95_Lower,CI_95_Upper,raw_p_value,Verdict,fdr_q_value
+Numeric Module,NUMERICAL_PRECISION,Deterministic numeric comparison,1.0,0.72,-0.28,-0.44,-0.12,0.0156,REGRESSED,0.0219
+Numeric Module,UNIT_SCALE,Physical dimension and scale parser,1.0,0.92,-0.08,-0.2,0.0,0.5,INCONCLUSIVE,0.5833
+Negation Module,NEGATION,Polarity reversal & antonym detector,1.0,1.0,0.0,0.0,0.0,1.0,NO_SIGNIFICANT_CHANGE,1.0
+Causal Module,CAUSAL_INVERSION,Causal direction asymmetry checker,1.0,0.72,-0.28,-0.48,-0.12,0.0156,REGRESSED,0.0219
+Claim Decomposition,TRUE_CORE_FALSE_ELABORATION,Atomic proposition decomposition,1.0,0.52,-0.48,-0.68,-0.28,0.0005,REGRESSED,0.0017
+Claim Decomposition,OUTDATED_SCIENTIFIC_CLAIM,Proposition temporal alignment,1.0,0.68,-0.32,-0.48,-0.16,0.0078,REGRESSED,0.0182
+Control Preservation,TRUE_CONTROL,Factual control retention,0.0,0.68,0.68,0.48,0.84,0.0,IMPROVED,0.0001

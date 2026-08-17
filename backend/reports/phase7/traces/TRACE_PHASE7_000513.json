@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000513",
+  "sample_id": "new_0513",
+  "timestamp": "2026-08-14T13:59:41Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits, also known as climate conferences or global climate talks, are important events where countries gather to discuss and agree on policies and actions to address the challenges of climate change. These summits typically focus on several key topics:\n\n1. **International Agreements**: Setting and enforcing international agreements on climate change, such as the Paris Agreement.\n\n2. **Technology Transfer**: Sharing technological innovations and resources to help developing countries reduce their greenhouse gas emissions.\n\n3. **Economic Policies**: Proposing economic measures to mitigate climate change impacts, such as carbon taxes, energy efficiency standards, and renewable energy policies.\n\n4. **Adaptation Strategies**: Developing strategies for adapting to the effects of climate change on societies, economies, and ecosystems.\n\n5. **Climate Science**: Discussing advancements in climate science and understanding of climate change phenomena.\n\n6. **Public Awareness**: Engaging with the public to promote awareness about climate change issues and encourage action.\n\n7. **Corporate Responsibility**: Encouraging companies and businesses to take responsibility for their environmental impact and to set ambitious climate targets.\n\n8. **Regional Cooperation**: Focusing on collaboration between countries within specific regions or continents to address shared challenges in climate change.\n\nThese summits aim to foster cooperation among nations, share knowledge, and develop effective strategies to combat global climate change. They are crucial for shaping the course of climate policy globally and ensuring that nations work together towards a more sustainable future.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "also known as climate conferences or global climate talks",
+      "are important events where countries gather to discuss and agree on policies and actions to address the challenges of climate change. These summits typically focus on several key topics:\n\n1. **International Agreements**: Setting and enforcing international agreements on climate change",
+      "such as the Paris Agreement.\n\n2. **Technology Transfer**: Sharing technological innovations and resources to help developing countries reduce their greenhouse gas emissions.\n\n3. **Economic Policies**: Proposing economic measures to mitigate climate change impacts",
+      "such as carbon taxes",
+      "and renewable energy policies.\n\n4. **Adaptation Strategies**: Developing strategies for adapting to the effects of climate change on societies",
+      "and ecosystems.\n\n5. **Climate Science**: Discussing advancements in climate science and understanding of climate change phenomena.\n\n6. **Public Awareness**: Engaging with the public to promote awareness about climate change issues and encourage action.\n\n7. **Corporate Responsibility**: Encouraging companies and businesses to take responsibility for their environmental impact and to set ambitious climate targets.\n\n8. **Regional Cooperation**: Focusing on collaboration between countries within specific regions or continents to address shared challenges in climate change.\n\nThese summits aim to foster cooperation among nations",
+      "and develop effective strategies to combat global climate change. They are crucial for shaping the course of climate policy globally and ensuring that nations work together towards a more sustainable future."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0852,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8825,
+      0.8859,
+      0.839
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0304,
+    "reconstructed_h_score": 0.0304,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 24033.32,
+    "llm_gen_ms": 6037.55,
+    "p1_ms": 5178.89,
+    "p2_ms": 0.04,
+    "p3_ms": 24701.77,
+    "fusion_ms": 0.01
+  }
+}

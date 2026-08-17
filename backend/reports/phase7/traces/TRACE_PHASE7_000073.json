@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000073",
+  "sample_id": "med_0073",
+  "timestamp": "2026-08-14T12:20:44Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar is regulated by the body through a complex system of hormones and enzymes that work together to maintain homeostasis in the body. Some of the key hormones involved in regulating blood sugar include insulin, glucagon, and leptin. Insulin is produced by the pancreas and helps regulate glucose uptake in cells throughout the body. Glucagon is produced by the liver and helps regulate the breakdown of glucose into energy. Leptin is a hormone produced by fat cells that helps regulate hunger and energy expenditure. These hormones work together to maintain blood sugar levels within a normal range and prevent high or low blood sugar, which can have serious consequences for the body if not properly regulated.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Blood sugar is regulated by the body through a complex system of hormones and enzymes that work together to maintain homeostasis in the body. Some of the key hormones involved in regulating blood sugar include insulin",
+      "and leptin. Insulin is produced by the pancreas and helps regulate glucose uptake in cells throughout the body. Glucagon is produced by the liver and helps regulate the breakdown of glucose into energy. Leptin is a hormone produced by fat cells that helps regulate hunger and energy expenditure. These hormones work together to maintain blood sugar levels within a normal range and prevent high or low blood sugar",
+      "which can have serious consequences for the body if not properly regulated."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0974,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8264,
+      0.8683,
+      0.8569
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0348,
+    "reconstructed_h_score": 0.0348,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7625.8,
+    "llm_gen_ms": 2287.6,
+    "p1_ms": 1797.49,
+    "p2_ms": 0.01,
+    "p3_ms": 6612.72,
+    "fusion_ms": 0.01
+  }
+}

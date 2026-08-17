@@ -1,0 +1,6 @@
+{
+  "calibration_policy": "FROZEN_PHASE9_ISOTONIC_NO_TEST_RECALIBRATION",
+  "test_ece": 0.315,
+  "test_brier_score": 0.1977,
+  "reliability_bins_count": 10
+}

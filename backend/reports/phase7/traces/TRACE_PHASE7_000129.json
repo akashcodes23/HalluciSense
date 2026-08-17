@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000129",
+  "sample_id": "law_0129",
+  "timestamp": "2026-08-14T12:34:25Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas corpus is a constitutional right in the United States that allows someone to seek judicial review of whether a court has abused its discretion when granting or denying a writ of habeas corpus. It provides an avenue for individuals who are held in custody by the government to challenge their legal status and determine if they have been granted appropriate bail or are entitled to other forms of relief from custody.\n\nHabeas corpus has been used for many historical purposes, including to prevent torture, enforce court orders, and protect individuals whose freedom is under threat. In recent years, habeas corpus has become more prominent in the United States, with increasing cases of wrongful imprisonment, abuse of power by law enforcement agencies, and other violations of constitutional rights.\n\nUnder the U.S. Constitution, habeas corpus is a basic civil right that can be invoked by anyone who is held in custody without a valid reason to remain there. The court must examine whether the detention was lawful or unreasonable and determine if it meets the requirements of the Constitution. If the court finds that the detention is unlawful, it may issue a writ of habeas corpus requiring the government to release the person from custody.\n\nIn some cases, habeas corpus may also be invoked in response to other forms of legal challenges, such as challenges to constitutional provisions or requests for compensation for damages caused by a violation of the Constitution. In these cases, the court may order the government to take action to remedy the issue or provide compensation.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Habeas corpus is a constitutional right in the United States that allows someone to seek judicial review of whether a court has abused its discretion when granting or denying a writ of habeas corpus. It provides an avenue for individuals who are held in custody by the government to challenge their legal status and determine if they have been granted appropriate bail or are entitled to other forms of relief from custody.\n\nHabeas corpus has been used for many historical purposes",
+      "including to prevent torture",
+      "and protect individuals whose freedom is under threat. In recent years",
+      "habeas corpus has become more prominent in the United States",
+      "with increasing cases of wrongful imprisonment",
+      "abuse of power by law enforcement agencies",
+      "and other violations of constitutional rights.\n\nUnder the U.S. Constitution",
+      "habeas corpus is a basic civil right that can be invoked by anyone who is held in custody without a valid reason to remain there. The court must examine whether the detention was lawful or unreasonable and determine if it meets the requirements of the Constitution. If the court finds that the detention is unlawful",
+      "it may issue a writ of habeas corpus requiring the government to release the person from custody.\n\nIn some cases",
+      "habeas corpus may also be invoked in response to other forms of legal challenges",
+      "such as challenges to constitutional provisions or requests for compensation for damages caused by a violation of the Constitution. In these cases",
+      "the court may order the government to take action to remedy the issue or provide compensation."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0683,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9523,
+      0.8579,
+      0.8825
+    ],
+    "contradiction_score": 0.0051
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0244,
+    "reconstructed_h_score": 0.0244,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23503.97,
+    "llm_gen_ms": 5589.17,
+    "p1_ms": 3310.69,
+    "p2_ms": 0.02,
+    "p3_ms": 28260.03,
+    "fusion_ms": 0.01
+  }
+}

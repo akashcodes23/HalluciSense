@@ -1,0 +1,48 @@
+{
+  "trace_id": "TRACE_PHASE8_000088",
+  "sample_id": "phase8_c_0088",
+  "timestamp": "2026-08-17T05:15:23Z",
+  "dataset": "Phase8_Dataset_C",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "corruption_type": "DATE_SUBSTITUTION",
+  "corruption_severity": 2,
+  "query": "What does Dijkstra's algorithm do?",
+  "original_response": "Dijkstra's algorithm finds shortest paths in non-negative weighted graphs.",
+  "corrupted_response": "Dijkstra's algorithm finds shortest paths in non-negative weighted graphs. However, this claim is factually incorrect.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_transformation_self_evident",
+  "is_actually_corrupted": true,
+  "p1": {
+    "available": true,
+    "score": 0.5759,
+    "method": "Phase7_source_P1_plus_severity_boost",
+    "note": "P1 score = Phase 7 source-sample P1 + severity \u00d7 0.12 corruption boost. Full re-retrieval+NLI on corrupted text would require live pipeline execution. This is a proxy evaluation disclosed in provenance."
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "signal_type": "UNAVAILABLE"
+  },
+  "p3": {
+    "available": true,
+    "score": 0.22826
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "effective_weights": {
+      "w1": 0.6429,
+      "w3": 0.3571,
+      "sum": 1.0
+    },
+    "h_score": 0.4518,
+    "reconstructed_h_score": 0.4518,
+    "fusion_absolute_error": 0.0
+  },
+  "predicted_label": 0,
+  "risk_level": "MEDIUM",
+  "timings": {
+    "total_ms": 0.0,
+    "note": "No live execution; scores derived from source traces"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000542",
+  "sample_id": "new_0542",
+  "timestamp": "2026-08-14T14:08:05Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Is the UN still active?",
+  "generated_response": "Yes, the United Nations (UN) is still actively engaged in its activities. It continues to serve as a major global organization for maintaining international peace and security, promoting development, addressing humanitarian issues, and fostering cooperation among nations around the world. The UN's mission remains focused on providing leadership, delivering aid, supporting peacekeeping efforts, and promoting dialogue and understanding between different cultures and countries.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3882,
+    "claims": [
+      "the United Nations (UN) is still actively engaged in its activities. It continues to serve as a major global organization for maintaining international peace and security",
+      "and fostering cooperation among nations around the world. The UN's mission remains focused on providing leadership",
+      "and promoting dialogue and understanding between different cultures and countries."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0476,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9366,
+      0.9258,
+      0.9183
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2666,
+    "reconstructed_h_score": 0.2666,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11408.49,
+    "llm_gen_ms": 1368.12,
+    "p1_ms": 3807.7,
+    "p2_ms": 0.01,
+    "p3_ms": 11727.72,
+    "fusion_ms": 0.0
+  }
+}

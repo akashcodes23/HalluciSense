@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000222",
+  "sample_id": "his_0222",
+  "timestamp": "2026-08-14T12:57:55Z",
+  "domain": "History",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Who won the Battle of Waterloo?",
+  "generated_response": "The Battle of Waterloo was fought on June 18, 1815, near Waterloo in Belgium. The outcome was a decisive victory for Napoleon Bonaparte's forces over the French Army under General Wellington. This battle marked the end of Napoleon's reign and the beginning of the era of European peace.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1611,
+    "claims": [
+      "The Battle of Waterloo was fought on June 18, 1815, near Waterloo in Belgium. The outcome was a decisive victory for Napoleon Bonaparte's forces over the French Army under General Wellington. This battle marked the end of Napoleon's reign and the beginning of the era of European peace."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1059,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8061,
+      0.9207,
+      0.7852
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1414,
+    "reconstructed_h_score": 0.1414,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9796.95,
+    "llm_gen_ms": 1686.85,
+    "p1_ms": 1966.05,
+    "p2_ms": 0.01,
+    "p3_ms": 11216.4,
+    "fusion_ms": 0.01
+  }
+}

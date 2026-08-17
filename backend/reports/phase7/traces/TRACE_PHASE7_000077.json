@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000077",
+  "sample_id": "med_0077",
+  "timestamp": "2026-08-14T12:21:37Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What regulates blood sugar?",
+  "generated_response": "Blood sugar is regulated primarily by the pancreas, particularly through the release of insulin and glucagon.\n\nInsulin is produced by the beta cells in the pancreas and helps to regulate blood glucose levels by promoting the uptake of glucose from the bloodstream into cells throughout the body. It also prevents cells from producing excess sugar by binding to them, thus lowering blood sugar.\n\nGlucagon is produced by the alpha cells in the pancreas and helps to regulate blood glucose levels by promoting the release of glucose from the liver back into the bloodstream. It also stimulates muscle cells to take up glucose from the bloodstream for energy.\n\nTogether, these hormones work in a complex feedback loop to keep blood sugar levels within a normal range, preventing excessive insulin production during fasting or after exercise, and glucagon production during times of high blood sugar (e.g., after meals).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4026,
+    "claims": [
+      "Blood sugar is regulated primarily by the pancreas",
+      "particularly through the release of insulin and glucagon.\n\nInsulin is produced by the beta cells in the pancreas and helps to regulate blood glucose levels by promoting the uptake of glucose from the bloodstream into cells throughout the body. It also prevents cells from producing excess sugar by binding to them",
+      "thus lowering blood sugar.\n\nGlucagon is produced by the alpha cells in the pancreas and helps to regulate blood glucose levels by promoting the release of glucose from the liver back into the bloodstream. It also stimulates muscle cells to take up glucose from the bloodstream for energy.\n\nTogether",
+      "these hormones work in a complex feedback loop to keep blood sugar levels within a normal range",
+      "preventing excessive insulin production during fasting or after exercise",
+      "and glucagon production during times of high blood sugar (e.g."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.072,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9164,
+      0.8563,
+      0.8951
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2845,
+    "reconstructed_h_score": 0.2845,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11636.7,
+    "llm_gen_ms": 2941.21,
+    "p1_ms": 3081.33,
+    "p2_ms": 0.02,
+    "p3_ms": 10715.95,
+    "fusion_ms": 0.02
+  }
+}

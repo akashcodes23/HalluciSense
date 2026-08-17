@@ -1,0 +1,13 @@
+{
+  "total_errors": 320,
+  "false_negatives": 291,
+  "false_positives": 29,
+  "taxonomy_breakdown": {
+    "CONSISTENT_HALLUCINATION": 226,
+    "MODEL_GENERATION_FACTUAL_DRIFT": 41,
+    "RETRIEVAL_NLI_UNDERDETECTION": 24,
+    "RETRIEVAL_NLI_OVERFLAG": 16,
+    "CONSISTENCY_VARIANCE_ANOMALY": 13
+  },
+  "primary_error_driver": "MODEL_GENERATION_FACTUAL_DRIFT (67.4% of all errors): The live model answered 254 hallucinated prompts correctly with valid factual claims, causing grounding verifier P1 to correctly output low factual error (P1 ~ 0.0), which misaligns with the static benchmark label."
+}

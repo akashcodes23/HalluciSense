@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000670",
+  "sample_id": "pol_0670",
+  "timestamp": "2026-08-14T14:40:21Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power is the right of a leader or government to prevent an action from being taken or passed into law without their approval. It allows the leader to make decisions that may be unpopular with the majority, as they can block legislation or veto any proposed changes.\n\nIn many countries, veto power is used to protect important social programs or policies from changes that might cause economic hardship or harm to certain groups. In other cases, veto power is used to preserve a government's authority and maintain its influence over the country's political process.\n\nVeto power can be exercised by either the executive branch of government or the legislature (or both). It can be exercised for a wide range of reasons, including:\n\n- Protecting public safety\n- Preserving national security\n- Maintaining social stability\n- Balancing the budget\n- Ensuring the country's economic well-being\n\nOverall, veto power is an important tool used by governments to maintain their authority and ensure that certain decisions are made in a way that respects the needs of the majority.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4969,
+    "claims": [
+      "Veto power is the right of a leader or government to prevent an action from being taken or passed into law without their approval. It allows the leader to make decisions that may be unpopular with the majority",
+      "as they can block legislation or veto any proposed changes.\n\nIn many countries",
+      "veto power is used to protect important social programs or policies from changes that might cause economic hardship or harm to certain groups. In other cases",
+      "veto power is used to preserve a government's authority and maintain its influence over the country's political process.\n\nVeto power can be exercised by either the executive branch of government or the legislature (or both). It can be exercised for a wide range of reasons",
+      "including:\n\n- Protecting public safety\n- Preserving national security\n- Maintaining social stability\n- Balancing the budget\n- Ensuring the country's economic well-being\n\nOverall",
+      "veto power is an important tool used by governments to maintain their authority and ensure that certain decisions are made in a way that respects the needs of the majority."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0782,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8883,
+      0.8884,
+      0.8636
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3474,
+    "reconstructed_h_score": 0.3474,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15224.32,
+    "llm_gen_ms": 4469.2,
+    "p1_ms": 3484.04,
+    "p2_ms": 0.03,
+    "p3_ms": 11612.54,
+    "fusion_ms": 0.02
+  }
+}

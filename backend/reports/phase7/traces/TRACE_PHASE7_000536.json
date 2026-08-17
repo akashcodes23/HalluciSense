@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000536",
+  "sample_id": "new_0536",
+  "timestamp": "2026-08-14T14:06:34Z",
+  "domain": "News",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets in many countries are subject to regulation by various government bodies and financial authorities. These regulations ensure that the securities market operates transparently, fairly, and safely for all participants, including investors, issuers, and brokers. The goal is to protect both investors and the broader financial system from risky investments.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4993,
+    "claims": [
+      "stock markets in many countries are subject to regulation by various government bodies and financial authorities. These regulations ensure that the securities market operates transparently",
+      "and safely for all participants",
+      "and brokers. The goal is to protect both investors and the broader financial system from risky investments."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0978,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8263,
+      0.873
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3559,
+    "reconstructed_h_score": 0.3559,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 21530.58,
+    "llm_gen_ms": 1160.19,
+    "p1_ms": 2940.52,
+    "p2_ms": 0.01,
+    "p3_ms": 32435.92,
+    "fusion_ms": 0.01
+  }
+}

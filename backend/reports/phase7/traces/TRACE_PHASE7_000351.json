@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000351",
+  "sample_id": "phy_0351",
+  "timestamp": "2026-08-14T13:24:07Z",
+  "domain": "Physics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is Newton's third law?",
+  "generated_response": "Newton's third law states that for every action, there is an equal and opposite reaction. In other words, if object A exerts a force on object B, then object B will exert a force back on object A with the same magnitude but in the opposite direction. This law is fundamental to classical mechanics and governs all interactions between objects.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Newton's third law states that for every action",
+      "there is an equal and opposite reaction. In other words",
+      "if object A exerts a force on object B",
+      "then object B will exert a force back on object A with the same magnitude but in the opposite direction. This law is fundamental to classical mechanics and governs all interactions between objects."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1091,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8781,
+      0.93,
+      0.6923
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.039,
+    "reconstructed_h_score": 0.039,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15702.35,
+    "llm_gen_ms": 1563.24,
+    "p1_ms": 2621.87,
+    "p2_ms": 0.02,
+    "p3_ms": 22167.04,
+    "fusion_ms": 0.01
+  }
+}

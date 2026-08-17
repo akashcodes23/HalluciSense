@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000681",
+  "sample_id": "pol_0681",
+  "timestamp": "2026-08-14T14:42:52Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a political system in which the government of a country is divided into two or more branches: the executive, legislative, and judiciary. In federal systems, powers are distributed between different levels of government - the national level (federal) and the state or local level (federative). This can lead to different governance structures at each level, with the national government having more control over the country as a whole while state or local governments have more autonomy in managing their own affairs. Federalism is often associated with constitutional democracy, which divides power among different branches of government and allows citizens to participate in democratic processes.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3797,
+    "claims": [
+      "Federalism is a political system in which the government of a country is divided into two or more branches: the executive",
+      "and judiciary. In federal systems",
+      "powers are distributed between different levels of government - the national level (federal) and the state or local level (federative). This can lead to different governance structures at each level",
+      "with the national government having more control over the country as a whole while state or local governments have more autonomy in managing their own affairs. Federalism is often associated with constitutional democracy",
+      "which divides power among different branches of government and allows citizens to participate in democratic processes."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.061,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9056,
+      0.9044,
+      0.9343
+    ],
+    "contradiction_score": 0.016
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2659,
+    "reconstructed_h_score": 0.2659,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14366.29,
+    "llm_gen_ms": 3567.23,
+    "p1_ms": 3667.92,
+    "p2_ms": 0.03,
+    "p3_ms": 12714.59,
+    "fusion_ms": 0.02
+  }
+}

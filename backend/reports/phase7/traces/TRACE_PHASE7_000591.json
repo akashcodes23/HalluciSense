@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000591",
+  "sample_id": "mat_0591",
+  "timestamp": "2026-08-14T14:25:49Z",
+  "domain": "Mathematics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the derivative of x^2?",
+  "generated_response": "The derivative of \\(x^2\\) with respect to \\(x\\) is given by the power rule of differentiation. The power rule states that if you have a function in the form \\(f(x) = x^n\\), then the derivative \\(f'(x)\\) is given by \\(n \\cdot f(x)^{n-1}\\). In this case, \\(n = 2\\), so the derivative of \\(x^2\\) is:\n\n\\[ f(x) = x^2 \\]\n\\[ f'(x) = 2 \\cdot (x^2)^{2-1} \\]\n\\[ f'(x) = 2 \\cdot x^2 \\]\n\nTherefore, the derivative of \\(x^2\\) is \\(\\boxed{2x^2}\\).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The derivative of \\(x^2\\) with respect to \\(x\\) is given by the power rule of differentiation. The power rule states that if you have a function in the form \\(f(x) = x^n\\)",
+      "then the derivative \\(f'(x)\\) is given by \\(n \\cdot f(x)^{n-1}\\). In this case",
+      "so the derivative of \\(x^2\\) is:\n\n\\[ f(x) = x^2 \\]\n\\[ f'(x) = 2 \\cdot (x^2)^{2-1} \\]\n\\[ f'(x) = 2 \\cdot x^2 \\]\n\nTherefore",
+      "the derivative of \\(x^2\\) is \\(\\boxed{2x^2}\\)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1127,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9529,
+      0.729,
+      0.821
+    ],
+    "contradiction_score": 0.0143
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0402,
+    "reconstructed_h_score": 0.0402,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17321.68,
+    "llm_gen_ms": 3714.59,
+    "p1_ms": 5762.34,
+    "p2_ms": 0.02,
+    "p3_ms": 13161.27,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000635",
+  "sample_id": "geo_0635",
+  "timestamp": "2026-08-14T14:33:25Z",
+  "domain": "Geography",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the largest hot desert?",
+  "generated_response": "The largest hot desert in the world is the Gobi Desert, located in Inner Mongolia, China. It covers an area of approximately 9.4 million square kilometers (3.67 million square miles), making it the third-largest desert after Antarctica and Sahara.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.8177,
+    "claims": [
+      "The largest hot desert in the world is the Gobi Desert",
+      "located in Inner Mongolia",
+      "China. It covers an area of approximately 9.4 million square kilometers (3.67 million square miles)",
+      "making it the third-largest desert after Antarctica and Sahara."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4111,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8682,
+      0.9845,
+      0.8477
+    ],
+    "contradiction_score": 0.9889
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6725,
+    "reconstructed_h_score": 0.6725,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 9652.18,
+    "llm_gen_ms": 1350.44,
+    "p1_ms": 5756.79,
+    "p2_ms": 0.01,
+    "p3_ms": 4538.35,
+    "fusion_ms": 0.24
+  }
+}

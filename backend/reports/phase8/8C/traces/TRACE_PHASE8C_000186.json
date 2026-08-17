@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000186",
+  "sample_id": "phase8_c_0186",
+  "timestamp": "2026-08-17T05:59:06Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Literature",
+  "corruption_type": "CAUSAL_REVERSAL",
+  "corruption_severity": 3,
+  "input": "William Shakespeare wrote Hamlet and Macbeth. However, this claim is factually incorrect.",
+  "original": "William Shakespeare wrote Hamlet and Macbeth.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.9472,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.9472,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1667.75
+  },
+  "pipeline_error": null
+}

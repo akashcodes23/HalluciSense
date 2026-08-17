@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000370",
+  "sample_id": "phy_0370",
+  "timestamp": "2026-08-14T13:29:35Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does entropy decrease in isolated systems?",
+  "generated_response": "Yes, the entropy of an isolated system tends to decrease over time due to thermal noise and other dissipative processes. In this case, we refer to the system as an isolated system because it is isolated from any external sources of energy or information. When a system is isolated, it can only exchange heat with its environment through internal mechanisms such as conduction, radiation, and molecular collisions.\n\nAs energy flows into the system, it causes particles to move faster and collide more frequently, increasing their kinetic energy. This increased motion results in an increase in disorder within the system, which corresponds to an increase in entropy. Therefore, if a system is isolated, its entropy will tend to decrease over time due to these internal processes.\n\nIt's important to note that while entropy tends to decrease in isolated systems, it can also increase in open systems where energy flows into or out of the system through interfaces such as walls, pipes, or other physical barriers. In these cases, the direction of entropy change depends on the nature of the interactions between the system and its environment.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "the entropy of an isolated system tends to decrease over time due to thermal noise and other dissipative processes. In this case",
+      "we refer to the system as an isolated system because it is isolated from any external sources of energy or information. When a system is isolated",
+      "it can only exchange heat with its environment through internal mechanisms such as conduction",
+      "and molecular collisions.\n\nAs energy flows into the system",
+      "it causes particles to move faster and collide more frequently",
+      "increasing their kinetic energy. This increased motion results in an increase in disorder within the system",
+      "which corresponds to an increase in entropy. Therefore",
+      "if a system is isolated",
+      "its entropy will tend to decrease over time due to these internal processes.\n\nIt's important to note that while entropy tends to decrease in isolated systems",
+      "it can also increase in open systems where energy flows into or out of the system through interfaces such as walls",
+      "or other physical barriers. In these cases",
+      "the direction of entropy change depends on the nature of the interactions between the system and its environment."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4462,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8602,
+      0.8801,
+      0.8118
+    ],
+    "contradiction_score": 0.9977
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1593,
+    "reconstructed_h_score": 0.1593,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16495.18,
+    "llm_gen_ms": 4344.1,
+    "p1_ms": 2715.89,
+    "p2_ms": 0.02,
+    "p3_ms": 17321.37,
+    "fusion_ms": 0.01
+  }
+}

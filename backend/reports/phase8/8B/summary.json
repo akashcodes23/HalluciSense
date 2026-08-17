@@ -1,0 +1,27 @@
+{
+  "experiment": "8B_Response_Level_Ground_Truth_Audit",
+  "purpose": "DIAGNOSTIC: Measures label alignment between static Phase 6 benchmark labels and actual LLM responses generated in Phase 7. This is NOT an independent detector benchmark.",
+  "dataset_sha256": "e0da63385e80171f48439928f2f7383a85c79b7f9bdcb25ca8644e46dffd4541",
+  "total_responses": 750,
+  "static_label_distribution": {
+    "factual_0": 375,
+    "hallucinated_1": 375
+  },
+  "response_gt_distribution": {
+    "factual": 420,
+    "hallucinated": 129,
+    "partially_hallucinated": 201
+  },
+  "label_shift": {
+    "count": 190,
+    "percentage_of_static_hallucinated": 50.67,
+    "interpretation": "190 of 375 prompts labeled 'hallucinated' (50.67%) were answered factually correctly by the live LLM (Qwen2.5-Coder:1.5b via Ollama). The static benchmark label is invalid for those responses."
+  },
+  "ground_truth_method": "P1_NLI_Evidence_Grounding (not H-score fusion)",
+  "circular_evaluation_disclosure": "CIRCULAR EVALUATION: Dataset B response_ground_truth was assigned using P1 NLI score thresholds (factual < 0.35, hallucinated \u2265 0.55). Evaluating P1 against this label produces AUROC \u2248 1.0 \u2014 a mathematical artifact because P1's own scores defined the labels. This MUST NOT be reported as evidence of detector quality.",
+  "p1_auroc_on_dataset_b": 1.0,
+  "p1_auroc_is_circular": true,
+  "primary_scientific_finding": "50.7% of hallucination-labeled benchmark prompts were answered factually by the live LLM. Static benchmark labels cannot serve as ground truth for newly generated responses.",
+  "examples_label_shift_count": 20,
+  "evaluation_timestamp": "2026-08-17T05:48:48Z"
+}

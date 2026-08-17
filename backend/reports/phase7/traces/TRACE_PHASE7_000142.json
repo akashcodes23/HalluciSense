@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000142",
+  "sample_id": "law_0142",
+  "timestamp": "2026-08-14T12:37:35Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "The court that handles parking fines is typically the District Court of the city where the incident occurred. If you are having trouble finding the specific court for your location, you can try searching online or contacting local law enforcement for assistance.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The court that handles parking fines is typically the District Court of the city where the incident occurred. If you are having trouble finding the specific court for your location",
+      "you can try searching online or contacting local law enforcement for assistance."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4444,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8339,
+      0.8223,
+      0.9004
+    ],
+    "contradiction_score": 0.9951
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1587,
+    "reconstructed_h_score": 0.1587,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 5772.15,
+    "llm_gen_ms": 762.55,
+    "p1_ms": 1786.44,
+    "p2_ms": 0.0,
+    "p3_ms": 5482.67,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000344",
+  "sample_id": "com_0344",
+  "timestamp": "2026-08-14T13:21:47Z",
+  "domain": "Computer Science",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Has P vs NP been solved?",
+  "generated_response": "As of 2023, the answer is no. The problem of determining whether any algorithm can solve a given problem in polynomial time is known as \"P versus NP\" and remains one of the most important unsolved problems in computer science. It's currently an open question, meaning that both sides (solving P) and not solving it (solving NP) have strong arguments to support their viewpoints.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2865,
+    "claims": [
+      "As of 2023, the answer is no. The problem of determining whether any algorithm can solve a given problem in polynomial time is known as \"P versus NP\" and remains one of the most important unsolved problems in computer science. It's currently an open question",
+      "meaning that both sides (solving P) and not solving it (solving NP) have strong arguments to support their viewpoints."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.196,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7006,
+      0.7377,
+      0.6624
+    ],
+    "contradiction_score": 0.0033
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2542,
+    "reconstructed_h_score": 0.2542,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13393.41,
+    "llm_gen_ms": 1891.85,
+    "p1_ms": 2431.81,
+    "p2_ms": 0.01,
+    "p3_ms": 16309.73,
+    "fusion_ms": 0.01
+  }
+}

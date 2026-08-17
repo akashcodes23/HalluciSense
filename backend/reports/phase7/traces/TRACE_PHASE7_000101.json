@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000101",
+  "sample_id": "law_0101",
+  "timestamp": "2026-08-14T12:27:34Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas Corpus is a constitutional provision in the United States Constitution that ensures that citizens have the right to challenge the legality of their imprisonment. This means that a person can file a petition with the court for release if they believe they are being held without a valid reason or due to improper conditions.\n\nThe habeas corpus doctrine was established by the Supreme Court in 1789 as part of the Bill of Rights, which guarantees citizens certain fundamental rights, including the right to due process and liberty. Habeas corpus is used to ensure that judges and prosecutors follow proper procedures and to protect against arbitrary arrests and detentions.\n\nHabeas corpus has become an important constitutional principle in many countries around the world, as it serves to safeguard citizens from unjust imprisonment or detention.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Habeas Corpus is a constitutional provision in the United States Constitution that ensures that citizens have the right to challenge the legality of their imprisonment. This means that a person can file a petition with the court for release if they believe they are being held without a valid reason or due to improper conditions.\n\nThe habeas corpus doctrine was established by the Supreme Court in 1789 as part of the Bill of Rights",
+      "which guarantees citizens certain fundamental rights",
+      "including the right to due process and liberty. Habeas corpus is used to ensure that judges and prosecutors follow proper procedures and to protect against arbitrary arrests and detentions.\n\nHabeas corpus has become an important constitutional principle in many countries around the world",
+      "as it serves to safeguard citizens from unjust imprisonment or detention."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0904,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9153,
+      0.7678,
+      0.9002
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0323,
+    "reconstructed_h_score": 0.0323,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15603.02,
+    "llm_gen_ms": 2801.52,
+    "p1_ms": 2110.18,
+    "p2_ms": 0.03,
+    "p3_ms": 20022.54,
+    "fusion_ms": 0.01
+  }
+}

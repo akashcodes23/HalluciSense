@@ -1,0 +1,15 @@
+{
+  "phase": "Phase 7 Live Three-Pillar Benchmark",
+  "timestamp": "2026-08-14T17:33:46Z",
+  "sample_count": 750,
+  "provider": "ollama",
+  "model": "qwen2.5-coder:1.5b",
+  "p3_num_generations": 3,
+  "temperature": 0.7,
+  "weights": {
+    "alpha": 0.45,
+    "beta": 0.3,
+    "gamma": 0.25
+  },
+  "seed": 42
+}

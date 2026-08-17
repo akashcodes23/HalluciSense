@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000340",
+  "sample_id": "com_0340",
+  "timestamp": "2026-08-14T13:20:44Z",
+  "domain": "Computer Science",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Has P vs NP been solved?",
+  "generated_response": "As of the time of my last update in 2023, it is widely believed that the problem of determining whether any given problem can be solved efficiently (in polynomial time) has not been solved. The statement \"P vs NP\" refers to a conjecture in theoretical computer science that states that there exist problems in the class P (problems that can be solved by a deterministic Turing machine in polynomial time) that cannot be solved by a non-deterministic Turing machine in polynomial time, and vice versa.\n\nThe question of whether P = NP remains one of the most important unsolved problems in theoretical computer science. The proof of the statement \"P = NP\" would have significant implications for many fields, including cryptography, optimization, and artificial intelligence, as it would provide a fundamental basis for algorithms that can handle large-scale computational tasks efficiently.\n\nHowever, despite extensive research, no one has yet been able to prove or disprove this conjecture.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "As of the time of my last update in 2023, it is widely believed that the problem of determining whether any given problem can be solved efficiently (in polynomial time) has not been solved. The statement \"P vs NP\" refers to a conjecture in theoretical computer science that states that there exist problems in the class P (problems that can be solved by a deterministic Turing machine in polynomial time) that cannot be solved by a non-deterministic Turing machine in polynomial time",
+      "and vice versa.\n\nThe question of whether P = NP remains one of the most important unsolved problems in theoretical computer science. The proof of the statement \"P = NP\" would have significant implications for many fields",
+      "as it would provide a fundamental basis for algorithms that can handle large-scale computational tasks efficiently.\n\nHowever",
+      "no one has yet been able to prove or disprove this conjecture."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4507,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8277,
+      0.1215,
+      0.8725
+    ],
+    "contradiction_score": 0.5581
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1609,
+    "reconstructed_h_score": 0.1609,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22760.58,
+    "llm_gen_ms": 4184.62,
+    "p1_ms": 2123.09,
+    "p2_ms": 0.01,
+    "p3_ms": 30636.33,
+    "fusion_ms": 0.02
+  }
+}

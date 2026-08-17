@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000736",
+  "sample_id": "lit_0736",
+  "timestamp": "2026-08-14T14:51:03Z",
+  "domain": "Literature",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who wrote Pride and Prejudice?",
+  "generated_response": "Pride and Prejudice was written by Jane Austen, an English novelist born on June 11, 1795. She lived from 1795 to 1851 and is considered one of the greatest novelists in English literature. The book has sold over 20 million copies worldwide and remains popular today for its witty dialogue, complex characters, and insightful commentary on social class and gender roles.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Pride and Prejudice was written by Jane Austen",
+      "an English novelist born on June 11, 1795. She lived from 1795 to 1851 and is considered one of the greatest novelists in English literature. The book has sold over 20 million copies worldwide and remains popular today for its witty dialogue",
+      "and insightful commentary on social class and gender roles."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0797,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8652,
+      0.9018,
+      0.8652
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0285,
+    "reconstructed_h_score": 0.0285,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 6765.79,
+    "llm_gen_ms": 2065.86,
+    "p1_ms": 3727.67,
+    "p2_ms": 0.03,
+    "p3_ms": 1681.71,
+    "fusion_ms": 0.02
+  }
+}

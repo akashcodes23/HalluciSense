@@ -1,0 +1,2 @@
+temperature,sample_count,model,accuracy,f1,auroc,ece,note
+0.7,750,qwen2.5-coder:1.5b,0.7107,0.5102,0.9944,0.2447,Only T=0.70 evaluated. Multi-temperature comparison requires additional LLM calls.

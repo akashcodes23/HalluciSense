@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000130",
+  "sample_id": "law_0130",
+  "timestamp": "2026-08-14T12:34:36Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "The court handling parking fines is typically the county or city court. Each jurisdiction may have different rules regarding parking laws and the procedure for issuing parking fines. It's important to check your local court system for specific guidelines.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4997,
+    "claims": [
+      "The court handling parking fines is typically the county or city court. Each jurisdiction may have different rules regarding parking laws and the procedure for issuing parking fines. It's important to check your local court system for specific guidelines."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.242,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8714,
+      0.8518,
+      0.7105
+    ],
+    "contradiction_score": 0.3408
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4077,
+    "reconstructed_h_score": 0.4077,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11073.44,
+    "llm_gen_ms": 776.82,
+    "p1_ms": 1864.09,
+    "p2_ms": 0.0,
+    "p3_ms": 15697.88,
+    "fusion_ms": 0.01
+  }
+}

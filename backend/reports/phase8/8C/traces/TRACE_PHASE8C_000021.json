@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000021",
+  "sample_id": "phase8_c_0021",
+  "timestamp": "2026-08-17T05:56:16Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "General Knowledge",
+  "corruption_type": "ENTITY_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Mount K2 is the highest mountain above sea level.",
+  "original": "Mount Everest is the highest mountain above sea level.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.05,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.05,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 247.78
+  },
+  "pipeline_error": null
+}

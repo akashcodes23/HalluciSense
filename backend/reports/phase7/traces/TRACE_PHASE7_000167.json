@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000167",
+  "sample_id": "fin_0167",
+  "timestamp": "2026-08-14T12:44:44Z",
+  "domain": "Finance",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is liquidity?",
+  "generated_response": "Liquidity refers to the ability of a financial instrument or asset to be bought and sold at a high price in a market, typically within an acceptable time frame. In finance, liquidity can be measured in terms of how quickly and easily it can be converted into cash or traded. High liquidity assets are considered safer and more stable than less liquid assets such as stocks or real estate. In addition to monetary assets, liquidity can also refer to the ability of a company to meet its short-term financial obligations by selling its assets or issuing new debt.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4583,
+    "claims": [
+      "Liquidity refers to the ability of a financial instrument or asset to be bought and sold at a high price in a market",
+      "typically within an acceptable time frame. In finance",
+      "liquidity can be measured in terms of how quickly and easily it can be converted into cash or traded. High liquidity assets are considered safer and more stable than less liquid assets such as stocks or real estate. In addition to monetary assets",
+      "liquidity can also refer to the ability of a company to meet its short-term financial obligations by selling its assets or issuing new debt."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1721,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9196,
+      0.9318,
+      0.8824
+    ],
+    "contradiction_score": 0.3271
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3561,
+    "reconstructed_h_score": 0.3561,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14612.44,
+    "llm_gen_ms": 3349.32,
+    "p1_ms": 1883.8,
+    "p2_ms": 0.01,
+    "p3_ms": 17522.48,
+    "fusion_ms": 0.01
+  }
+}

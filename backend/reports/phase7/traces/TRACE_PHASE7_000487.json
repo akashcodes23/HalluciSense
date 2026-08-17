@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000487",
+  "sample_id": "che_0487",
+  "timestamp": "2026-08-14T13:53:20Z",
+  "domain": "Chemistry",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the composition of water?",
+  "generated_response": "Water is composed of hydrogen and oxygen atoms linked together in various configurations. The simplest form of water, known as H2O (dihydrogen oxide), consists of two hydrogen atoms covalently bonded to one oxygen atom, with a bond angle of approximately 104 degrees.\n\nWater molecules can exist in different states: liquid at room temperature, solid as ice, and gaseous as steam. In these forms, the water molecules arrange themselves in different ways, which determine its state.\n\nThe composition of water is fundamental to many aspects of life on Earth, including:\n\n1. **Hydrogen Oxide (H2O)**: The simplest form of water, consisting of two hydrogen atoms and one oxygen atom.\n2. **Ammonia (NH3)**: A compound composed of nitrogen and three hydrogen atoms.\n3. **Water Vapor (H2O vapor)**: Gaseous form of water, making up most of the Earth's atmosphere.\n4. **Ice (H2O ice)**: Solid form of water with molecules arranged in a highly ordered structure.\n\nUnderstanding the composition of water is crucial for various scientific disciplines and applications, including chemistry, physics, geology, and environmental science.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4697,
+    "claims": [
+      "Water is composed of hydrogen and oxygen atoms linked together in various configurations. The simplest form of water",
+      "known as H2O (dihydrogen oxide)",
+      "consists of two hydrogen atoms covalently bonded to one oxygen atom",
+      "with a bond angle of approximately 104 degrees.\n\nWater molecules can exist in different states: liquid at room temperature",
+      "and gaseous as steam. In these forms",
+      "the water molecules arrange themselves in different ways",
+      "which determine its state.\n\nThe composition of water is fundamental to many aspects of life on Earth",
+      "including:\n\n1. **Hydrogen Oxide (H2O)**: The simplest form of water",
+      "consisting of two hydrogen atoms and one oxygen atom.\n2. **Ammonia (NH3)**: A compound composed of nitrogen and three hydrogen atoms.\n3. **Water Vapor (H2O vapor)**: Gaseous form of water",
+      "making up most of the Earth's atmosphere.\n4. **Ice (H2O ice)**: Solid form of water with molecules arranged in a highly ordered structure.\n\nUnderstanding the composition of water is crucial for various scientific disciplines and applications"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.186,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7338,
+      0.7049,
+      0.7181
+    ],
+    "contradiction_score": 0.0093
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3684,
+    "reconstructed_h_score": 0.3684,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10223.65,
+    "llm_gen_ms": 5107.66,
+    "p1_ms": 2328.54,
+    "p2_ms": 0.01,
+    "p3_ms": 4448.5,
+    "fusion_ms": 0.02
+  }
+}

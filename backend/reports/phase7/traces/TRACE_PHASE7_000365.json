@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000365",
+  "sample_id": "phy_0365",
+  "timestamp": "2026-08-14T13:27:54Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity scales with the square of the mass according to Newton's law of universal gravitation. This means that two objects with equal masses will attract each other with the same force, regardless of their distance apart, as long as they are within the gravitational influence of the universe. The strength of gravity between two objects is inversely proportional to the cube of the distance between them.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6512,
+    "claims": [
+      "Gravity scales with the square of the mass according to Newton's law of universal gravitation. This means that two objects with equal masses will attract each other with the same force",
+      "regardless of their distance apart",
+      "as long as they are within the gravitational influence of the universe. The strength of gravity between two objects is inversely proportional to the cube of the distance between them."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2119,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7053,
+      0.7631,
+      0.5634
+    ],
+    "contradiction_score": 0.006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4943,
+    "reconstructed_h_score": 0.4943,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15332.28,
+    "llm_gen_ms": 1346.43,
+    "p1_ms": 1853.71,
+    "p2_ms": 0.01,
+    "p3_ms": 22243.51,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "trace_id": "TRACE_PHASE7_000315",
+  "sample_id": "com_0315",
+  "timestamp": "2026-08-14T13:13:45Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is an efficient approach for finding the shortest paths between nodes in a graph. It works by maintaining a priority queue to always select the node with the smallest tentative distance from the starting node. This process continues until all nodes have been visited or the destination node is reached. The time complexity of Dijkstra's algorithm is O(E log V), where E represents the number of edges and V is the number of vertices in the graph.\n\nHere's a simple Python implementation using the `heapq` module to demonstrate how Dijkstra's algorithm works:\n\n```python\nimport heapq\n\ndef dijkstra(graph, start):\n    # Initialize all node distances as infinity except the start node\n    dist = {node: float('inf') for node in graph}\n    dist[start] = 0\n    \n    # Priority queue to store nodes with their tentative distances\n    priority_queue = [(0, start)]\n    \n    while priority_queue:\n        current_dist, current_node = heapq.heappop(priority_queue)\n        \n        # If the current distance is greater than the known distance, skip this node\n        if current_dist > dist[current_node]:\n            continue\n        \n        # Explore all neighbors of the current node\n        for neighbor, weight in graph[current_node].items():\n            new_dist = current_dist + weight\n            \n            # Update the distance to the neighbor if a shorter path is found\n            if new_dist < dist[neighbor]:\n                dist[neighbor] = new_dist\n                heapq.heappush(priority_queue, (new_dist, neighbor))\n    \n    return dist\n\n# Example graph represented as an adjacency list\ngraph = {\n    'A': {'B': 10, 'C': 5},\n    'B': {'A': 10, 'D': 2},\n    'C': {'A': 5, 'E': 3},\n    'D': {'B': 2, 'E': 7},\n    'E': {'C': 3, 'D': 7}\n}\n\nstart_node = 'A'\nshortest_paths = dijkstra(graph, start_node)\nprint(f\"Shortest paths from {start_node}: {shortest_paths}\")\n```\n\nIn this example, the `dijkstra` function initializes a dictionary to store the shortest distances from the start node to all other nodes. It uses a priority queue to keep track of nodes with their current minimum distance. The function iteratively selects the node with the smallest distance and updates the distances of its neighbors if a shorter path is found. Finally, it returns the distances from the start node to all other nodes.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Dijkstra's algorithm is an efficient approach for finding the shortest paths between nodes in a graph. It works by maintaining a priority queue to always select the node with the smallest tentative distance from the starting node. This process continues until all nodes have been visited or the destination node is reached. The time complexity of Dijkstra's algorithm is O(E log V)",
+      "where E represents the number of edges and V is the number of vertices in the graph.\n\nHere's a simple Python implementation using the `heapq` module to demonstrate how Dijkstra's algorithm works:\n\n```python\nimport heapq\n\ndef dijkstra(graph",
+      "start):\n    # Initialize all node distances as infinity except the start node\n    dist = {node: float('inf') for node in graph}\n    dist[start] = 0\n    \n    # Priority queue to store nodes with their tentative distances\n    priority_queue = [(0, start)]\n    \n    while priority_queue:\n        current_dist",
+      "current_node = heapq.heappop(priority_queue)\n        \n        # If the current distance is greater than the known distance",
+      "skip this node\n        if current_dist > dist[current_node]:\n            continue\n        \n        # Explore all neighbors of the current node\n        for neighbor",
+      "weight in graph[current_node].items():\n            new_dist = current_dist + weight\n            \n            # Update the distance to the neighbor if a shorter path is found\n            if new_dist < dist[neighbor]:\n                dist[neighbor] = new_dist\n                heapq.heappush(priority_queue",
+      "neighbor))\n    \n    return dist\n\n# Example graph represented as an adjacency list\ngraph = {\n    'A': {'B': 10, 'C': 5}",
+      "'B': {'A': 10, 'D': 2}",
+      "'C': {'A': 5, 'E': 3}",
+      "'D': {'B': 2, 'E': 7}",
+      "'E': {'C': 3, 'D': 7}\n}\n\nstart_node = 'A'\nshortest_paths = dijkstra(graph",
+      "start_node)\nprint(f\"Shortest paths from {start_node}: {shortest_paths}\")\n```\n\nIn this example",
+      "the `dijkstra` function initializes a dictionary to store the shortest distances from the start node to all other nodes. It uses a priority queue to keep track of nodes with their current minimum distance. The function iteratively selects the node with the smallest distance and updates the distances of its neighbors if a shorter path is found. Finally",
+      "it returns the distances from the start node to all other nodes."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1344,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8448,
+      0.7464,
+      0.7895
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.048,
+    "reconstructed_h_score": 0.048,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 26065.03,
+    "llm_gen_ms": 11503.59,
+    "p1_ms": 2116.15,
+    "p2_ms": 0.03,
+    "p3_ms": 22454.55,
+    "fusion_ms": 0.01
+  }
+}

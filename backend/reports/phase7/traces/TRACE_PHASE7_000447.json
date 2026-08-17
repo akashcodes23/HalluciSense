@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000447",
+  "sample_id": "bio_0447",
+  "timestamp": "2026-08-14T13:47:29Z",
+  "domain": "Biology",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are tiny protein structures found in all cells, playing crucial roles in various cellular processes, including protein synthesis, translation, and regulation. They facilitate the conversion of genetic information into functional proteins necessary for survival.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3492,
+    "claims": [
+      "Ribosomes are tiny protein structures found in all cells",
+      "playing crucial roles in various cellular processes",
+      "and regulation. They facilitate the conversion of genetic information into functional proteins necessary for survival."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1134,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8839,
+      0.7677
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.265,
+    "reconstructed_h_score": 0.265,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18514.66,
+    "llm_gen_ms": 744.13,
+    "p1_ms": 1778.53,
+    "p2_ms": 0.0,
+    "p3_ms": 30998.1,
+    "fusion_ms": 0.02
+  }
+}

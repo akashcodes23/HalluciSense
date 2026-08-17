@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MED_TRU_0106",
+  "claim": "Penicillin, the first widely used antibiotic, was discovered by Alexander Fleming in 1928.",
+  "ground_truth": 0,
+  "enhanced_h_score": 0.1007,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Penicillin, the first widely used antibiotic, was discovered by Alexander Fleming in 1928",
+      "base_nli_score": 0.1007,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.1007
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 3065.61
+}

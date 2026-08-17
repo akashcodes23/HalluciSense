@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000450",
+  "sample_id": "bio_0450",
+  "timestamp": "2026-08-14T13:47:57Z",
+  "domain": "Biology",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What do mitochondria produce?",
+  "generated_response": "Mitochondria produce ATP (adenosine triphosphate), which is used as the primary source of energy for most organisms. They also produce small amounts of carbon dioxide and water through aerobic respiration, which converts glucose into other energy molecules.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4403,
+    "claims": [
+      "Mitochondria produce ATP (adenosine triphosphate)",
+      "which is used as the primary source of energy for most organisms. They also produce small amounts of carbon dioxide and water through aerobic respiration",
+      "which converts glucose into other energy molecules."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0742,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9009,
+      0.8972,
+      0.86
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3096,
+    "reconstructed_h_score": 0.3096,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 5974.21,
+    "llm_gen_ms": 921.24,
+    "p1_ms": 1445.33,
+    "p2_ms": 0.0,
+    "p3_ms": 6134.09,
+    "fusion_ms": 0.01
+  }
+}

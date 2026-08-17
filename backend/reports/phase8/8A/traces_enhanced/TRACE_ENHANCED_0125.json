@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_MED_NEG_0125",
+  "claim": "Antigen-presenting cells do not activate T lymphocytes during the adaptive immune response.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.8827,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Antigen-presenting cells do not activate T lymphocytes during the adaptive immune response",
+      "base_nli_score": 0.8827,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.8827
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'not' while evidence affirms the predicate."
+  ],
+  "latency_ms": 2450.06
+}

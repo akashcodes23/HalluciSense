@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_OUT_0030",
+  "claim": "Heat is a fluid substance called caloric that flows from hot to cold objects.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.0082,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Heat is a fluid substance called caloric that flows from hot to cold objects",
+      "base_nli_score": 0.0082,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.0082
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1558.05
+}

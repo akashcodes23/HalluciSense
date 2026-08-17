@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000126",
+  "sample_id": "8A_MED_CAU_0126",
+  "timestamp": "2026-08-17T05:53:47Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Medicine",
+  "category": "CAUSAL_INVERSION",
+  "difficulty": "medium",
+  "input": "ACE inhibitors lower blood pressure by increasing angiotensin II production.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: ACE inhibitor",
+  "source_url": "https://en.wikipedia.org/wiki/ACE_inhibitor",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1718.32
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

@@ -1,0 +1,12 @@
+{
+  "calibration_methods_compared": [
+    "Raw_Logistic",
+    "Platt_Scaling",
+    "Isotonic_Regression"
+  ],
+  "selected_method": "Isotonic_Regression",
+  "selection_partition": "Development_70pct_Only",
+  "dev_brier_score_raw": 0.1692,
+  "dev_brier_score_isotonic": 0.0,
+  "calibration_delta": -0.1692
+}

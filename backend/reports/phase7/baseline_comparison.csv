@@ -1,0 +1,4 @@
+detector,accuracy,precision,recall,f1,auroc,ece
+Naive Lexical Retrieval Baseline,0.5667,0.6136,0.36,0.4538,0.5658,0.2512
+Pillar 1 Grounding Alone,0.5707,0.6417,0.32,0.427,0.5542,0.243
+HalluciSense Live Adaptive Fusion,0.5733,0.7434,0.224,0.3443,0.5602,0.2514

@@ -1,0 +1,2 @@
+threshold,n,confusion_matrix,accuracy,precision,recall,specificity,f1,balanced_accuracy,mcc,auroc,auprc,brier_score,ece,fpr,fnr,auroc_ci,brier_ci,f1_ci,accuracy_ci,pillar_config,dataset,available_pillars,missing_pillars,n_with_p3
+0.5,723,"{'TP': 6, 'TN': 396, 'FP': 3, 'FN': 318}",0.556,0.6667,0.0185,0.9925,0.036,0.5055,0.0493,0.5767,0.512,0.3401,0.308,0.0075,0.9815,"(0.5328, 0.6169)","(0.3121, 0.3671)","(0.0117, 0.0651)","(0.5201, 0.5934)",P3_ONLY,B_response_level,['P3'],"['P1', 'P2']",723

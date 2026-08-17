@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000562",
+  "sample_id": "mat_0562",
+  "timestamp": "2026-08-14T14:14:46Z",
+  "domain": "Mathematics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Are all prime numbers even?",
+  "generated_response": "No, not all prime numbers are even. A prime number is defined as a natural number greater than 1 that has no positive divisors other than 1 and itself. Here are some examples of prime numbers:\n\n- 2 (the smallest prime number)\n- 3\n- 5\n- 7\n- 11\n- 13\n- 17\n\nYou can see that the only even prime number is 2. All other prime numbers are odd, as they cannot be divided evenly by 2 without leaving a remainder.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3203,
+    "claims": [
+      "not all prime numbers are even. A prime number is defined as a natural number greater than 1 that has no positive divisors other than 1 and itself. Here are some examples of prime numbers:\n\n- 2 (the smallest prime number)\n- 3\n- 5\n- 7\n- 11\n- 13\n- 17\n\nYou can see that the only even prime number is 2. All other prime numbers are odd",
+      "as they cannot be divided evenly by 2 without leaving a remainder."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0622,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9705,
+      0.9582,
+      0.7862
+    ],
+    "contradiction_score": 0.0014
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2281,
+    "reconstructed_h_score": 0.2281,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15741.66,
+    "llm_gen_ms": 2635.75,
+    "p1_ms": 3373.74,
+    "p2_ms": 0.01,
+    "p3_ms": 18126.27,
+    "fusion_ms": 0.01
+  }
+}

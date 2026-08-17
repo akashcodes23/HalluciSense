@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000435",
+  "sample_id": "bio_0435",
+  "timestamp": "2026-08-14T13:44:22Z",
+  "domain": "Biology",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are structures found in cells that play a crucial role in protein synthesis. They are small protein molecules that contain rRNA and protein subunits. Ribosomes consist of a central region with three subunits: the large ribosomal subunit (rS1), the intermediate ribosomal subunit (rS2), and the small ribosomal subunit (rS3). Each subunit contains the gene for rRNA, which is responsible for synthesizing mRNA molecules. Ribosomes are essential for the translation of genetic information into functional proteins in cells.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1051,
+    "claims": [
+      "Ribosomes are structures found in cells that play a crucial role in protein synthesis. They are small protein molecules that contain rRNA and protein subunits. Ribosomes consist of a central region with three subunits: the large ribosomal subunit (rS1)",
+      "the intermediate ribosomal subunit (rS2)",
+      "and the small ribosomal subunit (rS3). Each subunit contains the gene for rRNA",
+      "which is responsible for synthesizing mRNA molecules. Ribosomes are essential for the translation of genetic information into functional proteins in cells."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1436,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7709,
+      0.7875,
+      0.7788
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1188,
+    "reconstructed_h_score": 0.1188,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12651.9,
+    "llm_gen_ms": 2506.15,
+    "p1_ms": 2531.26,
+    "p2_ms": 0.01,
+    "p3_ms": 14289.76,
+    "fusion_ms": 0.02
+  }
+}

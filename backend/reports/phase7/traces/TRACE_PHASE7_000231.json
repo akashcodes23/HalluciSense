@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000231",
+  "sample_id": "his_0231",
+  "timestamp": "2026-08-14T12:58:59Z",
+  "domain": "History",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "When was the Magna Carta signed?",
+  "generated_response": "The Magna Carta was signed on June 15, 1215, in the town of Runnymede in England. It is one of the most important documents in English history and serves as a cornerstone of Western democratic principles.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5,
+    "claims": [
+      "The Magna Carta was signed on June 15, 1215, in the town of Runnymede in England. It is one of the most important documents in English history and serves as a cornerstone of Western democratic principles."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.4139,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8592,
+      0.933,
+      0.912
+    ],
+    "contradiction_score": 0.9994
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4693,
+    "reconstructed_h_score": 0.4693,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 4767.71,
+    "llm_gen_ms": 884.93,
+    "p1_ms": 2559.62,
+    "p2_ms": 0.0,
+    "p3_ms": 2438.07,
+    "fusion_ms": 0.0
+  }
+}

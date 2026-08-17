@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000383",
+  "sample_id": "phy_0383",
+  "timestamp": "2026-08-14T13:33:10Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is Newton's third law?",
+  "generated_response": "Newton's third law states that for every action (force), there is an equal and opposite reaction (force). In other words, if you push something with force, the thing will push back with an equal and opposite force.\n\nThis principle is fundamental in physics and has many practical applications, such as in engineering, design, and even everyday life. It helps us understand how forces interact with each other and how we can use them to move objects or solve problems.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Newton's third law states that for every action (force)",
+      "there is an equal and opposite reaction (force). In other words",
+      "if you push something with force",
+      "the thing will push back with an equal and opposite force.\n\nThis principle is fundamental in physics and has many practical applications",
+      "such as in engineering",
+      "and even everyday life. It helps us understand how forces interact with each other and how we can use them to move objects or solve problems."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0756,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8981,
+      0.8957,
+      0.8617
+    ],
+    "contradiction_score": 0.0028
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.027,
+    "reconstructed_h_score": 0.027,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15999.68,
+    "llm_gen_ms": 1789.53,
+    "p1_ms": 2461.56,
+    "p2_ms": 0.01,
+    "p3_ms": 21574.08,
+    "fusion_ms": 0.08
+  }
+}

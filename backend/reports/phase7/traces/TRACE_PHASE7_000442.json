@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000442",
+  "sample_id": "bio_0442",
+  "timestamp": "2026-08-14T13:46:07Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What do mitochondria produce?",
+  "generated_response": "Mitochondria produce energy in the body through the process of cellular respiration. During this process, oxygen from the atmosphere is used to break down glucose and other nutrients into smaller molecules called pyruvate. The pyruvate molecules then enter the mitochondria's inner membrane where they are converted into acetyl-CoA, which is used as an energy source for the cell.\n\nIn addition to producing energy, mitochondria also play a crucial role in cellular signaling and regulation. They communicate with other cells and organs through their production of various signaling molecules such as hormones, neurotransmitters, and cytokines. These signaling molecules can be used by cells to trigger responses and adapt to changing conditions in their environment.\n\nOverall, mitochondria are essential for the proper functioning of the body and play a critical role in generating ATP (adenosine triphosphate), which is the primary energy currency in the cell.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4584,
+    "claims": [
+      "Mitochondria produce energy in the body through the process of cellular respiration. During this process",
+      "oxygen from the atmosphere is used to break down glucose and other nutrients into smaller molecules called pyruvate. The pyruvate molecules then enter the mitochondria's inner membrane where they are converted into acetyl-CoA",
+      "which is used as an energy source for the cell.\n\nIn addition to producing energy",
+      "mitochondria also play a crucial role in cellular signaling and regulation. They communicate with other cells and organs through their production of various signaling molecules such as hormones",
+      "and cytokines. These signaling molecules can be used by cells to trigger responses and adapt to changing conditions in their environment.\n\nOverall",
+      "mitochondria are essential for the proper functioning of the body and play a critical role in generating ATP (adenosine triphosphate)",
+      "which is the primary energy currency in the cell."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1165,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8372,
+      0.8511,
+      0.7746
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3363,
+    "reconstructed_h_score": 0.3363,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20443.28,
+    "llm_gen_ms": 4442.57,
+    "p1_ms": 2288.71,
+    "p2_ms": 0.01,
+    "p3_ms": 26406.5,
+    "fusion_ms": 0.02
+  }
+}

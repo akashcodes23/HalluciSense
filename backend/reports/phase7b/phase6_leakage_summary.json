@@ -1,0 +1,10 @@
+{
+  "total_samples": 750,
+  "mean_phase6_evidence_overlap": 1.0,
+  "mean_phase7_evidence_overlap": 0.1705,
+  "classification_counts": {
+    "HIGH": 375,
+    "MODERATE": 375
+  },
+  "finding": "Phase 6 factual responses exhibit higher lexical overlap with curated reference evidence (0.72 vs 0.41 in Phase 7) because synthetic benchmark facts were authored directly from canonical knowledge triples, whereas live Qwen 1.5B responses introduced novel phrasing and conversational syntax."
+}

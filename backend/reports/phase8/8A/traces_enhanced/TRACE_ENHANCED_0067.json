@@ -1,0 +1,27 @@
+{
+  "record_id": "8A_CHE_TRU_0067",
+  "claim": "DNA is composed of nucleotides, each containing a phosphate group, a sugar, and one of four nitrogenous bases; the sugar in DNA is ribose.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.368,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "DNA is composed of nucleotides, each containing a phosphate group, a sugar, and one of four nitrogenous bases",
+      "base_nli_score": 0.368,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.368
+    },
+    {
+      "proposition": "The sugar in DNA is ribose",
+      "base_nli_score": 0.05,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.05
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 5746.15
+}

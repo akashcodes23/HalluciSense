@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000163",
+  "sample_id": "8A_MAT_CAU_0163",
+  "timestamp": "2026-08-17T05:55:40Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Mathematics",
+  "category": "CAUSAL_INVERSION",
+  "difficulty": "easy",
+  "input": "A higher variance in a dataset causes the standard deviation to decrease.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Standard deviation",
+  "source_url": "https://en.wikipedia.org/wiki/Standard_deviation",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 4633.93
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

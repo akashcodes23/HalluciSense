@@ -1,0 +1,27 @@
+{
+  "record_id": "8A_MAT_TRU_0174",
+  "claim": "P vs NP is an unsolved problem in computer science asking whether every problem whose solution can be verified in polynomial time can also be solved in polynomial time; most experts believe P = NP.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.5003,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "P vs NP is an unsolved problem in computer science asking whether every problem whose solution can be verified in polynomial time can also be solved in polynomial time",
+      "base_nli_score": 0.0068,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.0068
+    },
+    {
+      "proposition": "Most experts believe P = NP",
+      "base_nli_score": 0.5003,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.5003
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 4312.97
+}

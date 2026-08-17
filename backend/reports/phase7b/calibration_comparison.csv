@@ -1,0 +1,5 @@
+method,test_ece,test_brier,test_accuracy,test_f1,test_auroc
+Uncalibrated Live Fusion (T = 0.50),0.2063,0.3082,0.6,0.3382,0.5339
+Validation-Optimized Threshold (T = 0.05),0.2063,0.3082,0.4622,0.56,0.5339
+Platt Scaling (Held-out Sigmoid),0.0899,0.2495,0.4889,0.5148,0.5339
+Isotonic Regression (Held-out Non-Parametric),0.0555,0.2457,0.5822,0.4125,0.5458

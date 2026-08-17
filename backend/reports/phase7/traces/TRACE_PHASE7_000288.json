@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000288",
+  "sample_id": "sci_0288",
+  "timestamp": "2026-08-14T13:06:46Z",
+  "domain": "Science",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does sound travel in vacuum?",
+  "generated_response": "Yes, sound travels through the air and water in vacuum as well as in gases. Sound is a mechanical wave that requires a medium to propagate, such as air or water. In a vacuum, there is no medium for sound waves to travel through, so they do not exist.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "sound travels through the air and water in vacuum as well as in gases. Sound is a mechanical wave that requires a medium to propagate",
+      "such as air or water. In a vacuum",
+      "there is no medium for sound waves to travel through",
+      "so they do not exist."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0874,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.848,
+      0.8712,
+      0.8845
+    ],
+    "contradiction_score": 0.0043
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6741,
+    "reconstructed_h_score": 0.6741,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 10316.83,
+    "llm_gen_ms": 1146.99,
+    "p1_ms": 1699.09,
+    "p2_ms": 0.0,
+    "p3_ms": 14525.25,
+    "fusion_ms": 0.01
+  }
+}

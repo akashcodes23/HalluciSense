@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000129",
+  "sample_id": "8A_MED_CAU_0129",
+  "timestamp": "2026-08-17T05:53:53Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Medicine",
+  "category": "CAUSAL_INVERSION",
+  "difficulty": "medium",
+  "input": "Opioids reduce pain perception by blocking μ-opioid receptors in the CNS.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Opioid receptor",
+  "source_url": "https://en.wikipedia.org/wiki/Opioid_receptor",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1807.3
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

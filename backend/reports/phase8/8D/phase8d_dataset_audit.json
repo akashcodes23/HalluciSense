@@ -1,0 +1,27 @@
+{
+  "audit_status": "PASSED_ALL_FREEZE_GATES",
+  "dataset_name": "Phase8A_Scientific_Adversarial",
+  "total_records": 175,
+  "sha256": "5a8bc3df48a31ef58bba376a23cb415ba4c7c2f25821c8f3a5275365de2e6710",
+  "phase6_benchmark_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "phase6_integrity_verified": true,
+  "domains": {
+    "Physics": 35,
+    "Chemistry": 35,
+    "Biology": 35,
+    "Medicine": 35,
+    "Mathematics": 35
+  },
+  "categories": {
+    "TRUE_CONTROL": 25,
+    "NUMERICAL_PRECISION": 25,
+    "UNIT_SCALE": 25,
+    "NEGATION": 25,
+    "CAUSAL_INVERSION": 25,
+    "OUTDATED_SCIENTIFIC_CLAIM": 25,
+    "TRUE_CORE_FALSE_ELABORATION": 25
+  },
+  "unique_ids_count": 175,
+  "unique_claims_count": 175,
+  "audit_timestamp": "2026-08-17T06:24:27Z"
+}

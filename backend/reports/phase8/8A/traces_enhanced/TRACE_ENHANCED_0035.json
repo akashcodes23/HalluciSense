@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_TRU_0035",
+  "claim": "Nuclear fission, the process of splitting heavy nuclei to release energy, was first demonstrated by Marie Curie in 1934.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.3991,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Nuclear fission, the process of splitting heavy nuclei to release energy, was first demonstrated by Marie Curie in 1934",
+      "base_nli_score": 0.3991,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.3991
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2320.82
+}

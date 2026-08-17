@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000517",
+  "sample_id": "new_0517",
+  "timestamp": "2026-08-14T14:00:45Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits typically focus on discussing the challenges and opportunities in addressing global climate change. These topics include:\n\n1. **Reducing greenhouse gas emissions**: Achieving significant reductions in carbon dioxide, methane, and other greenhouse gases to limit warming.\n\n2. **Adapting to climate impacts**: Planning strategies for communities and ecosystems to prepare for and mitigate the negative effects of climate change, such as sea level rise, droughts, floods, and extreme weather events.\n\n3. **International cooperation**: Engaging in global agreements and partnerships to coordinate efforts between countries to address climate issues collectively.\n\n4. **Research and development**: Investing in research and technology to develop cleaner energy sources and innovative solutions to climate challenges.\n\n5. **Education and awareness**: Increasing public understanding of the science behind climate change and promoting actions to mitigate it.\n\n6. **Climate finance**: Discussing mechanisms for financing sustainable development projects that help combat climate change, including green bonds and international aid.\n\n7. **Policy frameworks**: Setting policies and regulations aimed at reducing greenhouse gas emissions, such as carbon taxes or renewable energy targets.\n\n8. **Monitoring and reporting**: Establishing systems to monitor the progress of global efforts in addressing climate change and reporting on achievements.\n\nClimate summits play a crucial role in driving action towards mitigating climate change and ensuring that societies can adapt and thrive in a changing world.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5009,
+    "claims": [
+      "Climate summits typically focus on discussing the challenges and opportunities in addressing global climate change. These topics include:\n\n1. **Reducing greenhouse gas emissions**: Achieving significant reductions in carbon dioxide",
+      "and other greenhouse gases to limit warming.\n\n2. **Adapting to climate impacts**: Planning strategies for communities and ecosystems to prepare for and mitigate the negative effects of climate change",
+      "such as sea level rise",
+      "and extreme weather events.\n\n3. **International cooperation**: Engaging in global agreements and partnerships to coordinate efforts between countries to address climate issues collectively.\n\n4. **Research and development**: Investing in research and technology to develop cleaner energy sources and innovative solutions to climate challenges.\n\n5. **Education and awareness**: Increasing public understanding of the science behind climate change and promoting actions to mitigate it.\n\n6. **Climate finance**: Discussing mechanisms for financing sustainable development projects that help combat climate change",
+      "including green bonds and international aid.\n\n7. **Policy frameworks**: Setting policies and regulations aimed at reducing greenhouse gas emissions",
+      "such as carbon taxes or renewable energy targets.\n\n8. **Monitoring and reporting**: Establishing systems to monitor the progress of global efforts in addressing climate change and reporting on achievements.\n\nClimate summits play a crucial role in driving action towards mitigating climate change and ensuring that societies can adapt and thrive in a changing world."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0916,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8349,
+      0.8953,
+      0.8475
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3547,
+    "reconstructed_h_score": 0.3547,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18685.79,
+    "llm_gen_ms": 5878.48,
+    "p1_ms": 2271.3,
+    "p2_ms": 0.03,
+    "p3_ms": 20238.33,
+    "fusion_ms": 0.0
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000488",
+  "sample_id": "che_0488",
+  "timestamp": "2026-08-14T13:53:35Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does gold rust in water?",
+  "generated_response": "Gold does not rust in water. Rusting is the natural process of iron and other metal surfaces to form red-brown or green-black oxides, typically due to exposure to air, moisture, and chemicals like oxygen. Gold does not react with the oxygen in water at room temperature under normal conditions.\n\nThe rusting process involves several stages:\n1. Oxidation: The gold surface becomes exposed to oxygen from air.\n2. Hydrolysis: Oxygen molecules combine with gold ions to form hydroxide ions and a gold ion called ferric sulfide.\n3. Deposition of oxides: The hydroxide ions bond with the metal surface, forming an oxide film.\n\nIn water, the presence of dissolved oxygen is necessary for this process to occur. However, even in water, gold does not rust because it cannot absorb or maintain a protective layer like rust does on iron and steel.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "Gold does not rust in water. Rusting is the natural process of iron and other metal surfaces to form red-brown or green-black oxides",
+      "typically due to exposure to air",
+      "and chemicals like oxygen. Gold does not react with the oxygen in water at room temperature under normal conditions.\n\nThe rusting process involves several stages:\n1. Oxidation: The gold surface becomes exposed to oxygen from air.\n2. Hydrolysis: Oxygen molecules combine with gold ions to form hydroxide ions and a gold ion called ferric sulfide.\n3. Deposition of oxides: The hydroxide ions bond with the metal surface",
+      "forming an oxide film.\n\nIn water",
+      "the presence of dissolved oxygen is necessary for this process to occur. However",
+      "gold does not rust because it cannot absorb or maintain a protective layer like rust does on iron and steel."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2136,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8726,
+      0.8575,
+      0.8206
+    ],
+    "contradiction_score": 0.332
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.7192,
+    "reconstructed_h_score": 0.7192,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 14812.3,
+    "llm_gen_ms": 4013.23,
+    "p1_ms": 2087.4,
+    "p2_ms": 0.01,
+    "p3_ms": 14653.91,
+    "fusion_ms": 0.01
+  }
+}

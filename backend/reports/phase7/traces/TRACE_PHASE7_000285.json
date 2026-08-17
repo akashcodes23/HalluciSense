@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000285",
+  "sample_id": "sci_0285",
+  "timestamp": "2026-08-14T13:06:28Z",
+  "domain": "Science",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants, algae, and some other organisms convert light energy from the sun into chemical energy stored in sugar molecules. It occurs in the chloroplasts of plant cells and involves several stages:\n\n1. Light absorption: Chlorophyll in the chloroplasts absorbs light energy from the Sun.\n\n2. Carbon dioxide fixation: The absorbed light energy is used by enzymes to break down carbon dioxide (CO\u2082) into glucose (C\u2086H\u2081\u2082O\u2086). This process is called photosynthesis for plants and photosynthesis for algae and certain bacteria.\n\n3. Oxygen production: As a byproduct of the carbon dioxide fixation, oxygen is released into the air.\n\n4. Starch formation: In plants, sucrose molecules are formed from glucose, which is then converted into starch for storage.\n\nPhotosynthesis is essential for life on Earth because it provides the energy needed to power plants and other organisms, as well as producing oxygen in the atmosphere that supports aerobic respiration in animals.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1946,
+    "claims": [
+      "Photosynthesis is the process by which plants",
+      "and some other organisms convert light energy from the sun into chemical energy stored in sugar molecules. It occurs in the chloroplasts of plant cells and involves several stages:\n\n1. Light absorption: Chlorophyll in the chloroplasts absorbs light energy from the Sun.\n\n2. Carbon dioxide fixation: The absorbed light energy is used by enzymes to break down carbon dioxide (CO\u2082) into glucose (C\u2086H\u2081\u2082O\u2086). This process is called photosynthesis for plants and photosynthesis for algae and certain bacteria.\n\n3. Oxygen production: As a byproduct of the carbon dioxide fixation",
+      "oxygen is released into the air.\n\n4. Starch formation: In plants",
+      "sucrose molecules are formed from glucose",
+      "which is then converted into starch for storage.\n\nPhotosynthesis is essential for life on Earth because it provides the energy needed to power plants and other organisms",
+      "as well as producing oxygen in the atmosphere that supports aerobic respiration in animals."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0698,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8971,
+      0.8979,
+      0.8875
+    ],
+    "contradiction_score": 0.0028
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.15,
+    "reconstructed_h_score": 0.15,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15491.27,
+    "llm_gen_ms": 4243.59,
+    "p1_ms": 3257.34,
+    "p2_ms": 0.02,
+    "p3_ms": 14203.33,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000256",
+  "sample_id": "sci_0256",
+  "timestamp": "2026-08-14T13:01:59Z",
+  "domain": "Science",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does sound travel in vacuum?",
+  "generated_response": "No, sound does not travel in a vacuum. Sound is an oscillation of particles (e.g., air molecules) that propagate through a medium such as air, water, or solid materials. In a vacuum, there are no matter particles to collide with, so sound cannot propagate through the absence of matter.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4838,
+    "claims": [
+      "sound does not travel in a vacuum. Sound is an oscillation of particles (e.g.",
+      "air molecules) that propagate through a medium such as air",
+      "or solid materials. In a vacuum",
+      "there are no matter particles to collide with",
+      "so sound cannot propagate through the absence of matter."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.422,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6611,
+      0.8628,
+      0.884
+    ],
+    "contradiction_score": 0.8391
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4617,
+    "reconstructed_h_score": 0.4617,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8853.28,
+    "llm_gen_ms": 1099.25,
+    "p1_ms": 2126.24,
+    "p2_ms": 0.0,
+    "p3_ms": 10174.6,
+    "fusion_ms": 0.01
+  }
+}

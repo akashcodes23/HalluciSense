@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000041",
+  "sample_id": "phase8_c_0041",
+  "timestamp": "2026-08-17T05:56:48Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Science",
+  "corruption_type": "NUMERIC_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Photosynthesis converts sunlight into chemical energy. However, this claim is factually incorrect.",
+  "original": "Photosynthesis converts sunlight into chemical energy.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3119,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3119,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1546.82
+  },
+  "pipeline_error": null
+}

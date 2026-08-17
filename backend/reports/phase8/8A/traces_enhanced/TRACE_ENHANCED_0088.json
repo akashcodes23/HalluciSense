@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_BIO_NEG_0088",
+  "claim": "CRISPR-Cas9 does not use RNA to guide DNA editing.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.9993,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "CRISPR-Cas9 does not use RNA to guide DNA editing",
+      "base_nli_score": 0.9993,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.9993
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'not' while evidence affirms the predicate."
+  ],
+  "latency_ms": 2226.87
+}

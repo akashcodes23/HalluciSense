@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000374",
+  "sample_id": "phy_0374",
+  "timestamp": "2026-08-14T13:30:39Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does entropy decrease in isolated systems?",
+  "generated_response": "No, entropy cannot decrease in isolated systems. Entropy is a measure of disorder or randomness in a system. It is always increasing unless there is an external source to transfer heat from the system to the surroundings, causing the system to become less ordered.\n\nIsolated systems are closed systems where energy and matter can neither enter nor leave the system. In this case, the entropy within the isolated system remains constant over time. The internal energy of a system remains unchanged regardless of whether it is isolated or not. Therefore, entropy cannot decrease in isolated systems because there is no mechanism to transfer heat or do work that would cause entropy to decrease.\n\nIsolation and closed systems are important concepts in thermodynamics, as they allow us to study the behavior of a system without external influences.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "entropy cannot decrease in isolated systems. Entropy is a measure of disorder or randomness in a system. It is always increasing unless there is an external source to transfer heat from the system to the surroundings",
+      "causing the system to become less ordered.\n\nIsolated systems are closed systems where energy and matter can neither enter nor leave the system. In this case",
+      "the entropy within the isolated system remains constant over time. The internal energy of a system remains unchanged regardless of whether it is isolated or not. Therefore",
+      "entropy cannot decrease in isolated systems because there is no mechanism to transfer heat or do work that would cause entropy to decrease.\n\nIsolation and closed systems are important concepts in thermodynamics",
+      "as they allow us to study the behavior of a system without external influences."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0883,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9359,
+      0.8365,
+      0.8511
+    ],
+    "contradiction_score": 0.0193
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0315,
+    "reconstructed_h_score": 0.0315,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17792.6,
+    "llm_gen_ms": 3504.54,
+    "p1_ms": 2491.82,
+    "p2_ms": 0.02,
+    "p3_ms": 22009.72,
+    "fusion_ms": 0.01
+  }
+}

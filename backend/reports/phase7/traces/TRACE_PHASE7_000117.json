@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000117",
+  "sample_id": "law_0117",
+  "timestamp": "2026-08-14T12:31:34Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas corpus is a judicial remedy that allows a person to compel the government to release their personal property or legal documents from custody or to grant access to them. It is based on the 17th Amendment of the United States Constitution, which states that \"the power of the people to alter or reform the Constitution\" lies with Congress, but not with the executive branch.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.7916,
+    "claims": [
+      "Habeas corpus is a judicial remedy that allows a person to compel the government to release their personal property or legal documents from custody or to grant access to them. It is based on the 17th Amendment of the United States Constitution",
+      "which states that \"the power of the people to alter or reform the Constitution\" lies with Congress",
+      "but not with the executive branch."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1094,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8553,
+      0.8732,
+      0.7791
+    ],
+    "contradiction_score": 0.0077
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.548,
+    "reconstructed_h_score": 0.548,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 11538.86,
+    "llm_gen_ms": 1411.91,
+    "p1_ms": 2519.69,
+    "p2_ms": 0.01,
+    "p3_ms": 14157.25,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000124",
+  "sample_id": "law_0124",
+  "timestamp": "2026-08-14T12:33:09Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does double jeopardy apply to felonies?",
+  "generated_response": "No, double jeopardy does not apply to felonies. Double jeopardy refers to the constitutional guarantee that a person cannot be tried twice for the same crime. However, if someone is convicted of a felony, they can still face consequences such as imprisonment or civil penalties. The Supreme Court has ruled that even if someone is found guilty of a felony, there are certain circumstances under which the judge may dismiss the charges or impose lighter sentences than would have been imposed had no double jeopardy protection been in place.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "double jeopardy does not apply to felonies. Double jeopardy refers to the constitutional guarantee that a person cannot be tried twice for the same crime. However",
+      "if someone is convicted of a felony",
+      "they can still face consequences such as imprisonment or civil penalties. The Supreme Court has ruled that even if someone is found guilty of a felony",
+      "there are certain circumstances under which the judge may dismiss the charges or impose lighter sentences than would have been imposed had no double jeopardy protection been in place."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0607,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8736,
+      0.8759,
+      0.9718
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0217,
+    "reconstructed_h_score": 0.0217,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16056.28,
+    "llm_gen_ms": 1888.74,
+    "p1_ms": 2149.06,
+    "p2_ms": 0.03,
+    "p3_ms": 23146.58,
+    "fusion_ms": 0.01
+  }
+}

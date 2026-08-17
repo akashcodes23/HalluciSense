@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000150",
+  "sample_id": "law_0150",
+  "timestamp": "2026-08-14T12:39:19Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "Parking fines are typically handled by the local government's transportation department or a similar agency. In most cities and regions in China, you can usually find a parking enforcement officer on duty to handle such issues.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4908,
+    "claims": [
+      "Parking fines are typically handled by the local government's transportation department or a similar agency. In most cities and regions in China",
+      "you can usually find a parking enforcement officer on duty to handle such issues."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2099,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8424,
+      0.842,
+      0.8817
+    ],
+    "contradiction_score": 0.3311
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3905,
+    "reconstructed_h_score": 0.3905,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7283.87,
+    "llm_gen_ms": 733.11,
+    "p1_ms": 1787.17,
+    "p2_ms": 0.0,
+    "p3_ms": 8791.14,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000051",
+  "sample_id": "8A_CHE_NEG_0051",
+  "timestamp": "2026-08-17T05:51:20Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Chemistry",
+  "category": "NEGATION",
+  "difficulty": "easy",
+  "input": "Acids do not donate protons to bases in Brønsted–Lowry acid-base theory.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Brønsted–Lowry acid–base theory",
+  "source_url": "https://en.wikipedia.org/wiki/Br%C3%B8nsted%E2%80%93Lowry_acid%E2%80%93base_theory",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 2527.87
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

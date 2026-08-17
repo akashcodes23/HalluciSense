@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000071",
+  "sample_id": "med_0071",
+  "timestamp": "2026-08-14T12:20:19Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is penicillin?",
+  "generated_response": "Penicillin is a type of antibiotic that was discovered and developed in the early 1940s by Sir Alexander Fleming and his team at St. James's Hospital in London. It is effective against many bacteria, including those that cause infections such as pneumonia, strep throat, and urinary tract infections.\n\nPenicillin works by binding to the cell wall of bacteria, preventing the growth and multiplication of the bacteria. The bacterium cannot grow without a proper wall, so it dies or falls apart quickly.\n\nPenicillin is used to treat bacterial infections in humans and animals, as well as other species such as plants and algae. It is also used in some cases to prevent infections caused by resistant bacteria that have developed resistance to other antibiotics.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6807,
+    "claims": [
+      "Penicillin is a type of antibiotic that was discovered and developed in the early 1940s by Sir Alexander Fleming and his team at St. James's Hospital in London. It is effective against many bacteria",
+      "including those that cause infections such as pneumonia",
+      "and urinary tract infections.\n\nPenicillin works by binding to the cell wall of bacteria",
+      "preventing the growth and multiplication of the bacteria. The bacterium cannot grow without a proper wall",
+      "so it dies or falls apart quickly.\n\nPenicillin is used to treat bacterial infections in humans and animals",
+      "as well as other species such as plants and algae. It is also used in some cases to prevent infections caused by resistant bacteria that have developed resistance to other antibiotics."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3453,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8802,
+      0.8945,
+      0.8727
+    ],
+    "contradiction_score": 0.7683
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.5609,
+    "reconstructed_h_score": 0.5609,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 11813.43,
+    "llm_gen_ms": 2389.85,
+    "p1_ms": 2277.42,
+    "p2_ms": 0.01,
+    "p3_ms": 13635.84,
+    "fusion_ms": 0.02
+  }
+}

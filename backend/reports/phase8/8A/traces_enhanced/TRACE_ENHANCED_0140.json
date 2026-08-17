@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MED_TRU_0140",
+  "claim": "Statin medications lower LDL cholesterol by inhibiting HMG-CoA reductase, and they directly reverse advanced coronary calcification within 24 hours.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.2652,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Statin medications lower LDL cholesterol by inhibiting HMG-CoA reductase, and they directly reverse advanced coronary calcification within 24 hours",
+      "base_nli_score": 0.2652,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.2652
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 3295.02
+}

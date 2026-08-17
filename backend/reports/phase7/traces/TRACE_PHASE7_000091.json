@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000091",
+  "sample_id": "med_0091",
+  "timestamp": "2026-08-14T12:25:04Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is penicillin?",
+  "generated_response": "Penicillin is an antibiotic that is produced naturally by the mold Penicillium and is used to treat bacterial infections in humans and animals. It works by interfering with the growth of bacteria, which can help prevent infection. Penicillin is one of the most widely used antibiotics and has been effective for treating a wide range of bacterial infections.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1603,
+    "claims": [
+      "Penicillin is an antibiotic that is produced naturally by the mold Penicillium and is used to treat bacterial infections in humans and animals. It works by interfering with the growth of bacteria",
+      "which can help prevent infection. Penicillin is one of the most widely used antibiotics and has been effective for treating a wide range of bacterial infections."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1329,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8426,
+      0.7696,
+      0.7745
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1505,
+    "reconstructed_h_score": 0.1505,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 6356.55,
+    "llm_gen_ms": 1145.95,
+    "p1_ms": 1841.01,
+    "p2_ms": 0.0,
+    "p3_ms": 6387.11,
+    "fusion_ms": 0.01
+  }
+}

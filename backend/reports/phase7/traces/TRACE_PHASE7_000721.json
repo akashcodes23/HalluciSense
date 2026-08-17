@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000721",
+  "sample_id": "lit_0721",
+  "timestamp": "2026-08-14T14:49:44Z",
+  "domain": "Literature",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Who wrote Hamlet?",
+  "generated_response": "Hamlet was written by William Shakespeare, an English playwright and poet of the late Elizabethan era.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.252,
+    "claims": [
+      "Hamlet was written by William Shakespeare",
+      "an English playwright and poet of the late Elizabethan era."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1048,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7331,
+      0.8975,
+      0.8975
+    ],
+    "contradiction_score": 0.0072
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1994,
+    "reconstructed_h_score": 0.1994,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 2650.02,
+    "llm_gen_ms": 519.29,
+    "p1_ms": 1384.63,
+    "p2_ms": 0.0,
+    "p3_ms": 1272.92,
+    "fusion_ms": 0.0
+  }
+}

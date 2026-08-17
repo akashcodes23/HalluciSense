@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000468",
+  "sample_id": "che_0468",
+  "timestamp": "2026-08-14T13:50:29Z",
+  "domain": "Chemistry",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does gold rust in water?",
+  "generated_response": "Gold is an extremely stable metal and does not naturally oxidize or rust when placed in water, especially fresh water without air contact. However, some natural environments like seawater may have minerals present that can cause the surface of gold to slightly tarnish due to chemical reactions with oxygen dissolved in seawater.\n\nIn general, gold remains relatively unchanged by exposure to water unless it is immersed in saltwater for extended periods. It is also worth noting that if you are concerned about the tarnishing of gold over time, you may want to consider cleaning and maintaining it properly.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gold is an extremely stable metal and does not naturally oxidize or rust when placed in water",
+      "especially fresh water without air contact. However",
+      "some natural environments like seawater may have minerals present that can cause the surface of gold to slightly tarnish due to chemical reactions with oxygen dissolved in seawater.\n\nIn general",
+      "gold remains relatively unchanged by exposure to water unless it is immersed in saltwater for extended periods. It is also worth noting that if you are concerned about the tarnishing of gold over time",
+      "you may want to consider cleaning and maintaining it properly."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.221,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7999,
+      0.8392,
+      0.867
+    ],
+    "contradiction_score": 0.3258
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0789,
+    "reconstructed_h_score": 0.0789,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12292.81,
+    "llm_gen_ms": 2284.08,
+    "p1_ms": 1684.45,
+    "p2_ms": 0.01,
+    "p3_ms": 15544.44,
+    "fusion_ms": 0.01
+  }
+}

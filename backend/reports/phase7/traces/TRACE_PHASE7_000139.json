@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000139",
+  "sample_id": "law_0139",
+  "timestamp": "2026-08-14T12:36:57Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare Decisis is the legal principle in many jurisdictions that allows judges to apply precedents (decisions) made by higher courts or other authoritative bodies for future cases. This principle ensures consistency in judgments and prevents conflicts, as it establishes a precedent for similar cases.\n\nThe term \"stare decisis\" comes from the Latin word \"stare,\" meaning to stand or remain, and \"decisio,\" meaning decision. In legal contexts, it means that judges must follow established rules and precedents when making decisions, rather than applying their own personal opinions. This ensures that legal outcomes are predictable and consistent across similar cases.\n\nThe principle of stare decisis has been codified in many legal systems and is often referred to as the rule of precedent. It is a fundamental principle of common law and is considered one of the cornerstones of the judicial system.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3762,
+    "claims": [
+      "Stare Decisis is the legal principle in many jurisdictions that allows judges to apply precedents (decisions) made by higher courts or other authoritative bodies for future cases. This principle ensures consistency in judgments and prevents conflicts",
+      "as it establishes a precedent for similar cases.\n\nThe term \"stare decisis\" comes from the Latin word \"stare",
+      "\" meaning to stand or remain",
+      "\" meaning decision. In legal contexts",
+      "it means that judges must follow established rules and precedents when making decisions",
+      "rather than applying their own personal opinions. This ensures that legal outcomes are predictable and consistent across similar cases.\n\nThe principle of stare decisis has been codified in many legal systems and is often referred to as the rule of precedent. It is a fundamental principle of common law and is considered one of the cornerstones of the judicial system."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0678,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9355,
+      0.8804,
+      0.8729
+    ],
+    "contradiction_score": 0.0012
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2661,
+    "reconstructed_h_score": 0.2661,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19568.41,
+    "llm_gen_ms": 3130.82,
+    "p1_ms": 2172.17,
+    "p2_ms": 0.02,
+    "p3_ms": 27785.7,
+    "fusion_ms": 0.01
+  }
+}

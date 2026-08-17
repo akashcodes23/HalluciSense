@@ -1,0 +1,21 @@
+{
+  "record_id": "8A_PHY_NEG_0019",
+  "claim": "Electrons do not carry a negative electric charge.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.85,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Electrons do not carry a negative electric charge",
+      "base_nli_score": 0.15,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.85,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.85
+    }
+  ],
+  "enhancements_triggered": [
+    "NEGATION_POLARITY: Polarity reversal: claim contains negation 'not' while evidence affirms the predicate."
+  ],
+  "latency_ms": 2124.4
+}

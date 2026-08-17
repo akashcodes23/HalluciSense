@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000426",
+  "sample_id": "bio_0426",
+  "timestamp": "2026-08-14T13:42:48Z",
+  "domain": "Biology",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What do mitochondria produce?",
+  "generated_response": "Mitochondria are organelles that play a crucial role in cellular metabolism and energy production. They contain the enzymes necessary for producing ATP, which is the primary source of energy for cells. Other products produced by mitochondria include NADH (nicotinamide adenine dinucleotide), FADH2 (flavin adenine dinucleotide), and ATP synthase.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6661,
+    "claims": [
+      "Mitochondria are organelles that play a crucial role in cellular metabolism and energy production. They contain the enzymes necessary for producing ATP",
+      "which is the primary source of energy for cells. Other products produced by mitochondria include NADH (nicotinamide adenine dinucleotide)",
+      "FADH2 (flavin adenine dinucleotide)"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0845,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9,
+      0.8846,
+      0.8253
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4584,
+    "reconstructed_h_score": 0.4584,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7386.96,
+    "llm_gen_ms": 1729.71,
+    "p1_ms": 2630.4,
+    "p2_ms": 0.02,
+    "p3_ms": 5178.75,
+    "fusion_ms": 0.01
+  }
+}

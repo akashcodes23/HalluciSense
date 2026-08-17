@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000566",
+  "sample_id": "mat_0566",
+  "timestamp": "2026-08-14T14:16:01Z",
+  "domain": "Mathematics",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Are all prime numbers even?",
+  "generated_response": "No, not all prime numbers are even. A prime number is defined as a natural number greater than 1 that has no positive divisors other than 1 and itself. The smallest prime number is 2, which is also an even number. However, there are many other prime numbers that are odd. For example:\n\n- 3 is the next prime number after 2.\n- 5 is another prime number.\n- 7 is the third prime number.\n- 11 is the fourth prime number.\n\nSo while 2 is the smallest prime number and it is even, there are many other prime numbers that are odd.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3641,
+    "claims": [
+      "not all prime numbers are even. A prime number is defined as a natural number greater than 1 that has no positive divisors other than 1 and itself. The smallest prime number is 2, which is also an even number. However",
+      "there are many other prime numbers that are odd. For example:\n\n- 3 is the next prime number after 2.\n- 5 is another prime number.\n- 7 is the third prime number.\n- 11 is the fourth prime number.\n\nSo while 2 is the smallest prime number and it is even",
+      "there are many other prime numbers that are odd."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0708,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8786,
+      0.9812,
+      0.8156
+    ],
+    "contradiction_score": 0.0014
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2594,
+    "reconstructed_h_score": 0.2594,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20221.29,
+    "llm_gen_ms": 2851.47,
+    "p1_ms": 2597.77,
+    "p2_ms": 0.02,
+    "p3_ms": 26453.97,
+    "fusion_ms": 0.01
+  }
+}

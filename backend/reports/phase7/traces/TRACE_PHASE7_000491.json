@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000491",
+  "sample_id": "che_0491",
+  "timestamp": "2026-08-14T13:53:58Z",
+  "domain": "Chemistry",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the composition of water?",
+  "generated_response": "Water is composed of two types of atoms: hydrogen (H) and oxygen (O). In its most stable form, water exists as a liquid at room temperature and pressure, with a chemical formula of H2O. The molecule is symmetrically shaped with a bent structure that allows it to hold both hydrogen and oxygen atoms in the correct positions for stability.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4905,
+    "claims": [
+      "Water is composed of two types of atoms: hydrogen (H) and oxygen (O). In its most stable form",
+      "water exists as a liquid at room temperature and pressure",
+      "with a chemical formula of H2O. The molecule is symmetrically shaped with a bent structure that allows it to hold both hydrogen and oxygen atoms in the correct positions for stability."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1606,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8081,
+      0.7259,
+      0.7757
+    ],
+    "contradiction_score": 0.0316
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3727,
+    "reconstructed_h_score": 0.3727,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7279.41,
+    "llm_gen_ms": 1278.39,
+    "p1_ms": 2133.84,
+    "p2_ms": 0.0,
+    "p3_ms": 7138.5,
+    "fusion_ms": 0.0
+  }
+}

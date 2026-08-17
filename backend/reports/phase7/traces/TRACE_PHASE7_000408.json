@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000408",
+  "sample_id": "bio_0408",
+  "timestamp": "2026-08-14T13:39:04Z",
+  "domain": "Biology",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How do mammals reproduce?",
+  "generated_response": "Mammals reproduce through various methods depending on their species and reproductive system. The most common method is sexual reproduction, where an egg (ova) from one female is fertilized by sperm from another male. This process involves several stages:\n\n1. **Oogenesis**: In females, eggs are produced in specific glands called ovaries. Each mature follicle contains a single egg that develops into the embryo.\n\n2. **Pregnancy**: Once fertilization occurs, the egg and sperm combine in the fallopian tubes to form an embryo. This process is called fertilization.\n\n3. **Fertilization**: The embryo implants itself in the uterine wall (endometrium) through a small opening called the corpus luteum. This process is known as implantation.\n\n4. **Gestation**: After implantation, the growing embryo develops into a fetus. The fetus grows and develops over several weeks, supported by the mother's blood supply and nutrition.\n\n5. **Labor**: If the baby is born before it is fully developed, it must pass through labor to reach its birth canal. This is a series of contractions that push the baby out of the uterus.\n\n6. **Birth**: Once the baby is born, it can be transported to the mother's body and cared for by her. The baby grows and develops in the womb until it is ready to be introduced into the world.\n\nThese stages are essential for mammals to pass on their genetic material to future generations through reproduction.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Mammals reproduce through various methods depending on their species and reproductive system. The most common method is sexual reproduction",
+      "where an egg (ova) from one female is fertilized by sperm from another male. This process involves several stages:\n\n1. **Oogenesis**: In females",
+      "eggs are produced in specific glands called ovaries. Each mature follicle contains a single egg that develops into the embryo.\n\n2. **Pregnancy**: Once fertilization occurs",
+      "the egg and sperm combine in the fallopian tubes to form an embryo. This process is called fertilization.\n\n3. **Fertilization**: The embryo implants itself in the uterine wall (endometrium) through a small opening called the corpus luteum. This process is known as implantation.\n\n4. **Gestation**: After implantation",
+      "the growing embryo develops into a fetus. The fetus grows and develops over several weeks",
+      "supported by the mother's blood supply and nutrition.\n\n5. **Labor**: If the baby is born before it is fully developed",
+      "it must pass through labor to reach its birth canal. This is a series of contractions that push the baby out of the uterus.\n\n6. **Birth**: Once the baby is born",
+      "it can be transported to the mother's body and cared for by her. The baby grows and develops in the womb until it is ready to be introduced into the world.\n\nThese stages are essential for mammals to pass on their genetic material to future generations through reproduction."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1051,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8864,
+      0.8397,
+      0.7972
+    ],
+    "contradiction_score": 0.0052
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0375,
+    "reconstructed_h_score": 0.0375,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18043.86,
+    "llm_gen_ms": 7868.08,
+    "p1_ms": 2753.53,
+    "p2_ms": 0.02,
+    "p3_ms": 12904.24,
+    "fusion_ms": 0.01
+  }
+}

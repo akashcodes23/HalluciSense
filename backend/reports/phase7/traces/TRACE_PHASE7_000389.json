@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000389",
+  "sample_id": "phy_0389",
+  "timestamp": "2026-08-14T13:34:46Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "According to Newton's law of universal gravitation, the strength of the gravitational force between two objects is directly proportional to their masses and inversely proportional to the square of the distance between them. Mathematically, it can be expressed as:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere:\n- \\( F \\) is the magnitude of the gravitational force between two masses \\( m_1 \\) and \\( m_2 \\),\n- \\( G \\) is the gravitational constant, approximately equal to \\( 6.674 \\times 10^{-11} \\text{ N\u00b7m}^2/kg^2 \\),\n- \\( m_1 \\) and \\( m_2 \\) are the masses of the two objects,\n- \\( r \\) is the distance between the centers of mass of the two objects.\n\nThis equation shows that as the mass of an object increases, its gravitational force also increases. Additionally, as the mass of the object decreases, its gravitational force decreases.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2382,
+    "claims": [
+      "According to Newton's law of universal gravitation",
+      "the strength of the gravitational force between two objects is directly proportional to their masses and inversely proportional to the square of the distance between them. Mathematically",
+      "it can be expressed as:\n\n\\[ F = G \\frac{m_1 m_2}{r^2} \\]\n\nwhere:\n- \\( F \\) is the magnitude of the gravitational force between two masses \\( m_1 \\) and \\( m_2 \\)",
+      "- \\( G \\) is the gravitational constant",
+      "approximately equal to \\( 6.674 \\times 10^{-11} \\text{ N\u00b7m}^2/kg^2 \\)",
+      "- \\( m_1 \\) and \\( m_2 \\) are the masses of the two objects",
+      "- \\( r \\) is the distance between the centers of mass of the two objects.\n\nThis equation shows that as the mass of an object increases",
+      "its gravitational force also increases. Additionally",
+      "as the mass of the object decreases",
+      "its gravitational force decreases."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1798,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.679,
+      0.7775,
+      0.7608
+    ],
+    "contradiction_score": 0.0293
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2173,
+    "reconstructed_h_score": 0.2173,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20416.67,
+    "llm_gen_ms": 4824.23,
+    "p1_ms": 3235.15,
+    "p2_ms": 0.03,
+    "p3_ms": 21538.51,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000105",
+  "sample_id": "law_0105",
+  "timestamp": "2026-08-14T12:28:34Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is habeas corpus?",
+  "generated_response": "Habeas Corpus is a constitutional right in the United States that allows a person to challenge a judge's decision or order and to seek an opportunity for a hearing before a higher court. It was originally derived from Latin and means \"to have oneself heard.\"\n\nIn the context of habeas corpus, it can be used to challenge whether a judge has violated the defendant's constitutional rights, such as their right to due process, freedom from arbitrary imprisonment, or protection against self-incrimination. If a court finds that the defendant does not meet these standards, they may issue an order for a hearing, which is called a writ of habeas corpus.\n\nHabeas corpus has been used by courts throughout history to address issues such as wrongful convictions, denial of due process, and inadequate legal representation. It is considered an important tool in ensuring that judges are held accountable for their actions and that constitutional rights are respected.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Habeas Corpus is a constitutional right in the United States that allows a person to challenge a judge's decision or order and to seek an opportunity for a hearing before a higher court. It was originally derived from Latin and means \"to have oneself heard.\"\n\nIn the context of habeas corpus",
+      "it can be used to challenge whether a judge has violated the defendant's constitutional rights",
+      "such as their right to due process",
+      "freedom from arbitrary imprisonment",
+      "or protection against self-incrimination. If a court finds that the defendant does not meet these standards",
+      "they may issue an order for a hearing",
+      "which is called a writ of habeas corpus.\n\nHabeas corpus has been used by courts throughout history to address issues such as wrongful convictions",
+      "denial of due process",
+      "and inadequate legal representation. It is considered an important tool in ensuring that judges are held accountable for their actions and that constitutional rights are respected."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1035,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8322,
+      0.8579
+    ],
+    "contradiction_score": 0.008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.037,
+    "reconstructed_h_score": 0.037,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 24296.5,
+    "llm_gen_ms": 3578.36,
+    "p1_ms": 3016.35,
+    "p2_ms": 0.05,
+    "p3_ms": 32711.25,
+    "fusion_ms": 0.24
+  }
+}

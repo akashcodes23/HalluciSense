@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000271",
+  "sample_id": "phase8_c_0271",
+  "timestamp": "2026-08-17T06:00:22Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Medicine",
+  "corruption_type": "MULTI_CLAIM_CORRUPTION",
+  "corruption_severity": 3,
+  "input": "Penicillin is an antibiotic derived from Penicillium fungi. However, this claim is factually incorrect. However, this claim is factually incorrect.",
+  "original": "Penicillin is an antibiotic derived from Penicillium fungi.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3555,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3555,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.NEEDS_VERIFICATION",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 2498.52
+  },
+  "pipeline_error": null
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000106",
+  "sample_id": "law_0106",
+  "timestamp": "2026-08-14T12:28:43Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "The court that handles parking fines in most places is the administrative or enforcement court. These courts typically have jurisdiction over civil matters, including parking violations. The specific location of these courts can vary depending on the jurisdiction and county where the violation occurred. It's important to check local laws for the exact jurisdiction you are in and consult with your local government authorities for more accurate information.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5005,
+    "claims": [
+      "The court that handles parking fines in most places is the administrative or enforcement court. These courts typically have jurisdiction over civil matters",
+      "including parking violations. The specific location of these courts can vary depending on the jurisdiction and county where the violation occurred. It's important to check local laws for the exact jurisdiction you are in and consult with your local government authorities for more accurate information."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2091,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.909,
+      0.7757,
+      0.9397
+    ],
+    "contradiction_score": 0.365
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3964,
+    "reconstructed_h_score": 0.3964,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 9408.53,
+    "llm_gen_ms": 1858.76,
+    "p1_ms": 2676.37,
+    "p2_ms": 0.01,
+    "p3_ms": 9159.11,
+    "fusion_ms": 0.01
+  }
+}

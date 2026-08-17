@@ -1,0 +1,38 @@
+{
+  "trace_id": "TRACE_PHASE8A_000111",
+  "sample_id": "8A_MED_NUM_0111",
+  "timestamp": "2026-08-17T05:53:18Z",
+  "dataset": "Phase8A_Scientific_Adversarial",
+  "domain": "Medicine",
+  "category": "NUMERICAL_PRECISION",
+  "difficulty": "easy",
+  "input": "Normal adult resting heart rate is approximately 100–120 beats per minute.",
+  "ground_truth": 1,
+  "ground_truth_label": "hallucinated",
+  "source": "Wikipedia: Heart rate",
+  "source_url": "https://en.wikipedia.org/wiki/Heart_rate",
+  "retrieved_evidence": [],
+  "retrieval_scores": [],
+  "nli_score": null,
+  "nli_label": null,
+  "pillar_scores": {
+    "p1": 0.5,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "UNKNOWN",
+  "predicted_label": 1,
+  "is_correct": true,
+  "failure_classification": {
+    "primary": "CORRECT",
+    "secondary": null
+  },
+  "latency": {
+    "total_ms": 1650.1
+  },
+  "pipeline_error": "'Pillar1Result' object has no attribute 'h_score'"
+}

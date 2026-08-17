@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000218",
+  "sample_id": "his_0218",
+  "timestamp": "2026-08-14T12:57:31Z",
+  "domain": "History",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who won the Battle of Waterloo?",
+  "generated_response": "The Battle of Waterloo was fought on June 18-21, 1815, in the northwestern part of Belgium during the Napoleonic Wars. The British army led by Nelson Bonaparte defeated Napoleon Bonaparte's Grande Arm\u00e9e, which included French, Prussian, and Austrian forces. This battle marked the end of the Napoleonic Wars in Europe and paved the way for the restoration of the monarchy in France.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3378,
+    "claims": [
+      "The Battle of Waterloo was fought on June 18-21, 1815, in the northwestern part of Belgium during the Napoleonic Wars. The British army led by Nelson Bonaparte defeated Napoleon Bonaparte's Grande Arm\u00e9e",
+      "and Austrian forces. This battle marked the end of the Napoleonic Wars in Europe and paved the way for the restoration of the monarchy in France."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1091,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8578,
+      0.793,
+      0.8476
+    ],
+    "contradiction_score": 0.0012
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2561,
+    "reconstructed_h_score": 0.2561,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17249.19,
+    "llm_gen_ms": 3015.77,
+    "p1_ms": 2277.58,
+    "p2_ms": 0.0,
+    "p3_ms": 21775.73,
+    "fusion_ms": 0.01
+  }
+}

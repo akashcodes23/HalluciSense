@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000466",
+  "sample_id": "che_0466",
+  "timestamp": "2026-08-14T13:50:05Z",
+  "domain": "Chemistry",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does helium form covalent bonds?",
+  "generated_response": "No, helium does not form covalent bonds because helium is an inert gas and does not have enough electrons to participate in chemical bonding. Covalent bonds require at least two electrons for attraction between atoms, which is why helium is non-reactive and stable under normal conditions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5209,
+    "claims": [
+      "helium does not form covalent bonds because helium is an inert gas and does not have enough electrons to participate in chemical bonding. Covalent bonds require at least two electrons for attraction between atoms",
+      "which is why helium is non-reactive and stable under normal conditions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0698,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9225,
+      0.8855,
+      0.8721
+    ],
+    "contradiction_score": 0.0015
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3598,
+    "reconstructed_h_score": 0.3598,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11128.49,
+    "llm_gen_ms": 1288.95,
+    "p1_ms": 2485.48,
+    "p2_ms": 0.0,
+    "p3_ms": 13607.29,
+    "fusion_ms": 0.01
+  }
+}

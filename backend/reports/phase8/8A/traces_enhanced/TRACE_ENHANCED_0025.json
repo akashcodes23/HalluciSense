@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_CAU_0025",
+  "claim": "Compressing a gas adiabatically causes its temperature to decrease.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Compressing a gas adiabatically causes its temperature to decrease",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1729.95
+}

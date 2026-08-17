@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000454",
+  "sample_id": "che_0454",
+  "timestamp": "2026-08-14T13:48:30Z",
+  "domain": "Chemistry",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does helium form covalent bonds?",
+  "generated_response": "Helium is an inert gas and does not have any electrons in its outermost shell, so it cannot form covalent bonds with other atoms. In fact, helium's electron configuration is completely filled with 2 electrons, leaving no valence electrons for bonding. Therefore, helium is a noble gas and does not interact with other atoms through chemical reactions or bonds.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.8208,
+    "claims": [
+      "Helium is an inert gas and does not have any electrons in its outermost shell",
+      "so it cannot form covalent bonds with other atoms. In fact",
+      "helium's electron configuration is completely filled with 2 electrons",
+      "leaving no valence electrons for bonding. Therefore",
+      "helium is a noble gas and does not interact with other atoms through chemical reactions or bonds."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.212,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8808,
+      0.8733,
+      0.8261
+    ],
+    "contradiction_score": 0.346
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6034,
+    "reconstructed_h_score": 0.6034,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 9931.26,
+    "llm_gen_ms": 2102.65,
+    "p1_ms": 3585.72,
+    "p2_ms": 0.04,
+    "p3_ms": 6883.32,
+    "fusion_ms": 0.02
+  }
+}

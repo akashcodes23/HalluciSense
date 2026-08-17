@@ -1,0 +1,8 @@
+category,n,baseline_accuracy,enhanced_accuracy,delta_accuracy,baseline_precision,enhanced_precision,delta_precision,baseline_recall,enhanced_recall,delta_recall,baseline_f1,enhanced_f1,delta_f1
+TRUE_CONTROL,25,0.0,0.68,0.68,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+NUMERICAL_PRECISION,25,1.0,0.72,-0.28,1.0,1.0,0.0,1.0,0.72,-0.28,1.0,0.8372,-0.1628
+UNIT_SCALE,25,1.0,0.92,-0.08,1.0,1.0,0.0,1.0,0.92,-0.08,1.0,0.9583,-0.0417
+NEGATION,25,1.0,1.0,0.0,1.0,1.0,0.0,1.0,1.0,0.0,1.0,1.0,0.0
+CAUSAL_INVERSION,25,1.0,0.72,-0.28,1.0,1.0,0.0,1.0,0.72,-0.28,1.0,0.8372,-0.1628
+OUTDATED_SCIENTIFIC_CLAIM,25,1.0,0.68,-0.32,1.0,1.0,0.0,1.0,0.68,-0.32,1.0,0.8095,-0.1905
+TRUE_CORE_FALSE_ELABORATION,25,1.0,0.52,-0.48,1.0,1.0,0.0,1.0,0.52,-0.48,1.0,0.6842,-0.3158

@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MAT_CAU_0162",
+  "claim": "Increasing the significance threshold \u03b1 from 0.01 to 0.05 makes a test more conservative.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Increasing the significance threshold \u03b1 from 0.01 to 0.05 makes a test more conservative",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2550.43
+}

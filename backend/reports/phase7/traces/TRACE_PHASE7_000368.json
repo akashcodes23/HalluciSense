@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000368",
+  "sample_id": "phy_0368",
+  "timestamp": "2026-08-14T13:28:58Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero is the lowest possible temperature that can be achieved. It is the temperature at which all atoms and molecules cease to move because they have lost all kinetic energy. At this point, they stop all internal chemical activity and come to rest.\n\nThe exact temperature of absolute zero is dependent on the reference scale used. In the Celsius system, it is 0 degrees Celsius. However, in the Kelvin scale, it is -273.15 degrees Celsius.\n\nAbsolute zero can be reached only through extremely cold conditions, such as those found at the coldest places on Earth or near space. The temperature of absolute zero is a theoretical limit and has been achieved in laboratory settings using extreme cooling techniques.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4181,
+    "claims": [
+      "Absolute zero is the lowest possible temperature that can be achieved. It is the temperature at which all atoms and molecules cease to move because they have lost all kinetic energy. At this point",
+      "they stop all internal chemical activity and come to rest.\n\nThe exact temperature of absolute zero is dependent on the reference scale used. In the Celsius system",
+      "it is 0 degrees Celsius. However",
+      "in the Kelvin scale",
+      "it is -273.15 degrees Celsius.\n\nAbsolute zero can be reached only through extremely cold conditions",
+      "such as those found at the coldest places on Earth or near space. The temperature of absolute zero is a theoretical limit and has been achieved in laboratory settings using extreme cooling techniques."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0443,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9272,
+      0.9507,
+      0.918
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2846,
+    "reconstructed_h_score": 0.2846,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13827.52,
+    "llm_gen_ms": 3274.45,
+    "p1_ms": 2586.81,
+    "p2_ms": 0.01,
+    "p3_ms": 14900.94,
+    "fusion_ms": 0.01
+  }
+}

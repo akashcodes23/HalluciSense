@@ -1,0 +1,6 @@
+n,threshold,TP,TN,FP,FN,accuracy,precision,recall,specificity,f1,balanced_accuracy,mcc,auroc,auprc,brier_score,ece,domain,delta_vs_phase6,degradation_flag
+35,0.5,30,0,5,0,0.8571,0.8571,1.0,0.0,0.9231,0.5,0.0,0.5,0.9286,0.25,0.3571,Physics,0.0104,ROBUST
+35,0.5,30,0,5,0,0.8571,0.8571,1.0,0.0,0.9231,0.5,0.0,0.5,0.9286,0.25,0.3571,Chemistry,0.0104,ROBUST
+35,0.5,27,0,8,0,0.7714,0.7714,1.0,0.0,0.871,0.5,0.0,0.5,0.8857,0.25,0.2714,Biology,-0.0753,MODERATE_DEGRADATION
+34,0.5,27,0,7,0,0.7941,0.7941,1.0,0.0,0.8852,0.5,0.0,0.5,0.8971,0.25,0.2941,Medicine,-0.0526,MODERATE_DEGRADATION
+35,0.5,30,0,5,0,0.8571,0.8571,1.0,0.0,0.9231,0.5,0.0,0.5,0.9286,0.25,0.3571,Mathematics,0.0104,ROBUST

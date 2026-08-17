@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000250",
+  "sample_id": "his_0250",
+  "timestamp": "2026-08-14T13:01:04Z",
+  "domain": "History",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Who won the Battle of Waterloo?",
+  "generated_response": "The Battle of Waterloo was fought on June 18, 1815, in Belgium between Napoleon Bonaparte's forces and the Allied forces led by British, Prussian, French, Russian, Spanish, Dutch, and Swedish armies. The Allied forces were ultimately victorious, defeating Bonaparte's forces and securing control of Europe for the French Empire.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5775,
+    "claims": [
+      "The Battle of Waterloo was fought on June 18, 1815, in Belgium between Napoleon Bonaparte's forces and the Allied forces led by British",
+      "and Swedish armies. The Allied forces were ultimately victorious",
+      "defeating Bonaparte's forces and securing control of Europe for the French Empire."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2141,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9049,
+      0.8864,
+      0.758
+    ],
+    "contradiction_score": 0.3329
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4477,
+    "reconstructed_h_score": 0.4477,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14979.6,
+    "llm_gen_ms": 1653.75,
+    "p1_ms": 2179.02,
+    "p2_ms": 0.01,
+    "p3_ms": 21028.35,
+    "fusion_ms": 0.01
+  }
+}

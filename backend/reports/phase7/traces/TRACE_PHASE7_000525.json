@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000525",
+  "sample_id": "new_0525",
+  "timestamp": "2026-08-14T14:03:09Z",
+  "domain": "News",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What do climate summits discuss?",
+  "generated_response": "Climate summits are conferences that bring together leaders from governments, organizations, and individuals to discuss and agree on actions to address global climate change and its effects on the planet. These summits can be held biennially, annually, or more frequently depending on the specific goals of the conference.\n\nThe topics discussed at climate summits vary depending on the goals and priorities of the participants. Some common themes include:\n\n1. **Global Goals**: Setting ambitious targets for reducing greenhouse gas emissions, protecting biodiversity, and promoting sustainable development.\n2. **Technology Transfer**: Sharing innovative technologies and practices that can reduce emissions and improve resource efficiency.\n3. **Financial Cooperation**: Negotiating financial mechanisms to support developing countries in implementing climate action plans.\n4. **Public Participation**: Encouraging public engagement and dialogue on climate issues to build a sense of responsibility among individuals and communities.\n5. **International Relations**: Addressing the international system's role in ensuring global cooperation and addressing any challenges that arise from climate change.\n\nClimate summits are an important platform for making progress towards reducing greenhouse gas emissions, preserving the planet, and promoting sustainable development. They involve a wide range of stakeholders, including policymakers, environmentalists, businesses, and individuals, to ensure that everyone has a say in the decision-making process.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5795,
+    "claims": [
+      "Climate summits are conferences that bring together leaders from governments",
+      "and individuals to discuss and agree on actions to address global climate change and its effects on the planet. These summits can be held biennially",
+      "or more frequently depending on the specific goals of the conference.\n\nThe topics discussed at climate summits vary depending on the goals and priorities of the participants. Some common themes include:\n\n1. **Global Goals**: Setting ambitious targets for reducing greenhouse gas emissions",
+      "and promoting sustainable development.\n2. **Technology Transfer**: Sharing innovative technologies and practices that can reduce emissions and improve resource efficiency.\n3. **Financial Cooperation**: Negotiating financial mechanisms to support developing countries in implementing climate action plans.\n4. **Public Participation**: Encouraging public engagement and dialogue on climate issues to build a sense of responsibility among individuals and communities.\n5. **International Relations**: Addressing the international system's role in ensuring global cooperation and addressing any challenges that arise from climate change.\n\nClimate summits are an important platform for making progress towards reducing greenhouse gas emissions",
+      "and promoting sustainable development. They involve a wide range of stakeholders",
+      "to ensure that everyone has a say in the decision-making process."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0655,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9244,
+      0.9044,
+      0.8695
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.396,
+    "reconstructed_h_score": 0.396,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22441.16,
+    "llm_gen_ms": 5417.82,
+    "p1_ms": 6903.61,
+    "p2_ms": 0.06,
+    "p3_ms": 18708.9,
+    "fusion_ms": 0.03
+  }
+}

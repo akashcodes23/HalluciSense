@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000394",
+  "sample_id": "phy_0394",
+  "timestamp": "2026-08-14T13:36:07Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does entropy decrease in isolated systems?",
+  "generated_response": "Entropy is generally considered a measure of disorder or randomness in a system. In an isolated system, the total amount of available energy remains constant. However, the distribution of that energy can change over time, leading to an increase in entropy.\n\nTo illustrate this concept, consider an isolated system containing a gas at room temperature. Initially, the gas is in a random state with many possible configurations. As the system cools down and reaches equilibrium, the energy distribution becomes more ordered and predictable. This means that the system has acquired more \"order\" or entropy.\n\nIt's important to note that this behavior occurs within a specific context. An isolated system does not interact with its surroundings in any way, so it can only evolve according to laws of physics and thermodynamics. In contrast, open systems (those connected to their environment) can exchange energy with the external world, leading to an increase in entropy.\n\nIn summary, while entropy can decrease in closed systems where all heat is conserved, it cannot decrease in isolated systems unless there are exchanges with the surroundings.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4496,
+    "claims": [
+      "Entropy is generally considered a measure of disorder or randomness in a system. In an isolated system",
+      "the total amount of available energy remains constant. However",
+      "the distribution of that energy can change over time",
+      "leading to an increase in entropy.\n\nTo illustrate this concept",
+      "consider an isolated system containing a gas at room temperature. Initially",
+      "the gas is in a random state with many possible configurations. As the system cools down and reaches equilibrium",
+      "the energy distribution becomes more ordered and predictable. This means that the system has acquired more \"order\" or entropy.\n\nIt's important to note that this behavior occurs within a specific context. An isolated system does not interact with its surroundings in any way",
+      "so it can only evolve according to laws of physics and thermodynamics. In contrast",
+      "open systems (those connected to their environment) can exchange energy with the external world",
+      "leading to an increase in entropy.\n\nIn summary",
+      "while entropy can decrease in closed systems where all heat is conserved",
+      "it cannot decrease in isolated systems unless there are exchanges with the surroundings."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2648,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7928,
+      0.7222,
+      0.8018
+    ],
+    "contradiction_score": 0.3337
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3836,
+    "reconstructed_h_score": 0.3836,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16439.41,
+    "llm_gen_ms": 4463.13,
+    "p1_ms": 2893.58,
+    "p2_ms": 0.01,
+    "p3_ms": 17023.96,
+    "fusion_ms": 0.01
+  }
+}

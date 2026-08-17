@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000376",
+  "sample_id": "phy_0376",
+  "timestamp": "2026-08-14T13:31:01Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "What is absolute zero?",
+  "generated_response": "Absolute zero refers to the temperature at which all molecular motion ceases and remains stationary. At this point, the temperature of matter would be at its lowest possible level. It's important to note that while absolute zero is theoretically achievable in theory, it has not yet been reached due to the limitations of our technology and scientific understanding.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4576,
+    "claims": [
+      "Absolute zero refers to the temperature at which all molecular motion ceases and remains stationary. At this point",
+      "the temperature of matter would be at its lowest possible level. It's important to note that while absolute zero is theoretically achievable in theory",
+      "it has not yet been reached due to the limitations of our technology and scientific understanding."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0558,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9336,
+      0.871,
+      0.9459
+    ],
+    "contradiction_score": 0.0049
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3141,
+    "reconstructed_h_score": 0.3141,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11182.71,
+    "llm_gen_ms": 1278.26,
+    "p1_ms": 2767.12,
+    "p2_ms": 0.03,
+    "p3_ms": 13766.89,
+    "fusion_ms": 0.01
+  }
+}

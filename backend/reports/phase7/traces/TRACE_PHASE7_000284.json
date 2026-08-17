@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000284",
+  "sample_id": "sci_0284",
+  "timestamp": "2026-08-14T13:06:13Z",
+  "domain": "Science",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Does sound travel in vacuum?",
+  "generated_response": "Yes, sound does travel in vacuum, but at different speeds depending on the medium it is traveling through. The speed of sound varies from about 340 meters per second (approximately 215 miles per hour) in dry air to around 9,712 kilometers per second (6000 miles per hour) in water or helium gas.\n\nIn vacuum, sound travels at a constant speed of about 3.0 x 10^8 meters per second (approximately 186,000 miles per hour). This is because there are no molecules in the vacuum to slow down the sound waves.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "sound does travel in vacuum",
+      "but at different speeds depending on the medium it is traveling through. The speed of sound varies from about 340 meters per second (approximately 215 miles per hour) in dry air to around 9,712 kilometers per second (6000 miles per hour) in water or helium gas.\n\nIn vacuum",
+      "sound travels at a constant speed of about 3.0 x 10^8 meters per second (approximately 186,000 miles per hour). This is because there are no molecules in the vacuum to slow down the sound waves."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.086,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9195,
+      0.9321,
+      0.8196
+    ],
+    "contradiction_score": 0.0422
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.6736,
+    "reconstructed_h_score": 0.6736,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 10103.77,
+    "llm_gen_ms": 2705.87,
+    "p1_ms": 2097.18,
+    "p2_ms": 0.01,
+    "p3_ms": 9684.9,
+    "fusion_ms": 0.01
+  }
+}

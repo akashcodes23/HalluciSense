@@ -1,0 +1,88 @@
+{
+  "experiment": "Phase8D_Statistical_Acceptance_Test",
+  "decision": "ENHANCED_P1_TARGETED_BENEFIT_WITH_TRADEOFF",
+  "dataset_records": 175,
+  "dataset_sha256": "5a8bc3df48a31ef58bba376a23cb415ba4c7c2f25821c8f3a5275365de2e6710",
+  "phase6_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "baseline_metrics": {
+    "n": 175,
+    "TP": 150,
+    "TN": 0,
+    "FP": 25,
+    "FN": 0,
+    "accuracy": 0.8571,
+    "precision": 0.8571,
+    "recall": 1.0,
+    "specificity": 0.0,
+    "f1": 0.9231,
+    "balanced_accuracy": 0.5,
+    "mcc": 0.0,
+    "auroc": 0.5,
+    "auprc": 0.9286,
+    "ece": 0.3571,
+    "brier_score": 0.25
+  },
+  "enhanced_metrics": {
+    "n": 175,
+    "TP": 114,
+    "TN": 17,
+    "FP": 8,
+    "FN": 36,
+    "accuracy": 0.7486,
+    "precision": 0.9344,
+    "recall": 0.76,
+    "specificity": 0.68,
+    "f1": 0.8382,
+    "balanced_accuracy": 0.72,
+    "mcc": 0.3351,
+    "auroc": 0.8005,
+    "auprc": 0.9561,
+    "ece": 0.2006,
+    "brier_score": 0.1812
+  },
+  "mcnemar": {
+    "contingency_table": {
+      "A_stable_correct": 114,
+      "B_regression": 36,
+      "C_recovery": 17,
+      "D_stable_wrong": 8
+    },
+    "chi2_statistic": 6.1132,
+    "exact_p_value": 0.012660335802414213,
+    "discordant_pairs": 53,
+    "interpretation": "McNemar p=1.2660e-02. Baseline correctly classified 150/175 vs Enhanced 131/175. Recovery=17, Regression=36."
+  },
+  "bootstrap_ci": {
+    "delta_accuracy": {
+      "mean_delta": -0.1086,
+      "ci_95_lower": -0.1886,
+      "ci_95_upper": -0.0286
+    },
+    "delta_f1": {
+      "mean_delta": -0.0853,
+      "ci_95_lower": -0.1365,
+      "ci_95_upper": -0.0361
+    },
+    "delta_auroc": {
+      "mean_delta": 0.2988,
+      "ci_95_lower": 0.1925,
+      "ci_95_upper": 0.3961
+    },
+    "delta_auprc": {
+      "mean_delta": 0.0272,
+      "ci_95_lower": 0.0002,
+      "ci_95_upper": 0.0528
+    },
+    "delta_ece": {
+      "mean_delta": -0.1541,
+      "ci_95_lower": -0.2174,
+      "ci_95_upper": -0.0849
+    },
+    "delta_brier": {
+      "mean_delta": -0.0683,
+      "ci_95_lower": -0.1099,
+      "ci_95_upper": -0.0212
+    }
+  },
+  "execution_timestamp": "2026-08-17T06:09:25Z"
+}

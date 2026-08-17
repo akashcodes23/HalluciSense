@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000232",
+  "sample_id": "phase8_c_0232",
+  "timestamp": "2026-08-17T05:59:49Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Mathematics",
+  "corruption_type": "CONTRADICTION",
+  "corruption_severity": 4,
+  "input": "The derivative of x^2 with respect to x is not 2x.",
+  "original": "The derivative of x^2 with respect to x is 2x.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.901,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.901,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1763.19
+  },
+  "pipeline_error": null
+}

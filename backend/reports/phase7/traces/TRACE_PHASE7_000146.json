@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000146",
+  "sample_id": "law_0146",
+  "timestamp": "2026-08-14T12:38:33Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "In most countries and regions, parking fines are typically handled by the department of transportation or public safety. In some cases, the police may also be involved in enforcing parking regulations. The specific process for handling parking fines can vary depending on the jurisdiction, but generally, it involves the enforcement officer issuing a ticket to the driver, which is then recorded and enforced by the appropriate government agency.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3521,
+    "claims": [
+      "In most countries and regions",
+      "parking fines are typically handled by the department of transportation or public safety. In some cases",
+      "the police may also be involved in enforcing parking regulations. The specific process for handling parking fines can vary depending on the jurisdiction",
+      "it involves the enforcement officer issuing a ticket to the driver",
+      "which is then recorded and enforced by the appropriate government agency."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1812,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9024,
+      0.8621,
+      0.7978
+    ],
+    "contradiction_score": 0.2467
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2911,
+    "reconstructed_h_score": 0.2911,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7636.46,
+    "llm_gen_ms": 1133.73,
+    "p1_ms": 1879.05,
+    "p2_ms": 0.01,
+    "p3_ms": 8237.97,
+    "fusion_ms": 0.01
+  }
+}

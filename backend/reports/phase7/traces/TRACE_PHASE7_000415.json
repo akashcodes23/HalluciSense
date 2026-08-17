@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000415",
+  "sample_id": "bio_0415",
+  "timestamp": "2026-08-14T13:40:37Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are protein factories in cells. They synthesize proteins based on genetic instructions provided by RNA molecules (also known as messenger RNA or mRNA). Ribosomes consist of many subunits, and each subunit has a specific role in protein synthesis. The function of ribosomes is crucial for the growth and development of living organisms.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2627,
+    "claims": [
+      "Ribosomes are protein factories in cells. They synthesize proteins based on genetic instructions provided by RNA molecules (also known as messenger RNA or mRNA). Ribosomes consist of many subunits",
+      "and each subunit has a specific role in protein synthesis. The function of ribosomes is crucial for the growth and development of living organisms."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0944,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8327,
+      0.8205,
+      0.9119
+    ],
+    "contradiction_score": 0.0004
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2026,
+    "reconstructed_h_score": 0.2026,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18368.77,
+    "llm_gen_ms": 1105.14,
+    "p1_ms": 2929.32,
+    "p2_ms": 0.0,
+    "p3_ms": 27607.75,
+    "fusion_ms": 0.01
+  }
+}

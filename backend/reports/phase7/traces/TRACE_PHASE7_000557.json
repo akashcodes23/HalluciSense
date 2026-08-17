@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000557",
+  "sample_id": "mat_0557",
+  "timestamp": "2026-08-14T14:12:55Z",
+  "domain": "Mathematics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of the interior angles in any triangle is always 180 degrees.\n\nHere's the Python code using sympy to confirm this:\n\n```python\nimport sympy as sp\n\n# Define the variables for the angles of the triangle\nangle_A, angle_B, angle_C = sp.symbols('angle_A angle_B angle_C')\n\n# Define the equation representing the sum of the interior angles in a triangle\nequation = sp.Eq(angle_A + angle_B + angle_C, 180)\n\n# Solve the equation for one of the angles (for example, angle_A)\nsolution = sp.solve(equation, angle_A)[0]\n\n# Print the solution\nprint(solution)\n```\n```output\n180 - angle_B - angle_C\n```\nIt looks like the output `180 - angle_B - angle_C` confirms that the sum of the interior angles in a triangle is indeed 180 degrees. This is because we can substitute any one of the variables (e.g., angle_A) with the result of `180 - angle_B - angle_C`, which simplifies to 180 degrees.\n\nThus, the sum of the angles in a triangle is \\(\\boxed{180}\\) degrees.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5006,
+    "claims": [
+      "The sum of the interior angles in any triangle is always 180 degrees.\n\nHere's the Python code using sympy to confirm this:\n\n```python\nimport sympy as sp\n\n# Define the variables for the angles of the triangle\nangle_A",
+      "angle_C = sp.symbols('angle_A angle_B angle_C')\n\n# Define the equation representing the sum of the interior angles in a triangle\nequation = sp.Eq(angle_A + angle_B + angle_C",
+      "180)\n\n# Solve the equation for one of the angles (for example",
+      "angle_A)\nsolution = sp.solve(equation",
+      "angle_A)[0]\n\n# Print the solution\nprint(solution)\n```\n```output\n180 - angle_B - angle_C\n```\nIt looks like the output `180 - angle_B - angle_C` confirms that the sum of the interior angles in a triangle is indeed 180 degrees. This is because we can substitute any one of the variables (e.g.",
+      "angle_A) with the result of `180 - angle_B - angle_C`",
+      "which simplifies to 180 degrees.\n\nThus",
+      "the sum of the angles in a triangle is \\(\\boxed{180}\\) degrees."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.161,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6579,
+      0.8565,
+      0.7534
+    ],
+    "contradiction_score": 0.0066
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3793,
+    "reconstructed_h_score": 0.3793,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20885.28,
+    "llm_gen_ms": 5393.67,
+    "p1_ms": 4125.48,
+    "p2_ms": 0.01,
+    "p3_ms": 19548.9,
+    "fusion_ms": 0.01
+  }
+}

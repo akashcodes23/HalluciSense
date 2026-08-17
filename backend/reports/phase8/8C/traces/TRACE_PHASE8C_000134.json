@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000134",
+  "sample_id": "phase8_c_0134",
+  "timestamp": "2026-08-17T05:58:26Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "General Knowledge",
+  "corruption_type": "LOCATION_SUBSTITUTION",
+  "corruption_severity": 2,
+  "input": "Paris is the capital of France. However, this claim is factually incorrect.",
+  "original": "Paris is the capital of France.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.2573,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.2573,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 316.88
+  },
+  "pipeline_error": null
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000224",
+  "sample_id": "phase8_c_0224",
+  "timestamp": "2026-08-17T05:59:38Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Law",
+  "corruption_type": "CONTRADICTION",
+  "corruption_severity": 4,
+  "input": "Habeas corpus requires a court to determine the legality of detention. However, this claim is factually incorrect.",
+  "original": "Habeas corpus requires a court to determine the legality of detention.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.3217,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.3217,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 211.7
+  },
+  "pipeline_error": null
+}

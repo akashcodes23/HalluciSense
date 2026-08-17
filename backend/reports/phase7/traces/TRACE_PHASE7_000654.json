@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000654",
+  "sample_id": "pol_0654",
+  "timestamp": "2026-08-14T14:36:17Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What does veto power do?",
+  "generated_response": "Veto power refers to the ability of a legislature to prevent or modify an action that has already been enacted by a higher authority. In other words, it is a power of resistance against what has been decided upon by another body. This can include things like blocking legislation, refusing to vote on a bill, or vetoing executive decisions. The concept of veto power is often seen as one of the checks and balances in a democratic republic, where multiple branches of government work together to ensure that no single person or institution can dominate decision-making.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.6506,
+    "claims": [
+      "Veto power refers to the ability of a legislature to prevent or modify an action that has already been enacted by a higher authority. In other words",
+      "it is a power of resistance against what has been decided upon by another body. This can include things like blocking legislation",
+      "refusing to vote on a bill",
+      "or vetoing executive decisions. The concept of veto power is often seen as one of the checks and balances in a democratic republic",
+      "where multiple branches of government work together to ensure that no single person or institution can dominate decision-making."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1839,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9272,
+      0.9469,
+      0.9081
+    ],
+    "contradiction_score": 0.3906
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.4839,
+    "reconstructed_h_score": 0.4839,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14016.92,
+    "llm_gen_ms": 2647.34,
+    "p1_ms": 2528.56,
+    "p2_ms": 0.01,
+    "p3_ms": 16980.66,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000236",
+  "sample_id": "his_0236",
+  "timestamp": "2026-08-14T12:59:27Z",
+  "domain": "History",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Who was the first US President?",
+  "generated_response": "The first US President was George Washington.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.006,
+    "claims": [
+      "The first US President was George Washington."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0336,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8783,
+      0.9792,
+      0.9875
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0159,
+    "reconstructed_h_score": 0.0159,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 3962.69,
+    "llm_gen_ms": 242.33,
+    "p1_ms": 105.57,
+    "p2_ms": 0.0,
+    "p3_ms": 5400.71,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MAT_NUM_0146",
+  "claim": "The value of \u03c0 is exactly 22/7.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.9954,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "The value of \u03c0 is exactly 22/7",
+      "base_nli_score": 0.9954,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.9954
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1702.04
+}

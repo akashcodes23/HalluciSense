@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_BIO_TRU_0075",
+  "claim": "Photosynthesis in plants occurs in the chloroplast and converts CO\u2082 and water into glucose using light energy.",
+  "ground_truth": 0,
+  "enhanced_h_score": 0.1636,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "Photosynthesis in plants occurs in the chloroplast and converts CO\u2082 and water into glucose using light energy",
+      "base_nli_score": 0.1636,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.1636
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 2040.66
+}

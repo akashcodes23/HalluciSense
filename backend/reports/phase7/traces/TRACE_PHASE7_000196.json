@@ -1,0 +1,70 @@
+{
+  "trace_id": "TRACE_PHASE7_000196",
+  "sample_id": "fin_0196",
+  "timestamp": "2026-08-14T12:54:09Z",
+  "domain": "Finance",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation is a situation where the economy experiences sustained rapid price increases, often resulting in severe economic damage and instability. When prices rise rapidly, it can lead to:\n1. Unemployment: As businesses struggle to keep up with high wages and costs, they may lay off workers.\n2. Loss of confidence: Customers may lose trust in the currency and their ability to buy goods and services at a reasonable price.\n3. Currency devaluation: The value of money decreases as it is used more frequently due to higher prices.\n4. Decrease in purchasing power: With fewer goods available at higher prices, people may find that they cannot afford things they previously could.\n5. Financial instability: A hyperinflationary economy can cause financial instability, leading to bank closures, currency devaluation, and other economic problems.\n\nHyperinflations are often associated with political unrest, social unrest, and political instability, as governments may have to print more money to keep prices low, which can lead to inflation.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4664,
+    "claims": [
+      "Hyperinflation is a situation where the economy experiences sustained rapid price increases",
+      "often resulting in severe economic damage and instability. When prices rise rapidly",
+      "it can lead to:\n1. Unemployment: As businesses struggle to keep up with high wages and costs",
+      "they may lay off workers.\n2. Loss of confidence: Customers may lose trust in the currency and their ability to buy goods and services at a reasonable price.\n3. Currency devaluation: The value of money decreases as it is used more frequently due to higher prices.\n4. Decrease in purchasing power: With fewer goods available at higher prices",
+      "people may find that they cannot afford things they previously could.\n5. Financial instability: A hyperinflationary economy can cause financial instability",
+      "leading to bank closures",
+      "and other economic problems.\n\nHyperinflations are often associated with political unrest",
+      "as governments may have to print more money to keep prices low",
+      "which can lead to inflation."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0532,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.9174,
+      0.9197
+    ],
+    "contradiction_score": 0.0006
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3188,
+    "reconstructed_h_score": 0.3188,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22350.82,
+    "llm_gen_ms": 4061.42,
+    "p1_ms": 3010.4,
+    "p2_ms": 0.02,
+    "p3_ms": 30286.51,
+    "fusion_ms": 0.02
+  }
+}

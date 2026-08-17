@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_UNI_0013",
+  "claim": "The speed of light is approximately 3\u00d710\u2078 kilometres per second.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.15,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "The speed of light is approximately 3\u00d710\u2078 kilometres per second",
+      "base_nli_score": 0.15,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.15
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1642.6
+}

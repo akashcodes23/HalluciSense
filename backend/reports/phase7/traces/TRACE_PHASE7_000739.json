@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000739",
+  "sample_id": "lit_0739",
+  "timestamp": "2026-08-14T14:51:20Z",
+  "domain": "Literature",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "Who composed the Odyssey?",
+  "generated_response": "The Odyssey is a famous epic poem written by Homer, an ancient Greek poet. It tells the story of Odysseus, a king of Troy who sets out on a quest to rescue his wife Penelope from the suitors who have captured her. The poem covers many aspects of Homer's life and society in ancient Greece, including his love for Penelope, his relationship with the goddess Athena, and his struggles with his own inner demons.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3019,
+    "claims": [
+      "The Odyssey is a famous epic poem written by Homer",
+      "an ancient Greek poet. It tells the story of Odysseus",
+      "a king of Troy who sets out on a quest to rescue his wife Penelope from the suitors who have captured her. The poem covers many aspects of Homer's life and society in ancient Greece",
+      "including his love for Penelope",
+      "his relationship with the goddess Athena",
+      "and his struggles with his own inner demons."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1272,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8467,
+      0.8387,
+      0.7279
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2395,
+    "reconstructed_h_score": 0.2395,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8654.56,
+    "llm_gen_ms": 2117.8,
+    "p1_ms": 3803.91,
+    "p2_ms": 0.02,
+    "p3_ms": 5056.78,
+    "fusion_ms": 0.01
+  }
+}

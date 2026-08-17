@@ -1,0 +1,63 @@
+{
+  "trace_id": "TRACE_PHASE7_000595",
+  "sample_id": "mat_0595",
+  "timestamp": "2026-08-14T14:27:11Z",
+  "domain": "Mathematics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the derivative of x^2?",
+  "generated_response": "The derivative of \\(x^2\\) with respect to \\(x\\) is given by \\(\\frac{d}{dx}(x^2) = 2x\\).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.1037,
+    "claims": [
+      "The derivative of \\(x^2\\) with respect to \\(x\\) is given by \\(\\frac{d}{dx}(x^2) = 2x\\)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.143,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8697,
+      0.8135,
+      0.6621
+    ],
+    "contradiction_score": 0.0033
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1177,
+    "reconstructed_h_score": 0.1177,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 15800.97,
+    "llm_gen_ms": 717.71,
+    "p1_ms": 3927.38,
+    "p2_ms": 0.0,
+    "p3_ms": 18910.69,
+    "fusion_ms": 0.01
+  }
+}

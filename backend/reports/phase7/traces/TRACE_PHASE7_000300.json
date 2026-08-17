@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000300",
+  "sample_id": "sci_0300",
+  "timestamp": "2026-08-14T13:08:37Z",
+  "domain": "Science",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does sound travel in vacuum?",
+  "generated_response": "Yes, sound travels through the vacuum of space. Sound is made up of particles that vibrate when an object vibrates, and it can propagate through a medium such as air, water, or even in space if there are no obstacles.\n\nIn the absence of air, sound cannot travel because it requires air molecules to carry its energy. Without air molecules, there are no particles for sound to vibrate on, making it impossible for sound to propagate.\n\nIt's worth noting that while sound can travel through the vacuum of space, it is very slow compared to sound traveling through air or water. In a vacuum, sound travels at approximately 1130 meters per second (or about 372 miles per hour). This is much slower than sound traveling through air, which travels at around 343 meters per second (or about 212 miles per hour).\n\nOverall, while it's possible for sound to travel in the vacuum of space, it is extremely slow and not very useful for communication purposes.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "sound travels through the vacuum of space. Sound is made up of particles that vibrate when an object vibrates",
+      "and it can propagate through a medium such as air",
+      "or even in space if there are no obstacles.\n\nIn the absence of air",
+      "sound cannot travel because it requires air molecules to carry its energy. Without air molecules",
+      "there are no particles for sound to vibrate on",
+      "making it impossible for sound to propagate.\n\nIt's worth noting that while sound can travel through the vacuum of space",
+      "it is very slow compared to sound traveling through air or water. In a vacuum",
+      "sound travels at approximately 1130 meters per second (or about 372 miles per hour). This is much slower than sound traveling through air",
+      "which travels at around 343 meters per second (or about 212 miles per hour).\n\nOverall",
+      "while it's possible for sound to travel in the vacuum of space",
+      "it is extremely slow and not very useful for communication purposes."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3009,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7007,
+      0.9079,
+      0.8867
+    ],
+    "contradiction_score": 0.5474
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1075,
+    "reconstructed_h_score": 0.1075,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14302.15,
+    "llm_gen_ms": 4295.29,
+    "p1_ms": 1940.35,
+    "p2_ms": 0.02,
+    "p3_ms": 14231.07,
+    "fusion_ms": 0.01
+  }
+}

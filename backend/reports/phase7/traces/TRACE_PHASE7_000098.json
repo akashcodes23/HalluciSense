@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000098",
+  "sample_id": "med_0098",
+  "timestamp": "2026-08-14T12:26:39Z",
+  "domain": "Medicine",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does chemotherapy cure bacterial pneumonia?",
+  "generated_response": "No, chemotherapy is not effective in treating bacterial pneumonia. Bacterial pneumonia typically requires antibiotics to kill the bacteria causing the infection. In severe cases, surgical intervention may be necessary. If you have symptoms of bacterial pneumonia or think you may have it, it's important to see a healthcare provider for proper diagnosis and treatment.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "chemotherapy is not effective in treating bacterial pneumonia. Bacterial pneumonia typically requires antibiotics to kill the bacteria causing the infection. In severe cases",
+      "surgical intervention may be necessary. If you have symptoms of bacterial pneumonia or think you may have it",
+      "it's important to see a healthcare provider for proper diagnosis and treatment."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0404,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9485,
+      0.9488,
+      0.9163
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0144,
+    "reconstructed_h_score": 0.0144,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10783.47,
+    "llm_gen_ms": 1147.38,
+    "p1_ms": 1445.16,
+    "p2_ms": 0.0,
+    "p3_ms": 15597.77,
+    "fusion_ms": 0.01
+  }
+}

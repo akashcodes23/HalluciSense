@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000211",
+  "sample_id": "phase8_c_0211",
+  "timestamp": "2026-08-17T05:59:26Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "General Knowledge",
+  "corruption_type": "CONTRADICTION",
+  "corruption_severity": 4,
+  "input": "Paris is not the capital of France.",
+  "original": "Paris is the capital of France.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.9991,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.9991,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 1663.9
+  },
+  "pipeline_error": null
+}

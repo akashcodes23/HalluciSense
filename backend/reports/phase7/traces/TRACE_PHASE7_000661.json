@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000661",
+  "sample_id": "pol_0661",
+  "timestamp": "2026-08-14T14:38:08Z",
+  "domain": "Politics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a political system in which the government is divided into two main parts: a central government and state governments. The central government, also known as the national government or union, has some power to regulate the economy, foreign policy, and other important aspects of life for the country as a whole. The state governments, on the other hand, have more autonomy in their own affairs and can pass laws that affect only their own regions. This division of power is designed to give the states more control over local issues while still maintaining some level of national oversight and direction.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4134,
+    "claims": [
+      "Federalism is a political system in which the government is divided into two main parts: a central government and state governments. The central government",
+      "also known as the national government or union",
+      "has some power to regulate the economy",
+      "and other important aspects of life for the country as a whole. The state governments",
+      "on the other hand",
+      "have more autonomy in their own affairs and can pass laws that affect only their own regions. This division of power is designed to give the states more control over local issues while still maintaining some level of national oversight and direction."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0636,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8914,
+      0.9016,
+      0.9153
+    ],
+    "contradiction_score": 0.0011
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2885,
+    "reconstructed_h_score": 0.2885,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13441.84,
+    "llm_gen_ms": 2432.1,
+    "p1_ms": 3731.72,
+    "p2_ms": 0.02,
+    "p3_ms": 13790.14,
+    "fusion_ms": 0.02
+  }
+}

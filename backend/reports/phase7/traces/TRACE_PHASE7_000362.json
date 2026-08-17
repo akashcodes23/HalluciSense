@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000362",
+  "sample_id": "phy_0362",
+  "timestamp": "2026-08-14T13:27:08Z",
+  "domain": "Physics",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does entropy decrease in isolated systems?",
+  "generated_response": "No, entropy does not decrease in isolated systems. In fact, entropy is a fundamental property of the universe that describes the amount of disorder or randomness in a system. Entropy increases over time due to processes that increase disorder, such as heat transfer, chemical reactions, and radioactive decay.\n\nIn an isolated system, all energy and matter are contained within the system and cannot escape into the surroundings. As a result, no net entropy can be added to the system, and its total entropy remains constant.\n\nIt is important to note that the term \"entropy\" can have different meanings in physics and chemistry depending on the context. In thermodynamics, entropy is defined as the amount of energy available to do work at a given temperature. In statistical mechanics, entropy is related to the number of microstates that can be realized by a system with a fixed set of particles.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4782,
+    "claims": [
+      "entropy does not decrease in isolated systems. In fact",
+      "entropy is a fundamental property of the universe that describes the amount of disorder or randomness in a system. Entropy increases over time due to processes that increase disorder",
+      "such as heat transfer",
+      "and radioactive decay.\n\nIn an isolated system",
+      "all energy and matter are contained within the system and cannot escape into the surroundings. As a result",
+      "no net entropy can be added to the system",
+      "and its total entropy remains constant.\n\nIt is important to note that the term \"entropy\" can have different meanings in physics and chemistry depending on the context. In thermodynamics",
+      "entropy is defined as the amount of energy available to do work at a given temperature. In statistical mechanics",
+      "entropy is related to the number of microstates that can be realized by a system with a fixed set of particles."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0697,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9139,
+      0.8905,
+      0.8753
+    ],
+    "contradiction_score": 0.0008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3323,
+    "reconstructed_h_score": 0.3323,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17301.61,
+    "llm_gen_ms": 3667.76,
+    "p1_ms": 3296.58,
+    "p2_ms": 0.02,
+    "p3_ms": 18575.74,
+    "fusion_ms": 0.01
+  }
+}

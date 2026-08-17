@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000088",
+  "sample_id": "med_0088",
+  "timestamp": "2026-08-14T12:24:27Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a common respiratory illness caused by viruses that infect the respiratory system, particularly the nose and throat. The symptoms of the disease can include coughing, sneezing, fever, muscleache, fatigue, headaches, chills, and sometimes vomiting or diarrhea.\n\nWhile there is no cure for the flu, treatments are available to manage symptoms and prevent complications. Here are some general measures that can be taken:\n\n1. Stay at home: If you have flu-like symptoms, stay home from work or school to avoid spreading the virus to others.\n\n2. Get rest: Rest is important during the illness. Getting enough sleep helps your body fight off the virus more effectively.\n\n3. Drink fluids: Stay hydrated by drinking plenty of water, juices, and clear broths. This can help keep your lungs healthy and prevent dehydration.\n\n4. Take over-the-counter medications: Over-the-counter drugs such as acetaminophen or ibuprofen can help relieve fever, pain, and muscle aches. However, it's important to follow the dosage instructions on the label and not take any medicine if you have severe symptoms or are allergic to certain drugs.\n\n5. Get plenty of Vitamin C: Eating a diet rich in Vitamin C can help boost your immune system and reduce the severity of flu symptoms. You can get Vitamin C from fruits, vegetables, and citrus fruits.\n\n6. Practice good hygiene: Cover your mouth when coughing or sneezing, wash your hands frequently with soap and water, and avoid touching your face with your hands.\n\n7. Get vaccinated: The best way to prevent the flu is to get vaccinated against it. The flu vaccine is recommended for everyone aged 6 months and older.\n\nRemember that while there are no guarantees of preventing or treating the flu, taking these measures can help you manage symptoms and reduce the risk of complications.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a common respiratory illness caused by viruses that infect the respiratory system",
+      "particularly the nose and throat. The symptoms of the disease can include coughing",
+      "and sometimes vomiting or diarrhea.\n\nWhile there is no cure for the flu",
+      "treatments are available to manage symptoms and prevent complications. Here are some general measures that can be taken:\n\n1. Stay at home: If you have flu-like symptoms",
+      "stay home from work or school to avoid spreading the virus to others.\n\n2. Get rest: Rest is important during the illness. Getting enough sleep helps your body fight off the virus more effectively.\n\n3. Drink fluids: Stay hydrated by drinking plenty of water",
+      "and clear broths. This can help keep your lungs healthy and prevent dehydration.\n\n4. Take over-the-counter medications: Over-the-counter drugs such as acetaminophen or ibuprofen can help relieve fever",
+      "and muscle aches. However",
+      "it's important to follow the dosage instructions on the label and not take any medicine if you have severe symptoms or are allergic to certain drugs.\n\n5. Get plenty of Vitamin C: Eating a diet rich in Vitamin C can help boost your immune system and reduce the severity of flu symptoms. You can get Vitamin C from fruits",
+      "and citrus fruits.\n\n6. Practice good hygiene: Cover your mouth when coughing or sneezing",
+      "wash your hands frequently with soap and water",
+      "and avoid touching your face with your hands.\n\n7. Get vaccinated: The best way to prevent the flu is to get vaccinated against it. The flu vaccine is recommended for everyone aged 6 months and older.\n\nRemember that while there are no guarantees of preventing or treating the flu",
+      "taking these measures can help you manage symptoms and reduce the risk of complications."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1145,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7885,
+      0.8147,
+      0.8695
+    ],
+    "contradiction_score": 0.0007
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0409,
+    "reconstructed_h_score": 0.0409,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23565.58,
+    "llm_gen_ms": 7455.75,
+    "p1_ms": 1817.22,
+    "p2_ms": 0.03,
+    "p3_ms": 27700.76,
+    "fusion_ms": 0.01
+  }
+}

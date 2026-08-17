@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000624",
+  "sample_id": "geo_0624",
+  "timestamp": "2026-08-14T14:32:14Z",
+  "domain": "Geography",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Where does the Nile River flow?",
+  "generated_response": "The Nile River flows through various countries in Africa, including Egypt, Sudan, and Ethiopia. It starts in Lake Victoria in Kenya and then flows into Lake Chiba in Uganda, before reaching the Red Sea near Eritrea. The river is known for its annual flooding season, which helps shape the landscape of the surrounding regions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.7257,
+    "claims": [
+      "The Nile River flows through various countries in Africa",
+      "and Ethiopia. It starts in Lake Victoria in Kenya and then flows into Lake Chiba in Uganda",
+      "before reaching the Red Sea near Eritrea. The river is known for its annual flooding season",
+      "which helps shape the landscape of the surrounding regions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1453,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7672,
+      0.7691,
+      0.8176
+    ],
+    "contradiction_score": 0.0151
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.5184,
+    "reconstructed_h_score": 0.5184,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 10107.3,
+    "llm_gen_ms": 1210.75,
+    "p1_ms": 5233.9,
+    "p2_ms": 0.04,
+    "p3_ms": 5763.18,
+    "fusion_ms": 0.01
+  }
+}

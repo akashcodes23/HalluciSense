@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_MED_NUM_0113",
+  "claim": "Hypertension threshold is systolic blood pressure \u2265100 mmHg.",
+  "ground_truth": 1,
+  "enhanced_h_score": 1.0,
+  "predicted": 1,
+  "proposition_details": [
+    {
+      "proposition": "Hypertension threshold is systolic blood pressure \u2265100 mmHg",
+      "base_nli_score": 1.0,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 1.0
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1849.89
+}

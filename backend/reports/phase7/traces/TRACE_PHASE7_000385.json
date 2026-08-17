@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000385",
+  "sample_id": "phy_0385",
+  "timestamp": "2026-08-14T13:33:45Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity scales with the square of the mass of an object. This means that as the mass increases, the force of gravity it exerts on any other object also increases by the square of the mass ratio. This is because Newton's law of universal gravitation states that every particle in the universe attracts every other particle with a force proportional to their masses multiplied together and inversely proportional to the square of the distance between them.\n\nFor example, if you have two objects, each with a mass of 1 kilogram, they will attract each other with a gravitational force of approximately \\(9.8 \\text{ m/s}^2\\). If you increase one object's mass to 4 kilograms while keeping the other at 1 kilogram, the new gravitational force between them will be:\n\n\\[ G \\times (m_1 \\times m_2) / r^2 = 6.674 \\times 10^{-11} \\text{ Nm}^2/kg^2 \\times (1 \\text{ kg} \\times 4 \\text{ kg}) / 1 \\text{ m}^2 = 26.696 \\times 10^{-10} \\text{ N} \\]\n\nSo, the gravitational force increases by a factor of \\(4^2 = 16\\).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gravity scales with the square of the mass of an object. This means that as the mass increases",
+      "the force of gravity it exerts on any other object also increases by the square of the mass ratio. This is because Newton's law of universal gravitation states that every particle in the universe attracts every other particle with a force proportional to their masses multiplied together and inversely proportional to the square of the distance between them.\n\nFor example",
+      "if you have two objects",
+      "each with a mass of 1 kilogram",
+      "they will attract each other with a gravitational force of approximately \\(9.8 \\text{ m/s}^2\\). If you increase one object's mass to 4 kilograms while keeping the other at 1 kilogram",
+      "the new gravitational force between them will be:\n\n\\[ G \\times (m_1 \\times m_2) / r^2 = 6.674 \\times 10^{-11} \\text{ Nm}^2/kg^2 \\times (1 \\text{ kg} \\times 4 \\text{ kg}) / 1 \\text{ m}^2 = 26.696 \\times 10^{-10} \\text{ N} \\]\n\nSo",
+      "the gravitational force increases by a factor of \\(4^2 = 16\\)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3238,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6005,
+      0.6709,
+      0.7077
+    ],
+    "contradiction_score": 0.2931
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1156,
+    "reconstructed_h_score": 0.1156,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 23353.75,
+    "llm_gen_ms": 5562.28,
+    "p1_ms": 4246.29,
+    "p2_ms": 0.05,
+    "p3_ms": 25057.17,
+    "fusion_ms": 0.02
+  }
+}

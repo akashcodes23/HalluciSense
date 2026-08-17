@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000297",
+  "sample_id": "phase8_c_0297",
+  "timestamp": "2026-08-17T06:01:02Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Biology",
+  "corruption_type": "MULTI_CLAIM_CORRUPTION",
+  "corruption_severity": 3,
+  "input": "Ribosomes are the site of cellular protein synthesis. However, this claim is factually incorrect. However, this claim is factually incorrect.",
+  "original": "Ribosomes are the site of cellular protein synthesis.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.339,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.339,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.VERIFIED",
+  "predicted_label": 0,
+  "is_detected": false,
+  "latency": {
+    "total_ms": 1756.35
+  },
+  "pipeline_error": null
+}

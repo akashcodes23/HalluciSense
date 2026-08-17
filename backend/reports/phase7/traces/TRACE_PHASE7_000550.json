@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000550",
+  "sample_id": "new_0550",
+  "timestamp": "2026-08-14T14:10:33Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Is the UN still active?",
+  "generated_response": "Yes, the United Nations (UN) remains active and continues to serve as an important global organization dedicated to promoting international cooperation and peacekeeping. It is led by the Secretary-General, who is appointed by the General Assembly of the United Nations. The UN has been in existence since 1945 and has been involved in a wide range of activities, including peacekeeping missions, humanitarian aid, disarmament efforts, and diplomatic initiatives.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 1.0,
+    "claims": [
+      "the United Nations (UN) remains active and continues to serve as an important global organization dedicated to promoting international cooperation and peacekeeping. It is led by the Secretary-General",
+      "who is appointed by the General Assembly of the United Nations. The UN has been in existence since 1945 and has been involved in a wide range of activities"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0676,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9392,
+      0.9028,
+      0.8461
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.667,
+    "reconstructed_h_score": 0.667,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "LIKELY_HALLUCINATED",
+  "predicted_label": 1,
+  "timings": {
+    "total_ms": 6956.91,
+    "llm_gen_ms": 1981.99,
+    "p1_ms": 2351.37,
+    "p2_ms": 0.0,
+    "p3_ms": 4857.61,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000373",
+  "sample_id": "phy_0373",
+  "timestamp": "2026-08-14T13:30:21Z",
+  "domain": "Physics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "How does gravity scale with mass?",
+  "generated_response": "Gravity is directly proportional to the mass of an object. The strength of gravitational force decreases with the square of the distance from the center of mass. This means that if you increase the mass or decrease the distance, the effect on gravity will be greater.\n\nHere's a simple Python code snippet that demonstrates this relationship:\n\n```python\ndef calculate_gravitational_force(mass1, mass2, distance):\n    G = 6.67430e-11  # Gravitational constant in m^3 kg^-1 s^-2\n    return (G * mass1 * mass2) / (distance ** 2)\n\n# Example usage:\nmass1 = 5.972e24  # Mass of the Earth in kilograms\nmass2 = 6.022e23  # Mass of a proton in kilograms\ndistance = 1495.0e6  # Distance from the center of the Earth to the center of a proton in meters\n\nforce = calculate_gravitational_force(mass1, mass2, distance)\nprint(f\"The gravitational force between the Earth and a proton is approximately {force:.2e} N.\")\n```\n\nThis code calculates the gravitational force between two objects given their masses and the distance between them. The result is printed out in Newtons (N).",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Gravity is directly proportional to the mass of an object. The strength of gravitational force decreases with the square of the distance from the center of mass. This means that if you increase the mass or decrease the distance",
+      "the effect on gravity will be greater.\n\nHere's a simple Python code snippet that demonstrates this relationship:\n\n```python\ndef calculate_gravitational_force(mass1, mass2, distance):\n    G = 6.67430e-11  # Gravitational constant in m^3 kg^-1 s^-2\n    return (G * mass1 * mass2) / (distance ** 2)\n\n# Example usage:\nmass1 = 5.972e24  # Mass of the Earth in kilograms\nmass2 = 6.022e23  # Mass of a proton in kilograms\ndistance = 1495.0e6  # Distance from the center of the Earth to the center of a proton in meters\n\nforce = calculate_gravitational_force(mass1, mass2, distance)\nprint(f\"The gravitational force between the Earth and a proton is approximately {force:.2e} N.\")\n```\n\nThis code calculates the gravitational force between two objects given their masses and the distance between them. The result is printed out in Newtons (N)."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.3282,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.6527,
+      0.6816,
+      0.6719
+    ],
+    "contradiction_score": 0.3224
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1172,
+    "reconstructed_h_score": 0.1172,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 25207.67,
+    "llm_gen_ms": 5669.57,
+    "p1_ms": 2774.34,
+    "p2_ms": 0.02,
+    "p3_ms": 31640.8,
+    "fusion_ms": 0.01
+  }
+}

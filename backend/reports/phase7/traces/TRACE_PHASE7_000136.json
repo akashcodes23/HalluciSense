@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000136",
+  "sample_id": "law_0136",
+  "timestamp": "2026-08-14T12:36:13Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Does double jeopardy apply to felonies?",
+  "generated_response": "No, double jeopardy does not apply to felonies in the United States. Double jeopardy is an important constitutional provision that prohibits a person from being charged with a crime twice for the same offense. Felonies are serious criminal offenses that typically carry severe penalties and can result in jail time, fines, or both.\n\nTo avoid double jeopardy, the court must make certain determinations regarding whether a person has been convicted of a particular crime and if they have been sentenced to prison or some other type of punishment for it. If the court determines that a person has not been found guilty or sentenced to any penalties in relation to the specific offense, then there is no double jeopardy.\n\nHowever, double jeopardy does apply to misdemeanors, which are less serious crimes than felonies and carry less severe punishments. In this case, if a person is charged with a misdemeanor, they cannot be convicted of the same crime twice for the same offense, unless the court decides that their initial conviction was overturned or that they were acquitted.\n\nIt's important to note that some jurisdictions may have varying laws and procedures regarding double jeopardy and the treatment of felony convictions.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "double jeopardy does not apply to felonies in the United States. Double jeopardy is an important constitutional provision that prohibits a person from being charged with a crime twice for the same offense. Felonies are serious criminal offenses that typically carry severe penalties and can result in jail time",
+      "or both.\n\nTo avoid double jeopardy",
+      "the court must make certain determinations regarding whether a person has been convicted of a particular crime and if they have been sentenced to prison or some other type of punishment for it. If the court determines that a person has not been found guilty or sentenced to any penalties in relation to the specific offense",
+      "then there is no double jeopardy.\n\nHowever",
+      "double jeopardy does apply to misdemeanors",
+      "which are less serious crimes than felonies and carry less severe punishments. In this case",
+      "if a person is charged with a misdemeanor",
+      "they cannot be convicted of the same crime twice for the same offense",
+      "unless the court decides that their initial conviction was overturned or that they were acquitted.\n\nIt's important to note that some jurisdictions may have varying laws and procedures regarding double jeopardy and the treatment of felony convictions."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0393,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9442,
+      0.9457,
+      0.9296
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.014,
+    "reconstructed_h_score": 0.014,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14455.44,
+    "llm_gen_ms": 2917.56,
+    "p1_ms": 3369.37,
+    "p2_ms": 0.02,
+    "p3_ms": 15401.94,
+    "fusion_ms": 0.01
+  }
+}

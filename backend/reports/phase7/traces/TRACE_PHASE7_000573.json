@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000573",
+  "sample_id": "mat_0573",
+  "timestamp": "2026-08-14T14:18:49Z",
+  "domain": "Mathematics",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the sum of angles in a triangle?",
+  "generated_response": "The sum of the angles in any triangle is always \\(180^\\circ\\). This is a fundamental geometric fact that applies to all triangles, regardless of their size or shape. The reason for this formula can be derived from basic principles of geometry and trigonometry.\n\nTo visualize why the sum of the angles in a triangle is \\(180^\\circ\\), consider the following steps:\n\n1. Draw a triangle.\n2. Choose one vertex of the triangle as a reference point.\n3. Draw lines from the chosen vertex to each of the other two vertices.\n4. Observe that these three lines form three separate triangles inside the original triangle.\n5. The sum of the angles in any triangle is equal to the sum of the angles in the smaller triangles formed by drawing lines from the reference vertex.\n\nThe sum of the angles in a smaller triangle is \\(180^\\circ\\) because each internal angle of a triangle is \\(60^\\circ\\). Therefore, if we add up the angles of the three smaller triangles, we get:\n\\[180^\\circ + 180^\\circ + 180^\\circ = 3 \\times 180^\\circ = 540^\\circ\\]\n\nHowever, this sum includes each angle in the original triangle three times (once for each of the smaller triangles), so we need to subtract the angle at the reference vertex three times. The angle at the reference vertex is \\(180^\\circ\\) divided by 3, which is \\(60^\\circ\\). Therefore, we subtract:\n\\[540^\\circ - 3 \\times 60^\\circ = 540^\\circ - 180^\\circ = 360^\\circ - 180^\\circ = 180^\\circ\\]\n\nThus, the sum of the angles in any triangle is indeed \\(180^\\circ\\). The final answer is:\n\\[\n\\boxed{180}\n\\]",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "The sum of the angles in any triangle is always \\(180^\\circ\\). This is a fundamental geometric fact that applies to all triangles",
+      "regardless of their size or shape. The reason for this formula can be derived from basic principles of geometry and trigonometry.\n\nTo visualize why the sum of the angles in a triangle is \\(180^\\circ\\)",
+      "consider the following steps:\n\n1. Draw a triangle.\n2. Choose one vertex of the triangle as a reference point.\n3. Draw lines from the chosen vertex to each of the other two vertices.\n4. Observe that these three lines form three separate triangles inside the original triangle.\n5. The sum of the angles in any triangle is equal to the sum of the angles in the smaller triangles formed by drawing lines from the reference vertex.\n\nThe sum of the angles in a smaller triangle is \\(180^\\circ\\) because each internal angle of a triangle is \\(60^\\circ\\). Therefore",
+      "if we add up the angles of the three smaller triangles",
+      "we get:\n\\[180^\\circ + 180^\\circ + 180^\\circ = 3 \\times 180^\\circ = 540^\\circ\\]\n\nHowever",
+      "this sum includes each angle in the original triangle three times (once for each of the smaller triangles)",
+      "so we need to subtract the angle at the reference vertex three times. The angle at the reference vertex is \\(180^\\circ\\) divided by 3, which is \\(60^\\circ\\). Therefore",
+      "we subtract:\n\\[540^\\circ - 3 \\times 60^\\circ = 540^\\circ - 180^\\circ = 360^\\circ - 180^\\circ = 180^\\circ\\]\n\nThus",
+      "the sum of the angles in any triangle is indeed \\(180^\\circ\\). The final answer is:\n\\[\n\\boxed{180}\n\\]"
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1403,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8147,
+      0.7854,
+      0.7564
+    ],
+    "contradiction_score": 0.0024
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0501,
+    "reconstructed_h_score": 0.0501,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 19258.0,
+    "llm_gen_ms": 8529.14,
+    "p1_ms": 3910.97,
+    "p2_ms": 0.02,
+    "p3_ms": 11225.09,
+    "fusion_ms": 0.01
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "trace_id": "TRACE_PHASE8C_000234",
+  "sample_id": "phase8_c_0234",
+  "timestamp": "2026-08-17T05:59:49Z",
+  "dataset": "Phase8C_Controlled_Hallucination",
+  "domain": "Finance",
+  "corruption_type": "CONTRADICTION",
+  "corruption_severity": 4,
+  "input": "Liquidity measures how quickly assets convert into cash. However, this claim is factually incorrect.",
+  "original": "Liquidity measures how quickly assets convert into cash.",
+  "ground_truth": 1,
+  "ground_truth_method": "rule_based_self_evident",
+  "pillar_scores": {
+    "p1": 0.5042,
+    "p2": "UNAVAILABLE",
+    "p3": null
+  },
+  "fusion": {
+    "h_score": 0.5042,
+    "mode": "P1_PRIMARY"
+  },
+  "risk": "RiskLevel.MODERATE_RISK",
+  "predicted_label": 1,
+  "is_detected": true,
+  "latency": {
+    "total_ms": 119.72
+  },
+  "pipeline_error": null
+}

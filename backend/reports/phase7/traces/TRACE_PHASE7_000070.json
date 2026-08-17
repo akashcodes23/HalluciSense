@@ -1,0 +1,67 @@
+{
+  "trace_id": "TRACE_PHASE7_000070",
+  "sample_id": "med_0070",
+  "timestamp": "2026-08-14T12:20:08Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Does chemotherapy cure bacterial pneumonia?",
+  "generated_response": "Chemotherapy is not effective for treating bacterial pneumonia. Bacterial pneumonia is an infection caused by bacteria that can lead to inflammation and damage of the lungs. Chemotherapy is typically used to treat fungal infections or cancer, not bacterial pneumonia.\n\nTo treat bacterial pneumonia effectively, your healthcare provider will prescribe antibiotics that are specifically designed to kill the bacteria causing the infection. These drugs work by targeting specific protein receptors on the bacteria's cell surface, which allow them to bind and enter cells.\n\nIf you have bacterial pneumonia, it is important to follow your treatment plan closely with your healthcare provider to ensure proper medication administration and recovery.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Chemotherapy is not effective for treating bacterial pneumonia. Bacterial pneumonia is an infection caused by bacteria that can lead to inflammation and damage of the lungs. Chemotherapy is typically used to treat fungal infections or cancer",
+      "not bacterial pneumonia.\n\nTo treat bacterial pneumonia effectively",
+      "your healthcare provider will prescribe antibiotics that are specifically designed to kill the bacteria causing the infection. These drugs work by targeting specific protein receptors on the bacteria's cell surface",
+      "which allow them to bind and enter cells.\n\nIf you have bacterial pneumonia",
+      "it is important to follow your treatment plan closely with your healthcare provider to ensure proper medication administration and recovery."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1625,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9098,
+      0.9373,
+      0.9396
+    ],
+    "contradiction_score": 0.3322
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.058,
+    "reconstructed_h_score": 0.058,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 8282.75,
+    "llm_gen_ms": 1907.36,
+    "p1_ms": 1442.67,
+    "p2_ms": 0.01,
+    "p3_ms": 9286.61,
+    "fusion_ms": 0.01
+  }
+}

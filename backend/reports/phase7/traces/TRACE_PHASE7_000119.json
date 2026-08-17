@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000119",
+  "sample_id": "law_0119",
+  "timestamp": "2026-08-14T12:32:02Z",
+  "domain": "Law",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare decisis is a legal term that means \"consistency\" or \"to remain firm.\" It refers to the principle in criminal law that decisions should be consistent and fair, regardless of who is involved. This principle is often used to prevent miscarriages of justice and ensure that justice is carried out in a fair and impartial manner. Stare decisis is also a key aspect of the rule of law in many jurisdictions, as it helps to maintain legal uniformity and stability.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.5001,
+    "claims": [
+      "Stare decisis is a legal term that means \"consistency\" or \"to remain firm.\" It refers to the principle in criminal law that decisions should be consistent and fair",
+      "regardless of who is involved. This principle is often used to prevent miscarriages of justice and ensure that justice is carried out in a fair and impartial manner. Stare decisis is also a key aspect of the rule of law in many jurisdictions",
+      "as it helps to maintain legal uniformity and stability."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0723,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.91,
+      0.8896,
+      0.8722
+    ],
+    "contradiction_score": 0.0035
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3473,
+    "reconstructed_h_score": 0.3473,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13818.26,
+    "llm_gen_ms": 2408.06,
+    "p1_ms": 1683.01,
+    "p2_ms": 0.01,
+    "p3_ms": 17709.7,
+    "fusion_ms": 0.01
+  }
+}

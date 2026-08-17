@@ -1,0 +1,81 @@
+{
+  "phase": "8",
+  "timestamp": "2026-08-17T05:14:00Z",
+  "author": "HalluciSense Evaluation Engine",
+  "scientific_verdict": "VALIDATED_WITH_LIMITATIONS",
+  "frozen_phases": ["6", "6A", "6B", "7", "7B"],
+  "p1_status": "AVAILABLE",
+  "p2_status": "UNAVAILABLE",
+  "p3_status": "AVAILABLE",
+  "phase8_datasets": {
+    "A_canonical_static": {
+      "sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+      "n": 750,
+      "auroc": 0.926,
+      "accuracy": 0.8467,
+      "frozen": true
+    },
+    "B_live_response_gt": {
+      "sha256": "e0da63385e80171f48439928f2f7383a85c79b7f9bdcb25ca8644e46dffd4541",
+      "n": 750,
+      "gt_method": "P1_NLI_Evidence_Grounding",
+      "circularity_warning": "P1-only AUROC on Dataset B is circular (GT derived from P1 thresholds)",
+      "label_shift_count": 190,
+      "label_shift_pct": 50.7,
+      "frozen": true
+    },
+    "C_controlled_hallucination": {
+      "sha256": "2fcba8c9e32b52ea51c181ea89750fe768fe12eb2dca9c2dc672f25478886aff",
+      "n": 300,
+      "gt_method": "rule_based_transformation_self_evident",
+      "all_gt_1": true,
+      "corruption_types": 10,
+      "detection_rate_at_t050": 0.34,
+      "frozen": true
+    }
+  },
+  "key_measurements": {
+    "phase6_auroc": 0.926,
+    "phase7_auroc": 0.5602,
+    "dataset_b_p1_auroc_circular": 1.0,
+    "dataset_b_p1p3_auroc_circular": 0.9944,
+    "dataset_c_detection_rate": 0.34,
+    "dataset_c_contradiction_detection_rate": 0.61,
+    "dataset_c_partial_claim_detection_rate": 0.08,
+    "severity_spearman_rho": 0.2875,
+    "severity_spearman_p": 1.58e-13,
+    "ece_uncalibrated_test": 0.249,
+    "ece_isotonic_test": 0.0346,
+    "mcnemar_chi2": 72.01,
+    "mcnemar_p": 0.0,
+    "kruskal_wallis_p": 1.4e-05,
+    "fusion_reconstruction_error_max": 0.0
+  },
+  "p2_blocker_reason": "Ollama omits token logprobs. OpenAI quota exceeded. Gemini SDK omits logits. No synthetic logprobs generated.",
+  "claims_supported": [
+    "HalluciSense P1 detects direct contradictions at 61% rate",
+    "H-score increases monotonically with hallucination severity (rho=0.287, p<1e-6)",
+    "Isotonic calibration reduces ECE by 86% on held-out test",
+    "50.7% of hallucinated-labeled prompts were factually answered by Qwen 1.5B",
+    "P3 fusion significantly shifts classification patterns vs P1-only (McNemar p<0.0001)"
+  ],
+  "claims_not_supported": [
+    "Three-pillar detection (P2 unavailable)",
+    "AUROC=1.0 as genuine detection capability (circular artifact)",
+    "Temperature robustness (single temperature tested)",
+    "Cross-model generalization (single model tested live)"
+  ],
+  "test_counts": {
+    "phase8_suite": 46,
+    "all_phase8_passed": true,
+    "prior_phase_regression_required": true
+  },
+  "reproduction_commands": [
+    "PYTHONPATH=backend ./venv/bin/python backend/evaluation/phase8/build_dataset_b.py",
+    "PYTHONPATH=backend ./venv/bin/python backend/evaluation/phase8/build_dataset_c.py",
+    "PYTHONPATH=backend ./venv/bin/python backend/evaluation/phase8/run_phase8_evaluation.py",
+    "PYTHONPATH=backend ./venv/bin/pytest backend/tests/test_phase8_response_ground_truth.py -v"
+  ],
+  "seed": 42,
+  "python_version": "3.10.12"
+}

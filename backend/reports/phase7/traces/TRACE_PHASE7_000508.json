@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000508",
+  "sample_id": "new_0508",
+  "timestamp": "2026-08-14T13:57:48Z",
+  "domain": "News",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Are stock markets regulated?",
+  "generated_response": "Yes, stock markets are generally regulated to protect investors from fraud and market manipulation. Regulatory bodies such as the Securities and Exchange Commission (SEC) in the United States regulate companies' securities, including how they raise capital, disclose information, and comply with various laws and regulations. Additionally, stock exchanges maintain rules and policies that ensure fair trading practices and prevent fraudulent activities.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4923,
+    "claims": [
+      "stock markets are generally regulated to protect investors from fraud and market manipulation. Regulatory bodies such as the Securities and Exchange Commission (SEC) in the United States regulate companies' securities",
+      "including how they raise capital",
+      "and comply with various laws and regulations. Additionally",
+      "stock exchanges maintain rules and policies that ensure fair trading practices and prevent fraudulent activities."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0742,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8526,
+      0.913,
+      0.8943
+    ],
+    "contradiction_score": 0.0014
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.343,
+    "reconstructed_h_score": 0.343,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13871.79,
+    "llm_gen_ms": 1400.74,
+    "p1_ms": 2220.25,
+    "p2_ms": 0.0,
+    "p3_ms": 19998.68,
+    "fusion_ms": 0.01
+  }
+}

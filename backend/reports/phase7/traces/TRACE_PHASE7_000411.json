@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000411",
+  "sample_id": "bio_0411",
+  "timestamp": "2026-08-14T13:39:42Z",
+  "domain": "Biology",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are small proteins that play a crucial role in protein synthesis during cellular processes. They are composed of 70S subunits and are responsible for translating messenger RNA (mRNA) sequences into proteins.\n\nHere's a brief overview of how ribosomes work:\n\n1. **Molecular Structure**: Ribosomes have a basic structure consisting of two large subunits, each containing 34 chains of approximately 80 amino acids. These subunits interact to form a \"bigger\" protein called the large ribosomal complex, which contains 70 subunits.\n\n2. **Translation Process**:\n   - The mRNA strand is unwound from the chromosome and enters the cytoplasm.\n   - Ribosomes move along the mRNA strand, reading the codons (groups of three nucleotides) one at a time.\n   - Each codon specifies an amino acid that forms part of the protein being synthesized.\n\n3. **Amino Acid Synthesis**:\n   - As the ribosome reads through the mRNA sequence, it binds to the appropriate amino acid and begins constructing the growing polypeptide chain.\n   - This process involves joining the amino acids in a specific order, usually in reading frame with the mRNA codons.\n\n4. **Release of Protein**:\n   - When the protein is fully synthesized, it is released from the ribosome into the cytoplasm to be further processed and folded into its final conformation.\n   - The ribosome then returns to the start of the mRNA strand to begin producing another protein.\n\n5. **Post-translational Modifications**: Ribosomes play a role in modifying proteins after synthesis, such as adding terminal methyl groups to some proteins or completing folding processes.\n\n6. **Chaperone Functions**: Many ribosomal functions involve the binding of chaperones to assist in proper folding and assembly of proteins.\n\nIn summary, ribosomes are fundamental to protein synthesis in cells by translating mRNA into polypeptides, which are then folded into functional proteins.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3881,
+    "claims": [
+      "Ribosomes are small proteins that play a crucial role in protein synthesis during cellular processes. They are composed of 70S subunits and are responsible for translating messenger RNA (mRNA) sequences into proteins.\n\nHere's a brief overview of how ribosomes work:\n\n1. **Molecular Structure**: Ribosomes have a basic structure consisting of two large subunits",
+      "each containing 34 chains of approximately 80 amino acids. These subunits interact to form a \"bigger\" protein called the large ribosomal complex",
+      "which contains 70 subunits.\n\n2. **Translation Process**:\n   - The mRNA strand is unwound from the chromosome and enters the cytoplasm.\n   - Ribosomes move along the mRNA strand",
+      "reading the codons (groups of three nucleotides) one at a time.\n   - Each codon specifies an amino acid that forms part of the protein being synthesized.\n\n3. **Amino Acid Synthesis**:\n   - As the ribosome reads through the mRNA sequence",
+      "it binds to the appropriate amino acid and begins constructing the growing polypeptide chain.\n   - This process involves joining the amino acids in a specific order",
+      "usually in reading frame with the mRNA codons.\n\n4. **Release of Protein**:\n   - When the protein is fully synthesized",
+      "it is released from the ribosome into the cytoplasm to be further processed and folded into its final conformation.\n   - The ribosome then returns to the start of the mRNA strand to begin producing another protein.\n\n5. **Post-translational Modifications**: Ribosomes play a role in modifying proteins after synthesis",
+      "such as adding terminal methyl groups to some proteins or completing folding processes.\n\n6. **Chaperone Functions**: Many ribosomal functions involve the binding of chaperones to assist in proper folding and assembly of proteins.\n\nIn summary",
+      "ribosomes are fundamental to protein synthesis in cells by translating mRNA into polypeptides",
+      "which are then folded into functional proteins."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0962,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8512,
+      0.803,
+      0.9023
+    ],
+    "contradiction_score": 0.0003
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2839,
+    "reconstructed_h_score": 0.2839,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 24368.04,
+    "llm_gen_ms": 7885.75,
+    "p1_ms": 4369.07,
+    "p2_ms": 0.08,
+    "p3_ms": 22466.37,
+    "fusion_ms": 0.03
+  }
+}

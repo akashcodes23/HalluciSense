@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000052",
+  "sample_id": "med_0052",
+  "timestamp": "2026-08-14T12:16:30Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is a respiratory infection caused by various types of influenza viruses. Treatment options vary depending on the type of influenza and the specific symptoms. Here are some general guidelines:\n\n1. **Rest**: Rest is essential to help your body recover from the illness.\n2. **Hydration**: Drink plenty of fluids to keep your body hydrated, especially if you are experiencing a fever or other symptoms that could cause dehydration.\n3. **Over-the-counter medications**: Over-the-counter pain relievers such as acetaminophen or ibuprofen can be used to reduce fever and relieve discomfort. Be sure to follow the instructions on the label carefully.\n4. **Antiviral drugs**: In some cases, antiviral drugs may be prescribed by a doctor. These drugs can help reduce the severity of symptoms and shorten the duration of the illness.\n5. **Seek medical attention**: If you experience severe symptoms such as difficulty breathing, chest pain, or severe fever, it is important to seek medical attention immediately.\n\nIt's important to note that while some antiviral medications are available over-the-counter, others may require a prescription from a healthcare provider due to their potential side effects and interactions with other medications. If you have any concerns about the treatment options available for viral influenza or if you experience worsening symptoms, it is best to consult with a healthcare professional.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza is a respiratory infection caused by various types of influenza viruses. Treatment options vary depending on the type of influenza and the specific symptoms. Here are some general guidelines:\n\n1. **Rest**: Rest is essential to help your body recover from the illness.\n2. **Hydration**: Drink plenty of fluids to keep your body hydrated",
+      "especially if you are experiencing a fever or other symptoms that could cause dehydration.\n3. **Over-the-counter medications**: Over-the-counter pain relievers such as acetaminophen or ibuprofen can be used to reduce fever and relieve discomfort. Be sure to follow the instructions on the label carefully.\n4. **Antiviral drugs**: In some cases",
+      "antiviral drugs may be prescribed by a doctor. These drugs can help reduce the severity of symptoms and shorten the duration of the illness.\n5. **Seek medical attention**: If you experience severe symptoms such as difficulty breathing",
+      "it is important to seek medical attention immediately.\n\nIt's important to note that while some antiviral medications are available over-the-counter",
+      "others may require a prescription from a healthcare provider due to their potential side effects and interactions with other medications. If you have any concerns about the treatment options available for viral influenza or if you experience worsening symptoms",
+      "it is best to consult with a healthcare professional."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.098,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8373,
+      0.9114,
+      0.8119
+    ],
+    "contradiction_score": 0.008
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.035,
+    "reconstructed_h_score": 0.035,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14155.87,
+    "llm_gen_ms": 3432.42,
+    "p1_ms": 1994.61,
+    "p2_ms": 0.01,
+    "p3_ms": 15893.56,
+    "fusion_ms": 0.01
+  }
+}

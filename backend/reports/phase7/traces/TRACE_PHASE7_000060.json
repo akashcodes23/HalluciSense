@@ -1,0 +1,71 @@
+{
+  "trace_id": "TRACE_PHASE7_000060",
+  "sample_id": "med_0060",
+  "timestamp": "2026-08-14T12:18:08Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza can be treated using various methods depending on the severity of the illness and the presence of underlying conditions. Here are some common treatment options:\n\n1. Antivirals: These drugs work by inhibiting viral replication, reducing symptoms and speeding up recovery. Common antivirals for influenza include Tamiflu (oseltamivir) and Relenza (zidovudine). They can be taken in a single dose or as part of a combination treatment.\n\n2. Decongestants and cough suppressants: These medications help clear nasal congestion and reduce coughing, which can make the illness more uncomfortable but also helpful for some patients.\n\n3. Rest: Adequate rest is essential to recovery from viral influenza. It helps the body fight off infections and repairs damaged tissues.\n\n4. Fluids: Drinking plenty of fluids can help prevent dehydration and keep the mucous membranes moist, making it easier to cough and sneeze.\n\n5. Vitamin C and E: These vitamins have been shown to be effective in boosting immune function during flu season.\n\n6. Acetaminophen or ibuprofen: These medications can be used for pain relief, but they should not be taken without consulting a healthcare provider if you have underlying conditions that could make the flu more severe.\n\n7. Hospitalization: In some cases, especially if the illness is severe or if it's accompanied by complications such as pneumonia, patients may need to stay in the hospital for several days to receive proper treatment and monitoring.\n\nIt's important to note that while these treatments can help manage symptoms and improve recovery, they do not cure the virus. Therefore, it's crucial to follow your healthcare provider's advice on how to treat your influenza.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Viral influenza can be treated using various methods depending on the severity of the illness and the presence of underlying conditions. Here are some common treatment options:\n\n1. Antivirals: These drugs work by inhibiting viral replication",
+      "reducing symptoms and speeding up recovery. Common antivirals for influenza include Tamiflu (oseltamivir) and Relenza (zidovudine). They can be taken in a single dose or as part of a combination treatment.\n\n2. Decongestants and cough suppressants: These medications help clear nasal congestion and reduce coughing",
+      "which can make the illness more uncomfortable but also helpful for some patients.\n\n3. Rest: Adequate rest is essential to recovery from viral influenza. It helps the body fight off infections and repairs damaged tissues.\n\n4. Fluids: Drinking plenty of fluids can help prevent dehydration and keep the mucous membranes moist",
+      "making it easier to cough and sneeze.\n\n5. Vitamin C and E: These vitamins have been shown to be effective in boosting immune function during flu season.\n\n6. Acetaminophen or ibuprofen: These medications can be used for pain relief",
+      "but they should not be taken without consulting a healthcare provider if you have underlying conditions that could make the flu more severe.\n\n7. Hospitalization: In some cases",
+      "especially if the illness is severe or if it's accompanied by complications such as pneumonia",
+      "patients may need to stay in the hospital for several days to receive proper treatment and monitoring.\n\nIt's important to note that while these treatments can help manage symptoms and improve recovery",
+      "they do not cure the virus. Therefore",
+      "it's crucial to follow your healthcare provider's advice on how to treat your influenza."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1085,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.7738,
+      0.865,
+      0.8613
+    ],
+    "contradiction_score": 0.0005
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0387,
+    "reconstructed_h_score": 0.0387,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16036.56,
+    "llm_gen_ms": 4309.53,
+    "p1_ms": 2150.01,
+    "p2_ms": 0.02,
+    "p3_ms": 18366.16,
+    "fusion_ms": 0.01
+  }
+}

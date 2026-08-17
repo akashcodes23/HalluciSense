@@ -1,0 +1,66 @@
+{
+  "trace_id": "TRACE_PHASE7_000198",
+  "sample_id": "fin_0198",
+  "timestamp": "2026-08-14T12:54:56Z",
+  "domain": "Finance",
+  "difficulty": "hard",
+  "ground_truth": 1,
+  "query": "Do financial derivatives have risk?",
+  "generated_response": "Yes, financial derivatives do involve certain risks. These include the risk of default, credit risk, interest rate risk, liquidity risk, and market risk. Additionally, there is the risk of mispricing or manipulation in the derivative markets, which can lead to significant losses for investors.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4058,
+    "claims": [
+      "financial derivatives do involve certain risks. These include the risk of default",
+      "and market risk. Additionally",
+      "there is the risk of mispricing or manipulation in the derivative markets",
+      "which can lead to significant losses for investors."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1148,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8623,
+      0.7003,
+      0.9076
+    ],
+    "contradiction_score": 0.0001
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3019,
+    "reconstructed_h_score": 0.3019,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 18387.52,
+    "llm_gen_ms": 1158.94,
+    "p1_ms": 2433.41,
+    "p2_ms": 0.01,
+    "p3_ms": 28379.14,
+    "fusion_ms": 0.01
+  }
+}

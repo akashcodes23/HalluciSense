@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000055",
+  "sample_id": "med_0055",
+  "timestamp": "2026-08-14T12:17:10Z",
+  "domain": "Medicine",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is penicillin?",
+  "generated_response": "Penicillin is an antibiotic produced naturally by certain bacteria and molds. It works by inhibiting the growth of bacteria, which helps to prevent infections. It is commonly used in the treatment of bacterial infections such as streptococcus pneumonia, urinary tract infections, and ear infections. Penicillin was first discovered in 1928 by Alexander Fleming and its uses expanded significantly during World War II when it became available for use by the military.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4961,
+    "claims": [
+      "Penicillin is an antibiotic produced naturally by certain bacteria and molds. It works by inhibiting the growth of bacteria",
+      "which helps to prevent infections. It is commonly used in the treatment of bacterial infections such as streptococcus pneumonia",
+      "and ear infections. Penicillin was first discovered in 1928 by Alexander Fleming and its uses expanded significantly during World War II when it became available for use by the military."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0729,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9432,
+      0.8274,
+      0.898
+    ],
+    "contradiction_score": 0.0031
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.345,
+    "reconstructed_h_score": 0.345,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 7978.59,
+    "llm_gen_ms": 1225.96,
+    "p1_ms": 1642.48,
+    "p2_ms": 0.01,
+    "p3_ms": 9736.37,
+    "fusion_ms": 0.01
+  }
+}

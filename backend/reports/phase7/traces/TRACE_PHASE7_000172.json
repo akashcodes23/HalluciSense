@@ -1,0 +1,72 @@
+{
+  "trace_id": "TRACE_PHASE7_000172",
+  "sample_id": "fin_0172",
+  "timestamp": "2026-08-14T12:46:07Z",
+  "domain": "Finance",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "What does hyperinflation do?",
+  "generated_response": "Hyperinflation is a sustained period of rapid and excessive inflation that devalues currency and leads to economic instability. It typically occurs when the supply of money outpaces demand for goods and services, resulting in a substantial increase in prices. Hyperinflation can lead to financial crises, social unrest, and even political upheaval as governments struggle to manage the currency's value.\n\nSome key effects of hyperinflation include:\n\n1. **Devaluation of Currency**: In hyperinflation, paper money becomes increasingly worthless compared to other assets such as gold or precious metals.\n\n2. **Economic Instability**: As prices soar, businesses and consumers find it more difficult to buy goods and services at a reasonable price.\n\n3. **Loss of Purchasing Power**: The value of money decreases over time, meaning individuals can buy fewer items with the same amount of currency.\n\n4. **Financial Crises**: Hyperinflation can lead to severe financial problems for governments and businesses, as they struggle to manage their finances and avoid defaulting on loans.\n\n5. **Political Instability**: In some cases, hyperinflation can lead to political instability, as governments attempt to stabilize the currency but face resistance from voters who are dissatisfied with the inflation rate.\n\n6. **Economic Growth Stagnation**: As prices rise, it becomes increasingly difficult for businesses to invest and grow their operations.\n\nHyperinflation is a rare phenomenon that only occurs in extreme cases where there is no effective monetary policy to combat it.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4997,
+    "claims": [
+      "Hyperinflation is a sustained period of rapid and excessive inflation that devalues currency and leads to economic instability. It typically occurs when the supply of money outpaces demand for goods and services",
+      "resulting in a substantial increase in prices. Hyperinflation can lead to financial crises",
+      "and even political upheaval as governments struggle to manage the currency's value.\n\nSome key effects of hyperinflation include:\n\n1. **Devaluation of Currency**: In hyperinflation",
+      "paper money becomes increasingly worthless compared to other assets such as gold or precious metals.\n\n2. **Economic Instability**: As prices soar",
+      "businesses and consumers find it more difficult to buy goods and services at a reasonable price.\n\n3. **Loss of Purchasing Power**: The value of money decreases over time",
+      "meaning individuals can buy fewer items with the same amount of currency.\n\n4. **Financial Crises**: Hyperinflation can lead to severe financial problems for governments and businesses",
+      "as they struggle to manage their finances and avoid defaulting on loans.\n\n5. **Political Instability**: In some cases",
+      "hyperinflation can lead to political instability",
+      "as governments attempt to stabilize the currency but face resistance from voters who are dissatisfied with the inflation rate.\n\n6. **Economic Growth Stagnation**: As prices rise",
+      "it becomes increasingly difficult for businesses to invest and grow their operations.\n\nHyperinflation is a rare phenomenon that only occurs in extreme cases where there is no effective monetary policy to combat it."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1021,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9013,
+      0.8377,
+      0.7915
+    ],
+    "contradiction_score": 0.0012
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3577,
+    "reconstructed_h_score": 0.3577,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14680.91,
+    "llm_gen_ms": 5822.9,
+    "p1_ms": 2174.64,
+    "p2_ms": 0.02,
+    "p3_ms": 12345.78,
+    "fusion_ms": 0.01
+  }
+}

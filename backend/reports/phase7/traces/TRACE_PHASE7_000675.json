@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000675",
+  "sample_id": "pol_0675",
+  "timestamp": "2026-08-14T14:41:29Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies choose leaders through a process of voting, which involves citizens electing candidates to serve as heads of state or government. Some democracies use direct elections, while others have indirect elections where the leader is chosen by appointed officials or representatives. In all cases, the leader must be subject to the laws and democratic principles of the country.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3473,
+    "claims": [
+      "Democracies choose leaders through a process of voting",
+      "which involves citizens electing candidates to serve as heads of state or government. Some democracies use direct elections",
+      "while others have indirect elections where the leader is chosen by appointed officials or representatives. In all cases",
+      "the leader must be subject to the laws and democratic principles of the country."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.137,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.7713,
+      0.8072
+    ],
+    "contradiction_score": 0.0002
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2722,
+    "reconstructed_h_score": 0.2722,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 20169.6,
+    "llm_gen_ms": 1289.07,
+    "p1_ms": 3280.04,
+    "p2_ms": 0.01,
+    "p3_ms": 30607.22,
+    "fusion_ms": 0.02
+  }
+}

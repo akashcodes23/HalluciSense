@@ -1,0 +1,19 @@
+{
+  "record_id": "8A_PHY_NUM_0007",
+  "claim": "An electron has a rest mass of approximately 9.11\u00d710\u207b\u00b2\u2077 kilograms.",
+  "ground_truth": 1,
+  "enhanced_h_score": 0.0111,
+  "predicted": 0,
+  "proposition_details": [
+    {
+      "proposition": "An electron has a rest mass of approximately 9.11\u00d710\u207b\u00b2\u2077 kilograms",
+      "base_nli_score": 0.0111,
+      "numeric_penalty": 0.0,
+      "negation_penalty": 0.0,
+      "causal_penalty": 0.0,
+      "enhanced_score": 0.0111
+    }
+  ],
+  "enhancements_triggered": [],
+  "latency_ms": 1783.27
+}

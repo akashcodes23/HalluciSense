@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000665",
+  "sample_id": "pol_0665",
+  "timestamp": "2026-08-14T14:38:56Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a system of government in which power is divided between the central government and states or regions. In this system, the federal government has some authority to make decisions and laws for the country as a whole, while the state governments have the authority to make decisions and laws for their respective areas within the country. This division of power allows for more decentralization of decision-making and helps to ensure that different parts of the country can work together effectively to achieve common goals.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3255,
+    "claims": [
+      "Federalism is a system of government in which power is divided between the central government and states or regions. In this system",
+      "the federal government has some authority to make decisions and laws for the country as a whole",
+      "while the state governments have the authority to make decisions and laws for their respective areas within the country. This division of power allows for more decentralization of decision-making and helps to ensure that different parts of the country can work together effectively to achieve common goals."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1622,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.897,
+      0.9277,
+      0.9306
+    ],
+    "contradiction_score": 0.312
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2672,
+    "reconstructed_h_score": 0.2672,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14240.76,
+    "llm_gen_ms": 2093.57,
+    "p1_ms": 3670.18,
+    "p2_ms": 0.03,
+    "p3_ms": 16505.43,
+    "fusion_ms": 0.01
+  }
+}

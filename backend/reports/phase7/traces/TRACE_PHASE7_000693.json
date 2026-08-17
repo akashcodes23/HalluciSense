@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000693",
+  "sample_id": "pol_0693",
+  "timestamp": "2026-08-14T14:45:34Z",
+  "domain": "Politics",
+  "difficulty": "easy",
+  "ground_truth": 0,
+  "query": "What is federalism?",
+  "generated_response": "Federalism is a political system in which a country's government is divided into two parts: a central government and state governments or units of government. The central government is responsible for matters that affect the whole country, while state governments are responsible for matters that affect specific regions or states within the country. This type of government allows for greater autonomy and flexibility in decision-making, as well as the ability to address local issues more effectively than a centralized government.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4971,
+    "claims": [
+      "Federalism is a political system in which a country's government is divided into two parts: a central government and state governments or units of government. The central government is responsible for matters that affect the whole country",
+      "while state governments are responsible for matters that affect specific regions or states within the country. This type of government allows for greater autonomy and flexibility in decision-making",
+      "as well as the ability to address local issues more effectively than a centralized government."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0732,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9255,
+      0.8613,
+      0.8788
+    ],
+    "contradiction_score": 0.0021
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3457,
+    "reconstructed_h_score": 0.3457,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 12893.31,
+    "llm_gen_ms": 1923.16,
+    "p1_ms": 2651.92,
+    "p2_ms": 0.02,
+    "p3_ms": 15791.67,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "trace_id": "TRACE_PHASE7_000111",
+  "sample_id": "law_0111",
+  "timestamp": "2026-08-14T12:29:57Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare Decisis is a principle in law that refers to the doctrine of \"staying\" or \"standing by one's decision,\" meaning that once a court has made a binding legal judgment, it must follow through with its ruling unless there are compelling reasons for revising it. The term comes from the Latin phrase \"sud de decisio,\" which means \"by the decision itself.\" This principle is often used in cases where a court's decision is seen as the final and authoritative interpretation of the law, and any change would undermine that authority.\n\nStare Decisis has several important implications for legal practices:\n\n1. **Consistency**: By sticking to its decisions, courts maintain consistency across different areas of the law, which helps ensure clarity and predictability in decision-making.\n\n2. **Respect for precedent**: Courts respect past decisions made by their predecessors, which can provide valuable insights into how judges arrive at conclusions and guide future legal challenges.\n\n3. **Rulemaking**: In some jurisdictions, stare decisis is used as a basis for rulemaking, allowing courts to create statutes or regulations based on existing precedents.\n\n4. **Judicial discretion**: While stare decisis generally requires the court to follow its decisions unless there is a compelling reason for revising them, it does not deny judges some degree of discretion in determining legal issues when necessary.\n\n5. **Rule of law**: Stare Decisis ensures that laws are interpreted according to strict rules rather than being determined by political or personal preferences.\n\nThe principle of stare decisis has been influential throughout history and is fundamental to the structure and operation of many legal systems around the world.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4416,
+    "claims": [
+      "Stare Decisis is a principle in law that refers to the doctrine of \"staying\" or \"standing by one's decision",
+      "\" meaning that once a court has made a binding legal judgment",
+      "it must follow through with its ruling unless there are compelling reasons for revising it. The term comes from the Latin phrase \"sud de decisio",
+      "\" which means \"by the decision itself.\" This principle is often used in cases where a court's decision is seen as the final and authoritative interpretation of the law",
+      "and any change would undermine that authority.\n\nStare Decisis has several important implications for legal practices:\n\n1. **Consistency**: By sticking to its decisions",
+      "courts maintain consistency across different areas of the law",
+      "which helps ensure clarity and predictability in decision-making.\n\n2. **Respect for precedent**: Courts respect past decisions made by their predecessors",
+      "which can provide valuable insights into how judges arrive at conclusions and guide future legal challenges.\n\n3. **Rulemaking**: In some jurisdictions",
+      "stare decisis is used as a basis for rulemaking",
+      "allowing courts to create statutes or regulations based on existing precedents.\n\n4. **Judicial discretion**: While stare decisis generally requires the court to follow its decisions unless there is a compelling reason for revising them",
+      "it does not deny judges some degree of discretion in determining legal issues when necessary.\n\n5. **Rule of law**: Stare Decisis ensures that laws are interpreted according to strict rules rather than being determined by political or personal preferences.\n\nThe principle of stare decisis has been influential throughout history and is fundamental to the structure and operation of many legal systems around the world."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0781,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8994,
+      0.8715,
+      0.8712
+    ],
+    "contradiction_score": 0.0017
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3118,
+    "reconstructed_h_score": 0.3118,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 17798.12,
+    "llm_gen_ms": 6377.81,
+    "p1_ms": 2002.84,
+    "p2_ms": 0.03,
+    "p3_ms": 16847.02,
+    "fusion_ms": 0.02
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "trace_id": "TRACE_PHASE7_000695",
+  "sample_id": "pol_0695",
+  "timestamp": "2026-08-14T14:46:09Z",
+  "domain": "Politics",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "How do democracies choose leaders?",
+  "generated_response": "Democracies choose leaders through various processes including elections, referendums, and consultation with citizens. The specific method of choosing a leader can vary widely depending on the country's constitution and political system.\n\nHere is a general overview of how democracies choose leaders:\n\n1. **Electoral Process**: In many democracies, the most important step in electing a leader is through an electoral process. This typically involves citizens voting for their preferred candidate or candidates based on a list of candidates provided by the government.\n\n2. **Referendum**: In some countries, referendums are used to ask voters for a yes-or-no vote on various issues or changes to the country's constitution.\n\n3. **Consultation with Citizens**: Many democracies also involve consultation with citizens through committees, public forums, and other means of communication. This helps ensure that the chosen leader represents the voice of the people.\n\n4. **Judicial Process**: In some countries, a judicial process is used to select the winner. For example, in some European countries, there is a Constitutional Court that decides which candidate is most qualified to serve as president.\n\n5. **Candidate Qualifications**: Candidates are often required to meet certain qualifications, such as having a certain level of education or professional experience, and they must be able to demonstrate their commitment to the democratic process and respect for human rights.\n\n6. **Political Parties**: In some democracies, political parties play a significant role in selecting candidates. Political parties often organize campaigns to raise funds and recruit members, and they may also use various tactics to select their candidates.\n\nOverall, democracies choose leaders through a complex process that involves democratic principles and the participation of citizens.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4576,
+    "claims": [
+      "Democracies choose leaders through various processes including elections",
+      "and consultation with citizens. The specific method of choosing a leader can vary widely depending on the country's constitution and political system.\n\nHere is a general overview of how democracies choose leaders:\n\n1. **Electoral Process**: In many democracies",
+      "the most important step in electing a leader is through an electoral process. This typically involves citizens voting for their preferred candidate or candidates based on a list of candidates provided by the government.\n\n2. **Referendum**: In some countries",
+      "referendums are used to ask voters for a yes-or-no vote on various issues or changes to the country's constitution.\n\n3. **Consultation with Citizens**: Many democracies also involve consultation with citizens through committees",
+      "and other means of communication. This helps ensure that the chosen leader represents the voice of the people.\n\n4. **Judicial Process**: In some countries",
+      "a judicial process is used to select the winner. For example",
+      "in some European countries",
+      "there is a Constitutional Court that decides which candidate is most qualified to serve as president.\n\n5. **Candidate Qualifications**: Candidates are often required to meet certain qualifications",
+      "such as having a certain level of education or professional experience",
+      "and they must be able to demonstrate their commitment to the democratic process and respect for human rights.\n\n6. **Political Parties**: In some democracies",
+      "political parties play a significant role in selecting candidates. Political parties often organize campaigns to raise funds and recruit members",
+      "and they may also use various tactics to select their candidates.\n\nOverall",
+      "democracies choose leaders through a complex process that involves democratic principles and the participation of citizens."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.1307,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8364,
+      0.8427,
+      0.721
+    ],
+    "contradiction_score": 0.0019
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.3409,
+    "reconstructed_h_score": 0.3409,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 22278.29,
+    "llm_gen_ms": 8989.88,
+    "p1_ms": 3074.96,
+    "p2_ms": 0.04,
+    "p3_ms": 17991.77,
+    "fusion_ms": 0.03
+  }
+}

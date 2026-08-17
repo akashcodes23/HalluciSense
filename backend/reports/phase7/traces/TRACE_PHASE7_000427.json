@@ -1,0 +1,64 @@
+{
+  "trace_id": "TRACE_PHASE7_000427",
+  "sample_id": "bio_0427",
+  "timestamp": "2026-08-14T13:42:59Z",
+  "domain": "Biology",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is the function of ribosomes?",
+  "generated_response": "Ribosomes are small protein-producing structures in cells that play a crucial role in the translation process from mRNA to proteins. They are essential for converting genetic information stored in DNA into functional molecules like proteins. Each ribosome contains ribosomal RNA (rRNA) and many ribosomal proteins, which collaborate to build proteins according to the instructions provided by the mRNA.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2431,
+    "claims": [
+      "Ribosomes are small protein-producing structures in cells that play a crucial role in the translation process from mRNA to proteins. They are essential for converting genetic information stored in DNA into functional molecules like proteins. Each ribosome contains ribosomal RNA (rRNA) and many ribosomal proteins",
+      "which collaborate to build proteins according to the instructions provided by the mRNA."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0873,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8852,
+      0.8226,
+      0.8912
+    ],
+    "contradiction_score": 0.0012
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1875,
+    "reconstructed_h_score": 0.1875,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 11073.55,
+    "llm_gen_ms": 1594.63,
+    "p1_ms": 2214.72,
+    "p2_ms": 0.0,
+    "p3_ms": 13997.51,
+    "fusion_ms": 0.01
+  }
+}

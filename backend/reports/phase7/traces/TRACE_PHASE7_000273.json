@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000273",
+  "sample_id": "sci_0273",
+  "timestamp": "2026-08-14T13:04:41Z",
+  "domain": "Science",
+  "difficulty": "medium",
+  "ground_truth": 0,
+  "query": "What is photosynthesis?",
+  "generated_response": "Photosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy stored in glucose, a sugar that can be used by organisms as food. It occurs in green leaves and other parts of plant bodies, where chlorophyll, a pigment involved in absorbing light, helps capture energy from sunlight. The process involves the conversion of carbon dioxide and water molecules into glucose through a series of chemical reactions.\n\nPhotosynthesis plays a crucial role in maintaining life on Earth by producing oxygen, which is essential for aerobic respiration in animals. It also supports food chains and plays a key role in nutrient cycling within ecosystems.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.2453,
+    "claims": [
+      "Photosynthesis is the process by which plants",
+      "and some bacteria convert light energy into chemical energy stored in glucose",
+      "a sugar that can be used by organisms as food. It occurs in green leaves and other parts of plant bodies",
+      "a pigment involved in absorbing light",
+      "helps capture energy from sunlight. The process involves the conversion of carbon dioxide and water molecules into glucose through a series of chemical reactions.\n\nPhotosynthesis plays a crucial role in maintaining life on Earth by producing oxygen",
+      "which is essential for aerobic respiration in animals. It also supports food chains and plays a key role in nutrient cycling within ecosystems."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0519,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9277,
+      0.9224,
+      0.9132
+    ],
+    "contradiction_score": 0.0018
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.1762,
+    "reconstructed_h_score": 0.1762,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 14719.93,
+    "llm_gen_ms": 2708.1,
+    "p1_ms": 2609.07,
+    "p2_ms": 0.02,
+    "p3_ms": 17272.03,
+    "fusion_ms": 0.01
+  }
+}

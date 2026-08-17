@@ -1,0 +1,65 @@
+{
+  "trace_id": "TRACE_PHASE7_000072",
+  "sample_id": "med_0072",
+  "timestamp": "2026-08-14T12:20:36Z",
+  "domain": "Medicine",
+  "difficulty": "easy",
+  "ground_truth": 1,
+  "query": "How is viral influenza treated?",
+  "generated_response": "Viral influenza is typically treated with antiviral medications, such as oseltamavir (Tamiflu) and zidovudine (Antivir). These medications can help reduce the severity of symptoms and shorten the duration of the illness. Additionally, rest and hydration are important for recovery. It's also recommended to avoid close contact with others who are infected to prevent the spread of the virus.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.4998,
+    "claims": [
+      "Viral influenza is typically treated with antiviral medications",
+      "such as oseltamavir (Tamiflu) and zidovudine (Antivir). These medications can help reduce the severity of symptoms and shorten the duration of the illness. Additionally",
+      "rest and hydration are important for recovery. It's also recommended to avoid close contact with others who are infected to prevent the spread of the virus."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.226,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8417,
+      0.8118,
+      0.8415
+    ],
+    "contradiction_score": 0.3333
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.402,
+    "reconstructed_h_score": 0.402,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "MODERATE_RISK",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 16945.45,
+    "llm_gen_ms": 1255.36,
+    "p1_ms": 2092.08,
+    "p2_ms": 0.01,
+    "p3_ms": 26660.96,
+    "fusion_ms": 0.01
+  }
+}

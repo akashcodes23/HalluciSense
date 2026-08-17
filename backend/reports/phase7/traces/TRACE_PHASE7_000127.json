@@ -1,0 +1,69 @@
+{
+  "trace_id": "TRACE_PHASE7_000127",
+  "sample_id": "law_0127",
+  "timestamp": "2026-08-14T12:33:47Z",
+  "domain": "Law",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What is stare decisis?",
+  "generated_response": "Stare decisis is an English legal term that means to apply the law as it has been decided in prior cases. In other words, when a court makes a decision on a case, it applies the precedent (decisions) set by earlier courts to determine what should be done in similar cases in the future.\n\nStare decisis is important because it helps to maintain consistency and predictability in the legal system. By applying the same rules and decisions across different cases, judges can ensure that legal outcomes are fair, predictable, and consistent with the principles of justice set by the law.\n\nIt's worth noting that while stare decisis is a fundamental principle of law, it is not infallible or inflexible. In some cases, courts may overturn previously decided cases based on new evidence or arguments presented in the current case.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.3518,
+    "claims": [
+      "Stare decisis is an English legal term that means to apply the law as it has been decided in prior cases. In other words",
+      "when a court makes a decision on a case",
+      "it applies the precedent (decisions) set by earlier courts to determine what should be done in similar cases in the future.\n\nStare decisis is important because it helps to maintain consistency and predictability in the legal system. By applying the same rules and decisions across different cases",
+      "judges can ensure that legal outcomes are fair",
+      "and consistent with the principles of justice set by the law.\n\nIt's worth noting that while stare decisis is a fundamental principle of law",
+      "it is not infallible or inflexible. In some cases",
+      "courts may overturn previously decided cases based on new evidence or arguments presented in the current case."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.187,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.8476,
+      0.8745,
+      0.9537
+    ],
+    "contradiction_score": 0.3334
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.2929,
+    "reconstructed_h_score": 0.2929,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 13629.58,
+    "llm_gen_ms": 3477.59,
+    "p1_ms": 2362.42,
+    "p2_ms": 0.01,
+    "p3_ms": 14667.91,
+    "fusion_ms": 0.01
+  }
+}

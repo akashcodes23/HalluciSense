@@ -1,0 +1,74 @@
+{
+  "trace_id": "TRACE_PHASE7_000303",
+  "sample_id": "com_0303",
+  "timestamp": "2026-08-14T13:09:51Z",
+  "domain": "Computer Science",
+  "difficulty": "hard",
+  "ground_truth": 0,
+  "query": "What does Dijkstra's algorithm do?",
+  "generated_response": "Dijkstra's algorithm is an algorithm for finding the shortest path between two nodes in a graph with non-negative edge weights. It is commonly used in network routing and planning applications. The algorithm works by starting from the source node, iteratively relaxing (i.e., updating) the distances to all other nodes until it reaches the destination node or exhausts all possible paths.\n\nHere's a simplified explanation of how Dijkstra's algorithm works:\n\n1. **Initialization**:\n   - Start with a source node and initialize its distance to 0.\n   - Set all other nodes' distances to infinity (or some large value depending on the context).\n   - Create a priority queue or a min-heap to store the current nodes that need to be visited.\n\n2. **Selection of Next Node**:\n   - Select the node with the smallest distance from the priority queue.\n   - Mark this node as visited.\n\n3. **Update Distances**:\n   - For each neighbor of the selected node, if the distance through the selected node is shorter than the current distance to that neighbor, update the distance and add the neighbor to the priority queue (or heap).\n\n4. **Repeat**:\n   - Continue step 2 and 3 until all nodes have been visited or a destination node has been reached.\n\n5. **Result**:\n   - The distances from the source node to all other nodes will be stored in an array, which can be used to determine the shortest path.\n\nHere's a Python implementation of Dijkstra's algorithm:\n\n```python\nimport heapq\n\ndef dijkstra(graph, start):\n    # Initialize distances with infinity except for the start node\n    distances = {node: float('inf') for node in graph}\n    distances[start] = 0\n    \n    # Priority queue to store (distance, node)\n    priority_queue = [(0, start)]\n    \n    while priority_queue:\n        current_distance, current_node = heapq.heappop(priority_queue)\n        \n        # If the current distance is greater than the stored distance, skip this node\n        if current_distance > distances[current_node]:\n            continue\n        \n        # Explore all neighbors of the current node\n        for neighbor, weight in graph[current_node].items():\n            distance = current_distance + weight\n            \n            # Update the distance if a shorter path is found\n            if distance < distances[neighbor]:\n                distances[neighbor] = distance\n                heapq.heappush(priority_queue, (distance, neighbor))\n    \n    return distances\n\n# Example usage\ngraph = {\n    'A': {'B': 10, 'C': 5},\n    'B': {'D': 20},\n    'C': {'D': 30},\n    'D': {}\n}\n\nstart_node = 'A'\nprint(dijkstra(graph, start_node))\n```\n\nThis code defines a graph as a dictionary where each key is a node and the value is another dictionary representing the neighbors of that node with their weights. The `dijkstra` function calculates the shortest paths from the specified start node to all other nodes in the graph.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.0,
+    "claims": [
+      "Dijkstra's algorithm is an algorithm for finding the shortest path between two nodes in a graph with non-negative edge weights. It is commonly used in network routing and planning applications. The algorithm works by starting from the source node",
+      "updating) the distances to all other nodes until it reaches the destination node or exhausts all possible paths.\n\nHere's a simplified explanation of how Dijkstra's algorithm works:\n\n1. **Initialization**:\n   - Start with a source node and initialize its distance to 0.\n   - Set all other nodes' distances to infinity (or some large value depending on the context).\n   - Create a priority queue or a min-heap to store the current nodes that need to be visited.\n\n2. **Selection of Next Node**:\n   - Select the node with the smallest distance from the priority queue.\n   - Mark this node as visited.\n\n3. **Update Distances**:\n   - For each neighbor of the selected node",
+      "if the distance through the selected node is shorter than the current distance to that neighbor",
+      "update the distance and add the neighbor to the priority queue (or heap).\n\n4. **Repeat**:\n   - Continue step 2 and 3 until all nodes have been visited or a destination node has been reached.\n\n5. **Result**:\n   - The distances from the source node to all other nodes will be stored in an array",
+      "which can be used to determine the shortest path.\n\nHere's a Python implementation of Dijkstra's algorithm:\n\n```python\nimport heapq\n\ndef dijkstra(graph",
+      "start):\n    # Initialize distances with infinity except for the start node\n    distances = {node: float('inf') for node in graph}\n    distances[start] = 0\n    \n    # Priority queue to store (distance",
+      "node)\n    priority_queue = [(0, start)]\n    \n    while priority_queue:\n        current_distance",
+      "current_node = heapq.heappop(priority_queue)\n        \n        # If the current distance is greater than the stored distance",
+      "skip this node\n        if current_distance > distances[current_node]:\n            continue\n        \n        # Explore all neighbors of the current node\n        for neighbor",
+      "weight in graph[current_node].items():\n            distance = current_distance + weight\n            \n            # Update the distance if a shorter path is found\n            if distance < distances[neighbor]:\n                distances[neighbor] = distance\n                heapq.heappush(priority_queue",
+      "neighbor))\n    \n    return distances\n\n# Example usage\ngraph = {\n    'A': {'B': 10, 'C': 5}",
+      "'D': {}\n}\n\nstart_node = 'A'\nprint(dijkstra(graph",
+      "start_node))\n```\n\nThis code defines a graph as a dictionary where each key is a node and the value is another dictionary representing the neighbors of that node with their weights. The `dijkstra` function calculates the shortest paths from the specified start node to all other nodes in the graph."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.0999,
+    "sample_count": 2,
+    "semantic_similarity": [
+      0.8621,
+      0.8346
+    ],
+    "contradiction_score": 0.0037
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.0357,
+    "reconstructed_h_score": 0.0357,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 31948.34,
+    "llm_gen_ms": 12551.83,
+    "p1_ms": 2876.59,
+    "p2_ms": 0.05,
+    "p3_ms": 31525.5,
+    "fusion_ms": 0.01
+  }
+}

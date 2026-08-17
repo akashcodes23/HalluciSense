@@ -1,0 +1,6 @@
+domain,n,baseline_accuracy,enhanced_accuracy,hybrid_accuracy,hybrid_f1,hybrid_auroc,hybrid_ece
+Physics,150,0.7267,1.0,0.8933,0.875,1.0,0.3329
+Chemistry,150,0.72,1.0,0.86,0.8293,1.0,0.3008
+Biology,150,0.7,1.0,0.88,0.8571,1.0,0.3211
+Medicine,150,0.62,1.0,0.8467,0.8099,1.0,0.2865
+Mathematics,150,0.6933,1.0,0.8933,0.875,1.0,0.3339

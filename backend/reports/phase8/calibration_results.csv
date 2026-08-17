@@ -1,0 +1,5 @@
+method,test_ece,test_brier,test_accuracy,test_f1,test_auroc
+Uncalibrated (T=0.50),0.249,0.1589,0.68,0.4706,0.9878
+Val-Optimized Threshold (T=0.25),0.249,0.1589,0.9467,0.9455,0.9878
+"Platt Scaling (Logistic, val-fit)",0.1598,0.0682,0.96,0.9569,0.9878
+Isotonic Regression (val-fit),0.0346,0.0329,0.9644,0.9626,0.9847

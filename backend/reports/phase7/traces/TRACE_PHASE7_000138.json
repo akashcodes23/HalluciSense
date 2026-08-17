@@ -1,0 +1,68 @@
+{
+  "trace_id": "TRACE_PHASE7_000138",
+  "sample_id": "law_0138",
+  "timestamp": "2026-08-14T12:36:38Z",
+  "domain": "Law",
+  "difficulty": "medium",
+  "ground_truth": 1,
+  "query": "Which court handles parking fines?",
+  "generated_response": "In most countries and jurisdictions, parking fines are handled by municipal or local governments. The specific court that handles parking fines can vary depending on the jurisdiction.\n\nHere are some common ways parking fines might be handled:\n\n1. **Municipal Court**: Many cities have a dedicated municipal court specifically responsible for enforcing parking regulations. This court may handle tickets and serve penalties in person, such as issuing parking tickets and imposing fines.\n\n2. **Traffic Court**: In many jurisdictions, parking violations can be seen as traffic infractions, which are typically dealt with by traffic courts. These courts often have specialized judges who specialize in traffic law enforcement and enforcement.\n\n3. **County or City Law Department**: Depending on the jurisdiction, local law departments may handle parking-related legal issues such as enforcing parking regulations and handling lawsuits related to parking violations.\n\n4. **Public Safety Department**: Some jurisdictions may have a public safety department that handles parking-related cases through its traffic division or similar unit.\n\nIt's important to consult with the specific laws in your area to determine the appropriate court for parking fines.",
+  "model": "qwen2.5-coder:1.5b",
+  "provider": "ollama",
+  "p1": {
+    "available": true,
+    "score": 0.349,
+    "claims": [
+      "In most countries and jurisdictions",
+      "parking fines are handled by municipal or local governments. The specific court that handles parking fines can vary depending on the jurisdiction.\n\nHere are some common ways parking fines might be handled:\n\n1. **Municipal Court**: Many cities have a dedicated municipal court specifically responsible for enforcing parking regulations. This court may handle tickets and serve penalties in person",
+      "such as issuing parking tickets and imposing fines.\n\n2. **Traffic Court**: In many jurisdictions",
+      "parking violations can be seen as traffic infractions",
+      "which are typically dealt with by traffic courts. These courts often have specialized judges who specialize in traffic law enforcement and enforcement.\n\n3. **County or City Law Department**: Depending on the jurisdiction",
+      "local law departments may handle parking-related legal issues such as enforcing parking regulations and handling lawsuits related to parking violations.\n\n4. **Public Safety Department**: Some jurisdictions may have a public safety department that handles parking-related cases through its traffic division or similar unit.\n\nIt's important to consult with the specific laws in your area to determine the appropriate court for parking fines."
+    ],
+    "evidence_count": 5
+  },
+  "p2": {
+    "available": false,
+    "score": null,
+    "entropy": null,
+    "confidence_gap": null
+  },
+  "p3": {
+    "available": true,
+    "score": 0.2425,
+    "sample_count": 3,
+    "semantic_similarity": [
+      0.9126,
+      0.7057,
+      0.8012
+    ],
+    "contradiction_score": 0.3335
+  },
+  "fusion": {
+    "mode": "PARTIAL_RENORMALIZED",
+    "raw_weights": {
+      "alpha": 0.45,
+      "beta": 0.3,
+      "gamma": 0.25
+    },
+    "effective_weights": {
+      "alpha_factual_error": 0.6429,
+      "beta_confidence_gap": 0.0,
+      "gamma_consistency_failure": 0.3571
+    },
+    "h_score": 0.311,
+    "reconstructed_h_score": 0.311,
+    "fusion_absolute_error": 0.0
+  },
+  "risk_level": "VERIFIED",
+  "predicted_label": 0,
+  "timings": {
+    "total_ms": 10335.83,
+    "llm_gen_ms": 3735.01,
+    "p1_ms": 2284.12,
+    "p2_ms": 0.01,
+    "p3_ms": 7673.49,
+    "fusion_ms": 0.01
+  }
+}
