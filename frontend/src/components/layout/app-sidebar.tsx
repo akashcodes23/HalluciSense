@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  MessageSquare,
   ShieldCheck,
   Zap,
   GitBranch,
@@ -19,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { useHealth } from "@/hooks/use-analysis";
 
 const NAV_ITEMS = [
+  { href: "/chat", label: "Chat", icon: MessageSquare, description: "Answer + Verification + Correction" },
   { href: "/verify", label: "Verify", icon: ShieldCheck, description: "Verify LLM responses" },
   { href: "/analyze", label: "Analyzer", icon: Zap, description: "Detailed analysis" },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, description: "Overview" },

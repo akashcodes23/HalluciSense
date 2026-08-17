@@ -1,0 +1,13 @@
+{
+  "case_id": "case_17",
+  "query": "Do noble gases easily react?",
+  "category": "NEGATION_ERROR",
+  "draft": "Noble gases under standard conditions do not readily form covalent bonds.",
+  "initial_h_score": 0.0606,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "Noble gases under standard conditions do not readily form covalent bonds.",
+  "final_h_score": 0.0606,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 132.45
+}

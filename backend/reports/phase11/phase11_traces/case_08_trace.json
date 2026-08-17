@@ -1,0 +1,13 @@
+{
+  "case_id": "case_08",
+  "query": "How many chromosomes are in human somatic cells?",
+  "category": "NUMERICAL_HALLUCINATION",
+  "draft": "Human diploid somatic cells normally contain 92 chromosomes organized into 46 pairs.",
+  "initial_h_score": 0.8609,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Human diploid somatic cells normally contain 46 chromosomes organized into 23 pairs.",
+  "final_h_score": 0.0357,
+  "reverification_status": "PASSED",
+  "latency_ms": 132.25
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "case_22",
+  "query": "How do catalysts affect chemical reactions?",
+  "category": "CAUSAL_DIRECTION_ERROR",
+  "draft": "Increased chemical reaction rates cause the activation energy of catalysts to decrease.",
+  "initial_h_score": 0.8418,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Catalysts lower the activation energy of a chemical reaction, increasing reaction rate.",
+  "final_h_score": 0.0812,
+  "reverification_status": "PASSED",
+  "latency_ms": 101.29
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "case_29",
+  "query": "How do statins work?",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "draft": "Statins lower LDL cholesterol by dissolving arterial blood vessels into digestive bile acids.",
+  "initial_h_score": 0.8824,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Statins lower LDL cholesterol levels by inhibiting HMG-CoA reductase in the liver.",
+  "final_h_score": 0.0801,
+  "reverification_status": "PASSED",
+  "latency_ms": 130.28
+}

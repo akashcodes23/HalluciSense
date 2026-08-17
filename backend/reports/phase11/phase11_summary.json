@@ -1,0 +1,23 @@
+{
+  "benchmark_name": "Phase11_Closed_Loop_Acceptance_Suite",
+  "total_cases_evaluated": 30,
+  "categories_breakdown": {
+    "TRUE_SCIENTIFIC_CLAIM": 5,
+    "NUMERICAL_HALLUCINATION": 5,
+    "UNIT_SCALE_ERROR": 5,
+    "NEGATION_ERROR": 5,
+    "CAUSAL_DIRECTION_ERROR": 5,
+    "TRUE_CORE_FALSE_ELABORATION": 5
+  },
+  "correction_success_rate": 1.0,
+  "reverification_pass_rate": 1.0,
+  "false_correction_rate": 0.0,
+  "initial_hallucination_detection_rate": 1.0,
+  "latency_ms": {
+    "mean": 118.34,
+    "p50": 119.88,
+    "p95": 132.36
+  },
+  "phase6_canonical_hash_verified": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "acceptance_status": "PHASE11_CLOSED_LOOP_VALIDATED"
+}

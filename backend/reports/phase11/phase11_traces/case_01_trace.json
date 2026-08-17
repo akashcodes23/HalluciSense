@@ -1,0 +1,13 @@
+{
+  "case_id": "case_01",
+  "query": "What is the speed of light in vacuum?",
+  "category": "TRUE_SCIENTIFIC_CLAIM",
+  "draft": "The speed of light in vacuum is defined as exactly 299792458 meters per second.",
+  "initial_h_score": 0.1206,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "The speed of light in vacuum is defined as exactly 299792458 meters per second.",
+  "final_h_score": 0.1206,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 114.76
+}

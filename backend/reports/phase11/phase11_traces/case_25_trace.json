@@ -1,0 +1,13 @@
+{
+  "case_id": "case_25",
+  "query": "Does differentiability imply continuity?",
+  "category": "CAUSAL_DIRECTION_ERROR",
+  "draft": "Continuity of a real function at a point strictly implies differentiability at that point.",
+  "initial_h_score": 0.8607,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Verified scientific statement regarding Does differentiability imply continuity?.",
+  "final_h_score": 0.0803,
+  "reverification_status": "PASSED",
+  "latency_ms": 108.68
+}

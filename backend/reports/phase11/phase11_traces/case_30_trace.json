@@ -1,0 +1,13 @@
+{
+  "case_id": "case_30",
+  "query": "What is the Pythagorean theorem?",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "draft": "The Pythagorean theorem states a^2 + b^2 = c^2, which applies equally to all obtuse spherical triangles.",
+  "initial_h_score": 0.8829,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "The Pythagorean theorem states a^2 + b^2 = c^2 for right triangles in flat Euclidean space.",
+  "final_h_score": 0.0666,
+  "reverification_status": "PASSED",
+  "latency_ms": 131.63
+}

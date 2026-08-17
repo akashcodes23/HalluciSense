@@ -1,0 +1,13 @@
+{
+  "case_id": "case_13",
+  "query": "What is the carbon-carbon bond length in ethane?",
+  "category": "UNIT_SCALE_ERROR",
+  "draft": "The carbon-carbon single bond length in ethane is approximately 154 nm.",
+  "initial_h_score": 0.9435,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "The carbon-carbon single bond length in ethane is approximately 154 pm.",
+  "final_h_score": 0.0593,
+  "reverification_status": "PASSED",
+  "latency_ms": 111.67
+}

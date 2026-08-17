@@ -1,0 +1,13 @@
+{
+  "case_id": "case_14",
+  "query": "What is the diameter of a red blood cell?",
+  "category": "UNIT_SCALE_ERROR",
+  "draft": "A typical mammalian erythrocyte has a diameter of approximately 7.5 millimeters.",
+  "initial_h_score": 0.8439,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "A typical mammalian erythrocyte has a diameter of approximately 7.5 micrometers.",
+  "final_h_score": 0.0471,
+  "reverification_status": "PASSED",
+  "latency_ms": 100.85
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "case_21",
+  "query": "What is the relationship between smoking and lung cancer?",
+  "category": "CAUSAL_DIRECTION_ERROR",
+  "draft": "Smoking is caused by lung cancer.",
+  "initial_h_score": 0.883,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Smoking increases the risk of developing lung cancer.",
+  "final_h_score": 0.0935,
+  "reverification_status": "PASSED",
+  "latency_ms": 130.14
+}

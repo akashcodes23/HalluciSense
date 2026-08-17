@@ -1,0 +1,13 @@
+{
+  "case_id": "case_06",
+  "query": "What is Planck's constant?",
+  "category": "NUMERICAL_HALLUCINATION",
+  "draft": "Planck's constant h is approximately 7.62607015e-34 J*s.",
+  "initial_h_score": 0.8242,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Planck's constant h is approximately 6.62607015e-34 J*s.",
+  "final_h_score": 0.1134,
+  "reverification_status": "PASSED",
+  "latency_ms": 123.98
+}

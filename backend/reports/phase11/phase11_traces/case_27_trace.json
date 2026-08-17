@@ -1,0 +1,13 @@
+{
+  "case_id": "case_27",
+  "query": "What is the structure of benzene?",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "draft": "Benzene has a planar aromatic ring structure with alternating ionic triple bonds.",
+  "initial_h_score": 0.8317,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Benzene has a planar aromatic ring structure with delocalized pi electrons.",
+  "final_h_score": 0.1068,
+  "reverification_status": "PASSED",
+  "latency_ms": 105.53
+}

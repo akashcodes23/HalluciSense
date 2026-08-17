@@ -1,0 +1,13 @@
+{
+  "case_id": "case_09",
+  "query": "What is normal resting blood pressure?",
+  "category": "NUMERICAL_HALLUCINATION",
+  "draft": "Normal resting adult human blood pressure is typically defined as 240/160 mmHg.",
+  "initial_h_score": 0.8763,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Normal resting adult human blood pressure is typically defined as less than 120/80 mmHg.",
+  "final_h_score": 0.0982,
+  "reverification_status": "PASSED",
+  "latency_ms": 110.96
+}

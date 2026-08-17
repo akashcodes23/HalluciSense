@@ -1,0 +1,13 @@
+{
+  "case_id": "case_15",
+  "query": "What is normal fasting blood glucose?",
+  "category": "UNIT_SCALE_ERROR",
+  "draft": "Normal fasting serum glucose in non-diabetic adults is approximately 70 to 99 g/dL.",
+  "initial_h_score": 0.8451,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Normal fasting serum glucose in non-diabetic adults is approximately 70 to 99 mg/dL.",
+  "final_h_score": 0.0504,
+  "reverification_status": "PASSED",
+  "latency_ms": 125.14
+}

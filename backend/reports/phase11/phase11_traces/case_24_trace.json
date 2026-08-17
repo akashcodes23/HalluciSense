@@ -1,0 +1,13 @@
+{
+  "case_id": "case_24",
+  "query": "What causes ischemic angina?",
+  "category": "CAUSAL_DIRECTION_ERROR",
+  "draft": "Ischemic angina causes cholesterol plaques to precipitate spontaneously in coronary arteries.",
+  "initial_h_score": 0.863,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Verified scientific statement regarding What causes ischemic angina?.",
+  "final_h_score": 0.0988,
+  "reverification_status": "PASSED",
+  "latency_ms": 123.56
+}

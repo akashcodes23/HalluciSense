@@ -1,0 +1,13 @@
+{
+  "case_id": "case_26",
+  "query": "What are black holes?",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "draft": "Black holes possess an event horizon, inside which matter converts directly into tachyon particles.",
+  "initial_h_score": 0.7562,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Black holes possess an event horizon, beyond which escape velocity exceeds the speed of light.",
+  "final_h_score": 0.0693,
+  "reverification_status": "PASSED",
+  "latency_ms": 104.66
+}

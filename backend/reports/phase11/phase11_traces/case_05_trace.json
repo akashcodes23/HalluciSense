@@ -1,0 +1,13 @@
+{
+  "case_id": "case_05",
+  "query": "What characterizes Type 1 diabetes mellitus?",
+  "category": "TRUE_SCIENTIFIC_CLAIM",
+  "draft": "Type 1 diabetes mellitus is characterized by autoimmune destruction of pancreatic beta cells.",
+  "initial_h_score": 0.0367,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "Type 1 diabetes mellitus is characterized by autoimmune destruction of pancreatic beta cells.",
+  "final_h_score": 0.0367,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 115.27
+}

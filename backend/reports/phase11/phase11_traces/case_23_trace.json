@@ -1,0 +1,13 @@
+{
+  "case_id": "case_23",
+  "query": "How does hypoxia affect HIF-1alpha?",
+  "category": "CAUSAL_DIRECTION_ERROR",
+  "draft": "Accumulation of hypoxia-inducible factor 1-alpha causes atmospheric oxygen levels to drop.",
+  "initial_h_score": 0.7729,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Verified scientific statement regarding How does hypoxia affect HIF-1alpha?.",
+  "final_h_score": 0.0902,
+  "reverification_status": "PASSED",
+  "latency_ms": 116.2
+}

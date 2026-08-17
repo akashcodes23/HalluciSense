@@ -1,0 +1,13 @@
+{
+  "case_id": "case_04",
+  "query": "In which direction does DNA replication proceed?",
+  "category": "TRUE_SCIENTIFIC_CLAIM",
+  "draft": "DNA replication in eukaryotic cells proceeds in the 5-prime to 3-prime direction.",
+  "initial_h_score": 0.1189,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "DNA replication in eukaryotic cells proceeds in the 5-prime to 3-prime direction.",
+  "final_h_score": 0.1189,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 130.37
+}

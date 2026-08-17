@@ -3,11 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShieldCheck, Zap, LayoutDashboard, GitBranch, BarChart3 } from "lucide-react";
+import { MessageSquare, ShieldCheck, Zap, LayoutDashboard, GitBranch, BarChart3 } from "lucide-react";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { useAnalysisStore } from "@/store/analysis-store";
 
 const NAV_ITEMS = [
+  { href: "/chat", label: "Chat", icon: MessageSquare },
   { href: "/verify", label: "Verify", icon: ShieldCheck },
   { href: "/analyze", label: "Analyzer", icon: Zap },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },

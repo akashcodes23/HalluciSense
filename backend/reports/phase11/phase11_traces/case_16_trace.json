@@ -1,0 +1,13 @@
+{
+  "case_id": "case_16",
+  "query": "Do photons possess momentum?",
+  "category": "NEGATION_ERROR",
+  "draft": "Photons do not possess momentum when traveling through free space.",
+  "initial_h_score": 0.8374,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Photons carry momentum when traveling through free space according to p = h/lambda.",
+  "final_h_score": 0.1049,
+  "reverification_status": "PASSED",
+  "latency_ms": 126.51
+}

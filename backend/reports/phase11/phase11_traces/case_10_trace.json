@@ -1,0 +1,13 @@
+{
+  "case_id": "case_10",
+  "query": "What is the mathematical constant e?",
+  "category": "NUMERICAL_HALLUCINATION",
+  "draft": "The mathematical constant e is approximately 3.718281828459.",
+  "initial_h_score": 0.9441,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "The mathematical constant e is approximately 2.718281828459.",
+  "final_h_score": 0.1104,
+  "reverification_status": "PASSED",
+  "latency_ms": 130.03
+}

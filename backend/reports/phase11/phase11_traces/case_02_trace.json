@@ -1,0 +1,13 @@
+{
+  "case_id": "case_02",
+  "query": "What is standard atmospheric pressure at sea level?",
+  "category": "TRUE_SCIENTIFIC_CLAIM",
+  "draft": "The standard atmospheric pressure at sea level is approximately 101.325 kPa.",
+  "initial_h_score": 0.1316,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "The standard atmospheric pressure at sea level is approximately 101.325 kPa.",
+  "final_h_score": 0.1316,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 126.38
+}

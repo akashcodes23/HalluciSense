@@ -1,0 +1,13 @@
+{
+  "case_id": "case_20",
+  "query": "Is there a largest prime number?",
+  "category": "NEGATION_ERROR",
+  "draft": "The set of prime numbers is finite and contains a largest prime number.",
+  "initial_h_score": 0.79,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Verified scientific statement regarding Is there a largest prime number?.",
+  "final_h_score": 0.0307,
+  "reverification_status": "PASSED",
+  "latency_ms": 130.41
+}

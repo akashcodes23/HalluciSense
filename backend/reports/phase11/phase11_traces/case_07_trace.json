@@ -1,0 +1,13 @@
+{
+  "case_id": "case_07",
+  "query": "What is Avogadro's constant?",
+  "category": "NUMERICAL_HALLUCINATION",
+  "draft": "Avogadro's constant is defined as exactly 8.02214076e23 mol^-1.",
+  "initial_h_score": 0.9146,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Avogadro's constant is defined as exactly 6.02214076e23 mol^-1.",
+  "final_h_score": 0.0699,
+  "reverification_status": "PASSED",
+  "latency_ms": 105.23
+}

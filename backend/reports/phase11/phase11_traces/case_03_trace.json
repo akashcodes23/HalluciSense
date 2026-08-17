@@ -1,0 +1,13 @@
+{
+  "case_id": "case_03",
+  "query": "What is the molar mass of water?",
+  "category": "TRUE_SCIENTIFIC_CLAIM",
+  "draft": "Water has a molar mass of approximately 18.015 g/mol.",
+  "initial_h_score": 0.0322,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "Water has a molar mass of approximately 18.015 g/mol.",
+  "final_h_score": 0.0322,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 138.9
+}

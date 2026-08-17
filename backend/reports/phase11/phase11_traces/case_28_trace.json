@@ -1,0 +1,13 @@
+{
+  "case_id": "case_28",
+  "query": "What is the function of ribosomes?",
+  "category": "TRUE_CORE_FALSE_ELABORATION",
+  "draft": "Ribosomes synthesize polypeptides by fusing individual helium nuclei inside the cell membrane.",
+  "initial_h_score": 0.7617,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "Ribosomes are the cellular macromolecular complexes that synthesize polypeptides.",
+  "final_h_score": 0.0553,
+  "reverification_status": "PASSED",
+  "latency_ms": 108.21
+}

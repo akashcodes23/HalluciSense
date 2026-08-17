@@ -1,0 +1,13 @@
+{
+  "case_id": "case_19",
+  "query": "Do antibiotics cure viral infections?",
+  "category": "NEGATION_ERROR",
+  "draft": "Antibiotics do not eliminate viral particles such as influenza.",
+  "initial_h_score": 0.1087,
+  "initial_verdict": "VERIFIED",
+  "correction_performed": false,
+  "corrected_text": "Antibiotics do not eliminate viral particles such as influenza.",
+  "final_h_score": 0.1087,
+  "reverification_status": "NOT_REQUIRED",
+  "latency_ms": 101.29
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "case_18",
+  "query": "Do red blood cells have nuclei?",
+  "category": "NEGATION_ERROR",
+  "draft": "Mature mammalian red blood cells contain multiple active cell nuclei and mitochondria.",
+  "initial_h_score": 0.911,
+  "initial_verdict": "HALLUCINATED",
+  "correction_performed": true,
+  "corrected_text": "A typical mammalian erythrocyte has a diameter of approximately 7.5 micrometers.",
+  "final_h_score": 0.0649,
+  "reverification_status": "PASSED",
+  "latency_ms": 107.98
+}
