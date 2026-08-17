@@ -59,6 +59,7 @@ FINAL RESPONSE
 
 ## Release Details
 
+- **Release Commit SHA**: `da171d6dd567951d61fbf5512c4f47451dbded18`
 - **Release Tag**: `v1.0.0`
 - **Target Branch**: `main`
 - **Remote**: `origin` (`https://github.com/akashcodes23/HalluciSense.git`)
