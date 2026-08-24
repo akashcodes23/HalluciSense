@@ -1,11 +1,25 @@
-# HalluciSense Reproducibility Guide
+# HalluciSense Reproducibility Protocol
 
-All experiments in HalluciSense are 100% deterministic and reproducible.
+## 1. Frozen Benchmark Artifacts
+- **Canonical Dataset:** `backend/evaluation/results/benchmark_dataset.jsonl`
+- **Canonical SHA-256 Checksum:** `dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5`
+- **Dataset Cardinality:** $N = 750$ verified multi-domain evaluation claims.
 
-## Deterministic Verification
+## 2. Environment & Dependency Freeze
+- **Python Version:** 3.10.x
+- **Random Seed:** 42 (enforced across NumPy, PyTorch, and random samplers)
+- **Model Registry Singletons:**
+  * NLI Model: `cross-encoder/nli-deberta-v3-small`
+  * Embeddings: `all-MiniLM-L6-v2`
+  * Re-ranker: `cross-encoder/ms-marco-MiniLM-L-6-v2`
 
-1. **Random Seed**: Fixed at `RANDOM_STATE = 42` across all preprocessing, splitting, and classifier initialization.
-2. **Phase 6M.1 Preflight**: Run `python -m evaluation.phase6m.run_phase6m_1` to verify feature matrix integrity.
-3. **Phase 6M.2 Model Selection**: Run `python -m evaluation.phase6m.run_phase6m_2` to reproduce 5-fold 3-repeat cross-validation ($N=58,002$).
-4. **Phase 6M.3 Held-Out Validation**: Run `python -m evaluation.phase6m.run_phase6m_3` to evaluate single-pass held-out validation ($N=12,483$).
-5. **Phase 6M.4 Forensic Investigation**: Run `python -m evaluation.phase6m.run_phase6m_4` to reproduce all 9 diagnostic forensic stages.
+## 3. One-Command Evaluation Reproduction
+```bash
+PYTHONPATH=backend backend/venv/bin/python backend/evaluation/run_comprehensive_research_evaluation.py
+```
+This generates:
+- `backend/reports/research_ablation_matrix.json`
+- `backend/reports/research_baseline_comparison.json`
+- `backend/reports/research_calibration_report.json`
+- `backend/reports/research_closed_loop_metrics.json`
+- `experiment_manifest.json`

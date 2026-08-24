@@ -1,0 +1,9 @@
+Component,Technology,Output,Availability_Constraint
+Claim Decomposition,Rule-based sentence & discourse segmenter,Atomic factual claim list,Mandatory upstream
+Pillar 1: Evidence Grounding,BM25 + FAISS + DeBERTa-v3 NLI + Symbolic parsers,"Factual error score FE in [0, 1]","m_FE in {0, 1}"
+Pillar 2: Predictive Confidence,Token logprob entropy & confidence gap,"Predictive uncertainty CG in [0, 1]","m_CG in {0, 1}"
+Pillar 3: Semantic Consistency,Sentence transformer embeddings & cross-NLI,"Consistency failure CF in [0, 1]","m_CF in {0, 1}"
+Adaptive Fusion Layer,Dynamic indicator masking & reliability weighting,"Continuous H-score in [0, 1]",At least one active pillar
+Probability Calibration,"Platt logistic scaling (a=1.82, b=-0.45)",Calibrated posterior hallucination probability,Fitted strictly on Dev
+Selective Abstention Gate,Dual-criteria epistemic rejection gate,Binary accept or ABSTAIN decision,Operating point = 80% coverage
+Closed-Loop Correction,Symbolic deterministic repair + reverification gate,Factually corrected statement,Triggered when H >= 0.35

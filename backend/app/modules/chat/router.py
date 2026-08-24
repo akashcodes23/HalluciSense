@@ -58,12 +58,16 @@ async def closed_loop_chat(
         try:
             pipeline = ModelRegistry.get_pipeline()
             init_verification = pipeline.analyze_response(full_text=draft_response, query=payload.message)
-            h_score = float(getattr(init_verification, "hallucination_score", 0.0))
-            risk_level = getattr(init_verification, "risk_level", "LOW")
+            h_score = float(getattr(init_verification, "overall_h_score", getattr(init_verification, "hallucination_score", 0.0)))
+            risk_level = getattr(init_verification, "overall_risk_level", getattr(init_verification, "risk_level", "LOW"))
             if hasattr(risk_level, "value"):
                 risk_level = risk_level.value
 
-            evidence_items = getattr(init_verification, "evidence", [])
+            evidence_items = (
+                getattr(init_verification, "evidence_items", None)
+                or getattr(getattr(init_verification, "pillar1_summary", None), "evidence", None)
+                or getattr(init_verification, "evidence", [])
+            )
             evidence_dicts = [
                 {
                     "source_name": getattr(e, "source_name", "Authoritative Source"),

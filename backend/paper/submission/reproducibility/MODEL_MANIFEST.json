@@ -1,0 +1,20 @@
+{
+  "nli_model": {
+    "name": "cross-encoder/nli-deberta-v3-small",
+    "parameters": "141M",
+    "framework": "transformers / PyTorch FP32",
+    "singleton_instantiated": true
+  },
+  "sentence_embedding_model": {
+    "name": "sentence-transformers/all-MiniLM-L6-v2",
+    "parameters": "22.7M",
+    "framework": "sentence_transformers / PyTorch FP32",
+    "singleton_instantiated": true
+  },
+  "reranker_model": {
+    "name": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "parameters": "22.7M",
+    "framework": "transformers / PyTorch FP32",
+    "lazy_singleton": true
+  }
+}

@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{\textbf{HalluciSense: An Availability-Aware, Calibrated Multi-Signal Verification Framework with Selective Abstention and Reverification-Gated Repair for Large Language Models}}
+
+\author{
+  \textbf{Akash Patil}\textsuperscript{1} \and
+  \textbf{Senior Research Group}\textsuperscript{1} \\
+  \textsuperscript{1}Department of Computer Science and Engineering \\
+  \texttt{akashcodes23@gmail.com}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Large Language Models (LLMs) frequently generate plausible yet factually incorrect assertions (hallucinations), posing substantial operational risks in high-stakes knowledge-intensive domains. While existing fact-checking systems rely on isolated verification mechanisms---such as external passage retrieval, internal predictive token entropy, or cross-sample semantic consistency---they fundamentally assume static signal availability. In realistic deployment environments, internal token log-probabilities are often withheld by commercial black-box provider APIs, external passage retrieval can fail due to domain isolation or network constraints, and multi-sample generation introduces substantial latency overhead.
+
+To resolve this methodological challenge, we introduce and evaluate \textbf{HalluciSense}, an availability-aware, calibrated verification framework that explicitly models heterogeneous verifier availability while coupling factual risk estimation with selective abstention and closed-loop repair. HalluciSense decomposes LLM responses into atomic claims, extracts tripartite verification signals across retrieval grounding ($\text{FE}$), predictive uncertainty ($\text{CG}$), and semantic consistency ($\text{CF}$), and fuses them using dynamic indicator masks $\mathbf{m} \in \{0,1\}^3$ modulated by empirical signal reliability vectors $\mathbf{r}$. Under the complete absence of token log-probabilities (Mask $[1,0,1]$), availability-aware adaptive fusion maintains calibrated discrimination, achieving an AUROC of $0.9910$ compared to $0.8420$ for fixed unnormalized fusion ($+0.1490$ $\Delta\text{AUROC}$, paired bootstrap 95\% CI $[+0.1382, +0.1610]$, paired Wilcoxon $p < 0.001$, paired Cohen's $d = 1.42$). Post-hoc Platt logistic calibration reduces Expected Calibration Error (ECE) from $0.1972$ to $0.0937$. On the evaluated test population, the retained 80\% coverage subset exhibited zero observed classification errors under the pre-selected validation operating threshold ($\text{AURC} = 0.0051$). Furthermore, closed-loop repair achieves an $88.4\%$ Correction Success Rate while downstream independent re-verification limits secondary error induction to $2.1\%$. On a composite external benchmark of 850 claims spanning TruthfulQA, HaluEval, FEVER, RAGTruth, and BioASQ, HalluciSense achieves a zero-tuning AUROC of $0.9964$ and an ECE of $0.0986$, confirming robust generalization across scientific and open-domain question answering.
+\end{abstract}
+
+\textbf{Keywords:} Large Language Models, Hallucination Detection, Multi-Signal Fusion, Signal Missingness, Selective Prediction, Probability Calibration, Fact Verification.
+
+\newpage
+
+\section{Introduction}
+\label{sec:introduction}
+Large Language Models (LLMs) exhibit impressive generation capabilities across diverse natural language tasks \citep{he2021deberta}. However, their susceptibility to hallucinations---generating statements that contradict established scientific consensus or lack source grounding---remains a fundamental obstacle to their deployment in critical domains such as clinical medicine, engineering, and legal analysis \citep{lin2022truthfulqa, li2023halueval}.
+
+Verifying the factuality of generated claims in realistic operational environments is inherently difficult. In real-world enterprise deployments, verification systems face severe signal heterogeneity: external reference retrieval can fail due to domain boundaries or paywalls \citep{thorne2018fever}, predictive token log-probabilities are routinely concealed behind commercial black-box APIs \citep{manakul2023selfcheckgpt}, and generating multiple stochastic completions to measure consistency introduces substantial latency and monetary costs \citep{kuhn2023semantic}.
+
+Consequently, single-signal verification mechanisms exhibit sharp operational vulnerabilities. Retrieval-only systems fail when reference evidence is sparse; white-box uncertainty metrics fail entirely when model weights or log-probabilities are inaccessible; and cross-sample consistency methods fail when an LLM systematically repeats a common misconception across multiple samples \citep{min2023factscore, tang2024minicheck}.
+
+Crucially, existing multi-signal verification approaches assume a static, complete set of available signals. When a signal is missing (such as an unavailable log-probability distribution), naive systems either crash or penalize the composite score via zero-imputation, severely degrading discriminative performance and probability calibration.
+
+This creates a fundamental research gap: \textit{how can a fact-checking framework dynamically model heterogeneous signal availability, adaptively reweight active verification modalities without manufacturing synthetic confidence, provide calibrated selective abstention, and safely repair identified errors without introducing secondary hallucinations?}
+
+To address this gap, we present \textbf{HalluciSense}, a unified multi-signal verification architecture. HalluciSense formalizes signal missingness as a first-class state variable through dynamic indicator masks $\mathbf{m} = [m_{\text{FE}}, m_{\text{CG}}, m_{\text{CF}}] \in \{0, 1\}^3$ and empirical reliability vectors $\mathbf{r} \in (0, 1]^3$. Rather than forcing uniform or static weights, HalluciSense dynamically renormalizes active modalities, maintaining high discriminative accuracy even under partial verifier availability. The framework further integrates Platt probability calibration, selective prediction with explicit abstention, and closed-loop repair with independent downstream re-verification.
+
+To maintain conceptual clarity, HalluciSense strictly decouples the verification lifecycle into five distinct stages:
+\begin{enumerate}
+    \item \textbf{Detection:} Computing multi-signal continuous risk scores across grounding, confidence, and consistency.
+    \item \textbf{Calibration:} Mapping raw composite scores to well-calibrated posterior error probabilities.
+    \item \textbf{Abstention:} Rejecting low-confidence or retrieval-deficit queries to guarantee bounded selective risk.
+    \item \textbf{Correction:} Applying deterministic symbolic repair policies to factually inconsistent claims.
+    \item \textbf{Re-verification:} Submitting candidate repairs to an independent downstream evaluation gate before acceptance.
+\end{enumerate}
+
+\subsection{Primary Contributions}
+The primary contributions of this work are:
+\begin{enumerate}
+    \item \textbf{Availability-Aware Adaptive Multi-Signal Fusion:} A mathematical formulation that dynamically renormalizes verification weights across arbitrary signal availability masks $\mathbf{m} \in \{0, 1\}^3$ while enforcing a strict zero-logit safety invariant for black-box LLM APIs.
+    \item \textbf{Calibrated Selective Verification with Explicit Abstention:} Integration of Platt probability calibration with a dual-criteria rejection gate, achieving zero empirical classification errors on the retained 80\% coverage subset.
+    \item \textbf{Closed-Loop Correction with Independent Re-verification:} A deterministic symbolic repair engine coupled with an independent downstream reverification gate, bounding the Correction-Induced Hallucination Rate ($\text{CIHR}$) to $2.1\%$.
+    \item \textbf{External, Leakage-Audited, Reproducible Evaluation:} Comprehensive zero-tuning evaluation across 5 external public benchmarks ($N=850$) with complete machine-readable manifests and clean-room reproducibility test scripts.
+\end{enumerate}
+
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Hallucination Detection Paradigms}
+Hallucination verification paradigms have evolved across three primary axes: external passage grounding \citep{thorne2018fever, min2023factscore}, internal predictive uncertainty \citep{kuhn2023semantic}, and cross-sample semantic consistency \citep{manakul2023selfcheckgpt}.
+
+\subsection{Retrieval-Grounded Fact Checking}
+Retrieval-augmented verification queries authoritative reference corpora to corroborate generated assertions. FActScore \citep{min2023factscore} extracts atomic facts and computes precision against Wikipedia articles. MiniCheck \citep{tang2024minicheck} uses compact DeBERTa-v3 cross-encoders to optimize document-grounded NLI. However, retrieval systems struggle when consensus evidence is missing or conflicting \citep{niu2024ragtruth}.
+
+\subsection{Multimodal Missing-Data Fusion and Mixture of Experts}
+Dynamic reweighting under missing features has been explored in multimodal sensor fusion \citep{baltrusaitis2018multimodal} and mixture-of-experts (MoE) architectures \citep{shazeer2017outrageously}. However, while MoE models require end-to-end backpropagation and deep ensembles require identical architectures \citep{lakshminarayanan2017simple}, HalluciSense addresses heterogeneous black-box verifier availability in a training-free, zero-logit-safe formulation.
+
+\subsection{Probability Calibration and Selective Classification}
+Probability calibration maps raw classifier outputs to empirical posterior probabilities \citep{platt1999probabilistic}. Selective classification theory \citep{geifman2017selective} establishes risk-coverage trade-offs, enabling models to abstain on uncertain instances to achieve high precision on retained predictions.
+
+\section{Problem Formulation}
+\label{sec:problem_formulation}
+Let $x$ denote an input prompt and $y$ denote an LLM-generated response. The response $y$ is decomposed into a set of $K$ atomic claims $\mathcal{C} = \{c_1, c_2, \dots, c_K\}$. For each atomic claim $c_j$, the verification system extracts three candidate signals:
+\begin{enumerate}
+    \item \textbf{Factual Evidence Grounding Score ($\text{FE} \in [0, 1]$):} Derived from dense/sparse passage retrieval and NLI cross-encoder entailment against consensus evidence $E$.
+    \item \textbf{Predictive Uncertainty Gap ($\text{CG} \in [0, 1]$):} Derived from token-level log-probability entropy along the generation trajectory.
+    \item \textbf{Semantic Inconsistency Score ($\text{CF} \in [0, 1]$):} Derived from sentence-embedding cosine variance across $M$ stochastic response samples.
+\end{enumerate}
+
+Let $\mathbf{m} = [m_{\text{FE}}, m_{\text{CG}}, m_{\text{CF}}] \in \{0, 1\}^3$ denote the binary availability mask and $\mathbf{r} = [r_{\text{FE}}, r_{\text{CG}}, r_{\text{CF}}] \in (0, 1]^3$ denote the empirical signal reliability vector.
+
+In static settings, Canonical Mode A computes fixed weighted fusion:
+\begin{equation}
+H_{\text{fixed}} = \alpha \cdot \text{FE} + \beta \cdot \text{CG} + \gamma \cdot \text{CF}, \quad (\alpha=0.40, \beta=0.30, \gamma=0.30)
+\end{equation}
+In heterogeneous settings with partial signal availability, Mode B executes availability-aware adaptive fusion:
+\begin{equation}
+H_{\text{adaptive}} = \frac{\sum_{i \in \{\text{FE}, \text{CG}, \text{CF}\}} m_i r_i w_i S_i}{\sum_{i \in \{\text{FE}, \text{CG}, \text{CF}\}} m_i r_i w_i}
+\label{eq:adaptive_fusion}
+\end{equation}
+where $\mathbf{w} = [0.40, 0.30, 0.30]$ denotes base architectural weights.
+
+\paragraph{Explicit Zero-Signal Trapping:} If all signals are unavailable ($\sum m_i r_i w_i = 0$), the framework explicitly refuses to manufacture dummy logits, sets $H = \text{None}$, and immediately routes the claim to $\text{Category.INSUFFICIENT\_EVIDENCE}$ with mandatory $\text{ABSTAIN}$.
+
+\section{HalluciSense Methodology}
+\label{sec:methodology}
+
+\subsection{Tri-Pillar Verification Architecture}
+\input{../tables/table1_system_architecture.tex}
+
+\paragraph{Pillar 1: Evidence Grounding ($\text{FE}$)}
+Pillar 1 executes hybrid BM25 lexical search and FAISS dense retrieval over Wikipedia consensus passages. Top-$k$ candidate passages are evaluated by a pre-trained DeBERTa-v3 cross-encoder NLI model \citep{he2021deberta} combined with deterministic symbolic checkers for numerical precision, SI dimensional units, and causal directionality.
+
+\paragraph{Pillar 2: Predictive Confidence ($\text{CG}$)}
+When token log-probabilities are exposed ($m_{\text{CG}} = 1$), Pillar 2 computes token entropy and confidence gaps along the claim token span. When log-probabilities are withheld by black-box APIs ($m_{\text{CG}} = 0$), Pillar 2 sets $\text{CG} = \text{None}$ without manufacturing synthetic logits.
+
+\paragraph{Pillar 3: Semantic Consistency ($\text{CF}$)}
+Pillar 3 computes pairwise cosine embeddings using \texttt{all-MiniLM-L6-v2} across $M=3$ stochastic alternate completions to quantify inter-sample semantic divergence.
+
+\subsection{Probability Calibration}
+Raw fused scores $H$ are mapped to calibrated posterior probabilities via Platt logistic scaling:
+\begin{equation}
+\hat{P}(\text{Hallucination} \mid H) = \frac{1}{1 + \exp(-(a H + b))}
+\end{equation}
+where parameters $a = 1.82$ and $b = -0.45$ were fitted strictly on the internal development partition.
+
+\subsection{Selective Abstention Gate}
+To prevent erroneous classifications on highly uncertain inputs, HalluciSense routes claims through a dual-criteria selective rejection gate:
+\begin{equation}
+\text{Decision}(H) = 
+\begin{cases}
+\text{ABSTAIN}, & \text{if } S_{\text{evidence}} < 0.40 \text{ or } |H - 0.40| < 0.08 \\
+\text{VERIFY}, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+\subsection{Closed-Loop Repair with Downstream Reverification}
+Flagged claims ($H \ge 0.35$) trigger deterministic symbolic repair rules. The candidate repair $c^*$ is immediately submitted to an independent downstream reverification gate:
+\begin{equation}
+\text{Accept}(c^*) = 
+\begin{cases}
+\text{True}, & \text{if } H_{\text{reverify}}(c^*) < 0.20 \\
+\text{False (Revert to Draft)}, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+\subsection{Computational Cost and Retrieval Latency}
+Profiling the end-to-end execution reveals a mean latency of $1205\text{ ms}$ for verification and $1862\text{ ms}$ for closed-loop repair. External passage retrieval accounts for approximately $65\%$ ($780\text{ ms}$) of pipeline latency. In network-isolated offline environments (Mask $[0, 1, 1]$), latency drops to $422\text{ ms}$, accompanied by an $-8.8\%$ AUROC trade-off ($0.9120$). ModelRegistry singletons bound runtime memory to $\le 1.2\text{ GB}$ peak RAM.
+
+\section{Experimental Methodology}
+\label{sec:experimental_methodology}
+\paragraph{Datasets \& Partitions:} Experiments were conducted on the canonical HalluciSense benchmark ($N=750$, SHA-256: \texttt{dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5}) partitioned into disjoint Train ($60\%$, $N=450$), Validation ($20\%$, $N=150$), and Held-Out Test ($20\%$, $N=150$) splits. External generalization was evaluated on 5 peer-reviewed public benchmarks ($N=850$): TruthfulQA \citep{lin2022truthfulqa}, HaluEval \citep{li2023halueval}, FEVER \citep{thorne2018fever}, RAGTruth \citep{niu2024ragtruth}, and BioASQ.
+\paragraph{Evaluation Metrics:} Area Under the ROC Curve (AUROC), Area Under the Precision-Recall Curve (AUPRC), Macro F1, Expected Calibration Error (ECE, 10 uniform bins), Brier Score, and Area Under the Risk-Coverage Curve (AURC). Statistical significance was assessed using 500-iteration paired bootstrap resampling (95\% empirical percentile CIs) and paired Wilcoxon signed-rank tests.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Main Benchmark Performance}
+\input{../tables/table2_main_results.tex}
+As shown in Table~\ref{tab:main_results}, HalluciSense achieves an AUROC of $1.0000$ and an AUPRC of $0.9967$ on the held-out test split. Platt calibration reduces ECE from $0.1972$ to $0.0937$ with a Brier score of $0.0164$.
+
+\subsection{External Benchmark Generalization}
+\input{../tables/table3_external_generalization.tex}
+Table~\ref{tab:external_generalization} documents zero-tuning generalization across 5 external public datasets ($N=850$), achieving an aggregate AUROC of $0.9964$ (95\% CI $[0.9938, 0.9985]$), an AUPRC of $0.9958$, and an ECE of $0.0986$.
+
+\subsection{Comprehensive Baseline Comparison}
+\input{../tables/table4_baseline_comparison.tex}
+Table~\ref{tab:baseline_comparison} presents comparative evaluations across single-pillar ablations and published reference architectures, explicitly separating directly evaluated native runs from published literature figures.
+
+\section{Ablation Studies}
+\label{sec:ablation_studies}
+\input{../tables/table5_ablation.tex}
+Table~\ref{tab:ablation} details the ablation progression from individual signals to the complete hybrid pipeline (A0 to A11), confirming that multi-signal integration provides statistically significant gains over any single constituent verifier.
+
+\section{Availability Robustness}
+\label{sec:availability_robustness}
+\input{../tables/table6_availability_robustness.tex}
+Table~\ref{tab:availability_robustness} demonstrates the effectiveness of availability-aware adaptive fusion across all 7 signal missingness masks. Under Mask $[1, 0, 1]$ (black-box APIs lacking token log-probabilities), adaptive fusion outperforms fixed unnormalized fusion by $+0.1490$ AUROC (95\% CI $[+0.1382, +0.1610]$, $p < 0.001$, paired Cohen's $d = 1.42$).
+
+\section{Calibration and Selective Prediction}
+\label{sec:calibration_and_selective_prediction}
+\input{../tables/table7_calibration.tex}
+\input{../tables/table8_selective_abstention.tex}
+Table~\ref{tab:calibration} shows that Platt scaling effectively eliminates overconfidence, reducing Brier score from $0.0412$ to $0.0164$. Table~\ref{tab:selective_abstention} reports the risk-coverage trade-off ($\text{AURC} = 0.0051$). On the evaluated test population, the retained 80\% coverage subset exhibited zero observed classification errors under the pre-selected validation operating threshold ($\text{Selective Risk} = 0.00\%$, $\text{Precision} = 1.000$). Rejecting the most ambiguous 20\% of queries represents a deliberate, safety-critical operational trade-off.
+
+\section{Closed-Loop Correction}
+\label{sec:closed_loop_correction}
+\input{../tables/table9_closed_loop_correction.tex}
+As documented in Table~\ref{tab:closed_loop_correction}, closed-loop repair achieves an overall Correction Success Rate (CSR) of $88.4\%$ evaluated at the flagged claim level ($N=350$), a Reverification Pass Rate (RPR) of $91.2\%$ evaluated at the repair attempt level, and a Correction-Induced Hallucination Rate (CIHR) of $2.1\%$ evaluated at the accepted repaired claim level. Mean risk scores drop from $0.848$ to $0.092$ ($\Delta H = -0.756$). A candidate repair is never accepted merely because it looks plausible; it must independently pass the downstream reverification gate.
+
+\section{Failure Analysis}
+\label{sec:failure_analysis}
+\input{../tables/table10_failure_taxonomy.tex}
+Table~\ref{tab:failure_taxonomy} catalogues failure distributions across 10 operational categories. Grounding deficits and unresolved cross-document consensus contradictions represent the primary remaining sources of verification error.
+
+\section{Threats to Validity}
+\label{sec:threats_to_validity}
+We explicitly disclose twelve methodological limitations:
+\begin{enumerate}
+    \item \textbf{English-Only Evaluation:} Current evaluations are conducted exclusively in English.
+    \item \textbf{External Retrieval Dependency:} Accuracy depends on accessible consensus reference passages.
+    \item \textbf{Benchmark Saturation:} Near-perfect synthetic split scores reflect clean i.i.d. conditions.
+    \item \textbf{Evidence-Source Overlap:} Retrieval accesses public encyclopedia passages sharing factual concepts with benchmark claims.
+    \item \textbf{External Dataset Comparability:} Differences in prompt formatting across external datasets require contextual interpretation.
+    \item \textbf{Selective Coverage Trade-Off:} Achieving zero selective risk requires abstaining on $20\%$ of high-ambiguity queries.
+    \item \textbf{Symbolic Parser Scope:} Rule checkers cover standard SI units and scientific notation but lack arbitrary symbolic calculus.
+    \item \textbf{Retrieval Latency:} External REST lookups account for $\sim 65\%$ of pipeline duration.
+    \item \textbf{Computational Footprint:} Local DeBERTa and sentence embedding inference require $\sim 1.2\text{ GB}$ RAM.
+    \item \textbf{Low-Resource Languages:} Multilingual performance is unverified.
+    \item \textbf{Potential Domain Shift:} Localized enterprise knowledge bases require dedicated embedding indexing.
+    \item \textbf{Baseline Implementation Differences:} Literature baselines reflect reported numbers under standard benchmarks.
+\end{enumerate}
+
+\section{Reproducibility and Open Artifacts}
+\label{sec:reproducibility}
+HalluciSense is committed to full scientific reproducibility. All random seeds are fixed to 42 across data splitting and evaluation pipelines. The canonical benchmark dataset is frozen and verified with SHA-256 hash \texttt{dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5}. Model weights are managed via ModelRegistry singletons bounding runtime memory to $\le 1.2\text{ GB}$ peak RAM. All execution manifests and reproduction scripts are publicly available in the reproducibility package.
+
+\section{Discussion}
+\label{sec:discussion}
+Our findings demonstrate that explicit signal availability modeling is essential for practical LLM fact verification. By replacing static weighting with dynamic renormalization and enforcing downstream reverification gates, HalluciSense provides reliable, calibrated risk estimation across heterogeneous real-world deployment settings without requiring model fine-tuning.
+
+\section{Future Work}
+\label{sec:future_work}
+Promising directions for future exploration include: (1) multilingual verification across low-resource languages, (2) domain-specific clinical and legal reference stores, (3) adversarial retrieval defense, (4) streaming token-level verification, (5) epistemic vs aleatoric uncertainty decomposition, (6) expanded black-box model families, (7) expert human-in-the-loop validation, (8) cost-aware dynamic routing, (9) longitudinal deployment monitoring, and (10) computer algebra system integration for advanced mathematical theorem verification.
+
+\section{Conclusion}
+\label{sec:conclusion}
+In this paper, we presented HalluciSense, an availability-aware multi-signal hallucination verification framework. Through dynamic indicator masking, reliability modulation, probability calibration, selective abstention, and gated closed-loop repair, HalluciSense provides robust factuality verification across diverse models and external benchmarks without requiring model fine-tuning.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

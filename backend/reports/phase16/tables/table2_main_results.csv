@@ -1,0 +1,4 @@
+Evaluation_Condition,N,AUROC,AUPRC,Macro_F1,Accuracy,ECE,Brier
+Canonical Fixed Fusion Baseline,150,1.0,0.9967,0.9867,0.9867,0.1972,0.0412
+Adaptive Platt Calibrated Hybrid,150,1.0,0.9967,0.9867,0.9867,0.0937,0.0164
+Adaptive + Selective Abstention (80%),120,1.0,1.0,1.0,1.0,0.041,0.0051

@@ -1,0 +1,8 @@
+Artifact_Key,Value
+Canonical Benchmark Hash,dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5
+Platt Parameters,"a=1.82, b=-0.45 (Dev fitted)"
+Base Pillar Weights,"alpha=0.40, beta=0.30, gamma=0.30"
+Abstention Parameters,"min_evidence_similarity=0.40, ambiguity_margin=0.08"
+PyTorch Version,2.2.2
+Transformers Version,4.57.6
+Random Seed,42

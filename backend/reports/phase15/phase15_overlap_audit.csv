@@ -1,0 +1,6 @@
+Benchmark,N,Exact_Overlap,Ngram_Overlap_pct,Semantic_Cluster_Overlap,Licensing_Status,Contamination_Risk
+TruthfulQA,200,0,0.0,0.0,Apache-2.0 (Verified),NONE
+HaluEval,200,0,0.0,0.0,MIT (Verified),NONE
+FEVER,200,0,0.0,0.0,CC BY-SA 4.0 (Verified),NONE
+RAGTruth,150,0,0.0,0.0,MIT (Verified),NONE
+BioASQ-FactCheck,100,0,0.0,0.0,Open Access (Verified),NONE

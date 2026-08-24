@@ -1,0 +1,38 @@
+{
+  "canonical_benchmark": {
+    "path": "backend/evaluation/results/benchmark_dataset.jsonl",
+    "sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+    "n_records": 750,
+    "partitions": {
+      "train": 450,
+      "val": 150,
+      "test": 150
+    }
+  },
+  "external_benchmarks": {
+    "truthful_qa": {
+      "n": 200,
+      "license": "Apache-2.0"
+    },
+    "halu_eval": {
+      "n": 200,
+      "license": "MIT"
+    },
+    "fever": {
+      "n": 200,
+      "license": "CC BY-SA 4.0"
+    },
+    "rag_truth": {
+      "n": 150,
+      "license": "MIT"
+    },
+    "bioasq": {
+      "n": 100,
+      "license": "Open Access"
+    }
+  },
+  "adversarial_stress_datasets": {
+    "phase13_adversarial": "backend/evaluation/phase13/adversarial_stress_test.jsonl",
+    "phase14_adversarial": "backend/evaluation/phase14/adversarial_external_stress.jsonl"
+  }
+}

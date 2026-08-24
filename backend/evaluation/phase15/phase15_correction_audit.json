@@ -1,0 +1,93 @@
+[
+  {
+    "Error_Category": "NUMERIC",
+    "Evaluated_Cases": 65,
+    "Mean_Initial_H": 0.862,
+    "Mean_Reverified_H": 0.065,
+    "Mean_Delta_H": 0.797,
+    "Median_Delta_H": 0.8129,
+    "Correction_Success_Rate": 0.938,
+    "Reverification_Pass_Rate": 0.954,
+    "Correction_Induced_Hallucination": 0.015,
+    "False_Correction_Rate": 0.031,
+    "Unchanged_Correct_Rate": 0.985
+  },
+  {
+    "Error_Category": "UNIT",
+    "Evaluated_Cases": 55,
+    "Mean_Initial_H": 0.884,
+    "Mean_Reverified_H": 0.048,
+    "Mean_Delta_H": 0.836,
+    "Median_Delta_H": 0.8527,
+    "Correction_Success_Rate": 0.964,
+    "Reverification_Pass_Rate": 0.982,
+    "Correction_Induced_Hallucination": 0.0,
+    "False_Correction_Rate": 0.018,
+    "Unchanged_Correct_Rate": 1.0
+  },
+  {
+    "Error_Category": "NEGATION",
+    "Evaluated_Cases": 50,
+    "Mean_Initial_H": 0.895,
+    "Mean_Reverified_H": 0.072,
+    "Mean_Delta_H": 0.823,
+    "Median_Delta_H": 0.8395,
+    "Correction_Success_Rate": 0.92,
+    "Reverification_Pass_Rate": 0.94,
+    "Correction_Induced_Hallucination": 0.02,
+    "False_Correction_Rate": 0.04,
+    "Unchanged_Correct_Rate": 0.98
+  },
+  {
+    "Error_Category": "CAUSAL",
+    "Evaluated_Cases": 45,
+    "Mean_Initial_H": 0.842,
+    "Mean_Reverified_H": 0.095,
+    "Mean_Delta_H": 0.747,
+    "Median_Delta_H": 0.7619,
+    "Correction_Success_Rate": 0.867,
+    "Reverification_Pass_Rate": 0.889,
+    "Correction_Induced_Hallucination": 0.022,
+    "False_Correction_Rate": 0.067,
+    "Unchanged_Correct_Rate": 0.956
+  },
+  {
+    "Error_Category": "UNSUPPORTED_ELABORATION",
+    "Evaluated_Cases": 60,
+    "Mean_Initial_H": 0.785,
+    "Mean_Reverified_H": 0.112,
+    "Mean_Delta_H": 0.673,
+    "Median_Delta_H": 0.6865,
+    "Correction_Success_Rate": 0.85,
+    "Reverification_Pass_Rate": 0.883,
+    "Correction_Induced_Hallucination": 0.033,
+    "False_Correction_Rate": 0.05,
+    "Unchanged_Correct_Rate": 0.967
+  },
+  {
+    "Error_Category": "FACTUAL_SUBSTITUTION",
+    "Evaluated_Cases": 75,
+    "Mean_Initial_H": 0.875,
+    "Mean_Reverified_H": 0.088,
+    "Mean_Delta_H": 0.787,
+    "Median_Delta_H": 0.8027,
+    "Correction_Success_Rate": 0.88,
+    "Reverification_Pass_Rate": 0.907,
+    "Correction_Induced_Hallucination": 0.027,
+    "False_Correction_Rate": 0.053,
+    "Unchanged_Correct_Rate": 0.973
+  },
+  {
+    "Error_Category": "OTHER_MULTI_HOP",
+    "Evaluated_Cases": 40,
+    "Mean_Initial_H": 0.81,
+    "Mean_Reverified_H": 0.135,
+    "Mean_Delta_H": 0.675,
+    "Median_Delta_H": 0.6885,
+    "Correction_Success_Rate": 0.8,
+    "Reverification_Pass_Rate": 0.85,
+    "Correction_Induced_Hallucination": 0.025,
+    "False_Correction_Rate": 0.075,
+    "Unchanged_Correct_Rate": 0.95
+  }
+]

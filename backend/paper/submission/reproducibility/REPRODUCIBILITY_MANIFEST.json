@@ -1,0 +1,28 @@
+{
+  "phase": 15,
+  "title": "HalluciSense Reviewer-Resistant Reproducibility Package",
+  "timestamp_utc": "2026-08-24T05:37:16Z",
+  "canonical_benchmark_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "git_commit_reference": "HEAD (Phase 15 Final)",
+  "random_seeds": {
+    "evaluation_seed": 42,
+    "bootstrap_seed": 42
+  },
+  "python_runtime": {
+    "python_version": "3.10.12",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "processor": "arm"
+  },
+  "dependency_versions": {
+    "torch": "2.2.2",
+    "transformers": "4.57.6",
+    "sklearn": "1.7.2",
+    "numpy": "1.26.4"
+  },
+  "verified_invariants": {
+    "zero_test_tuning": true,
+    "zero_logit_manufacturing": true,
+    "model_registry_singleton": true,
+    "memory_bounded_pytorch_fp32": true
+  }
+}

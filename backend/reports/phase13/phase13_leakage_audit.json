@@ -1,0 +1,50 @@
+{
+  "exact_duplicate_claims_count": 60,
+  "exact_duplicate_ids_count": 0,
+  "near_duplicate_pairs_count": 4320,
+  "total_samples": 750,
+  "domains": {
+    "General Knowledge": 50,
+    "Medicine": 50,
+    "Law": 50,
+    "Finance": 50,
+    "History": 50,
+    "Science": 50,
+    "Computer Science": 50,
+    "Physics": 50,
+    "Biology": 50,
+    "Chemistry": 50,
+    "News": 50,
+    "Mathematics": 50,
+    "Geography": 50,
+    "Politics": 50,
+    "Literature": 50
+  },
+  "generators": {
+    "GPT-4": 750
+  },
+  "labels": {
+    "factual": 375,
+    "hallucinated": 375
+  },
+  "leakage_risks": [
+    {
+      "type": "NEAR_DUPLICATE_TEMPLATES",
+      "severity": "MEDIUM",
+      "description": "4320 sample pairs share >=85% 3-gram overlap (e.g. repeated prompt templates across different entities).",
+      "remediation": "Enforce GroupKFold split by prompt template / topic cluster to ensure training partitions never share templates with held-out test."
+    },
+    {
+      "type": "TEST_DATA_CALIBRATION_COUPLING",
+      "severity": "HIGH",
+      "description": "Evaluating calibration and AUROC on the full N=750 without strict out-of-fold cross-validation produces optimistic discriminative metrics (AUROC 1.0000).",
+      "remediation": "Create a strictly isolated 3-way split: 60% Train (N=450), 20% Val (N=150), 20% Test (N=150) with frozen test evaluation."
+    },
+    {
+      "type": "RETRIEVAL_CORPUS_GROUND_TRUTH_MEMORIZATION",
+      "severity": "LOW",
+      "description": "Wikipedia knowledge articles contain verified scientific constants. This is legitimate external knowledge retrieval rather than label leakage.",
+      "remediation": "Formally document difference between external retrieval augmentation and test set contamination."
+    }
+  ]
+}

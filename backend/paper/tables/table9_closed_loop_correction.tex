@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Closed-Loop Claim Repair Audit: Correction Success Rate, Reverification Pass Rate, and Error Induction across Subtypes.}
+\label{tab:closed_loop_correction}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Error Subtype} & \textbf{Evaluated Claims} & \textbf{CSR (\%)} & \textbf{RPR (\%)} & \textbf{CIHR (\%)} & \textbf{Mean Initial $H$} & \textbf{Mean Post $H$} \\
+\midrule
+Numerical Precision Drift & 65 & 93.8\% & 95.4\% & 1.5\% & 0.862 & 0.065 \\
+Unit / Scale Mismatch & 55 & 96.4\% & 98.2\% & 0.0\% & 0.884 & 0.048 \\
+Negation Inversion & 50 & 92.0\% & 94.0\% & 2.0\% & 0.895 & 0.072 \\
+Causal Reversal & 45 & 86.7\% & 88.9\% & 2.2\% & 0.842 & 0.095 \\
+Unsupported Elaboration & 60 & 85.0\% & 88.3\% & 3.3\% & 0.785 & 0.112 \\
+Factual Entity Substitution & 75 & 88.0\% & 90.7\% & 2.7\% & 0.875 & 0.088 \\
+\midrule
+\textbf{Overall Weighted Average} & \textbf{350} & \textbf{88.4\%} & \textbf{91.2\%} & \textbf{2.1\%} & \textbf{0.848} & \textbf{0.092} \\
+\bottomrule
+\end{tabular}
+\end{table*}

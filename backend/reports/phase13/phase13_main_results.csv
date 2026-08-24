@@ -1,0 +1,4 @@
+Split,Method,auroc,auprc,f1,accuracy,precision,recall,specificity,brier,ece,aurc,AUROC_95CI,ECE_95CI
+Held-Out Test (N=150),Canonical Fusion (Uncalibrated),1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0477,0.1904,0.0,"(1.0, 1.0)","(0.1716, 0.2075)"
+Held-Out Test (N=150),Adaptive Calibrated Hybrid (Platt),1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0164,0.0939,0.0,"(1.0, 1.0)","(0.0788, 0.1067)"
+Full Benchmark (N=750),Full Hybrid Pipeline,1.0,0.9967,1.0,1.0,1.0,1.0,1.0,0.0164,0.0937,0.0,"[1.0, 1.0]","[0.085, 0.103]"

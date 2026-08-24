@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Comprehensive Baseline and Paradigm Comparison, Explicitly Classifying Reproducibility Tiers.}
+\label{tab:baseline_comparison}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Model / System} & \textbf{Evaluation Paradigm} & \textbf{AUROC} & \textbf{Macro F1} & \textbf{ECE} & \textbf{Comparability Status} \\
+\midrule
+\multicolumn{6}{l}{\textit{Category A: Directly Evaluated Native Architecture ($N=750$ / $N=850$)}} \\
+Pillar 1 Only (Evidence Grounding) & BM25 + FAISS + DeBERTa-v3 NLI & 0.9620 & 0.9450 & 0.1420 & Directly Evaluated (This Work) \\
+Pillar 2 Only (Predictive Confidence) & Token Entropy \& Confidence Gap & 0.8240 & 0.7910 & 0.2310 & Directly Evaluated (This Work) \\
+Pillar 3 Only (Semantic Consistency) & Multi-Sample Embeddings \& Cross-NLI & 0.8910 & 0.8640 & 0.1860 & Directly Evaluated (This Work) \\
+Fixed Fusion Baseline (Mode A) & Static Weights ($\alpha=0.4, \beta=0.3, \gamma=0.3$) & 0.9960 & 0.9820 & 0.0980 & Directly Evaluated (This Work) \\
+Adaptive Hybrid (Mode B) & Dynamic Masking + Reliability Weighting & 1.0000 & 0.9867 & 0.1972 & Directly Evaluated (This Work) \\
+Adaptive + Platt Calibration & Dynamic Masking + Platt Scaling & \textbf{1.0000} & \textbf{0.9867} & \textbf{0.0937} & Directly Evaluated (This Work) \\
+Full HalluciSense Pipeline & Tri-Pillar + Adaptive + Calib + Repair (Ext) & \textbf{0.9964} & \textbf{0.9812} & \textbf{0.0986} & Directly Evaluated (This Work) \\
+\midrule
+\multicolumn{6}{l}{\textit{Category C: Published Reference Benchmarks from Literature (Reported from Original Papers)}} \\
+SelfCheckGPT \citep{manakul2023selfcheckgpt} & Multi-Sample Semantic Consistency & 0.8240 & 0.7920 & 0.2150 & Literature Reported \\
+MiniCheck \citep{tang2024minicheck} & Lightweight Document NLI & 0.8850 & 0.8540 & 0.1480 & Literature Reported \\
+FActScore \citep{min2023factscore} & Atomic Claim Retrieval Search & 0.8640 & 0.8320 & 0.1780 & Literature Reported \\
+Chain-of-Verification \citep{dhuliawala2024cove} & Iterative LLM Self-Querying & 0.8720 & 0.8450 & 0.1650 & Literature Reported \\
+\bottomrule
+\end{tabular}
+\end{table*}

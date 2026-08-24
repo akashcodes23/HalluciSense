@@ -1,0 +1,14 @@
+torch>=2.0.0
+transformers>=4.38.0
+sentence-transformers>=2.3.0
+scikit-learn>=1.4.0
+numpy>=1.26.0
+scipy>=1.12.0
+matplotlib>=3.8.0
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+fastapi>=0.109.0
+uvicorn>=0.27.0
+pydantic>=2.6.0
+faiss-cpu>=1.7.4
+rank-bm25>=0.2.2

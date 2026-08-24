@@ -1,0 +1,93 @@
+[
+  {
+    "Signal_Mask": "[1, 1, 1]",
+    "Scenario": "Full Observability",
+    "Fixed_AUROC": 0.9964,
+    "Adaptive_AUROC": 0.9964,
+    "Delta_AUROC": 0.0,
+    "Bootstrap_95CI": "[0.0000, 0.0000]",
+    "Bootstrap_SE": 0.0,
+    "Per_Sample_Cohen_d": 0.0,
+    "Bootstrap_z_Score_Historical": 0.0,
+    "Paired_Wilcoxon_p_val": "\u2014",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  },
+  {
+    "Signal_Mask": "[1, 0, 1]",
+    "Scenario": "Black-Box No Logprobs",
+    "Fixed_AUROC": 0.842,
+    "Adaptive_AUROC": 0.991,
+    "Delta_AUROC": 0.149,
+    "Bootstrap_95CI": "[+0.1382, +0.1610]",
+    "Bootstrap_SE": 0.0058,
+    "Per_Sample_Cohen_d": 1.42,
+    "Bootstrap_z_Score_Historical": 25.69,
+    "Paired_Wilcoxon_p_val": "< 0.001",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  },
+  {
+    "Signal_Mask": "[1, 1, 0]",
+    "Scenario": "Single-Turn No Samples",
+    "Fixed_AUROC": 0.851,
+    "Adaptive_AUROC": 0.978,
+    "Delta_AUROC": 0.127,
+    "Bootstrap_95CI": "[+0.1165, +0.1384]",
+    "Bootstrap_SE": 0.0056,
+    "Per_Sample_Cohen_d": 1.21,
+    "Bootstrap_z_Score_Historical": 22.68,
+    "Paired_Wilcoxon_p_val": "< 0.001",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  },
+  {
+    "Signal_Mask": "[0, 1, 1]",
+    "Scenario": "Offline No Retrieval",
+    "Fixed_AUROC": 0.785,
+    "Adaptive_AUROC": 0.912,
+    "Delta_AUROC": 0.127,
+    "Bootstrap_95CI": "[+0.1142, +0.1395]",
+    "Bootstrap_SE": 0.0064,
+    "Per_Sample_Cohen_d": 1.15,
+    "Bootstrap_z_Score_Historical": 19.84,
+    "Paired_Wilcoxon_p_val": "< 0.001",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  },
+  {
+    "Signal_Mask": "[1, 0, 0]",
+    "Scenario": "P1 Only",
+    "Fixed_AUROC": 0.724,
+    "Adaptive_AUROC": 0.962,
+    "Delta_AUROC": 0.238,
+    "Bootstrap_95CI": "[+0.2240, +0.2520]",
+    "Bootstrap_SE": 0.0071,
+    "Per_Sample_Cohen_d": 1.85,
+    "Bootstrap_z_Score_Historical": 33.52,
+    "Paired_Wilcoxon_p_val": "< 0.001",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  },
+  {
+    "Signal_Mask": "[0, 1, 0]",
+    "Scenario": "P2 Only",
+    "Fixed_AUROC": 0.612,
+    "Adaptive_AUROC": 0.824,
+    "Delta_AUROC": 0.212,
+    "Bootstrap_95CI": "[+0.1980, +0.2260]",
+    "Bootstrap_SE": 0.0071,
+    "Per_Sample_Cohen_d": 1.6,
+    "Bootstrap_z_Score_Historical": 29.86,
+    "Paired_Wilcoxon_p_val": "< 0.001",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  },
+  {
+    "Signal_Mask": "[0, 0, 1]",
+    "Scenario": "P3 Only",
+    "Fixed_AUROC": 0.654,
+    "Adaptive_AUROC": 0.891,
+    "Delta_AUROC": 0.237,
+    "Bootstrap_95CI": "[+0.2230, +0.2510]",
+    "Bootstrap_SE": 0.0071,
+    "Per_Sample_Cohen_d": 1.78,
+    "Bootstrap_z_Score_Historical": 33.38,
+    "Paired_Wilcoxon_p_val": "< 0.001",
+    "Statistical_Recommendation": "Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "timestamp_utc": "2026-08-24T05:34:43Z",
+  "evaluated_internal_baselines": 8,
+  "referenced_published_baselines": 4,
+  "n_samples_internal": 750,
+  "primary_metric": "AUROC"
+}

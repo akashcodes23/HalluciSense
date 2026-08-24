@@ -1,0 +1,9 @@
+Coverage_Target,Coverage_Fraction,Retained_Samples,Abstained_Samples,Selective_Risk,Selective_Precision,Selective_Recall,Selective_F1,Scientific_Interpretation
+100%,1.0,750,0,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+95%,0.95,712,38,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+90%,0.9,675,75,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+85%,0.85,637,113,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+80%,0.8,600,150,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+70%,0.7,525,225,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+60%,0.6,450,300,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset
+50%,0.5,375,375,0.0,1.0,1.0,1.0,Zero empirical errors observed on retained subset

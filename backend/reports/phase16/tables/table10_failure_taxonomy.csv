@@ -1,0 +1,11 @@
+Failure_Category,Frequency,Percentage,Severity,Detection_Rate,Remaining_Limitation
+Retrieval Deficit,42,4.94,HIGH,0.952,Expanded indexing needed
+Evidence Conflict,28,3.29,MEDIUM,0.928,Requires domain expert review
+NLI Context Ambiguity,22,2.59,LOW,0.864,DeBERTa token limit
+Numerical Precision Drift,65,7.65,HIGH,0.985,Arbitrary precision limits
+Unit / Scale Mismatch,55,6.47,HIGH,0.982,Dimensional table coverage
+Negation Inversion,50,5.88,HIGH,0.98,Double negation syntax
+Causal Reversal,45,5.29,MEDIUM,0.956,Multi-hop causality
+Unsupported Elaboration,60,7.06,MEDIUM,0.933,Pruning speculative details
+Boundary Ambiguity,35,4.12,LOW,0.886,Covered via selective abstention
+Total Signal Missingness,12,1.41,CRITICAL,1.0,Fallback to unverified state

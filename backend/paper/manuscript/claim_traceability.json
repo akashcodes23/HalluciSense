@@ -1,0 +1,92 @@
+[
+  {
+    "claim_id": "CLAIM-MAIN-001",
+    "section": "6.1 Main Benchmark Results",
+    "metric": "AUROC",
+    "value": 1.0,
+    "dataset": "Held-Out Test N=150",
+    "source_artifact": "table2_main_results.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-MAIN-002",
+    "section": "6.1 Main Benchmark Results",
+    "metric": "ECE",
+    "value": 0.0937,
+    "dataset": "Held-Out Test N=150",
+    "source_artifact": "table2_main_results.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-EXT-001",
+    "section": "6.2 External Benchmark Generalization",
+    "metric": "AUROC",
+    "value": 0.9964,
+    "dataset": "Combined External N=850",
+    "source_artifact": "table3_external_generalization.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-EXT-002",
+    "section": "6.2 External Benchmark Generalization",
+    "metric": "ECE",
+    "value": 0.0986,
+    "dataset": "Combined External N=850",
+    "source_artifact": "table3_external_generalization.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-AVAIL-001",
+    "section": "8. Availability Robustness",
+    "metric": "Delta AUROC",
+    "value": 0.149,
+    "dataset": "External Mask [1,0,1]",
+    "source_artifact": "table6_availability_robustness.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-AVAIL-002",
+    "section": "8. Availability Robustness",
+    "metric": "Cohen d",
+    "value": 1.42,
+    "dataset": "External Mask [1,0,1]",
+    "source_artifact": "table6_availability_robustness.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-ABST-001",
+    "section": "9. Selective Abstention",
+    "metric": "Selective Risk",
+    "value": 0.0,
+    "dataset": "Retained 80% Subset",
+    "source_artifact": "table8_selective_abstention.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-REPAIR-001",
+    "section": "10. Closed-Loop Correction",
+    "metric": "CSR",
+    "value": 0.884,
+    "dataset": "External Repair N=350",
+    "source_artifact": "table9_closed_loop_correction.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-REPAIR-002",
+    "section": "10. Closed-Loop Correction",
+    "metric": "CIHR",
+    "value": 0.021,
+    "dataset": "External Repair N=350",
+    "source_artifact": "table9_closed_loop_correction.csv",
+    "status": "VERIFIED"
+  },
+  {
+    "claim_id": "CLAIM-MEM-001",
+    "section": "13. Reproducibility & Systems",
+    "metric": "Peak RAM MB",
+    "value": 1124.5,
+    "dataset": "Runtime Telemetry",
+    "source_artifact": "table12_reproducibility.csv",
+    "status": "VERIFIED"
+  }
+]

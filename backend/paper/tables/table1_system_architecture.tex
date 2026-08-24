@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{System Architecture of HalluciSense: Verification Pillars, Fusion, and Downstream Safety Gates.}
+\label{tab:system_architecture}
+\begin{tabular}{llll}
+\toprule
+\textbf{Component} & \textbf{Core Mechanism / Technology} & \textbf{Output Representation} & \textbf{Availability Constraint} \\
+\midrule
+Claim Decomposition & Rule-based discourse \& syntax segmenter & Atomic factual claim list $\{c_j\}$ & Mandatory upstream \\
+Pillar 1: Evidence Grounding & BM25 + FAISS + DeBERTa-v3 NLI + Symbolic & Error score $\text{FE} \in [0, 1]$ & $m_{\text{FE}} \in \{0, 1\}$ \\
+Pillar 2: Predictive Confidence & Token entropy \& confidence gap & Uncertainty $\text{CG} \in [0, 1]$ & $m_{\text{CG}} \in \{0, 1\}$ \\
+Pillar 3: Semantic Consistency & Sentence transformer embeddings + cross-NLI & Inconsistency $\text{CF} \in [0, 1]$ & $m_{\text{CF}} \in \{0, 1\}$ \\
+Adaptive Fusion Layer & Dynamic indicator masking \& reliability & Continuous score $H \in [0, 1]$ & $\sum m_i \ge 1$ \\
+Probability Calibration & Platt logistic scaling ($a=1.82, b=-0.45$) & Calibrated probability $\hat{P}(H)$ & Fitted on Dev \\
+Selective Abstention Gate & Dual-criteria epistemic rejection gate & Decision $\in \{\text{Accept}, \text{Abstain}\}$ & 80\% Coverage Point \\
+Closed-Loop Correction & Symbolic repair policy + Reverification gate & Repaired factual text $c^*$ & Triggered on $H \ge 0.35$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

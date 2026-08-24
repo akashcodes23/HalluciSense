@@ -1,0 +1,9 @@
+Scenario,Evidence_A,Evidence_B,Output_H,Decision,Abstain
+Case A: Strong Support + Weak Contradiction,NIST Standard (0.95),Forum Post (0.35),0.08,VERIFIED,False
+Case B: Weak Support + Strong Contradiction,Blog Post (0.35),IUPAC Reference (0.95),0.92,LIKELY_HALLUCINATED,False
+Case C: Equal-Quality Mutual Contradiction,Peer Source 1 (0.88),Peer Source 2 (0.88),0.5,NEEDS_VERIFICATION,False
+Case D: Multi-Support + Single-Contradiction,3x Verified (0.91),1x Low Rank (0.42),0.14,LOW_RISK,False
+Case E: Single-Support + Multi-Contradiction,1x Weak (0.40),3x Verified (0.91),0.86,LIKELY_HALLUCINATED,False
+Case F: Complete Evidence Deficit,No Evidence (0.00),No Evidence (0.00),0.5,INSUFFICIENT_EVIDENCE,True
+Case G: Outdated Support + Recent Contradiction,1995 Textbook (0.89),2026 Discovery (0.94),0.88,LIKELY_HALLUCINATED,False
+Case H: Recent Support + Outdated Contradiction,2026 Trial (0.94),1995 Textbook (0.89),0.1,VERIFIED,False

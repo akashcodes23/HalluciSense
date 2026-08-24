@@ -1,0 +1,134 @@
+[
+  {
+    "key": "manakul2023selfcheckgpt",
+    "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models",
+    "authors": "Potsawee Manakul, Adian Liusie, Mark J. F. Gales",
+    "year": 2023,
+    "venue": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    "doi": "10.18653/v1/2023.emnlp-main.557",
+    "url": "https://aclanthology.org/2023.emnlp-main.557/",
+    "task": "Sampling-based black-box hallucination detection",
+    "relevance": "Key baseline for semantic consistency signal without token logprobs"
+  },
+  {
+    "key": "min2023factscore",
+    "title": "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation",
+    "authors": "Sewon Min, Kalpesh Krishna, Xinxi Lyu, Mike Lewis, Wen-tau Yih, Pang Wei Koh, Mohit Iyyer, Luke Zettlemoyer, Hannaneh Hajishirzi",
+    "year": 2023,
+    "venue": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    "doi": "10.18653/v1/2023.emnlp-main.741",
+    "url": "https://aclanthology.org/2023.emnlp-main.741/",
+    "task": "Atomic claim decomposition and precision scoring",
+    "relevance": "Methodological foundation for claim-level atomic decomposition"
+  },
+  {
+    "key": "tang2024minicheck",
+    "title": "MiniCheck: Efficient Fact-Checking of LLMs on Grounding Documents",
+    "authors": "Liyan Tang, Philippe Laban, Greg Durrett",
+    "year": 2024,
+    "venue": "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    "doi": "10.18653/v1/2024.emnlp-main.488",
+    "url": "https://aclanthology.org/2024.emnlp-main.488/",
+    "task": "Lightweight NLI document grounding",
+    "relevance": "State-of-the-art small NLI cross-encoder verification baseline"
+  },
+  {
+    "key": "dhuliawala2024cove",
+    "title": "Chain-of-Verification Reduces Hallucination in Large Language Models",
+    "authors": "Shehzaad Dhuliawala, Mojtaba Komeili, Jing Xu, Roberta Raileanu, Xian Li, Asli Celikyilmaz, Jason Weston",
+    "year": 2024,
+    "venue": "Findings of the Association for Computational Linguistics: ACL 2024",
+    "doi": "10.18653/v1/2024.findings-acl.208",
+    "url": "https://aclanthology.org/2024.findings-acl.208/",
+    "task": "Iterative verification question generation and checking",
+    "relevance": "Baseline for prompt-based iterative LLM self-verification"
+  },
+  {
+    "key": "thorne2018fever",
+    "title": "FEVER: a Large-scale Dataset for Fact Extraction and VERification",
+    "authors": "James Thorne, Andreas Vlachos, Christos Christodoulopoulos, Arpit Mittal",
+    "year": 2018,
+    "venue": "Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL)",
+    "doi": "10.18653/v1/N18-1074",
+    "url": "https://aclanthology.org/N18-1074/",
+    "task": "Claim verification against Wikipedia evidence",
+    "relevance": "Standard benchmark for retrieval grounding and NLI classification"
+  },
+  {
+    "key": "lin2022truthfulqa",
+    "title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods",
+    "authors": "Stephanie Lin, Jacob Hilton, Owain Evans",
+    "year": 2022,
+    "venue": "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (ACL)",
+    "doi": "10.18653/v1/2022.acl-long.229",
+    "url": "https://aclanthology.org/2022.acl-long.229/",
+    "task": "Measuring imitative falsehoods in LLMs",
+    "relevance": "Key external benchmark for domain-general truthfulness"
+  },
+  {
+    "key": "li2023halueval",
+    "title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "authors": "Junyi Li, Xiaoxue Cheng, Wayne Xin Zhao, Jian-Yun Nie, Ji-Rong Wen",
+    "year": 2023,
+    "venue": "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    "doi": "10.18653/v1/2023.emnlp-main.397",
+    "url": "https://aclanthology.org/2023.emnlp-main.397/",
+    "task": "Hallucination detection across QA, Dialogue, and Summarization",
+    "relevance": "Core multi-task external hallucination evaluation benchmark"
+  },
+  {
+    "key": "niu2024ragtruth",
+    "title": "RAGTruth: A Hallucination Corpus for Retrieval-Augmented Generation",
+    "authors": "Cheng Niu, Yuanhao Wu, Junfeng Fang, et al.",
+    "year": 2024,
+    "venue": "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL)",
+    "doi": "10.18653/v1/2024.acl-long.821",
+    "url": "https://aclanthology.org/2024.acl-long.821/",
+    "task": "Word-level and sentence-level hallucination annotation in RAG",
+    "relevance": "Benchmark for long-form retrieval-grounded generation"
+  },
+  {
+    "key": "platt1999probabilistic",
+    "title": "Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods",
+    "authors": "John C. Platt",
+    "year": 1999,
+    "venue": "Advances in Large Margin Classifiers",
+    "doi": "10.1.1.41.1639",
+    "url": "https://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf",
+    "task": "Sigmoidal logistic probability calibration",
+    "relevance": "Theoretical foundation for post-hoc H-score probability calibration"
+  },
+  {
+    "key": "geifman2017selective",
+    "title": "Selective Classification for Deep Neural Networks",
+    "authors": "Yonatan Geifman, Ran El-Yaniv",
+    "year": 2017,
+    "venue": "Advances in Neural Information Processing Systems (NeurIPS 2017)",
+    "doi": "10.5555/3294996.3295244",
+    "url": "https://proceedings.neurips.cc/paper/2017/hash/4a27cea747a8286a117b4c40590c2e64-Abstract.html",
+    "task": "Risk-coverage analysis and selective prediction",
+    "relevance": "Formal framework for selective abstention and AURC evaluation"
+  },
+  {
+    "key": "kuhn2023semantic",
+    "title": "Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Large Language Models",
+    "authors": "Lorenz Kuhn, Yarin Gal, Sebastian Farquhar",
+    "year": 2023,
+    "venue": "International Conference on Learning Representations (ICLR 2023)",
+    "doi": "10.48550/arXiv.2302.09664",
+    "url": "https://openreview.net/forum?id=VD-AYtP0dve",
+    "task": "Semantic clustering entropy over LLM generations",
+    "relevance": "Foundation for semantic consistency cross-sample entropy"
+  },
+  {
+    "key": "he2021deberta",
+    "title": "DeBERTa: Decoding-enhanced BERT with Disentangled Attention",
+    "authors": "Pengcheng He, Xiaodong Liu, Jianfeng Gao, Weizhu Chen",
+    "year": 2021,
+    "venue": "International Conference on Learning Representations (ICLR 2021)",
+    "doi": "10.48550/arXiv.2006.03654",
+    "url": "https://openreview.net/forum?id=XPZIaotutsD",
+    "task": "Cross-encoder NLI representation backbone",
+    "relevance": "Underlying pretrained NLI cross-encoder backbone for Pillar 1"
+  }
+]

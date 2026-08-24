@@ -1,0 +1,4 @@
+Method,ECE,Brier_Score,Sharpness,Calibration_Status
+Uncalibrated Raw Score,0.1972,0.0412,0.245,OVERCONFIDENT
+Platt Logistic Scaling,0.0937,0.0164,0.221,WELL_CALIBRATED
+Isotonic Regression,0.098,0.0175,0.218,WELL_CALIBRATED

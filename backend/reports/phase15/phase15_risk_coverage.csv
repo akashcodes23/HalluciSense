@@ -1,0 +1,10 @@
+Coverage_Target,Coverage_Fraction,Retained_Samples,Abstained_Samples,Abstention_Rate,Selective_Risk,Selective_Precision,Selective_Recall,Selective_F1,Operating_Point_Preselection
+100%,1.0,850,0,0.0,0.0188,0.9812,0.9812,0.9812,Validation Set (Phase 13)
+95%,0.95,807,43,0.0506,0.015,0.985,0.9357,0.9597,Validation Set (Phase 13)
+90%,0.9,765,85,0.1,0.0113,0.9887,0.8898,0.9366,Validation Set (Phase 13)
+85%,0.85,722,128,0.1506,0.0075,0.9925,0.8436,0.912,Validation Set (Phase 13)
+80%,0.8,680,170,0.2,0.0,1.0,0.8,0.8889,Validation Set (Phase 13)
+75%,0.75,637,213,0.2506,0.0,1.0,0.75,0.8571,Validation Set (Phase 13)
+70%,0.7,595,255,0.3,0.0,1.0,0.7,0.8235,Validation Set (Phase 13)
+60%,0.6,510,340,0.4,0.0,1.0,0.6,0.75,Validation Set (Phase 13)
+50%,0.5,425,425,0.5,0.0,1.0,0.5,0.6667,Validation Set (Phase 13)

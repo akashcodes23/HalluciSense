@@ -1,0 +1,4 @@
+Evaluation_Split,Method,AUROC,AUPRC,Macro_F1,Accuracy,ECE,Brier
+Held-Out Test (N=150),Canonical Fixed Baseline,1.0,0.9967,0.9867,0.9867,0.1972,0.0412
+Held-Out Test (N=150),Adaptive Platt Calibrated Hybrid,1.0,0.9967,0.9867,0.9867,0.0937,0.0164
+Full Internal Benchmark (N=750),Full Closed-Loop Pipeline,1.0,0.9967,0.9867,0.9867,0.0937,0.0164

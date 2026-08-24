@@ -1,0 +1,6 @@
+Paper,Year,Task,Evidence_Grounding,NLI_Entailment,Self_Consistency,Calibration,Selective_Abstention,Missing_Signal_Handling,Adaptive_Fusion,Closed_Loop_Repair,Independent_Reverification,External_Evaluation,Key_Limitations
+SelfCheckGPT,2023,Black-Box QA,No,No,Yes,No,No,No,No,No,No,Yes,"Requires multiple stochastic samples; blind to factual consensus"
+FActScore,2023,Biography QA,Yes,No,No,No,No,No,No,No,No,Yes,"Strictly entity-lookup focused; no predictive uncertainty modeling"
+MiniCheck,2024,RAG Fact-Checking,Yes,Yes,No,No,No,No,No,No,No,Yes,"Single-signal classifier; cannot handle missing reference documents"
+Chain-of-Verification,2024,Open-Domain QA,Yes,No,No,No,No,No,No,Yes,No,Yes,"Unverified prompt rewriting; high latency and hallucination re-induction"
+HalluciSense (This Work),2026,Open-Domain QA & Fact Verification,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,"Relies on reference corpus indexing; English-evaluated"

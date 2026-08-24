@@ -1,0 +1,8 @@
+Error_Subtype,Evaluated_Cases,Mean_Initial_H,Mean_Corrected_H,Delta_H_Score,Correction_Success_Rate,Reverification_Pass_Rate,Correction_Induced_Hallucination
+Numerical,50,0.8425,0.1091,0.7334,0.9151,0.9216,0.0155
+Unit,50,0.7871,0.0514,0.7357,0.8674,0.9099,0.0242
+Negation,50,0.8507,0.0588,0.7919,0.8595,0.9071,0.0222
+Causal,50,0.8337,0.1018,0.7319,0.9222,0.8889,0.0191
+Temporal,50,0.9143,0.0722,0.8421,0.8546,0.9539,0.0233
+Unsupported Elaboration,50,0.8531,0.0842,0.7689,0.8691,0.9456,0.0175
+Entity,50,0.7847,0.0946,0.6901,0.9355,0.9463,0.0142

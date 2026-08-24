@@ -1,0 +1,54 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{\textbf{Supplementary Materials:\\HalluciSense: An Availability-Aware, Calibrated Multi-Signal Verification Framework for Large Language Models}}
+\author{Akash Patil \and Research Group}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Extended Ablation Analysis}
+This section details the 12 fine-grained ablation checkpoints evaluated across individual and paired pillar combinations.
+
+\section{Paired Statistical Significance Tests}
+All paired differences between Adaptive Mode B and Fixed Mode A were evaluated using 500-iteration nonparametric bootstrap resampling with empirical percentile confidence intervals.
+
+\section{Complete Signal Availability Masks}
+Table~\ref{tab:all_masks} details the mathematical weights computed across all 7 signal availability combinations.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Dynamic Weights across All 7 Signal Availability Masks.}
+\label{tab:all_masks}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Mask Vector $\mathbf{m}$} & \textbf{Effective $w_{\text{FE}}$} & \textbf{Effective $w_{\text{CG}}$} & \textbf{Effective $w_{\text{CF}}$} & \textbf{Sum of Weights} \\
+\midrule
+$[1, 1, 1]$ & 0.4000 & 0.3000 & 0.3000 & 1.0000 \\
+$[1, 0, 1]$ & 0.5714 & 0.0000 & 0.4286 & 1.0000 \\
+$[1, 1, 0]$ & 0.5714 & 0.4286 & 0.0000 & 1.0000 \\
+$[0, 1, 1]$ & 0.0000 & 0.5000 & 0.5000 & 1.0000 \\
+$[1, 0, 0]$ & 1.0000 & 0.0000 & 0.0000 & 1.0000 \\
+$[0, 1, 0]$ & 0.0000 & 1.0000 & 0.0000 & 1.0000 \\
+$[0, 0, 1]$ & 0.0000 & 0.0000 & 1.0000 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Deterministic Symbolic Repair Policies}
+Deterministic repairs follow explicit transform rules:
+\begin{itemize}
+    \item \textbf{Numerical Tolerance Rule:} Replaces mismatched numbers with consensus evidence scalar values when precision drift exceeds $\pm 1\%$.
+    \item \textbf{Dimensional Unit Rule:} Standardizes SI prefixes (e.g., converting kilometers to meters) based on reference entity attributes.
+    \item \textbf{Negation Polarity Rule:} Inverts explicit negation particles (\texttt{not}, \texttt{never}, \texttt{cannot}) upon high-confidence contradiction detection.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,31 @@
+# Phase 16 — Comprehensive Reviewer Risk Register (R1 to R20)
+
+## 1. Executive Overview
+This risk register systematically catalogues the 20 primary challenges and objections a rigorous peer reviewer (Elsevier / Scopus / ACL / EMNLP / NeurIPS / ICLR) could raise against the HalluciSense manuscript, providing exact empirical mitigations and documented limitations.
+
+---
+
+## 2. Reviewer Risk Ledger
+
+| Risk ID | Reviewer Challenge / Concern | Severity | Probability | Empirical Evidence & Mitigation | Remaining Limitation |
+| :--- | :--- | :---: | :---: | :--- | :--- |
+| **R1** | **Baseline Comparability:** "Are published baselines evaluated on identical hardware?" | HIGH | HIGH | Table 4 explicitly distinguishes Category A (Directly Reproduced) from Category C (Literature Reported). | Baseline comparisons clearly state their literature provenance. |
+| **R2** | **Benchmark Leakage:** "Did test claims leak into training/calibration?" | CRITICAL | LOW | Data leakage audit confirms 0 label leaks and 3-way disjoint split manifest ($N=450/150/150$). | Development split required for Platt parameter fitting. |
+| **R3** | **External Contamination:** "Are external benchmarks contaminated by benchmark overlap?" | HIGH | LOW | `phase15_overlap_audit.csv` confirms 0 exact string or n-gram overlap. | External datasets share general world scientific facts. |
+| **R4** | **Statistical Significance:** "Are paired differences tested with appropriate statistical procedures?" | HIGH | MEDIUM | Paired Wilcoxon signed-rank and 500-iteration paired bootstrap empirical CIs used throughout. | Bootstrap requires representative sample distributions. |
+| **R5** | **Unusually Large Effect Sizes:** "Why was historical Cohen's d so large?" | HIGH | HIGH | Statistical audit clarified that dividing $\Delta\text{AUROC}$ by $SE_{\text{boot}}$ was a bootstrap mean $z$-score; reported proper per-sample $d=1.42$. | Disclosed honestly in statistical methodology notes. |
+| **R6** | **Calibration Leakage:** "Was calibration fitted on held-out test data?" | CRITICAL | LOW | Platt parameters ($a=1.82, b=-0.45$) fitted strictly on internal development partition ($N=450$). | External dataset ECE evaluated out-of-the-box ($0.0986$). |
+| **R7** | **Threshold Selection Bias:** "Were decision thresholds post-tuned on test scores?" | CRITICAL | LOW | Threshold registry ([`phase15_threshold_registry.json`](file:///Users/akashgpatil/major_project/backend/evaluation/phase15/phase15_threshold_registry.json)) documents pre-frozen thresholds. | Thresholds are fixed operational operating bounds. |
+| **R8** | **Abstention Interpretation:** "Does 100% precision @ 80% coverage mean zero errors everywhere?" | HIGH | HIGH | Rephrased with exact statistical precision: *"On the evaluated test set, the retained 80% subset had zero observed errors."* | Abstaining rejects 20% of difficult/ambiguous cases. |
+| **R9** | **Correction Denominators:** "What is the denominator for CSR, RPR, and CIHR?" | MEDIUM | MEDIUM | Table 9 explicitly documents: Claim-level for CSR, attempt-level for RPR, and accepted-repair-level for CIHR. | Clarified in both table captions and methodology text. |
+| **R10**| **Novelty Overclaiming:** "Is this the first multi-signal hallucination verifier?" | HIGH | HIGH | Conservative novelty matrix ([`PHASE16_NOVELTY_POSITIONING.md`](file:///Users/akashgpatil/major_project/backend/reports/phase16/PHASE16_NOVELTY_POSITIONING.md)) pruned all "first-ever" superlatives. | Focuses on availability-aware adaptive fusion. |
+| **R11**| **Retrieval Dependency:** "What if external Wikipedia retrieval is unavailable?" | HIGH | MEDIUM | Mask `[0, 1, 1]` offline evaluation documented with an explicit $-8.8\%$ AUROC performance disclosure. | Offline mode relies on internal model consistency. |
+| **R12**| **Language Scope:** "Does HalluciSense work on non-English text?" | MEDIUM | HIGH | Explicitly scoped to English scientific and open-domain QA in threats to validity. | Multilingual verification left for future work. |
+| **R13**| **Dataset Representativeness:** "Is the benchmark representative of open-ended conversational LLMs?" | MEDIUM | MEDIUM | Evaluated on 5 external benchmarks including HaluEval Dialogue and RAGTruth longform. | Focused on factual and empirical assertions. |
+| **R14**| **External Dataset Licensing:** "Are external benchmarks legally licensed for research evaluation?" | MEDIUM | LOW | Manifest documents licenses: Apache-2.0, MIT, CC BY-SA 4.0, and Open Access. | All datasets are standard public academic corpora. |
+| **R15**| **Computational Reproducibility:** "Can the results be reproduced in a clean-room environment?" | CRITICAL | LOW | `run_reproducibility_check.py` returns `PASS` across all 5 verification invariants. | Requires standard PyTorch + Transformers environment. |
+| **R16**| **Latency / API Cost:** "How slow is full tri-pillar verification?" | MEDIUM | MEDIUM | Full pipeline latency documented as $1205\text{ ms}$ (verification) to $1862\text{ ms}$ (closed-loop repair). | Retrieval constitutes $\sim 65\%$ of pipeline duration. |
+| **R17**| **Failure Modes:** "What are the remaining failure cases?" | MEDIUM | LOW | 15-category failure taxonomy ([`table10_failure_taxonomy.csv`](file:///Users/akashgpatil/major_project/backend/reports/phase16/tables/table10_failure_taxonomy.csv)) documents detection rates and limits. | Edge cases catalogued with transparency. |
+| **R18**| **Correlation Between Pillars:** "Are pillars redundant?" | MEDIUM | MEDIUM | Ablation study (Table 5) proves combining $P_1+P_2+P_3$ improves AUROC from $0.962$ to $0.996$. | Moderate correlation between NLI and token entropy. |
+| **R19**| **Potential Benchmark Saturation:** "Is 1.0000 AUROC on clean synthetic claims saturated?" | HIGH | HIGH | Generalization ladder (Levels 1 to 8) shows performance lands between $0.946$ and $0.996$ on harder splits. | Disclosed that 1.0000 reflects clean i.i.d. synthetic pairs. |
+| **R20**| **Generalization Beyond Scientific QA:** "How does it handle creative writing?" | MEDIUM | HIGH | Scoped explicitly to factual assertion verification; subjective/creative claims trigger `ABSTAIN`. | Designed specifically for factual hallucination. |

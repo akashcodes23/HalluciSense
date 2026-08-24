@@ -1,0 +1,42 @@
+{
+  "protocol": "Phase 14 Zero-Tuning External Generalization Freeze",
+  "freeze_timestamp_utc": "2026-08-24T05:28:00Z",
+  "base_weights": {
+    "alpha_factual_error": 0.40,
+    "beta_confidence_gap": 0.30,
+    "gamma_consistency_failure": 0.30
+  },
+  "reliability_parameters": {
+    "r_p1_min": 0.10,
+    "r_p2_min": 0.10,
+    "r_p3_min": 0.10
+  },
+  "calibration_parameters": {
+    "method": "platt",
+    "platt_a": 1.82,
+    "platt_b": -0.45
+  },
+  "decision_thresholds": {
+    "verified_max": 0.20,
+    "low_risk_max": 0.35,
+    "needs_verification_max": 0.50,
+    "moderate_risk_max": 0.65,
+    "correction_trigger_threshold": 0.35
+  },
+  "selective_abstention_parameters": {
+    "min_evidence_similarity": 0.40,
+    "uncertainty_abstain_threshold": 0.85,
+    "ambiguity_margin": 0.08
+  },
+  "model_identifiers": {
+    "nli_model": "cross-encoder/nli-deberta-v3-small",
+    "sentence_embeddings": "all-MiniLM-L6-v2",
+    "reranker": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "system_invariants": {
+    "zero_logit_manufacturing": true,
+    "pytorch_fp32_runtime": true,
+    "model_registry_singleton": true
+  },
+  "random_seed": 42
+}

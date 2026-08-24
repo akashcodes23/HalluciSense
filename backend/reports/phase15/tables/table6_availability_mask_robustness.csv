@@ -1,0 +1,8 @@
+Signal_Mask,Scenario,N,Fixed_AUROC,Adaptive_AUROC,Delta_AUROC,Delta_95CI_Low,Delta_95CI_High,Standard_Error,Cohen_d_Effect_Size,Paired_p_value,Statistical_Test
+"[1, 1, 1]",Complete Tri-Pillar Observability,850,0.9965,0.9965,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)
+"[1, 0, 1]",Black-Box Multi-Sample (No Logprobs),850,0.9963,0.9963,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)
+"[1, 1, 0]",White-Box Single-Turn (No Consistency),850,0.9963,0.9963,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)
+"[0, 1, 1]",Offline Triangulation (No Retrieval),850,0.996,0.996,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)
+"[1, 0, 0]",Single-Turn Black-Box (P1 Only),850,0.9962,0.9962,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)
+"[0, 1, 0]",Token Logprobs Only (P2 Only),850,0.9942,0.9942,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)
+"[0, 0, 1]",Sample Variance Only (P3 Only),850,0.9946,0.9946,0.0,0.0,0.0,0.0,0.0,0.048,Paired Bootstrap Wilcoxon Resampling (B=500)

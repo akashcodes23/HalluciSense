@@ -26,6 +26,9 @@ from .fusion import FusionEngine
 from app.modules.knowledge.retriever import HybridRetriever
 
 
+from app.core.engine.calibration import ProbabilityCalibrator, SelectiveAbstentionGate
+
+
 class HallucinationDetectionPipeline:
     """
     Master Hybrid Hallucination Detection Pipeline Orchestrator.
@@ -54,6 +57,8 @@ class HallucinationDetectionPipeline:
             beta=beta,
             gamma=gamma,
         )
+        self.calibrator = ProbabilityCalibrator(method="platt")
+        self.abstention_gate = SelectiveAbstentionGate()
 
     def _retrieve_evidence(self, text: str, query: Optional[str] = None) -> List[EvidenceItem]:
         """Retrieve real evidence from Wikipedia + BM25 + FAISS + CrossEncoder.
@@ -860,9 +865,9 @@ Respond STRICTLY in JSON using this schema:
             for item in evidence_items
         ]
 
-        # Platt-scaled sigmoidal probability calibration (a=1.82, b=-0.45 calibrated on 750 benchmark claims)
-        logit_z = np.log((overall_h_score + 1e-6) / (1.0 - overall_h_score + 1e-6))
-        calibrated_p = float(1.0 / (1.0 + np.exp(-(1.82 * logit_z - 0.45))))
+        # Platt / Isotonic probability calibration
+        calib_res = self.calibrator.calibrate(overall_h_score)
+        calibrated_p = calib_res.calibrated_probability
         fusion_duration_ms = getattr(self.fusion_engine, "last_fusion_ms", 0.0)
 
         perf_timings = {

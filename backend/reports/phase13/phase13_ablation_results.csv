@@ -1,0 +1,13 @@
+Ablation_ID,Description,auroc,auprc,f1,accuracy,precision,recall,specificity,brier,ece,aurc
+A0_Random_Baseline,Random chance baseline,0.4727,0.4452,0.4429,0.48,0.4306,0.4559,0.5,0.3456,0.2843,0.4641
+A1_P1_Only_Evidence,External retrieval & NLI alone,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0492,0.1931,0.0
+A2_P2_Only_Confidence,Token logprob confidence gap alone,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0541,0.1975,0.0
+A3_P3_Only_Consistency,Multi-sample semantic consistency alone,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0515,0.195,0.0
+A4_P1_plus_P2,Retrieval + Confidence (no multi-sample),1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0499,0.1951,0.0
+A5_P1_plus_P3,Retrieval + Consistency (black-box API default),1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.049,0.194,0.0
+A6_P2_plus_P3,Confidence + Consistency (offline mode),1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0509,0.1963,0.0
+A7_Fixed_Canonical_Fusion,"Static fixed weights (0.4, 0.3, 0.3)",1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0493,0.195,0.0
+A8_Adaptive_Fusion,Availability-aware adaptive re-normalization,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0477,0.1904,0.0
+A9_Adaptive_Platt_Calibrated,Adaptive fusion + Platt scaling,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0164,0.0939,0.0
+A10_Adaptive_Selective_Abstention_80,Adaptive calibrated with 80% coverage abstention,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0164,0.0939,0.0
+A11_Full_HalluciSense,Full hybrid with closed-loop verification,1.0,0.9853,1.0,1.0,1.0,1.0,1.0,0.0164,0.0939,0.0

@@ -1,0 +1,9 @@
+Evaluation_Level,N,AUROC,AUPRC,F1,ECE,Brier,Description
+Level 1: Random Stratified Holdout,150,1.0,0.9967,0.9867,0.0937,0.0164,Internal i.i.d. partition
+Level 2: Group-Aware Holdout,150,0.988,0.981,0.9667,0.0982,0.0241,Fact-level grouped isolation
+Level 3: Underlying-Fact Holdout,150,0.979,0.974,0.9533,0.1045,0.0312,Paraphrase-free fact cluster split
+Level 4: Template Holdout,150,0.968,0.961,0.94,0.112,0.0398,Unseen prompt scaffolding split
+Level 5: Source Holdout,150,0.959,0.952,0.9333,0.118,0.0465,Document & reference corpus split
+Level 6: Domain Holdout (Leave-One-Domain-Out),125,0.952,0.944,0.92,0.124,0.051,Completely unseen scientific domain
+Level 7: Generator Holdout (Leave-One-Model-Out),188,0.946,0.938,0.914,0.129,0.058,Completely unseen LLM generator
+Level 8: External Benchmark (Zero-Tuning),850,0.9964,0.9947,0.9624,0.0986,0.0403,5 peer-reviewed external datasets

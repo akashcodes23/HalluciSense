@@ -1,0 +1,110 @@
+[
+  {
+    "Coverage_Target": "100%",
+    "Coverage_Fraction": 1.0,
+    "Retained_Samples": 850,
+    "Abstained_Samples": 0,
+    "Abstention_Rate": 0.0,
+    "Selective_Risk": 0.0188,
+    "Selective_Precision": 0.9812,
+    "Selective_Recall": 0.9812,
+    "Selective_F1": 0.9812,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "95%",
+    "Coverage_Fraction": 0.95,
+    "Retained_Samples": 807,
+    "Abstained_Samples": 43,
+    "Abstention_Rate": 0.0506,
+    "Selective_Risk": 0.015,
+    "Selective_Precision": 0.985,
+    "Selective_Recall": 0.9357,
+    "Selective_F1": 0.9597,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "90%",
+    "Coverage_Fraction": 0.9,
+    "Retained_Samples": 765,
+    "Abstained_Samples": 85,
+    "Abstention_Rate": 0.1,
+    "Selective_Risk": 0.0113,
+    "Selective_Precision": 0.9887,
+    "Selective_Recall": 0.8898,
+    "Selective_F1": 0.9366,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "85%",
+    "Coverage_Fraction": 0.85,
+    "Retained_Samples": 722,
+    "Abstained_Samples": 128,
+    "Abstention_Rate": 0.1506,
+    "Selective_Risk": 0.0075,
+    "Selective_Precision": 0.9925,
+    "Selective_Recall": 0.8436,
+    "Selective_F1": 0.912,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "80%",
+    "Coverage_Fraction": 0.8,
+    "Retained_Samples": 680,
+    "Abstained_Samples": 170,
+    "Abstention_Rate": 0.2,
+    "Selective_Risk": 0.0,
+    "Selective_Precision": 1.0,
+    "Selective_Recall": 0.8,
+    "Selective_F1": 0.8889,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "75%",
+    "Coverage_Fraction": 0.75,
+    "Retained_Samples": 637,
+    "Abstained_Samples": 213,
+    "Abstention_Rate": 0.2506,
+    "Selective_Risk": 0.0,
+    "Selective_Precision": 1.0,
+    "Selective_Recall": 0.75,
+    "Selective_F1": 0.8571,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "70%",
+    "Coverage_Fraction": 0.7,
+    "Retained_Samples": 595,
+    "Abstained_Samples": 255,
+    "Abstention_Rate": 0.3,
+    "Selective_Risk": 0.0,
+    "Selective_Precision": 1.0,
+    "Selective_Recall": 0.7,
+    "Selective_F1": 0.8235,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "60%",
+    "Coverage_Fraction": 0.6,
+    "Retained_Samples": 510,
+    "Abstained_Samples": 340,
+    "Abstention_Rate": 0.4,
+    "Selective_Risk": 0.0,
+    "Selective_Precision": 1.0,
+    "Selective_Recall": 0.6,
+    "Selective_F1": 0.75,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  },
+  {
+    "Coverage_Target": "50%",
+    "Coverage_Fraction": 0.5,
+    "Retained_Samples": 425,
+    "Abstained_Samples": 425,
+    "Abstention_Rate": 0.5,
+    "Selective_Risk": 0.0,
+    "Selective_Precision": 1.0,
+    "Selective_Recall": 0.5,
+    "Selective_F1": 0.6667,
+    "Operating_Point_Preselection": "Validation Set (Phase 13)"
+  }
+]

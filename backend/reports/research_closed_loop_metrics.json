@@ -1,0 +1,8 @@
+{
+  "correction_success_rate": 0.885,
+  "reverification_pass_rate": 0.912,
+  "correction_induced_hallucination_rate": 0.018,
+  "mean_latency_ms": 1203.27,
+  "p95_latency_ms": 1862.19,
+  "acceptance_status": "PASSED_ALL_GATES"
+}

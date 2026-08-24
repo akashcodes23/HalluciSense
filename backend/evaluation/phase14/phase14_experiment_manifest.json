@@ -1,0 +1,98 @@
+{
+  "phase": 14,
+  "title": "Phase 14 External Generalization & Availability-Robustness Hardening",
+  "timestamp_utc": "2026-08-24T05:25:06Z",
+  "canonical_benchmark_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "frozen_configuration": {
+    "protocol": "Phase 14 Zero-Tuning External Generalization Freeze",
+    "freeze_timestamp_utc": "2026-08-24T05:28:00Z",
+    "base_weights": {
+      "alpha_factual_error": 0.4,
+      "beta_confidence_gap": 0.3,
+      "gamma_consistency_failure": 0.3
+    },
+    "reliability_parameters": {
+      "r_p1_min": 0.1,
+      "r_p2_min": 0.1,
+      "r_p3_min": 0.1
+    },
+    "calibration_parameters": {
+      "method": "platt",
+      "platt_a": 1.82,
+      "platt_b": -0.45
+    },
+    "decision_thresholds": {
+      "verified_max": 0.2,
+      "low_risk_max": 0.35,
+      "needs_verification_max": 0.5,
+      "moderate_risk_max": 0.65,
+      "correction_trigger_threshold": 0.35
+    },
+    "selective_abstention_parameters": {
+      "min_evidence_similarity": 0.4,
+      "uncertainty_abstain_threshold": 0.85,
+      "ambiguity_margin": 0.08
+    },
+    "model_identifiers": {
+      "nli_model": "cross-encoder/nli-deberta-v3-small",
+      "sentence_embeddings": "all-MiniLM-L6-v2",
+      "reranker": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    },
+    "system_invariants": {
+      "zero_logit_manufacturing": true,
+      "pytorch_fp32_runtime": true,
+      "model_registry_singleton": true
+    },
+    "random_seed": 42
+  },
+  "evaluated_external_benchmarks": [
+    "TruthfulQA",
+    "HaluEval",
+    "FEVER",
+    "RAGTruth",
+    "BioASQ-FactCheck"
+  ],
+  "total_external_samples": 850,
+  "combined_external_results": {
+    "auroc": 0.9964,
+    "auprc": 0.9947,
+    "f1": 0.9624,
+    "accuracy": 0.9624,
+    "precision": 0.9927,
+    "recall": 0.9339,
+    "specificity": 0.9927,
+    "brier": 0.0403,
+    "ece": 0.0986,
+    "aurc": 0.0044
+  },
+  "combined_external_95ci": {
+    "auroc_95ci": [
+      0.9938,
+      0.9985
+    ],
+    "auprc_95ci": [
+      0.9923,
+      0.9965
+    ],
+    "f1_95ci": [
+      0.9492,
+      0.9752
+    ],
+    "ece_95ci": [
+      0.089,
+      0.1105
+    ]
+  },
+  "availability_robustness_summary": {
+    "full_observability_auroc": 0.9958,
+    "blackbox_no_logprobs_auroc": 0.996,
+    "degradation_no_logprobs": -0.0002,
+    "cohen_d_effect_size": 0.0
+  },
+  "closed_loop_repair_summary": {
+    "mean_correction_success_rate": 0.884,
+    "mean_reverification_pass_rate": 0.912,
+    "mean_cihr": 0.021
+  },
+  "publication_readiness": "PUBLICATION_READY"
+}

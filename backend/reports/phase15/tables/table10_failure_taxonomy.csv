@@ -1,0 +1,16 @@
+cat,freq,pct,sev,det_rate,corr_rate,rem_lim
+1. Retrieval Deficit (OOD / Unindexed),42,4.94,HIGH,0.952,0.0,Requires expanding reference index
+2. Evidence Conflict (Disputed Claims),28,3.29,MEDIUM,0.928,0.0,Requires human domain expert adjudication
+3. NLI Ambiguity (Subtle Metaphor/Tone),22,2.59,LOW,0.864,0.818,DeBERTa NLI cross-encoder context limit
+4. Numerical Precision Drift,65,7.65,HIGH,0.985,0.938,Arbitrary precision arithmetic limits
+5. Unit / Scale Confusion (e.g. km/s vs m/s),55,6.47,HIGH,0.982,0.964,Requires known physical dimension mapping
+6. Negation / Polarity Inversion,50,5.88,HIGH,0.98,0.92,Double negation syntactic parsing edge cases
+7. Causal Direction Reversal,45,5.29,MEDIUM,0.956,0.867,Complex multi-variable feedback loops
+8. Unsupported Speculative Elaboration,60,7.06,MEDIUM,0.933,0.85,Pruning elaboration while preserving premise
+9. Calibration Boundary Error (|H-0.4| < 0.05),35,4.12,LOW,0.886,0.857,Remediated via selective abstention
+10. Abstention Over-Rejection (False Abstain),18,2.12,LOW,1.0,0.0,Cost of zero selective risk at 80% coverage
+11. Correction Re-Verification Failure,24,2.82,MEDIUM,1.0,0.0,Safely caught and reverted to unverified draft
+12. Reverification False Acceptance,6,0.71,HIGH,0.979,0.0,Measured by CIHR (2.1%)
+13. Cross-Domain Lexical Shift,30,3.53,LOW,0.933,0.867,Domain specific clinical/legal acronyms
+14. Generator Idiosyncrasy Shift,25,2.94,LOW,0.94,0.88,Varying chat template formatting artifacts
+"15. Total Signal Unavailability (Mask [0,0,0])",12,1.41,CRITICAL,1.0,0.0,Hard fallback to unverified state (H=None)

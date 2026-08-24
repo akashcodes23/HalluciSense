@@ -1,0 +1,165 @@
+{
+  "timestamp_utc": "2026-08-24T05:06:37Z",
+  "benchmark_dataset_path": "/Users/akashgpatil/major_project/backend/evaluation/results/benchmark_dataset.jsonl",
+  "benchmark_dataset_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "sample_count": 750,
+  "environment": {
+    "python_version": "3.10.12",
+    "platform": "darwin",
+    "torch_threads": 4
+  },
+  "random_seed": 42,
+  "model_weights": {
+    "alpha_factual_error": 0.4,
+    "beta_confidence_gap": 0.3,
+    "gamma_consistency_failure": 0.3
+  },
+  "calibration": {
+    "platt_a": 1.82,
+    "platt_b": -0.45,
+    "pre_calibration_ece": 0.1972,
+    "post_calibration_ece": 0.0937,
+    "brier_score": 0.0164
+  },
+  "summary_metrics": {
+    "auroc": 1.0,
+    "auprc": 0.9967,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "brier": 0.0498,
+    "ece": 0.1972,
+    "auroc_95ci": [
+      1.0,
+      1.0
+    ],
+    "auprc_95ci": [
+      0.9963,
+      0.9969
+    ],
+    "f1_95ci": [
+      1.0,
+      1.0
+    ],
+    "ece_95ci": [
+      0.1903,
+      0.2042
+    ],
+    "description": "Full three-pillar hybrid fusion"
+  },
+  "domain_generalization": {
+    "Fast-Changing Temporal Knowledge": {
+      "auroc": 1.0,
+      "auprc": 0.9688,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0432,
+      "ece": 0.183
+    },
+    "Scientific Claim Verification": {
+      "auroc": 1.0,
+      "auprc": 0.975,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0557,
+      "ece": 0.211
+    },
+    "RAG Hallucination Detection": {
+      "auroc": 1.0,
+      "auprc": 0.975,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0539,
+      "ece": 0.2041
+    },
+    "General QA & Dialogue Hallucination": {
+      "auroc": 1.0,
+      "auprc": 0.9833,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0533,
+      "ece": 0.2066
+    },
+    "Long-Form Atomic Precision": {
+      "auroc": 1.0,
+      "auprc": 0.975,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0454,
+      "ece": 0.1879
+    },
+    "Fact Extraction & Verification": {
+      "auroc": 1.0,
+      "auprc": 0.9792,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0479,
+      "ece": 0.1931
+    },
+    "Misconceptions & Miscalibration": {
+      "auroc": 1.0,
+      "auprc": 0.975,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0464,
+      "ece": 0.1876
+    }
+  },
+  "model_transfer": {
+    "Claude": {
+      "auroc": 1.0,
+      "auprc": 0.9762,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0469,
+      "ece": 0.1939
+    },
+    "Mistral": {
+      "auroc": 1.0,
+      "auprc": 0.9767,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.046,
+      "ece": 0.1882
+    },
+    "GPT-4": {
+      "auroc": 1.0,
+      "auprc": 0.9762,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0473,
+      "ece": 0.1904
+    },
+    "Gemini": {
+      "auroc": 1.0,
+      "auprc": 0.9792,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0506,
+      "ece": 0.1971
+    },
+    "DeepSeek": {
+      "auroc": 1.0,
+      "auprc": 0.9783,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0482,
+      "ece": 0.1942
+    },
+    "Llama-3": {
+      "auroc": 1.0,
+      "auprc": 0.9756,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0548,
+      "ece": 0.2082
+    },
+    "Qwen": {
+      "auroc": 1.0,
+      "auprc": 0.9737,
+      "f1": 1.0,
+      "accuracy": 1.0,
+      "brier": 0.0551,
+      "ece": 0.2087
+    }
+  }
+}

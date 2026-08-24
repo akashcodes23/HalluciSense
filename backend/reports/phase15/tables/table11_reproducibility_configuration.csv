@@ -1,0 +1,8 @@
+Item,Value
+Canonical Benchmark Hash,dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5
+Base Pillar Weights,"alpha=0.40, beta=0.30, gamma=0.30"
+Platt Calibration Fit,"a=1.82, b=-0.45 (Dev split only)"
+Selective Abstention Gate,"min_evidence_similarity=0.40, ambiguity_margin=0.08"
+NLI Model Architecture,cross-encoder/nli-deberta-v3-small (141M FP32)
+Sentence Embedding Architecture,sentence-transformers/all-MiniLM-L6-v2 (22.7M FP32)
+Random Seed,42 (Deterministic)

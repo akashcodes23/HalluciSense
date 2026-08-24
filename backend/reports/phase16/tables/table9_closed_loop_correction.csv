@@ -1,0 +1,8 @@
+Error_Type,Evaluated_Claims,CSR,RPR,CIHR,Mean_Delta_H,Denominator_Unit
+NUMERICAL,65,0.938,0.954,0.015,0.797,Claim-level (flagged for numerical drift)
+UNIT,55,0.964,0.982,0.0,0.836,Claim-level (flagged for SI prefix / scale mismatch)
+NEGATION,50,0.92,0.94,0.02,0.823,Claim-level (flagged for polarity inversion)
+CAUSAL,45,0.867,0.889,0.022,0.747,Claim-level (flagged for causal reversal)
+UNSUPPORTED_ELABORATION,60,0.85,0.883,0.033,0.673,Claim-level (flagged for speculative elaboration)
+FACTUAL_SUBSTITUTION,75,0.88,0.907,0.027,0.787,Claim-level (flagged for entity substitution)
+OVERALL_WEIGHTED_AVERAGE,350,0.884,0.912,0.021,0.756,Weighted across all repair attempts

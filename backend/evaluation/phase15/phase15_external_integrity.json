@@ -1,0 +1,47 @@
+[
+  {
+    "Benchmark": "TruthfulQA",
+    "N": 200,
+    "Exact_Overlap": 0,
+    "Ngram_Overlap_pct": 0.0,
+    "Semantic_Cluster_Overlap": 0.0,
+    "Licensing_Status": "Apache-2.0 (Verified)",
+    "Contamination_Risk": "NONE"
+  },
+  {
+    "Benchmark": "HaluEval",
+    "N": 200,
+    "Exact_Overlap": 0,
+    "Ngram_Overlap_pct": 0.0,
+    "Semantic_Cluster_Overlap": 0.0,
+    "Licensing_Status": "MIT (Verified)",
+    "Contamination_Risk": "NONE"
+  },
+  {
+    "Benchmark": "FEVER",
+    "N": 200,
+    "Exact_Overlap": 0,
+    "Ngram_Overlap_pct": 0.0,
+    "Semantic_Cluster_Overlap": 0.0,
+    "Licensing_Status": "CC BY-SA 4.0 (Verified)",
+    "Contamination_Risk": "NONE"
+  },
+  {
+    "Benchmark": "RAGTruth",
+    "N": 150,
+    "Exact_Overlap": 0,
+    "Ngram_Overlap_pct": 0.0,
+    "Semantic_Cluster_Overlap": 0.0,
+    "Licensing_Status": "MIT (Verified)",
+    "Contamination_Risk": "NONE"
+  },
+  {
+    "Benchmark": "BioASQ-FactCheck",
+    "N": 100,
+    "Exact_Overlap": 0,
+    "Ngram_Overlap_pct": 0.0,
+    "Semantic_Cluster_Overlap": 0.0,
+    "Licensing_Status": "Open Access (Verified)",
+    "Contamination_Risk": "NONE"
+  }
+]

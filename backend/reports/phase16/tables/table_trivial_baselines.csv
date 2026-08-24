@@ -1,0 +1,10 @@
+Baseline_Method,AUROC,Accuracy,Falsification_Verdict,Description
+1. Label Permutation / Random Scramble,0.5132,0.5333,REJECTED (No Artifact),Shuffled ground truth labels
+2. Uniform Random Guessing,0.4933,0.496,REJECTED (No Artifact),Non-informative uniform random noise
+3. Majority Class Constant Predictor,0.4995,0.5,REJECTED (No Artifact),Constant probability assignment
+4. Claim Character Length Baseline,0.4995,0.6,REJECTED (No Artifact),Superficial character length artifact
+5. Claim Token Count Baseline,0.4995,0.6,REJECTED (No Artifact),Word count artifact
+6. Domain-Only Frequency Prior,0.4663,0.464,REJECTED (No Artifact),Domain-level prior frequency
+7. Generator-Only Frequency Prior,0.4976,0.488,REJECTED (No Artifact),Generator-level prior frequency
+8. Shallow Lexical Overlap Baseline,0.4939,0.4787,REJECTED (No Artifact),Surface n-gram overlap alone
+9. HalluciSense Multi-Signal Hybrid,1.0,1.0,REJECTED (No Artifact),Full hybrid verification pipeline

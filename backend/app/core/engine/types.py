@@ -11,10 +11,14 @@ except ImportError:
 if USE_PYDANTIC:
     class RiskLevel(str, Enum):
         VERIFIED = "VERIFIED"                       # Green (#10B981)
+        LOW_RISK = "LOW_RISK"                       # Green (#10B981)
         NEEDS_VERIFICATION = "NEEDS_VERIFICATION"   # Yellow (#F59E0B)
+        NEEDS_REVIEW = "NEEDS_REVIEW"               # Yellow (#F59E0B)
         MODERATE_RISK = "MODERATE_RISK"             # Orange (#F97316)
         LIKELY_HALLUCINATED = "LIKELY_HALLUCINATED" # Red (#EF4444)
         HALLUCINATED = "HALLUCINATED"               # Red (#EF4444) backward compatibility
+        INSUFFICIENT_EVIDENCE = "INSUFFICIENT_EVIDENCE" # Gray (#6B7280)
+        ABSTAIN = "ABSTAIN"                         # Gray (#6B7280)
 
     class EvidenceItem(BaseModel):
         claim: str = Field(..., description="The factual claim extracted from the sentence")
@@ -134,10 +138,14 @@ if USE_PYDANTIC:
 else:
     class RiskLevel(str, Enum):
         VERIFIED = "VERIFIED"
+        LOW_RISK = "LOW_RISK"
         NEEDS_VERIFICATION = "NEEDS_VERIFICATION"
+        NEEDS_REVIEW = "NEEDS_REVIEW"
         MODERATE_RISK = "MODERATE_RISK"
         LIKELY_HALLUCINATED = "LIKELY_HALLUCINATED"
         HALLUCINATED = "HALLUCINATED"
+        INSUFFICIENT_EVIDENCE = "INSUFFICIENT_EVIDENCE"
+        ABSTAIN = "ABSTAIN"
 
     @dataclass
     class EvidenceItem:

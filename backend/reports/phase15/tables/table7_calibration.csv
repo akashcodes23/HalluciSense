@@ -1,0 +1,4 @@
+Calibration_Method,ECE,Brier_Score,Sharpness,Monotonicity
+Uncalibrated Raw Score,0.1972,0.0412,0.245,PRESERVED
+Platt Logistic Scaling,0.0937,0.0164,0.221,STRICTLY_MONOTONIC
+Isotonic Regression,0.098,0.0175,0.218,PIECEWISE_MONOTONIC

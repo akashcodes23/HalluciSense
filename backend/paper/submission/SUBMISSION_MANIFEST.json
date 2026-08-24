@@ -1,0 +1,80 @@
+{
+  "submission_manifest_version": "1.0",
+  "title": "HalluciSense: An Availability-Aware, Calibrated Multi-Signal Verification Framework with Selective Abstention and Reverification-Gated Repair for Large Language Models",
+  "authors": [
+    {
+      "name": "Akash Patil",
+      "email": "akashcodes23@gmail.com",
+      "role": "Corresponding Author & Lead Research Engineer"
+    },
+    {
+      "name": "Senior Research Group",
+      "role": "Collaborators & Co-Authors"
+    }
+  ],
+  "canonical_benchmark_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "target_journals": [
+    "Information Fusion (Elsevier, IF: ~14.7)",
+    "Knowledge-Based Systems (Elsevier, IF: ~8.0)",
+    "Expert Systems with Applications (Elsevier, IF: ~7.5)"
+  ],
+  "manuscript_artifacts": {
+    "main_manuscript": "backend/paper/manuscript/main.tex",
+    "supplementary_material": "backend/paper/manuscript/supplementary.tex",
+    "bibliography": "backend/paper/manuscript/references.bib",
+    "claim_traceability_ledger": "backend/paper/manuscript/claim_traceability.json"
+  },
+  "tables": [
+    "table1_system_architecture.tex",
+    "table2_main_results.tex",
+    "table3_external_generalization.tex",
+    "table4_baseline_comparison.tex",
+    "table5_ablation.tex",
+    "table6_availability_robustness.tex",
+    "table7_calibration.tex",
+    "table8_selective_abstention.tex",
+    "table9_closed_loop_correction.tex",
+    "table10_failure_taxonomy.tex"
+  ],
+  "figures": [
+    "fig1_system_architecture.png",
+    "fig2_baseline_comparison.png",
+    "fig3_generalization.png",
+    "fig4_availability_robustness.png",
+    "fig5_calibration.png",
+    "fig6_risk_coverage.png",
+    "fig7_closed_loop_repair.png",
+    "fig8_failure_taxonomy.png",
+    "fig9_ablation.png",
+    "fig10_error_analysis.png"
+  ],
+  "submission_documents": {
+    "graphical_abstract": "backend/paper/submission/graphical_abstract/graphical_abstract.png",
+    "highlights": "backend/paper/submission/highlights.md",
+    "cover_letter": "backend/paper/submission/cover_letter.md",
+    "journal_comparison": "backend/paper/submission/JOURNAL_TARGET_COMPARISON.md"
+  },
+  "mandatory_statements": {
+    "author_contributions": "backend/paper/submission/statements/author_contributions.md",
+    "data_availability": "backend/paper/submission/statements/data_availability.md",
+    "code_availability": "backend/paper/submission/statements/code_availability.md",
+    "conflict_of_interest": "backend/paper/submission/statements/conflict_of_interest.md",
+    "funding_statement": "backend/paper/submission/statements/funding_statement.md",
+    "ethics_statement": "backend/paper/submission/statements/ethics_statement.md"
+  },
+  "reproducibility_package": {
+    "root": "backend/paper/submission/reproducibility/",
+    "entrypoint": "backend/paper/submission/reproducibility/RUN_REPRODUCTION.sh",
+    "manifests": [
+      "REPRODUCIBILITY_MANIFEST.json",
+      "MODEL_MANIFEST.json",
+      "DATASET_MANIFEST.json"
+    ]
+  },
+  "scientific_gate_status": {
+    "phase17_manuscript_readiness": "A — MANUSCRIPT READY",
+    "phase18_peer_review_gate": "A — READY FOR SUBMISSION",
+    "phase19_final_submission_audit": "A — SUBMISSION READY",
+    "regression_tests_passed": "100% (60/60)"
+  }
+}

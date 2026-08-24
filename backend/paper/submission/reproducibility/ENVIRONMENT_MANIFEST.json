@@ -1,0 +1,10 @@
+{
+  "os": "Darwin",
+  "os_release": "25.5.0",
+  "cpu_count": 10,
+  "execution_threads": 4,
+  "memory_peak_mb": 1124.5,
+  "device": "cpu",
+  "cuda_available": false,
+  "mps_available": true
+}

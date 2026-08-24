@@ -1,0 +1,91 @@
+{
+  "calibration_summary": {
+    "platt_a": 1.82,
+    "platt_b": -0.45,
+    "pre_calibration_ece": 0.1972,
+    "post_calibration_ece": 0.0937,
+    "brier_score": 0.0164
+  },
+  "reliability_bins": [
+    {
+      "bin_idx": 0,
+      "bin_range": "[0.00, 0.10]",
+      "sample_count": 319,
+      "mean_predicted_h": 0.0333,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.0333
+    },
+    {
+      "bin_idx": 1,
+      "bin_range": "[0.10, 0.20]",
+      "sample_count": 119,
+      "mean_predicted_h": 0.1503,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.1503
+    },
+    {
+      "bin_idx": 2,
+      "bin_range": "[0.20, 0.30]",
+      "sample_count": 12,
+      "mean_predicted_h": 0.2027,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.2027
+    },
+    {
+      "bin_idx": 3,
+      "bin_range": "[0.30, 0.40]",
+      "sample_count": 0,
+      "mean_predicted_h": 0.35,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.0
+    },
+    {
+      "bin_idx": 4,
+      "bin_range": "[0.40, 0.50]",
+      "sample_count": 0,
+      "mean_predicted_h": 0.45,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.0
+    },
+    {
+      "bin_idx": 5,
+      "bin_range": "[0.50, 0.60]",
+      "sample_count": 0,
+      "mean_predicted_h": 0.55,
+      "observed_hallucination_rate": 0.0,
+      "calibration_error": 0.0
+    },
+    {
+      "bin_idx": 6,
+      "bin_range": "[0.60, 0.70]",
+      "sample_count": 20,
+      "mean_predicted_h": 0.6817,
+      "observed_hallucination_rate": 1.0,
+      "calibration_error": 0.3183
+    },
+    {
+      "bin_idx": 7,
+      "bin_range": "[0.70, 0.80]",
+      "sample_count": 70,
+      "mean_predicted_h": 0.7496,
+      "observed_hallucination_rate": 1.0,
+      "calibration_error": 0.2504
+    },
+    {
+      "bin_idx": 8,
+      "bin_range": "[0.80, 0.90]",
+      "sample_count": 65,
+      "mean_predicted_h": 0.848,
+      "observed_hallucination_rate": 1.0,
+      "calibration_error": 0.152
+    },
+    {
+      "bin_idx": 9,
+      "bin_range": "[0.90, 1.00]",
+      "sample_count": 145,
+      "mean_predicted_h": 0.9617,
+      "observed_hallucination_rate": 1.0,
+      "calibration_error": 0.0383
+    }
+  ]
+}

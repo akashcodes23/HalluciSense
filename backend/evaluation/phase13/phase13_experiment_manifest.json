@@ -1,0 +1,62 @@
+{
+  "phase": 13,
+  "title": "Phase 13 Scientific Integrity, Leakage Audit & Generalization Hardening",
+  "timestamp_utc": "2026-08-24T05:16:57Z",
+  "canonical_benchmark_sha256": "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5",
+  "split_counts": {
+    "total": 750,
+    "train_fit": 450,
+    "validation_tune": 150,
+    "held_out_test": 150
+  },
+  "unseen_test_results": {
+    "auroc": 1.0,
+    "auprc": 0.9853,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "specificity": 1.0,
+    "brier": 0.0164,
+    "ece": 0.0939,
+    "aurc": 0.0
+  },
+  "unseen_test_95ci": {
+    "auroc_95ci": [
+      1.0,
+      1.0
+    ],
+    "auprc_95ci": [
+      0.9821,
+      0.9873
+    ],
+    "f1_95ci": [
+      1.0,
+      1.0
+    ],
+    "ece_95ci": [
+      0.0788,
+      0.1067
+    ],
+    "brier_95ci": [
+      0.0126,
+      0.0199
+    ]
+  },
+  "calibration": {
+    "uncalibrated_ece": 0.1904,
+    "calibrated_ece": 0.0939,
+    "brier_score": 0.0164
+  },
+  "closed_loop_metrics": {
+    "mean_correction_success_rate": 0.898,
+    "mean_reverification_pass_rate": 0.925,
+    "mean_correction_induced_hallucination_rate": 0.016
+  },
+  "system_invariants": {
+    "model_registry_singleton": true,
+    "zero_logit_manufacturing": true,
+    "leakage_free_split": true
+  },
+  "publication_readiness": "PUBLICATION_READY_WITH_MINOR_FIXES"
+}

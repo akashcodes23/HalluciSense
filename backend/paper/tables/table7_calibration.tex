@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Probability Calibration Performance: Platt Scaling vs Isotonic vs Uncalibrated Raw Score.}
+\label{tab:calibration}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Calibration Method} & \textbf{Expected Calibration Error (ECE)} & \textbf{Brier Score} & \textbf{Sharpness} & \textbf{Status} \\
+\midrule
+Uncalibrated Raw Score & 0.1972 & 0.0412 & 0.2450 & Overconfident \\
+Platt Logistic Scaling ($a=1.82, b=-0.45$) & \textbf{0.0937} & \textbf{0.0164} & 0.2210 & Well-Calibrated \\
+Isotonic Nonparametric Regression & 0.0980 & 0.0175 & 0.2180 & Well-Calibrated \\
+\bottomrule
+\end{tabular}
+\end{table}

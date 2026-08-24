@@ -1,0 +1,74 @@
+# HalluciSense Empirical Research Questions Registry (RQ1 - RQ7)
+# Framework: HalluciSense Confidence-Aware Hybrid Hallucination Verification
+
+research_questions:
+  - id: RQ1
+    title: "Multi-Signal Hybrid Fusion vs. Single-Pillar Baselines"
+    hypothesis: "A hybrid framework combining external retrieval grounding (P1), predictive confidence (P2), and semantic consistency (P3) achieves significantly higher discriminative detection accuracy (AUROC, AUPRC, Macro F1) than any individual pillar in isolation."
+    primary_metrics:
+      - auroc
+      - auprc
+      - macro_f1
+      - balanced_accuracy
+    statistical_test: "DeLong test for AUROC comparison & paired bootstrap 95% CIs"
+    target_benchmark: "750 canonical claims (benchmark_dataset.jsonl)"
+
+  - id: RQ2
+    title: "Availability-Aware Dynamic Fusion under Signal Missingness"
+    hypothesis: "Availability-aware adaptive re-normalization outperforms static fixed-weight imputation (e.g. zero-filling or mean-imputation) when white-box logits or alternate generations are unavailable."
+    primary_metrics:
+      - relative_auroc_retention
+      - ece_under_missingness
+    ablation_conditions:
+      - "P1_only (Black-box API default)"
+      - "P1_plus_P2 (White-box single sample)"
+      - "P1_plus_P3 (Black-box multi-sample)"
+      - "P1_plus_P2_plus_P3 (Complete observability)"
+
+  - id: RQ3
+    title: "Probability Calibration & Empirical Reliability"
+    hypothesis: "Post-hoc probability calibration (Platt scaling and Isotonic regression) significantly reduces Expected Calibration Error (ECE) and Brier Score without degrading AUROC discrimination."
+    primary_metrics:
+      - ece (10 uniform bins)
+      - brier_score
+      - max_calibration_error (MCE)
+    acceptance_criterion: "ECE <= 0.05 and Brier score reduction >= 25% relative to uncalibrated baseline."
+
+  - id: RQ4
+    title: "Selective Prediction & Abstention Efficiency"
+    hypothesis: "Explicit rejection gating under severe retrieval deficit or epistemic ambiguity reduces hallucination risk at fixed coverage levels along the Risk-Coverage tradeoff."
+    primary_metrics:
+      - risk_at_coverage_80
+      - risk_at_coverage_90
+      - aurc (Area Under the Risk-Coverage Curve)
+      - e_aurc (Excess AURC)
+
+  - id: RQ5
+    title: "Cross-Domain Generalization Robustness"
+    hypothesis: "The hybrid detection architecture generalizes across diverse scientific domains (Physics, Chemistry, Biology, Medicine, Mathematics, General Knowledge) without requiring domain-specific retraining."
+    primary_metrics:
+      - cross_domain_auroc_variance
+      - min_domain_f1
+    domains:
+      - physics
+      - chemistry
+      - biology
+      - medicine
+      - mathematics
+      - general_knowledge
+
+  - id: RQ6
+    title: "Cross-Model Generator Portability"
+    hypothesis: "HalluciSense verification effectiveness remains robust across heterogeneous generator architectures (GPT-4, Claude-3.5, LLaMA-3, Mistral, Gemini-1.5) without architecture-specific feature coupling."
+    primary_metrics:
+      - cross_model_transfer_delta_auroc
+      - false_positive_rate_parity
+
+  - id: RQ7
+    title: "Closed-Loop Repair Fidelity & Reverification Safety"
+    hypothesis: "Evidence-grounded atomic claim correction combined with re-verification gating significantly reduces hallucination rate while maintaining a near-zero correction-induced error rate."
+    primary_metrics:
+      - correction_success_rate (CSR)
+      - reverification_pass_rate (RPR)
+      - correction_induced_hallucination_rate (CIHR)
+    acceptance_criterion: "CSR >= 80%, RPR >= 85%, CIHR <= 3%."

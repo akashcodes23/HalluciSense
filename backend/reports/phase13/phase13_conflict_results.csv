@@ -1,0 +1,8 @@
+Scenario,Evidence_A,Evidence_B,Output_H,Verdict,Abstained
+1. Equal-Quality Sources,Support (0.85),Contradict (0.85),0.5,NEEDS_VERIFICATION,False
+2. Authoritative vs Weak,NIST Support (0.95),Blog Contradict (0.35),0.08,VERIFIED,False
+3. Recent vs Outdated,2026 Discovery (0.92),1998 Fact (0.90),0.12,VERIFIED,False
+4. Multi-Support vs Single-Contra,3x Peer-Reviewed (0.90),1x Forum (0.40),0.15,LOW_RISK,False
+5. Single-Support vs Multi-Contra,1x Weak (0.40),3x Authoritative (0.92),0.88,LIKELY_HALLUCINATED,False
+6. Complete Evidence Deficit,No Evidence (0.00),No Evidence (0.00),0.5,INSUFFICIENT_EVIDENCE,True
+7. Irreconcilable Scientific Debate,Nature 2025 (0.94),Science 2025 (0.94),0.42,ABSTAIN,True

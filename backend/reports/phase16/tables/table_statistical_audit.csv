@@ -1,0 +1,8 @@
+Signal_Mask,Scenario,Fixed_AUROC,Adaptive_AUROC,Delta_AUROC,Bootstrap_95CI,Bootstrap_SE,Per_Sample_Cohen_d,Bootstrap_z_Score_Historical,Paired_Wilcoxon_p_val,Statistical_Recommendation
+"[1, 1, 1]",Full Observability,0.9964,0.9964,0.0,"[0.0000, 0.0000]",0.0,0.0,0.0,—,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
+"[1, 0, 1]",Black-Box No Logprobs,0.842,0.991,0.149,"[+0.1382, +0.1610]",0.0058,1.42,25.69,< 0.001,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
+"[1, 1, 0]",Single-Turn No Samples,0.851,0.978,0.127,"[+0.1165, +0.1384]",0.0056,1.21,22.68,< 0.001,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
+"[0, 1, 1]",Offline No Retrieval,0.785,0.912,0.127,"[+0.1142, +0.1395]",0.0064,1.15,19.84,< 0.001,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
+"[1, 0, 0]",P1 Only,0.724,0.962,0.238,"[+0.2240, +0.2520]",0.0071,1.85,33.52,< 0.001,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
+"[0, 1, 0]",P2 Only,0.612,0.824,0.212,"[+0.1980, +0.2260]",0.0071,1.6,29.86,< 0.001,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
+"[0, 0, 1]",P3 Only,0.654,0.891,0.237,"[+0.2230, +0.2510]",0.0071,1.78,33.38,< 0.001,Report Bootstrap 95% CI + Per-Sample Cohen's d (clarifying historical z-score)
