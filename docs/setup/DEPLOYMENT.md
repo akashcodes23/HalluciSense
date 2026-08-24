@@ -34,7 +34,7 @@ Port 3000                             Port 8000
 - **Runtime**: Python 3.10
 - **Start Command**:
   ```bash
-  uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2 --timeout-keep-alive 75
+  uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1 --timeout-keep-alive 75
   ```
 - **Persistent Volume Mount**: `/data` (10 GB)
 - **Health Check Path**: `/health`

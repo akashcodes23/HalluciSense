@@ -26,7 +26,9 @@ class EventTemporalAnchorResolver:
     TIMEOUT_SECONDS = 0.8
 
     def __init__(self):
-        self._cache: Dict[str, Optional[Dict[str, Any]]] = {}
+        from collections import OrderedDict
+        self.MAX_CACHE_ENTRIES = 512
+        self._cache: OrderedDict = OrderedDict()
         self.last_lookup_count = 0
 
     @staticmethod
@@ -92,12 +94,18 @@ class EventTemporalAnchorResolver:
             response.raise_for_status()
             results = response.json().get("search", [])
             if not results:
+                if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                    self._cache.popitem(last=False)
                 self._cache[label] = None
                 return None
             entity_id = results[0].get("id")
+            if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                self._cache.popitem(last=False)
             self._cache[label] = {"id": entity_id} if entity_id else None
             return entity_id
         except Exception:
+            if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                self._cache.popitem(last=False)
             self._cache[label] = None
             return None
 

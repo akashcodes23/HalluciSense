@@ -27,7 +27,11 @@ class WikipediaKnowledgeSource:
         self.max_results = max_results
         self.max_search_workers = max(1, max_search_workers)
         self.api_url = f"https://{lang}.wikipedia.org/w/api.php"
-        self._cache: Dict[str, List[dict]] = {}
+        from collections import OrderedDict
+        import threading
+        self.MAX_CACHE_ENTRIES = 512
+        self._cache: OrderedDict = OrderedDict()
+        self._cache_lock = threading.Lock()
         self.last_metrics = self._empty_metrics()
         
         # Persistent HTTP connection pooling
@@ -178,12 +182,13 @@ class WikipediaKnowledgeSource:
 
         for query in unique_queries:
             key = query.lower()
-            if key in self._cache:
-                results[query] = self._cache[key]
-                metrics["cache_hits"] += 1
-            else:
-                misses.append(query)
-                metrics["cache_misses"] += 1
+            with self._cache_lock:
+                if key in self._cache:
+                    results[query] = list(self._cache[key])
+                    metrics["cache_hits"] += 1
+                    continue
+            misses.append(query)
+            metrics["cache_misses"] += 1
 
         if misses:
             workers = min(self.max_search_workers, len(misses))
@@ -217,7 +222,10 @@ class WikipediaKnowledgeSource:
                 ]
                 results[query] = evidence
                 if evidence:
-                    self._cache[query.lower()] = evidence
+                    with self._cache_lock:
+                        if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                            self._cache.popitem(last=False)
+                        self._cache[query.lower()] = evidence
                     metrics["retrieved_pages"] += len(evidence)
                 else:
                     metrics["failed_queries"] += 1

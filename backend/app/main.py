@@ -60,6 +60,14 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
         port=settings.PORT,
         host=settings.HOST,
     )
+    # Optimize PyTorch CPU threading for container resource efficiency
+    try:
+        import torch
+        if torch.get_num_threads() > 2:
+            torch.set_num_threads(2)
+        logger.info("pytorch_threads_configured", threads=torch.get_num_threads())
+    except Exception as e:
+        logger.warning("pytorch_thread_config_skipped", error=str(e))
 
     # Initialize Railway Volume Storage Directories (/data)
     from pathlib import Path

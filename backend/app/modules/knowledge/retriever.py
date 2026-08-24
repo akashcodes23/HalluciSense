@@ -103,11 +103,14 @@ class HybridRetriever:
 
     def get_evidence(self, query: str) -> List[dict]:
         """Retrieve evidence for a single query with cache support."""
+        from collections import OrderedDict
         if not hasattr(self, "_query_cache"):
-            self._query_cache = {}
+            self._query_cache = OrderedDict()
         key = query.strip().lower() if query else ""
         if key in self._query_cache:
-            return self._query_cache[key]
+            return list(self._query_cache[key])
         res = self.retrieve([query]) if query else []
+        if len(self._query_cache) >= 512:
+            self._query_cache.popitem(last=False)
         self._query_cache[key] = res
         return res

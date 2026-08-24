@@ -39,7 +39,11 @@ class EvidenceEntailmentEngine:
             "batch_size": 16,
             "inference_ms": 0.0,
         }
-        self._cache: Dict[Tuple[str, str], Dict[str, float]] = {}
+        from collections import OrderedDict
+        import threading
+        self.MAX_CACHE_ENTRIES = 512
+        self._cache: OrderedDict = OrderedDict()
+        self._cache_lock = threading.Lock()
 
     def classify(self, claim: str, evidence: str) -> Dict[str, float]:
         return self.classify_batch([claim], [evidence])[0]
@@ -64,12 +68,13 @@ class EvidenceEntailmentEngine:
                 c_clean = claim.strip()
                 e_clean = evidence.strip()
                 cache_key = (c_clean, e_clean)
-                if cache_key in self._cache:
-                    results[idx] = dict(self._cache[cache_key])
-                else:
-                    uncached_indices.append(idx)
-                    uncached_evidences.append(e_clean)
-                    uncached_claims.append(c_clean)
+                with self._cache_lock:
+                    if cache_key in self._cache:
+                        results[idx] = dict(self._cache[cache_key])
+                        continue
+                uncached_indices.append(idx)
+                uncached_evidences.append(e_clean)
+                uncached_claims.append(c_clean)
 
         if not uncached_indices:
             self.last_batch_metrics = {"pairs": len(claims), "batches": 0, "batch_size": batch_size, "inference_ms": 0.0}
@@ -97,6 +102,7 @@ class EvidenceEntailmentEngine:
                 with torch.inference_mode():
                     logits = self.model(**inputs).logits
                     probs = torch.softmax(logits, dim=-1).cpu().numpy()
+                del inputs, logits
                 num_batches += 1
                 for offset, orig_idx in enumerate(uncached_indices[b_start:b_end]):
                     row = probs[offset]
@@ -106,7 +112,12 @@ class EvidenceEntailmentEngine:
                         "contradiction": float(row[con_idx]),
                     }
                     results[orig_idx] = pred
-                    self._cache[(uncached_claims[b_start + offset], uncached_evidences[b_start + offset])] = pred
+                    c_k = (uncached_claims[b_start + offset], uncached_evidences[b_start + offset])
+                    with self._cache_lock:
+                        if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                            self._cache.popitem(last=False)
+                        self._cache[c_k] = pred
+                del probs
 
         inference_ms = (time.perf_counter() - t0) * 1000.0
         self.last_batch_metrics = {

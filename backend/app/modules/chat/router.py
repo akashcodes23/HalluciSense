@@ -129,6 +129,29 @@ async def closed_loop_chat(
                 is_success=True,
             )
 
+        except (MemoryError, OSError) as exc:
+            total_latency_ms = (time.perf_counter() - start_time) * 1000.0
+            metrics_tracker.record_request(
+                latency_ms=total_latency_ms,
+                h_score=0.0,
+                is_success=False,
+            )
+            logger.error("closed_loop_memory_pressure_error", error=str(exc))
+            final_response = draft_response
+            corr_performed = False
+            corr_reason = "RESOURCE_PRESSURE_ERROR"
+            claims_corr = []
+            orig_to_corr = []
+            evidence_dicts = []
+            sources = []
+            verif_summary = VerificationSummary(
+                status="FAILED",
+                h_score=None,
+                risk_level=None,
+                claims_total=None,
+                claims_flagged=None,
+                error_message="Verification temporarily unavailable due to system resource pressure. Please retry in a moment.",
+            )
         except Exception as exc:
             total_latency_ms = (time.perf_counter() - start_time) * 1000.0
             metrics_tracker.record_request(
@@ -151,7 +174,7 @@ async def closed_loop_chat(
                 risk_level=None,
                 claims_total=None,
                 claims_flagged=None,
-                error_message="Verification could not be completed because the verification service encountered an internal error.",
+                error_message="Verification could not be completed because the verification service encountered a transient processing error. Please retry.",
             )
     else:
         total_latency_ms = (time.perf_counter() - start_time) * 1000.0
