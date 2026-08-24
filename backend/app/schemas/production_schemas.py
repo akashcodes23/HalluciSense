@@ -12,8 +12,8 @@ from pydantic import BaseModel, Field
 
 class AnalysisRequest(BaseModel):
     """Input request model for canonical hallucination analysis."""
-    query: Optional[str] = Field(None, description="User query or context prompt", example="Who invented the telephone?")
-    response: str = Field(..., min_length=1, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
+    query: Optional[str] = Field(None, max_length=2000, description="User query or context prompt", example="Who invented the telephone?")
+    response: str = Field(..., min_length=1, max_length=10000, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
     model_name: Optional[str] = Field("GPT-4", description="Target LLM architecture name", example="GPT-4")
     provided_evidence: Optional[List[Any]] = Field(default=None, description="Optional ground-truth reference passages or evidence")
     sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations for P3 consistency analysis")

@@ -128,6 +128,13 @@ export default function OverviewPage() {
       {metricsLoading ? (
         <SkeletonMetrics count={6} />
       ) : (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-[var(--text-dim)]">
+              Live Production Telemetry
+            </span>
+            <span className="h-px flex-1 bg-[var(--border)]" />
+          </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           <StatCard
             label="Verifications"
@@ -171,6 +178,7 @@ export default function OverviewPage() {
             icon={Clock}
             status="default"
           />
+        </div>
         </div>
       )}
 

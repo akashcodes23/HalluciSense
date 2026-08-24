@@ -143,14 +143,23 @@ export default function ClosedLoopChatPage() {
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err: unknown) {
       clearInterval(stageInterval);
-      const errMsg = err instanceof Error ? err.message : "Verification could not be completed.";
+      const errMsg = err instanceof Error ? err.message : "An unexpected error occurred.";
+      // Map error to user-friendly category
+      let userReason = "Evidence retrieval or verification service temporarily unavailable.";
+      if (errMsg.includes("timed out") || errMsg.includes("TIMEOUT")) {
+        userReason = "Request timed out. The verification service did not respond in time.";
+      } else if (errMsg.includes("429") || errMsg.includes("RATE_LIMIT")) {
+        userReason = "Too many requests. Please wait a moment before retrying.";
+      } else if (errMsg.includes("503") || errMsg.includes("NETWORK")) {
+        userReason = "Verification service is currently unavailable. Please retry.";
+      }
       const errorMsg: ChatMessage = {
         id: `asst_err_${Date.now()}`,
         role: "assistant",
-        content: `Verification could not be completed: ${errMsg}`,
+        content: `Verification could not be completed.\n\nReason: ${userReason}`,
         verification: {
           status: "FAILED",
-          error_message: errMsg,
+          error_message: userReason,
         },
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
@@ -278,21 +287,27 @@ export default function ClosedLoopChatPage() {
                           REQUIRES REVIEW
                         </span>
                       )}
+                      {msg.verification.status === "UNVERIFIED" && (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/15 border border-rose-500/30 text-rose-400">
+                          <AlertTriangle className="w-3.5 h-3.5" />
+                          LIKELY HALLUCINATED
+                        </span>
+                      )}
                       {msg.verification.status === "FAILED" && (
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/15 border border-rose-500/30 text-rose-400">
                           <AlertTriangle className="w-3.5 h-3.5" />
-                          FAILED
+                          VERIFICATION FAILED
                         </span>
                       )}
                       {msg.verification.h_score !== undefined && msg.verification.h_score !== null ? (
-                        <span className="text-[11px] font-mono text-slate-400">
+                        <span className="text-[11px] font-mono text-slate-400 cursor-help" title="Hallucination Risk: Higher values indicate greater estimated hallucination risk (0–100%)">
                           H-Score: {(msg.verification.h_score * 100).toFixed(1)}%
                         </span>
-                      ) : (
-                        <span className="text-[11px] font-mono text-slate-400">
-                          Verification unavailable
+                      ) : msg.verification.status === "FAILED" ? (
+                        <span className="text-[11px] font-mono text-slate-500">
+                          H-Score unavailable
                         </span>
-                      )}
+                      ) : null}
                     </div>
 
                     <button
@@ -380,6 +395,20 @@ export default function ClosedLoopChatPage() {
                       </motion.div>
                     )}
                   </AnimatePresence>
+
+                  {/* Retry Button for Failed Messages */}
+                  {msg.verification?.status === "FAILED" && (
+                    <div className="mt-3 pt-3 border-t border-white/[0.06]">
+                      <button
+                        onClick={() => handleSendMessage(messages.find(m => m.id === msg.id.replace('asst_err_', 'user_'))?.content)}
+                        disabled={isLoading}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-accent-primary/10 hover:bg-accent-primary/20 border border-accent-primary/30 text-accent-primary transition-colors cursor-pointer disabled:opacity-40"
+                      >
+                        <RefreshCw className="w-3 h-3" />
+                        Retry Verification
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

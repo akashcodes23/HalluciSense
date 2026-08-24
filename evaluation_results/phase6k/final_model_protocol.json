@@ -1,6 +1,6 @@
 {
   "protocol_status": "LOCKED_PRE_EVALUATION",
-  "timestamp_utc": "2026-08-14 09:39:41 UTC",
+  "timestamp_utc": "2026-08-24 06:31:52 UTC",
   "selected_candidate_key": "candidate_3",
   "display_name": "Candidate 3 (Set B + RobustScaler + liblinear)",
   "locked_features": [

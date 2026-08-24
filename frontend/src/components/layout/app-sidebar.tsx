@@ -99,7 +99,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
                 HalluciSense
               </span>
               <span className="text-[10px] text-[var(--text-muted)] font-medium mt-0.5">
-                v2.0 · Enterprise
+                v1.0.0
               </span>
             </motion.div>
           )}

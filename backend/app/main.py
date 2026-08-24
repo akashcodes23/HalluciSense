@@ -118,6 +118,43 @@ def create_application() -> FastAPI:
     )
     app.add_middleware(GZipMiddleware, minimum_size=1000)
 
+    # ── Rate Limiting Middleware ──────────────────────────────────────────────
+    from app.core.rate_limiter import get_rate_limiter, RATE_LIMITED_PREFIXES, EXEMPT_PATHS
+    limiter = get_rate_limiter(requests_per_minute=settings.RATE_LIMIT_PER_MINUTE)
+
+    @app.middleware("http")
+    async def rate_limit_middleware(request: Request, call_next):
+        path = request.url.path
+        # Skip exempt paths
+        if any(path == ep for ep in EXEMPT_PATHS):
+            return await call_next(request)
+        # Check rate-limited paths
+        if any(path.startswith(prefix) for prefix in RATE_LIMITED_PREFIXES):
+            client_ip = request.client.host if request.client else "unknown"
+            allowed, retry_after = limiter.is_allowed(client_ip)
+            if not allowed:
+                return JSONResponse(
+                    status_code=429,
+                    content={
+                        "status": "error",
+                        "error_code": "RATE_LIMIT_EXCEEDED",
+                        "message": "Too many requests. Please wait before retrying.",
+                        "retryable": True,
+                        "retry_after_seconds": retry_after,
+                    },
+                    headers={"Retry-After": str(int(retry_after) + 1)},
+                )
+        return await call_next(request)
+
+    # ── Security Headers Middleware ───────────────────────────────────────────
+    @app.middleware("http")
+    async def security_headers_middleware(request: Request, call_next):
+        response = await call_next(request)
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        return response
+
     # ── Request Tracing & OpenTelemetry Middleware ───────────────────────────
     @app.middleware("http")
     async def request_tracing_middleware(request: Request, call_next):

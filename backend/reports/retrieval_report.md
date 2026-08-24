@@ -13,5 +13,5 @@ Formal Information Retrieval (IR) evaluation executed across `1` benchmark queri
 | **Recall@10** | `1.0000` | $\ge 0.90$ | ✅ |
 | **MRR** | `1.0000` | $\ge 0.75$ | ✅ |
 | **nDCG@5** | `1.0000` | $\ge 0.80$ | ✅ |
-| **MAP** | `0.5000` | $\ge 0.75$ | ⚠️ |
+| **MAP** | `0.7500` | $\ge 0.75$ | ✅ |
 | **Evidence Coverage** | `1.0000` | $\ge 0.80$ | ✅ |

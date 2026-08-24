@@ -364,18 +364,21 @@ export default function VerifyPage() {
                     sublabel="Pillar 1 — Retrieval + NLI"
                     value={currentResult.pillar_scores.retrieval ?? currentResult.pillar_scores.pillar1_factual_error}
                     status={currentResult.pillar_status?.p1_available !== false ? "active" : "unavailable"}
+                    reason="Evidence retrieval service unavailable"
                   />
                   <PillarScoreCard
                     label="Confidence Estimation"
                     sublabel="Pillar 2 — Token uncertainty"
                     value={currentResult.pillar_scores.confidence ?? currentResult.pillar_scores.pillar2_confidence_gap}
                     status={currentResult.pillar_status?.p2_available ? "active" : "unavailable"}
+                    reason="Token log-probabilities not provided"
                   />
                   <PillarScoreCard
                     label="Consistency Reasoning"
                     sublabel="Pillar 3 — Self-consistency"
                     value={currentResult.pillar_scores.consistency ?? currentResult.pillar_scores.pillar3_consistency_failure}
                     status={currentResult.pillar_status?.p3_available ? "active" : "unavailable"}
+                    reason="Multiple generations not available"
                   />
                 </div>
 
@@ -454,11 +457,13 @@ function PillarScoreCard({
   sublabel,
   value,
   status,
+  reason,
 }: {
   label: string;
   sublabel: string;
   value?: number | null;
   status: "active" | "unavailable";
+  reason?: string;
 }) {
   const isAvailable = status === "active" && value !== null && value !== undefined;
   const scorePercent = isAvailable ? Math.round(value * 100) : null;
@@ -471,11 +476,20 @@ function PillarScoreCard({
       <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-0.5">{label}</p>
       <p className="text-[10px] text-[var(--text-dim)] mb-2">{sublabel}</p>
       {isAvailable ? (
-        <p className="text-xl font-bold font-mono" style={{ color: riskColor }}>
+        <p
+          className="text-xl font-bold font-mono cursor-help"
+          style={{ color: riskColor }}
+          title="Hallucination Risk: Higher values indicate greater hallucination risk"
+        >
           {scorePercent}%
         </p>
       ) : (
-        <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
+        <div>
+          <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
+          {reason && (
+            <p className="text-[10px] text-[var(--text-dim)] mt-0.5">{reason}</p>
+          )}
+        </div>
       )}
     </div>
   );

@@ -42,9 +42,12 @@ async function request<T>(
   options?: RequestInit
 ): Promise<T> {
   const url = `${getBaseUrl()}${path}`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 60000);
   try {
     const res = await fetch(url, {
       headers: { "Content-Type": "application/json" },
+      signal: controller.signal,
       ...options,
     });
 
@@ -62,11 +65,20 @@ async function request<T>(
     if (err instanceof HalluciSenseAPIError) {
       throw err;
     }
+    if (err instanceof DOMException && err.name === "AbortError") {
+      throw new HalluciSenseAPIError(
+        "Request timed out. The verification service did not respond within 60 seconds.",
+        408,
+        { error: "TIMEOUT" }
+      );
+    }
     throw new HalluciSenseAPIError(
       err instanceof Error ? err.message : "Verification service unavailable",
       503,
       { error: "NETWORK_ERROR" }
     );
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
