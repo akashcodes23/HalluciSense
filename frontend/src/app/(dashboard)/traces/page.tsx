@@ -1,181 +1,93 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   GitBranch,
   Clock,
   CheckCircle2,
   XCircle,
   MinusCircle,
-  HelpCircle,
-  ChevronDown,
-  ChevronUp,
   Search,
   RefreshCw,
   Loader2,
-  ListFilter,
-  FileText,
+  ChevronDown,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { EmptyState } from "@/components/ui/EmptyState";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { Input } from "@/components/ui/input";
+import { NoTraces } from "@/components/ui/EmptyState";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useLatestTrace, useDebugTrace } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
-import { formatLatency, formatTimestamp, getRiskColor, getRiskLabel } from "@/lib/format";
+import { formatLatency, formatTimestamp, formatScore, getRiskColor } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
 import type { TraceStage, TraceData, AnalysisHistoryEntry } from "@/types/hallucisense";
 
+// Pipeline stage definitions for the waterfall
+const PIPELINE_STAGES = [
+  { key: "input_validation", label: "Input Validation", icon: "📥" },
+  { key: "claim_decomposition", label: "Claim Decomposition", icon: "🔍" },
+  { key: "evidence_retrieval", label: "Evidence Retrieval", icon: "📚" },
+  { key: "pillar1", label: "Pillar 1 — Evidence Grounding", icon: "🎯" },
+  { key: "pillar2", label: "Pillar 2 — Confidence Estimation", icon: "📊" },
+  { key: "pillar3", label: "Pillar 3 — Consistency Reasoning", icon: "🔗" },
+  { key: "fusion", label: "Hybrid Fusion", icon: "⚡" },
+  { key: "token_localization", label: "Token Localization", icon: "🔬" },
+  { key: "root_cause", label: "Root Cause Classification", icon: "🏷️" },
+];
+
 export default function TracesPage() {
-  const [traceIdInput, setTraceIdInput] = useState("");
-  const [searchId, setSearchId] = useState<string | null>(null);
+  return (
+    <Suspense fallback={<div className="p-6 text-xs text-[var(--text-dim)]">Loading trace explorer…</div>}>
+      <TracesContent />
+    </Suspense>
+  );
+}
+
+function TracesContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [traceIdInput, setTraceIdInput] = useState(searchParams?.get("id") || "");
+  const [searchId, setSearchId] = useState<string | null>(searchParams?.get("id") || null);
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
 
   const history = useAnalysisStore((s) => s.history);
   const selectedTraceId = useAnalysisStore((s) => s.selectedTraceId);
   const setSelectedTraceId = useAnalysisStore((s) => s.setSelectedTraceId);
 
-  // Sync selected trace from store
+  // Sync from store
   useEffect(() => {
     if (selectedTraceId) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTraceIdInput(selectedTraceId);
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSearchId(selectedTraceId);
-      setSelectedTraceId(null); // Clear selected trace to avoid loop
+      setSelectedTraceId(null);
     }
   }, [selectedTraceId, setSelectedTraceId]);
 
   const { data: latestTrace, isLoading: latestLoading, refetch } = useLatestTrace();
   const { data: searchedTrace, isLoading: searchLoading } = useDebugTrace(searchId);
 
-  // Context-dependent loading: when searching, only care about searchLoading
-  // (and skip it entirely if we already have a local fallback ready).
-  // When not searching, only care about latestLoading.
-  const isLoading = searchId
-    ? searchLoading && !history.find((h) => h.id === searchId || h.result.trace_id === searchId)
-    : latestLoading && history.length === 0;
-
-  // Local helper to convert history entry to TraceData structure
-  const transformHistoryEntry = (entry: AnalysisHistoryEntry): TraceData => {
-    const res = entry.result;
-    const measured = res.measured_timings;
-    const pStatus = res.pillar_status;
-    const totalDuration = measured?.total_latency_ms ?? res.processing_time_ms ?? res.latency_ms ?? null;
-
-    const p1Available = pStatus?.p1_available ?? true;
-    const p2Available = pStatus?.p2_available ?? (res.pillar_scores?.confidence !== undefined && res.pillar_scores?.confidence !== null && res.confidence_analysis !== undefined);
-    const p3Available = pStatus?.p3_available ?? (res.pillar_scores?.consistency !== undefined && res.pillar_scores?.consistency !== null);
-
-    const stages: TraceStage[] = [
-      {
-        name: "Pillar 1 — Evidence Grounding",
-        duration_ms: measured?.p1_latency_ms ?? (p1Available && totalDuration ? totalDuration : null),
-        status: p1Available ? "completed" : "failed",
-        details: {
-          status: p1Available ? "EXECUTED" : "FAILED",
-          factual_error: res.pillar_scores?.retrieval ?? res.pillar_scores?.pillar1_factual_error ?? null,
-          evidence_count: res.evidence?.length || 0,
-          root_cause: res.root_cause_classification ?? "VERIFIED",
-        }
-      },
-      {
-        name: "Pillar 2 — Confidence Estimation",
-        duration_ms: p2Available ? (measured?.p2_latency_ms ?? null) : null,
-        status: p2Available ? "completed" : "unavailable",
-        details: p2Available ? {
-          status: "EXECUTED",
-          confidence_gap: res.pillar_scores?.confidence ?? null,
-          entropy: res.confidence_analysis?.whitebox_entropy ?? null,
-          methodology: res.confidence_analysis ? "Model Uncertainty Proxy / Logprobs" : "N/A"
-        } : {
-          status: "UNAVAILABLE",
-          reason: "Token-level logprobs not provided by active LLM provider (unavailable for static text input). Excluded from fusion."
-        }
-      },
-      {
-        name: "Pillar 3 — Consistency Reasoning",
-        duration_ms: p3Available ? (measured?.p3_latency_ms ?? null) : null,
-        status: p3Available ? "completed" : "unavailable",
-        details: p3Available ? {
-          status: "EXECUTED",
-          consistency_failure: res.pillar_scores?.consistency ?? null,
-          failure_taxonomy: res.failure_taxonomy ?? "NONE"
-        } : {
-          status: "UNAVAILABLE",
-          reason: "Single generation mode active. Multi-sampling consistency was not executed (unavailable for static text input). Excluded from fusion."
-        }
-      },
-      {
-        name: "Adaptive Fusion Engine",
-        duration_ms: measured?.fusion_latency_ms ?? 0.5,
-        status: "completed",
-        details: res.fusion_decomposition ? {
-          ...res.fusion_decomposition,
-        } : {
-          final_h_score: res.overall_h_score,
-          risk_level: res.risk_level,
-          is_full_analysis: pStatus?.is_full_analysis ?? (p1Available && p2Available && p3Available),
-        }
-      }
-    ];
-
-    return {
-      trace_id: res.trace_id || entry.id,
-      timestamp: entry.timestamp,
-      stages: stages,
-      summary: {
-        total_duration_ms: totalDuration || 0,
-        total_memory_mb: 256.0,
-        final_h_score: res.overall_h_score,
-        risk_level: res.risk_level,
-        root_cause_classification: res.root_cause_classification || "VERIFIED",
-        stage_count: stages.length
-      },
-      measured_timings: measured,
-      pillar_status: pStatus,
-      fusion_decomposition: res.fusion_decomposition,
-    };
-  };
-
-  // Check local history first
-  const localTrace = useMemo(() => {
-    if (!searchId) return null;
-    const entry = history.find(
-      (h) => h.id === searchId || h.result.trace_id === searchId
-    );
-    if (!entry) return null;
-    return transformHistoryEntry(entry);
-  }, [searchId, history]);
-
-  // Fallback to latest local history entry if no trace loaded yet and no search query active
-  const fallbackLatestLocalTrace = useMemo(() => {
-    if (history.length === 0) return null;
-    return transformHistoryEntry(history[0]);
-  }, [history]);
-
-  // Trace lookup priority:
-  // 1. If searching, prefer backend trace (searchedTrace)
-  // 2. If backend trace search fails or is empty, try local trace history fallback (localTrace)
-  // 3. If not searching, try latest server trace (latestTrace)
-  // 4. Fallback to latest local history entry (fallbackLatestLocalTrace)
-  const displayTrace = useMemo(() => {
+  // Determine active trace
+  const activeTrace = useMemo(() => {
     if (searchId) {
       if (searchedTrace) return searchedTrace;
-      if (!searchLoading && localTrace) return localTrace;
-      return searchedTrace || localTrace;
+      // Fallback to local history
+      const entry = history.find((h) => h.id === searchId || h.result.trace_id === searchId);
+      if (entry) return transformHistoryEntry(entry);
     }
-    return latestTrace || fallbackLatestLocalTrace;
-  }, [searchId, searchedTrace, searchLoading, localTrace, latestTrace, fallbackLatestLocalTrace]);
+    if (latestTrace) return latestTrace;
+    if (history.length > 0) return transformHistoryEntry(history[0]);
+    return null;
+  }, [searchId, searchedTrace, latestTrace, history]);
 
-  const isLocalCache = useMemo(() => {
-    if (!displayTrace) return false;
-    if (searchId) {
-      return !searchedTrace && displayTrace === localTrace;
-    }
-    return !latestTrace && displayTrace === fallbackLatestLocalTrace;
-  }, [displayTrace, searchId, searchedTrace, latestTrace, localTrace, fallbackLatestLocalTrace]);
+  const isLoading = searchId ? searchLoading && !activeTrace : latestLoading && !activeTrace;
 
   const handleSearch = () => {
     if (traceIdInput.trim()) {
@@ -183,283 +95,349 @@ export default function TracesPage() {
     }
   };
 
-  const selectLocalTrace = (id: string) => {
-    setTraceIdInput(id);
-    setSearchId(id);
+  const toggleNode = (key: string) => {
+    setExpandedNodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
   };
 
+  // Compute max duration for waterfall bar widths
+  const maxDuration = useMemo(() => {
+    if (!activeTrace?.stages) return 1;
+    return Math.max(...activeTrace.stages.map((s) => s.duration_ms || 0), 1);
+  }, [activeTrace]);
+
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="max-w-6xl mx-auto px-6 py-8 space-y-8">
-        {/* ── Header ─────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between border-b border-white/[0.04] pb-6">
-          <div className="flex items-center gap-3">
-            <GitBranch className="w-6 h-6 text-accent-primary shrink-0" />
-            <div>
-              <h1 className="text-heading-md font-bold text-white tracking-tight leading-none">Pipeline Traces</h1>
-              <p className="text-label-md text-slate-500">Execution timeline & diagnostic logs</p>
-            </div>
-          </div>
-
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => refetch()}
-            className="flex items-center gap-1.5 border border-white/5 bg-white/[0.01] hover:bg-white/[0.04] hover:text-white transition-all cursor-pointer font-mono text-xs"
-          >
-            <RefreshCw className={cn("w-3.5 h-3.5", isLoading && "animate-spin")} />
-            Refresh Server
-          </Button>
-        </div>
-
-        {/* ── Search Bar ────────────────────────────────────────────────── */}
-        <div className="flex gap-2">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-            <Input
+    <div className="flex h-full overflow-hidden">
+      {/* ── Trace List Sidebar ──────────────────────────────────────── */}
+      <div className="hidden lg:flex flex-col w-[280px] border-r border-[var(--border)] bg-[var(--bg-surface)] shrink-0">
+        <div className="p-4 border-b border-[var(--border)]">
+          <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-3">Recent Traces</h3>
+          <div className="relative">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--text-dim)]" />
+            <input
+              type="text"
               value={traceIdInput}
               onChange={(e) => setTraceIdInput(e.target.value)}
-              placeholder="Search by trace ID (e.g. TRACE_88CFA3E9)"
-              className="pl-10 bg-bg-surface border-white/[0.04] text-white rounded-xl focus:border-accent-primary/40 focus:ring-accent-primary/10 font-mono text-sm"
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              placeholder="Search trace ID…"
+              className={cn(
+                "w-full pl-8 pr-3 py-1.5 rounded-[var(--radius-sm)]",
+                "bg-[var(--surface)] border border-[var(--border)]",
+                "text-xs text-[var(--text-primary)] placeholder:text-[var(--text-dim)]",
+                "focus:outline-none focus:border-[var(--primary)]"
+              )}
             />
           </div>
-          <Button
-            onClick={handleSearch}
-            disabled={!traceIdInput.trim() || isLoading}
-            className="bg-accent-primary hover:bg-accent-primary/90 text-white rounded-xl px-5 cursor-pointer disabled:opacity-50 font-mono text-xs shadow-[0_0_24px_rgba(168,85,247,0.2)]"
-          >
-            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Search"}
+        </div>
+        <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
+          {history.length > 0 ? (
+            history.slice(0, 30).map((entry) => {
+              const traceId = entry.result.trace_id || entry.id;
+              const isActive = searchId === traceId || searchId === entry.id;
+              return (
+                <button
+                  key={entry.id}
+                  onClick={() => { setSearchId(traceId); setTraceIdInput(traceId); }}
+                  className={cn(
+                    "w-full text-left p-2.5 rounded-[var(--radius)] transition-colors cursor-pointer",
+                    isActive ? "bg-[var(--primary-soft)] border border-[var(--ai-border)]" : "hover:bg-[var(--surface-hover)] border border-transparent"
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    <StatusBadge status={entry.result.risk_level} size="sm" />
+                    <span className="text-[11px] font-mono text-[var(--text-dim)] truncate">{formatScore(entry.result.overall_h_score)}%</span>
+                  </div>
+                  <p className="text-[11px] text-[var(--text-muted)] truncate mt-1">
+                    {truncate(entry.query || entry.response, 40)}
+                  </p>
+                  <p className="text-[10px] text-[var(--text-dim)] mt-0.5">{formatTimestamp(entry.timestamp)}</p>
+                </button>
+              );
+            })
+          ) : (
+            <NoTraces variant="compact" />
+          )}
+        </div>
+      </div>
+
+      {/* ── Trace Detail ────────────────────────────────────────────── */}
+      <div className="flex-1 min-w-0 overflow-y-auto p-5 md:p-6 pb-20 md:pb-6 space-y-6">
+        {/* Page Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-heading-lg text-[var(--text-primary)]">Traces</h1>
+            <p className="text-label-md text-[var(--text-muted)] mt-1">Pipeline execution trace explorer</p>
+          </div>
+          <Button variant="ghost" size="icon-sm" onClick={() => refetch()} aria-label="Refresh">
+            <RefreshCw className={cn("w-4 h-4", latestLoading && "animate-spin")} />
           </Button>
         </div>
 
-        {/* ── Main Layout Split Grid ────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Left Sidebar: Local Traces List */}
-          <div className="md:col-span-1 space-y-4">
-            <Card className="p-4 rounded-xl space-y-3">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-white/[0.04] pb-2 font-mono">
-                <ListFilter className="w-3.5 h-3.5 text-slate-400" />
-                <span>Session ({history.length})</span>
-              </div>
-
-              {history.length === 0 ? (
-                <div className="text-center py-6 text-slate-400 text-xs leading-relaxed">
-                  No local traces recorded in this browser session.
-                </div>
-              ) : (
-                <div className="space-y-2 max-h-[420px] overflow-y-auto pr-1 custom-scrollbar">
-                  {history.map((entry) => {
-                    const id = entry.result?.trace_id || entry.id;
-                    const isActive = displayTrace?.trace_id === id;
-                    const risk = entry.result?.risk_level || "VERIFIED";
-
-                    return (
-                      <button
-                        key={entry.id}
-                        onClick={() => selectLocalTrace(id)}
-                        className={cn(
-                          "w-full text-left p-3 rounded-lg border text-xs font-mono transition-all duration-200 cursor-pointer block",
-                          isActive
-                            ? "bg-accent-primary/10 border-accent-primary/30 text-white shadow-sm"
-                            : "bg-white/[0.01] border-white/5 text-slate-400 hover:bg-white/[0.03] hover:border-white/10"
-                        )}
-                      >
-                        <div className="flex items-center justify-between mb-1.5">
-                          <span className="font-semibold text-slate-300 truncate max-w-[80px]">
-                            {id.slice(0, 12)}
-                          </span>
-                          <span
-                            className="font-bold text-[10px]"
-                            style={{ color: getRiskColor(risk) }}
-                          >
-                            {(entry.result?.overall_h_score * 100).toFixed(0)}%
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-[10px] text-slate-500 font-sans">
-                          <span className="truncate max-w-[90px]">{entry.response}</span>
-                          <span>{new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+        {/* Mobile Search */}
+        <div className="lg:hidden">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-dim)]" />
+            <input
+              type="text"
+              value={traceIdInput}
+              onChange={(e) => setTraceIdInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              placeholder="Search trace ID…"
+              className={cn(
+                "w-full pl-9 pr-3 py-2 rounded-[var(--radius)]",
+                "bg-[var(--bg-surface)] border border-[var(--border)]",
+                "text-sm text-[var(--text-primary)] placeholder:text-[var(--text-dim)]",
+                "focus:outline-none focus:border-[var(--primary)]"
               )}
-            </Card>
-          </div>
-
-          {/* Right Column: Active Trace details */}
-          <div className="md:col-span-3 space-y-6">
-            {isLoading ? (
-              <div className="flex items-center justify-center py-24 bg-bg-surface border border-white/[0.04] rounded-2xl">
-                <div className="text-center space-y-3">
-                  <Loader2 className="w-8 h-8 text-accent-primary animate-spin mx-auto" />
-                  <p className="text-xs text-slate-500">Retrieving diagnostic timeline data...</p>
-                </div>
-              </div>
-            ) : displayTrace ? (
-              <motion.div
-                key={displayTrace.trace_id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-6"
-              >
-                {/* Trace Summary Card */}
-                <Card className="p-6 rounded-2xl">
-                  <div className="flex items-center justify-between flex-wrap gap-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[10px] bg-white/[0.02] border border-white/[0.04] text-slate-400 px-2 py-0.5 rounded font-mono font-semibold uppercase tracking-wider">
-                          Trace Log
-                        </span>
-                        <span className="text-xs font-mono text-slate-500">{displayTrace.trace_id}</span>
-                        {isLocalCache ? (
-                          <StatusBadge label="from cache" status="warning" className="font-mono text-[9px] py-0 px-1.5" />
-                        ) : (
-                          <StatusBadge label="from server" status="success" className="font-mono text-[9px] py-0 px-1.5" />
-                        )}
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <h2 className="text-heading-md font-bold text-white tracking-tight font-sans leading-none">
-                          H-Score: {displayTrace.summary ? (displayTrace.summary.final_h_score * 100).toFixed(1) : "0.0"}%
-                        </h2>
-                        <StatusBadge
-                          label={getRiskLabel(displayTrace.summary?.risk_level || "VERIFIED")}
-                          status={
-                            displayTrace.summary?.risk_level === "VERIFIED"
-                              ? "success"
-                              : displayTrace.summary?.risk_level === "LIKELY_HALLUCINATED"
-                              ? "error"
-                              : "warning"
-                          }
-                          className="px-2.5 py-0.5 rounded-lg text-xs"
-                        />
-                      </div>
-                    </div>
-                    <div className="text-right text-xs text-slate-500 space-y-1 font-mono">
-                      <p className="font-sans">{formatTimestamp(displayTrace.timestamp)}</p>
-                      <p>RSS: {displayTrace.summary?.total_memory_mb ? `${displayTrace.summary.total_memory_mb.toFixed(0)} MB` : "N/A"}</p>
-                      <p className="text-slate-400">Verdict: {displayTrace.summary?.root_cause_classification || "VERIFIED"}</p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Pipeline Timeline */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    Execution Timeline
-                  </h3>
-
-                  <div className="relative pl-6">
-                    {/* Vertical connector line */}
-                    <div className="absolute left-[11px] top-3 bottom-3 w-px bg-white/[0.08]" />
-
-                    {displayTrace.stages?.map((stage: TraceStage, index: number) => (
-                      <TraceStageRow key={index} stage={stage} index={index} />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ) : (
-              /* Designed Empty State */
-              <EmptyState
-                title="No Active Trace Selected"
-                description="Select a past execution trace from your session history sidebar on the left, or query a trace ID in the search bar."
-                icon={FileText}
-                actionLabel="Go to Verification Workspace"
-                actionHref="/verify"
-              />
-            )}
+            />
           </div>
         </div>
+
+        {isLoading ? (
+          <div className="space-y-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-14 w-full" />
+            ))}
+          </div>
+        ) : activeTrace ? (
+          <>
+            {/* Trace Summary */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex flex-wrap items-center gap-4">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Trace ID</p>
+                    <p className="text-sm font-mono text-[var(--text-primary)]">{activeTrace.trace_id}</p>
+                  </div>
+                  {activeTrace.summary && (
+                    <>
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">H-Score</p>
+                        <p className="text-lg font-bold font-mono" style={{ color: getRiskColor(activeTrace.summary.risk_level) }}>
+                          {formatScore(activeTrace.summary.final_h_score)}%
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Duration</p>
+                        <p className="text-sm font-mono text-[var(--text-primary)]">{formatLatency(activeTrace.summary.total_duration_ms)}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Status</p>
+                        <StatusBadge status={activeTrace.summary.risk_level} size="sm" />
+                      </div>
+                      {activeTrace.summary.root_cause_classification && activeTrace.summary.root_cause_classification !== "VERIFIED" && (
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Root Cause</p>
+                          <Badge variant="hallucination">{activeTrace.summary.root_cause_classification.replace(/_/g, " ")}</Badge>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Waterfall Visualization */}
+            <div>
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">
+                Pipeline Execution Waterfall
+              </h3>
+              <div className="space-y-1">
+                {activeTrace.stages.map((stage, i) => {
+                  const isExpanded = expandedNodes.has(stage.name);
+                  const barWidth = stage.duration_ms ? Math.max((stage.duration_ms / maxDuration) * 100, 4) : 0;
+                  const statusColor = getStageColor(stage.status);
+
+                  return (
+                    <div key={i}>
+                      <button
+                        onClick={() => toggleNode(stage.name)}
+                        className="w-full text-left hover:bg-[var(--surface-hover)] rounded-[var(--radius)] p-2 transition-colors cursor-pointer"
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Status Dot */}
+                          <span
+                            className="w-2 h-2 rounded-full shrink-0"
+                            style={{ backgroundColor: statusColor }}
+                          />
+                          {/* Stage Name */}
+                          <span className="text-[13px] text-[var(--text-primary)] flex-1 min-w-0 truncate">
+                            {stage.name}
+                          </span>
+                          {/* Duration */}
+                          <span className="text-[11px] font-mono text-[var(--text-muted)] shrink-0">
+                            {stage.duration_ms != null ? formatLatency(stage.duration_ms) : "—"}
+                          </span>
+                          {/* Status Badge */}
+                          <Badge
+                            variant={stage.status === "completed" || stage.status === "success" ? "verified" : stage.status === "failed" ? "hallucination" : "outline"}
+                            size="sm"
+                          >
+                            {stage.status}
+                          </Badge>
+                          <ChevronDown className={cn("w-3.5 h-3.5 text-[var(--text-dim)] transition-transform", isExpanded && "rotate-180")} />
+                        </div>
+                        {/* Waterfall Bar */}
+                        {barWidth > 0 && (
+                          <div className="mt-1.5 ml-5 h-1.5 bg-[var(--surface)] rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: `${barWidth}%` }}
+                              transition={{ duration: 0.4, delay: i * 0.05 }}
+                              className="h-full rounded-full"
+                              style={{ backgroundColor: statusColor }}
+                            />
+                          </div>
+                        )}
+                      </button>
+
+                      {/* Expanded Details */}
+                      <AnimatePresence>
+                        {isExpanded && stage.details && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="ml-7 mb-2 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)]">
+                              <div className="grid grid-cols-2 gap-2 text-[12px]">
+                                {Object.entries(stage.details).map(([key, val]) => (
+                                  <div key={key}>
+                                    <span className="text-[var(--text-dim)]">{key.replace(/_/g, " ")}:</span>{" "}
+                                    <span className="text-[var(--text-secondary)] font-mono">
+                                      {typeof val === "number" ? val.toFixed(4) : String(val ?? "—")}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Measured Timings */}
+            {activeTrace.measured_timings && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-[var(--text-muted)]" />
+                    Measured Timings
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {Object.entries(activeTrace.measured_timings).map(([key, val]) => (
+                      <div key={key} className="rounded-[var(--radius)] bg-[var(--surface)] p-2 text-center">
+                        <p className="text-[10px] text-[var(--text-dim)] uppercase tracking-wider mb-0.5">
+                          {key.replace(/_ms$/, "").replace(/_/g, " ")}
+                        </p>
+                        <p className="text-sm font-mono font-medium text-[var(--text-secondary)]">
+                          {val != null ? formatLatency(val as number) : "—"}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </>
+        ) : (
+          <NoTraces onNavigate={() => router.push("/verify")} />
+        )}
       </div>
     </div>
   );
 }
 
-function TraceStageRow({ stage, index }: { stage: TraceStage; index: number }) {
-  const [expanded, setExpanded] = useState(false);
-  const isUnavailable = stage.status === "unavailable" || stage.status === "skipped" || stage.duration_ms === null;
-  const isSuccess = !isUnavailable && (stage.status === "completed" || stage.status === "success" || !stage.status);
+function transformHistoryEntry(entry: AnalysisHistoryEntry): TraceData {
+  const res = entry.result;
+  const measured = res.measured_timings;
+  const pStatus = res.pillar_status;
+  const totalDuration = measured?.total_latency_ms ?? res.processing_time_ms ?? res.latency_ms ?? null;
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -8 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className="relative pb-4"
-    >
-      {/* Dot */}
-      <div
-        className={cn(
-          "absolute left-0 top-3 w-[10px] h-[10px] rounded-full border-2",
-          isSuccess
-            ? "bg-emerald-500 border-emerald-500/30"
-            : isUnavailable
-            ? "bg-slate-600 border-slate-500/30"
-            : "bg-red-500 border-red-500/30"
-        )}
-        style={{ transform: "translateX(-4.5px)" }}
-      />
+  const p1Available = pStatus?.p1_available ?? true;
+  const p2Available = pStatus?.p2_available ?? false;
+  const p3Available = pStatus?.p3_available ?? false;
 
-      {/* Card */}
-      <div className="ml-6">
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className={cn(
-            "w-full text-left rounded-xl border px-4 py-3 transition-all cursor-pointer",
-            isUnavailable
-              ? "border-white/[0.03] bg-bg-surface/20 opacity-80 hover:opacity-100 hover:border-white/[0.06]"
-              : "border-white/[0.04] bg-bg-surface/40 hover:border-white/[0.08] hover:bg-bg-surface/60"
-          )}
-          aria-expanded={expanded}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              {isSuccess ? (
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              ) : isUnavailable ? (
-                <MinusCircle className="w-4 h-4 text-slate-400" />
-              ) : (
-                <XCircle className="w-4 h-4 text-red-400" />
-              )}
-              <span className={cn("text-sm font-medium", isUnavailable ? "text-slate-400" : "text-slate-200")}>
-                {stage.name}
-              </span>
-              {isUnavailable && (
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] text-slate-400 border border-white/[0.06]">
-                  Unavailable
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 text-xs text-slate-500 font-mono">
-                <Clock className="w-3 h-3" />
-                {isUnavailable ? (
-                  <span className="text-slate-400">Not available</span>
-                ) : (
-                  formatLatency(stage.duration_ms)
-                )}
-              </div>
-              {expanded ? (
-                <ChevronUp className="w-4 h-4 text-slate-500" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-slate-500" />
-              )}
-            </div>
-          </div>
-        </button>
+  const stages: TraceStage[] = [
+    {
+      name: "Pillar 1 — Evidence Grounding",
+      duration_ms: measured?.p1_latency_ms ?? null,
+      status: p1Available ? "completed" : "failed",
+      details: {
+        factual_error: res.pillar_scores?.retrieval ?? res.pillar_scores?.pillar1_factual_error ?? null,
+        evidence_count: res.evidence?.length || 0,
+        root_cause: res.root_cause_classification ?? "VERIFIED",
+      }
+    },
+    {
+      name: "Pillar 2 — Confidence Estimation",
+      duration_ms: measured?.p2_latency_ms ?? null,
+      status: p2Available ? "completed" : "unavailable",
+      details: p2Available ? {
+        confidence_gap: res.pillar_scores?.confidence ?? null,
+      } : { reason: "Token logprobs not available" }
+    },
+    {
+      name: "Pillar 3 — Consistency Reasoning",
+      duration_ms: measured?.p3_latency_ms ?? null,
+      status: p3Available ? "completed" : "unavailable",
+      details: p3Available ? {
+        consistency: res.pillar_scores?.consistency ?? null,
+      } : { reason: "Multi-generation not available for static input" }
+    },
+    {
+      name: "Adaptive Fusion",
+      duration_ms: measured?.fusion_latency_ms ?? null,
+      status: pStatus?.fusion_status === "failed" ? "failed" : "completed",
+      details: res.fusion_decomposition ? {
+        mode: res.fusion_decomposition.fusion_mode,
+        uncalibrated: res.fusion_decomposition.uncalibrated_h_score,
+        calibrated: res.fusion_decomposition.calibrated_h_score,
+      } : undefined
+    },
+  ];
 
-        {expanded && stage.details && (
-          <motion.pre
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            className="mt-2 p-4 rounded-xl bg-black/40 border border-white/[0.06] text-xs font-mono text-slate-400 overflow-x-auto select-text leading-relaxed"
-          >
-            {JSON.stringify(stage.details, null, 2)}
-          </motion.pre>
-        )}
-      </div>
-    </motion.div>
-  );
+  return {
+    trace_id: res.trace_id || entry.id,
+    timestamp: entry.timestamp,
+    stages,
+    summary: {
+      total_duration_ms: totalDuration ?? 0,
+      total_memory_mb: 0,
+      final_h_score: res.overall_h_score,
+      risk_level: res.risk_level,
+      root_cause_classification: res.root_cause_classification || "VERIFIED",
+      stage_count: stages.length,
+    },
+    measured_timings: measured,
+    pillar_status: pStatus,
+    fusion_decomposition: res.fusion_decomposition,
+  };
+}
+
+function getStageColor(status: string): string {
+  switch (status) {
+    case "completed": case "success": return "var(--verified)";
+    case "failed": return "var(--hallucination)";
+    case "unavailable": case "skipped": return "var(--text-dim)";
+    case "running": return "var(--ai)";
+    default: return "var(--text-muted)";
+  }
+}
+
+function truncate(text: string, max: number) {
+  if (!text) return "";
+  return text.length <= max ? text : text.slice(0, max).trimEnd() + "…";
 }

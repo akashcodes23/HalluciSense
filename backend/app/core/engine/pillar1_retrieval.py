@@ -239,6 +239,18 @@ class Pillar1RetrievalEngine:
         neutral = result["neutral"]
         sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
 
+        # Check for chemical formula contradiction or match
+        claim_formula_m = re.search(r'\b(?:chemical\s+formula|formula)\s+([A-Za-z0-9]+)\b', claim, re.IGNORECASE)
+        snippet_formula_m = re.search(r'\b(?:chemical\s+formula|formula)\s+([A-Za-z0-9]+)\b', item.snippet, re.IGNORECASE)
+
+        if claim_formula_m and snippet_formula_m:
+            c_form = claim_formula_m.group(1).upper()
+            s_form = snippet_formula_m.group(1).upper()
+            if c_form != s_form:
+                return 0.0, 0.95, 0.05
+            else:
+                return 0.95, 0.0, 0.05
+
         if neutral > 0.60 and contradiction < 0.30 and sim_score >= 0.70:
             match = re.match(r'^([A-Za-z0-9\s]+)\s+is\s+([A-Za-z0-9]+)\.?$', claim.strip(), re.IGNORECASE)
             if match:
@@ -247,7 +259,7 @@ class Pillar1RetrievalEngine:
                 if f"{subj} ({obj})" in snippet_lower or f"{subj} ({obj}" in snippet_lower or f"formula {obj}" in snippet_lower:
                     entailment = max(entailment, 0.90)
 
-        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0):
+        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_formula_m:
             claim_keywords = [w.lower() for w in re.findall(r'\b[A-Za-z]{4,}\b', claim)]
             snippet_lower = item.snippet.lower()
             if claim_keywords:
@@ -356,9 +368,11 @@ class Pillar1RetrievalEngine:
             if pol_res.negation_inversion_detected or pol_res.antonym_inversion_detected:
                 fe_score = round(max(fe_score, pol_res.confidence_penalty), 4)
 
-            caus_res = self.causal_checker.check_inversion(text, ev_combined)
-            if caus_res.is_inversion_detected:
-                fe_score = round(max(fe_score, caus_res.confidence_penalty), 4)
+            for snip in ev_snippets[:3]:
+                caus_res = self.causal_checker.check_inversion(text, snip)
+                if caus_res.is_inversion_detected:
+                    fe_score = round(max(fe_score, caus_res.confidence_penalty), 4)
+                    break
 
         if not claims:
             reasoning = "No discrete factual claims identified."

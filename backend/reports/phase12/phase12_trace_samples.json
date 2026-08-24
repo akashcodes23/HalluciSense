@@ -1,0 +1,234 @@
+[
+  {
+    "test_case_id": "CASE_A_TRUE_SCIENTIFIC_CLAIM",
+    "trace_id": "TRACE_6692A32A0F98",
+    "h_score": 0.0488,
+    "risk_level": "VERIFIED",
+    "root_cause": "VERIFIED",
+    "measured_timings": {
+      "retrieval_ms": 1354.37,
+      "bm25_ms": 0.5,
+      "dense_ms": 1086.56,
+      "nli_ms": 262.4,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1354.37,
+      "p2_latency_ms": 0.06,
+      "p3_latency_ms": 0.05,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1419.93
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_B_NUMERICAL_UNIT_HALLUCINATION",
+    "trace_id": "TRACE_505A6197E189",
+    "h_score": 0.9,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause": "Entity Linking Failure",
+    "measured_timings": {
+      "retrieval_ms": 1218.04,
+      "bm25_ms": 0.3,
+      "dense_ms": 1034.62,
+      "nli_ms": 180.56,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1218.04,
+      "p2_latency_ms": 0.01,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1290.05
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_C_WATER_FORMULA_TRUE",
+    "trace_id": "TRACE_8565F66A4D16",
+    "h_score": 0.0173,
+    "risk_level": "VERIFIED",
+    "root_cause": "VERIFIED",
+    "measured_timings": {
+      "retrieval_ms": 1359.96,
+      "bm25_ms": 0.22,
+      "dense_ms": 1153.31,
+      "nli_ms": 205.01,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1359.96,
+      "p2_latency_ms": 0.01,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1421.22
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_D_WRONG_CHEMICAL_FORMULA",
+    "trace_id": "TRACE_1A2ABF1C2C5F",
+    "h_score": 0.95,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause": "Entity Linking Failure",
+    "measured_timings": {
+      "retrieval_ms": 1535.29,
+      "bm25_ms": 0.24,
+      "dense_ms": 1366.63,
+      "nli_ms": 167.09,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1535.29,
+      "p2_latency_ms": 0.01,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1597.07
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_E_NEGATION_FLIP",
+    "trace_id": "TRACE_EA0D5E0127DE",
+    "h_score": 0.9988,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause": "Entity Linking Failure",
+    "measured_timings": {
+      "retrieval_ms": 1763.71,
+      "bm25_ms": 1.51,
+      "dense_ms": 1586.35,
+      "nli_ms": 172.19,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1763.71,
+      "p2_latency_ms": 0.04,
+      "p3_latency_ms": 0.1,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 1850.88
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_F_TRUE_CORE_FALSE_ELABORATION",
+    "trace_id": "TRACE_05511B0D7076",
+    "h_score": 0.9986,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause": "Entity Linking Failure",
+    "measured_timings": {
+      "retrieval_ms": 1442.4,
+      "bm25_ms": 0.37,
+      "dense_ms": 1266.78,
+      "nli_ms": 171.37,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1442.4,
+      "p2_latency_ms": 0.01,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1635.07
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_G_CAUSAL_DIRECTION",
+    "trace_id": "TRACE_E053A64F33E3",
+    "h_score": 0.85,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause": "Entity Linking Failure",
+    "measured_timings": {
+      "retrieval_ms": 1393.16,
+      "bm25_ms": 0.29,
+      "dense_ms": 1207.6,
+      "nli_ms": 167.5,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1393.16,
+      "p2_latency_ms": 0.01,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1468.96
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  },
+  {
+    "test_case_id": "CASE_H_AMBIGUOUS_CLAIM",
+    "trace_id": "TRACE_6AF46DD90B18",
+    "h_score": 0.9941,
+    "risk_level": "LIKELY_HALLUCINATED",
+    "root_cause": "Entity Linking Failure",
+    "measured_timings": {
+      "retrieval_ms": 1229.33,
+      "bm25_ms": 0.24,
+      "dense_ms": 1128.74,
+      "nli_ms": 95.77,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1229.33,
+      "p2_latency_ms": 0.01,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1293.26
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "UNAVAILABLE",
+      "p3_status": "UNAVAILABLE",
+      "fusion_status": "PARTIAL_ONE_PILLAR",
+      "p1_available": true,
+      "p2_available": false,
+      "p3_available": false,
+      "is_full_analysis": false
+    }
+  }
+]

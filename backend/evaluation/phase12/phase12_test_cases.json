@@ -1,0 +1,107 @@
+{
+  "description": "HalluciSense Phase 12 Live End-to-End Product Acceptance Test Case Matrix",
+  "version": "1.0.0",
+  "test_cases": [
+    {
+      "id": "CASE_A_TRUE_SCIENTIFIC_CLAIM",
+      "category": "TRUE_CONTROL",
+      "description": "Authoritative scientific fact that must be verified safe without correction",
+      "query": "What is the speed of light in vacuum?",
+      "input_text": "The speed of light in vacuum is approximately 299,792,458 m/s.",
+      "expected_risk_level": "VERIFIED",
+      "max_acceptable_h_score": 0.35,
+      "should_correct": false
+    },
+    {
+      "id": "CASE_B_NUMERICAL_UNIT_HALLUCINATION",
+      "category": "UNIT_SCALE_ERROR",
+      "description": "Numerical/unit scale error (km/s instead of m/s) requiring detection, correction, and re-verification",
+      "query": "What is the speed of light in vacuum?",
+      "input_text": "The speed of light in vacuum is approximately 299,792,458 km/s.",
+      "expected_risk_level": "LIKELY_HALLUCINATED",
+      "min_acceptable_h_score": 0.50,
+      "should_correct": true,
+      "expected_corrected_text_contains": "299,792,458 m/s",
+      "expected_reverification_status": "CORRECTED"
+    },
+    {
+      "id": "CASE_C_WATER_FORMULA_TRUE",
+      "category": "TRUE_CONTROL",
+      "description": "Standard chemical formula fact check",
+      "query": "What is the chemical formula of water?",
+      "input_text": "Water has the chemical formula H2O.",
+      "expected_risk_level": "VERIFIED",
+      "max_acceptable_h_score": 0.35,
+      "should_correct": false
+    },
+    {
+      "id": "CASE_D_WRONG_CHEMICAL_FORMULA",
+      "category": "FACTUAL_ERROR",
+      "description": "Contradictory chemical formula assertion",
+      "query": "What is the chemical formula of water?",
+      "input_text": "Water has the chemical formula CO2.",
+      "expected_risk_level": "LIKELY_HALLUCINATED",
+      "min_acceptable_h_score": 0.50,
+      "should_correct": true
+    },
+    {
+      "id": "CASE_E_NEGATION_FLIP",
+      "category": "NEGATION_ERROR",
+      "description": "Negation polarity inversion on a biological mechanism",
+      "query": "Do mitochondria produce ATP?",
+      "input_text": "Mitochondria do not produce ATP in eukaryotic cells.",
+      "expected_risk_level": "LIKELY_HALLUCINATED",
+      "min_acceptable_h_score": 0.50,
+      "should_correct": true,
+      "expected_corrected_text_contains": "produce ATP"
+    },
+    {
+      "id": "CASE_F_TRUE_CORE_FALSE_ELABORATION",
+      "category": "UNSUPPORTED_ELABORATION",
+      "description": "True scientific core fact with false historical elaboration",
+      "query": "Tell me about the chemical formula of water and its discovery.",
+      "input_text": "The chemical formula of water is H2O. It was discovered by Albert Einstein in 1905.",
+      "expected_risk_level": "LIKELY_HALLUCINATED",
+      "min_acceptable_h_score": 0.35,
+      "flagged_claims_min": 1
+    },
+    {
+      "id": "CASE_G_CAUSAL_DIRECTION",
+      "category": "CAUSAL_INVERSION",
+      "description": "Causal direction and absolute strength inversion",
+      "query": "What is the relationship between blood pressure and kidney damage?",
+      "input_text": "Kidney damage always causes high blood pressure.",
+      "expected_risk_level": "LIKELY_HALLUCINATED",
+      "min_acceptable_h_score": 0.40,
+      "should_correct": true
+    },
+    {
+      "id": "CASE_H_AMBIGUOUS_CLAIM",
+      "category": "UNCERTAIN_CLAIM",
+      "description": "Context-dependent or speculative hypothesis that should trigger uncertainty rather than forced VERIFIED",
+      "query": "What constitutes dark matter?",
+      "input_text": "Dark matter consists entirely of weakly interacting massive particles (WIMPs).",
+      "expected_risk_level": "NEEDS_VERIFICATION",
+      "max_acceptable_h_score": 0.85
+    },
+    {
+      "id": "CASE_I_EMPTY_INPUT",
+      "category": "VALIDATION_BOUNDARY",
+      "description": "Empty input string must return HTTP 400 validation error and never produce H-score 100%",
+      "query": "",
+      "input_text": "   ",
+      "expected_http_status": 400,
+      "must_not_have_h_score": true
+    },
+    {
+      "id": "CASE_J_BACKEND_FAILURE_SEMANTICS",
+      "category": "FAILURE_SEMANTICS",
+      "description": "Simulated or controlled backend failure must produce status FAILED with null h_score and null risk_level",
+      "query": "Simulate error",
+      "input_text": "Error injection test",
+      "expected_failure_status": "FAILED",
+      "expected_h_score": null,
+      "expected_risk_level": null
+    }
+  ]
+}

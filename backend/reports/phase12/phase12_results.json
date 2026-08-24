@@ -1,0 +1,169 @@
+{
+  "decision": "PRODUCTION_E2E_ACCEPTED",
+  "timestamp": "2026-08-18T09:33:42Z",
+  "total_test_cases": 10,
+  "passed_test_cases": 10,
+  "failed_test_cases": 0,
+  "verification_accuracy_pct": 100.0,
+  "correction_success_rate_pct": 100.0,
+  "reverification_success_rate_pct": 100.0,
+  "latency_stats": {
+    "count": 10,
+    "mean_ms": 1203.27,
+    "p50_ms": 1432.58,
+    "p95_ms": 1862.19,
+    "max_ms": 1862.19
+  },
+  "memory_invariants": {
+    "singleton_pipeline_init_count": 1,
+    "singleton_nli_init_count": 1,
+    "singleton_sentence_transformer_count": 0,
+    "singleton_cross_encoder_count": 0,
+    "initial_rss_mb": 402.52,
+    "final_rss_mb": 517.34,
+    "rss_delta_mb": 114.83
+  },
+  "benchmark_hash_verified": true,
+  "results": [
+    {
+      "id": "CASE_A_TRUE_SCIENTIFIC_CLAIM",
+      "category": "TRUE_CONTROL",
+      "passed": true,
+      "h_score": 0.0488,
+      "risk_level": "VERIFIED",
+      "root_cause_classification": "VERIFIED",
+      "latency_ms": 1432.58,
+      "trace_id": "TRACE_6692A32A0F98",
+      "evidence_count": 5,
+      "correction": null
+    },
+    {
+      "id": "CASE_B_NUMERICAL_UNIT_HALLUCINATION",
+      "category": "UNIT_SCALE_ERROR",
+      "passed": true,
+      "h_score": 0.9,
+      "risk_level": "LIKELY_HALLUCINATED",
+      "root_cause_classification": "Entity Linking Failure",
+      "latency_ms": 1293.63,
+      "trace_id": "TRACE_505A6197E189",
+      "evidence_count": 5,
+      "correction": {
+        "performed": true,
+        "final_text": "The speed of light in vacuum is approximately 299,792,458 m/s.",
+        "reverification_passed": true,
+        "text_match": true,
+        "reverif_h_score": 0.0488
+      }
+    },
+    {
+      "id": "CASE_C_WATER_FORMULA_TRUE",
+      "category": "TRUE_CONTROL",
+      "passed": true,
+      "h_score": 0.0173,
+      "risk_level": "VERIFIED",
+      "root_cause_classification": "VERIFIED",
+      "latency_ms": 1424.66,
+      "trace_id": "TRACE_8565F66A4D16",
+      "evidence_count": 5,
+      "correction": null
+    },
+    {
+      "id": "CASE_D_WRONG_CHEMICAL_FORMULA",
+      "category": "FACTUAL_ERROR",
+      "passed": true,
+      "h_score": 0.95,
+      "risk_level": "LIKELY_HALLUCINATED",
+      "root_cause_classification": "Entity Linking Failure",
+      "latency_ms": 1600.5,
+      "trace_id": "TRACE_1A2ABF1C2C5F",
+      "evidence_count": 5,
+      "correction": {
+        "performed": true,
+        "final_text": "A chemical composition specifies the identity, arrangement, and ratio of the chemical elements making up a compound by way of chemical and atomic bonds.\nChemical formulas can be used to describe the relative amounts of elements present in a compound. For example, the chemical formula for water is H2O: this means that each molecule of water is constituted by 2 atoms of hydrogen (H) and 1 atom of oxygen (O). The chemical composition of water may be interpreted as a 2:1 ratio of hydrogen atoms to oxygen atoms..",
+        "reverification_passed": true,
+        "text_match": true,
+        "reverif_h_score": 0.0216
+      }
+    },
+    {
+      "id": "CASE_E_NEGATION_FLIP",
+      "category": "NEGATION_ERROR",
+      "passed": true,
+      "h_score": 0.9988,
+      "risk_level": "LIKELY_HALLUCINATED",
+      "root_cause_classification": "Entity Linking Failure",
+      "latency_ms": 1862.19,
+      "trace_id": "TRACE_EA0D5E0127DE",
+      "evidence_count": 5,
+      "correction": {
+        "performed": true,
+        "final_text": "Mitochondria do produce ATP in eukaryotic cells.",
+        "reverification_passed": true,
+        "text_match": true,
+        "reverif_h_score": 0.0453
+      }
+    },
+    {
+      "id": "CASE_F_TRUE_CORE_FALSE_ELABORATION",
+      "category": "UNSUPPORTED_ELABORATION",
+      "passed": true,
+      "h_score": 0.9986,
+      "risk_level": "LIKELY_HALLUCINATED",
+      "root_cause_classification": "Entity Linking Failure",
+      "latency_ms": 1638.68,
+      "trace_id": "TRACE_05511B0D7076",
+      "evidence_count": 5,
+      "correction": null
+    },
+    {
+      "id": "CASE_G_CAUSAL_DIRECTION",
+      "category": "CAUSAL_INVERSION",
+      "passed": true,
+      "h_score": 0.85,
+      "risk_level": "LIKELY_HALLUCINATED",
+      "root_cause_classification": "Entity Linking Failure",
+      "latency_ms": 1471.72,
+      "trace_id": "TRACE_E053A64F33E3",
+      "evidence_count": 5,
+      "correction": {
+        "performed": true,
+        "final_text": "Chronic kidney disease (CKD) is a type of long-term kidney disease, defined by the sustained presence of abnormal kidney function and/or abnormal kidney structure. To meet the criteria for CKD, the abnormalities must be present for at least three months. Early in the course of CKD, patients are usually asymptomatic, but can be diagnosed via proteinuria. At later stages, the symptoms may include leg swelling, feeling tired, vomiting, loss of appetite, and confusion..",
+        "reverification_passed": true,
+        "text_match": true,
+        "reverif_h_score": 0.05
+      }
+    },
+    {
+      "id": "CASE_H_AMBIGUOUS_CLAIM",
+      "category": "UNCERTAIN_CLAIM",
+      "passed": true,
+      "h_score": 0.9941,
+      "risk_level": "LIKELY_HALLUCINATED",
+      "root_cause_classification": "Entity Linking Failure",
+      "latency_ms": 1296.6,
+      "trace_id": "TRACE_6AF46DD90B18",
+      "evidence_count": 5,
+      "correction": null
+    },
+    {
+      "id": "CASE_I_EMPTY_INPUT",
+      "category": "VALIDATION_BOUNDARY",
+      "passed": true,
+      "http_status": 400,
+      "latency_ms": 1.81,
+      "error_details": {
+        "status": "error",
+        "error_code": "BAD_REQUEST",
+        "message": "Field 'response' must contain non-empty, non-whitespace string values."
+      }
+    },
+    {
+      "id": "CASE_J_BACKEND_FAILURE_SEMANTICS",
+      "category": "FAILURE_SEMANTICS",
+      "passed": true,
+      "verification_status": "UNVERIFIED",
+      "h_score": null,
+      "latency_ms": 10.29
+    }
+  ]
+}

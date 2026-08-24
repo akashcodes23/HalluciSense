@@ -1,0 +1,16 @@
+{
+  "startup_rss_mb": 253.11,
+  "post_pipeline_rss_mb": 907.8,
+  "post_first_verification_rss_mb": 979.22,
+  "peak_rss_mb": 1163.55,
+  "model_counts": {
+    "nli_model": 1,
+    "sentence_transformer": 0,
+    "cross_encoder_reranker": 0,
+    "pipeline": 1
+  },
+  "first_request_latency_ms": 216.47,
+  "mean_latency_ms": 1412.28,
+  "phase11c_peak_rss_mb": 1049.98,
+  "rss_reduction_pct": -10.82
+}

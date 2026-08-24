@@ -1,16 +1,13 @@
-"use client";
-
-import * as React from "react";
 import { cn } from "@/lib/utils";
 
-function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+function Skeleton({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl bg-white/[0.04]",
-        "before:absolute before:inset-0 before:-translate-x-full",
-        "before:bg-gradient-to-r before:from-transparent before:via-white/[0.06] before:to-transparent",
-        "before:animate-[shimmer_2s_infinite]",
+        "rounded-[var(--radius)] bg-[var(--surface)] animate-skeleton",
         className
       )}
       {...props}
@@ -18,33 +15,45 @@ function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
   );
 }
 
-function SkeletonText({ lines = 3, className }: { lines?: number; className?: string }) {
+function SkeletonCard({ className }: { className?: string }) {
   return (
-    <div className={cn("space-y-3", className)}>
-      {Array.from({ length: lines }).map((_, i) => (
-        <Skeleton
-          key={i}
-          className="h-4"
-          style={{ width: i === lines - 1 ? "60%" : "100%" }}
-        />
+    <div className={cn("rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-surface)] p-4 space-y-3", className)}>
+      <Skeleton className="h-3 w-24" />
+      <Skeleton className="h-7 w-16" />
+      <Skeleton className="h-2.5 w-32" />
+    </div>
+  );
+}
+
+function SkeletonTable({ rows = 5, cols = 4, className }: { rows?: number; cols?: number; className?: string }) {
+  return (
+    <div className={cn("rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-surface)] overflow-hidden", className)}>
+      {/* Header */}
+      <div className="flex gap-4 p-3 border-b border-[var(--border)]">
+        {Array.from({ length: cols }).map((_, i) => (
+          <Skeleton key={`h-${i}`} className="h-3 flex-1" />
+        ))}
+      </div>
+      {/* Rows */}
+      {Array.from({ length: rows }).map((_, r) => (
+        <div key={`r-${r}`} className="flex gap-4 p-3 border-b border-[var(--border)] last:border-0">
+          {Array.from({ length: cols }).map((_, c) => (
+            <Skeleton key={`r-${r}-c-${c}`} className="h-3 flex-1" />
+          ))}
+        </div>
       ))}
     </div>
   );
 }
 
-function SkeletonCard({ className }: { className?: string }) {
+function SkeletonMetrics({ count = 4 }: { count?: number }) {
   return (
-    <div
-      className={cn(
-        "rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 space-y-4",
-        className
-      )}
-    >
-      <Skeleton className="h-5 w-1/3" />
-      <SkeletonText lines={2} />
-      <Skeleton className="h-8 w-24" />
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {Array.from({ length: count }).map((_, i) => (
+        <SkeletonCard key={i} />
+      ))}
     </div>
   );
 }
 
-export { Skeleton, SkeletonText, SkeletonCard };
+export { Skeleton, SkeletonCard, SkeletonTable, SkeletonMetrics };

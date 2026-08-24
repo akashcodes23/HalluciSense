@@ -243,20 +243,25 @@ def create_application() -> FastAPI:
     @app.get("/healthz", tags=["System"], summary="System liveness check")
     async def health_check():
         import os, psutil
+        from app.core.engine.model_registry import ModelRegistry
         try:
             process = psutil.Process(os.getpid())
             mem_mb = round(process.memory_info().rss / (1024 * 1024), 2)
         except Exception:
             mem_mb = 0.0
+
+        init_counts = ModelRegistry.get_init_counts()
         return {
             "status": "healthy",
             "version": settings.VERSION,
             "memory_mb": mem_mb,
             "models": {
-                "p1_hybrid": "loaded",
-                "p2_confidence": "provider_dependent",
-                "p3_consistency": "provider_dependent",
+                "nli_model": init_counts.get("nli_model", 0) > 0,
+                "sentence_transformer": init_counts.get("sentence_transformer", 0) > 0,
+                "cross_encoder_reranker": init_counts.get("cross_encoder_reranker", 0) > 0,
+                "pipeline": init_counts.get("pipeline", 0) > 0,
             },
+            "model_counts": init_counts,
         }
 
     @app.get("/ready", tags=["System"], summary="Deep component readiness check")

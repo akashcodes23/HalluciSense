@@ -1,69 +1,69 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShieldCheck,
   Loader2,
   RotateCcw,
   ChevronDown,
-  ChevronUp,
   Clock,
-  ExternalLink,
-  FileText,
-  Code,
   Info,
+  Sparkles,
+  Settings2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { StatusBadge } from "@/components/ui/StatusBadge";
-import { InlineError } from "@/components/ui/InlineError";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useAnalysis, useExplain } from "@/hooks/use-analysis";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { VerdictBanner } from "@/components/verification/VerdictBanner";
+import { ClaimAnalysisCard } from "@/components/verification/ClaimAnalysisCard";
+import { VerificationUnavailable } from "@/components/ui/EmptyState";
+import { useAnalysis } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
-import { formatLatency, getRiskColor, getRiskLabel } from "@/lib/format";
+import { formatLatency } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { ScoreGauge } from "@/components/features/analyzer/score-gauge";
-import { TokenHeatmap } from "@/components/features/heatmap/token-heatmap";
-import type { SentenceScore, EvidenceItem } from "@/types/hallucisense";
+import type { EvidenceItem } from "@/types/hallucisense";
 import { toast } from "sonner";
 
 const SAMPLE_PRESETS = [
   {
-    label: "Temporal Verification",
+    label: "Verified Fact",
     query: "When was James Webb Space Telescope launched?",
     response: "The James Webb Space Telescope was successfully launched into orbit on December 25, 2021 aboard an Ariane 5 rocket from Kourou, French Guiana.",
   },
   {
-    label: "Adversarial Date Contamination",
+    label: "Unit Error",
+    query: "What is the speed of light?",
+    response: "The speed of light in vacuum is approximately 299,792,458 km/s.",
+  },
+  {
+    label: "Temporal Error",
     query: "Tell me about the iPhone launch history.",
     response: "Steve Jobs announced the original iPhone in 2007. Later, Apple launched the iPhone 15 in 1999 with revolutionary AI capabilities.",
   },
   {
-    label: "Epistemic Protection (Prediction)",
-    query: "What will happen in quantum computing by 2030?",
-    response: "We predict that fault-tolerant quantum computers might achieve commercial quantum supremacy for drug discovery before 2030.",
+    label: "Negation Error",
+    query: "Can humans breathe underwater?",
+    response: "Humans can breathe underwater without any equipment due to their evolved gill structures.",
   },
 ];
 
 export default function VerifyPage() {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
-  const [contextEvidence, setContextEvidence] = useState("");
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [validationError, setValidationError] = useState<{ message: string; details?: unknown } | null>(null);
+  const [contextEvidence, setContextEvidence] = useState("");
 
   const analysis = useAnalysis();
-  const explain = useExplain();
   const currentResult = useAnalysisStore((s) => s.currentResult);
-  const currentExplain = useAnalysisStore((s) => s.currentExplain);
   const isAnalyzing = useAnalysisStore((s) => s.isAnalyzing);
   const reset = useAnalysisStore((s) => s.reset);
 
   const isLoading = analysis.isPending || isAnalyzing;
+  const hasResult = currentResult !== null;
+  const hasFailed = analysis.isError;
 
-  const handleVerify = async () => {
+  const handleVerify = useCallback(async () => {
     const textToVerify = response.trim();
     if (!textToVerify) {
       toast.error("Please enter an LLM response to verify.");
@@ -71,797 +71,412 @@ export default function VerifyPage() {
     }
 
     reset();
-    setValidationError(null);
 
     const providedEvidence: EvidenceItem[] = contextEvidence.trim()
-      ? [
-          {
-            claim: query.trim() || "provided_context",
-            snippet: contextEvidence.trim(),
-            source_name: "Provided Context",
-            source_url: "",
-          },
-        ]
+      ? [{
+          claim: query.trim() || "provided_context",
+          snippet: contextEvidence.trim(),
+          source_name: "Provided Context",
+          source_url: "",
+        }]
       : [];
 
     let modelToSend = "gpt-4o";
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("hallucisense_default_model");
-      if (saved) {
-        modelToSend = saved;
-      }
+      if (saved) modelToSend = saved;
     }
 
     const VALID_FRONTEND_MODELS = [
-      "claude",
-      "claude-3-5-sonnet",
-      "deepseek",
-      "default",
-      "gemini",
-      "gpt-3.5-turbo",
-      "gpt-4",
-      "gpt-4.1",
-      "gpt-4o",
-      "llama-3",
-      "llama-3-70b",
-      "mistral",
-      "phi",
-      "qwen"
+      "claude", "claude-3-5-sonnet", "deepseek", "default", "gemini",
+      "gpt-3.5-turbo", "gpt-4", "gpt-4.1", "gpt-4o", "llama-3",
+      "llama-3-70b", "mistral", "phi", "qwen",
     ];
-
-    const normalizedModel = modelToSend.trim().toLowerCase();
-    const isValid = VALID_FRONTEND_MODELS.includes(normalizedModel) ||
-                    ["gpt", "gemini", "claude", "llama", "qwen", "mistral"].some(m => normalizedModel.includes(m));
-
-    if (!isValid) {
-      setValidationError({
-        message: `Validation Error: Invalid or unsupported model name "${modelToSend}". Supported options include: ${VALID_FRONTEND_MODELS.join(", ")}.`
-      });
-      toast.error(`Invalid model "${modelToSend}" selected in settings.`);
-      return;
+    if (!VALID_FRONTEND_MODELS.includes(modelToSend.toLowerCase())) {
+      modelToSend = "gpt-4o";
     }
 
-    const payload = {
-      text: textToVerify,
+    analysis.mutate({
+      query: query.trim() || undefined,
       response: textToVerify,
-      query: query.trim(),
-      provided_evidence: providedEvidence,
       model_name: modelToSend,
-    };
+      provided_evidence: providedEvidence.length > 0 ? providedEvidence : undefined,
+    });
+  }, [response, query, contextEvidence, analysis, reset]);
 
-    try {
-      await analysis.mutateAsync(payload);
-      explain.mutate(payload);
-      toast.success("Verification complete");
-    } catch (err: unknown) {
-      if (err && typeof err === "object" && "body" in err) {
-        const apiErr = err as { message?: string; body?: { details?: unknown } };
-        setValidationError({
-          message: apiErr.message || "Invalid request payload schema or missing required fields.",
-          details: apiErr.body?.details || apiErr.body || null,
-        });
-      } else {
-        const message = err instanceof Error ? err.message : "Verification failed";
-        setValidationError({ message });
-      }
-    }
+  const handlePreset = (preset: typeof SAMPLE_PRESETS[0]) => {
+    setQuery(preset.query);
+    setResponse(preset.response);
+    reset();
   };
 
   const handleReset = () => {
     setQuery("");
     setResponse("");
     setContextEvidence("");
-    setValidationError(null);
     reset();
   };
 
-  const applyPreset = (preset: typeof SAMPLE_PRESETS[0]) => {
-    setQuery(preset.query);
-    setResponse(preset.response);
-    setContextEvidence("");
-    setValidationError(null);
-    reset();
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
       e.preventDefault();
-      if (!isLoading && response.trim()) {
-        handleVerify();
-      }
+      handleVerify();
     }
   };
 
-  const copyMarkdownReport = () => {
-    if (!currentResult) return;
-    const p1 = ((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1);
-    const p2 = currentResult.pillar_scores?.pillar2_confidence_gap != null ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "Protected";
-    const p3 = currentResult.pillar_scores?.pillar3_consistency_failure != null ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "N/A";
-
-    const report = `# HalluciSense Verification Certificate
-- **Target Response**: "${response.trim()}"
-- **Verdict**: ${getRiskLabel(currentResult.risk_level)}
-- **Hallucination Index (H-Score)**: ${(currentResult.overall_h_score * 100).toFixed(1)}%
-- **Latency**: ${currentResult.latency_ms ? formatLatency(currentResult.latency_ms) : "< 250ms"}
-- **Three-Pillar Breakdown**:
-  - Pillar 1 (Factual Evidence / FE): ${p1}%
-  - Pillar 2 (Confidence Estimation / CG): ${p2}
-  - Pillar 3 (Consistency Reasoning / CF): ${p3}
-- **Flagged Claims**: ${currentResult.flagged_sentences_count ?? 0} of ${currentResult.total_sentences_count ?? (currentResult.sentence_scores?.length || 1)} claims
-- **Trace Identifier**: \`${currentResult.trace_id || "LOCAL_EXECUTION"}\`
-- **Timestamp**: ${new Date().toISOString()}`;
-
-    navigator.clipboard.writeText(report);
-    toast.success("Markdown verification report copied to clipboard!");
-  };
-
-  const copyLaTeXReport = () => {
-    if (!currentResult) return;
-    const p1 = ((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1);
-    const p2 = currentResult.pillar_scores?.pillar2_confidence_gap != null ? (currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1) : "--";
-    const p3 = currentResult.pillar_scores?.pillar3_consistency_failure != null ? (currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1) : "--";
-
-    const latex = `% HalluciSense Verification Summary (Trace ID: ${currentResult.trace_id || "LOCAL_EXECUTION"})
-\\begin{table}[h]
-\\centering
-\\caption{HalluciSense Multi-Pillar Verification Summary}
-\\begin{tabular}{lcccc}
-\\hline
-\\textbf{Evaluation Target} & \\textbf{Pillar 1 ($FE$)} & \\textbf{Pillar 2 ($CG$)} & \\textbf{Pillar 3 ($CF$)} & \\textbf{Overall H-Score} \\\\
-\\hline
-Claim Response & ${p1}\\% & ${p2}\\% & ${p3}\\% & \\textbf{${(currentResult.overall_h_score * 100).toFixed(1)}\\%} \\\\
-\\hline
-\\end{tabular}
-\\end{table}`;
-
-    navigator.clipboard.writeText(latex);
-    toast.success("LaTeX table code copied to clipboard!");
-  };
-
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="max-w-5xl mx-auto px-6 py-8 space-y-8">
-        {/* ── Page Title & Subtitle ───────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.04] pb-6"
-        >
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <ShieldCheck className="w-6 h-6 text-slate-400" />
-              <h1 className="text-heading-md font-bold text-white tracking-tight">Verification Workspace</h1>
-            </div>
-            <p className="text-label-md text-slate-400 max-w-xl">
-              Determine whether an AI-generated response is factual, temporally consistent, and grounded using confidence-aware hybrid verification.
-            </p>
-          </div>
+    <div className="max-w-[960px] mx-auto p-5 md:p-8 pb-20 md:pb-8 space-y-6">
+      {/* ── Page Header ─────────────────────────────────────────────── */}
+      <div>
+        <h1 className="text-heading-lg text-[var(--text-primary)]">Verify</h1>
+        <p className="text-label-md text-[var(--text-muted)] mt-1">
+          Analyze any LLM response for hallucinations, factual errors, and inconsistencies.
+        </p>
+      </div>
 
-          {/* Quick Preset Buttons */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-label-sm text-slate-500 font-medium mr-1 font-mono">Presets:</span>
-            {SAMPLE_PRESETS.map((p, idx) => (
-              <button
-                key={idx}
-                onClick={() => applyPreset(p)}
-                disabled={isLoading}
-                className="px-2.5 py-1 text-[11px] rounded-lg border border-white/[0.04] bg-white/[0.01] text-slate-300 hover:text-white hover:bg-white/[0.04] transition-colors cursor-pointer disabled:opacity-50 font-mono"
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ── Response & Evidence Input Experience ────────────────────── */}
+      {/* ── Input Section ────────────────────────────────────────────── */}
+      {!hasResult && (
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
           className="space-y-4"
         >
-          {/* Response Textarea */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label htmlFor="verify-response" className="text-label-sm text-slate-400 font-sans">
-                LLM Response to Verify <span className="text-status-error">*</span>
-              </label>
-              <span className="text-label-sm text-slate-500 font-mono">
-                {response.length} chars • {response.trim() ? response.trim().split(/\s+/).length : 0} words
-              </span>
-            </div>
-            <Textarea
+          {/* Query (optional) */}
+          <div>
+            <label htmlFor="verify-query" className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
+              Original Question <span className="text-[var(--text-dim)] normal-case tracking-normal">(optional)</span>
+            </label>
+            <input
+              id="verify-query"
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="What question was asked to the LLM?"
+              className={cn(
+                "w-full px-3 py-2.5 rounded-[var(--radius-md)]",
+                "bg-[var(--bg-surface)] border border-[var(--border)]",
+                "text-sm text-[var(--text-primary)] placeholder:text-[var(--text-dim)]",
+                "focus:outline-none focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary-soft)]",
+                "transition-all duration-150"
+              )}
+            />
+          </div>
+
+          {/* Response (required) */}
+          <div>
+            <label htmlFor="verify-response" className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
+              LLM Response <span className="text-[var(--hallucination)] normal-case tracking-normal">*</span>
+            </label>
+            <textarea
               id="verify-response"
               value={response}
               onChange={(e) => setResponse(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Paste the AI-generated text or claim to evaluate... (Press ⌘+Enter to verify)"
-              className="min-h-[140px] text-sm leading-relaxed bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
-              disabled={isLoading}
+              placeholder="Paste the AI-generated response to verify…"
+              rows={6}
+              className={cn(
+                "w-full px-3 py-3 rounded-[var(--radius-md)] resize-y",
+                "bg-[var(--bg-surface)] border border-[var(--border)]",
+                "text-sm text-[var(--text-primary)] placeholder:text-[var(--text-dim)]",
+                "focus:outline-none focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary-soft)]",
+                "transition-all duration-150",
+                "min-h-[120px]"
+              )}
             />
           </div>
 
-          {/* Advanced Context Toggle */}
-          <div className="flex items-center justify-between pt-1">
-            <button
-              onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors cursor-pointer font-mono"
-            >
-              {showAdvanced ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-              {showAdvanced ? "Hide Optional Query & Context" : "Add Optional User Query & Reference Context"}
-            </button>
-          </div>
+          {/* Advanced options toggle */}
+          <button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="flex items-center gap-1.5 text-[12px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors cursor-pointer"
+          >
+            <Settings2 className="w-3.5 h-3.5" />
+            Advanced options
+            <ChevronDown className={cn("w-3 h-3 transition-transform", showAdvanced && "rotate-180")} />
+          </button>
 
-          {/* Optional Inputs Drawer */}
           <AnimatePresence>
             {showAdvanced && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-4 pt-2 border-t border-white/[0.04]"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
               >
-                <div className="space-y-2">
-                  <label htmlFor="verify-query" className="text-label-sm text-slate-400 font-sans">
-                    Original Prompt / Question (Optional)
-                  </label>
-                  <Textarea
-                    id="verify-query"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="e.g. When was James Webb Space Telescope launched?"
-                    className="min-h-[70px] text-sm bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
-                    disabled={isLoading}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="verify-context" className="text-label-sm text-slate-400 font-sans">
-                    Reference Evidence / Context Excerpt (Optional)
-                  </label>
-                  <Textarea
-                    id="verify-context"
-                    value={contextEvidence}
-                    onChange={(e) => setContextEvidence(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Paste reference text or ground-truth document against which to verify..."
-                    className="min-h-[90px] text-sm bg-bg-surface border-white/[0.04] focus:border-accent-primary/40 font-mono text-slate-300"
-                    disabled={isLoading}
-                  />
+                <div className="space-y-3 pt-1">
+                  <div>
+                    <label htmlFor="verify-evidence" className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
+                      Context / Evidence <span className="text-[var(--text-dim)] normal-case tracking-normal">(optional)</span>
+                    </label>
+                    <textarea
+                      id="verify-evidence"
+                      value={contextEvidence}
+                      onChange={(e) => setContextEvidence(e.target.value)}
+                      placeholder="Optionally provide ground-truth context or evidence for more accurate verification…"
+                      rows={3}
+                      className={cn(
+                        "w-full px-3 py-2.5 rounded-[var(--radius-md)] resize-y",
+                        "bg-[var(--bg-surface)] border border-[var(--border)]",
+                        "text-sm text-[var(--text-primary)] placeholder:text-[var(--text-dim)]",
+                        "focus:outline-none focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary-soft)]",
+                        "transition-all duration-150"
+                      )}
+                    />
+                  </div>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Contextual Inline Error Feedback */}
-          {validationError && (
-            <InlineError
-              message={validationError.message}
-              details={validationError.details}
-              onClear={() => setValidationError(null)}
-              className="mt-2"
-            />
-          )}
+          {/* Sample Presets */}
+          <div className="flex flex-wrap gap-2">
+            <span className="text-[11px] text-[var(--text-dim)] self-center mr-1">Try:</span>
+            {SAMPLE_PRESETS.map((preset) => (
+              <button
+                key={preset.label}
+                onClick={() => handlePreset(preset)}
+                className={cn(
+                  "px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-medium",
+                  "border border-[var(--border)] text-[var(--text-muted)]",
+                  "hover:border-[var(--border-hover)] hover:text-[var(--text-secondary)] hover:bg-[var(--surface-hover)]",
+                  "transition-all duration-150 cursor-pointer"
+                )}
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
 
-          {/* Action Row */}
-          <div className="flex items-center justify-between pt-2">
-            <div>
-              {(response || query || currentResult) && (
-                <Button variant="ghost" size="sm" onClick={handleReset} disabled={isLoading} className="text-slate-400 hover:text-slate-200">
-                  <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
-                  Clear Workspace
-                </Button>
-              )}
-            </div>
-
+          {/* Submit */}
+          <div className="flex items-center gap-3 pt-2">
             <Button
               onClick={handleVerify}
               disabled={isLoading || !response.trim()}
               size="lg"
-              className="min-w-[190px] bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/20 cursor-pointer flex items-center justify-center gap-2"
+              className="min-w-[140px]"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Verifying...
+                  Analyzing…
                 </>
               ) : (
                 <>
                   <ShieldCheck className="w-4 h-4" />
-                  Verify Response
-                  <kbd className="hidden sm:inline-block ml-1 px-1.5 py-0.5 text-[10px] rounded bg-white/20 border border-white/20 font-mono text-white/90">⌘↵</kbd>
+                  Verify
                 </>
               )}
             </Button>
+            <span className="text-[11px] text-[var(--text-dim)]">
+              <kbd className="font-mono">⌘</kbd>+<kbd className="font-mono">Enter</kbd>
+            </span>
           </div>
         </motion.div>
+      )}
 
-        {/* ── Verification Progress Indicator ──────────────────────────── */}
-        <AnimatePresence>
-          {isLoading && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="p-6 rounded-2xl border border-blue-500/20 bg-blue-500/[0.04] space-y-4"
-            >
-              <div className="flex items-center gap-3">
-                <Loader2 className="w-5 h-5 text-blue-400 animate-spin shrink-0" />
-                <div>
-                  <h3 className="text-sm font-semibold text-white">Running Verification Pipeline</h3>
-                  <p className="text-xs text-slate-400">Extracting atomic claims, querying retrieval indices, resolving epistemic modality, and verifying temporal anchors...</p>
-                </div>
+      {/* ── Loading State ────────────────────────────────────────────── */}
+      {isLoading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="space-y-4"
+        >
+          <Card>
+            <CardContent className="p-6 flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--ai-soft)] border border-[var(--ai-border)] flex items-center justify-center mb-4">
+                <Loader2 className="w-5 h-5 text-[var(--ai)] animate-spin" />
               </div>
-
-              {/* Progress Steps */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 border-t border-white/[0.06]">
-                <ProgressStep label="1. Claim Segmentation" active />
-                <ProgressStep label="2. Evidence Alignment" active />
-                <ProgressStep label="3. Epistemic Gating" active />
-                <ProgressStep label="4. Score Fusion" active />
+              <p className="text-sm font-semibold text-[var(--text-primary)] mb-1">Running verification pipeline</p>
+              <p className="text-xs text-[var(--text-muted)]">
+                Evidence retrieval → NLI verification → Symbolic checks → Hybrid fusion
+              </p>
+              <div className="flex gap-2 mt-4">
+                {["Retrieving", "Verifying", "Scoring"].map((stage, i) => (
+                  <Badge key={stage} variant="ai" size="sm" className={cn("animate-pulse", `stagger-${i + 1}`)}>
+                    {stage}
+                  </Badge>
+                ))}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
 
-        {/* ── Result Experience & Progressive Disclosure ─────────────── */}
-        <AnimatePresence>
-          {currentResult && !isLoading && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.4 }}
-              className="space-y-6"
-            >
-              {/* 1. Primary Verdict Header */}
-              <Card className="p-6 md:p-8 relative overflow-hidden border-white/[0.04] space-y-6">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                  {/* Gauge */}
-                  <div className="flex items-center gap-6">
-                    <ScoreGauge score={currentResult.overall_h_score} riskLevel={currentResult.risk_level} />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <RiskBadge level={currentResult.risk_level} />
-                        {currentResult.latency_ms && (
-                          <span className="text-xs text-slate-500 font-mono flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {formatLatency(currentResult.latency_ms)}
-                          </span>
-                        )}
-                      </div>
+      {/* ── Error State ──────────────────────────────────────────────── */}
+      {hasFailed && !hasResult && (
+        <VerificationUnavailable onRetry={handleVerify} />
+      )}
 
-                      <h2 className="text-heading-md font-bold text-white tracking-tight">
-                        Verdict: {getRiskLabel(currentResult.risk_level)}
-                      </h2>
-                      <p className="text-label-md text-slate-400 mt-1 max-w-md">
-                        Overall Hallucination Index (H-Score):{" "}
-                        <span className="font-mono font-semibold" style={{ color: getRiskColor(currentResult.risk_level) }}>
-                          {(currentResult.overall_h_score * 100).toFixed(1)}%
-                        </span>
-                        {" • "}
-                        {currentResult.flagged_sentences_count ?? 0} of {currentResult.total_sentences_count ?? (currentResult.sentence_scores?.length || 1)} claims flagged.
-                      </p>
-                    </div>
-                  </div>
+      {/* ── Results ──────────────────────────────────────────────────── */}
+      {hasResult && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-5"
+        >
+          {/* New Verification Button */}
+          <div className="flex items-center justify-between">
+            <Button variant="outline" size="sm" onClick={handleReset}>
+              <RotateCcw className="w-3.5 h-3.5" />
+              New Verification
+            </Button>
+            <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+              {currentResult.processing_time_ms && (
+                <Badge variant="outline" size="sm">
+                  <Clock className="w-3 h-3" /> {formatLatency(currentResult.processing_time_ms)}
+                </Badge>
+              )}
+              {currentResult.version && (
+                <Badge variant="outline" size="sm">v{currentResult.version}</Badge>
+              )}
+            </div>
+          </div>
 
-                  {/* Summary Meta Pills */}
-                  <div className="flex flex-wrap md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-white/[0.04] pt-4 md:pt-0 md:pl-6 min-w-[240px]">
-                    <MetaPill
-                      label="P1 Evidence (FE)"
-                      tooltip="Hybrid BM25 + dense retrieval with Cross-Encoder NLI entailment."
-                      value={`${((currentResult.pillar_scores?.pillar1_factual_error ?? currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%`}
-                      status="success"
-                    />
-                    <MetaPill
-                      label="P2 Uncertainty (CG)"
-                      tooltip="Token Shannon entropy H(p) and epistemic/aleatoric uncertainty quantification."
-                      value={currentResult.pillar_scores?.pillar2_confidence_gap != null && (currentResult.pillar_status?.p2_available ?? true) ? `${(currentResult.pillar_scores.pillar2_confidence_gap * 100).toFixed(1)}%` : "Unavailable"}
-                      status={currentResult.pillar_scores?.pillar2_confidence_gap != null && (currentResult.pillar_status?.p2_available ?? true) ? "success" : "neutral"}
-                    />
-                    <MetaPill
-                      label="P3 Consistency (CF)"
-                      tooltip="Multi-prompt generation sampling and semantic contradiction variance."
-                      value={currentResult.pillar_scores?.pillar3_consistency_failure != null && (currentResult.pillar_status?.p3_available ?? true) ? `${(currentResult.pillar_scores.pillar3_consistency_failure * 100).toFixed(1)}%` : "Unavailable"}
-                      status={currentResult.pillar_scores?.pillar3_consistency_failure != null && (currentResult.pillar_status?.p3_available ?? true) ? "success" : "neutral"}
-                    />
-                  </div>
+          {/* Verdict Banner */}
+          <VerdictBanner
+            riskLevel={currentResult.risk_level}
+            hScore={currentResult.overall_h_score}
+            rootCause={currentResult.root_cause_classification}
+            traceId={currentResult.trace_id}
+            latencyMs={currentResult.processing_time_ms ?? currentResult.latency_ms}
+            totalClaims={currentResult.total_sentences_count ?? currentResult.sentence_scores?.length}
+            flaggedClaims={currentResult.flagged_sentences_count}
+            correctionAvailable={true}
+            onCorrect={() => {
+              toast.info("Correction feature available through the Chat interface.");
+            }}
+          />
+
+          {/* Pillar Scores */}
+          {currentResult.pillar_scores && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[var(--text-muted)]" />
+                  Pillar Signals
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <PillarScoreCard
+                    label="Evidence Grounding"
+                    sublabel="Pillar 1 — Retrieval + NLI"
+                    value={currentResult.pillar_scores.retrieval ?? currentResult.pillar_scores.pillar1_factual_error}
+                    status={currentResult.pillar_status?.p1_available !== false ? "active" : "unavailable"}
+                  />
+                  <PillarScoreCard
+                    label="Confidence Estimation"
+                    sublabel="Pillar 2 — Token uncertainty"
+                    value={currentResult.pillar_scores.confidence ?? currentResult.pillar_scores.pillar2_confidence_gap}
+                    status={currentResult.pillar_status?.p2_available ? "active" : "unavailable"}
+                  />
+                  <PillarScoreCard
+                    label="Consistency Reasoning"
+                    sublabel="Pillar 3 — Self-consistency"
+                    value={currentResult.pillar_scores.consistency ?? currentResult.pillar_scores.pillar3_consistency_failure}
+                    status={currentResult.pillar_status?.p3_available ? "active" : "unavailable"}
+                  />
                 </div>
 
-                {/* ── Signal Provenance & Availability Transparency Banner ──── */}
-                <div className="p-3.5 rounded-xl bg-blue-500/[0.03] border border-blue-500/10 flex flex-wrap items-center justify-between gap-2.5 text-[11px] font-mono">
-                  <div className="flex items-center gap-2 flex-wrap text-slate-300">
-                    <span className="text-slate-400 font-semibold font-sans">Signals used:</span>
-                    <span className="text-emerald-400 font-medium flex items-center gap-1">Evidence Grounding (P1) ✓</span>
-                    <span className="text-slate-600">·</span>
-                    <span className={cn((currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? "text-emerald-400 font-medium" : "text-slate-400")}>
-                      Confidence Estimation (P2) {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? "✓" : "— unavailable for static text"}
-                    </span>
-                    <span className="text-slate-600">·</span>
-                    <span className={cn((currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? "text-emerald-400 font-medium" : "text-slate-400")}>
-                      Consistency Reasoning (P3) {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? "✓" : "— unavailable for static text"}
-                    </span>
-                  </div>
-                  <span className="text-[10px] text-slate-400 font-sans italic">
-                    {(currentResult.pillar_status?.is_full_analysis || currentResult.fusion_decomposition?.fusion_mode === "FULL_THREE_PILLAR")
-                      ? "Full 3-Pillar Fusion Active"
-                      : "Evaluated via Invariant Grounded Evidence (P1)"}
-                  </span>
-                </div>
-
-                {/* ── Mathematical Fusion Decomposition Box ─────────────────── */}
-                <div className="p-4 rounded-xl bg-black/30 border border-white/[0.06] space-y-3 font-mono text-xs">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-2.5">
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-400 font-sans font-semibold text-xs">Three-Pillar Fusion Formula:</span>
-                      <code className="text-purple-300 font-bold">H = &alpha;P₁ + &beta;P₂ + &gamma;P₃</code>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className={cn(
-                        "text-[10px] px-2 py-0.5 rounded font-semibold border",
-                        (currentResult.fusion_decomposition?.fusion_mode === "FULL_THREE_PILLAR" || currentResult.pillar_status?.is_full_analysis)
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                          : "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                      )}>
-                        {currentResult.fusion_decomposition?.fusion_mode || (currentResult.pillar_status?.is_full_analysis ? "FULL_THREE_PILLAR" : "PARTIAL_RENORMALIZED")}
+                {/* Fusion Decomposition */}
+                {currentResult.fusion_decomposition && (
+                  <div className="mt-4 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)]">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Info className="w-3.5 h-3.5 text-[var(--text-dim)]" />
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                        Fusion Decomposition
                       </span>
+                      <Badge variant="ai" size="sm">{currentResult.fusion_decomposition.fusion_mode}</Badge>
                     </div>
-                  </div>
-
-                  {/* 3-Pillar Step Calculation Matrix */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                    {/* P1 Box */}
-                    <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] space-y-1">
-                      <div className="flex items-center justify-between text-[11px] text-slate-400">
-                        <span className="font-sans">P1 Evidence Grounding</span>
-                        <span className="text-emerald-400 font-bold">w = {(currentResult.fusion_decomposition?.effective_weights?.alpha ?? 0.45).toFixed(2)}</span>
-                      </div>
-                      <div className="flex items-baseline justify-between text-slate-200">
-                        <span className="text-[11px]">Score: {((currentResult.pillar_scores?.retrieval ?? 0) * 100).toFixed(1)}%</span>
-                        <span className="text-slate-400 text-[10px]">&rarr; +{((currentResult.fusion_decomposition?.weighted_contributions?.p1_contribution ?? ((currentResult.fusion_decomposition?.effective_weights?.alpha ?? 0.45) * (currentResult.pillar_scores?.retrieval ?? 0))) * 100).toFixed(2)}%</span>
-                      </div>
-                    </div>
-
-                    {/* P2 Box */}
-                    <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] space-y-1">
-                      <div className="flex items-center justify-between text-[11px] text-slate-400">
-                        <span className="font-sans">P2 Confidence Gap</span>
-                        <span className={cn("font-bold", (currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? "text-emerald-400" : "text-slate-500")}>
-                          {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null)) ? `w = ${(currentResult.fusion_decomposition?.effective_weights?.beta ?? 0.30).toFixed(2)}` : "Unavailable"}
-                        </span>
-                      </div>
-                      <div className="flex items-baseline justify-between text-slate-200">
-                        <span className="text-[11px]">
-                          {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null))
-                            ? `Score: ${((currentResult.pillar_scores?.confidence ?? 0) * 100).toFixed(1)}%`
-                            : "No logprobs"}
-                        </span>
-                        <span className="text-slate-400 text-[10px]">
-                          {(currentResult.pillar_status?.p2_available ?? (currentResult.pillar_scores?.confidence != null))
-                            ? `&rarr; +${((currentResult.fusion_decomposition?.weighted_contributions?.p2_contribution ?? 0) * 100).toFixed(2)}%`
-                            : "—"}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* P3 Box */}
-                    <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] space-y-1">
-                      <div className="flex items-center justify-between text-[11px] text-slate-400">
-                        <span className="font-sans">P3 Consistency Failure</span>
-                        <span className={cn("font-bold", (currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? "text-emerald-400" : "text-slate-500")}>
-                          {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null)) ? `w = ${(currentResult.fusion_decomposition?.effective_weights?.gamma ?? 0.25).toFixed(2)}` : "Unavailable"}
-                        </span>
-                      </div>
-                      <div className="flex items-baseline justify-between text-slate-200">
-                        <span className="text-[11px]">
-                          {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null))
-                            ? `Score: ${((currentResult.pillar_scores?.consistency ?? 0) * 100).toFixed(1)}%`
-                            : "Single sample"}
-                        </span>
-                        <span className="text-slate-400 text-[10px]">
-                          {(currentResult.pillar_status?.p3_available ?? (currentResult.pillar_scores?.consistency != null))
-                            ? `&rarr; +${((currentResult.fusion_decomposition?.weighted_contributions?.p3_contribution ?? 0) * 100).toFixed(2)}%`
-                            : "—"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Plain Language Explanation */}
-                  {currentResult.fusion_decomposition?.explanation && (
-                    <p className="text-[11px] text-slate-400 font-sans leading-relaxed pt-1 border-t border-white/[0.04]">
-                      {currentResult.fusion_decomposition.explanation}
+                    <p className="text-[12px] text-[var(--text-muted)] font-mono leading-relaxed break-all">
+                      {currentResult.fusion_decomposition.equation}
                     </p>
-                  )}
-                </div>
-
-                {/* Academic Export Actions */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/[0.04]">
-                  <div className="text-xs text-slate-400 font-mono flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-accent-primary" />
-                    <span>Platt-Calibrated Hybrid Score (ECE &le; 0.0257)</span>
-                    {currentResult.trace_id && (
-                      <a
-                        href={`/traces`}
-                        className="text-[11px] text-blue-400 hover:text-blue-300 underline ml-2 flex items-center gap-1"
-                      >
-                        Inspect Trace ({currentResult.trace_id.slice(0, 12)}) <ExternalLink className="w-3 h-3" />
-                      </a>
-                    )}
                   </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-500 font-mono hidden sm:inline">Export:</span>
-                    <button
-                      onClick={copyMarkdownReport}
-                      className="px-2.5 py-1.5 text-xs rounded-lg border border-white/[0.08] bg-white/[0.02] text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center gap-1.5 cursor-pointer font-mono"
-                    >
-                      <FileText className="w-3.5 h-3.5 text-blue-400" />
-                      Markdown
-                    </button>
-                    <button
-                      onClick={copyLaTeXReport}
-                      className="px-2.5 py-1.5 text-xs rounded-lg border border-white/[0.08] bg-white/[0.02] text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors flex items-center gap-1.5 cursor-pointer font-mono"
-                    >
-                      <Code className="w-3.5 h-3.5 text-purple-400" />
-                      LaTeX
-                    </button>
-                  </div>
-                </div>
-              </Card>
-
-              {/* 2. Progressive Disclosure Tab View */}
-              <Tabs defaultValue="claims" className="space-y-6">
-                <TabsList className="bg-bg-surface border border-white/[0.04] p-1 rounded-xl flex-wrap">
-                  <TabsTrigger value="claims" className="cursor-pointer">Atomic Claims ({currentResult.sentence_scores?.length || 0})</TabsTrigger>
-                  <TabsTrigger value="evidence" className="cursor-pointer">Retrieved Sources ({currentResult.evidence?.length || 0})</TabsTrigger>
-                  <TabsTrigger value="technical" className="cursor-pointer">Attention Heatmap & Telemetry</TabsTrigger>
-                  {currentExplain && <TabsTrigger value="explanation" className="cursor-pointer">Natural Language Reasoning</TabsTrigger>}
-                </TabsList>
-
-                {/* Claim-Level Results Tab */}
-                <TabsContent value="claims" className="space-y-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <h3 className="text-sm font-semibold text-slate-300">Atomic Claims & Epistemic Modality</h3>
-                      <p className="text-xs text-slate-500">Sentence segmentation, fact verification gates, and temporal consistency anchors</p>
-                    </div>
-                    <span className="text-xs font-mono text-slate-500">
-                      {currentResult.flagged_sentences_count ?? 0} flagged
-                    </span>
-                  </div>
-
-                  {currentResult.sentence_scores?.map((sentence, idx) => (
-                    <ClaimCard key={idx} sentence={sentence} index={idx} />
-                  ))}
-                </TabsContent>
-
-                {/* Evidence Citations Tab */}
-                <TabsContent value="evidence" className="space-y-4">
-                  <div className="mb-2">
-                    <h3 className="text-sm font-semibold text-slate-300">External Evidence & Passage Grounding</h3>
-                    <p className="text-xs text-slate-500">Dense embeddings and cross-encoder NLI passage alignment against external knowledge corpora</p>
-                  </div>
-
-                  {!currentResult.evidence || currentResult.evidence.length === 0 ? (
-                    <div className="text-center py-10 px-6 text-slate-400 text-sm bg-white/[0.02] rounded-xl border border-white/[0.06] space-y-1">
-                      <p className="font-semibold text-slate-300">No external passages retrieved for this claim.</p>
-                      <p className="text-xs text-slate-500">HalluciSense evaluated factual grounding using parametric uncertainty bounds and semantic consistency checks.</p>
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {currentResult.evidence.map((ev, i) => (
-                        <div key={i} className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220] space-y-2">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-blue-400">{ev.source_name || ev.source || "Reference Passage"}</span>
-                            {ev.similarity_score != null && (
-                              <span className="text-xs font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
-                                Relevancy: {(ev.similarity_score * 100).toFixed(0)}%
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-slate-200 leading-relaxed">&quot;{ev.snippet}&quot;</p>
-                          {ev.source_url && (
-                            <a href={ev.source_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:underline flex items-center gap-1">
-                              View Source Document <ExternalLink className="w-3 h-3" />
-                            </a>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </TabsContent>
-
-                {/* Technical Traces Tab */}
-                <TabsContent value="technical" className="space-y-6">
-                  {/* Token Heatmap */}
-                  {currentResult.token_heatmap && currentResult.token_heatmap.length > 0 && (
-                    <div className="space-y-3">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <div>
-                          <h4 className="text-sm font-semibold text-slate-300">Token-Level Hallucination Heatmap</h4>
-                          <p className="text-xs text-slate-500">Per-token probability distribution colored by calibrated risk classification</p>
-                        </div>
-
-                        {/* 4-Tier Risk Legend */}
-                        <div className="flex items-center gap-2 flex-wrap text-[10px] font-mono">
-                          <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Verified (&le;25%)</span>
-                          <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Review (25-50%)</span>
-                          <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/20">Mod Risk (50-75%)</span>
-                          <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Hallucinated (&gt;75%)</span>
-                        </div>
-                      </div>
-
-                      <TokenHeatmap tokens={currentResult.token_heatmap} />
-                    </div>
-                  )}
-
-                  {/* Metadata & Root Cause */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220]">
-                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Root Cause Classification</span>
-                      <span className="text-sm font-semibold text-white">{currentResult.root_cause_classification || "None (Factually Grounded)"}</span>
-                    </div>
-                    <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220]">
-                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Execution Trace Identifier</span>
-                      <span className="text-sm font-mono text-slate-300">{currentResult.trace_id || "LOCAL_EXECUTION"}</span>
-                    </div>
-                    <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220]">
-                      <span className="text-xs text-slate-500 uppercase tracking-wider block mb-1">Hybrid Weights (FE / CG / CF)</span>
-                      <span className="text-sm font-mono text-slate-300">&alpha;=0.45 / &beta;=0.30 / &gamma;=0.25</span>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                {/* Explanation Tab */}
-                {currentExplain && (
-                  <TabsContent value="explanation" className="space-y-4">
-                    <div className="p-6 rounded-xl border border-white/[0.06] bg-[#0b1220] space-y-4">
-                      <div className="border-b border-white/[0.06] pb-3">
-                        <h4 className="text-sm font-semibold text-white">Diagnostic Scientific Explanation</h4>
-                        <p className="text-xs text-slate-400">Step-by-step reasoning behind the confidence rating and detected factual discrepancies</p>
-                      </div>
-                      <p className="text-sm text-slate-300 whitespace-pre-line leading-relaxed">
-                        {currentExplain.explanation_markdown || currentExplain.confidence_explanation}
-                      </p>
-
-                      {currentExplain.remediation_suggestions && currentExplain.remediation_suggestions.length > 0 && (
-                        <div className="pt-4 border-t border-white/[0.06] space-y-2">
-                          <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-400">Recommended Prompt & Model Remediations</h5>
-                          <ul className="list-disc list-inside text-xs text-slate-400 space-y-1">
-                            {currentExplain.remediation_suggestions.map((s, i) => (
-                              <li key={i}>{s}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </TabsContent>
                 )}
-              </Tabs>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
-
-/* ── Auxiliary Components ─────────────────────────────────────────────────── */
-
-function ProgressStep({ label, active }: { label: string; active?: boolean }) {
-  return (
-    <div
-      className={`px-2.5 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1.5 transition-colors ${
-        active
-          ? "border-blue-500/30 bg-blue-950/40 text-blue-300"
-          : "border-white/[0.06] bg-white/[0.01] text-slate-400"
-      }`}
-    >
-      <div className={`w-1.5 h-1.5 rounded-full ${active ? "bg-blue-400 animate-ping" : "bg-slate-600"}`} />
-      <span>{label}</span>
-    </div>
-  );
-}
-
-function RiskBadge({ level }: { level: string }) {
-  const label = getRiskLabel(level);
-  const status = level === "VERIFIED" ? "success" : level === "LIKELY_HALLUCINATED" ? "error" : "warning";
-  return <StatusBadge label={label} status={status} />;
-}
-
-function MetaPill({ label, value, tooltip, status = "neutral" }: { label: string; value: string; tooltip?: string; status?: "success" | "neutral" | "warning" | "error" }) {
-  return (
-    <div
-      title={tooltip}
-      className={cn(
-        "flex items-center justify-between gap-4 text-xs font-mono p-1.5 px-2.5 rounded-lg border transition-colors cursor-help group",
-        status === "success" ? "bg-white/[0.02] border-white/[0.06] hover:border-white/[0.12]" : "bg-white/[0.01] border-white/[0.03] opacity-75 hover:opacity-100"
-      )}
-    >
-      <span className="text-slate-400 flex items-center gap-1 font-sans">
-        {label}
-        {tooltip && <Info className="w-3 h-3 text-slate-500 group-hover:text-blue-400 transition-colors" />}
-      </span>
-      <span className={cn("font-semibold font-mono", status === "success" ? "text-slate-200" : "text-slate-500")}>{value}</span>
-    </div>
-  );
-}
-
-function ClaimCard({ sentence, index }: { sentence: SentenceScore; index: number }) {
-  const [open, setOpen] = useState(true);
-  const score = sentence.h_score ?? sentence.score ?? 0;
-  const riskColor = getRiskColor(sentence.risk_level);
-  const isProtected = sentence.epistemic_category && sentence.epistemic_category !== "ASSERTED_FACT";
-
-  return (
-    <Card className="overflow-hidden transition-colors">
-      <div
-        onClick={() => setOpen(!open)}
-        className="p-4 flex items-start gap-4 cursor-pointer hover:bg-white/[0.01] transition-colors"
-      >
-        <span className="text-xs font-mono text-slate-500 mt-0.5 shrink-0">#{String(index + 1).padStart(2, "0")}</span>
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-white leading-snug">{sentence.sentence_text || sentence.text}</p>
-          <div className="flex items-center gap-2 mt-2 flex-wrap">
-            <RiskBadge level={sentence.risk_level} />
-
-            {sentence.epistemic_category && (
-              <StatusBadge
-                label={sentence.epistemic_category + (isProtected ? " (Protected Gate)" : "")}
-                status={isProtected ? "info" : "default"}
-              />
-            )}
-
-            {sentence.temporal_anchor?.asserted_year && (
-              <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
-                Year: {sentence.temporal_anchor.asserted_year}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="text-right">
-            <span className="text-xs font-mono font-bold block" style={{ color: riskColor }}>
-              {(score * 100).toFixed(0)}%
-            </span>
-            <span className="text-[10px] text-slate-500">H-Score</span>
-          </div>
-          {open ? <ChevronUp className="w-4 h-4 text-slate-500" /> : <ChevronDown className="w-4 h-4 text-slate-500" />}
-        </div>
-      </div>
-
-      {open && (
-        <div className="px-4 pb-4 pt-2 border-t border-white/[0.04] bg-black/20 space-y-3 text-xs">
-          {sentence.reasoning_summary && (
-            <p className="text-slate-300 leading-relaxed">
-              <strong className="text-slate-400">Reasoning:</strong> {sentence.reasoning_summary}
-            </p>
+              </CardContent>
+            </Card>
           )}
 
-          {sentence.nli_entailment_prob != null && (
-            <div className="flex items-center gap-4 text-slate-400 font-mono">
-              <span>Entailment: {(sentence.nli_entailment_prob * 100).toFixed(1)}%</span>
-              <span>Contradiction: {((sentence.nli_contradiction_prob || 0) * 100).toFixed(1)}%</span>
+          {/* Claim-Level Analysis */}
+          {currentResult.sentence_scores && currentResult.sentence_scores.length > 0 && (
+            <div>
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">
+                Claim-Level Analysis ({currentResult.sentence_scores.length} claims)
+              </h3>
+              <div className="space-y-2">
+                {currentResult.sentence_scores.map((claim, i) => (
+                  <ClaimAnalysisCard key={i} claim={claim} index={i} />
+                ))}
+              </div>
             </div>
           )}
 
-          {sentence.evidence_matched && sentence.evidence_matched.length > 0 && (
-            <div className="space-y-1.5 pt-1">
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 block">Matched Evidence Excerpt</span>
-              {sentence.evidence_matched.map((ev, ei) => (
-                <div key={ei} className="p-2.5 rounded bg-white/[0.03] border border-white/[0.06] text-slate-300">
-                  &quot;{ev.snippet}&quot; — <span className="text-blue-400">{ev.source_name || "Wikipedia"}</span>
+          {/* Token Heatmap (if available) */}
+          {currentResult.token_heatmap && currentResult.token_heatmap.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-sm">
+                  Token Risk Heatmap
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-1">
+                  {currentResult.token_heatmap.map((token, i) => (
+                    <span
+                      key={i}
+                      className={cn(
+                        "px-1 py-0.5 rounded text-[12px] font-mono",
+                        token.is_hallucination_suspect ? "token-red" :
+                          token.tier === "GREEN" ? "token-green" :
+                          token.tier === "YELLOW" ? "token-yellow" :
+                          token.tier === "ORANGE" ? "token-orange" :
+                          token.tier === "RED" ? "token-red" :
+                          "text-[var(--text-secondary)]"
+                      )}
+                      title={`Score: ${token.score?.toFixed(3) ?? "—"}, Entropy: ${token.entropy?.toFixed(3) ?? "—"}`}
+                    >
+                      {token.token}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </CardContent>
+            </Card>
           )}
-        </div>
+        </motion.div>
       )}
-    </Card>
+    </div>
+  );
+}
+
+function PillarScoreCard({
+  label,
+  sublabel,
+  value,
+  status,
+}: {
+  label: string;
+  sublabel: string;
+  value?: number | null;
+  status: "active" | "unavailable";
+}) {
+  const isAvailable = status === "active" && value !== null && value !== undefined;
+  const scorePercent = isAvailable ? Math.round(value * 100) : null;
+  const riskColor = isAvailable
+    ? value > 0.5 ? "var(--hallucination)" : value > 0.25 ? "var(--warning)" : "var(--verified)"
+    : "var(--text-dim)";
+
+  return (
+    <div className="rounded-[var(--radius)] bg-[var(--surface)] p-3">
+      <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-0.5">{label}</p>
+      <p className="text-[10px] text-[var(--text-dim)] mb-2">{sublabel}</p>
+      {isAvailable ? (
+        <p className="text-xl font-bold font-mono" style={{ color: riskColor }}>
+          {scorePercent}%
+        </p>
+      ) : (
+        <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
+      )}
+    </div>
   );
 }

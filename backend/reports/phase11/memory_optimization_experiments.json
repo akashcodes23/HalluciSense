@@ -1,0 +1,104 @@
+{
+  "tokenizer_investigation": {
+    "python_base_rss_mb": 15.47,
+    "transformers_import_rss_mb": 327.16,
+    "import_delta_mb": 311.69,
+    "tokenizer_loaded_rss_mb": 481.05,
+    "tokenizer_isolated_delta_mb": 153.89,
+    "load_time_ms": 2773.05
+  },
+  "control": {
+    "mode": "control",
+    "startup_rss_mb": 171.72,
+    "post_model_rss_mb": 904.58,
+    "first_request_rss_mb": 1086.53,
+    "peak_rss_mb": 1092.11,
+    "parameter_memory_mb": 541.29,
+    "first_request_latency_ms": 70.1,
+    "mean_latency_ms": 32.39,
+    "p95_latency_ms": 36.34,
+    "smoke_accuracy": {
+      "true_sol_verified": true,
+      "true_sol_h_score": 0.0237,
+      "false_sol_detected": true,
+      "false_sol_h_score": 0.9966,
+      "true_water_verified": true,
+      "true_water_h_score": 0.004,
+      "false_water_detected": true,
+      "false_water_h_score": 0.9997,
+      "negation_detected": true,
+      "negation_h_score": 0.9996,
+      "repair_performed": true,
+      "repair_passed": true,
+      "repair_final_text": "The speed of light in vacuum is approximately 299,792,458 m/s."
+    },
+    "all_smoke_pass": true
+  },
+  "variant_a_safe_cpu": {
+    "mode": "variant_a",
+    "startup_rss_mb": 171.05,
+    "post_model_rss_mb": 904.83,
+    "first_request_rss_mb": 1086.28,
+    "peak_rss_mb": 1089.83,
+    "parameter_memory_mb": 541.29,
+    "first_request_latency_ms": 63.47,
+    "mean_latency_ms": 35.46,
+    "p95_latency_ms": 41.92,
+    "smoke_accuracy": {
+      "true_sol_verified": true,
+      "true_sol_h_score": 0.0237,
+      "false_sol_detected": true,
+      "false_sol_h_score": 0.9966,
+      "true_water_verified": true,
+      "true_water_h_score": 0.004,
+      "false_water_detected": true,
+      "false_water_h_score": 0.9997,
+      "negation_detected": true,
+      "negation_h_score": 0.9996,
+      "repair_performed": true,
+      "repair_passed": true,
+      "repair_final_text": "The speed of light in vacuum is approximately 299,792,458 m/s."
+    },
+    "all_smoke_pass": true
+  },
+  "variant_b_dynamic_int8": {
+    "mode": "variant_b",
+    "startup_rss_mb": 170.95,
+    "post_model_rss_mb": 2026.75,
+    "first_request_rss_mb": 2090.08,
+    "peak_rss_mb": 2090.64,
+    "parameter_memory_mb": 376.88,
+    "first_request_latency_ms": 409.83,
+    "mean_latency_ms": 319.29,
+    "p95_latency_ms": 340.38,
+    "smoke_accuracy": {
+      "true_sol_verified": true,
+      "true_sol_h_score": 0.0102,
+      "false_sol_detected": true,
+      "false_sol_h_score": 0.8,
+      "true_water_verified": true,
+      "true_water_h_score": 0.0047,
+      "false_water_detected": true,
+      "false_water_h_score": 0.9997,
+      "negation_detected": true,
+      "negation_h_score": 0.9996,
+      "repair_performed": true,
+      "repair_passed": true,
+      "repair_final_text": "The speed of light in vacuum is approximately 299,792,458 m/s."
+    },
+    "all_smoke_pass": true
+  },
+  "comparative_analysis": {
+    "control_peak_rss_mb": 1092.11,
+    "variant_a_peak_rss_mb": 1089.83,
+    "variant_b_peak_rss_mb": 2090.64,
+    "variant_a_rss_reduction_mb": 2.28,
+    "variant_b_rss_reduction_mb": -998.53,
+    "variant_a_rss_reduction_pct": 0.21,
+    "variant_b_rss_reduction_pct": -91.43
+  },
+  "target_assessment": {
+    "preferred_target_700mb": "NOT MET",
+    "interim_target_800mb": "NOT MET"
+  }
+}

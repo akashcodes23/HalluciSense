@@ -28,10 +28,9 @@ export function InlineError({
   };
 
   return (
-    <Card
-      status="error"
+    <div
       className={cn(
-        "p-4 bg-status-error/5 border border-status-error/20 rounded-xl space-y-2 relative",
+        "p-4 bg-[var(--hallucination-soft)] border border-[var(--hallucination-border)] rounded-[var(--radius-lg)] space-y-2 relative",
         className
       )}
     >
@@ -70,6 +69,6 @@ export function InlineError({
           )}
         </div>
       )}
-    </Card>
+    </div>
   );
 }

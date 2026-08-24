@@ -1,0 +1,294 @@
+{
+  "model_metadata": {
+    "model_name": "cross-encoder/nli-deberta-v3-small",
+    "total_parameters": 141897219,
+    "trainable_parameters": 141897219,
+    "parameter_bytes": 567588876,
+    "parameter_memory_mb": 541.29,
+    "dtype": "torch.float32",
+    "device": "mps:0",
+    "training_mode": false
+  },
+  "device_diagnostic": {
+    "cuda_available": false,
+    "mps_available": true,
+    "selected_device": "mps",
+    "default_torch_threads": 4,
+    "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]"
+  },
+  "duplication_check": {
+    "model_registry_nli_id": 5324368400,
+    "entailment_model_id": 5324368400,
+    "p1_model_id": 5324368400,
+    "are_identical_instances": true,
+    "data_pointer_identical": true
+  },
+  "individual_steps": [
+    {
+      "step": "A. Baseline Process State",
+      "rss_mb": 17.2,
+      "delta_mb": 0.0,
+      "elapsed_ms": 0.0
+    },
+    {
+      "step": "B. import torch",
+      "rss_mb": 211.7,
+      "delta_mb": 194.48,
+      "elapsed_ms": 1340.75
+    },
+    {
+      "step": "C. import transformers",
+      "rss_mb": 246.75,
+      "delta_mb": 35.05,
+      "elapsed_ms": 420.5
+    },
+    {
+      "step": "D. import ModelRegistry",
+      "rss_mb": 348.42,
+      "delta_mb": 101.67,
+      "elapsed_ms": 1648.24
+    },
+    {
+      "step": "E. load tokenizer only",
+      "rss_mb": 701.0,
+      "delta_mb": 352.58,
+      "elapsed_ms": 4305.76
+    },
+    {
+      "step": "F. load DeBERTa model only",
+      "rss_mb": 1154.72,
+      "delta_mb": 453.72,
+      "elapsed_ms": 5550.53
+    },
+    {
+      "step": "G. model.eval()",
+      "rss_mb": 1154.72,
+      "delta_mb": 0.0,
+      "elapsed_ms": 0.66
+    },
+    {
+      "step": "H. model.to(mps)",
+      "rss_mb": 1159.69,
+      "delta_mb": 2.13,
+      "elapsed_ms": 140.51
+    },
+    {
+      "step": "I. construct EvidenceEntailmentEngine",
+      "rss_mb": 1159.7,
+      "delta_mb": 0.0,
+      "elapsed_ms": 1.01
+    },
+    {
+      "step": "J. construct Pillar1RetrievalEngine",
+      "rss_mb": 1159.72,
+      "delta_mb": 0.0,
+      "elapsed_ms": 1.86
+    },
+    {
+      "step": "K. construct HybridRetriever",
+      "rss_mb": 1159.72,
+      "delta_mb": 0.0,
+      "elapsed_ms": 0.08
+    },
+    {
+      "step": "L. construct HallucinationDetectionPipeline",
+      "rss_mb": 1159.72,
+      "delta_mb": 0.0,
+      "elapsed_ms": 1.13
+    },
+    {
+      "step": "M. first NLI inference",
+      "rss_mb": 1230.89,
+      "delta_mb": 71.14,
+      "elapsed_ms": 197.33
+    },
+    {
+      "step": "N. second NLI inference",
+      "rss_mb": 1231.0,
+      "delta_mb": 0.11,
+      "elapsed_ms": 16.63
+    },
+    {
+      "step": "O. after gc.collect()",
+      "rss_mb": 1231.0,
+      "delta_mb": 0.0,
+      "elapsed_ms": 85.65
+    },
+    {
+      "step": "P. after torch cache cleanup",
+      "rss_mb": 1231.0,
+      "delta_mb": 0.0,
+      "elapsed_ms": 0.27
+    }
+  ],
+  "thread_count_comparison": [
+    {
+      "threads": 1,
+      "elapsed_ms": 136.56,
+      "rss_before_mb": 1231.03,
+      "rss_after_mb": 1231.17
+    },
+    {
+      "threads": 2,
+      "elapsed_ms": 143.2,
+      "rss_before_mb": 1231.17,
+      "rss_after_mb": 1231.72
+    },
+    {
+      "threads": 4,
+      "elapsed_ms": 138.38,
+      "rss_before_mb": 1231.72,
+      "rss_after_mb": 1231.86
+    },
+    {
+      "threads": 4,
+      "elapsed_ms": 141.66,
+      "rss_before_mb": 1231.86,
+      "rss_after_mb": 1231.97
+    }
+  ],
+  "batch_size_comparison": [
+    {
+      "batch_size": 4,
+      "total_pairs": 32,
+      "elapsed_ms": 283.32,
+      "rss_before_mb": 1231.97,
+      "rss_after_mb": 1270.5,
+      "delta_mb": 38.53
+    },
+    {
+      "batch_size": 8,
+      "total_pairs": 32,
+      "elapsed_ms": 204.3,
+      "rss_before_mb": 1270.5,
+      "rss_after_mb": 1288.36,
+      "delta_mb": 17.86
+    },
+    {
+      "batch_size": 16,
+      "total_pairs": 32,
+      "elapsed_ms": 184.66,
+      "rss_before_mb": 1288.36,
+      "rss_after_mb": 1307.62,
+      "delta_mb": 19.26
+    },
+    {
+      "batch_size": 32,
+      "total_pairs": 32,
+      "elapsed_ms": 104.69,
+      "rss_before_mb": 1307.62,
+      "rss_after_mb": 1325.88,
+      "delta_mb": 18.26
+    }
+  ],
+  "retention_over_10_requests": [
+    {
+      "request_index": 1,
+      "rss_mb": 1360.41,
+      "delta_mb": 34.53
+    },
+    {
+      "request_index": 2,
+      "rss_mb": 1388.03,
+      "delta_mb": 27.62
+    },
+    {
+      "request_index": 3,
+      "rss_mb": 1470.17,
+      "delta_mb": 82.14
+    },
+    {
+      "request_index": 4,
+      "rss_mb": 1471.86,
+      "delta_mb": 1.69
+    },
+    {
+      "request_index": 5,
+      "rss_mb": 1497.8,
+      "delta_mb": 25.94
+    },
+    {
+      "request_index": 6,
+      "rss_mb": 1497.89,
+      "delta_mb": 0.09
+    },
+    {
+      "request_index": 7,
+      "rss_mb": 1497.92,
+      "delta_mb": 0.03
+    },
+    {
+      "request_index": 8,
+      "rss_mb": 1498.09,
+      "delta_mb": 0.17
+    },
+    {
+      "request_index": 9,
+      "rss_mb": 1498.11,
+      "delta_mb": 0.02
+    },
+    {
+      "request_index": 10,
+      "rss_mb": 1498.16,
+      "delta_mb": 0.05
+    }
+  ],
+  "tracemalloc_top_10": [
+    {
+      "size_kb": 153200.76,
+      "count": 1228633,
+      "trace": "<frozen importlib._bootstrap_external>:672"
+    },
+    {
+      "size_kb": 13598.97,
+      "count": 123992,
+      "trace": "<frozen importlib._bootstrap>:241"
+    },
+    {
+      "size_kb": 10887.95,
+      "count": 107137,
+      "trace": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/linecache.py:137"
+    },
+    {
+      "size_kb": 4215.58,
+      "count": 16267,
+      "trace": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/abc.py:106"
+    },
+    {
+      "size_kb": 2672.14,
+      "count": 14844,
+      "trace": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/site-packages/torch/__init__.py:1954"
+    },
+    {
+      "size_kb": 2539.89,
+      "count": 15664,
+      "trace": "<frozen importlib._bootstrap_external>:128"
+    },
+    {
+      "size_kb": 2277.94,
+      "count": 26180,
+      "trace": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/dataclasses.py:432"
+    },
+    {
+      "size_kb": 2112.43,
+      "count": 27342,
+      "trace": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/inspect.py:2969"
+    },
+    {
+      "size_kb": 1744.41,
+      "count": 14993,
+      "trace": "<frozen importlib._bootstrap_external>:1616"
+    },
+    {
+      "size_kb": 1439.18,
+      "count": 24522,
+      "trace": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/inspect.py:2967"
+    }
+  ],
+  "peak_rss_mb": 1990.81,
+  "largest_memory_consumer": {
+    "step": "F. load DeBERTa model only",
+    "delta_mb": 453.72,
+    "final_rss_mb": 1154.72
+  }
+}

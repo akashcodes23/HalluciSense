@@ -1,34 +1,35 @@
-"use client";
-
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816] disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-150 cursor-pointer disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
   {
     variants: {
       variant: {
         default:
-          "bg-blue-600 text-white shadow-[0_0_0_1px_rgba(37,99,235,0.4),0_4px_16px_rgba(37,99,235,0.3)] hover:bg-blue-500 hover:shadow-[0_0_0_1px_rgba(37,99,235,0.6),0_6px_24px_rgba(37,99,235,0.45)] hover:-translate-y-0.5 active:translate-y-0",
+          "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] shadow-[var(--shadow-sm)]",
         secondary:
-          "bg-white/[0.04] text-slate-300 border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] hover:text-white hover:-translate-y-0.5",
-        ghost:
-          "text-slate-400 hover:bg-white/[0.05] hover:text-white",
-        danger:
-          "bg-red-600/90 text-white shadow-[0_0_0_1px_rgba(239,68,68,0.4)] hover:bg-red-500 hover:shadow-[0_0_0_1px_rgba(239,68,68,0.6),0_4px_16px_rgba(239,68,68,0.3)]",
-        success:
-          "bg-emerald-600/90 text-white shadow-[0_0_0_1px_rgba(34,197,94,0.4)] hover:bg-emerald-500",
+          "bg-[var(--surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-hover)]",
         outline:
-          "border border-white/[0.1] bg-transparent text-slate-300 hover:bg-white/[0.04] hover:border-white/[0.2] hover:text-white",
+          "border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)]",
+        ghost:
+          "text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]",
+        destructive:
+          "bg-[var(--hallucination-soft)] text-[var(--hallucination)] border border-[var(--hallucination-border)] hover:bg-[var(--hallucination)] hover:text-white",
+        verified:
+          "bg-[var(--verified-soft)] text-[var(--verified)] border border-[var(--verified-border)] hover:bg-[var(--verified)] hover:text-white",
+        link:
+          "text-[var(--primary)] underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {
-        sm: "h-8 px-3 text-xs rounded-lg",
-        default: "h-10 px-5 py-2",
-        lg: "h-12 px-8 text-base rounded-2xl",
-        xl: "h-14 px-10 text-base rounded-2xl",
-        icon: "h-10 w-10 rounded-lg",
+        default: "h-9 px-3.5 rounded-[var(--radius)]",
+        sm: "h-7 px-2.5 text-xs rounded-[var(--radius-sm)]",
+        lg: "h-10 px-5 rounded-[var(--radius-md)]",
+        xl: "h-11 px-6 text-base rounded-[var(--radius-md)]",
+        icon: "h-8 w-8 rounded-[var(--radius)]",
+        "icon-sm": "h-7 w-7 rounded-[var(--radius-sm)]",
       },
     },
     defaultVariants: {

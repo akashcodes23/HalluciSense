@@ -13,13 +13,15 @@ from typing import List, Optional, Tuple
 
 # Forward causal connectors: [CAUSE] -> [EFFECT]
 FORWARD_CAUSAL_PATTERNS = [
-    r"(.+?)\s+(?:causes|caused|causing)\s+(.+)",
+    r"(.+?)\s+(?:always causes|always caused|causes|caused|causing)\s+(.+)",
     r"(.+?)\s+(?:leads to|led to|leading to)\s+(.+)",
     r"(.+?)\s+(?:results in|resulted in|resulting in)\s+(.+)",
     r"(.+?)\s+(?:produces|produced|producing)\s+(.+)",
     r"(.+?)\s+(?:induces|induced|inducing)\s+(.+)",
     r"(.+?)\s+(?:triggers|triggered|triggering)\s+(.+)",
     r"(.+?)\s+(?:drives|driven by|driving)\s+(.+)",
+    r"(.+?)\s+(?:is(?:,?\s*however,?\s*|\s+\w+)?\s+a\s+(?:major\s+|primary\s+|known\s+|key\s+)?risk\s+factor\s+(?:for|in))\s+(.+)",
+    r"(.+?)\s+(?:is(?:,?\s*however,?\s*|\s+\w+)?\s+a\s+(?:major\s+|primary\s+|known\s+|key\s+)?cause\s+of)\s+(.+)",
     r"(.+?)\s+(?:is transcribed from)\s+(.+)",
     r"(.+?)\s+(?:is synthesised from|is synthesized from)\s+(.+)",
 ]
@@ -96,56 +98,68 @@ class CausalDirectionChecker:
         self, claim_text: str, evidence_text: str
     ) -> CausalDirectionResult:
         """
-        Compare causal direction between claim and evidence.
+        Compare causal direction between claim and evidence sentences.
         """
         c_rel = self.extract_causal_relation(claim_text)
-        e_rel = self.extract_causal_relation(evidence_text)
-
         if not c_rel:
             return CausalDirectionResult(
                 claim_relation=None,
-                evidence_relation=e_rel,
+                evidence_relation=None,
                 is_inversion_detected=False,
                 confidence_penalty=0.0,
                 explanation="No explicit causal relation detected in claim.",
             )
 
-        if not e_rel:
-            return CausalDirectionResult(
-                claim_relation=c_rel,
-                evidence_relation=None,
-                is_inversion_detected=False,
-                confidence_penalty=0.0,
-                explanation="No explicit causal relation detected in evidence to verify against.",
-            )
+        ev_sentences = [
+            s.strip() for s in re.split(r"[.!?\n]+", evidence_text) if len(s.strip().split()) >= 3
+        ]
+        if not ev_sentences:
+            ev_sentences = [evidence_text]
 
-        # Check for swapped entities
-        c_cause_words = set(re.findall(r"\b\w{3,}\b", c_rel.cause.lower()))
-        c_effect_words = set(re.findall(r"\b\w{3,}\b", c_rel.effect.lower()))
+        # Extract primary subject from first sentence for pronoun resolution
+        primary_subject = ""
+        if ev_sentences:
+            first_sent = ev_sentences[0]
+            subj_match = re.match(r"^([A-Za-z0-9\s,\(\)]+?)\s+(?:is|are|was|were)\b", first_sent)
+            if subj_match:
+                primary_subject = subj_match.group(1).strip()
 
-        e_cause_words = set(re.findall(r"\b\w{3,}\b", e_rel.cause.lower()))
-        e_effect_words = set(re.findall(r"\b\w{3,}\b", e_rel.effect.lower()))
+        e_rel_first = None
 
-        # If claim's cause overlaps evidence's effect AND claim's effect overlaps evidence's cause -> INVERSION!
-        cause_to_effect = len(c_cause_words & e_effect_words) > 0
-        effect_to_cause = len(c_effect_words & e_cause_words) > 0
+        for s in ev_sentences:
+            candidate_s = s
+            if primary_subject and re.match(r"^(?:It|This|They)\s+(?:is|are|was|were)\b", s, re.IGNORECASE):
+                candidate_s = re.sub(r"^(?:It|This|They)\s+", f"{primary_subject} ", s, count=1, flags=re.IGNORECASE)
 
-        if cause_to_effect and effect_to_cause:
-            return CausalDirectionResult(
-                claim_relation=c_rel,
-                evidence_relation=e_rel,
-                is_inversion_detected=True,
-                confidence_penalty=0.85,
-                explanation=(
-                    f"Causal inversion detected: Claim asserts '{c_rel.cause}' causes '{c_rel.effect}', "
-                    f"whereas evidence affirms '{e_rel.cause}' causes '{e_rel.effect}'."
-                ),
-            )
+            e_rel = self.extract_causal_relation(candidate_s)
+            if e_rel and e_rel_first is None:
+                e_rel_first = e_rel
+
+            if e_rel:
+                c_cause_words = set(re.findall(r"\b\w{3,}\b", c_rel.cause.lower()))
+                c_effect_words = set(re.findall(r"\b\w{3,}\b", c_rel.effect.lower()))
+                e_cause_words = set(re.findall(r"\b\w{3,}\b", e_rel.cause.lower()))
+                e_effect_words = set(re.findall(r"\b\w{3,}\b", e_rel.effect.lower()))
+
+                cause_to_effect = len(c_cause_words & e_effect_words) > 0
+                effect_to_cause = len(c_effect_words & e_cause_words) > 0
+
+                if cause_to_effect and effect_to_cause:
+                    return CausalDirectionResult(
+                        claim_relation=c_rel,
+                        evidence_relation=e_rel,
+                        is_inversion_detected=True,
+                        confidence_penalty=0.85,
+                        explanation=(
+                            f"Causal inversion detected: Claim asserts '{c_rel.cause}' causes '{c_rel.effect}', "
+                            f"whereas evidence affirms '{e_rel.cause}' causes '{e_rel.effect}'."
+                        ),
+                    )
 
         return CausalDirectionResult(
             claim_relation=c_rel,
-            evidence_relation=e_rel,
+            evidence_relation=e_rel_first,
             is_inversion_detected=False,
             confidence_penalty=0.0,
-            explanation="Causal entities align in the correct direction.",
+            explanation="Causal entities align in the correct direction." if e_rel_first else "No explicit causal relation detected in evidence to verify against.",
         )

@@ -22,13 +22,15 @@ class HybridRetriever:
             {"title": "HalluciSense Design", "url": "https://wiki/design", "text": "HalluciSense uses a three-pillar system: Factual Error, Confidence Gap, and Consistency Failure."}
         ]
         self.bm25 = BM25Retriever(internal_docs)
-        self.reranker = CrossEncoderReranker()
+        self.reranker = None
         self.last_timings = {}
         self.last_cache_metrics = {}
 
     def retrieve(self, claims: List[str]) -> List[dict]:
         """Retrieve evidence for all claims, batching external Wikipedia work."""
         import time
+        from app.core.config import settings
+
         all_evidence = []
         t_start = time.perf_counter()
         clean_claims = [c.strip() for c in claims if c and c.strip()]
@@ -40,6 +42,8 @@ class HybridRetriever:
             for item in wiki_by_claim.get(claim, []):
                 evidence = dict(item)
                 evidence["claim"] = claim
+                if "similarity_score" not in evidence:
+                    evidence["similarity_score"] = 0.85
                 all_evidence.append(evidence)
 
         faiss_ms = 0.0
@@ -70,7 +74,20 @@ class HybridRetriever:
 
         t_r0 = time.perf_counter()
         primary_claim = clean_claims[0] if clean_claims else ""
-        top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5) if primary_claim else []
+        enable_reranker = bool(getattr(settings, "HALLUCISENSE_ENABLE_RERANKER", False))
+        if enable_reranker and primary_claim:
+            if self.reranker is None:
+                self.reranker = CrossEncoderReranker()
+            top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5)
+        else:
+            # Strongest candidates selection using existing retrieval similarity scores
+            sorted_evidence = sorted(
+                unique_evidence,
+                key=lambda x: float(x.get("similarity_score", 0.0)),
+                reverse=True,
+            )
+            top_evidence = sorted_evidence[:5]
+
         rerank_ms = (time.perf_counter() - t_r0) * 1000.0
         total_ms = (time.perf_counter() - t_start) * 1000.0
 

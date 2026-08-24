@@ -1,19 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MessageSquare, ShieldCheck, Zap, LayoutDashboard, GitBranch, BarChart3 } from "lucide-react";
+import {
+  LayoutDashboard,
+  ShieldCheck,
+  MessageSquare,
+  BarChart3,
+  AlertTriangle,
+  GitBranch,
+  FlaskConical,
+  Settings,
+} from "lucide-react";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { TopBar } from "@/components/shell/top-bar";
 import { useAnalysisStore } from "@/store/analysis-store";
 
-const NAV_ITEMS = [
-  { href: "/chat", label: "Chat", icon: MessageSquare },
+const MOBILE_NAV = [
+  { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/verify", label: "Verify", icon: ShieldCheck },
-  { href: "/analyze", label: "Analyzer", icon: Zap },
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/chat", label: "Chat", icon: MessageSquare },
+  { href: "/errors", label: "Errors", icon: AlertTriangle },
   { href: "/traces", label: "Traces", icon: GitBranch },
-  { href: "/metrics", label: "Metrics", icon: BarChart3 },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -21,23 +30,52 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const setSidebarOpen = useAnalysisStore((s) => s.setSidebarOpen);
   const pathname = usePathname();
 
+  const handleCommandPaletteOpen = useCallback(() => {
+    // Dispatch keyboard event to trigger cmdk
+    const event = new KeyboardEvent("keydown", {
+      key: "k",
+      metaKey: true,
+      bubbles: true,
+    });
+    document.dispatchEvent(event);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#050816] text-slate-100 flex overflow-hidden font-sans relative">
+    <div className="app-shell">
+      {/* Desktop Sidebar */}
       <AppSidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
-      <main className="min-w-0 flex-1 h-screen overflow-y-auto relative bg-[#050816] pb-20 md:pb-0">
-        {children}
-      </main>
+
+      {/* Main Content Area */}
+      <div className="app-main">
+        {/* Top Bar */}
+        <TopBar onCommandPaletteOpen={handleCommandPaletteOpen} />
+
+        {/* Page Content */}
+        <main className="app-content" role="main">
+          {children}
+        </main>
+      </div>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#060a14]/95 backdrop-blur-lg border-t border-white/[0.06] flex items-center justify-around h-16 px-2 shadow-2xl">
-        {NAV_ITEMS.map((item) => {
+      <nav
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[var(--bg-surface)]/95 backdrop-blur-lg border-t border-[var(--border)] flex items-center justify-around h-14 px-1"
+        role="navigation"
+        aria-label="Mobile navigation"
+      >
+        {MOBILE_NAV.map((item) => {
           const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           const Icon = item.icon;
           return (
             <Link key={item.href} href={item.href} className="flex-1">
-              <div className={`flex flex-col items-center justify-center py-1 gap-1 cursor-pointer transition-colors ${isActive ? "text-accent-primary font-semibold" : "text-slate-400 hover:text-slate-200"}`}>
-                <Icon className="w-5 h-5 shrink-0" />
-                <span className="text-[10px] tracking-tight">{item.label}</span>
+              <div
+                className={`flex flex-col items-center justify-center py-1 gap-0.5 cursor-pointer transition-colors ${
+                  isActive
+                    ? "text-[var(--primary)] font-semibold"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                }`}
+              >
+                <Icon className="w-[18px] h-[18px] shrink-0" />
+                <span className="text-[9px] tracking-tight">{item.label}</span>
               </div>
             </Link>
           );

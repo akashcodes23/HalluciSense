@@ -1,0 +1,8 @@
+Stage,RSS_MB,Delta_MB,Elapsed_MS
+"Base Python Process",15.41,0.0,0.0
+"FastAPI Framework",60.55,45.16,222.56
+"PyTorch CPU Core",170.45,155.06,578.49
+"Transformers Library",184.31,169.11,692.42
+"DeBERTa Tokenizer",480.97,465.53,2237.24
+"DeBERTa Model (FP32)",692.0,676.78,3975.01
+"Correction Engine",908.03,892.62,5354.83

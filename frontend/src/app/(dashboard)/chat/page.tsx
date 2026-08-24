@@ -22,10 +22,11 @@ import {
 
 interface VerificationSummary {
   status: "VERIFIED" | "CORRECTED" | "REVIEW" | "FAILED" | "UNVERIFIED";
-  h_score: number;
-  risk_level: string;
-  claims_total: number;
-  claims_flagged: number;
+  h_score?: number;
+  risk_level?: string;
+  claims_total?: number;
+  claims_flagged?: number;
+  error_message?: string;
 }
 
 interface ClaimCorrection {

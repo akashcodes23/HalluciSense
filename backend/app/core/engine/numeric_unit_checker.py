@@ -51,8 +51,10 @@ UNIT_MAP: Dict[str, str] = {
     "ns": "nanosecond", "nanoseconds": "nanosecond",
     "min": "minute", "minutes": "minute",
     "h": "hour", "hr": "hour", "hrs": "hour", "hours": "hour",
-    "m/s": "m_per_s", "metres per second": "m_per_s", "meters per second": "m_per_s",
-    "km/s": "km_per_s", "km/h": "km_per_h",
+    "m/s": "m_per_s", "m/sec": "m_per_s", "metres per second": "m_per_s", "meters per second": "m_per_s",
+    "m⋅s−1": "m_per_s", "m⋅s-1": "m_per_s", "m·s−1": "m_per_s", "m·s-1": "m_per_s", "m s−1": "m_per_s", "m s-1": "m_per_s", "m s^-1": "m_per_s",
+    "km/s": "km_per_s", "km/sec": "km_per_s", "km⋅s−1": "km_per_s", "km⋅s-1": "km_per_s", "km·s−1": "km_per_s", "km·s-1": "km_per_s", "km s−1": "km_per_s", "km s-1": "km_per_s",
+    "km/h": "km_per_h", "km/hr": "km_per_h",
 
     # Energy / Power / Force / Constants
     "j": "joule", "joules": "joule", "joule-seconds": "joule_second", "j·s": "joule_second", "j s": "joule_second",
@@ -81,6 +83,7 @@ SCALE_FACTORS: Dict[str, float] = {
     "picogram": 1e-12, "nanogram": 1e-9, "microgram": 1e-6, "milligram": 1e-3,
     "gram": 1.0, "kilogram": 1e3, "tonne": 1e6,
     "nanosecond": 1e-9, "millisecond": 1e-3, "second": 1.0, "minute": 60.0, "hour": 3600.0,
+    "m_per_s": 1.0, "km_per_s": 1e3, "km_per_h": 1.0 / 3.6,
     "milliliter": 1e-3, "liter": 1.0,
     "base_pairs": 1.0, "kilobase": 1e3, "megabase": 1e6,
 }

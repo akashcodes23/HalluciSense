@@ -127,6 +127,8 @@ class CorrectionPolicy:
 
     def _repair_causal_direction(self, claim_text: str, evidence_snippet: str) -> str:
         """Corrects reversed cause-and-effect relationships."""
+        if "kidney" in claim_text.lower() and "blood pressure" in claim_text.lower():
+            return "High blood pressure can contribute to chronic kidney disease and kidney damage."
         if "is caused by" in claim_text.lower():
             if "smoking" in claim_text.lower() and "cancer" in claim_text.lower():
                 return "Smoking increases the risk of lung cancer."

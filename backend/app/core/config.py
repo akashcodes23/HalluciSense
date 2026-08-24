@@ -109,6 +109,7 @@ class Settings(BaseSettings):
     H_SCORE_CORRECTION_THRESHOLD: float = 0.65
     ENABLE_FALLBACK_MODELS: bool = False
     ENABLE_REQUEST_CACHE: bool = True
+    HALLUCISENSE_ENABLE_RERANKER: bool = False
 
     @property
     def is_production(self) -> bool:

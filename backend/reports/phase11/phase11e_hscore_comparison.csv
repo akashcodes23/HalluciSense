@@ -1,0 +1,5 @@
+Model,Class_Agreement_Pct,Risk_Agreement_Pct,MAE,RMSE,Max_Delta
+"DeBERTa-v3-Small (Control)",100.0,100.0,0.0,0.0,0.0
+"DeBERTa-v3-XSmall",92.8,78.8,0.1038,0.1651,0.4655
+"DistilRoBERTa-NLI",92.8,71.2,0.1284,0.1751,0.5577
+"DistilBERT-MNLI",92.8,70.4,0.1283,0.2132,0.5014

@@ -26,7 +26,7 @@ dist/
 build/
 
 ############################
-# Environment
+# Environment / Secrets
 ############################
 .env
 .env.*
@@ -52,9 +52,22 @@ build/
 # Temporary
 ############################
 *.bak
+*.tmp
+*.swp
 
 ############################
-# Research Data (ignore)
+# Large ML / Model Artifacts
+############################
+*.onnx
+*.pt
+*.pth
+*.safetensors
+
+# Phase 11D generated ONNX models
+backend/evaluation/phase11/onnx/*.onnx
+
+############################
+# Research Data
 ############################
 backend/evaluation_data/
 backend/data/external/*/raw/
@@ -62,32 +75,37 @@ backend/data/external/*/raw/
 ############################
 # Generated Runtime Data
 ############################
-
 /backend/traces/
 /backend/experiments/runs/
 
 ############################
-# Ignore ONLY research cache
+# Research Caches
 ############################
 backend/evaluation_results/**/cache/
 
 ############################
-# Ignore generated research reports if desired
+# JSONL
 ############################
+# Ignore generated JSONL by default
 *.jsonl
 
-##################################################
-# KEEP PRODUCTION MODELS (DO NOT IGNORE THEM)
-##################################################
+# BUT preserve the canonical scientific benchmark
+!backend/evaluation/results/
+!backend/evaluation/results/benchmark_dataset.jsonl
 
+############################
+# Production Research Models
+############################
 !backend/evaluation_results/
 !backend/evaluation_results/phase6k/
 !backend/evaluation_results/phase6k/final_model/
 !backend/evaluation_results/phase6k/final_model/*.joblib
+
 !backend/evaluation_results/phase6m/
 !backend/evaluation_results/phase6m/final_hybrid_model/
 !backend/evaluation_results/phase6m/final_hybrid_model/*.joblib
-!backend/evaluation_results/phase6m/final_hybrid_model/*.jsonsubmission_packages/*.zip
-submission_packages/*.zip
-submission_packages/*.zip
+
+############################
+# Submission Packages
+############################
 submission_packages/

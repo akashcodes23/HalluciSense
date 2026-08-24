@@ -1,24 +1,35 @@
-"use client";
-
 import * as React from "react";
-import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-colors",
+  "inline-flex items-center gap-1 rounded-[var(--radius-sm)] font-medium transition-colors",
   {
     variants: {
       variant: {
-        default: "bg-white/[0.06] text-slate-300 border border-white/[0.08]",
-        verified: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
-        warning: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
-        danger: "bg-red-500/10 text-red-400 border border-red-500/20",
-        info: "bg-sky-500/10 text-sky-400 border border-sky-500/20",
-        primary: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
-        purple: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
+        default: "bg-[var(--surface)] text-[var(--text-secondary)] border border-[var(--border)]",
+        verified: "bg-[var(--verified-soft)] text-[var(--verified)] border border-[var(--verified-border)]",
+        hallucination: "bg-[var(--hallucination-soft)] text-[var(--hallucination)] border border-[var(--hallucination-border)]",
+        warning: "bg-[var(--warning-soft)] text-[var(--warning)] border border-[var(--warning-border)]",
+        evidence: "bg-[var(--evidence-soft)] text-[var(--evidence)] border border-[var(--evidence-border)]",
+        ai: "bg-[var(--ai-soft)] text-[var(--ai)] border border-[var(--ai-border)]",
+        primary: "bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--ai-border)]",
+        success: "bg-[var(--verified-soft)] text-[var(--verified)] border border-[var(--verified-border)]",
+        destructive: "bg-[var(--hallucination-soft)] text-[var(--hallucination)] border border-[var(--hallucination-border)]",
+        danger: "bg-[var(--hallucination-soft)] text-[var(--hallucination)] border border-[var(--hallucination-border)]",
+        info: "bg-[var(--evidence-soft)] text-[var(--evidence)] border border-[var(--evidence-border)]",
+        outline: "text-[var(--text-secondary)] border border-[var(--border)]",
+      },
+      size: {
+        default: "px-2 py-0.5 text-[11px]",
+        sm: "px-1.5 py-px text-[10px]",
+        lg: "px-2.5 py-1 text-xs",
       },
     },
-    defaultVariants: { variant: "default" },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
   }
 );
 
@@ -26,8 +37,10 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+function Badge({ className, variant, size, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant, size }), className)} {...props} />
+  );
 }
 
 export { Badge, badgeVariants };
