@@ -195,6 +195,7 @@ export interface MetricsResponse {
   success_rate: number | null;
   error_rate: number | null;
   avg_h_score?: number | null;
+  average_h_score?: number | null;
   average_latency_ms: number | null;
   active_models?: number;
   total_requests?: number;

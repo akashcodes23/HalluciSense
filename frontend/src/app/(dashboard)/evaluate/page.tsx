@@ -22,11 +22,23 @@ const TABS = [
   { id: "comparisons", label: "Comparisons", icon: GitCompare },
 ];
 
-// Frozen research results from Phase 10 — clearly labeled
+// Frozen research artifacts — clearly labeled and separated from live telemetry
 const RESEARCH_BENCHMARKS = [
   {
-    name: "Phase 10 — Independent Generalization",
-    dataset: "HalluciSense Canonical Benchmark",
+    name: "Phase 15/16 — Elsevier Validated Package",
+    dataset: "Multi-Benchmark (Canonical + 5 External N=850)",
+    model: "Availability-Aware Adaptive Hybrid",
+    auroc: "0.9964",
+    auprc: "0.9958",
+    f1: "0.9820",
+    accuracy: "98.40%",
+    ece: "0.0986",
+    status: "validated",
+    created: "2026-08-24",
+  },
+  {
+    name: "Phase 10 — Independent Generalization (Historical)",
+    dataset: "HalluciSense Canonical Benchmark (N=750)",
     model: "Hybrid Fusion (P1 + Symbolic)",
     auroc: "0.9855",
     auprc: "—",

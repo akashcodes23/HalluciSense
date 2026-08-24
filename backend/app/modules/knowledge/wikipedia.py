@@ -20,7 +20,7 @@ HEADERS = {
 
 
 class WikipediaKnowledgeSource:
-    """Retrieve factual snippets from Wikipedia with bounded caching and batching."""
+    """Retrieve factual snippets from Wikipedia with bounded caching, session pooling and batching."""
 
     def __init__(self, lang: str = "en", max_results: int = 3, max_search_workers: int = 4):
         self.lang = lang
@@ -29,6 +29,20 @@ class WikipediaKnowledgeSource:
         self.api_url = f"https://{lang}.wikipedia.org/w/api.php"
         self._cache: Dict[str, List[dict]] = {}
         self.last_metrics = self._empty_metrics()
+        
+        # Persistent HTTP connection pooling
+        self.session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(
+            pool_connections=10,
+            pool_maxsize=20,
+            max_retries=requests.adapters.Retry(
+                total=2,
+                backoff_factor=0.2,
+                status_forcelist=[500, 502, 503, 504],
+            ),
+        )
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
 
     @staticmethod
     def _empty_metrics() -> dict:
@@ -53,11 +67,11 @@ class WikipediaKnowledgeSource:
         }
 
         try:
-            resp = requests.get(
+            resp = self.session.get(
                 self.api_url,
                 params=params,
                 headers=HEADERS,
-                timeout=3.0,
+                timeout=2.5,
             )
             if resp.status_code != 200:
                 logger.warning(
@@ -111,11 +125,11 @@ class WikipediaKnowledgeSource:
         }
 
         try:
-            resp = requests.get(
+            resp = self.session.get(
                 self.api_url,
                 params=params,
                 headers=HEADERS,
-                timeout=5.0,
+                timeout=4.0,
             )
             if resp.status_code != 200:
                 logger.warning(

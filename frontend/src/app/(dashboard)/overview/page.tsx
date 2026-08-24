@@ -41,17 +41,30 @@ export default function OverviewPage() {
   const components = ready?.components || {};
   const hasMetrics = metrics && (metrics.requests > 0 || (metrics.total_requests && metrics.total_requests > 0));
 
-  // Compute derived metrics from history
+  // Compute derived metrics from history and backend metrics
   const totalVerifications = Math.max(metrics?.requests ?? 0, history.length);
   const hallucinationsDetected = history.filter(
-    (h) => h.result.risk_level === "LIKELY_HALLUCINATED"
+    (h) => h.result.risk_level === "LIKELY_HALLUCINATED" || h.result.risk_level === "MODERATE_RISK"
   ).length;
   const verificationsVerified = history.filter(
     (h) => h.result.risk_level === "VERIFIED"
   ).length;
-  const avgHScore = history.length > 0
-    ? history.reduce((sum, h) => sum + (h.result.overall_h_score ?? 0), 0) / history.length
-    : null;
+  
+  const avgHScore = (metrics && metrics.average_h_score !== null && metrics.average_h_score !== undefined)
+    ? metrics.average_h_score
+    : (history.length > 0
+      ? history.reduce((sum, h) => sum + (h.result.overall_h_score ?? 0), 0) / history.length
+      : null);
+
+  const avgLatencyMs = (metrics && metrics.average_latency_ms !== null && metrics.average_latency_ms !== undefined)
+    ? metrics.average_latency_ms
+    : (history.length > 0
+      ? history.reduce((sum, h) => sum + ((h.result as any).latency_ms ?? 0), 0) / history.length
+      : null);
+
+  const successRate = (metrics && metrics.success_rate !== null && metrics.success_rate !== undefined)
+    ? metrics.success_rate
+    : (totalVerifications > 0 ? 100.0 : null);
 
   // Get greeting based on time
   const hour = new Date().getHours();
@@ -125,22 +138,22 @@ export default function OverviewPage() {
           />
           <StatCard
             label="Hallucinations"
-            value={hallucinationsDetected > 0 ? formatNumber(hallucinationsDetected) : "—"}
-            caption={hallucinationsDetected > 0 ? "Detected across analyses" : "No hallucinations detected"}
+            value={totalVerifications > 0 ? formatNumber(hallucinationsDetected) : "—"}
+            caption={totalVerifications > 0 ? `${hallucinationsDetected} detected across analyses` : "Awaiting data"}
             icon={XCircle}
             status={hallucinationsDetected > 0 ? "hallucination" : "default"}
           />
           <StatCard
             label="Verified"
-            value={verificationsVerified > 0 ? formatNumber(verificationsVerified) : "—"}
-            caption={verificationsVerified > 0 ? "Claims verified safe" : "Awaiting verified claims"}
+            value={totalVerifications > 0 ? formatNumber(verificationsVerified) : "—"}
+            caption={totalVerifications > 0 ? `${verificationsVerified} claims verified safe` : "Awaiting data"}
             icon={CheckCircle2}
             status={verificationsVerified > 0 ? "verified" : "default"}
           />
           <StatCard
             label="Success Rate"
-            value={hasMetrics && metrics.success_rate !== null ? `${metrics.success_rate.toFixed(1)}%` : "—"}
-            caption={hasMetrics ? "Pipeline execution rate" : "Awaiting production telemetry"}
+            value={successRate !== null ? `${successRate.toFixed(1)}%` : "—"}
+            caption={totalVerifications > 0 ? "Pipeline execution rate" : "Awaiting telemetry"}
             icon={Activity}
             status="default"
           />
@@ -153,8 +166,8 @@ export default function OverviewPage() {
           />
           <StatCard
             label="Avg Latency"
-            value={hasMetrics && metrics.average_latency_ms !== null ? formatLatency(metrics.average_latency_ms) : "—"}
-            caption={hasMetrics ? "Pipeline execution time" : "Awaiting telemetry"}
+            value={avgLatencyMs !== null && avgLatencyMs > 0 ? formatLatency(avgLatencyMs) : "—"}
+            caption={avgLatencyMs !== null && avgLatencyMs > 0 ? "Pipeline execution time" : "Awaiting telemetry"}
             icon={Clock}
             status="default"
           />

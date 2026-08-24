@@ -91,7 +91,7 @@ class HallucinationDetectionPipeline:
                         snippet=snippet,
                         source_name=ev.get("source_name", "Wikipedia"),
                         source_url=ev.get("source_url"),
-                        similarity_score=float(ev.get("similarity_score", 0.5)),
+                        similarity_score=max(0.0, min(1.0, float(ev.get("similarity_score", 0.5)))),
                         is_supporting=ev.get("is_supporting", True),
                     )
                 )

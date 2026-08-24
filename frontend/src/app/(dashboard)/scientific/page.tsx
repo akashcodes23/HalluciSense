@@ -55,13 +55,22 @@ const PHASES = [
     description: "Independent generalization testing on unseen data to validate no overfitting.",
   },
   {
-    id: "phase11",
-    name: "Phase 11 — Production Validation",
+    id: "phase15_16",
+    name: "Phase 15/16 — Elsevier Manuscript Package",
     status: "completed",
-    dataset: "Production endpoint testing",
-    datasetSize: null,
-    metrics: null,
-    description: "End-to-end production API validation confirming deployed model matches research performance.",
+    dataset: "Canonical Benchmark + 5 External Sets (N=850)",
+    datasetSize: 850,
+    metrics: { auroc: 0.9964, f1: 0.9820, accuracy: 0.9840, ece: 0.0986, brier: 0.0185 },
+    description: "Full multi-benchmark evidence lock, availability-aware adaptive fusion, Platt calibration, and selective abstention validation.",
+  },
+  {
+    id: "phase19",
+    name: "Phase 19 — Submission Package Lock",
+    status: "completed",
+    dataset: "Elsevier Peer-Review & Release Package",
+    datasetSize: 850,
+    metrics: { auroc: 0.9964, f1: 0.9820, accuracy: 0.9840, ece: 0.0986, brier: 0.0185 },
+    description: "Final scientific hardening, graphical abstract generation, reproducibility manifest, and GitHub v1.0.0-paper release.",
   },
 ];
 

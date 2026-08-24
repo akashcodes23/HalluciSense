@@ -12,7 +12,14 @@ from .types import (
     Pillar3Result,
     HallucinationReport,
 )
-from .pipeline import HallucinationDetectionPipeline
+
+
+def __getattr__(name: str):
+    if name == "HallucinationDetectionPipeline":
+        from .pipeline import HallucinationDetectionPipeline
+        return HallucinationDetectionPipeline
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 __all__ = [
     "RiskLevel",

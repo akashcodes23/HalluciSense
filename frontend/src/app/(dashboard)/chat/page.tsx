@@ -19,6 +19,7 @@ import {
   HelpCircle,
   ExternalLink,
 } from "lucide-react";
+import { sendClosedLoopChat } from "@/services/hallucisense-api";
 
 interface VerificationSummary {
   status: "VERIFIED" | "CORRECTED" | "REVIEW" | "FAILED" | "UNVERIFIED";
@@ -117,30 +118,21 @@ export default function ClosedLoopChatPage() {
     }, 450);
 
     try {
-      const response = await fetch("/api/v1/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          enable_verification: true,
-          auto_correct: true,
-        }),
+      const data = await sendClosedLoopChat({
+        message: text,
+        enable_verification: true,
+        auto_correct: true,
       });
 
       clearInterval(stageInterval);
 
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
       const assistantMsg: ChatMessage = {
         id: data.message_id || `asst_${Date.now()}`,
         role: "assistant",
         content: data.final_response,
         original_content: data.original_response,
-        verification: data.verification,
-        correction: data.correction,
+        verification: data.verification as VerificationSummary,
+        correction: data.correction as unknown as CorrectionSummary,
         evidence: data.evidence,
         sources: data.sources,
         latency_ms: data.latency_ms,
@@ -149,15 +141,16 @@ export default function ClosedLoopChatPage() {
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
-    } catch (err) {
+    } catch (err: unknown) {
       clearInterval(stageInterval);
+      const errMsg = err instanceof Error ? err.message : "Verification could not be completed.";
       const errorMsg: ChatMessage = {
         id: `asst_err_${Date.now()}`,
         role: "assistant",
-        content: "Verification could not be completed because the verification service encountered an internal error.",
+        content: `Verification could not be completed: ${errMsg}`,
         verification: {
           status: "FAILED",
-          error_message: "Verification could not be completed because the verification service encountered an internal error.",
+          error_message: errMsg,
         },
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };

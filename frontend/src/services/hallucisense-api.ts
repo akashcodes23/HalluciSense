@@ -118,3 +118,49 @@ export async function getLatestDebug(): Promise<TraceData> {
 export async function getDebugTrace(traceId: string): Promise<TraceData> {
   return request<TraceData>(`/api/v1/debug/${traceId}`);
 }
+
+export interface ClosedLoopChatPayload {
+  message: string;
+  enable_verification?: boolean;
+  auto_correct?: boolean;
+  model_name?: string;
+  conversation_id?: string;
+}
+
+export interface ClosedLoopChatResponse {
+  conversation_id: string;
+  message_id: string;
+  original_response: string;
+  final_response: string;
+  verification: {
+    status: string;
+    h_score: number | null;
+    risk_level: string | null;
+    claims_total: number | null;
+    claims_flagged: number | null;
+    error_message?: string;
+  };
+  correction: {
+    performed: boolean;
+    reason: string;
+    claims_corrected: Array<Record<string, unknown>>;
+    original_to_corrected: Array<Record<string, unknown>>;
+  };
+  evidence: Array<{
+    source_name: string;
+    snippet: string;
+    claim: string;
+  }>;
+  sources: string[];
+  trace_id: string;
+  latency_ms: number;
+}
+
+export async function sendClosedLoopChat(
+  payload: ClosedLoopChatPayload
+): Promise<ClosedLoopChatResponse> {
+  return request<ClosedLoopChatResponse>("/api/v1/chat", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}

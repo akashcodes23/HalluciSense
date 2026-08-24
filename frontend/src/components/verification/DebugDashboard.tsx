@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { getLatestDebug, getDebugTrace } from '@/services/hallucisense-api';
 
 interface StageDetails {
   duration_ms: number;
@@ -33,10 +34,8 @@ export const DebugDashboard: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/v1/debug/latest');
-      if (!res.ok) throw new Error('No trace data found');
-      const data = await res.json();
-      setTrace(data);
+      const data = await getLatestDebug();
+      setTrace(data as unknown as PipelineTrace);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to fetch trace');
     } finally {
@@ -49,10 +48,8 @@ export const DebugDashboard: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/v1/debug/trace/${id.trim()}`);
-      if (!res.ok) throw new Error(`Trace ID ${id} not found`);
-      const data = await res.json();
-      setTrace(data);
+      const data = await getDebugTrace(id.trim());
+      setTrace(data as unknown as PipelineTrace);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Trace fetch failed');
     } finally {

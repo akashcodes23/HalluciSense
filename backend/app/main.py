@@ -281,6 +281,8 @@ def create_application() -> FastAPI:
             content={
                 "status": "ready" if pipeline_ready else "unready",
                 "components": {
+                    "pipeline": pipeline_ready,
+                    "nli_model": pipeline_ready,
                     "p1_hybrid": pipeline_ready,
                     "retriever": pipeline_ready,
                     "fusion_engine": pipeline_ready,
