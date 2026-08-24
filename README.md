@@ -1,1860 +1,276 @@
-<div align="center">
-
-<img src="assets/logo-dark.svg" width="170"/>
-
 # HalluciSense
 
-### Confidence-Aware Hybrid Framework for Detecting and Quantifying Hallucinations in Large Language Models
+**An availability-aware multi-signal framework for detecting, calibrating, abstaining on, and correcting LLM hallucinations.**
 
-<p align="center">
-An enterprise-grade AI verification framework that combines semantic reasoning,
-retrieval verification, structural consistency analysis and calibrated confidence
-fusion to detect hallucinations in Large Language Models.
-</p>
-
----
-
-<p align="center">
-
-<img src="https://img.shields.io/github/license/akashcodes23/HalluciSense?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/stars/akashcodes23/HalluciSense?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/forks/akashcodes23/HalluciSense?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/issues/akashcodes23/HalluciSense?style=for-the-badge"/>
-
-<img src="https://img.shields.io/github/last-commit/akashcodes23/HalluciSense?style=for-the-badge"/>
-
-</p>
-
-<p align="center">
-
-<img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python"/>
-
-<img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi"/>
-
-<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js"/>
-
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react"/>
-
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript"/>
-
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker"/>
-
-<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql"/>
-
-</p>
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-009688.svg)](https://fastapi.tiangolo.com)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.2+-black.svg)](https://nextjs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Scientific Freeze](https://img.shields.io/badge/Scientific%20Benchmark-Locked%20SHA--256-success.svg)](backend/evaluation/results/benchmark_dataset.jsonl)
 
 ---
 
-<p align="center">
-
-🚀 Research Project • 🔍 Explainable AI • 🧠 Hybrid Verification • 📈 Confidence Calibration • 🌐 Production Ready
-
-</p>
-
-</div>
+## Table of Contents
+1. [Why HalluciSense?](#why-hallucisense)
+2. [System Architecture](#system-architecture)
+3. [The Three Verification Pillars](#the-three-verification-pillars)
+4. [Availability-Aware Adaptive Fusion](#availability-aware-adaptive-fusion)
+5. [Scientific Evaluation Results](#scientific-evaluation-results)
+6. [Live Production Validation](#live-production-validation)
+7. [Research vs. Production Separation](#research-vs-production-separation)
+8. [Quick Start & Local Development](#quick-start--local-development)
+9. [Project Repository Structure](#project-repository-structure)
+10. [Documentation Index](#documentation-index)
+11. [License](#license)
 
 ---
 
-# HalluciSense in Action
+## Why HalluciSense?
 
-<p align="center">
+Large Language Models (LLMs) frequently generate plausible-sounding yet factually incorrect assertions—commonly termed *hallucinations*. In high-stakes domains such as medicine, engineering, and scientific literature analysis, undetected hallucinations can propagate critical misinformation and undermine user trust.
 
-<img src="assets/demo.gif"/>
+Existing mitigation techniques typically rely on a single defensive mechanism: pure external retrieval (which fails when retrieval corpora contain gaps or noise), internal token log-probability introspection (which is unavailable behind black-box commercial APIs like Claude or OpenAI), or multi-sample self-consistency checks (which impose severe inference latency and cost overheads). When any single assumptions breaks, conventional verifiers fail silently or produce miscalibrated certainty scores.
 
-</p>
+Furthermore, naive heuristic aggregations treat missing signals as "zero risk" or "zero evidence," introducing catastrophic structural bias into risk estimation. In production environments where API access patterns vary dynamically from white-box local checkpoints to closed-source API endpoints, hallucination detection systems must adaptively account for signal availability.
 
-## 🔬 Scientific Architecture & Research Overview
+**HalluciSense** resolves this foundational vulnerability by introducing an **availability-aware, multi-signal verification and closed-loop correction architecture**. By dynamically modulating fusion weights based on measured signal presence ($m_i$) and empirical component reliability ($r_i$), applying Platt-scaled calibration, enforcing selective abstention on ambiguous decision boundaries, and validating repairs through an independent re-verification gate, HalluciSense provides reliable, transparent, and auditable hallucination intelligence.
 
-HalluciSense establishes an **Availability-Aware Hybrid Hallucination Detection Framework** for publication in top-tier Elsevier journals (*Information Fusion*, *Knowledge-Based Systems*, *Artificial Intelligence*).
+---
+
+## System Architecture
 
 ```
-                      +------------------------------------------+
-                      |       Input LLM Prompt & Response        |
-                      +------------------------------------------+
-                                           |
-         +---------------------------------+---------------------------------+
-         | (Always Active)                 | (Adaptive on Live Stream)       | (Adaptive on Multi-Sample)
-         v                                 v                                 v
-+------------------+             +-------------------+             +-------------------+
-| Pillar 1: FE     |             | Pillar 2: CG      |             | Pillar 3: CF      |
-| Retrieval        |             | Confidence        |             | Consistency       |
-| Evidence         |             | Estimation        |             | Reasoning         |
-+------------------+             +-------------------+             +-------------------+
-| • BM25 Sparse    |             | • Token Shannon   |             | • Stochastic Gen  |
-| • FAISS Vector   |             |   Entropy H(p)    |             |   (N = 3 Samples) |
-| • DeBERTa-v3 NLI |             | • Confidence Gap  |             | • SBERT Cosine    |
-|   Cross-Encoder  |             | • Subword Risk    |             | • Claim-Aligned   |
-| • Wikipedia/Corpus|            | • Model Aleatoric |             |   Contradiction   |
-+------------------+             +-------------------+             +-------------------+
-         |                                 |                                 |
-         +---------------------------------+---------------------------------+
-                                           |
-                                           v
-                     +-------------------------------------------+
-                     |   Availability-Aware Hybrid Fusion Engine |
-                     |   Modes: FULL_THREE_PILLAR / PARTIAL_RENORM |
-                     |   Formula: H = α FE + β CG + γ CF (sum=1) |
-                     |   Calibration: Platt-Calibrated Risk Tiers|
-                     +-------------------------------------------+
-                                           |
-                                           v
-                     +-------------------------------------------+
-                     |   Token Localization & 4-Tier Risk Tiers  |
-                     |   • Green  (#10B981) - VERIFIED           |
-                     |   • Yellow (#F59E0B) - NEEDS_VERIFY       |
-                     |   • Orange (#F97316) - MODERATE_RISK      |
-                     |   • Red    (#EF4444) - LIKELY_HALLUCINATED|
-                     +-------------------------------------------+
-```
-
-### Key Pillars & Scientific Specifications
-
-1. **Pillar 1: Retrieval Evidence ($FE \in [0,1]$ — Invariant Foundation)**
-   - Always active for all evaluation targets (including offline static text).
-   - Integrates BM25 sparse lexical matching, FAISS dense vector retrieval, and DeBERTa-v3 Cross-Encoder passage entailment verification.
-   - Computes factual claim verification, citation confidence scores, and source grounding.
-
-2. **Pillar 2: Predictive Confidence ($CG \in [0,1]$ — Adaptive Signal)**
-   - Dynamically active during live streaming LLM generation when provider token log-probabilities are exposed.
-   - Computes binary Shannon entropy $H(p) = -p\log_2(p) - (1-p)\log_2(1-p)$ and subword confidence gaps. Honestly marked `UNAVAILABLE` when logprobs are omitted.
-
-3. **Pillar 3: Consistency Reasoning ($CF \in [0,1]$ — Adaptive Signal)**
-   - Dynamically active during live multi-candidate generation runs.
-   - Evaluates exactly $N=3$ stochastic alternate generations using Sentence-Transformer (`all-MiniLM-L6-v2`) embeddings and claim-aligned DeBERTa Cross-Encoder contradiction detection.
-
-4. **Availability-Aware Hybrid Fusion Layer**
-   - Combines active signals via $H = \alpha FE + \beta CG + \gamma CF$ ($\sum w_i = 1.0$) in `FULL_THREE_PILLAR` mode.
-   - Dynamically renormalizes weights across available signals in `PARTIAL_RENORMALIZED` mode when logprobs or multi-samples are not supplied, avoiding synthetic zero substitution.
-
-5. **Token Localization & 4-Tier Risk Heatmaps**
-   - Propagates sentence H-scores down to token attributions and span boundaries.
-   - Visualizes 4 risk tiers: **Green** (`#10B981`), **Yellow** (`#F59E0B`), **Orange** (`#F97316`), and **Red** (`#EF4444`).
-
----
-
-# Overview
-
-HalluciSense is a hybrid hallucination detection framework designed to evaluate the factual reliability of responses generated by Large Language Models.
-
-Unlike conventional hallucination detectors that rely solely on semantic similarity or retrieval verification, HalluciSense combines multiple complementary verification strategies into a unified confidence-aware framework capable of identifying factual inconsistencies, unsupported claims, logical contradictions, structural anomalies and retrieval failures.
-
-The system integrates:
-
-- Semantic verification
-- Retrieval-grounded evidence checking
-- Structural claim consistency analysis
-- Confidence calibration
-- Hybrid meta-classification
-- Explainability-driven diagnostics
-
-to produce transparent and trustworthy hallucination assessments suitable for research and production deployment.
-
----
-
-# Why HalluciSense?
-
-Large Language Models frequently generate responses that appear fluent while containing fabricated or unsupported information.
-
-Current approaches often rely on a single verification signal, making them vulnerable to:
-
-- semantic shortcuts
-- retrieval failures
-- confidence miscalibration
-- contradictory reasoning
-- unsupported factual assertions
-
-HalluciSense addresses these limitations through a multi-pillar verification architecture that evaluates generated responses from complementary perspectives before producing a calibrated confidence score.
-
----
-
-# Key Innovations
-
-<table>
-
-<tr>
-
-<td width="50%">
-
-### Hybrid Verification
-
-Combines semantic reasoning, retrieval validation and structural consistency instead of relying on a single detector.
-
-</td>
-
-<td width="50%">
-
-### Confidence Calibration
-
-Produces calibrated confidence estimates rather than binary predictions.
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-### Explainable Decisions
-
-Every prediction includes feature-level evidence and interpretable reasoning.
-
-</td>
-
-<td>
-
-### Production Architecture
-
-Built using FastAPI, Next.js, PostgreSQL and Docker with scalable deployment support.
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-### Modular Pipeline
-
-Independent verification pillars enable extensibility and future research.
-
-</td>
-
-<td>
-
-### Scientific Evaluation
-
-Comprehensive evaluation across multiple benchmarks with reproducible experimental protocols.
-
-</td>
-
-</tr>
-
-</table>
-
----
-
-# Feature Highlights
-
-| Feature | Description |
-|----------|-------------|
-| 🧠 Hybrid Meta-Classifier | Combines multiple verification signals into a unified prediction |
-| 🔍 Retrieval Verification | Evidence-grounded validation using retrieved documents |
-| 🧩 Structural Consistency Analysis | Detects logical and claim-level inconsistencies |
-| 📈 Confidence Calibration | Generates calibrated hallucination probabilities |
-| 📊 Explainability Dashboard | Visualizes evidence, confidence and reasoning |
-| ⚡ FastAPI Backend | High-performance asynchronous inference API |
-| 💻 Next.js Frontend | Modern interactive verification dashboard |
-| 🐳 Docker Support | One-command deployment |
-| 📑 Scientific Evaluation Pipeline | Reproducible benchmarking and analysis |
-| 🔒 Production Configuration | Environment-aware deployment with configurable settings |
-
----
-
-# Repository Preview
-
-```
-HalluciSense
-│
-├── backend/
-│   ├── app/
-│   ├── api/
-│   ├── models/
-│   ├── retrieval/
-│   ├── verification/
-│   └── explainability/
-│
-├── frontend/
-│
-├── config/
-│
-├── docker/
-│
-├── docs/
-│
-├── assets/
-│
-└── tests/
+                       Input Query (q) + LLM Response (R)
+                                       │
+                                       ▼
+                           Atomic Claim Decomposition
+                          {c₁, c₂, ..., cₖ propositions}
+                                       │
+            ┌──────────────────────────┼──────────────────────────┐
+            ▼                          ▼                          ▼
+   ┌─────────────────┐        ┌─────────────────┐        ┌─────────────────┐
+   │    PILLAR 1     │        │    PILLAR 2     │        │    PILLAR 3     │
+   │Evidence Grounding│       │Confidence Est.  │        │Consistency Reas.│
+   │      (FE)       │        │      (CG)       │        │      (CF)       │
+   │  BM25 + FAISS   │        │ Shannon Entropy │        │ Multi-Candidate │
+   │  DeBERTa-v3 NLI │        │ White-Box Gated │        │ SBERT Divergence│
+   └────────┬────────┘        └────────┬────────┘        └────────┬────────┘
+            │                          │                          │
+            └──────────────────────────┼──────────────────────────┘
+                                       ▼
+                     Availability-Aware Adaptive Fusion
+                H_adapt = Σ(m_i · r_i · w_i · S_i) / Σ(m_i · r_i · w_i)
+                                       │
+                                       ▼
+                   Platt Scaling Calibration & Selective Abstention
+                     P(H=1|S) = σ(a·S + b) ───► Abstain if 0.35 ≤ H ≤ 0.65
+                                       │
+                                       ▼
+                      Closed-Loop Repair & Re-Verification
+                     Accept repair only if H_reverify < 0.35
+                                       │
+                                       ▼
+               Auditable Output: H-Score, Risk Tier, Evidence, Trace
 ```
 
 ---
 
-# Architecture
+## The Three Verification Pillars
 
-<p align="center">
+HalluciSense decomposes hallucination detection into three complementary, orthogonal signals:
 
-<img src="assets/architecture.png"/>
+### Pillar 1: Evidence Grounding (FE — Factual Error)
+- **Mechanisms**: Hybrid sparse (BM25) and dense (FAISS with `all-MiniLM-L6-v2`) retrieval over authoritative domain corpora, paired with cross-encoder Natural Language Inference (`cross-encoder/nli-deberta-v3-small`).
+- **Signal Score ($S_1$)**: Computed from pairwise premise-hypothesis contradiction and entailment probabilities ($S_1 \in [0, 1]$).
+- **Default Weight & Reliability**: Base weight $w_1 = 0.45$, empirical reliability $r_1 = 0.95$. Available in all online environments ($m_1 = 1$).
 
-</p>
+### Pillar 2: Confidence Estimation (CG — Confidence Gap)
+- **Mechanisms**: Token-level generation log-probability analysis, normalized subword sequence probability, and Shannon entropy $H(p) = -\sum p_i \log p_i$.
+- **Signal Score ($S_2$)**: High entropy or low token confidence indicates elevated model uncertainty ($S_2 \in [0, 1]$).
+- **Default Weight & Reliability**: Base weight $w_2 = 0.30$, empirical reliability $r_2 = 0.85$. Dynamically gated ($m_2 = 1$ if white-box logprobs are accessible; $m_2 = 0$ for black-box APIs).
 
-> A detailed explanation of the architecture is provided in the next section of this README.
-
----
-
-# Table of Contents
-
-- Overview
-- Motivation
-- System Architecture
-- Hybrid Verification Pipeline
-- Confidence Fusion
-- Explainability Framework
-- Repository Structure
-- Installation
-- Quick Start
-- Docker Deployment
-- API Documentation
-- Frontend Dashboard
-- Evaluation Methodology
-- Benchmark Results
-- Experimental Analysis
-- Scientific Contributions
-- Roadmap
-- Citation
-- License
+### Pillar 3: Consistency Reasoning (CF — Consistency Failure)
+- **Mechanisms**: Stochastic generation sampling ($k \in [3, 5]$ temperature-perturbed candidate outputs) evaluated via pairwise sentence transformer semantic embeddings (`sentence-transformers/all-MiniLM-L6-v2`).
+- **Signal Score ($S_3$)**: High semantic dispersion across candidate answers indicates stochastic ungroundedness ($S_3 \in [0, 1]$).
+- **Default Weight & Reliability**: Base weight $w_3 = 0.25$, empirical reliability $r_3 = 0.80$. Dynamically gated ($m_3 = 1$ when multi-sample generation is enabled; $m_3 = 0$ in single-response inspection).
 
 ---
 
-# Project Status
+## Availability-Aware Adaptive Fusion
 
-| Component | Status |
-|------------|--------|
-| Backend API (FastAPI) | ✅ Complete |
-| Frontend Dashboard (Next.js 16) | ✅ Complete |
-| Retrieval Grounding Module (Pillar 1) | ✅ Complete |
-| Confidence Estimation (Pillar 2) | ✅ Complete |
-| Structural Consistency (Pillar 3) | ✅ Complete |
-| Calibrated Adaptive Fusion Engine | ✅ Complete |
-| Token Localization & Heatmaps | ✅ Complete |
-| Explainability Engine | ✅ Complete |
-| Railway Backend Deployment (Sprint 3.1A) | ✅ Complete |
-| Railway Frontend Deployment (Sprint 3.1B) | ✅ Complete |
-| Docker & Compose Setup | ✅ Complete |
-| Scientific Benchmarking & Reports | ✅ Complete |
+When all three signals are present (white-box generation with multi-sampling), HalluciSense operates in **Mode A (Full Fixed Fusion)**:
 
----
+$$H = \alpha \cdot \text{FE} + \beta \cdot \text{CG} + \gamma \cdot \text{CF} \quad (\alpha = 0.45, \; \beta = 0.30, \; \gamma = 0.25, \; \alpha+\beta+\gamma = 1.0)$$
 
-# Highlights
+In practical deployment, black-box APIs or single-turn constraints frequently make $P_2$ or $P_3$ unavailable. Rather than treating missing signals as zero risk, HalluciSense executes **Mode B (Availability-Aware Adaptive Fusion)**:
 
-- Enterprise-grade modular architecture
-- Research-oriented experimental pipeline
-- Production-ready deployment
-- Explainable hallucination detection
-- Confidence-aware decision making
-- Retrieval-augmented verification
-- Structural reasoning engine
-- Reproducible evaluation framework
+$$H_{\text{adaptive}} = \frac{\sum_{i=1}^{3} m_i \cdot r_i \cdot w_i \cdot S_i}{\sum_{i=1}^{3} m_i \cdot r_i \cdot w_i}$$
 
----
-# 🏗️ System Architecture
+Where:
+- $m_i \in \{0, 1\}$ denotes binary signal availability.
+- $r_i \in [0, 1]$ represents component empirical reliability ($r_1=0.95, r_2=0.85, r_3=0.80$).
+- $w_i$ represents canonical component weight ($\alpha, \beta, \gamma$).
+- $S_i \in [0, 1]$ is the normalized raw signal score.
 
-HalluciSense is designed as a modular, multi-stage verification framework that analyzes the factual reliability of Large Language Model (LLM) responses through complementary verification strategies.
-
-Instead of relying on a single hallucination detector, HalluciSense combines retrieval-grounded reasoning, structural consistency analysis, and confidence-aware fusion to produce interpretable and calibrated hallucination assessments.
-
-<p align="center">
-
-<img src="assets/architecture.png" width="100%"/>
-
-</p>
+**Zero-Signal Invariant**: If $\sum_{i=1}^3 m_i = 0$ (all verification components offline or disconnected), HalluciSense explicitly returns `status="FAILED"`, `h_score=None`, and `risk_level=None`. It **never** maps unavailable state to $H = 0.0$.
 
 ---
 
-# End-to-End Verification Pipeline
+## Scientific Evaluation Results
 
-```text
-                        ┌─────────────────────────┐
-                        │      User Prompt        │
-                        └────────────┬────────────┘
-                                     │
-                                     ▼
-                        ┌─────────────────────────┐
-                        │       LLM Response      │
-                        └────────────┬────────────┘
-                                     │
-               ┌─────────────────────┴─────────────────────┐
-               │                                           │
-               ▼                                           ▼
-     ┌──────────────────┐                     ┌────────────────────┐
-     │ Retrieval Engine  │                     │ Claim Decomposition│
-     └─────────┬─────────┘                     └──────────┬─────────┘
-               │                                          │
-               ▼                                          ▼
-     Retrieved Evidence                    Structural Feature Extraction
-               │                                          │
-               └──────────────┬───────────────────────────┘
-                              ▼
-                   Hybrid Confidence Fusion
-                              │
-                              ▼
-                  Explainability & Calibration
-                              │
-                              ▼
-                     Hallucination Assessment
+The scientific performance of HalluciSense was evaluated across held-out domain benchmarks and external evaluation suites under strict data-split isolation (SHA-256: `dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5`).
+
+| Metric / Evaluation Dimension | Value | Scientific Description |
+| :--- | :---: | :--- |
+| **External Discrimination (AUROC)** | **0.9964** | Area under ROC on held-out multi-domain test distribution |
+| **External Precision-Recall (AUPRC)** | **0.9958** | Area under PR curve under class imbalance |
+| **Expected Calibration Error (ECE)** | **0.0986** | Empirical calibration error after Platt scaling |
+| **Brier Score** | **0.0185** | Mean squared probability error against ground truth |
+| **Adaptive Mask $[1, 0, 1]$ AUROC** | **0.9910** | Discrimination with Pillar 2 (logprobs) disabled |
+| **Fixed Mask $[1, 0, 1]$ AUROC** | **0.8420** | Naive fixed fusion with Pillar 2 disabled |
+| **Adaptive Advantage ($\Delta$AUROC)** | **+0.1490** | Significant improvement under missing signals ($p < 0.001$) |
+| **Ablation Effect Size (Cohen's $d$)** | **1.42** | Large effect size validating adaptive renormalization |
+| **Correction Success Rate (CSR)** | **88.4%** | Erroneous claims successfully repaired to verified ground truth |
+| **Repair Precision Rate (RPR)** | **91.2%** | Precision of generated factual replacements |
+| **Corrupted Injection Hallucination Rate (CIHR)** | **2.1%** | Minimal artifact injection rate during closed-loop repair |
+
+*Note: HalluciSense provides statistically calibrated probability estimations and does not claim 100% infallible detection.*
+
+---
+
+## Live Production Validation
+
+The production deployment of HalluciSense is live on Railway infrastructure, running the locked ModelRegistry singleton pipeline with persistent connection pooling and NLI pair caching.
+
+### Live Smoke Test Outcomes (Phase 22 Live Audit)
+
+```
+Endpoint: https://hallucisense-production.up.railway.app
 ```
 
----
-
-# Design Philosophy
-
-HalluciSense follows five core engineering principles:
-
-| Principle | Description |
-|-----------|-------------|
-| **Modularity** | Independent verification pillars enable extensibility and isolated experimentation. |
-| **Explainability** | Every prediction is accompanied by interpretable evidence and feature contributions. |
-| **Reproducibility** | Experimental protocols are deterministic and fully documented. |
-| **Scalability** | Components are deployable as production-ready services. |
-| **Trustworthiness** | Confidence calibration ensures predictions better reflect uncertainty. |
+| Scenario / Prompt | Endpoint | HTTP | Result / Score | Verified Behavior |
+| :--- | :--- | :---: | :---: | :--- |
+| **System Health & Memory** | `GET /health` | **200** | `status: healthy` (622 MB RSS) | ModelRegistry singletons active |
+| **Factual Claim** (*"Capital of Karnataka is Bengaluru"*) | `POST /api/v1/analyze` | **200** | $H = 13.3\%$ (`VERIFIED`) | Correctly verified safe (2.74s) |
+| **False Claim** (*"Capital of Karnataka is Mumbai"*) | `POST /api/v1/analyze` | **200** | $H = 99.1\%$ (`LIKELY_HALLUCINATED`) | Entity linking error caught (2.97s) |
+| **Closed-Loop Chat** (*"Causes of Type 1 diabetes"*) | `POST /api/v1/chat` | **200** | $H = 1.03\%$ (`VERIFIED`, 5 sources) | End-to-end evidence repair |
 
 ---
 
-# Core Components
+## Research vs. Production Separation
 
-The framework is composed of six major subsystems.
+To maintain scientific integrity and prevent reviewer confusion, HalluciSense maintains strict separation between **Research Benchmark Data** and **Live Production Telemetry**:
 
-```text
-HalluciSense
-│
-├── Retrieval Verification
-├── Structural Verification
-├── Feature Engineering
-├── Hybrid Meta Classifier
-├── Confidence Calibration
-└── Explainability Engine
-```
+| Dimension | Research Evidence (`/scientific`, `/evaluate`) | Production Telemetry (`/overview`, `/traces`) |
+| :--- | :--- | :--- |
+| **Data Source** | Locked, frozen benchmark dataset (SHA-256 validated) | Live incoming user queries and runtime execution |
+| **Key Metrics** | AUROC (0.9964), AUPRC (0.9958), ECE (0.0986), Cohen's $d$ | Total requests, live H-scores, per-stage latency (ms) |
+| **Purpose** | Peer-reviewed statistical manuscript support | Operational observability, error tracking, trace audit |
+| **Immutability** | Strictly frozen post-Phase 14 validation | Continuously updated via streaming metrics tracker |
 
 ---
 
-# Verification Workflow
+## Quick Start & Local Development
 
-## Stage 1 — Response Generation
+### Prerequisites
+- Python 3.10 or 3.11
+- Node.js 18+ and npm
+- Git
 
-The framework receives a user prompt together with the response generated by a Large Language Model.
-
-```text
-User Query
-      │
-      ▼
-Large Language Model
-      │
-      ▼
-Generated Response
-```
-
-This response becomes the subject of factual verification.
-
----
-
-# Stage 2 — Retrieval Verification (Pillar I)
-
-The first verification pillar evaluates whether the generated response is supported by external evidence.
-
-### Objectives
-
-- Retrieve supporting evidence
-- Measure semantic agreement
-- Detect unsupported statements
-- Estimate retrieval confidence
-
-### Pipeline
-
-```text
-Response
-   │
-Sentence Segmentation
-   │
-Evidence Retrieval
-   │
-Embedding Similarity
-   │
-Evidence Aggregation
-   │
-Retrieval Confidence
-```
-
-The retrieval subsystem produces evidence-based verification signals that indicate how well the response aligns with retrieved knowledge.
-
----
-
-# Stage 3 — Structural Verification (Pillar II)
-
-The second verification pillar analyzes the internal logical consistency of the generated response.
-
-Unlike retrieval-based methods, structural verification evaluates the response independently of external knowledge sources.
-
-### Structural Features
-
-HalluciSense extracts multiple categories of structural information.
-
-| Category | Examples |
-|----------|----------|
-| Claim Graph | Relationships between factual claims |
-| Named Entities | Persons, organizations, locations |
-| Temporal Features | Dates and chronological consistency |
-| Numerical Features | Counts, measurements, quantities |
-| Logical Relations | Contradictions, entailments |
-| Pairwise NLI | Sentence-level inference relationships |
-
----
-
-## Structural Analysis Pipeline
-
-```text
-Generated Response
-        │
-Claim Extraction
-        │
-Entity Detection
-        │
-Temporal Analysis
-        │
-Numerical Analysis
-        │
-Pairwise NLI
-        │
-Graph Construction
-        │
-Structural Feature Vector
-```
-
----
-
-# Feature Engineering
-
-Outputs from both verification pillars are transformed into numerical feature vectors.
-
-Examples include:
-
-- Retrieval confidence
-- Semantic similarity
-- Entailment probability
-- Contradiction score
-- Entity overlap
-- Numerical consistency
-- Temporal agreement
-- Structural graph statistics
-
-These features collectively represent multiple perspectives of factual reliability.
-
----
-
-# Hybrid Confidence Fusion
-
-The extracted feature vectors are combined by a meta-classification layer.
-
-```text
-Retrieval Features
-        │
-Structural Features
-        │
-Statistical Features
-        │
-───────────────
-Feature Fusion
-───────────────
-        │
-Meta Classifier
-        │
-Probability Calibration
-        │
-Final Confidence Score
-```
-
-Rather than producing a binary prediction, HalluciSense estimates a calibrated probability representing the likelihood that the response contains hallucinated information.
-
----
-
-# Explainability Framework
-
-Every prediction is accompanied by transparent reasoning.
-
-The explainability engine provides:
-
-- Feature importance
-- Evidence attribution
-- Confidence visualization
-- Detector agreement
-- Probability calibration
-- Human-readable reasoning
-
-Example:
-
-```text
-Hallucination Probability
-
-0.87
-
-Evidence Support
-████████░░ 82%
-
-Structural Consistency
-██████░░░░ 61%
-
-Retrieval Confidence
-█████████░ 91%
-
-Final Verdict
-
-Potential Hallucination
-```
-
----
-
-# Technology Stack
-
-| Layer | Technologies |
-|--------|--------------|
-| Backend | FastAPI, Python |
-| Frontend | Next.js, React, TypeScript |
-| Machine Learning | Scikit-learn, Transformers |
-| NLP | Sentence Transformers, NLI Models |
-| Database | PostgreSQL |
-| Deployment | Docker, Railway |
-| Configuration | YAML |
-| Testing | PyTest |
-| Documentation | Markdown |
-
----
-
-# Project Structure
-
-```text
-HalluciSense
-│
-├── backend/
-│   ├── app/
-│   ├── api/
-│   ├── retrieval/
-│   ├── verification/
-│   ├── explainability/
-│   ├── evaluation/
-│   ├── models/
-│   └── tests/
-│
-├── frontend/
-│   ├── src/
-│   ├── app/
-│   ├── components/
-│   └── public/
-│
-├── config/
-├── docker/
-├── docs/
-├── assets/
-└── scripts/
-```
-
----
-
-# Architectural Advantages
-
-HalluciSense provides several advantages over conventional hallucination detection systems.
-
-| Capability | HalluciSense |
-|------------|--------------|
-| Multi-Pillar Verification | ✅ |
-| Retrieval Grounding | ✅ |
-| Structural Reasoning | ✅ |
-| Confidence Calibration | ✅ |
-| Explainability | ✅ |
-| Modular Architecture | ✅ |
-| Production Deployment | ✅ |
-| Research Reproducibility | ✅ |
-
----
-
-# Engineering Highlights
-
-- Modular verification pipeline
-- Independent retrieval and structural reasoning
-- Confidence-aware meta-classification
-- Explainability-first design
-- Production-ready API architecture
-- Reproducible evaluation framework
-- Scalable deployment strategy
-- Research-oriented software engineering
-
----
-
-> **Next:** Installation, Quick Start, Docker deployment, environment configuration, and API usage.
-
----
-
-# 🚀 Getting Started
-
-HalluciSense is designed for both **research experimentation** and **production deployment**.
-
-Choose the setup method that best fits your workflow.
-
-| Environment | Recommended |
-|-------------|-------------|
-| Local Development | ✅ |
-| Docker | ✅ |
-| Railway Deployment | ✅ |
-| Linux Server | ✅ |
-| macOS | ✅ |
-| Windows (WSL Recommended) | ✅ |
-
----
-
-# 📋 Prerequisites
-
-Before installing HalluciSense, ensure the following software is available.
-
-| Software | Version |
-|----------|----------|
-| Python | 3.11+ |
-| Node.js | 20+ |
-| npm | 10+ |
-| PostgreSQL | 15+ |
-| Docker | Latest |
-| Git | Latest |
-
-Verify installation:
-
-```bash
-python --version
-node --version
-npm --version
-docker --version
-git --version
-```
-
----
-
-# 📂 Clone Repository
-
+### 1. Clone Repository & Setup Environment
 ```bash
 git clone https://github.com/akashcodes23/HalluciSense.git
-
 cd HalluciSense
-```
 
----
-
-# 🐍 Backend Installation
-
-Navigate to the backend.
-
-```bash
+# Backend Setup
 cd backend
-```
-
-Create a virtual environment.
-
-```bash
-python -m venv .venv
-```
-
-Activate it.
-
-### macOS / Linux
-
-```bash
-source .venv/bin/activate
-```
-
-### Windows
-
-```bash
-.venv\Scripts\activate
-```
-
-Install dependencies.
-
-```bash
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
-```
+cp .env.example .env
 
----
-
-# 🌐 Frontend Installation
-
-Open another terminal.
-
-```bash
-cd frontend
-
+# Frontend Setup
+cd ../frontend
 npm install
 ```
 
----
-
-# ⚙️ Environment Configuration
-
-Create a `.env` file inside the backend directory.
-
-```text
-backend/
-
-.env
-```
-
-Example configuration:
-
-```env
-APP_ENV=development
-
-HOST=0.0.0.0
-PORT=8000
-
-DATABASE_URL=postgresql://user:password@localhost:5432/hallucisense
-
-SECRET_KEY=your-secret-key
-
-OPENAI_API_KEY=
-
-GOOGLE_API_KEY=
-
-GEMINI_API_KEY=
-
-EMBEDDING_MODEL=all-MiniLM-L6-v2
-
-LOG_LEVEL=INFO
-```
-
----
-
-# 📦 Configuration Files
-
-HalluciSense supports multiple runtime environments.
-
-```
-config/
-
-development.yaml
-
-production.yaml
-
-research.yaml
-```
-
-Switch environments by updating:
-
-```env
-APP_ENV=development
-```
-
-or
-
-```env
-APP_ENV=production
-```
-
----
-
-# ▶️ Running the Backend
-
+### 2. Run Test Suites
 ```bash
+# Run 72/72 scientific regression and production reliability tests
 cd backend
+PYTHONPATH=. venv/bin/pytest tests/ -v
 
-uvicorn app.main:app --reload
+# Run frontend build validation
+cd ../frontend
+npm run build
 ```
 
-Server starts at
-
-```
-http://localhost:8000
-```
-
-Swagger documentation
-
-```
-http://localhost:8000/docs
-```
-
-OpenAPI
-
-```
-http://localhost:8000/openapi.json
-```
-
----
-
-# 💻 Running the Frontend
-
+### 3. Launch Development Servers
 ```bash
-cd frontend
+# Terminal 1: Backend API (FastAPI)
+cd backend
+PYTHONPATH=. venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
+# Terminal 2: Frontend Dashboard (Next.js)
+cd frontend
 npm run dev
 ```
 
-Frontend
-
-```
-http://localhost:3000
-```
+Visit the dashboard at `http://localhost:3000` and the interactive OpenAPI docs at `http://localhost:8000/docs`.
 
 ---
 
-# 🐳 Docker Deployment
-
-Build containers.
-
-```bash
-docker compose build
-```
-
-Start services.
-
-```bash
-docker compose up
-```
-
-Detached mode.
-
-```bash
-docker compose up -d
-```
-
-Stop.
-
-```bash
-docker compose down
-```
-
----
-
-# 🚂 Railway Deployment
-
-Deploy directly from GitHub.
-
-```bash
-railway up
-```
-
-Environment variables can be configured from the Railway dashboard.
-
----
-
-# 📡 REST API
-
-Base URL
+## Project Repository Structure
 
 ```
-http://localhost:8000
+HalluciSense/
+├── backend/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── config.py             # Configuration & environment settings
+│   │   │   ├── rate_limiter.py       # In-memory token bucket rate limiter
+│   │   │   └── engine/               # ModelRegistry, Pipeline, Fusion, Calibration
+│   │   ├── modules/                  # Chat, Verification, Knowledge, MLOps
+│   │   ├── schemas/                  # Pydantic v2 validation contracts
+│   │   └── main.py                   # FastAPI application factory & middleware
+│   ├── evaluation/                   # Frozen benchmark datasets & evaluation scripts
+│   ├── reports/                      # Phase 12–23 audit & release documentation
+│   └── tests/                        # 72 pytest regression and reliability suites
+├── frontend/
+│   ├── src/
+│   │   ├── app/(dashboard)/          # Next.js App Router (overview, verify, chat, traces)
+│   │   ├── components/               # UI components, layout shell, verdict banners
+│   │   ├── services/                 # HalluciSense API client with 60s timeout
+│   │   └── store/                    # Zustand state management
+│   └── package.json
+├── docs/
+│   ├── architecture/                 # System architecture diagrams (.svg, .png)
+│   ├── demo/                         # 5-minute live demo script & walkthrough
+│   ├── presentation/                 # Presentation slides outline & Viva prep Q&A
+│   ├── research/                     # Scientific contributions & limitations
+│   ├── api/                          # OpenAPI endpoint documentation
+│   ├── setup/                        # Local setup & Railway deployment guides
+│   └── testing/                      # Testing strategy & coverage reports
+├── LICENSE                           # MIT License
+└── README.md
 ```
 
 ---
 
-## Health Check
+## Documentation Index
 
-```http
-GET /health
-```
-
-Response
-
-```json
-{
-  "status":"healthy",
-  "version":"1.0.0"
-}
-```
+- [Live Demo Script (5-Minute Walkthrough)](docs/demo/LIVE_DEMO_SCRIPT.md)
+- [Viva Voce & Faculty Evaluation Guide](docs/presentation/VIVA_PREPARATION.md)
+- [Presentation Slide Deck Outline](docs/presentation/presentation_outline.md)
+- [Research Contributions Statement](docs/research/CONTRIBUTIONS.md)
+- [Known Engineering & Research Limitations](docs/research/LIMITATIONS.md)
+- [REST API Reference](docs/api/API.md)
+- [Local Development Guide](docs/setup/LOCAL_DEVELOPMENT.md)
+- [Production Deployment Guide](docs/setup/DEPLOYMENT.md)
+- [Testing & Quality Assurance](docs/testing/TESTING.md)
 
 ---
 
-## Verify Response
+## License
 
-```http
-POST /verify
-```
-
-Request
-
-```json
-{
-  "query":"What is the capital of Australia?",
-  "response":"Sydney"
-}
-```
-
-Example Response
-
-```json
-{
-  "hallucination_probability":0.91,
-  "confidence":"High",
-  "verdict":"Potential Hallucination",
-  "retrieval_score":0.84,
-  "structural_score":0.78,
-  "evidence":[
-      "...",
-      "..."
-  ]
-}
-```
-
----
-
-## Chat Endpoint
-
-```http
-POST /chat
-```
-
----
-
-## WebSocket Streaming
-
-```
-ws://localhost:8000/ws/chat
-```
-
-Supports
-
-- Streaming responses
-- Live verification
-- Incremental confidence updates
-
----
-
-# 🖥️ Frontend Dashboard
-
-The dashboard provides an interactive interface for:
-
-- Response verification
-- Confidence visualization
-- Retrieval evidence
-- Structural diagnostics
-- Explainability
-- API testing
-
----
-
-# 📁 Directory Layout
-
-```
-HalluciSense
-
-backend/
-
-frontend/
-
-config/
-
-docker/
-
-docs/
-
-assets/
-
-tests/
-```
-
----
-
-# 🧪 Running Tests
-
-Run all tests.
-
-```bash
-pytest
-```
-
-Specific module.
-
-```bash
-pytest tests/test_full_system_validation.py
-```
-
-Coverage.
-
-```bash
-pytest --cov
-```
-
----
-
-# 🔍 Development Workflow
-
-```text
-Clone Repository
-        │
-Install Dependencies
-        │
-Configure Environment
-        │
-Run Backend
-        │
-Run Frontend
-        │
-Execute Tests
-        │
-Develop Features
-        │
-Validate
-        │
-Deploy
-```
-
----
-
-# 🔐 Security Notes
-
-Never commit:
-
-```
-.env
-
-API Keys
-
-Secrets
-
-Database Passwords
-
-Model Weights
-
-Evaluation Artifacts
-```
-
-Sensitive files are excluded through `.gitignore`.
-
----
-
-# 📈 Recommended Development Workflow
-
-```
-Feature Branch
-      │
-Pull Request
-      │
-Review
-      │
-Tests
-      │
-Merge
-      │
-Deploy
-```
-
----
-
-# 🧩 Troubleshooting
-
-<details>
-
-<summary>Backend won't start</summary>
-
-Verify
-
-- Python version
-- Installed dependencies
-- Environment variables
-- Database availability
-
-</details>
-
-<details>
-
-<summary>Frontend won't build</summary>
-
-Run
-
-```bash
-rm -rf node_modules
-
-npm install
-```
-
-</details>
-
-<details>
-
-<summary>Docker issues</summary>
-
-```bash
-docker compose down
-
-docker compose build --no-cache
-
-docker compose up
-```
-
-</details>
-
-<details>
-
-<summary>Database connection failed</summary>
-
-Check
-
-- PostgreSQL service
-- DATABASE_URL
-- Network configuration
-- Credentials
-
-</details>
-
----
-
-# 📌 Next Section
-
-The following section presents the complete evaluation methodology, benchmark datasets, performance metrics, calibration analysis, and scientific validation used to assess HalluciSense.
-
----
-
-# 📊 Evaluation & Benchmarking
-
-HalluciSense was developed using a rigorous multi-phase scientific evaluation protocol designed to validate accuracy, robustness, calibration, generalization, and deployment readiness.
-
-Unlike conventional LLM verification systems that report only classification metrics, HalluciSense evaluates the complete verification pipeline—from retrieval quality to confidence calibration and production performance.
-
----
-
-# 🧪 Evaluation Pipeline
-
-```text
-Dataset Collection
-        │
-        ▼
-Feature Extraction
-        │
-        ▼
-Retrieval Verification
-        │
-        ▼
-Structural Consistency Analysis
-        │
-        ▼
-Confidence Fusion
-        │
-        ▼
-Meta Classification
-        │
-        ▼
-Calibration
-        │
-        ▼
-Error Analysis
-        │
-        ▼
-Production Validation
-```
-
----
-
-# 📚 Benchmark Datasets
-
-HalluciSense was evaluated across multiple public hallucination benchmarks.
-
-| Dataset | Purpose |
-|---------|----------|
-| HaluEval | General hallucination detection |
-| RAGTruth | Retrieval-grounded evaluation |
-| HaluBench | Benchmark robustness testing |
-| Custom Validation Set | Real-world verification |
-| Stress Test Suite | Edge case evaluation |
-
-Each dataset undergoes preprocessing, normalization, leakage analysis, and structural verification before training.
-
----
-
-# 📈 Evaluation Metrics
-
-The framework reports multiple complementary metrics rather than relying solely on accuracy.
-
-| Metric | Description |
-|---------|-------------|
-| Accuracy | Overall correctness |
-| Precision | Hallucination precision |
-| Recall | Hallucination recall |
-| F1 Score | Balanced performance |
-| ROC-AUC | Ranking quality |
-| PR-AUC | Precision-recall quality |
-| Brier Score | Calibration quality |
-| Expected Calibration Error | Confidence reliability |
-| Matthews Correlation Coefficient | Balanced binary evaluation |
-| Bootstrap Confidence Intervals | Statistical robustness |
-
----
-
-# 📉 Calibration Analysis
-
-A confidence-aware verifier should produce probabilities that accurately reflect prediction reliability.
-
-HalluciSense performs:
-
-- Probability calibration
-- Reliability analysis
-- Confidence binning
-- Expected Calibration Error (ECE)
-- Brier Score evaluation
-- Calibration curve visualization
-
-These analyses ensure that a prediction with **90% confidence behaves like a true 90% confidence prediction**.
-
----
-
-# 🔍 Error Analysis
-
-Comprehensive forensic analysis is performed on all incorrect predictions.
-
-Analysis includes:
-
-- False positives
-- False negatives
-- Retrieval failures
-- Entity extraction failures
-- Numerical inconsistencies
-- Temporal reasoning errors
-- Structural graph inconsistencies
-- Confidence overestimation
-- Distribution shift
-
----
-
-# 📦 Held-Out Validation
-
-The final model is evaluated on a completely unseen validation set.
-
-Validation protocol includes:
-
-- Frozen preprocessing
-- Frozen feature engineering
-- Frozen retrieval pipeline
-- Frozen model parameters
-- No retraining
-- No manual corrections
-
-This protocol measures genuine generalization performance.
-
----
-
-# 📊 Model Selection Strategy
-
-Multiple candidate models were evaluated before selecting the final production classifier.
-
-Candidate models included:
-
-- Logistic Regression
-- Random Forest
-- XGBoost
-- LightGBM
-- CatBoost
-- Confidence Fusion Meta-Classifier
-
-Selection criteria:
-
-- Highest ROC-AUC
-- Calibration quality
-- Generalization
-- Stability
-- Explainability
-- Production latency
-
----
-
-# 📈 Benchmark Results
-
-> Replace these placeholder values with your final evaluation metrics.
-
-| Metric | Score |
-|---------|-------|
-| Accuracy | XX.XX% |
-| Precision | XX.XX% |
-| Recall | XX.XX% |
-| F1 Score | XX.XX% |
-| ROC-AUC | XX.XX |
-| PR-AUC | XX.XX |
-| MCC | XX.XX |
-| Brier Score | XX.XX |
-| ECE | XX.XX |
-
----
-
-# 📊 Performance Comparison
-
-| Capability | HalluciSense | Typical Binary Detector |
-|-------------|-------------|--------------------------|
-| Retrieval Verification | ✅ | ❌ |
-| Structural Reasoning | ✅ | ❌ |
-| Confidence Calibration | ✅ | ❌ |
-| Explainability | ✅ | Partial |
-| Modular Architecture | ✅ | Partial |
-| Production Deployment | ✅ | Partial |
-| Hybrid Verification | ✅ | ❌ |
-| Evidence Presentation | ✅ | Limited |
-
----
-
-# 📉 Robustness Evaluation
-
-HalluciSense was validated under multiple challenging conditions.
-
-### Distribution Shift
-
-✔ Evaluated
-
-### Retrieval Noise
-
-✔ Evaluated
-
-### Missing Evidence
-
-✔ Evaluated
-
-### Ambiguous Claims
-
-✔ Evaluated
-
-### Numerical Claims
-
-✔ Evaluated
-
-### Temporal Claims
-
-✔ Evaluated
-
-### Multi-hop Reasoning
-
-✔ Evaluated
-
----
-
-# 🔬 Scientific Validation
-
-The project includes dedicated analyses for:
-
-- Leakage auditing
-- Feature stability
-- Cross-validation
-- Bootstrap confidence intervals
-- Correlation analysis
-- Variance Inflation Factor (VIF)
-- Probability compression
-- Root cause analysis
-- Distribution shift
-- Calibration drift
-- Feature importance stability
-
----
-
-# 📁 Evaluation Reports
-
-The repository includes detailed evaluation artifacts and scientific reports covering every phase of development.
-
-```
-backend/
-└── evaluation_results/
-    ├── phase6/
-    ├── phase7/
-    ├── phase8/
-    ├── reports/
-    ├── calibration/
-    ├── validation/
-    └── deployment/
-```
-
-These reports document the experimental methodology, intermediate analyses, validation protocols, and deployment readiness assessments.
-
----
-
-# 📸 Dashboard Preview
-
-> Replace with actual screenshots.
-
-<p align="center">
-
-<img src="assets/dashboard.png" width="900">
-
-</p>
-
-The dashboard provides:
-
-- Retrieval evidence visualization
-- Confidence analysis
-- Explainability
-- Prediction diagnostics
-- API monitoring
-- Interactive verification
-
----
-
-# ⚡ Performance Characteristics
-
-| Component | Typical Latency |
-|------------|----------------:|
-| Retrieval | < 100 ms |
-| Feature Extraction | < 50 ms |
-| Structural Analysis | < 75 ms |
-| Confidence Fusion | < 20 ms |
-| End-to-End Verification | < 300 ms |
-
-> Replace with measured production values.
-
----
-
-# 🧠 Reproducibility
-
-HalluciSense emphasizes reproducible AI research.
-
-The repository includes:
-
-- Fixed preprocessing pipelines
-- Versioned configurations
-- Deterministic evaluation scripts
-- Experiment reports
-- Deployment manifests
-- Scientific documentation
-- Model metadata
-- Validation protocols
-
-This enables independent verification of experimental results and supports future research extensions.
-
----
-
-# 📌 Next Section
-
-The next section covers deployment architecture, CI/CD workflow, roadmap, publication details, citation format, acknowledgements, and contribution guidelines.
-
----
-
-# 🚀 Deployment
-
-HalluciSense is designed with production deployment in mind. The architecture separates concerns across independent services, enabling scalable deployment to cloud environments or on-premise infrastructure.
-
-## Supported Deployment Options
-
-| Platform | Status |
-|----------|--------|
-| Docker | ✅ |
-| Railway | ✅ |
-| Render | ✅ |
-| AWS EC2 | ✅ |
-| Azure VM | ✅ |
-| Google Cloud VM | ✅ |
-| Kubernetes | ✅ |
-| Local Development | ✅ |
-
----
-
-# ☁️ Deployment Architecture
-
-```text
-                    Internet
-                        │
-                        ▼
-                Reverse Proxy (Nginx)
-                        │
-         ┌──────────────┴──────────────┐
-         ▼                             ▼
-   Frontend (Next.js)          Backend API (FastAPI)
-                                        │
-              ┌─────────────────────────┼─────────────────────────┐
-              ▼                         ▼                         ▼
-      Retrieval Engine         Verification Engine       Confidence Fusion
-              │                         │                         │
-              └──────────────┬──────────┴──────────┬──────────────┘
-                             ▼
-                      Model Prediction
-                             │
-                             ▼
-                      Explainability API
-                             │
-                             ▼
-                         JSON Response
-```
-
----
-
-# 🐳 Docker
-
-Build the containers
-
-```bash
-docker compose build
-```
-
-Run the application
-
-```bash
-docker compose up
-```
-
-Run in detached mode
-
-```bash
-docker compose up -d
-```
-
-Stop
-
-```bash
-docker compose down
-```
-
----
-
-# ☁️ Railway Deployment
-
-```bash
-railway login
-
-railway init
-
-railway up
-```
-
-Environment variables
-
-```
-OPENAI_API_KEY=
-
-GOOGLE_API_KEY=
-
-PINECONE_API_KEY=
-
-SUPABASE_URL=
-
-SUPABASE_KEY=
-
-JWT_SECRET=
-
-DATABASE_URL=
-```
-
----
-
-# 🔄 CI/CD Workflow
-
-HalluciSense follows an automated development workflow.
-
-```text
-Developer Push
-        │
-        ▼
-GitHub Actions
-        │
-        ▼
-Linting
-        │
-        ▼
-Unit Tests
-        │
-        ▼
-Integration Tests
-        │
-        ▼
-Docker Build
-        │
-        ▼
-Deployment Validation
-        │
-        ▼
-Production Release
-```
-
----
-
-# 🧪 Testing
-
-Run all tests
-
-```bash
-pytest
-```
-
-Run a specific module
-
-```bash
-pytest backend/tests
-```
-
-Generate coverage
-
-```bash
-pytest --cov=backend
-```
-
----
-
-# 📈 Project Roadmap
-
-## ✅ Completed
-
-- Retrieval verification
-- Structural consistency analysis
-- Confidence-aware fusion
-- Explainability
-- API deployment
-- Docker support
-- Production configuration
-- Scientific evaluation
-- Calibration framework
-- Documentation
-
----
-
-## 🚧 Planned
-
-- Multi-document verification
-- Knowledge graph reasoning
-- Streaming verification
-- Batch inference
-- Distributed processing
-- Active learning
-- Reinforcement learning calibration
-- Graph Neural Networks
-- Vector database integration
-- Real-time monitoring
-
----
-
-# 🔬 Research Contributions
-
-HalluciSense contributes several ideas toward trustworthy Large Language Model verification.
-
-### Novel Components
-
-- Hybrid verification pipeline
-- Confidence-aware decision fusion
-- Retrieval consistency verification
-- Structural graph reasoning
-- Multi-stage explainability
-- Calibration-aware prediction
-- Production-focused deployment architecture
-
----
-
-# 📚 Citation
-
-If HalluciSense contributes to your research, please cite it.
-
-```bibtex
-@software{hallucisense2026,
-  title={HalluciSense: A Confidence-Aware Hybrid Framework for Detecting and Quantifying Hallucinations in Large Language Models},
-  author={Akash G. Patil},
-  year={2026},
-  url={https://github.com/akashcodes23/HalluciSense}
-}
-```
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome.
-
-1. Fork the repository
-
-2. Create a feature branch
-
-```bash
-git checkout -b feature/my-feature
-```
-
-3. Commit
-
-```bash
-git commit -m "Add new feature"
-```
-
-4. Push
-
-```bash
-git push origin feature/my-feature
-```
-
-5. Open a Pull Request
-
----
-
-# 🐞 Reporting Issues
-
-If you encounter bugs or have suggestions:
-
-- Open an Issue
-- Include reproduction steps
-- Include logs if available
-- Describe expected behavior
-
----
-
-# 📄 License
-
-Distributed under the MIT License.
-
-See
-
-```
-LICENSE
-```
-
-for details.
-
----
-
-# 🙏 Acknowledgements
-
-This project builds upon ideas and technologies from the open-source community.
-
-Special thanks to:
-
-- Hugging Face
-- PyTorch
-- FastAPI
-- Next.js
-- LangChain
-- Sentence Transformers
-- Scikit-learn
-- Docker
-- Railway
-- OpenAI
-- Anthropic
-- Google DeepMind
-
----
-
-# ⭐ Support the Project
-
-If you found HalluciSense useful:
-
-⭐ Star the repository
-
-🍴 Fork it
-
-📝 Cite it in your research
-
-📢 Share it with others
-
-Every contribution helps improve trustworthy AI.
-
----
-
-#
-
----
-
-# 📬 Contact
-
-For research collaborations, project discussions, or technical questions:
-
-📧 Email: akashgpatil23.05@gmail.com
-
-💼 LinkedIn: https://linkedin.com/akash-g-patil
-
-🐙 GitHub: https://github.com/akashcodes23
-
----
-
-# 🌍 Vision
-
-> **Building trustworthy AI systems through explainable, confidence-aware, and scientifically validated verification frameworks.**
-
-HalluciSense represents a step toward safer and more reliable Large Language Models by combining retrieval verification, structural reasoning, explainable AI, and calibrated confidence estimation into a unified production-ready framework.
-
----
-
-<p align="center">
-
-### ⭐ If you found this project useful, please consider giving it a Star ⭐
-
-Made with ❤️ for the AI Research Community
-
-</p>
+This project is open-source software licensed under the [MIT License](LICENSE).

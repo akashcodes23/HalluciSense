@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="100%" height="100%" style="background:#090d16; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="gradPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="gradPillar1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="gradPillar2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="gradPillar3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="gradFusion" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="gradDecision" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <linearGradient id="gradAction" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0e7490"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Title Bar -->
+  <text x="600" y="45" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="700" letter-spacing="1">HALLUCISENSE SYSTEM ARCHITECTURE</text>
+  <text x="600" y="70" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="400">Availability-Aware Multi-Signal Verification, Calibration &amp; Closed-Loop Repair Framework</text>
+
+  <!-- 1. INPUT LAYER -->
+  <g transform="translate(425, 95)" filter="url(#cardShadow)">
+    <rect width="350" height="65" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="175" y="26" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="700" letter-spacing="0.5">INPUT RESPONSE</text>
+    <text x="175" y="48" text-anchor="middle" fill="#f1f5f9" font-size="14" font-weight="600">Query (q) + Generated LLM Response (R)</text>
+  </g>
+
+  <!-- Flow Arrow 1 -->
+  <line x1="600" y1="160" x2="600" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 2. CLAIM EXTRACTION -->
+  <g transform="translate(425, 195)" filter="url(#cardShadow)">
+    <rect width="350" height="55" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+    <text x="175" y="24" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="700" letter-spacing="0.5">CLAIM DECOMPOSITION</text>
+    <text x="175" y="42" text-anchor="middle" fill="#94a3b8" font-size="12">Atomic Proposition Parser {c₁, c₂, ..., cₖ}</text>
+  </g>
+
+  <!-- Distribution Lines to Pillars -->
+  <path d="M 600 250 L 600 280 L 220 280 L 220 305" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="600" y1="250" x2="600" y2="305" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M 600 250 L 600 280 L 980 280 L 980 305" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- 3. THREE VERIFICATION PILLARS -->
+  <!-- Pillar 1: Evidence Grounding -->
+  <g transform="translate(60, 310)" filter="url(#cardShadow)">
+    <rect width="320" height="155" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <rect width="320" height="32" rx="10" fill="url(#gradPillar1)"/>
+    <text x="160" y="21" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">PILLAR 1: EVIDENCE GROUNDING (FE)</text>
+    <text x="20" y="58" fill="#34d399" font-size="12" font-weight="600">• Hybrid Retrieval (m₁ = 1.0)</text>
+    <text x="32" y="76" fill="#94a3b8" font-size="11">BM25 Sparse + FAISS Dense Vector Index</text>
+    <text x="20" y="100" fill="#34d399" font-size="12" font-weight="600">• Cross-Encoder NLI Entailment</text>
+    <text x="32" y="118" fill="#94a3b8" font-size="11">DeBERTa-v3 Pair Scoring: Entail / Contradict</text>
+    <text x="20" y="142" fill="#cbd5e1" font-size="11" font-weight="500">Output: S₁ ∈ [0, 1], Reliability r₁ = 0.95</text>
+  </g>
+
+  <!-- Pillar 2: Confidence Estimation -->
+  <g transform="translate(440, 310)" filter="url(#cardShadow)">
+    <rect width="320" height="155" rx="10" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+    <rect width="320" height="32" rx="10" fill="url(#gradPillar2)"/>
+    <text x="160" y="21" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">PILLAR 2: CONFIDENCE GAP (CG)</text>
+    <text x="20" y="58" fill="#a78bfa" font-size="12" font-weight="600">• Token Entropy &amp; Uncertainty (m₂)</text>
+    <text x="32" y="76" fill="#94a3b8" font-size="11">Shannon Entropy H(p) from Logprobs</text>
+    <text x="20" y="100" fill="#a78bfa" font-size="12" font-weight="600">• Availability Gating</text>
+    <text x="32" y="118" fill="#94a3b8" font-size="11">m₂ = 1 if white-box logprobs; else m₂ = 0</text>
+    <text x="20" y="142" fill="#cbd5e1" font-size="11" font-weight="500">Output: S₂ ∈ [0, 1], Reliability r₂ = 0.85</text>
+  </g>
+
+  <!-- Pillar 3: Consistency Reasoning -->
+  <g transform="translate(820, 310)" filter="url(#cardShadow)">
+    <rect width="320" height="155" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+    <rect width="320" height="32" rx="10" fill="url(#gradPillar3)"/>
+    <text x="160" y="21" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">PILLAR 3: CONSISTENCY FAILURE (CF)</text>
+    <text x="20" y="58" fill="#fbbf24" font-size="12" font-weight="600">• Multi-Sample Invariance (m₃)</text>
+    <text x="32" y="76" fill="#94a3b8" font-size="11">Stochastic Candidates (k = 3–5)</text>
+    <text x="20" y="100" fill="#fbbf24" font-size="12" font-weight="600">• Semantic Divergence</text>
+    <text x="32" y="118" fill="#94a3b8" font-size="11">Pairwise SBERT Cosine Dissimilarity</text>
+    <text x="20" y="142" fill="#cbd5e1" font-size="11" font-weight="500">Output: S₃ ∈ [0, 1], Reliability r₃ = 0.80</text>
+  </g>
+
+  <!-- Convergence to Fusion Engine -->
+  <path d="M 220 465 L 220 495 L 600 495 L 600 515" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="600" y1="465" x2="600" y2="515" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <path d="M 980 465 L 980 495 L 600 495 L 600 515" fill="none" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrow)"/>
+
+  <!-- 4. FUSION ENGINE -->
+  <g transform="translate(300, 520)" filter="url(#cardShadow)">
+    <rect width="600" height="95" rx="10" fill="#0f172a" stroke="#6366f1" stroke-width="1.8"/>
+    <rect width="600" height="28" rx="10" fill="url(#gradFusion)"/>
+    <text x="300" y="19" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">AVAILABILITY-AWARE ADAPTIVE FUSION ENGINE</text>
+    <text x="300" y="52" text-anchor="middle" fill="#818cf8" font-size="13" font-weight="700">Mode A (Full): H = α·FE + β·CG + γ·CF  (α=0.45, β=0.30, γ=0.25)</text>
+    <text x="300" y="74" text-anchor="middle" fill="#c7d2fe" font-size="12" font-weight="600">Mode B (Adaptive): H_adapt = [Σ m_i · r_i · w_i · S_i] / [Σ m_i · r_i · w_i]</text>
+    <text x="300" y="90" text-anchor="middle" fill="#94a3b8" font-size="10">Guarantees zero-signal safe fallback (H=None, status=FAILED) if Σ m_i = 0</text>
+  </g>
+
+  <!-- Flow to Decision Layer -->
+  <line x1="600" y1="615" x2="600" y2="645" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 5. DECISION & CALIBRATION LAYER -->
+  <g transform="translate(180, 650)" filter="url(#cardShadow)">
+    <rect width="380" height="85" rx="10" fill="#0f172a" stroke="#ec4899" stroke-width="1.5"/>
+    <rect width="380" height="26" rx="10" fill="url(#gradDecision)"/>
+    <text x="190" y="18" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">CALIBRATION &amp; SELECTIVE ABSTENTION</text>
+    <text x="20" y="48" fill="#f472b6" font-size="11" font-weight="600">• Platt Scaling Calibration: P(H=1|S) = σ(a·S + b)</text>
+    <text x="20" y="65" fill="#f472b6" font-size="11" font-weight="600">• Selective Abstention Gate: τ_low = 0.35, τ_high = 0.65</text>
+    <text x="20" y="80" fill="#94a3b8" font-size="10">Abstains on ambiguous boundary or severe retrieval deficit</text>
+  </g>
+
+  <!-- 6. ACTION LAYER (Closed-Loop Correction) -->
+  <g transform="translate(640, 650)" filter="url(#cardShadow)">
+    <rect width="380" height="85" rx="10" fill="#0f172a" stroke="#06b6d4" stroke-width="1.5"/>
+    <rect width="380" height="26" rx="10" fill="url(#gradAction)"/>
+    <text x="190" y="18" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">CLOSED-LOOP CORRECTION &amp; RE-VERIFICATION</text>
+    <text x="20" y="48" fill="#22d3ee" font-size="11" font-weight="600">• Evidence-Grounded Symbolic/Neural Repair</text>
+    <text x="20" y="65" fill="#22d3ee" font-size="11" font-weight="600">• Downstream Re-Verification Gate</text>
+    <text x="20" y="80" fill="#94a3b8" font-size="10">Accepts repair only if H_reverify &lt; τ_verified (88.4% CSR)</text>
+  </g>
+
+  <!-- Lines from Fusion to both Decision and Action -->
+  <path d="M 600 615 L 600 635 L 370 635 L 370 648" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <path d="M 600 615 L 600 635 L 830 635 L 830 648" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Lines to Output Layer -->
+  <line x1="370" y1="735" x2="370" y2="765" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="830" y1="735" x2="830" y2="765" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 7. OUTPUT LAYER -->
+  <g transform="translate(180, 770)" filter="url(#cardShadow)">
+    <rect width="840" height="85" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="420" y="24" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="700" letter-spacing="0.5">COMPREHENSIVE AUDITABLE OUTPUT</text>
+    <g transform="translate(40, 42)">
+      <rect width="160" height="32" rx="6" fill="#0f172a" stroke="#334155"/>
+      <text x="80" y="20" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="600">Calibrated H-Score</text>
+    </g>
+    <g transform="translate(230, 42)">
+      <rect width="160" height="32" rx="6" fill="#0f172a" stroke="#334155"/>
+      <text x="80" y="20" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="600">Discrete Risk Tier</text>
+    </g>
+    <g transform="translate(420, 42)">
+      <rect width="180" height="32" rx="6" fill="#0f172a" stroke="#334155"/>
+      <text x="90" y="20" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="600">Attributed Evidence</text>
+    </g>
+    <g transform="translate(630, 42)">
+      <rect width="170" height="32" rx="6" fill="#0f172a" stroke="#334155"/>
+      <text x="85" y="20" text-anchor="middle" fill="#f1f5f9" font-size="11" font-weight="600">Distributed Trace ID</text>
+    </g>
+  </g>
+</svg>
