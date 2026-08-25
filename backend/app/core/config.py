@@ -42,6 +42,11 @@ class Settings(BaseSettings):
     MODEL_DIR: str = "/data/models"
     FAISS_DIR: str = "/data/faiss"
 
+    # ── Memory & Concurrency Guard Settings ──────────────────────────────────
+    HALLUCISENSE_MEMORY_LIMIT_MB: int = 2048
+    HALLUCISENSE_MEMORY_GUARD_MB: int = 1500
+    MAX_CONCURRENT_ANALYSES: int = 2
+
     # ── Security ──────────────────────────────────────────────────────────────
     SECRET_KEY: str = "dev-secret-key-change-in-production-must-be-32-chars"
     ALGORITHM: str = "HS256"

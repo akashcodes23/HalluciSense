@@ -34,6 +34,7 @@ from app.core.engine.token_localization import TokenLevelLocalizationEngine
 from app.core.engine.tracer import PipelineTracer, get_latest_trace, get_trace_by_id
 from app.core.engine.root_cause_classifier import RootCauseClassifier
 from app.core.engine.metrics_tracker import get_metrics_tracker
+from app.core.config import settings
 
 router = APIRouter(tags=["Analysis"])
 
@@ -54,6 +55,10 @@ VALID_MODELS = {
 
 
 from app.core.engine.pipeline_timer import PipelineTimer, StageMeasurement
+
+import asyncio
+_analysis_concurrency_semaphore = asyncio.Semaphore(int(getattr(settings, "MAX_CONCURRENT_ANALYSES", 2)))
+
 
 @router.post(
     "/analyze",
@@ -84,19 +89,41 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         import os, psutil
         proc = psutil.Process(os.getpid())
         rss_mb = proc.memory_info().rss / (1024 * 1024)
-        if rss_mb > 1750.0:
+        guard_limit = float(getattr(settings, "HALLUCISENSE_MEMORY_GUARD_MB", 1500))
+        if rss_mb > guard_limit:
             _metrics_tracker.record_request(0.0, 0.0, is_success=False)
             raise HTTPException(
                 status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
                 detail={
                     "code": "RESOURCE_PRESSURE",
-                    "message": "Verification capacity is temporarily saturated due to high memory pressure. Please retry shortly.",
+                    "message": f"Verification capacity is temporarily saturated (memory usage: {rss_mb:.1f}MB exceeds {guard_limit}MB guard). Please retry shortly.",
                 },
             )
     except HTTPException:
         raise
     except Exception:
         pass
+
+    # 0.2 Concurrency Slot Allocation
+    try:
+        await asyncio.wait_for(_analysis_concurrency_semaphore.acquire(), timeout=5.0)
+    except asyncio.TimeoutError:
+        _metrics_tracker.record_request(0.0, 0.0, is_success=False)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail={
+                "code": "RESOURCE_PRESSURE",
+                "message": "Verification capacity is temporarily saturated due to high concurrency. Please retry shortly.",
+            },
+        )
+
+    try:
+        return await _execute_analysis(payload, request, response, tracer, timer)
+    finally:
+        _analysis_concurrency_semaphore.release()
+
+
+async def _execute_analysis(payload: AnalysisRequest, request: Request, response: Response, tracer: PipelineTracer, timer: PipelineTimer) -> AnalysisResponse:
 
     # 1. Request Initialization
     with timer.stage("request_initialization"):

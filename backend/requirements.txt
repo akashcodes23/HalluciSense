@@ -13,6 +13,7 @@ scikit-learn==1.7.2
 joblib==1.5.2
 numpy==1.26.4
 scipy==1.15.3
+accelerate==1.2.1
 
 sentence-transformers==3.3.1
 transformers==4.47.1

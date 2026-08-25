@@ -51,7 +51,7 @@ logger = structlog.get_logger(__name__)
 # Lifespan (startup / shutdown events)
 # ---------------------------------------------------------------------------
 
-async def _background_warmup(app: FastAPI):
+def _sync_warmup(app: FastAPI):
     from app.core.engine.model_registry import ModelRegistry
     logger.info("[HalluciSense] background pipeline initialization started")
     try:
@@ -67,6 +67,11 @@ async def _background_warmup(app: FastAPI):
         logger.error("[HalluciSense] pipeline initialization FAILED", error=str(e))
 
 
+async def _background_warmup(app: FastAPI):
+    import asyncio
+    await asyncio.to_thread(_sync_warmup, app)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator:
     logger.info(
@@ -80,8 +85,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     # Optimize PyTorch CPU threading for container resource efficiency
     try:
         import torch
-        if torch.get_num_threads() > 2:
-            torch.set_num_threads(2)
+        torch.set_num_threads(1)
+        torch.set_num_interop_threads(1)
         logger.info("pytorch_threads_configured", threads=torch.get_num_threads())
     except Exception as e:
         logger.warning("pytorch_thread_config_skipped", error=str(e))
@@ -98,10 +103,14 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     app.state.readiness_status = "STARTING"
     app.state.readiness_error = None
     import asyncio
-    asyncio.create_task(_background_warmup(app))
+    warmup_task = asyncio.create_task(_background_warmup(app))
+    app.state.warmup_task = warmup_task
 
     yield
     logger.info("HalluciSense shutting down")
+    if hasattr(app.state, "warmup_task") and app.state.warmup_task:
+        if not app.state.warmup_task.done():
+            app.state.warmup_task.cancel()
 
 
 # ---------------------------------------------------------------------------
