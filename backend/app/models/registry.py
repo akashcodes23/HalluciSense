@@ -41,6 +41,46 @@ def resolve_results_directory() -> Path:
 RESULTS_DIR = resolve_results_directory()
 
 
+from joblib.numpy_pickle import NumpyUnpickler
+import numpy as np
+
+
+class _SafeModelUnpickler(NumpyUnpickler):
+    def find_class(self, module, name):
+        if "numpy.random" in module:
+            class DummyBitGen:
+                def __init__(self, *args, **kwargs): pass
+                def __setstate__(self, state): pass
+                def __getstate__(self): return {}
+            class DummyGenerator:
+                def __init__(self, *args, **kwargs): pass
+                def __setstate__(self, state): pass
+                def __getstate__(self): return {}
+
+            if "bit_generator" in name or "BitGenerator" in name or "PCG64" in name:
+                return DummyBitGen
+            if "generator" in name or "Generator" in name or "randomstate" in name.lower():
+                return DummyGenerator
+        return super().find_class(module, name)
+
+
+def safe_joblib_load(filepath: Path) -> Any:
+    """Load joblib artifact with automatic resilience for BitGenerator serialization differences."""
+    try:
+        return joblib.load(filepath)
+    except Exception as e:
+        logger.warning("standard_joblib_load_failed_attempting_safe_unpickler", path=str(filepath), error=str(e))
+        with open(filepath, "rb") as f:
+            unpickler = _SafeModelUnpickler(str(filepath), f, mmap_mode=None, ensure_native_byte_order=True)
+            model = unpickler.load()
+            if hasattr(model, "_random_generator"):
+                try:
+                    model._random_generator = np.random.default_rng(42)
+                except Exception:
+                    pass
+            return model
+
+
 class ModelRegistry:
     """Centralized Lazy-Loading Registry for HalluciSense Frozen Models."""
 
@@ -49,6 +89,30 @@ class ModelRegistry:
         self._pillar1_cache: Optional[Tuple[Any, Any, Dict[str, Any]]] = None
         self._pillar2_cache: Optional[Tuple[Any, Any, Dict[str, Any]]] = None
         self._hybrid_cache: Optional[Tuple[Any, Any, Dict[str, Any]]] = None
+        self._active_model_name: str = "none"
+        self._hybrid_available: bool = False
+        self._fallback_active: bool = False
+
+    @property
+    def active_model(self) -> str:
+        return self._active_model_name
+
+    @property
+    def hybrid_available(self) -> bool:
+        return self._hybrid_available
+
+    @property
+    def fallback_active(self) -> bool:
+        return self._fallback_active
+
+    def get_model_status(self) -> Dict[str, Any]:
+        return {
+            "active_model": self._active_model_name,
+            "hybrid_available": self._hybrid_available,
+            "fallback_active": self._fallback_active,
+            "hybrid_cached": self._hybrid_cache is not None,
+            "pillar1_cached": self._pillar1_cache is not None,
+        }
 
     def load_pillar1_model(self) -> Tuple[Any, Any, Dict[str, Any]]:
         """Lazy-load Pillar 1 (Evidence Consistency) frozen model and scaler."""
@@ -64,10 +128,12 @@ class ModelRegistry:
             with open(meta_path, "r", encoding="utf-8") as f:
                 meta = json.load(f)
 
-        scaler = joblib.load(p1_dir / "robust_scaler.joblib")
-        clf = joblib.load(p1_dir / "pillar1_logistic_model.joblib")
+        scaler = safe_joblib_load(p1_dir / "robust_scaler.joblib")
+        clf = safe_joblib_load(p1_dir / "pillar1_logistic_model.joblib")
 
         self._pillar1_cache = (scaler, clf, meta)
+        if self._active_model_name == "none":
+            self._active_model_name = "pillar1"
         return self._pillar1_cache
 
     def load_pillar2_model(self) -> Tuple[Any, Any, Dict[str, Any]]:
@@ -77,16 +143,16 @@ class ModelRegistry:
 
         logger.info("loading_pillar2_model", results_dir=str(self.results_dir))
         p2_dir = self.results_dir / "phase6l" / "final_model"
-
-        if (p2_dir / "preprocessing.joblib").exists() and (p2_dir / "classifier.joblib").exists():
-            meta = {"operating_threshold": 0.57, "scaler": "StandardScaler", "model": "HistGradientBoostingClassifier"}
+        
+        if (p2_dir / "pillar2_logistic_model.joblib").exists() and (p2_dir / "robust_scaler.joblib").exists():
+            meta = {"operating_threshold": 0.52, "scaler": "RobustScaler", "model": "LogisticRegression"}
             meta_path = p2_dir / "model_metadata.json"
             if meta_path.exists():
                 with open(meta_path, "r", encoding="utf-8") as f:
                     meta = json.load(f)
 
-            scaler = joblib.load(p2_dir / "preprocessing.joblib")
-            clf = joblib.load(p2_dir / "classifier.joblib")
+            scaler = safe_joblib_load(p2_dir / "robust_scaler.joblib")
+            clf = safe_joblib_load(p2_dir / "pillar2_logistic_model.joblib")
 
             self._pillar2_cache = (scaler, clf, meta)
         else:
@@ -108,8 +174,8 @@ class ModelRegistry:
 
         if clf_path.exists() and scaler_path.exists():
             try:
-                scaler = joblib.load(scaler_path)
-                clf = joblib.load(clf_path)
+                scaler = safe_joblib_load(scaler_path)
+                clf = safe_joblib_load(clf_path)
 
                 meta = {}
                 if (h_dir / "model_metadata.json").exists():
@@ -117,16 +183,24 @@ class ModelRegistry:
                         meta = json.load(f)
 
                 self._hybrid_cache = (scaler, clf, meta)
+                self._active_model_name = "hybrid"
+                self._hybrid_available = True
+                self._fallback_active = False
                 logger.info(
                     "hybrid_model_loaded_successfully",
                     clf_size=clf_path.stat().st_size,
                     scaler_size=scaler_path.stat().st_size,
                     sklearn_version=sklearn.__version__,
                     joblib_version=joblib.__version__,
+                    active_model=self._active_model_name,
+                    hybrid_available=self._hybrid_available,
                 )
                 return self._hybrid_cache
             except Exception as exc:
                 logger.error("hybrid_model_load_exception_falling_back", error=str(exc))
+                self._active_model_name = "pillar1_fallback"
+                self._hybrid_available = False
+                self._fallback_active = True
                 return self.load_pillar1_model()
         else:
             logger.warning(
@@ -136,6 +210,9 @@ class ModelRegistry:
                 scaler_exists=scaler_path.exists(),
                 dir_contents=os.listdir(h_dir) if h_dir.exists() else "Directory does not exist",
             )
+            self._active_model_name = "pillar1_fallback"
+            self._hybrid_available = False
+            self._fallback_active = True
             return self.load_pillar1_model()
 
     def verify_checksums(self) -> Dict[str, bool]:

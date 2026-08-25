@@ -305,6 +305,7 @@ def create_application() -> FastAPI:
     async def health_check():
         import os, psutil
         from app.core.engine.model_registry import ModelRegistry
+        from app.models.registry import registry
         try:
             process = psutil.Process(os.getpid())
             mem_mb = round(process.memory_info().rss / (1024 * 1024), 2)
@@ -312,10 +313,14 @@ def create_application() -> FastAPI:
             mem_mb = 0.0
 
         init_counts = ModelRegistry.get_init_counts()
+        model_status = registry.get_model_status()
         return {
             "status": "healthy",
             "version": settings.VERSION,
             "memory_mb": mem_mb,
+            "active_model": model_status.get("active_model", "none"),
+            "hybrid_available": model_status.get("hybrid_available", False),
+            "fallback_active": model_status.get("fallback_active", False),
             "models": {
                 "nli_model": init_counts.get("nli_model", 0) > 0,
                 "sentence_transformer": init_counts.get("sentence_transformer", 0) > 0,
@@ -328,6 +333,8 @@ def create_application() -> FastAPI:
     @app.get("/ready", tags=["System"], summary="Deep component readiness check")
     @app.get("/readyz", tags=["System"], summary="Deep component readiness check")
     async def readiness_check():
+        from app.models.registry import registry
+        model_status = registry.get_model_status()
         status_val = getattr(app.state, "readiness_status", "READY")
         if status_val == "READY":
             return JSONResponse(
@@ -335,6 +342,9 @@ def create_application() -> FastAPI:
                 content={
                     "status": "ready",
                     "ready": True,
+                    "active_model": model_status.get("active_model", "hybrid"),
+                    "hybrid_available": model_status.get("hybrid_available", True),
+                    "fallback_active": model_status.get("fallback_active", False),
                     "components": {
                         "pipeline": True,
                         "nli_model": True,
@@ -362,7 +372,7 @@ def create_application() -> FastAPI:
                     "status": "failed",
                     "ready": False,
                     "version": settings.VERSION,
-                    "error": getattr(app.state, "readiness_error", "Unknown initialization failure"),
+                    "error": getattr(app.state, "readiness_error", "Unknown startup error"),
                 },
             )
 
