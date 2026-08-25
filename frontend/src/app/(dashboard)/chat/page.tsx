@@ -19,7 +19,7 @@ import {
   HelpCircle,
   ExternalLink,
 } from "lucide-react";
-import { sendClosedLoopChat } from "@/services/hallucisense-api";
+import { sendClosedLoopChat, HalluciSenseAPIError } from "@/services/hallucisense-api";
 import { useAnalysisStore, type ErrorEventRiskLevel } from "@/store/analysis-store";
 
 interface VerificationSummary {
@@ -77,17 +77,27 @@ const PIPELINE_STAGES = [
   "Running independent re-verification gate...",
 ];
 
-// Map chat verification status to normalised ErrorEventRiskLevel
-function chatStatusToRiskLevel(status: string | undefined): ErrorEventRiskLevel {
+// Map chat verification status to normalised ErrorEventRiskLevel.
+// Returns null for VERIFIED — those must NOT enter the Error Feed.
+function chatStatusToRiskLevel(status: string | undefined): ErrorEventRiskLevel | null {
   if (!status) return "NEEDS_VERIFICATION";
-  const m: Record<string, ErrorEventRiskLevel> = {
-    VERIFIED: "VERIFIED",
+  const m: Record<string, ErrorEventRiskLevel | null> = {
+    VERIFIED: null,                   // intentionally excluded
     CORRECTED: "CORRECTED",
     REVIEW: "REVIEW",
     UNVERIFIED: "LIKELY_HALLUCINATED",
     FAILED: "FAILED",
   };
-  return m[status] ?? "NEEDS_VERIFICATION";
+  return status in m ? m[status] : "NEEDS_VERIFICATION";
+}
+
+// Normalize error to a user-safe message (no stack traces)
+function normalizeErrorMessage(err: unknown): string {
+  if (err instanceof HalluciSenseAPIError) {
+    return `[HTTP ${err.status}] ${err.message}`;
+  }
+  if (err instanceof Error) return err.message;
+  return "An unexpected error occurred.";
 }
 
 export default function ClosedLoopChatPage() {
@@ -157,27 +167,39 @@ export default function ClosedLoopChatPage() {
 
       setMessages((prev) => [...prev, assistantMsg]);
 
-      // Push to global error feed (all chat outcomes, not just failures)
-      addErrorEvent({
-        id: `chat_${assistantMsg.id}`,
-        timestamp: new Date().toISOString(),
-        source: "CHAT",
-        risk_level: chatStatusToRiskLevel(data.verification?.status),
-        query: text,
-        response: data.final_response,
-        h_score: data.verification?.h_score ?? undefined,
-        trace_id: data.trace_id,
-      });
+      // Push anomalies to the Error Feed; skip plain VERIFIED responses.
+      const chatRiskLevel = chatStatusToRiskLevel(data.verification?.status);
+      if (chatRiskLevel !== null) {
+        const isCorrected = data.correction?.performed === true;
+        addErrorEvent({
+          id: `chat_${assistantMsg.id}`,
+          timestamp: new Date().toISOString(),
+          source: "CHAT",
+          risk_level: chatRiskLevel,
+          query: text,
+          // response holds the final (corrected or flagged) answer
+          response: data.final_response,
+          h_score: data.verification?.h_score ?? undefined,
+          trace_id: data.trace_id,
+          latency_ms: data.latency_ms,
+          // Correction-specific fields
+          corrected: isCorrected,
+          original_response: isCorrected ? data.original_response : undefined,
+          corrected_response: isCorrected ? data.final_response : undefined,
+          claims_corrected: isCorrected ? data.correction?.claims_corrected : undefined,
+        });
+      }
     } catch (err: unknown) {
       clearInterval(stageInterval);
-      const errMsg = err instanceof Error ? err.message : "An unexpected error occurred.";
-      // Map error to user-friendly category
-      let userReason = "Evidence retrieval or verification service temporarily unavailable.";
-      if (errMsg.includes("timed out") || errMsg.includes("TIMEOUT")) {
+      // Use real error information (HalluciSenseAPIError preserves HTTP status)
+      const normalizedError = normalizeErrorMessage(err);
+      // Map to a user-friendly UI reason while preserving real info for the feed
+      let userReason = normalizedError;
+      if (normalizedError.includes("timed out") || normalizedError.includes("TIMEOUT") || normalizedError.includes("408")) {
         userReason = "Request timed out. The verification service did not respond in time.";
-      } else if (errMsg.includes("429") || errMsg.includes("RATE_LIMIT")) {
+      } else if (normalizedError.includes("429") || normalizedError.includes("RATE_LIMIT")) {
         userReason = "Too many requests. Please wait a moment before retrying.";
-      } else if (errMsg.includes("503") || errMsg.includes("NETWORK")) {
+      } else if (normalizedError.includes("503") || normalizedError.includes("NETWORK")) {
         userReason = "Verification service is currently unavailable. Please retry.";
       }
       const errorMsg: ChatMessage = {
@@ -192,7 +214,7 @@ export default function ClosedLoopChatPage() {
       };
       setMessages((prev) => [...prev, errorMsg]);
 
-      // Record chat failure in error feed
+      // Record chat failure in error feed — use the real technical error, not the UI string
       addErrorEvent({
         id: `chat_fail_${Date.now()}`,
         timestamp: new Date().toISOString(),
@@ -200,7 +222,7 @@ export default function ClosedLoopChatPage() {
         risk_level: "FAILED",
         query: text,
         response: "",
-        error_message: userReason,
+        error_message: normalizedError,
       });
     } finally {
       setIsLoading(false);

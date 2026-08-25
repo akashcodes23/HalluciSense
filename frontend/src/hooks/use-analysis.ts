@@ -13,6 +13,7 @@ import {
   getReady,
   getLatestDebug,
   getDebugTrace,
+  HalluciSenseAPIError,
 } from "@/services/hallucisense-api";
 import type {
   AnalysisRequest,
@@ -22,22 +23,40 @@ import type {
 } from "@/types/hallucisense";
 import { useAnalysisStore, type ErrorEventRiskLevel } from "@/store/analysis-store";
 
-// Map backend RiskLevel to ErrorEventRiskLevel (they overlap but backend uses
-// a slightly different vocabulary on the chat path).
-function normalizeRiskLevel(rl: string | undefined): ErrorEventRiskLevel {
+// ─── Risk level normalization ─────────────────────────────────────────────────
+/**
+ * Maps backend RiskLevel strings to ErrorEventRiskLevel.
+ * Returns null for VERIFIED — those must NOT enter the feed.
+ */
+function normalizeRiskLevel(rl: string | undefined): ErrorEventRiskLevel | null {
   if (!rl) return "NEEDS_VERIFICATION";
-  const map: Record<string, ErrorEventRiskLevel> = {
+  const map: Record<string, ErrorEventRiskLevel | null> = {
     LIKELY_HALLUCINATED: "LIKELY_HALLUCINATED",
     MODERATE_RISK: "MODERATE_RISK",
     NEEDS_VERIFICATION: "NEEDS_VERIFICATION",
-    VERIFIED: "VERIFIED",
+    VERIFIED: null,          // intentionally excluded
     CORRECTED: "CORRECTED",
     FAILED: "FAILED",
     REVIEW: "REVIEW",
   };
-  return map[rl] ?? "NEEDS_VERIFICATION";
+  // Unknown values default to NEEDS_VERIFICATION
+  return rl in map ? map[rl] : "NEEDS_VERIFICATION";
 }
 
+// ─── Normalize error message from HalluciSenseAPIError ───────────────────────
+function normalizeErrorMessage(err: unknown): string {
+  if (err instanceof HalluciSenseAPIError) {
+    // Use the API-provided message; include HTTP status for context.
+    // Do not expose raw stack traces.
+    return `[HTTP ${err.status}] ${err.message}`;
+  }
+  if (err instanceof Error) {
+    return err.message;
+  }
+  return "An unexpected error occurred.";
+}
+
+// ─── Hooks ────────────────────────────────────────────────────────────────────
 export function useAnalysis() {
   const addToHistory = useAnalysisStore((s) => s.addToHistory);
   const setCurrentResult = useAnalysisStore((s) => s.setCurrentResult);
@@ -67,23 +86,27 @@ export function useAnalysis() {
       };
       addToHistory(historyEntry);
 
-      // Push to global error feed
+      // Only push anomalies to the error feed — VERIFIED results are skipped.
+      const riskLevel = normalizeRiskLevel(data.risk_level);
+      if (riskLevel === null) return; // VERIFIED — do not record
+
       addErrorEvent({
         id: `verify_${data.trace_id || Date.now()}`,
         timestamp: new Date().toISOString(),
         source: "VERIFY",
-        risk_level: normalizeRiskLevel(data.risk_level),
+        risk_level: riskLevel,
         query: historyEntry.query,
         response: historyEntry.response,
         h_score: data.overall_h_score,
         root_cause: data.root_cause_classification,
+        failure_taxonomy: data.failure_taxonomy,
         pillar_scores: data.pillar_scores,
         trace_id: data.trace_id,
+        latency_ms: data.processing_time_ms ?? data.latency_ms,
       });
     },
-    onError: (_err, variables: AnalysisRequest) => {
+    onError: (err: unknown, variables: AnalysisRequest) => {
       setIsAnalyzing(false);
-      // Record system-level failure in the feed
       addErrorEvent({
         id: `verify_fail_${Date.now()}`,
         timestamp: new Date().toISOString(),
@@ -91,7 +114,7 @@ export function useAnalysis() {
         risk_level: "FAILED",
         query: variables.query?.trim() || "(no query provided)",
         response: variables.text || variables.response || "",
-        error_message: "Verification service returned an error.",
+        error_message: normalizeErrorMessage(err),
       });
     },
   });

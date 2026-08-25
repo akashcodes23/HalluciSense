@@ -5,9 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   AlertTriangle,
   Search,
-  Filter,
   XCircle,
-  Clock,
   GitBranch,
   ChevronRight,
   ShieldCheck,
@@ -15,10 +13,9 @@ import {
   Trash2,
   X,
   MessageSquare,
-  CheckCircle2,
   Info,
+  Clock,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NoErrors } from "@/components/ui/EmptyState";
@@ -54,9 +51,7 @@ function riskConfig(rl: string) {
     case "NEEDS_VERIFICATION":
       return { color: "text-indigo-400", bg: "bg-indigo-500/15", border: "border-indigo-500/30", icon: <Info className="w-3.5 h-3.5" />, label: "UNVERIFIED" };
     case "CORRECTED":
-      return { color: "text-amber-300", bg: "bg-amber-500/10", border: "border-amber-400/30", icon: <AlertTriangle className="w-3.5 h-3.5" />, label: "CORRECTED" };
-    case "VERIFIED":
-      return { color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/25", icon: <CheckCircle2 className="w-3.5 h-3.5" />, label: "VERIFIED" };
+      return { color: "text-amber-300", bg: "bg-amber-500/10", border: "border-amber-400/30", icon: <AlertTriangle className="w-3.5 h-3.5" />, label: "CORRECTED & RE-VERIFIED" };
     case "FAILED":
       return { color: "text-rose-300", bg: "bg-rose-900/20", border: "border-rose-500/20", icon: <XCircle className="w-3.5 h-3.5" />, label: "FAILED" };
     case "REVIEW":
@@ -134,14 +129,10 @@ export default function ErrorFeedPage() {
   const [activeSource, setActiveSource] = useState<"all" | ErrorEventSource>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [showVerified, setShowVerified] = useState(false);
 
   const filtered = useMemo(() => {
     return errorFeed
       .filter((e) => {
-        // By default hide VERIFIED events unless toggle is on
-        if (!showVerified && e.risk_level === "VERIFIED") return false;
-
         if (activeRisk !== "all" && e.risk_level !== activeRisk) return false;
         if (activeSource !== "all" && e.source !== activeSource) return false;
 
@@ -153,12 +144,13 @@ export default function ErrorFeedPage() {
         return true;
       })
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-  }, [errorFeed, activeRisk, activeSource, searchQuery, showVerified]);
+  }, [errorFeed, activeRisk, activeSource, searchQuery]);
 
   const selectedEntry: VerificationErrorEvent | undefined = selectedId
     ? errorFeed.find((e) => e.id === selectedId)
     : undefined;
 
+  const totalErrorCount = errorFeed.length;
   const hallucinatedCount = errorFeed.filter((e) => e.risk_level === "LIKELY_HALLUCINATED").length;
   const failedCount = errorFeed.filter((e) => e.risk_level === "FAILED").length;
   const correctedCount = errorFeed.filter((e) => e.risk_level === "CORRECTED").length;
@@ -177,7 +169,13 @@ export default function ErrorFeedPage() {
               </p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              {/* Summary chips */}
+              {/* Total count */}
+              {totalErrorCount > 0 && (
+                <span className="px-2 py-1 rounded-lg text-[11px] font-bold bg-[var(--primary-soft)] text-[var(--primary)] border border-[var(--ai-border)]">
+                  {totalErrorCount} total
+                </span>
+              )}
+              {/* Per-type chips */}
               {hallucinatedCount > 0 && (
                 <span className="px-2 py-1 rounded-lg text-[11px] font-bold bg-rose-500/15 text-rose-400 border border-rose-500/30">
                   {hallucinatedCount} hallucinated
@@ -267,21 +265,6 @@ export default function ErrorFeedPage() {
                 </button>
               ))}
             </div>
-
-            {/* Show verified toggle */}
-            <button
-              onClick={() => setShowVerified((v) => !v)}
-              className={cn(
-                "ml-auto px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-medium whitespace-nowrap",
-                "transition-all duration-150 cursor-pointer border flex items-center gap-1",
-                showVerified
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/25"
-                  : "text-[var(--text-dim)] border-transparent hover:text-[var(--text-secondary)] hover:bg-[var(--surface-hover)]"
-              )}
-            >
-              <CheckCircle2 className="w-3 h-3" />
-              {showVerified ? "Hiding verified" : "Show verified"}
-            </button>
           </div>
         </div>
 
@@ -404,7 +387,7 @@ export default function ErrorFeedPage() {
             {selectedEntry.error_message && (
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">Error</p>
-                <p className="text-[13px] text-rose-300">{selectedEntry.error_message}</p>
+                <p className="text-[13px] text-rose-300 font-mono">{selectedEntry.error_message}</p>
               </div>
             )}
 
@@ -416,12 +399,31 @@ export default function ErrorFeedPage() {
               </div>
             )}
 
-            {/* Response */}
-            {selectedEntry.response && (
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">Response Analysed</p>
-                <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed line-clamp-6">{selectedEntry.response}</p>
+            {/* Correction diff — shown only for CORRECTED events */}
+            {selectedEntry.corrected && selectedEntry.original_response && selectedEntry.corrected_response ? (
+              <div className="space-y-2">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Closed-Loop Repair</p>
+                <div className="p-3 rounded-xl bg-rose-500/[0.04] border border-rose-500/20">
+                  <span className="text-[9px] font-bold text-rose-400 uppercase block mb-1">Original Draft</span>
+                  <p className="text-[12px] text-rose-300 leading-relaxed line-clamp-6 font-mono">
+                    {selectedEntry.original_response}
+                  </p>
+                </div>
+                <div className="p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+                  <span className="text-[9px] font-bold text-emerald-400 uppercase block mb-1">Corrected Response</span>
+                  <p className="text-[12px] text-emerald-300 leading-relaxed line-clamp-6 font-mono">
+                    {selectedEntry.corrected_response}
+                  </p>
+                </div>
               </div>
+            ) : (
+              /* Regular response (non-corrected) */
+              selectedEntry.response && (
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">Response Analysed</p>
+                  <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed line-clamp-6">{selectedEntry.response}</p>
+                </div>
+              )
             )}
 
             {/* Pillar Scores */}
@@ -433,6 +435,17 @@ export default function ErrorFeedPage() {
                   <PillarRow label="Confidence Gap" value={selectedEntry.pillar_scores.confidence ?? selectedEntry.pillar_scores.pillar2_confidence_gap} />
                   <PillarRow label="Consistency" value={selectedEntry.pillar_scores.consistency ?? selectedEntry.pillar_scores.pillar3_consistency_failure} />
                 </div>
+              </div>
+            )}
+
+            {/* Latency */}
+            {selectedEntry.latency_ms !== undefined && selectedEntry.latency_ms !== null && (
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">Latency</p>
+                <p className="text-[12px] font-mono text-[var(--text-secondary)] flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  {selectedEntry.latency_ms.toFixed(0)} ms
+                </p>
               </div>
             )}
 

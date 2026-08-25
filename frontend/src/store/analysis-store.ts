@@ -13,11 +13,15 @@ import type {
 
 // ─── Error Feed Event Schema ──────────────────────────────────────────────────
 export type ErrorEventSource = "VERIFY" | "CHAT" | "SYSTEM";
+
+/**
+ * VERIFIED is intentionally excluded — the Error Feed is an anomaly feed,
+ * not a complete verification history.
+ */
 export type ErrorEventRiskLevel =
   | "LIKELY_HALLUCINATED"
   | "MODERATE_RISK"
   | "NEEDS_VERIFICATION"
-  | "VERIFIED"
   | "CORRECTED"
   | "FAILED"
   | "REVIEW";
@@ -29,22 +33,40 @@ export interface VerificationErrorEvent {
   timestamp: string;
   /** Which flow produced this event */
   source: ErrorEventSource;
-  /** Normalised risk label */
+  /** Normalised risk label (VERIFIED is never stored in the feed) */
   risk_level: ErrorEventRiskLevel;
   /** User-facing query text (Verify) or user message (Chat) */
   query?: string;
-  /** Response / AI answer that was analysed */
+  /**
+   * For non-corrected events: the AI response that was analysed.
+   * For CORRECTED events: the final verified response.
+   * Use original_response + corrected_response for the diff panel.
+   */
   response: string;
   /** H-score in [0, 1]; undefined for FAILED/SYSTEM events */
   h_score?: number;
   /** Root-cause tag from the verify pipeline */
   root_cause?: string;
+  /** Failure taxonomy from the verify pipeline (if present) */
+  failure_taxonomy?: string;
   /** Pillar scores from the verify pipeline */
   pillar_scores?: AnalysisResponse["pillar_scores"];
   /** Backend trace ID (if available) */
   trace_id?: string;
   /** Human-readable error description for FAILED events */
   error_message?: string;
+  /** Pipeline latency in milliseconds */
+  latency_ms?: number;
+
+  // ── Correction-specific fields (CORRECTED events only) ────────────────────
+  /** True when the pipeline performed an auto-correction */
+  corrected?: boolean;
+  /** The unsafe original draft before correction */
+  original_response?: string;
+  /** The verified corrected response (same as `response` for CORRECTED) */
+  corrected_response?: string;
+  /** Per-claim corrections from the pipeline */
+  claims_corrected?: Array<Record<string, unknown>>;
 }
 
 // ─── Store Interface ──────────────────────────────────────────────────────────
@@ -117,15 +139,25 @@ export const useAnalysisStore = create<AnalysisState>()(
           selectedTraceId: null,
         }),
 
-      // Error feed
+      // Error feed — with duplicate protection
       addErrorEvent: (event) =>
-        set((state) => ({
-          errorFeed: [event, ...state.errorFeed].slice(0, 100),
-        })),
+        set((state) => {
+          // Reject duplicate ID
+          if (state.errorFeed.some((e) => e.id === event.id)) return {};
+          // Reject duplicate trace_id (non-empty)
+          if (
+            event.trace_id &&
+            state.errorFeed.some((e) => e.trace_id === event.trace_id)
+          )
+            return {};
+          return { errorFeed: [event, ...state.errorFeed].slice(0, 100) };
+        }),
+
       removeErrorEvent: (id) =>
         set((state) => ({
           errorFeed: state.errorFeed.filter((e) => e.id !== id),
         })),
+
       clearErrorFeed: () => set({ errorFeed: [] }),
     }),
     {
