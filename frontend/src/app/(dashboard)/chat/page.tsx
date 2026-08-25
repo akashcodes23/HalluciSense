@@ -20,6 +20,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { sendClosedLoopChat } from "@/services/hallucisense-api";
+import { useAnalysisStore, type ErrorEventRiskLevel } from "@/store/analysis-store";
 
 interface VerificationSummary {
   status: "VERIFIED" | "CORRECTED" | "REVIEW" | "FAILED" | "UNVERIFIED";
@@ -76,7 +77,21 @@ const PIPELINE_STAGES = [
   "Running independent re-verification gate...",
 ];
 
+// Map chat verification status to normalised ErrorEventRiskLevel
+function chatStatusToRiskLevel(status: string | undefined): ErrorEventRiskLevel {
+  if (!status) return "NEEDS_VERIFICATION";
+  const m: Record<string, ErrorEventRiskLevel> = {
+    VERIFIED: "VERIFIED",
+    CORRECTED: "CORRECTED",
+    REVIEW: "REVIEW",
+    UNVERIFIED: "LIKELY_HALLUCINATED",
+    FAILED: "FAILED",
+  };
+  return m[status] ?? "NEEDS_VERIFICATION";
+}
+
 export default function ClosedLoopChatPage() {
+  const addErrorEvent = useAnalysisStore((s) => s.addErrorEvent);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputQuery, setInputQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -141,6 +156,18 @@ export default function ClosedLoopChatPage() {
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
+
+      // Push to global error feed (all chat outcomes, not just failures)
+      addErrorEvent({
+        id: `chat_${assistantMsg.id}`,
+        timestamp: new Date().toISOString(),
+        source: "CHAT",
+        risk_level: chatStatusToRiskLevel(data.verification?.status),
+        query: text,
+        response: data.final_response,
+        h_score: data.verification?.h_score ?? undefined,
+        trace_id: data.trace_id,
+      });
     } catch (err: unknown) {
       clearInterval(stageInterval);
       const errMsg = err instanceof Error ? err.message : "An unexpected error occurred.";
@@ -164,6 +191,17 @@ export default function ClosedLoopChatPage() {
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
       setMessages((prev) => [...prev, errorMsg]);
+
+      // Record chat failure in error feed
+      addErrorEvent({
+        id: `chat_fail_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        source: "CHAT",
+        risk_level: "FAILED",
+        query: text,
+        response: "",
+        error_message: userReason,
+      });
     } finally {
       setIsLoading(false);
     }

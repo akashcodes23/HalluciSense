@@ -20,12 +20,29 @@ import type {
   ExplainRequest,
   ExplainResponse,
 } from "@/types/hallucisense";
-import { useAnalysisStore } from "@/store/analysis-store";
+import { useAnalysisStore, type ErrorEventRiskLevel } from "@/store/analysis-store";
+
+// Map backend RiskLevel to ErrorEventRiskLevel (they overlap but backend uses
+// a slightly different vocabulary on the chat path).
+function normalizeRiskLevel(rl: string | undefined): ErrorEventRiskLevel {
+  if (!rl) return "NEEDS_VERIFICATION";
+  const map: Record<string, ErrorEventRiskLevel> = {
+    LIKELY_HALLUCINATED: "LIKELY_HALLUCINATED",
+    MODERATE_RISK: "MODERATE_RISK",
+    NEEDS_VERIFICATION: "NEEDS_VERIFICATION",
+    VERIFIED: "VERIFIED",
+    CORRECTED: "CORRECTED",
+    FAILED: "FAILED",
+    REVIEW: "REVIEW",
+  };
+  return map[rl] ?? "NEEDS_VERIFICATION";
+}
 
 export function useAnalysis() {
   const addToHistory = useAnalysisStore((s) => s.addToHistory);
   const setCurrentResult = useAnalysisStore((s) => s.setCurrentResult);
   const setIsAnalyzing = useAnalysisStore((s) => s.setIsAnalyzing);
+  const addErrorEvent = useAnalysisStore((s) => s.addErrorEvent);
 
   return useMutation({
     mutationFn: async (payload: AnalysisRequest) => {
@@ -41,16 +58,41 @@ export function useAnalysis() {
     onSuccess: (data: AnalysisResponse, variables: AnalysisRequest) => {
       setIsAnalyzing(false);
       setCurrentResult(data);
-      addToHistory({
+      const historyEntry = {
         id: data.trace_id || `trace_${Date.now()}`,
         query: variables.query?.trim() || "(no query provided)",
         response: variables.text || variables.response || "",
         result: data,
         timestamp: new Date().toISOString(),
+      };
+      addToHistory(historyEntry);
+
+      // Push to global error feed
+      addErrorEvent({
+        id: `verify_${data.trace_id || Date.now()}`,
+        timestamp: new Date().toISOString(),
+        source: "VERIFY",
+        risk_level: normalizeRiskLevel(data.risk_level),
+        query: historyEntry.query,
+        response: historyEntry.response,
+        h_score: data.overall_h_score,
+        root_cause: data.root_cause_classification,
+        pillar_scores: data.pillar_scores,
+        trace_id: data.trace_id,
       });
     },
-    onError: () => {
+    onError: (_err, variables: AnalysisRequest) => {
       setIsAnalyzing(false);
+      // Record system-level failure in the feed
+      addErrorEvent({
+        id: `verify_fail_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        source: "VERIFY",
+        risk_level: "FAILED",
+        query: variables.query?.trim() || "(no query provided)",
+        response: variables.text || variables.response || "",
+        error_message: "Verification service returned an error.",
+      });
     },
   });
 }
