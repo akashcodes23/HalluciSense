@@ -79,6 +79,25 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             },
         )
 
+    # 0.1 Resource Pressure Guard (OOM Prevention)
+    try:
+        import os, psutil
+        proc = psutil.Process(os.getpid())
+        rss_mb = proc.memory_info().rss / (1024 * 1024)
+        if rss_mb > 1750.0:
+            _metrics_tracker.record_request(0.0, 0.0, is_success=False)
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail={
+                    "code": "RESOURCE_PRESSURE",
+                    "message": "Verification capacity is temporarily saturated due to high memory pressure. Please retry shortly.",
+                },
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        pass
+
     # 1. Request Initialization
     with timer.stage("request_initialization"):
         body_bytes = await request.body()
