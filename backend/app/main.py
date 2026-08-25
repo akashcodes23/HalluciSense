@@ -51,6 +51,22 @@ logger = structlog.get_logger(__name__)
 # Lifespan (startup / shutdown events)
 # ---------------------------------------------------------------------------
 
+async def _background_warmup(app: FastAPI):
+    from app.core.engine.model_registry import ModelRegistry
+    logger.info("[HalluciSense] background pipeline initialization started")
+    try:
+        logger.info("[HalluciSense] NLI model initialization started")
+        _ = ModelRegistry.get_pipeline()
+        logger.info("[HalluciSense] NLI model initialization complete")
+        logger.info("[HalluciSense] pipeline initialization complete")
+        app.state.readiness_status = "READY"
+        logger.info("[HalluciSense] application READY")
+    except Exception as e:
+        app.state.readiness_status = "FAILED"
+        app.state.readiness_error = str(e)
+        logger.error("[HalluciSense] pipeline initialization FAILED", error=str(e))
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator:
     logger.info(
@@ -60,6 +76,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
         port=settings.PORT,
         host=settings.HOST,
     )
+    logger.info("[HalluciSense] application process started")
     # Optimize PyTorch CPU threading for container resource efficiency
     try:
         import torch
@@ -77,21 +94,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
             (data_dir / sub).mkdir(parents=True, exist_ok=True)
         logger.info("railway_volume_storage_initialized", path="/data")
 
-    # Initialize ModelRegistry and validate single shared pipeline
-    from app.core.engine.model_registry import ModelRegistry
-    components_status = {}
-    try:
-        _ = ModelRegistry.get_pipeline()
-        components_status["FusionEngine"] = True
-        components_status["Retriever"] = True
-        components_status["P1_Hybrid"] = True
-        logger.info("startup_component_validation", component="ModelRegistry", status="✓ Loaded Shared Pipeline")
-    except Exception as e:
-        components_status["FusionEngine"] = False
-        logger.error("startup_component_validation", component="ModelRegistry", status="✗ Failed", error=str(e))
-        raise RuntimeError(f"Critical pipeline component failed to load during startup: {e}")
-
-    logger.info("startup_validation_completed", components=components_status)
+    # Start background model initialization so HTTP server binds immediately
+    app.state.readiness_status = "STARTING"
+    app.state.readiness_error = None
+    import asyncio
+    asyncio.create_task(_background_warmup(app))
 
     yield
     logger.info("HalluciSense shutting down")
@@ -312,29 +319,43 @@ def create_application() -> FastAPI:
     @app.get("/ready", tags=["System"], summary="Deep component readiness check")
     @app.get("/readyz", tags=["System"], summary="Deep component readiness check")
     async def readiness_check():
-        from app.core.engine.model_registry import ModelRegistry
-        try:
-            _ = ModelRegistry.get_pipeline()
-            pipeline_ready = True
-        except Exception:
-            pipeline_ready = False
-
-        status_code = status.HTTP_200_OK if pipeline_ready else status.HTTP_503_SERVICE_UNAVAILABLE
-
-        return JSONResponse(
-            status_code=status_code,
-            content={
-                "status": "ready" if pipeline_ready else "unready",
-                "components": {
-                    "pipeline": pipeline_ready,
-                    "nli_model": pipeline_ready,
-                    "p1_hybrid": pipeline_ready,
-                    "retriever": pipeline_ready,
-                    "fusion_engine": pipeline_ready,
+        status_val = getattr(app.state, "readiness_status", "READY")
+        if status_val == "READY":
+            return JSONResponse(
+                status_code=status.HTTP_200_OK,
+                content={
+                    "status": "ready",
+                    "ready": True,
+                    "components": {
+                        "pipeline": True,
+                        "nli_model": True,
+                        "p1_hybrid": True,
+                        "retriever": True,
+                        "fusion_engine": True,
+                    },
+                    "version": settings.VERSION,
                 },
-                "version": settings.VERSION,
-            },
-        )
+            )
+        elif status_val == "STARTING":
+            return JSONResponse(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                content={
+                    "status": "starting",
+                    "ready": False,
+                    "version": settings.VERSION,
+                    "detail": "HalluciSense verification pipeline is still initializing.",
+                },
+            )
+        else:
+            return JSONResponse(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                content={
+                    "status": "failed",
+                    "ready": False,
+                    "version": settings.VERSION,
+                    "error": getattr(app.state, "readiness_error", "Unknown initialization failure"),
+                },
+            )
 
     @app.get("/", tags=["System"], summary="Root endpoint")
     async def root():

@@ -67,6 +67,18 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
     tracer = PipelineTracer()
     timer = PipelineTimer(trace_id=tracer.trace_id)
 
+    # 0. Readiness Gate Check
+    readiness = getattr(request.app.state, "readiness_status", "READY")
+    if readiness != "READY":
+        _metrics_tracker.record_request(0.0, 0.0, is_success=False)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail={
+                "code": "MODEL_NOT_READY",
+                "message": "HalluciSense verification pipeline is still initializing.",
+            },
+        )
+
     # 1. Request Initialization
     with timer.stage("request_initialization"):
         body_bytes = await request.body()
