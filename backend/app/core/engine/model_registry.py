@@ -52,13 +52,10 @@ class ModelRegistry:
                     logger.info("loading_shared_nli_model", model_name=model_name)
                     from transformers import AutoTokenizer, AutoModelForSequenceClassification
                     tokenizer = AutoTokenizer.from_pretrained(model_name)
-                    try:
-                        model = AutoModelForSequenceClassification.from_pretrained(
-                            model_name,
-                            low_cpu_mem_usage=True,
-                        )
-                    except Exception:
-                        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+                    model = AutoModelForSequenceClassification.from_pretrained(
+                        model_name,
+                        low_cpu_mem_usage=True,
+                    )
                     model.eval()
                     cls._nli_tokenizer = tokenizer
                     cls._nli_model = model
