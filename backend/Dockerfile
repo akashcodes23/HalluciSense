@@ -43,6 +43,8 @@ ENV APP_ENV=production \
     MKL_NUM_THREADS=1 \
     OPENBLAS_NUM_THREADS=1 \
     MALLOC_ARENA_MAX=2 \
+    MALLOC_TRIM_THRESHOLD_=65536 \
+    PYTHONMALLOC=malloc \
     HF_HOME=/data/cache/huggingface \
     TRANSFORMERS_CACHE=/data/cache/transformers \
     TRACE_DIR=/data/traces \
@@ -67,9 +69,9 @@ COPY . .
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s \
-    --timeout=5s \
-    --start-period=20s \
-    --retries=3 \
+    --timeout=10s \
+    --start-period=120s \
+    --retries=5 \
     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
 CMD ["python", "start.py"]
