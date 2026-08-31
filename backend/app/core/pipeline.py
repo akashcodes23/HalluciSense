@@ -130,5 +130,20 @@ class HalluciSensePipeline:
         )
 
 
-# Singleton pipeline instance
-pipeline = HalluciSensePipeline()
+# Lazy Singleton pipeline instance
+_pipeline_instance: Optional[HalluciSensePipeline] = None
+
+
+def get_hallucisense_pipeline() -> HalluciSensePipeline:
+    global _pipeline_instance
+    if _pipeline_instance is None:
+        _pipeline_instance = HalluciSensePipeline()
+    return _pipeline_instance
+
+
+class _LazyPipelineProxy:
+    def __getattr__(self, name):
+        return getattr(get_hallucisense_pipeline(), name)
+
+
+pipeline = _LazyPipelineProxy()
