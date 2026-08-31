@@ -44,7 +44,6 @@ ENV APP_ENV=production \
     OPENBLAS_NUM_THREADS=1 \
     MALLOC_ARENA_MAX=2 \
     MALLOC_TRIM_THRESHOLD_=65536 \
-    PYTHONMALLOC=malloc \
     HF_HOME=/data/cache/huggingface \
     TRANSFORMERS_CACHE=/data/cache/transformers \
     TRACE_DIR=/data/traces \
