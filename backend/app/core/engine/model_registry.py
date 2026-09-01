@@ -86,17 +86,24 @@ class ModelRegistry:
                         max_length=256,
                     )
 
-                    model = CrossEncoder(
-                        model_name,
-                        backend="onnx",
-                        cache_folder=cache_folder,
-                        model_kwargs={
-                            "file_name": artifact,
-                            "provider": "CPUExecutionProvider",
-                        },
-                        device="cpu",
-                        max_length=256,
-                    )
+                    try:
+                        model = CrossEncoder(
+                            model_name,
+                            backend="onnx",
+                            cache_folder=cache_folder,
+                            model_kwargs={
+                                "file_name": artifact,
+                                "provider": "CPUExecutionProvider",
+                            },
+                            device="cpu",
+                            max_length=256,
+                        )
+                    except (TypeError, Exception):
+                        model = CrossEncoder(
+                            model_name,
+                            device="cpu",
+                            max_length=256,
+                        )
                     tokenizer = getattr(model, "tokenizer", None)
                     if tokenizer is None:
                         raise RuntimeError("Quantized ONNX NLI CrossEncoder did not expose a tokenizer")
