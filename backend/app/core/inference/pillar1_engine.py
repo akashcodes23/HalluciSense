@@ -165,6 +165,24 @@ class Pillar1Engine:
         )
         semantic_grounding["shadow_only"] = (semantic_mode == "shadow")
 
+        # Phase 42 Evidence Intelligence Gateway (Symbolic Integration)
+        from app.core.verification.gateway import EvidenceIntelligenceGateway
+        symbolic_traces = []
+        for c in claims:
+            c_text = c.get("text", "")
+            gw_res = EvidenceIntelligenceGateway.verify_claim(c_text)
+            if gw_res.get("status") == "verified_symbolically":
+                symbolic_traces.append(gw_res)
+                # If active mode and symbolic contradiction is found, reflect in active features
+                if semantic_mode == "active" and not gw_res.get("is_consistent"):
+                    agg = semantic_grounding.get("aggregated_features", {})
+                    agg["mean_contradiction"] = max(float(agg.get("mean_contradiction", 0.0)), 0.95)
+                    agg["min_support_margin"] = min(float(agg.get("min_support_margin", 0.0)), -0.90)
+                    semantic_grounding["aggregated_features"] = agg
+
+        if symbolic_traces:
+            semantic_grounding["symbolic_verifications"] = symbolic_traces
+
         # Determine which features reach base P1 and downstream classifier
         if semantic_mode == "active":
             agg = semantic_grounding.get("aggregated_features", {})
