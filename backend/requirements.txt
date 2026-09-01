@@ -7,7 +7,6 @@
 
 # -------------------- AI / ML --------------------
 torch==2.5.1
-torchvision==0.20.1
 
 scikit-learn==1.7.2
 joblib==1.5.2
