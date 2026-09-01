@@ -108,7 +108,7 @@ class Settings(BaseSettings):
     GEMINI_MAX_BACKOFF: float = 8.0
 
     # ── LLM Call Optimization & Architectural Controls ───────────────────────
-    ENABLE_SELF_CONSISTENCY: bool = True
+    ENABLE_SELF_CONSISTENCY: bool = False
     MAX_SELF_CONSISTENCY_SAMPLES: int = 5
     ENABLE_AUTOMATIC_CORRECTION: bool = False
     H_SCORE_CORRECTION_THRESHOLD: float = 0.65

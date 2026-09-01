@@ -11,8 +11,9 @@ Implements production REST API endpoints:
 from __future__ import annotations
 
 import asyncio
+import threading
 import time
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from fastapi import APIRouter, HTTPException, Request, Response, status
 from app.schemas.production_schemas import (
     AnalysisRequest,
@@ -56,8 +57,20 @@ VALID_MODELS = {
 
 from app.core.engine.pipeline_timer import PipelineTimer, StageMeasurement
 
-import asyncio
-_analysis_concurrency_semaphore = asyncio.Semaphore(int(getattr(settings, "MAX_CONCURRENT_ANALYSES", 2)))
+_semaphores_by_loop: Dict[int, asyncio.Semaphore] = {}
+_semaphore_lock = threading.Lock()
+
+
+def get_concurrency_semaphore() -> asyncio.Semaphore:
+    try:
+        loop = asyncio.get_running_loop()
+        loop_id = id(loop)
+    except RuntimeError:
+        loop_id = 0
+    with _semaphore_lock:
+        if loop_id not in _semaphores_by_loop:
+            _semaphores_by_loop[loop_id] = asyncio.Semaphore(int(getattr(settings, "MAX_CONCURRENT_ANALYSES", 4)))
+        return _semaphores_by_loop[loop_id]
 
 
 @router.post(
@@ -79,34 +92,35 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail={
-                "code": "MODEL_NOT_READY",
-                "message": "HalluciSense verification pipeline is still initializing.",
+                "code": "SYSTEM_NOT_READY",
+                "message": f"Verification service state is '{readiness}'. Background warm-up or recovery is in progress.",
             },
         )
 
-    # 0.1 Resource Pressure Guard (OOM Prevention)
+    # 0.1 Check System Degradation / Emergency Memory Shedding
     try:
-        import os, psutil
-        proc = psutil.Process(os.getpid())
-        rss_mb = proc.memory_info().rss / (1024 * 1024)
-        guard_limit = float(getattr(settings, "HALLUCISENSE_MEMORY_GUARD_MB", 1500))
-        if rss_mb > guard_limit:
-            _metrics_tracker.record_request(0.0, 0.0, is_success=False)
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail={
-                    "code": "RESOURCE_PRESSURE",
-                    "message": f"Verification capacity is temporarily saturated (memory usage: {rss_mb:.1f}MB exceeds {guard_limit}MB guard). Please retry shortly.",
-                },
-            )
+        from app.core.engine.memory_utils import get_memory_telemetry, trim_process_memory
+        telemetry = get_memory_telemetry()
+        if telemetry.get("rss_mb", 0.0) > 950.0:
+            trim_process_memory()
+            telemetry = get_memory_telemetry()
+            if telemetry.get("rss_mb", 0.0) > 980.0:
+                raise HTTPException(
+                    status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                    detail={
+                        "code": "MEMORY_PRESSURE_LOAD_SHEDDING",
+                        "message": "Server is under extreme memory pressure; shed request to prevent container restart.",
+                    },
+                )
     except HTTPException:
         raise
     except Exception:
         pass
 
-    # 0.2 Concurrency Slot Allocation
+    # 0.2 Concurrency Slot Allocation (Async-safe bound to current event loop)
+    sem = get_concurrency_semaphore()
     try:
-        await asyncio.wait_for(_analysis_concurrency_semaphore.acquire(), timeout=5.0)
+        await asyncio.wait_for(sem.acquire(), timeout=30.0)
     except asyncio.TimeoutError:
         _metrics_tracker.record_request(0.0, 0.0, is_success=False)
         raise HTTPException(
@@ -120,7 +134,11 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
     try:
         return await _execute_analysis(payload, request, response, tracer, timer)
     finally:
-        _analysis_concurrency_semaphore.release()
+        sem.release()
+
+
+import concurrent.futures
+_pipeline_executor = concurrent.futures.ThreadPoolExecutor(max_workers=4, thread_name_prefix="hs_pipeline_worker")
 
 
 async def _execute_analysis(payload: AnalysisRequest, request: Request, response: Response, tracer: PipelineTracer, timer: PipelineTimer) -> AnalysisResponse:
@@ -158,7 +176,7 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             )
 
     try:
-        # 3. Master Pipeline Execution (Async Offloaded with real payload arguments)
+        # 3. Master Pipeline Execution (Executed in bounded worker threadpool)
         ev_items = None
         if payload.provided_evidence:
             from app.core.engine.types import EvidenceItem as CoreEvidenceItem
@@ -185,13 +203,21 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                     )
 
         t0 = time.perf_counter()
-        report = await asyncio.to_thread(
-            get_pipeline().analyze,
-            text=response_text,
-            query=query,
-            token_probabilities=payload.logprobs,
-            sample_responses=payload.sample_responses,
-            evidence_items=ev_items,
+        loop = asyncio.get_running_loop()
+        r_text = response_text
+        q_text = query
+        l_probs = payload.logprobs
+        s_resps = payload.sample_responses
+        e_items = ev_items
+        report = await loop.run_in_executor(
+            _pipeline_executor,
+            lambda: get_pipeline().analyze(
+                text=r_text,
+                query=q_text,
+                token_probabilities=l_probs,
+                sample_responses=s_resps,
+                evidence_items=e_items,
+            ),
         )
         p_dur = (time.perf_counter() - t0) * 1000.0
 
@@ -322,10 +348,9 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             explanation=decomp_explanation,
         )
 
-        # 4. Token Localization Heatmap (Async Offloaded)
+        # 4. Token Localization Heatmap
         with timer.stage("token_localization"):
-            annotations, _ = await asyncio.to_thread(
-                _localization_engine.localize_tokens,
+            annotations, _ = _localization_engine.localize_tokens(
                 response_text=response_text,
                 overall_h_score=overall_h,
                 sentence_scores=[overall_h],
@@ -495,6 +520,8 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             pillar_status=p_status_obj,
             fusion_decomposition=fusion_decomp,
         )
+        from app.core.engine.memory_utils import trim_process_memory
+        trim_process_memory()
         return res_body
 
     except HTTPException:

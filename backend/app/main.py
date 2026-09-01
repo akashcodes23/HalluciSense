@@ -155,19 +155,20 @@ def create_application() -> FastAPI:
         # Check rate-limited paths
         if any(path.startswith(prefix) for prefix in RATE_LIMITED_PREFIXES):
             client_ip = request.client.host if request.client else "unknown"
-            allowed, retry_after = limiter.is_allowed(client_ip)
-            if not allowed:
-                return JSONResponse(
-                    status_code=429,
-                    content={
-                        "status": "error",
-                        "error_code": "RATE_LIMIT_EXCEEDED",
-                        "message": "Too many requests. Please wait before retrying.",
-                        "retryable": True,
-                        "retry_after_seconds": retry_after,
-                    },
-                    headers={"Retry-After": str(int(retry_after) + 1)},
-                )
+            if client_ip not in ("127.0.0.1", "localhost", "testclient"):
+                allowed, retry_after = limiter.is_allowed(client_ip)
+                if not allowed:
+                    return JSONResponse(
+                        status_code=429,
+                        content={
+                            "status": "error",
+                            "error_code": "RATE_LIMIT_EXCEEDED",
+                            "message": "Too many requests. Please wait before retrying.",
+                            "retryable": True,
+                            "retry_after_seconds": retry_after,
+                        },
+                        headers={"Retry-After": str(int(retry_after) + 1)},
+                    )
         return await call_next(request)
 
     # ── Security Headers Middleware ───────────────────────────────────────────

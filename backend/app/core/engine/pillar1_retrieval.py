@@ -38,29 +38,23 @@ class EventTemporalAnchorResolver:
         match = re.search(r"[+-](\d{4})-", value)
         return int(match.group(1)) if match else None
 
-    @staticmethod
-    def _normalise_candidate(value: str) -> str:
-        value = re.sub(r"^[Tt]he\s+", "", value.strip())
-        value = re.sub(r"\s+", " ", value)
-        return value.strip(" ,.;:()[]")
+    def _normalise_candidate(self, raw: str) -> str:
+        cleaned = re.sub(r"^(?:the|a|an)\s+", "", raw.strip(), flags=re.IGNORECASE)
+        cleaned = re.sub(r"\s+", " ", cleaned)
+        return cleaned.strip()
 
     def extract_anchor_candidates(self, text: str) -> List[str]:
         candidates: List[str] = []
 
-        # Named multi-word entities / periods.
-        for match in re.finditer(
-            r"\b(?:[A-Z][A-Za-z0-9'’-]+(?:\s+[A-Z][A-Za-z0-9'’-]+){1,5})\b",
-            text,
-        ):
+        # 1. Capitalized multi-word named entities.
+        for match in re.finditer(r"\b(?:[A-Z][A-Za-z0-9'’-]+(?:\s+[A-Z][A-Za-z0-9'’-]+){1,5})\b", text):
             candidate = self._normalise_candidate(match.group(0))
-            if candidate and candidate.lower() not in {c.lower() for c in candidates}:
+            if candidate and len(candidate.split()) <= 5 and candidate.lower() not in {c.lower() for c in candidates}:
                 candidates.append(candidate)
 
-        # Explicit temporal-object phrases after relational operators. This
-        # captures entities such as "the Renaissance" without hardcoding them.
+        # 2. Relational subject/object captures.
         relation_object = re.compile(
-            r"\b(?:during|after|before|since|prior to|following|preceding|earlier than|later than)\s+"
-            r"(?:the\s+)?([A-Za-z][A-Za-z0-9'’-]*(?:\s+[A-Za-z][A-Za-z0-9'’-]*){0,4})",
+            r"\b(?:prior to|earlier than|later than|preceding|following|before|after|since|during)\s+([A-Za-z0-9'’\-\s]{3,60})",
             re.IGNORECASE,
         )
         for match in relation_object.finditer(text):
@@ -78,7 +72,7 @@ class EventTemporalAnchorResolver:
 
         try:
             self.last_lookup_count += 1
-            response = httpx.get(
+            response = self.client.get(
                 self.API_URL,
                 params={
                     "action": "wbsearchentities",
@@ -89,7 +83,6 @@ class EventTemporalAnchorResolver:
                     "format": "json",
                 },
                 headers={"User-Agent": "HalluciSense/Phase6 temporal-research"},
-                timeout=self.TIMEOUT_SECONDS,
             )
             response.raise_for_status()
             results = response.json().get("search", [])
@@ -111,7 +104,7 @@ class EventTemporalAnchorResolver:
 
     def _fetch_time_span(self, entity_id: str) -> Optional[Dict[str, Any]]:
         try:
-            response = httpx.get(
+            response = self.client.get(
                 self.API_URL,
                 params={
                     "action": "wbgetentities",
@@ -121,7 +114,6 @@ class EventTemporalAnchorResolver:
                     "format": "json",
                 },
                 headers={"User-Agent": "HalluciSense/Phase6 temporal-research"},
-                timeout=self.TIMEOUT_SECONDS,
             )
             response.raise_for_status()
             entity = response.json().get("entities", {}).get(entity_id, {})
@@ -174,12 +166,12 @@ class EventTemporalAnchorResolver:
         return None
 
     def evaluate(self, text: str) -> Tuple[Optional[float], Optional[str], List[Dict[str, Any]]]:
-        anchors = self.resolve(text)
-        if len(anchors) < 2:
-            return None, None, anchors
-
         relation = self._relation(text)
         if not relation:
+            return None, None, []
+
+        anchors = self.resolve(text)
+        if len(anchors) < 2:
             return None, None, anchors
 
         first, second = anchors[0], anchors[1]
@@ -294,6 +286,7 @@ class Pillar1RetrievalEngine:
             relevant_items = [item for item in external_evidence if self._evidence_relevant_to_claim(claim, item)]
             if not relevant_items:
                 relevant_items = external_evidence
+            relevant_items = relevant_items[:3]
             for item_idx, item in enumerate(relevant_items):
                 sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
                 if sim_score >= 0.20:

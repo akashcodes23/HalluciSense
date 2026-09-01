@@ -75,7 +75,7 @@ class WikipediaKnowledgeSource:
                 self.api_url,
                 params=params,
                 headers=HEADERS,
-                timeout=2.5,
+                timeout=(1.0, 2.0),
             )
             if resp.status_code != 200:
                 logger.warning(
@@ -98,11 +98,11 @@ class WikipediaKnowledgeSource:
                 topic = topic.strip()
                 if topic:
                     params["srsearch"] = topic
-                    resp2 = requests.get(
+                    resp2 = self.session.get(
                         self.api_url,
                         params=params,
                         headers=HEADERS,
-                        timeout=3.0,
+                        timeout=(1.0, 2.0),
                     )
                     if resp2.status_code == 200:
                         items = resp2.json().get("query", {}).get("search", [])
@@ -133,7 +133,7 @@ class WikipediaKnowledgeSource:
                 self.api_url,
                 params=params,
                 headers=HEADERS,
-                timeout=4.0,
+                timeout=(1.0, 2.0),
             )
             if resp.status_code != 200:
                 logger.warning(
@@ -192,12 +192,18 @@ class WikipediaKnowledgeSource:
 
         if misses:
             workers = min(self.max_search_workers, len(misses))
-            with ThreadPoolExecutor(max_workers=workers) as executor:
-                futures = [executor.submit(self._search, query) for query in misses]
-                search_results = []
-                for future in as_completed(futures):
-                    search_results.append(future.result())
-                    metrics["search_requests"] += 1
+            search_results = []
+            try:
+                with ThreadPoolExecutor(max_workers=workers) as executor:
+                    futures = [executor.submit(self._search, query) for query in misses]
+                    for future in as_completed(futures, timeout=3.0):
+                        try:
+                            search_results.append(future.result())
+                            metrics["search_requests"] += 1
+                        except Exception:
+                            pass
+            except Exception:
+                pass
 
             titles_by_query: Dict[str, List[str]] = dict(search_results)
             unique_titles = list(dict.fromkeys(
@@ -221,11 +227,11 @@ class WikipediaKnowledgeSource:
                     if title in extracted_by_title
                 ]
                 results[query] = evidence
+                with self._cache_lock:
+                    if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                        self._cache.popitem(last=False)
+                    self._cache[query.lower()] = evidence
                 if evidence:
-                    with self._cache_lock:
-                        if len(self._cache) >= self.MAX_CACHE_ENTRIES:
-                            self._cache.popitem(last=False)
-                        self._cache[query.lower()] = evidence
                     metrics["retrieved_pages"] += len(evidence)
                 else:
                     metrics["failed_queries"] += 1

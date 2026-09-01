@@ -128,6 +128,9 @@ class EvidenceEntailmentEngine:
                             self._cache.popitem(last=False)
                         self._cache[cache_key] = pred
 
+        import gc
+        gc.collect()
+
         inference_ms = (time.perf_counter() - t0) * 1000.0
         self.last_batch_metrics = {
             "pairs": len(claims),

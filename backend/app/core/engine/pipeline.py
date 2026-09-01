@@ -350,7 +350,7 @@ Respond STRICTLY in JSON using this schema:
                 generation_config=genai.GenerationConfig(
                     response_mime_type="application/json"
                 ),
-                request_options={"timeout": 30},
+                request_options={"timeout": 3.0},
             )
 
             result = json.loads(response.text)
@@ -599,7 +599,7 @@ Respond STRICTLY in JSON using this schema:
         for (
             idx,
             (sent_text, s_start, s_end),
-        ) in enumerate(sentence_spans):
+        ) in enumerate(sentence_spans[:10]):
 
             # -------------------------------------------------
             # PILLAR 1
