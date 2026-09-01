@@ -392,6 +392,7 @@ def compute_local_attribution(
 
     # ── Step 6: Interaction gap ───────────────────────────────────────────
     total_shift = P_original - P_baseline
+    sum_attributions = sum(f.attribution for f in attributions)
     interaction_gap = total_shift - sum_attributions
 
     # ── Step 7: Sort for top drivers ──────────────────────────────────────
