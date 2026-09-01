@@ -12,6 +12,7 @@ import math
 import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+import uuid
 
 import joblib
 import numpy as np
@@ -151,7 +152,144 @@ class HalluciSensePipeline:
             except Exception as cand_exc:
                 logger.warning("candidate_shadow_evaluation_failed", error=str(cand_exc))
 
+        # Task 11: Phase 44 Observability & Structured Verification Summary
+        from app.core.verification.verification_state import (
+            VerificationStatus,
+            EvidenceSufficiency,
+            ConfidenceBand,
+            EvidenceProvenance,
+            ClaimVerificationResult,
+            ResponseVerificationSummary,
+        )
+        from app.core.observability.metrics import metrics_tracker
+
+        req_id = str(uuid.uuid4())
+        trace_id = str(uuid.uuid4())
+        
+        claim_results: List[ClaimVerificationResult] = []
+        n_verified = 0
+        n_contradicted = 0
+        n_insufficient = 0
+        n_symbolic = 0
+        
+        symbolic_map = {s.get("claim_text"): s for s in semantic_grounding.get("symbolic_verifications", [])}
+        nli_claims_map = {c.get("claim_text"): c for c in semantic_grounding.get("claims", [])}
+
+        for c_idx, c_obj in enumerate(claims_struct):
+            c_text = c_obj.get("text", "")
+            if c_text in symbolic_map:
+                s_info = symbolic_map[c_text]
+                n_symbolic += 1
+                is_cons = s_info.get("is_consistent", False)
+                v_stat = VerificationStatus.VERIFIED if is_cons else VerificationStatus.CONTRADICTED
+                e_suff = EvidenceSufficiency.DIRECT_SUPPORT if is_cons else EvidenceSufficiency.DIRECT_CONTRADICTION
+                if is_cons:
+                    n_verified += 1
+                else:
+                    n_contradicted += 1
+                c_res = ClaimVerificationResult(
+                    claim_id=c_idx,
+                    claim_text=c_text,
+                    claim_type=s_info.get("claim_type", "ARITHMETIC"),
+                    verification_method=s_info.get("modality", "symbolic_computation"),
+                    status=v_stat,
+                    evidence_sufficiency=e_suff,
+                    confidence_band=ConfidenceBand.HIGH,
+                    verification_confidence=1.0,
+                    symbolic_result=s_info,
+                    reason=s_info.get("explanation", ""),
+                )
+            elif c_text in nli_claims_map:
+                n_info = nli_claims_map[c_text]
+                prim_stat = n_info.get("primary_status", "neutral")
+                if prim_stat == "entailment":
+                    v_stat = VerificationStatus.VERIFIED
+                    e_suff = EvidenceSufficiency.DIRECT_SUPPORT
+                    n_verified += 1
+                elif prim_stat == "contradiction":
+                    v_stat = VerificationStatus.CONTRADICTED
+                    e_suff = EvidenceSufficiency.DIRECT_CONTRADICTION
+                    n_contradicted += 1
+                else:
+                    v_stat = VerificationStatus.INSUFFICIENT_EVIDENCE
+                    e_suff = EvidenceSufficiency.NO_EVIDENCE
+                    n_insufficient += 1
+                
+                ev_provs = []
+                for ev in n_info.get("evidence_details", []):
+                    ev_provs.append(EvidenceProvenance(
+                        source_title=ev.get("title", ""),
+                        source_url=ev.get("url"),
+                        snippet=ev.get("snippet", ""),
+                        nli_entailment=ev.get("entailment", 0.0),
+                        nli_contradiction=ev.get("contradiction", 0.0),
+                        nli_neutral=ev.get("neutral", 0.0),
+                    ))
+                
+                c_res = ClaimVerificationResult(
+                    claim_id=c_idx,
+                    claim_text=c_text,
+                    claim_type="TEXTUAL_FACT",
+                    verification_method="wikipedia_deberta_nli",
+                    status=v_stat,
+                    evidence_sufficiency=e_suff,
+                    confidence_band=ConfidenceBand.HIGH if (n_info.get("max_entailment", 0.0) > 0.8 or n_info.get("mean_contradiction", 0.0) > 0.8) else ConfidenceBand.MEDIUM,
+                    verification_confidence=float(max(n_info.get("max_entailment", 0.0), n_info.get("mean_contradiction", 0.0))),
+                    evidence=ev_provs,
+                    reason=f"Primary NLI status: {prim_stat}",
+                )
+            else:
+                v_stat = VerificationStatus.INSUFFICIENT_EVIDENCE
+                e_suff = EvidenceSufficiency.NO_EVIDENCE
+                n_insufficient += 1
+                c_res = ClaimVerificationResult(
+                    claim_id=c_idx,
+                    claim_text=c_text,
+                    claim_type="TEXTUAL_FACT",
+                    verification_method="unverified",
+                    status=v_stat,
+                    evidence_sufficiency=e_suff,
+                    confidence_band=ConfidenceBand.LOW,
+                    verification_confidence=0.0,
+                    reason="No direct matching evidence retrieved.",
+                )
+            claim_results.append(c_res)
+
+        primary_summary_stat = (
+            "CONTAINS_CONTRADICTION" if n_contradicted > 0
+            else ("ALL_VERIFIED" if n_verified == len(claims_struct) and len(claims_struct) > 0
+            else "INSUFFICIENT_EVIDENCE")
+        )
+
+        resp_summary = ResponseVerificationSummary(
+            request_id=req_id,
+            trace_id=trace_id,
+            total_claims=len(claims_struct),
+            verified_claims=n_verified,
+            contradicted_claims=n_contradicted,
+            unsupported_claims=n_insufficient,
+            error_claims=0,
+            primary_status=primary_summary_stat,
+            model_score=round(prob_hybrid, 4),
+            model_threshold=self.threshold,
+            is_hallucinated=is_hallucinated,
+            claims=claim_results,
+        )
+
+        # Record in observability tracker
+        metrics_tracker.record_request(
+            claim_count=len(claims_struct),
+            verified=n_verified,
+            contradicted=n_contradicted,
+            insufficient=n_insufficient,
+            symbolic=n_symbolic,
+            retrieval=len(claims_struct) - n_symbolic,
+            latency_ms=10.0,
+        )
+
         return {
+            "request_id": req_id,
+            "trace_id": trace_id,
             "is_hallucinated": is_hallucinated,
             "hallucination_probability": round(prob_hybrid, 4),
             "operating_threshold": self.threshold,
@@ -162,6 +300,7 @@ class HalluciSensePipeline:
             "local_attribution": local_attribution_dict,
             "semantic_grounding": semantic_grounding,
             "candidate_comparison": candidate_comparison,
+            "verification_summary": resp_summary.to_dict(),
         }
 
     def generate_explanation(self, prob: float, claims: List[str], is_hallucinated: bool) -> Dict[str, Any]:

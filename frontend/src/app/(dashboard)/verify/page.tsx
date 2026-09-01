@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { VerdictBanner } from "@/components/verification/VerdictBanner";
 import { ClaimAnalysisCard } from "@/components/verification/ClaimAnalysisCard";
 import { LocalAttributionPanel } from "@/components/verification/LocalAttributionPanel";
+import { VerificationTracePanel } from "@/components/verification/VerificationTracePanel";
 import { VerificationUnavailable } from "@/components/ui/EmptyState";
 import { useAnalysis } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
@@ -446,6 +447,11 @@ export default function VerifyPage() {
                 </div>
               </CardContent>
             </Card>
+          )}
+
+          {/* Evidence Intelligence Audit Trace */}
+          {currentResult.verification_summary && (
+            <VerificationTracePanel summary={currentResult.verification_summary} />
           )}
 
           {/* Local Feature Attribution & Evidence Grounding Panel */}

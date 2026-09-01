@@ -217,7 +217,38 @@ export interface CandidateComparison {
   verdicts_match: boolean;
 }
 
+export interface ClaimVerificationResult {
+  claim_id: number;
+  claim_text: string;
+  claim_type: string;
+  verification_method: string;
+  status: 'VERIFIED' | 'CONTRADICTED' | 'INSUFFICIENT_EVIDENCE' | 'NOT_APPLICABLE' | 'ERROR';
+  evidence_sufficiency: 'DIRECT_SUPPORT' | 'DIRECT_CONTRADICTION' | 'PARTIAL_SUPPORT' | 'AMBIGUOUS' | 'NO_EVIDENCE';
+  confidence_band: 'HIGH' | 'MEDIUM' | 'LOW';
+  verification_confidence: number;
+  evidence?: SemanticEvidenceEvaluation[];
+  symbolic_result?: Record<string, unknown>;
+  reason?: string;
+}
+
+export interface ResponseVerificationSummary {
+  request_id: string;
+  trace_id: string;
+  total_claims: number;
+  verified_claims: number;
+  contradicted_claims: number;
+  unsupported_claims: number;
+  error_claims: number;
+  primary_status: string;
+  model_score: number;
+  model_threshold: number;
+  is_hallucinated: boolean;
+  claims: ClaimVerificationResult[];
+}
+
 export interface AnalysisResponse {
+  request_id?: string;
+  trace_id?: string;
   overall_h_score: number;
   risk_level: RiskLevel;
   confidence?: number;
@@ -230,7 +261,6 @@ export interface AnalysisResponse {
   evidence?: EvidenceItem[];
   root_cause_classification?: string;
   failure_taxonomy?: string;
-  trace_id?: string;
   latency_ms?: number;
   processing_time_ms?: number;
   version?: string;
@@ -240,6 +270,7 @@ export interface AnalysisResponse {
   local_attribution?: LocalAttribution;
   semantic_grounding?: SemanticGrounding;
   candidate_comparison?: CandidateComparison;
+  verification_summary?: ResponseVerificationSummary;
 }
 
 export interface AnalysisHistoryEntry {
