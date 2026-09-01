@@ -3,12 +3,12 @@
 Executes end-to-end real production inference pipeline:
 Input text -> Claim Extraction -> Knowledge Retrieval -> Pillar 1 Grounding -> Pillar 2 Structure -> Hybrid Fusion -> Calibration -> Real Explanation.
 
-Zero synthetic defaults. Zero retraining or modification of frozen research models.
+Phase 37 adds a faithful local explanation layer around the frozen hybrid
+classifier. The research model and preprocessing artifacts are not changed.
 """
 
 from __future__ import annotations
 
-import math
 from typing import Any, Dict, List, Optional
 
 import numpy as np
@@ -16,11 +16,12 @@ import structlog
 
 from app.core.inference.claim_extractor import extract_claims
 from app.core.inference.explanation_engine import generate_rich_explanation
+from app.core.inference.explainability import compute_local_feature_attributions
 from app.core.inference.pillar1_engine import Pillar1Engine
 from app.core.inference.pillar2_engine import Pillar2Engine
 from app.models.registry import registry
 from evaluation.phase6m.dataset import compute_logit
-from evaluation.phase6m.config import EPSILON
+from evaluation.phase6m.config import EPSILON, HYBRID_FEATURE_SCHEMA
 
 logger = structlog.get_logger(__name__)
 
@@ -75,10 +76,10 @@ class HalluciSensePipeline:
             p_ratio = float((prob_p1 + EPSILON) / (prob_p2 + EPSILON))
 
             hybrid_vector = [
-                p1_feats[0], p1_feats[1], p1_feats[2], p1_feats[3], p1_feats[4],  # P1 features (5)
-                p2_feats[0], p2_feats[1], p2_feats[2], p2_feats[3], p2_feats[4],  # P2 features (5)
-                prob_p1, prob_p2, l1, l2,                                          # Probabilities & Logits (4)
-                disagg_abs, p_mean, p_max, p_min, p_ratio,                        # Meta signals (5)
+                p1_feats[0], p1_feats[1], p1_feats[2], p1_feats[3], p1_feats[4],
+                p2_feats[0], p2_feats[1], p2_feats[2], p2_feats[3], p2_feats[4],
+                prob_p1, prob_p2, l1, l2,
+                disagg_abs, p_mean, p_max, p_min, p_ratio,
             ]
             X_raw = np.array(hybrid_vector, dtype=np.float64).reshape(1, -1)
 
@@ -93,7 +94,31 @@ class HalluciSensePipeline:
         prob_hybrid = float(self.clf.predict_proba(X_scaled)[0, 1])
         is_hallucinated = bool(prob_hybrid >= self.threshold)
 
-        # Task 8: Real Explanation Generation
+        # Task 8: Faithful local explanation of the frozen hybrid decision.
+        if expected_features == 19 and X_raw.shape[1] == len(HYBRID_FEATURE_SCHEMA):
+            try:
+                explainability = compute_local_feature_attributions(
+                    X_raw=X_raw[0],
+                    scaler=self.scaler,
+                    clf=self.clf,
+                    feature_names=HYBRID_FEATURE_SCHEMA,
+                    threshold=self.threshold,
+                )
+            except Exception as exc:
+                logger.warning("hybrid_local_explainability_failed", error=str(exc))
+                explainability = {
+                    "available": False,
+                    "method": "UNAVAILABLE",
+                    "reason": str(exc),
+                }
+        else:
+            explainability = {
+                "available": False,
+                "method": "UNAVAILABLE",
+                "reason": "Active production model is not the 19-feature hybrid classifier.",
+            }
+
+        # Task 9: Real Explanation Generation
         explanation = generate_rich_explanation(
             prob_hybrid=prob_hybrid,
             threshold=self.threshold,
@@ -105,6 +130,13 @@ class HalluciSensePipeline:
             structural_diagnostics=structural_diagnostics,
         )
 
+        explanation["model_explainability"] = explainability
+        explanation["decision_rule"] = {
+            "threshold": self.threshold,
+            "comparison": f"P(H) {'>=' if is_hallucinated else '<'} τ*",
+            "margin": round(prob_hybrid - self.threshold, 8),
+        }
+
         return {
             "is_hallucinated": is_hallucinated,
             "hallucination_probability": round(prob_hybrid, 4),
@@ -112,6 +144,9 @@ class HalluciSensePipeline:
             "claim_count": len(claims_struct),
             "claims": [c["text"] for c in claims_struct],
             "explanation": explanation,
+            "explainability": explainability,
+            "feature_vector": [round(float(v), 8) for v in X_raw[0].tolist()] if X_raw.shape[1] == len(HYBRID_FEATURE_SCHEMA) else None,
+            "feature_schema": list(HYBRID_FEATURE_SCHEMA) if X_raw.shape[1] == len(HYBRID_FEATURE_SCHEMA) else None,
             "confidence_score": round(abs(prob_hybrid - 0.5) * 2.0, 4),
         }
 

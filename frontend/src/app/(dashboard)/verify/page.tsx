@@ -11,6 +11,9 @@ import {
   Info,
   Sparkles,
   Settings2,
+  BrainCircuit,
+  ArrowUpRight,
+  ArrowDownRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { VerdictBanner } from "@/components/verification/VerdictBanner";
 import { ClaimAnalysisCard } from "@/components/verification/ClaimAnalysisCard";
 import { VerificationUnavailable } from "@/components/ui/EmptyState";
-import { useAnalysis } from "@/hooks/use-analysis";
+import { useAnalysis, useHybridExplain } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
 import { formatLatency } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -53,8 +56,10 @@ export default function VerifyPage() {
   const [response, setResponse] = useState("");
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [contextEvidence, setContextEvidence] = useState("");
+  const [showExplainability, setShowExplainability] = useState(false);
 
   const analysis = useAnalysis();
+  const hybridExplain = useHybridExplain();
   const currentResult = useAnalysisStore((s) => s.currentResult);
   const isAnalyzing = useAnalysisStore((s) => s.isAnalyzing);
   const reset = useAnalysisStore((s) => s.reset);
@@ -71,6 +76,8 @@ export default function VerifyPage() {
     }
 
     reset();
+    setShowExplainability(false);
+    hybridExplain.reset();
 
     const providedEvidence: EvidenceItem[] = contextEvidence.trim()
       ? [{
@@ -102,11 +109,30 @@ export default function VerifyPage() {
       model_name: modelToSend,
       provided_evidence: providedEvidence.length > 0 ? providedEvidence : undefined,
     });
-  }, [response, query, contextEvidence, analysis, reset]);
+  }, [response, query, contextEvidence, analysis, reset, hybridExplain]);
+
+  const handleExplainDecision = useCallback(() => {
+    if (!response.trim()) {
+      toast.error("No response is available to explain.");
+      return;
+    }
+
+    setShowExplainability(true);
+    const claims = currentResult?.sentence_scores
+      ?.map((sentence) => sentence.text || sentence.sentence_text || "")
+      .filter(Boolean);
+
+    hybridExplain.mutate({
+      responseText: response.trim(),
+      claims: claims && claims.length > 0 ? claims : undefined,
+    });
+  }, [response, currentResult, hybridExplain]);
 
   const handlePreset = (preset: typeof SAMPLE_PRESETS[0]) => {
     setQuery(preset.query);
     setResponse(preset.response);
+    setShowExplainability(false);
+    hybridExplain.reset();
     reset();
   };
 
@@ -114,6 +140,8 @@ export default function VerifyPage() {
     setQuery("");
     setResponse("");
     setContextEvidence("");
+    setShowExplainability(false);
+    hybridExplain.reset();
     reset();
   };
 
@@ -126,7 +154,6 @@ export default function VerifyPage() {
 
   return (
     <div className="max-w-[960px] mx-auto p-5 md:p-8 pb-20 md:pb-8 space-y-6">
-      {/* ── Page Header ─────────────────────────────────────────────── */}
       <div>
         <h1 className="text-heading-lg text-[var(--text-primary)]">Verify</h1>
         <p className="text-label-md text-[var(--text-muted)] mt-1">
@@ -134,14 +161,12 @@ export default function VerifyPage() {
         </p>
       </div>
 
-      {/* ── Input Section ────────────────────────────────────────────── */}
       {!hasResult && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          {/* Query (optional) */}
           <div>
             <label htmlFor="verify-query" className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
               Original Question <span className="text-[var(--text-dim)] normal-case tracking-normal">(optional)</span>
@@ -163,7 +188,6 @@ export default function VerifyPage() {
             />
           </div>
 
-          {/* Response (required) */}
           <div>
             <label htmlFor="verify-response" className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
               LLM Response <span className="text-[var(--hallucination)] normal-case tracking-normal">*</span>
@@ -186,7 +210,6 @@ export default function VerifyPage() {
             />
           </div>
 
-          {/* Advanced options toggle */}
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="flex items-center gap-1.5 text-[12px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors cursor-pointer"
@@ -229,7 +252,6 @@ export default function VerifyPage() {
             )}
           </AnimatePresence>
 
-          {/* Sample Presets */}
           <div className="flex flex-wrap gap-2">
             <span className="text-[11px] text-[var(--text-dim)] self-center mr-1">Try:</span>
             {SAMPLE_PRESETS.map((preset) => (
@@ -248,7 +270,6 @@ export default function VerifyPage() {
             ))}
           </div>
 
-          {/* Submit */}
           <div className="flex items-center gap-3 pt-2">
             <Button
               onClick={handleVerify}
@@ -275,7 +296,6 @@ export default function VerifyPage() {
         </motion.div>
       )}
 
-      {/* ── Loading State ────────────────────────────────────────────── */}
       {isLoading && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -303,19 +323,14 @@ export default function VerifyPage() {
         </motion.div>
       )}
 
-      {/* ── Error State ──────────────────────────────────────────────── */}
-      {hasFailed && !hasResult && (
-        <VerificationUnavailable onRetry={handleVerify} />
-      )}
+      {hasFailed && !hasResult && <VerificationUnavailable onRetry={handleVerify} />}
 
-      {/* ── Results ──────────────────────────────────────────────────── */}
       {hasResult && (
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-5"
         >
-          {/* New Verification Button */}
           <div className="flex items-center justify-between">
             <Button variant="outline" size="sm" onClick={handleReset}>
               <RotateCcw className="w-3.5 h-3.5" />
@@ -327,13 +342,10 @@ export default function VerifyPage() {
                   <Clock className="w-3 h-3" /> {formatLatency(currentResult.processing_time_ms)}
                 </Badge>
               )}
-              {currentResult.version && (
-                <Badge variant="outline" size="sm">v{currentResult.version}</Badge>
-              )}
+              {currentResult.version && <Badge variant="outline" size="sm">v{currentResult.version}</Badge>}
             </div>
           </div>
 
-          {/* Verdict Banner */}
           <VerdictBanner
             riskLevel={currentResult.risk_level}
             hScore={currentResult.overall_h_score}
@@ -348,7 +360,99 @@ export default function VerifyPage() {
             }}
           />
 
-          {/* Pillar Scores */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between gap-2">
+                <span className="flex items-center gap-2">
+                  <BrainCircuit className="w-4 h-4 text-[var(--ai)]" />
+                  Explain this decision
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleExplainDecision}
+                  disabled={hybridExplain.isPending}
+                >
+                  {hybridExplain.isPending ? (
+                    <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Explaining…</>
+                  ) : (
+                    <><BrainCircuit className="w-3.5 h-3.5" /> Analyze drivers</>
+                  )}
+                </Button>
+              </CardTitle>
+              <p className="text-[11px] text-[var(--text-muted)]">
+                Runs the frozen 19-feature hybrid classifier in diagnostic mode. It does not alter the Verify verdict.
+              </p>
+            </CardHeader>
+            {showExplainability && hybridExplain.data && (
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  <ExplainMetric label="Model P(H)" value={`${(hybridExplain.data.prediction.hallucination_probability * 100).toFixed(1)}%`} />
+                  <ExplainMetric label="Threshold" value={`${(hybridExplain.data.prediction.operating_threshold * 100).toFixed(0)}%`} />
+                  <ExplainMetric label="Baseline P(H)" value={`${((hybridExplain.data.prediction.explanation?.model_explainability?.baseline_probability ?? 0) * 100).toFixed(1)}%`} />
+                  <ExplainMetric label="Margin" value={`${((hybridExplain.data.prediction.explanation?.model_explainability?.decision_margin ?? 0) * 100).toFixed(1)}%`} />
+                </div>
+
+                {hybridExplain.data.prediction.explanation?.summary && (
+                  <div className="p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)] text-[12px] text-[var(--text-secondary)] leading-relaxed">
+                    {hybridExplain.data.prediction.explanation.summary}
+                  </div>
+                )}
+
+                {hybridExplain.data.prediction.explanation?.primary_driver && (
+                  <div className="text-[12px] text-[var(--text-secondary)]">
+                    <span className="font-semibold text-[var(--text-primary)]">Primary driver:</span>{" "}
+                    {hybridExplain.data.prediction.explanation.primary_driver}
+                  </div>
+                )}
+
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[var(--hallucination)]" />
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Top risk drivers</span>
+                  </div>
+                  <div className="space-y-1.5">
+                    {(hybridExplain.data.prediction.explainability?.top_positive_drivers || []).slice(0, 5).map((driver) => (
+                      <FeatureDriverRow key={driver.index} driver={driver} positive />
+                    ))}
+                    {(hybridExplain.data.prediction.explainability?.top_positive_drivers || []).length === 0 && (
+                      <p className="text-[11px] text-[var(--text-dim)]">No positive local drivers were identified.</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <ArrowDownRight className="w-3.5 h-3.5 text-[var(--verified)]" />
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Top protective drivers</span>
+                  </div>
+                  <div className="space-y-1.5">
+                    {(hybridExplain.data.prediction.explainability?.top_negative_drivers || []).slice(0, 5).map((driver) => (
+                      <FeatureDriverRow key={driver.index} driver={driver} positive={false} />
+                    ))}
+                    {(hybridExplain.data.prediction.explainability?.top_negative_drivers || []).length === 0 && (
+                      <p className="text-[11px] text-[var(--text-dim)]">No negative local drivers were identified.</p>
+                    )}
+                  </div>
+                </div>
+
+                {hybridExplain.data.prediction.explainability?.non_additivity_note && (
+                  <div className="flex gap-2 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)] text-[10px] text-[var(--text-dim)] leading-relaxed">
+                    <Info className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                    <span>{hybridExplain.data.prediction.explainability.non_additivity_note}</span>
+                  </div>
+                )}
+              </CardContent>
+            )}
+            {showExplainability && hybridExplain.isError && (
+              <CardContent>
+                <p className="text-[12px] text-[var(--hallucination)]">
+                  Explainability analysis failed. The original verification result remains valid and unchanged.
+                </p>
+              </CardContent>
+            )}
+          </Card>
+
           {currentResult.pillar_scores && (
             <Card>
               <CardHeader>
@@ -382,7 +486,6 @@ export default function VerifyPage() {
                   />
                 </div>
 
-                {/* Fusion Decomposition */}
                 {currentResult.fusion_decomposition && (
                   <div className="mt-4 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)]">
                     <div className="flex items-center gap-2 mb-2">
@@ -401,7 +504,6 @@ export default function VerifyPage() {
             </Card>
           )}
 
-          {/* Claim-Level Analysis */}
           {currentResult.sentence_scores && currentResult.sentence_scores.length > 0 && (
             <div>
               <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">
@@ -415,13 +517,10 @@ export default function VerifyPage() {
             </div>
           )}
 
-          {/* Token Heatmap (if available) */}
           {currentResult.token_heatmap && currentResult.token_heatmap.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-sm">
-                  Token Risk Heatmap
-                </CardTitle>
+                <CardTitle className="flex items-center gap-2 text-sm">Token Risk Heatmap</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-1">
@@ -448,6 +547,48 @@ export default function VerifyPage() {
           )}
         </motion.div>
       )}
+    </div>
+  );
+}
+
+function ExplainMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-[var(--radius)] bg-[var(--surface)] p-3 border border-[var(--border)]">
+      <p className="text-[10px] uppercase tracking-wider text-[var(--text-dim)]">{label}</p>
+      <p className="text-sm font-bold font-mono text-[var(--text-primary)] mt-1">{value}</p>
+    </div>
+  );
+}
+
+function FeatureDriverRow({
+  driver,
+  positive,
+}: {
+  driver: {
+    feature: string;
+    value: number;
+    baseline_value: number;
+    counterfactual_probability: number;
+    delta: number;
+    relative_strength: number;
+  };
+  positive: boolean;
+}) {
+  const deltaPct = `${driver.delta >= 0 ? "+" : ""}${(driver.delta * 100).toFixed(2)}%`;
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--border)] px-3 py-2">
+      <div className="min-w-0">
+        <p className="text-[11px] font-mono text-[var(--text-secondary)] truncate">{driver.feature}</p>
+        <p className="text-[10px] text-[var(--text-dim)]">
+          value {driver.value.toFixed(4)} · baseline {driver.baseline_value.toFixed(4)}
+        </p>
+      </div>
+      <div className="text-right shrink-0">
+        <p className={cn("text-[11px] font-bold font-mono", positive ? "text-[var(--hallucination)]" : "text-[var(--verified)]")}>
+          {deltaPct}
+        </p>
+        <p className="text-[9px] text-[var(--text-dim)]">{(driver.relative_strength * 100).toFixed(1)}% local strength</p>
+      </div>
     </div>
   );
 }
@@ -486,9 +627,7 @@ function PillarScoreCard({
       ) : (
         <div>
           <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
-          {reason && (
-            <p className="text-[10px] text-[var(--text-dim)] mt-0.5">{reason}</p>
-          )}
+          {reason && <p className="text-[10px] text-[var(--text-dim)] mt-0.5">{reason}</p>}
         </div>
       )}
     </div>

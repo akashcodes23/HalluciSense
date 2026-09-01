@@ -118,6 +118,37 @@ class ConfidenceAnalysis(BaseModel):
     explanation: Optional[str] = Field(None)
 
 
+class FeatureAttribution(BaseModel):
+    """Local counterfactual attribution for one frozen hybrid feature."""
+    index: int = Field(..., ge=0)
+    feature: str = Field(...)
+    value: float
+    baseline_value: float
+    counterfactual_probability: float = Field(..., ge=0.0, le=1.0)
+    delta: float
+    direction: str = Field(..., description="increases_hallucination, decreases_hallucination, or neutral")
+    relative_strength: float = Field(..., ge=0.0, le=1.0)
+
+
+class ModelExplainability(BaseModel):
+    """Faithful local explanation of the frozen 19-feature hybrid classifier."""
+    available: bool = Field(...)
+    method: str = Field(...)
+    methodology: Optional[str] = Field(None)
+    baseline_method: Optional[str] = Field(None)
+    baseline_probability: Optional[float] = Field(None, ge=0.0, le=1.0)
+    observed_probability: Optional[float] = Field(None, ge=0.0, le=1.0)
+    decision_threshold: Optional[float] = Field(None, ge=0.0, le=1.0)
+    decision_margin: Optional[float] = Field(None)
+    interaction_gap: Optional[float] = Field(None)
+    non_additivity_note: Optional[str] = Field(None)
+    feature_count: Optional[int] = Field(None, ge=0)
+    features: List[FeatureAttribution] = Field(default_factory=list)
+    top_positive_drivers: List[FeatureAttribution] = Field(default_factory=list)
+    top_negative_drivers: List[FeatureAttribution] = Field(default_factory=list)
+    reason: Optional[str] = Field(None)
+
+
 class AnalysisResponse(BaseModel):
     """Canonical production response model for POST /api/v1/analyze."""
     trace_id: str = Field(..., description="Unique execution trace ID for pipeline debugging", example="TRACE_88CFA3E9")
@@ -134,11 +165,10 @@ class AnalysisResponse(BaseModel):
     evidence: List[EvidenceItem] = Field(default_factory=list)
     confidence_analysis: Optional[ConfidenceAnalysis] = Field(None)
     root_cause_classification: Optional[str] = Field("VERIFIED", description="Single-label failure classification")
-    
-    # ── Real Timing & Fusion Provenance ──────────────────────────────────────
     measured_timings: Optional[MeasuredTimingBreakdown] = Field(None, description="Actual measured sub-operation timings")
     pillar_status: Optional[PillarExecutionStatus] = Field(None, description="Detailed execution and availability status")
     fusion_decomposition: Optional[MathematicalFusionDecomposition] = Field(None, description="Step-by-step linear algebra contribution breakdown")
+    explainability: Optional[ModelExplainability] = Field(None, description="Faithful local feature attribution for the frozen hybrid classifier")
 
 
 class ExplainResponse(BaseModel):
@@ -157,6 +187,7 @@ class ExplainResponse(BaseModel):
     confidence_explanation: str = Field(...)
     fusion_decomposition: Optional[MathematicalFusionDecomposition] = Field(None)
     measured_timings: Optional[MeasuredTimingBreakdown] = Field(None)
+    model_explainability: Optional[ModelExplainability] = Field(None, description="Faithful local feature attribution for the frozen hybrid classifier")
 
 
 class MetricsResponse(BaseModel):

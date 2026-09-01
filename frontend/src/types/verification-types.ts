@@ -5,7 +5,7 @@
 
 export type RiskLevel = 'VERIFIED' | 'NEEDS_VERIFICATION' | 'MODERATE_RISK' | 'LIKELY_HALLUCINATED';
 
-export type EpistemicCategory = 
+export type EpistemicCategory =
   | 'ASSERTED_FACT'
   | 'PREDICTION'
   | 'HYPOTHETICAL'
@@ -139,6 +139,35 @@ export interface MathematicalFusionDecomposition {
   explanation?: string | null;
 }
 
+export interface FeatureAttribution {
+  index: number;
+  feature: string;
+  value: number;
+  baseline_value: number;
+  counterfactual_probability: number;
+  delta: number;
+  direction: "increases_hallucination" | "decreases_hallucination" | "neutral";
+  relative_strength: number;
+}
+
+export interface ModelExplainability {
+  available: boolean;
+  method: string;
+  methodology?: string;
+  baseline_method?: string;
+  baseline_probability?: number;
+  observed_probability?: number;
+  decision_threshold?: number;
+  decision_margin?: number;
+  interaction_gap?: number;
+  non_additivity_note?: string;
+  feature_count?: number;
+  features?: FeatureAttribution[];
+  top_positive_drivers?: FeatureAttribution[];
+  top_negative_drivers?: FeatureAttribution[];
+  reason?: string;
+}
+
 export interface AnalysisResponse {
   overall_h_score: number;
   risk_level: RiskLevel;
@@ -159,6 +188,7 @@ export interface AnalysisResponse {
   measured_timings?: MeasuredTimingBreakdown;
   pillar_status?: PillarExecutionStatus;
   fusion_decomposition?: MathematicalFusionDecomposition;
+  explainability?: ModelExplainability;
 }
 
 export interface AnalysisHistoryEntry {
@@ -188,6 +218,39 @@ export interface ExplainResponse {
   fusion_contribution?: Record<string, number>;
   fusion_decomposition?: MathematicalFusionDecomposition;
   measured_timings?: MeasuredTimingBreakdown;
+  model_explainability?: ModelExplainability;
+}
+
+export interface HybridExplainResponse {
+  response_text: string;
+  prediction: {
+    is_hallucinated: boolean;
+    hallucination_probability: number;
+    operating_threshold: number;
+    claim_count: number;
+    claims: string[];
+    confidence_score: number;
+    feature_vector?: number[] | null;
+    feature_schema?: string[] | null;
+    explanation?: {
+      verdict?: string;
+      risk_severity?: string;
+      summary?: string;
+      primary_driver?: string;
+      pillar_contributions?: Record<string, number>;
+      claim_analysis?: Array<Record<string, unknown>>;
+      structural_analysis?: Record<string, unknown>;
+      recommendation?: string;
+      decision_rule?: {
+        threshold: number;
+        comparison: string;
+        margin: number;
+      };
+      model_explainability?: ModelExplainability;
+    };
+    explainability?: ModelExplainability;
+  };
+  explanation_breakdown?: HybridExplainResponse["prediction"]["explanation"];
 }
 
 export interface MetricsResponse {

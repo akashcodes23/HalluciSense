@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   analyzeResponse,
   explainResponse,
+  explainHybridDecision,
   getMetrics,
   getHealth,
   getReady,
@@ -20,34 +21,27 @@ import type {
   AnalysisResponse,
   ExplainRequest,
   ExplainResponse,
+  HybridExplainResponse,
 } from "@/types/hallucisense";
 import { useAnalysisStore, type ErrorEventRiskLevel } from "@/store/analysis-store";
 
 // ─── Risk level normalization ─────────────────────────────────────────────────
-/**
- * Maps backend RiskLevel strings to ErrorEventRiskLevel.
- * Returns null for VERIFIED — those must NOT enter the feed.
- */
 function normalizeRiskLevel(rl: string | undefined): ErrorEventRiskLevel | null {
   if (!rl) return "NEEDS_VERIFICATION";
   const map: Record<string, ErrorEventRiskLevel | null> = {
     LIKELY_HALLUCINATED: "LIKELY_HALLUCINATED",
     MODERATE_RISK: "MODERATE_RISK",
     NEEDS_VERIFICATION: "NEEDS_VERIFICATION",
-    VERIFIED: null,          // intentionally excluded
+    VERIFIED: null,
     CORRECTED: "CORRECTED",
     FAILED: "FAILED",
     REVIEW: "REVIEW",
   };
-  // Unknown values default to NEEDS_VERIFICATION
   return rl in map ? map[rl] : "NEEDS_VERIFICATION";
 }
 
-// ─── Normalize error message from HalluciSenseAPIError ───────────────────────
 function normalizeErrorMessage(err: unknown): string {
   if (err instanceof HalluciSenseAPIError) {
-    // Use the API-provided message; include HTTP status for context.
-    // Do not expose raw stack traces.
     return `[HTTP ${err.status}] ${err.message}`;
   }
   if (err instanceof Error) {
@@ -86,9 +80,8 @@ export function useAnalysis() {
       };
       addToHistory(historyEntry);
 
-      // Only push anomalies to the error feed — VERIFIED results are skipped.
       const riskLevel = normalizeRiskLevel(data.risk_level);
-      if (riskLevel === null) return; // VERIFIED — do not record
+      if (riskLevel === null) return;
 
       addErrorEvent({
         id: `verify_${data.trace_id || Date.now()}`,
@@ -136,6 +129,13 @@ export function useExplain() {
     onSuccess: (data: ExplainResponse) => {
       setCurrentExplain(data);
     },
+  });
+}
+
+/** On-demand explanation of the frozen 19-feature hybrid classifier. */
+export function useHybridExplain() {
+  return useMutation<HybridExplainResponse, unknown, { responseText: string; claims?: string[] }>({
+    mutationFn: ({ responseText, claims }) => explainHybridDecision(responseText, claims),
   });
 }
 

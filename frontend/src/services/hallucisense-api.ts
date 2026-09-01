@@ -8,6 +8,7 @@ import type {
   AnalysisResponse,
   ExplainRequest,
   ExplainResponse,
+  HybridExplainResponse,
   MetricsResponse,
   TraceData,
 } from "@/types/hallucisense";
@@ -108,6 +109,23 @@ export async function explainResponse(
   return request<ExplainResponse>("/api/v1/explain", {
     method: "POST",
     body: JSON.stringify(payload),
+  });
+}
+
+/**
+ * On-demand explanation for the frozen 19-feature hybrid classifier.
+ * Kept separate from /analyze so normal verification latency is unchanged.
+ */
+export async function explainHybridDecision(
+  responseText: string,
+  claims?: string[]
+): Promise<HybridExplainResponse> {
+  return request<HybridExplainResponse>("/api/v1/hallucisense/explain", {
+    method: "POST",
+    body: JSON.stringify({
+      response_text: responseText,
+      claims: claims && claims.length > 0 ? claims : undefined,
+    }),
   });
 }
 
