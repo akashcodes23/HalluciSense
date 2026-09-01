@@ -1,0 +1,32 @@
+{
+  "manifest_version": "1.0.0",
+  "generated_at_utc": "2026-09-01T12:45:00Z",
+  "candidate_version": "phase40_candidate_v1",
+  "intended_role": "SHADOW_RESEARCH_ONLY",
+  "classifier_class": "sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingClassifier",
+  "scaler_class": "sklearn.preprocessing._data.RobustScaler",
+  "feature_count": 19,
+  "operating_threshold": 0.54,
+  "training_sample_count": 40601,
+  "training_random_seed": 42,
+  "artifacts": [
+    {
+      "filename": "hybrid_meta_classifier_phase40_candidate.joblib",
+      "path": "backend/evaluation_results/phase40_candidate/hybrid_meta_classifier_phase40_candidate.joblib",
+      "size_bytes": 218104,
+      "sha256": "498e30ad249412c0046a6f703d2078cf8ac7e619df2d576797455d370f3f2e60"
+    },
+    {
+      "filename": "preprocessing_phase40_candidate.joblib",
+      "path": "backend/evaluation_results/phase40_candidate/preprocessing_phase40_candidate.joblib",
+      "size_bytes": 799,
+      "sha256": "36c1e5b08dd8993cfcb47a31e22c155f2f58702d299e43aefe94b8c9bee9cfa4"
+    },
+    {
+      "filename": "model_metadata_candidate.json",
+      "path": "backend/evaluation_results/phase40_candidate/model_metadata_candidate.json",
+      "size_bytes": 639,
+      "sha256": "58f4b325cfcbc0c771ddd280651bb17e5fd27353cd262f2a6729d510deca23a0"
+    }
+  ]
+}
