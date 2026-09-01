@@ -46,6 +46,7 @@ class HalluciSensePipeline:
         claims: Optional[List[str]] = None,
         evidence_passages: Optional[List[str]] = None,
         feature_vector: Optional[List[float]] = None,
+        semantic_mode: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Predict hallucination probability executing full real research pipeline."""
         if not response_text or not response_text.strip():
@@ -61,7 +62,10 @@ class HalluciSensePipeline:
             claims_struct = [{"claim_id": 0, "text": response_text}]
 
         # Task 3 & 5: Pillar 1 Execution
-        p1_feats, prob_p1, evidence_attribution, semantic_grounding = self.pillar1_engine.extract_features_and_predict(claims_struct)
+        p1_feats, prob_p1, evidence_attribution, semantic_grounding = self.pillar1_engine.extract_features_and_predict(
+            claims=claims_struct,
+            semantic_mode=semantic_mode,
+        )
 
         # Task 4 & 5: Pillar 2 Execution
         p2_feats, prob_p2, structural_diagnostics = self.pillar2_engine.extract_features_and_predict(claims_struct)
