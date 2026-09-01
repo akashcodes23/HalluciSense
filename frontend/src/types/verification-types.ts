@@ -5,6 +5,34 @@
 
 export type RiskLevel = 'VERIFIED' | 'NEEDS_VERIFICATION' | 'MODERATE_RISK' | 'LIKELY_HALLUCINATED';
 
+export type AttributionDirection = 'hallucination_risk' | 'protective' | 'neutral';
+
+export interface LocalAttributionFeature {
+  feature_name: string;
+  index: number;
+  value: number;
+  baseline: number;
+  attribution: number;
+  direction: AttributionDirection;
+}
+
+export interface LocalAttribution {
+  method: 'local_counterfactual_attribution';
+  feature_count: number;
+  baseline_type: 'training_median_from_robust_scaler';
+  original_probability: number;
+  baseline_probability: number;
+  threshold: number;
+  decision_margin: number;
+  interaction_gap: number;
+  interaction_gap_explanation: string;
+  scientific_caveat: string;
+  features: LocalAttributionFeature[];
+  top_hallucination_drivers: LocalAttributionFeature[];
+  top_protective_drivers: LocalAttributionFeature[];
+  inference_count: number;
+}
+
 export type EpistemicCategory = 
   | 'ASSERTED_FACT'
   | 'PREDICTION'
@@ -159,6 +187,7 @@ export interface AnalysisResponse {
   measured_timings?: MeasuredTimingBreakdown;
   pillar_status?: PillarExecutionStatus;
   fusion_decomposition?: MathematicalFusionDecomposition;
+  local_attribution?: LocalAttribution;
 }
 
 export interface AnalysisHistoryEntry {

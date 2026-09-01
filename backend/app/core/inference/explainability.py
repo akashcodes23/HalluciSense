@@ -1,8 +1,9 @@
 """Phase 16 — Advanced Explainability & Topological Claim Graph Engine.
 
 Provides:
-- SHAP-style local feature attributions for 19-feature hybrid vectors
-- Permutation importance estimation
+- Local counterfactual feature attributions for 19-feature hybrid vectors
+  (one-feature-at-a-time counterfactuals against training-median baseline;
+   NOT SHAP — does not use Shapley value marginalisation)
 - Topological claim-evidence support & contradiction graph construction
 - Enriched interactive explanation JSON generator
 """
@@ -19,37 +20,52 @@ from evaluation.phase6m.config import HYBRID_FEATURE_SCHEMA
 logger = structlog.get_logger(__name__)
 
 
-def compute_shap_feature_attributions(
+def compute_local_feature_attributions(
     X_raw: np.ndarray,
     scaler: Any,
     clf: Any,
     feature_names: List[str] = HYBRID_FEATURE_SCHEMA,
 ) -> Dict[str, float]:
-    """Compute local linear/tree-based SHAP-style feature attributions for an input vector.
+    """Compute local counterfactual feature attributions for an input vector.
+
+    Attribution method: one-feature-at-a-time counterfactual in RAW (unscaled) space.
+
+    For each feature i:
+        a_i = P(H | X) - P(H | X_i)
+        where X_i is X with feature i replaced by its training-median value.
+
+    The training-median baseline is sourced from RobustScaler.center_ (not zero).
+    This is local counterfactual attribution, NOT SHAP. SHAP requires marginalisation
+    over all feature coalitions via Shapley values.
 
     Args:
-        X_raw: Unscaled 1x19 feature array.
-        scaler: RobustScaler instance.
-        clf: HistGradientBoostingClassifier instance.
-        feature_names: Feature names list.
+        X_raw:         Unscaled 1x19 raw feature array.
+        scaler:        Frozen RobustScaler instance.
+        clf:           Frozen HistGradientBoostingClassifier instance.
+        feature_names: Canonical 19-feature schema list.
 
     Returns:
-        Dict mapping feature name to local probability delta contribution.
+        Dict mapping feature name to local probability delta (a_i).
     """
-    X_scaled = scaler.transform(X_raw)
-    base_prob = float(clf.predict_proba(X_scaled)[0, 1])
+    # Delegate to the canonical attribution engine to avoid duplication
+    from app.core.inference.local_attribution import compute_local_attribution, get_training_medians
 
-    # Compute marginal effect of zeroing/median-replacing each feature
+    training_medians = get_training_medians()
+    X = np.atleast_2d(np.array(X_raw, dtype=np.float64))
+    if X.shape != (1, 19):
+        X = X.reshape(1, 19)
+
+    X_original_scaled = scaler.transform(X)
+    P_original = float(clf.predict_proba(X_original_scaled)[0, 1])
+
     attributions: Dict[str, float] = {}
-    n_features = X_scaled.shape[1]
-
-    for i in range(n_features):
-        fname = feature_names[i] if i < len(feature_names) else f"feature_{i}"
-        X_temp = X_scaled.copy()
-        X_temp[0, i] = 0.0  # Set to scaled median
-        prob_without = float(clf.predict_proba(X_temp)[0, 1])
-        delta = base_prob - prob_without
-        attributions[fname] = round(float(delta), 4)
+    for i in range(min(len(feature_names), 19)):
+        fname = feature_names[i]
+        X_i = X.copy()
+        X_i[0, i] = training_medians[i]  # replace with training median, in raw space
+        X_i_scaled = scaler.transform(X_i)
+        P_i = float(clf.predict_proba(X_i_scaled)[0, 1])
+        attributions[fname] = round(P_original - P_i, 4)
 
     return attributions
 
@@ -139,9 +155,9 @@ def generate_interactive_explanation(
     feature_importance = {}
     if X_raw is not None and scaler is not None and clf is not None:
         try:
-            feature_importance = compute_shap_feature_attributions(X_raw, scaler, clf)
+            feature_importance = compute_local_feature_attributions(X_raw, scaler, clf)
         except Exception as e:
-            logger.warning("shap_computation_exception", error=str(e))
+            logger.warning("local_attribution_computation_exception", error=str(e))
 
     # Topological graph
     claim_graph = build_topological_claim_graph(claims, evidence_attribution, structural_diagnostics)

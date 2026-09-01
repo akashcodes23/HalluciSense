@@ -16,6 +16,7 @@ import structlog
 
 from app.core.inference.claim_extractor import extract_claims
 from app.core.inference.explanation_engine import generate_rich_explanation
+from app.core.inference.local_attribution import compute_local_attribution
 from app.core.inference.pillar1_engine import Pillar1Engine
 from app.core.inference.pillar2_engine import Pillar2Engine
 from app.models.registry import registry
@@ -105,6 +106,19 @@ class HalluciSensePipeline:
             structural_diagnostics=structural_diagnostics,
         )
 
+        # Task 9: Local Counterfactual Attribution
+        local_attribution_dict: dict = {}
+        try:
+            attr_result = compute_local_attribution(
+                X_raw=X_input,  # unscaled raw vector used for inference
+                scaler=self.scaler,
+                clf=self.clf,
+                threshold=self.threshold,
+            )
+            local_attribution_dict = attr_result.to_dict()
+        except Exception as attr_exc:
+            logger.warning("local_attribution_failed", error=str(attr_exc))
+
         return {
             "is_hallucinated": is_hallucinated,
             "hallucination_probability": round(prob_hybrid, 4),
@@ -113,6 +127,7 @@ class HalluciSensePipeline:
             "claims": [c["text"] for c in claims_struct],
             "explanation": explanation,
             "confidence_score": round(abs(prob_hybrid - 0.5) * 2.0, 4),
+            "local_attribution": local_attribution_dict,
         }
 
     def generate_explanation(self, prob: float, claims: List[str], is_hallucinated: bool) -> Dict[str, Any]:

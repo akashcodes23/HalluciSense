@@ -31,8 +31,16 @@ class PredictRequest(BaseModel):
 
 
 class ExplainRequest(BaseModel):
-    response_text: str = Field(..., description="LLM generated response text to analyze.")
+    response_text: Optional[str] = Field(None, description="LLM generated response text to analyze.")
     claims: Optional[List[str]] = Field(None, description="Optional claims list.")
+    feature_vector: Optional[List[float]] = Field(
+        None,
+        description=(
+            "Optional pre-computed 19-dimensional raw feature vector. "
+            "When provided, the pipeline skips Pillar 1/2 extraction and "
+            "runs attribution directly on this vector."
+        ),
+    )
 
 
 @router.post("/predict", response_model=Dict[str, Any], summary="Predict Hallucination Probability")
@@ -51,13 +59,97 @@ def predict_hallucination(req: PredictRequest) -> Dict[str, Any]:
 
 @router.post("/explain", response_model=Dict[str, Any], summary="Explain Hallucination Decision")
 def explain_hallucination(req: ExplainRequest) -> Dict[str, Any]:
-    """Generate detailed claim-level explanation for hallucination prediction."""
-    try:
-        res = pipeline.predict(response_text=req.response_text, claims=req.claims)
+    """Return a full local counterfactual attribution breakdown for a prediction.
+
+    The explanation operates against the SAME frozen classifier used for production
+    verification.  The decision is NOT changed by the explanation layer.
+
+    Attribution method: Local Counterfactual Attribution (one-feature-at-a-time).
+    Baseline: training-median values from frozen RobustScaler.center_ (N=58,002 dev samples).
+    """
+    import time
+    import numpy as np
+    from app.core.inference.local_attribution import (
+        compute_local_attribution,
+        validate_feature_vector,
+        get_feature_schema,
+        get_training_medians,
+    )
+
+    t0 = time.perf_counter()
+
+    if req.feature_vector is not None:
+        # Direct vector path: validate and attribute
+        if len(req.feature_vector) != 19:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=(
+                    f"feature_vector must have exactly 19 elements. "
+                    f"Received {len(req.feature_vector)}."
+                ),
+            )
+        import math as _math
+        invalid = [
+            (i, v) for i, v in enumerate(req.feature_vector)
+            if v is None or not _math.isfinite(v)
+        ]
+        if invalid:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"feature_vector contains non-finite values at positions: {[i for i,_ in invalid]}.",
+            )
+
+        scaler, clf, metadata = registry.load_hybrid_model()
+        threshold = float(metadata.get("protocol", {}).get("decision_threshold", 0.54))
+        X_raw = np.array(req.feature_vector, dtype=np.float64).reshape(1, 19)
+
+        try:
+            attr_result = compute_local_attribution(
+                X_raw=X_raw, scaler=scaler, clf=clf, threshold=threshold
+            )
+        except Exception as exc:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Attribution computation failed: {exc}",
+            )
+
+        latency_ms = round((time.perf_counter() - t0) * 1000, 2)
         return {
+            "source": "direct_feature_vector",
+            "response_text": None,
+            "local_attribution": attr_result.to_dict(),
+            "latency_ms": latency_ms,
+            "feature_schema": get_feature_schema(),
+        }
+
+    # Full pipeline path: run predict (which already computes attribution)
+    if not req.response_text or not req.response_text.strip():
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Either 'response_text' or 'feature_vector' must be provided.",
+        )
+
+    try:
+        res = pipeline.predict(
+            response_text=req.response_text,
+            claims=req.claims,
+        )
+        latency_ms = round((time.perf_counter() - t0) * 1000, 2)
+        return {
+            "source": "full_pipeline",
             "response_text": req.response_text,
-            "prediction": res,
-            "explanation_breakdown": res["explanation"],
+            "prediction": {
+                "is_hallucinated": res["is_hallucinated"],
+                "hallucination_probability": res["hallucination_probability"],
+                "operating_threshold": res["operating_threshold"],
+                "claim_count": res["claim_count"],
+                "claims": res["claims"],
+                "confidence_score": res["confidence_score"],
+            },
+            "explanation": res["explanation"],
+            "local_attribution": res.get("local_attribution", {}),
+            "latency_ms": latency_ms,
+            "feature_schema": get_feature_schema(),
         }
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))

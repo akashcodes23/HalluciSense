@@ -17,6 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { VerdictBanner } from "@/components/verification/VerdictBanner";
 import { ClaimAnalysisCard } from "@/components/verification/ClaimAnalysisCard";
+import { LocalAttributionPanel } from "@/components/verification/LocalAttributionPanel";
 import { VerificationUnavailable } from "@/components/ui/EmptyState";
 import { useAnalysis } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
@@ -445,6 +446,12 @@ export default function VerifyPage() {
                 </div>
               </CardContent>
             </Card>
+          )}
+
+          {/* Local Feature Attribution Panel */}
+          {currentResult.local_attribution &&
+            currentResult.local_attribution.features?.length > 0 && (
+            <LocalAttributionPanel attribution={currentResult.local_attribution} />
           )}
         </motion.div>
       )}
