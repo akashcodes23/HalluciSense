@@ -1,0 +1,32 @@
+{
+  "manifest_version": "1.0.0",
+  "generated_at_utc": "2026-09-01T12:35:00Z",
+  "environment": "production",
+  "framework": "HalluciSense Hybrid Fusion Engine",
+  "model_status": "FROZEN_BASELINE",
+  "operating_threshold": 0.54,
+  "feature_count": 19,
+  "classifier_class": "sklearn.ensemble._hist_gradient_boosting.gradient_boosting.HistGradientBoostingClassifier",
+  "scaler_class": "sklearn.preprocessing._data.RobustScaler",
+  "training_samples": 58002,
+  "artifacts": [
+    {
+      "filename": "hybrid_meta_classifier.joblib",
+      "path": "backend/evaluation_results/phase6m/final_hybrid_model/hybrid_meta_classifier.joblib",
+      "size_bytes": 218104,
+      "sha256": "089ebd2d277d1c21adc0541b71f1bf3e4cb5927d6e74f3ed96b1d00b15337cad"
+    },
+    {
+      "filename": "preprocessing.joblib",
+      "path": "backend/evaluation_results/phase6m/final_hybrid_model/preprocessing.joblib",
+      "size_bytes": 799,
+      "sha256": "bdbd42e3f386b7b2602e95b1fc32b6ded1ac404779498190442d17aec2f97e90"
+    },
+    {
+      "filename": "model_metadata.json",
+      "path": "backend/evaluation_results/phase6m/final_hybrid_model/model_metadata.json",
+      "size_bytes": 1356,
+      "sha256": "1654a9d7010471b0bbdaeb8e0302c01991d90aa8390772733c7fc017f8a79fe2"
+    }
+  ]
+}

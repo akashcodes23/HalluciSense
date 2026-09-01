@@ -1,0 +1,32 @@
+{
+  "framework": "HalluciSense Hybrid Fusion Engine",
+  "model_status": "PHASE40_CANDIDATE_EVALUATED",
+  "timestamp_utc": "2026-09-01 07:10:35 UTC",
+  "model_version": "phase40_candidate_v1",
+  "clf_type": "HistGradientBoostingClassifier",
+  "scaler": "RobustScaler",
+  "training_samples": 40601,
+  "num_features": 19,
+  "feature_schema": [
+    "p1_mean_entailment",
+    "p1_max_entailment",
+    "p1_mean_contradiction",
+    "p1_min_support_margin",
+    "p1_num_claims",
+    "p2_max_pairwise_contradiction",
+    "p2_mean_pairwise_contradiction",
+    "p2_max_pairwise_similarity",
+    "p2_fraction_contradictory_pairs",
+    "p2_num_claims",
+    "prob_p1",
+    "prob_p2",
+    "logit_p1",
+    "logit_p2",
+    "prob_disagreement_abs",
+    "prob_mean",
+    "prob_max",
+    "prob_min",
+    "prob_ratio"
+  ],
+  "decision_threshold": 0.54
+}

@@ -206,6 +206,17 @@ export interface SemanticGrounding {
   claims?: SemanticClaimGrounding[];
 }
 
+export interface CandidateComparison {
+  candidate_model_version: string;
+  shadow_only: boolean;
+  candidate_probability: number;
+  candidate_verdict: string;
+  production_probability: number;
+  production_verdict: string;
+  decision_delta: number;
+  verdicts_match: boolean;
+}
+
 export interface AnalysisResponse {
   overall_h_score: number;
   risk_level: RiskLevel;
@@ -228,6 +239,7 @@ export interface AnalysisResponse {
   fusion_decomposition?: MathematicalFusionDecomposition;
   local_attribution?: LocalAttribution;
   semantic_grounding?: SemanticGrounding;
+  candidate_comparison?: CandidateComparison;
 }
 
 export interface AnalysisHistoryEntry {

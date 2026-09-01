@@ -9,8 +9,11 @@ Zero synthetic defaults. Zero retraining or modification of frozen research mode
 from __future__ import annotations
 
 import math
+import os
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import joblib
 import numpy as np
 import structlog
 
@@ -118,6 +121,31 @@ class HalluciSensePipeline:
             local_attribution_dict = attr_result.to_dict()
         except Exception as attr_exc:
             logger.warning("local_attribution_failed", error=str(attr_exc))
+        # Task 10: Phase 40 Shadow Classifier Evaluation
+        candidate_comparison = None
+        if os.getenv("HALLUCISENSE_CLASSIFIER_SHADOW", "").lower() in ("true", "1", "yes"):
+            try:
+                cand_dir = Path(__file__).resolve().parent.parent.parent / "evaluation_results" / "phase40_candidate"
+                candidate_model_path = cand_dir / "hybrid_meta_classifier_phase40_candidate.joblib"
+                candidate_scaler_path = cand_dir / "preprocessing_phase40_candidate.joblib"
+                if candidate_model_path.exists() and candidate_scaler_path.exists():
+                    c_clf = joblib.load(candidate_model_path)
+                    c_scaler = joblib.load(candidate_scaler_path)
+                    X_cand_scaled = c_scaler.transform(X_input)
+                    cand_prob = float(c_clf.predict_proba(X_cand_scaled)[0, 1])
+                    cand_verdict = bool(cand_prob >= self.threshold)
+                    candidate_comparison = {
+                        "candidate_model_version": "phase40_candidate_v1",
+                        "shadow_only": True,
+                        "candidate_probability": round(cand_prob, 4),
+                        "candidate_verdict": "hallucinated" if cand_verdict else "factual",
+                        "production_probability": round(prob_hybrid, 4),
+                        "production_verdict": "hallucinated" if is_hallucinated else "factual",
+                        "decision_delta": round(cand_prob - prob_hybrid, 4),
+                        "verdicts_match": bool(cand_verdict == is_hallucinated),
+                    }
+            except Exception as cand_exc:
+                logger.warning("candidate_shadow_evaluation_failed", error=str(cand_exc))
 
         return {
             "is_hallucinated": is_hallucinated,
@@ -129,6 +157,7 @@ class HalluciSensePipeline:
             "confidence_score": round(abs(prob_hybrid - 0.5) * 2.0, 4),
             "local_attribution": local_attribution_dict,
             "semantic_grounding": semantic_grounding,
+            "candidate_comparison": candidate_comparison,
         }
 
     def generate_explanation(self, prob: float, claims: List[str], is_hallucinated: bool) -> Dict[str, Any]:
