@@ -1,16 +1,20 @@
-"""Phase 16 — Advanced Explainability & Topological Claim Graph Engine.
+"""Phase 37 — Explainable AI & Topological Claim Graph Engine.
 
 Provides:
-- SHAP-style local feature attributions for 19-feature hybrid vectors
-- Permutation importance estimation
-- Topological claim-evidence support & contradiction graph construction
-- Enriched interactive explanation JSON generator
+- faithful local leave-one-feature-at-baseline attribution for the frozen 19-feature hybrid model
+- compatibility feature_importance output for existing consumers
+- topological claim-evidence support / contradiction graph construction
+- enriched interactive explanation JSON
+
+Important: the local attribution is deliberately NOT labelled SHAP. Each
+feature is replaced independently by the training median represented by
+RobustScaler.center_, the exact frozen classifier is re-evaluated, and the
+probability delta is reported. Nonlinear interaction residual is explicit.
 """
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Tuple, Optional
-import math
+from typing import Any, Dict, List, Optional, Sequence
 import numpy as np
 import structlog
 
@@ -19,39 +23,110 @@ from evaluation.phase6m.config import HYBRID_FEATURE_SCHEMA
 logger = structlog.get_logger(__name__)
 
 
+def compute_local_feature_attributions(
+    X_raw: np.ndarray,
+    scaler: Any,
+    clf: Any,
+    feature_names: Optional[Sequence[str]] = None,
+    threshold: Optional[float] = None,
+    top_k: int = 7,
+) -> Dict[str, Any]:
+    """Compute exact local leave-one-feature-at-training-median effects."""
+    names = list(feature_names or HYBRID_FEATURE_SCHEMA)
+    raw = np.asarray(X_raw, dtype=np.float64).reshape(-1)
+
+    if raw.size != len(names):
+        raise ValueError(f"Expected {len(names)} features, received {raw.size}")
+    if not np.all(np.isfinite(raw)):
+        raise ValueError("Feature vector contains non-finite values")
+
+    center = getattr(scaler, "center_", None)
+    if center is None:
+        baseline = np.zeros(raw.size, dtype=np.float64)
+        baseline_method = "zero_raw_feature_baseline"
+    else:
+        baseline = np.asarray(center, dtype=np.float64).reshape(-1)
+        if baseline.size != raw.size or not np.all(np.isfinite(baseline)):
+            raise ValueError("RobustScaler center_ is missing or incompatible with the feature vector")
+        baseline_method = "training_median_from_RobustScaler_center"
+
+    def predict(row: np.ndarray) -> float:
+        scaled = scaler.transform(row.reshape(1, -1))
+        return float(clf.predict_proba(scaled)[0, 1])
+
+    observed_probability = predict(raw)
+    baseline_probability = predict(baseline)
+    attributions: List[Dict[str, Any]] = []
+
+    for index, feature_name in enumerate(names):
+        counterfactual = raw.copy()
+        counterfactual[index] = baseline[index]
+        counterfactual_probability = predict(counterfactual)
+        delta = observed_probability - counterfactual_probability
+        attributions.append({
+            "index": index,
+            "feature": feature_name,
+            "value": round(float(raw[index]), 8),
+            "baseline_value": round(float(baseline[index]), 8),
+            "counterfactual_probability": round(float(counterfactual_probability), 8),
+            "delta": round(float(delta), 8),
+            "direction": (
+                "increases_hallucination" if delta > 1e-9 else
+                "decreases_hallucination" if delta < -1e-9 else
+                "neutral"
+            ),
+        })
+
+    attributions.sort(key=lambda item: abs(float(item["delta"])), reverse=True)
+    abs_total = sum(abs(float(item["delta"])) for item in attributions)
+    for item in attributions:
+        item["relative_strength"] = round(abs(float(item["delta"])) / abs_total, 6) if abs_total else 0.0
+
+    interaction_gap = observed_probability - (
+        baseline_probability + sum(float(item["delta"]) for item in attributions)
+    )
+
+    return {
+        "available": True,
+        "method": "LOCAL_LEAVE_ONE_FEATURE_AT_BASELINE",
+        "methodology": (
+            "Each feature is replaced independently by its training median "
+            "(RobustScaler.center_) and the exact frozen classifier is re-evaluated. "
+            "Delta = P(observed) - P(counterfactual)."
+        ),
+        "baseline_method": baseline_method,
+        "baseline_probability": round(float(baseline_probability), 8),
+        "observed_probability": round(float(observed_probability), 8),
+        "decision_threshold": round(float(threshold), 8) if threshold is not None else None,
+        "decision_margin": round(float(observed_probability - threshold), 8) if threshold is not None else None,
+        "interaction_gap": round(float(interaction_gap), 8),
+        "non_additivity_note": (
+            "These are local perturbation effects, not SHAP values or global feature importance. "
+            "The interaction_gap captures nonlinear interaction effects."
+        ),
+        "feature_count": len(names),
+        "features": attributions,
+        "top_positive_drivers": [a for a in attributions if a["delta"] > 0][:top_k],
+        "top_negative_drivers": [a for a in attributions if a["delta"] < 0][:top_k],
+    }
+
+
 def compute_shap_feature_attributions(
     X_raw: np.ndarray,
     scaler: Any,
     clf: Any,
     feature_names: List[str] = HYBRID_FEATURE_SCHEMA,
 ) -> Dict[str, float]:
-    """Compute local linear/tree-based SHAP-style feature attributions for an input vector.
+    """Backward-compatible mapping of feature name -> local probability delta.
 
-    Args:
-        X_raw: Unscaled 1x19 feature array.
-        scaler: RobustScaler instance.
-        clf: HistGradientBoostingClassifier instance.
-        feature_names: Feature names list.
-
-    Returns:
-        Dict mapping feature name to local probability delta contribution.
+    Existing callers may still use this function name. New code should use
+    compute_local_feature_attributions() and its explicit methodology.
     """
-    X_scaled = scaler.transform(X_raw)
-    base_prob = float(clf.predict_proba(X_scaled)[0, 1])
-
-    # Compute marginal effect of zeroing/median-replacing each feature
-    attributions: Dict[str, float] = {}
-    n_features = X_scaled.shape[1]
-
-    for i in range(n_features):
-        fname = feature_names[i] if i < len(feature_names) else f"feature_{i}"
-        X_temp = X_scaled.copy()
-        X_temp[0, i] = 0.0  # Set to scaled median
-        prob_without = float(clf.predict_proba(X_temp)[0, 1])
-        delta = base_prob - prob_without
-        attributions[fname] = round(float(delta), 4)
-
-    return attributions
+    result = compute_local_feature_attributions(X_raw, scaler, clf, feature_names)
+    return {
+        item["feature"]: round(float(item["delta"]), 4)
+        for item in result["features"]
+    }
 
 
 def build_topological_claim_graph(
@@ -59,11 +134,7 @@ def build_topological_claim_graph(
     evidence_attribution: List[Dict[str, Any]],
     structural_diagnostics: Dict[str, Any],
 ) -> Dict[str, Any]:
-    """Construct D3/Mermaid compatible claim-evidence topological graph.
-
-    Nodes: Claims, Evidence Passages, Entities.
-    Edges: Entails, Contradicts, Mentions.
-    """
+    """Construct D3/Mermaid compatible claim-evidence topological graph."""
     nodes = []
     edges = []
 
@@ -77,13 +148,12 @@ def build_topological_claim_graph(
             "full_text": ctext,
         })
 
-    # Evidence nodes & edges
     for item in evidence_attribution:
         cid = f"claim_{item.get('claim_id', 0)}"
         passages = item.get("evidence_passages", [])
         top_ent = item.get("top_entailment", 0.5)
 
-        for j, ptext in enumerate(passages[:2]):  # Top 2 passages per claim
+        for j, ptext in enumerate(passages[:2]):
             eid = f"ev_{item.get('claim_id', 0)}_{j}"
             nodes.append({
                 "id": eid,
@@ -92,7 +162,6 @@ def build_topological_claim_graph(
                 "full_text": ptext,
                 "entailment_score": top_ent,
             })
-
             edge_type = "supports" if top_ent >= 0.20 else "unsupported"
             edges.append({
                 "source": eid,
@@ -101,7 +170,6 @@ def build_topological_claim_graph(
                 "weight": round(top_ent, 4),
             })
 
-    # Contradiction edges from pairwise evaluated pairs
     evaluated_pairs = structural_diagnostics.get("evaluated_pairs", [])
     for pair in evaluated_pairs:
         if isinstance(pair, dict) and pair.get("is_contradictory", False):
@@ -130,23 +198,31 @@ def generate_interactive_explanation(
     scaler: Optional[Any] = None,
     clf: Optional[Any] = None,
 ) -> Dict[str, Any]:
-    """Generate publication-grade interactive explanation JSON payload for frontend visualization."""
+    """Generate publication-grade interactive explanation JSON payload."""
     severity = "HIGH" if prob_hybrid >= 0.75 else ("MODERATE" if prob_hybrid >= 0.54 else "LOW")
     verdict_str = "HALLUCINATED" if is_hallucinated else "FACTUAL"
     confidence = round(abs(prob_hybrid - 0.5) * 2.0, 4)
 
-    # Feature importances
-    feature_importance = {}
+    local_attribution: Dict[str, Any] = {
+        "available": False,
+        "method": "UNAVAILABLE",
+        "reason": "Hybrid feature vector or frozen model was not supplied.",
+    }
     if X_raw is not None and scaler is not None and clf is not None:
         try:
-            feature_importance = compute_shap_feature_attributions(X_raw, scaler, clf)
-        except Exception as e:
-            logger.warning("shap_computation_exception", error=str(e))
+            local_attribution = compute_local_feature_attributions(
+                X_raw, scaler, clf, HYBRID_FEATURE_SCHEMA, threshold=threshold
+            )
+        except Exception as exc:
+            logger.warning("local_explainability_failed", error=str(exc))
+            local_attribution["reason"] = str(exc)
 
-    # Topological graph
+    feature_importance = {
+        item["feature"]: round(float(item["delta"]), 4)
+        for item in local_attribution.get("features", [])
+    }
     claim_graph = build_topological_claim_graph(claims, evidence_attribution, structural_diagnostics)
 
-    # Extracted sources & evidence scores
     retrieved_sources = []
     evidence_scores = []
     for item in evidence_attribution:
@@ -157,7 +233,6 @@ def generate_interactive_explanation(
             "top_entailment": item.get("top_entailment", 0.5),
         })
 
-    # Contradictions list
     contradictions = []
     graph_stats = structural_diagnostics.get("graph_stats", {})
     if graph_stats.get("contradiction_pair_count", 0) > 0:
@@ -182,6 +257,7 @@ def generate_interactive_explanation(
         "pillar_1": round(p1_prob, 4),
         "pillar_2": round(p2_prob, 4),
         "feature_importance": feature_importance,
+        "local_feature_attribution": local_attribution,
         "claim_graph": claim_graph,
         "retrieved_sources": retrieved_sources,
         "evidence_scores": evidence_scores,
