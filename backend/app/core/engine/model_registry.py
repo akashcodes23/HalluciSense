@@ -51,12 +51,7 @@ class ModelRegistry:
 
     @classmethod
     def _quantized_nli_file(cls) -> str:
-        """Select the official CPU int8 artifact for the host architecture.
-
-        Railway production is normally x86_64; AVX2 is the conservative x86
-        target. ARM64 hosts use the ARM artifact. The artifacts are published
-        with the same DeBERTa-v3-small NLI weights, quantized for CPU inference.
-        """
+        """Select the official CPU int8 artifact for the host architecture."""
         machine = platform.machine().lower()
         if machine in {"aarch64", "arm64"}:
             return "onnx/model_qint8_arm64.onnx"
@@ -67,13 +62,7 @@ class ModelRegistry:
         cls,
         model_name: str = "cross-encoder/nli-deberta-v3-small",
     ) -> Tuple[Any, Any]:
-        """Return the shared quantized ONNX NLI singleton.
-
-        The public return shape remains ``(tokenizer, model)`` for backwards
-        compatibility with the existing engine. The model is a
-        sentence-transformers CrossEncoder backed by ONNX Runtime rather than
-        a PyTorch ``AutoModelForSequenceClassification`` instance.
-        """
+        """Return the shared quantized ONNX NLI singleton."""
         if cls._nli_model is None or cls._nli_tokenizer is None:
             with cls._lock:
                 if cls._nli_model is None or cls._nli_tokenizer is None:
@@ -94,6 +83,7 @@ class ModelRegistry:
                         backend="onnx",
                         artifact=artifact,
                         cache_folder=cache_folder,
+                        max_length=256,
                     )
 
                     model = CrossEncoder(
@@ -105,6 +95,7 @@ class ModelRegistry:
                             "provider": "CPUExecutionProvider",
                         },
                         device="cpu",
+                        max_length=256,
                     )
                     tokenizer = getattr(model, "tokenizer", None)
                     if tokenizer is None:
@@ -130,16 +121,12 @@ class ModelRegistry:
             "artifact": cls._nli_artifact,
             "init_count": cls._init_counts["nli_model"],
             "model_name": "cross-encoder/nli-deberta-v3-small",
+            "max_length": 256,
         }
 
     @classmethod
     def get_sentence_transformer(cls, model_name: str = "all-MiniLM-L6-v2") -> Any:
-        """Legacy singleton API; intentionally not used by production P3.
-
-        Kept for backwards compatibility with historical tooling. Phase 47B
-        production verification must not call this method because P3 now uses
-        the shared NLI singleton directly.
-        """
+        """Legacy singleton API; intentionally not used by production P3."""
         if cls._sentence_transformer is None:
             with cls._lock:
                 if cls._sentence_transformer is None:
