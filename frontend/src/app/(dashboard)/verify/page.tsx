@@ -448,10 +448,12 @@ export default function VerifyPage() {
             </Card>
           )}
 
-          {/* Local Feature Attribution Panel */}
-          {currentResult.local_attribution &&
-            currentResult.local_attribution.features?.length > 0 && (
-            <LocalAttributionPanel attribution={currentResult.local_attribution} />
+          {/* Local Feature Attribution & Evidence Grounding Panel */}
+          {(currentResult.local_attribution || currentResult.semantic_grounding) && (
+            <LocalAttributionPanel
+              attribution={currentResult.local_attribution}
+              semanticGrounding={currentResult.semantic_grounding}
+            />
           )}
         </motion.div>
       )}

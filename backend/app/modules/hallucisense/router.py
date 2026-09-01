@@ -148,6 +148,7 @@ def explain_hallucination(req: ExplainRequest) -> Dict[str, Any]:
             },
             "explanation": res["explanation"],
             "local_attribution": res.get("local_attribution", {}),
+            "semantic_grounding": res.get("semantic_grounding", {}),
             "latency_ms": latency_ms,
             "feature_schema": get_feature_schema(),
         }

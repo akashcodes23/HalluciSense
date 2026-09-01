@@ -58,7 +58,7 @@ class HalluciSensePipeline:
             claims_struct = [{"claim_id": 0, "text": response_text}]
 
         # Task 3 & 5: Pillar 1 Execution
-        p1_feats, prob_p1, evidence_attribution = self.pillar1_engine.extract_features_and_predict(claims_struct)
+        p1_feats, prob_p1, evidence_attribution, semantic_grounding = self.pillar1_engine.extract_features_and_predict(claims_struct)
 
         # Task 4 & 5: Pillar 2 Execution
         p2_feats, prob_p2, structural_diagnostics = self.pillar2_engine.extract_features_and_predict(claims_struct)
@@ -128,6 +128,7 @@ class HalluciSensePipeline:
             "explanation": explanation,
             "confidence_score": round(abs(prob_hybrid - 0.5) * 2.0, 4),
             "local_attribution": local_attribution_dict,
+            "semantic_grounding": semantic_grounding,
         }
 
     def generate_explanation(self, prob: float, claims: List[str], is_hallucinated: bool) -> Dict[str, Any]:

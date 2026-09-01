@@ -167,6 +167,45 @@ export interface MathematicalFusionDecomposition {
   explanation?: string | null;
 }
 
+export interface SemanticEvidenceEvaluation {
+  title: string;
+  url?: string;
+  snippet: string;
+  entailment: number;
+  neutral: number;
+  contradiction: number;
+  label: 'entailment' | 'neutral' | 'contradiction';
+  confidence: number;
+}
+
+export interface SemanticClaimGrounding {
+  claim_id: number;
+  claim_text: string;
+  evidence_count: number;
+  primary_status: string;
+  max_entailment: number;
+  mean_contradiction: number;
+  support_margin: number;
+  evidence_details: SemanticEvidenceEvaluation[];
+}
+
+export interface SemanticGrounding {
+  status: string;
+  shadow_only?: boolean;
+  model_name?: string;
+  total_claims_evaluated?: number;
+  total_pairs_evaluated?: number;
+  latency_ms?: number;
+  aggregated_features?: {
+    mean_entailment: number;
+    max_entailment: number;
+    mean_contradiction: number;
+    min_support_margin: number;
+    num_claims: number;
+  };
+  claims?: SemanticClaimGrounding[];
+}
+
 export interface AnalysisResponse {
   overall_h_score: number;
   risk_level: RiskLevel;
@@ -188,6 +227,7 @@ export interface AnalysisResponse {
   pillar_status?: PillarExecutionStatus;
   fusion_decomposition?: MathematicalFusionDecomposition;
   local_attribution?: LocalAttribution;
+  semantic_grounding?: SemanticGrounding;
 }
 
 export interface AnalysisHistoryEntry {

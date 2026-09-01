@@ -15,6 +15,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { LocalAttribution, LocalAttributionFeature } from "@/types/hallucisense";
+import type { SemanticGrounding } from "@/types/verification-types";
+
+interface LocalAttributionPanelProps {
+  attribution?: LocalAttribution | null;
+  semanticGrounding?: SemanticGrounding | null;
+  className?: string;
+}
 
 // ─── Feature name → human-readable label ──────────────────────────────────
 const FEATURE_LABELS: Record<string, { label: string; group: string; description: string }> = {
@@ -152,13 +159,35 @@ function ProbabilityDisplay({
 }
 
 // ─── Main panel ───────────────────────────────────────────────────────────
-interface LocalAttributionPanelProps {
-  attribution: LocalAttribution;
-}
-
-export function LocalAttributionPanel({ attribution }: LocalAttributionPanelProps) {
+export function LocalAttributionPanel({ attribution, semanticGrounding, className }: LocalAttributionPanelProps) {
   const [showFullTable, setShowFullTable] = useState(false);
   const [showCaveat, setShowCaveat] = useState(false);
+
+  if (!attribution) {
+    if (semanticGrounding && semanticGrounding.claims && semanticGrounding.claims.length > 0) {
+      return (
+        <Card className={cn("bg-[var(--surface)] border-[var(--border)]", className)}>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2">
+              <Shield className="w-4 h-4 text-indigo-400" />
+              Evidence Grounding Trace
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {semanticGrounding.claims.map((c) => (
+              <div key={c.claim_id} className="p-2.5 rounded bg-[var(--bg-surface)] border border-[var(--border)] text-xs space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium text-[var(--text-primary)]">&ldquo;{c.claim_text}&rdquo;</span>
+                  <Badge variant="outline" className="text-[10px]">{c.primary_status}</Badge>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      );
+    }
+    return null;
+  }
 
   const allFeatures = [...attribution.features].sort(
     (a, b) => Math.abs(b.attribution) - Math.abs(a.attribution)
@@ -173,23 +202,90 @@ export function LocalAttributionPanel({ attribution }: LocalAttributionPanelProp
   const topDrivers = [
     ...attribution.top_hallucination_drivers,
     ...attribution.top_protective_drivers,
-  ].sort((a, b) => Math.abs(b.attribution) - Math.abs(a.attribution)).slice(0, 6);
+  ].sort((a, b) => Math.abs(b.attribution) - Math.abs(a.attribution));
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Activity className="w-4 h-4 text-[var(--primary)]" />
-          Decision Explanation
-          <Badge variant="ai" size="sm">Local Feature Attribution</Badge>
-        </CardTitle>
+    <Card className={cn("bg-[var(--bg-surface)] border-[var(--border)]", className)}>
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Activity className="w-4 h-4 text-[var(--text-muted)]" />
+            <CardTitle className="text-sm font-semibold text-[var(--text-primary)]">
+              Local Counterfactual Attribution
+            </CardTitle>
+            <Badge
+              variant="outline"
+              className="text-[10px] font-mono px-1.5 py-0 border-[var(--border)] text-[var(--text-dim)]"
+            >
+              19 features · exact
+            </Badge>
+          </div>
+          <span className="text-[11px] text-[var(--text-dim)] font-mono">
+            {attribution.inference_count} model evaluations
+          </span>
+        </div>
+        <p className="text-[12px] text-[var(--text-muted)] mt-1">
+          Quantifies how each feature coordinate moves P(H) relative to its training-median baseline.
+        </p>
       </CardHeader>
-      <CardContent className="space-y-5">
 
-        {/* ─── A: Model Decision ─────────────────────────────────────────── */}
+      <CardContent className="space-y-4">
+        {/* ─── Evidence Grounding Trace (Phase 39) ─── */}
+        {semanticGrounding && semanticGrounding.claims && semanticGrounding.claims.length > 0 && (
+          <div className="p-3.5 rounded-[var(--radius-md)] bg-[var(--surface)] border border-[var(--border)] space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] flex items-center gap-1.5">
+                <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                Claim ↔ Evidence Grounding Trace
+              </span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-950/60 text-indigo-300 border border-indigo-800 font-mono">
+                {semanticGrounding.shadow_only ? "Shadow NLI Diagnostic" : "Active NLI Grounding"}
+              </span>
+            </div>
+
+            <div className="space-y-2.5">
+              {semanticGrounding.claims.map((c) => (
+                <div key={c.claim_id} className="p-2.5 rounded bg-[var(--bg-surface)] border border-[var(--border)] text-xs space-y-1.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="font-medium text-[var(--text-primary)]">Claim {c.claim_id + 1}: &ldquo;{c.claim_text}&rdquo;</span>
+                    <span className={cn(
+                      "px-2 py-0.5 rounded text-[10px] font-semibold tracking-wide uppercase flex-shrink-0",
+                      c.primary_status === "contradiction" ? "bg-red-950/80 text-red-400 border border-red-800" :
+                      c.primary_status === "entailment" ? "bg-emerald-950/80 text-emerald-400 border border-emerald-800" :
+                      c.primary_status === "neutral" ? "bg-amber-950/80 text-amber-400 border border-amber-800" :
+                      "bg-zinc-900 text-zinc-400 border border-zinc-800"
+                    )}>
+                      {c.primary_status}
+                    </span>
+                  </div>
+
+                  {c.evidence_details && c.evidence_details.length > 0 ? (
+                    <div className="space-y-1 text-[11px] text-[var(--text-muted)] pl-2 border-l-2 border-[var(--border)]">
+                      {c.evidence_details.slice(0, 2).map((ev, eIdx) => (
+                        <div key={eIdx} className="space-y-0.5">
+                          <p className="italic text-[var(--text-dim)]">&ldquo;{ev.snippet.length > 140 ? ev.snippet.slice(0, 140) + '...' : ev.snippet}&rdquo;</p>
+                          <div className="flex items-center gap-3 text-[10px] font-mono text-[var(--text-dim)]">
+                            <span>Source: {ev.title}</span>
+                            <span className="text-emerald-400">Ent: {(ev.entailment * 100).toFixed(0)}%</span>
+                            <span className="text-red-400">Con: {(ev.contradiction * 100).toFixed(0)}%</span>
+                            <span className="text-amber-400">Neu: {(ev.neutral * 100).toFixed(0)}%</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-[var(--text-dim)] italic">No direct reference evidence retrieved for this claim.</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ─── A: Probability Summary ─────────────────────────────────────── */}
         <div className="grid grid-cols-3 gap-2">
           <ProbabilityDisplay
-            label="Baseline"
+            label="Baseline P(H)"
             value={attribution.baseline_probability}
           />
           <ProbabilityDisplay
