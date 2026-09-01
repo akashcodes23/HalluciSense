@@ -1,22 +1,28 @@
-"""Thread-Safe Singleton Model Registry for HalluciSense Phase 11B.
+"""Thread-safe singleton registry for HalluciSense production ML models.
 
-Ensures heavy ML models (DeBERTa NLI CrossEncoder, SentenceTransformer, CrossEncoderReranker,
-FAISS VectorStore, and Master Pipeline) are loaded exactly ONCE per process with lazy-loading,
-thread safety, bounded concurrency, and memory optimization (eval mode + inference mode).
+Phase 47B memory policy:
+- One NLI model per process.
+- NLI uses the official quantized int8 ONNX artifact for the same
+  cross-encoder/nli-deberta-v3-small model, avoiding the ~568 MB fp32
+  PyTorch weight allocation in the Railway process.
+- No SentenceTransformer is loaded by the verification path.
+- Heavy inference concurrency remains bounded to one operation.
 """
 
 from __future__ import annotations
 
 import os
+import platform
 import threading
-import structlog
 from typing import Optional, Tuple, Any
+
+import structlog
 
 logger = structlog.get_logger(__name__)
 
 
 class ModelRegistry:
-    """Thread-safe singleton registry for all heavy ML models in HalluciSense."""
+    """Thread-safe singleton registry for heavy production models."""
 
     _lock = threading.RLock()
     _init_counts = {
@@ -31,8 +37,8 @@ class ModelRegistry:
     _sentence_transformer: Optional[Any] = None
     _cross_encoder_reranker: Optional[Any] = None
     _pipeline: Optional[Any] = None
-
-    # Concurrency control semaphore for heavy NLI inference
+    _nli_backend: str = "uninitialized"
+    _nli_artifact: str = ""
     _nli_semaphore: Optional[threading.Semaphore] = None
 
     @classmethod
@@ -44,62 +50,121 @@ class ModelRegistry:
         return cls._nli_semaphore
 
     @classmethod
-    def get_nli_model(cls, model_name: str = "cross-encoder/nli-deberta-v3-small") -> Tuple[Any, Any]:
-        """Returns the shared singleton (tokenizer, model) for DeBERTa NLI."""
+    def _quantized_nli_file(cls) -> str:
+        """Select the official CPU int8 artifact for the host architecture.
+
+        Railway production is normally x86_64; AVX2 is the conservative x86
+        target. ARM64 hosts use the ARM artifact. The artifacts are published
+        with the same DeBERTa-v3-small NLI weights, quantized for CPU inference.
+        """
+        machine = platform.machine().lower()
+        if machine in {"aarch64", "arm64"}:
+            return "onnx/model_qint8_arm64.onnx"
+        return "onnx/model_qint8_avx2.onnx"
+
+    @classmethod
+    def get_nli_model(
+        cls,
+        model_name: str = "cross-encoder/nli-deberta-v3-small",
+    ) -> Tuple[Any, Any]:
+        """Return the shared quantized ONNX NLI singleton.
+
+        The public return shape remains ``(tokenizer, model)`` for backwards
+        compatibility with the existing engine. The model is a
+        sentence-transformers CrossEncoder backed by ONNX Runtime rather than
+        a PyTorch ``AutoModelForSequenceClassification`` instance.
+        """
         if cls._nli_model is None or cls._nli_tokenizer is None:
             with cls._lock:
                 if cls._nli_model is None or cls._nli_tokenizer is None:
-                    logger.info("loading_shared_nli_model", model_name=model_name)
-                    from transformers import AutoTokenizer, AutoModelForSequenceClassification
-                    tokenizer = AutoTokenizer.from_pretrained(model_name)
-                    try:
-                        model = AutoModelForSequenceClassification.from_pretrained(
-                            model_name,
-                            low_cpu_mem_usage=True,
-                        )
-                    except Exception:
-                        model = AutoModelForSequenceClassification.from_pretrained(
-                            model_name,
-                        )
-                    model.eval()
+                    from sentence_transformers import CrossEncoder
+
+                    artifact = os.getenv(
+                        "HALLUCISENSE_NLI_ONNX_FILE",
+                        cls._quantized_nli_file(),
+                    )
+                    cache_folder = os.getenv(
+                        "SENTENCE_TRANSFORMERS_HOME",
+                        os.getenv("HF_HOME", "/data/cache/huggingface"),
+                    )
+
+                    logger.info(
+                        "loading_shared_quantized_nli_model",
+                        model_name=model_name,
+                        backend="onnx",
+                        artifact=artifact,
+                        cache_folder=cache_folder,
+                    )
+
+                    model = CrossEncoder(
+                        model_name,
+                        backend="onnx",
+                        cache_folder=cache_folder,
+                        model_kwargs={
+                            "file_name": artifact,
+                            "provider": "CPUExecutionProvider",
+                        },
+                        device="cpu",
+                    )
+                    tokenizer = getattr(model, "tokenizer", None)
+                    if tokenizer is None:
+                        raise RuntimeError("Quantized ONNX NLI CrossEncoder did not expose a tokenizer")
+
                     cls._nli_tokenizer = tokenizer
                     cls._nli_model = model
+                    cls._nli_backend = "onnx-int8"
+                    cls._nli_artifact = artifact
                     cls._init_counts["nli_model"] += 1
-                    logger.info("shared_nli_model_loaded", init_count=cls._init_counts["nli_model"])
+                    logger.info(
+                        "shared_quantized_nli_model_loaded",
+                        init_count=cls._init_counts["nli_model"],
+                        backend=cls._nli_backend,
+                        artifact=artifact,
+                    )
         return cls._nli_tokenizer, cls._nli_model
 
     @classmethod
+    def get_nli_runtime_info(cls) -> dict:
+        return {
+            "backend": cls._nli_backend,
+            "artifact": cls._nli_artifact,
+            "init_count": cls._init_counts["nli_model"],
+            "model_name": "cross-encoder/nli-deberta-v3-small",
+        }
+
+    @classmethod
     def get_sentence_transformer(cls, model_name: str = "all-MiniLM-L6-v2") -> Any:
-        """Returns the shared singleton SentenceTransformer model."""
+        """Legacy singleton API; intentionally not used by production P3.
+
+        Kept for backwards compatibility with historical tooling. Phase 47B
+        production verification must not call this method because P3 now uses
+        the shared NLI singleton directly.
+        """
         if cls._sentence_transformer is None:
             with cls._lock:
                 if cls._sentence_transformer is None:
-                    logger.info("loading_shared_sentence_transformer", model_name=model_name)
+                    logger.info("loading_legacy_sentence_transformer", model_name=model_name)
                     from sentence_transformers import SentenceTransformer
-                    st = SentenceTransformer(model_name)
+                    st = SentenceTransformer(model_name, device="cpu")
                     st.eval()
                     cls._sentence_transformer = st
                     cls._init_counts["sentence_transformer"] += 1
-                    logger.info("shared_sentence_transformer_loaded", init_count=cls._init_counts["sentence_transformer"])
         return cls._sentence_transformer
 
     @classmethod
     def get_cross_encoder_reranker(cls, model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2") -> Any:
-        """Returns the shared singleton CrossEncoder reranker."""
         if cls._cross_encoder_reranker is None:
             with cls._lock:
                 if cls._cross_encoder_reranker is None:
                     logger.info("loading_shared_cross_encoder_reranker", model_name=model_name)
                     from sentence_transformers import CrossEncoder
-                    ce = CrossEncoder(model_name)
+                    ce = CrossEncoder(model_name, device="cpu")
                     cls._cross_encoder_reranker = ce
                     cls._init_counts["cross_encoder_reranker"] += 1
-                    logger.info("shared_cross_encoder_reranker_loaded", init_count=cls._init_counts["cross_encoder_reranker"])
         return cls._cross_encoder_reranker
 
     @classmethod
     def get_pipeline(cls) -> Any:
-        """Returns the single shared HallucinationDetectionPipeline orchestrator."""
         if cls._pipeline is None:
             with cls._lock:
                 if cls._pipeline is None:
@@ -116,11 +181,12 @@ class ModelRegistry:
 
     @classmethod
     def reset_for_testing(cls):
-        """Used only in memory tests to verify fresh initialization counts."""
         with cls._lock:
             cls._nli_tokenizer = None
             cls._nli_model = None
             cls._sentence_transformer = None
             cls._cross_encoder_reranker = None
             cls._pipeline = None
+            cls._nli_backend = "uninitialized"
+            cls._nli_artifact = ""
             cls._init_counts = {k: 0 for k in cls._init_counts}
