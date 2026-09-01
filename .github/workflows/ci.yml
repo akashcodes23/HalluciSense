@@ -51,12 +51,20 @@ jobs:
           cd backend
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          # Scientific evaluation modules are intentionally not production
+          # runtime dependencies. Install them only in CI for the full suite.
+          pip install pandas==2.2.3 matplotlib==3.10.7
           pip install pytest pytest-asyncio pytest-cov
 
       - name: Run Three Pillars Unit Test Suite
         run: |
           cd backend
           pytest tests/test_three_pillars_complete.py -v
+
+      - name: Run Full Backend Test Suite
+        run: |
+          cd backend
+          pytest tests/ -v
 
   evaluation:
     name: Master Benchmark & Statistical Verification Pipeline
@@ -78,6 +86,7 @@ jobs:
           cd backend
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pandas==2.2.3 matplotlib==3.10.7
 
       - name: Run Master Reproducibility Pipeline
         run: |
@@ -99,11 +108,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+          cache: "pip"
 
       - name: Install Paper Dependencies
         run: |
           cd backend
-          pip install matplotlib scikit-learn numpy
+          pip install -r requirements.txt
+          pip install pandas==2.2.3 matplotlib==3.10.7
 
       - name: Generate Paper Packages
         run: |
