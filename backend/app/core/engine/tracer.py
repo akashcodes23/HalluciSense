@@ -53,6 +53,35 @@ class PipelineTracer:
             "summary": {},
         }
 
+    @staticmethod
+    def sanitize_trace_data(obj: Any, depth: int = 0) -> Any:
+        """Recursively sanitize trace payloads to guarantee zero tensors or large buffers."""
+        if depth > 8:
+            return str(obj)[:100]
+        if obj is None or isinstance(obj, (bool, int, float)):
+            return obj
+        if isinstance(obj, str):
+            return obj if len(obj) <= 1000 else obj[:1000] + "... [TRUNCATED]"
+        if hasattr(obj, "item") and callable(getattr(obj, "item")):
+            try:
+                return obj.item()
+            except Exception:
+                pass
+        if hasattr(obj, "tolist") and callable(getattr(obj, "tolist")):
+            try:
+                return obj.tolist()
+            except Exception:
+                pass
+        if isinstance(obj, dict):
+            return {str(k): PipelineTracer.sanitize_trace_data(v, depth + 1) for k, v in obj.items() if not str(k).startswith("_")}
+        if isinstance(obj, (list, tuple, set)):
+            return [PipelineTracer.sanitize_trace_data(item, depth + 1) for item in list(obj)[:50]]
+        if hasattr(obj, "model_dump") and callable(getattr(obj, "model_dump")):
+            return PipelineTracer.sanitize_trace_data(obj.model_dump(), depth + 1)
+        if hasattr(obj, "dict") and callable(getattr(obj, "dict")):
+            return PipelineTracer.sanitize_trace_data(obj.dict(), depth + 1)
+        return str(obj)[:200]
+
     def record_stage(
         self,
         stage_name: str,
@@ -63,13 +92,14 @@ class PipelineTracer:
         """Record execution metrics for a specific pipeline stage."""
         current_mem = self.process.memory_info().rss / (1024 * 1024)
         mem_delta = round(current_mem - self.start_memory_mb, 2)
+        sanitized_details = self.sanitize_trace_data(details)
 
         stage_trace = StageTrace(
             stage_name=stage_name,
             duration_ms=round(duration_ms, 2),
             memory_mb=mem_delta,
             confidence=round(confidence, 4) if confidence is not None else None,
-            details=details,
+            details=sanitized_details,
         )
         self.stages.append(stage_trace)
 
@@ -77,7 +107,7 @@ class PipelineTracer:
             "duration_ms": round(duration_ms, 2),
             "memory_mb": mem_delta,
             "confidence": round(confidence, 4) if confidence is not None else None,
-            "details": details,
+            "details": sanitized_details,
         }
 
     def finalize(
@@ -90,6 +120,7 @@ class PipelineTracer:
         """Finalize trace recording and persist JSON to backend/traces/."""
         total_duration_ms = round((time.time() - self.start_time) * 1000, 2)
         end_mem = self.process.memory_info().rss / (1024 * 1024)
+        sanitized_meta = self.sanitize_trace_data(metadata or {})
 
         summary = {
             "total_duration_ms": total_duration_ms,
@@ -98,10 +129,10 @@ class PipelineTracer:
             "risk_level": risk_level,
             "root_cause_classification": root_cause,
             "stage_count": len(self.stages),
-            "metadata": metadata or {},
+            "metadata": sanitized_meta,
         }
-        if metadata and "performance_timings" in metadata:
-            self.trace_payload["performance_timings"] = metadata["performance_timings"]
+        if sanitized_meta and "performance_timings" in sanitized_meta:
+            self.trace_payload["performance_timings"] = sanitized_meta["performance_timings"]
         self.trace_payload["summary"] = summary
 
         trace_file = TRACES_DIR / f"{self.trace_id}.json"

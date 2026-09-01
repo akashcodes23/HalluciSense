@@ -97,11 +97,20 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
             },
         )
 
-    # 0.1 Check System Degradation / Emergency Memory Shedding
+    # 0.1 Check System Degradation / Emergency Memory Shedding & OOM Watchdog
     try:
+        import os
         from app.core.engine.memory_utils import get_memory_telemetry, trim_process_memory
         telemetry = get_memory_telemetry()
-        if telemetry.get("rss_mb", 0.0) > 950.0:
+        current_rss = float(telemetry.get("rss_mb", 0.0))
+        if current_rss > 800.0:
+            logger.error("OOM_RISK", rss_mb=current_rss, pid=os.getpid(), payload_len=len(payload.response_text or ""))
+        elif current_rss > 700.0:
+            logger.warning("CRITICAL_MEMORY_PRESSURE", rss_mb=current_rss, pid=os.getpid(), payload_len=len(payload.response_text or ""))
+        elif current_rss > 600.0:
+            logger.info("WARNING_MEMORY_PRESSURE", rss_mb=current_rss, pid=os.getpid(), payload_len=len(payload.response_text or ""))
+
+        if current_rss > 950.0:
             trim_process_memory()
             telemetry = get_memory_telemetry()
             if telemetry.get("rss_mb", 0.0) > 980.0:
@@ -135,6 +144,11 @@ async def analyze_response(payload: AnalysisRequest, request: Request, response:
         return await _execute_analysis(payload, request, response, tracer, timer)
     finally:
         sem.release()
+        try:
+            from app.core.engine.memory_utils import trim_process_memory
+            trim_process_memory()
+        except Exception:
+            pass
 
 
 import concurrent.futures

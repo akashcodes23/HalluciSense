@@ -62,62 +62,40 @@ class ModelRegistry:
         cls,
         model_name: str = "cross-encoder/nli-deberta-v3-small",
     ) -> Tuple[Any, Any]:
-        """Return the shared quantized ONNX NLI singleton."""
+        """Return the single shared DeBERTa NLI singleton."""
         if cls._nli_model is None or cls._nli_tokenizer is None:
             with cls._lock:
                 if cls._nli_model is None or cls._nli_tokenizer is None:
-                    from sentence_transformers import CrossEncoder
+                    import torch
+                    from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-                    artifact = os.getenv(
-                        "HALLUCISENSE_NLI_ONNX_FILE",
-                        cls._quantized_nli_file(),
-                    )
-                    cache_folder = os.getenv(
-                        "SENTENCE_TRANSFORMERS_HOME",
-                        os.getenv("HF_HOME", "/data/cache/huggingface"),
-                    )
+                    torch.set_num_threads(1)
+                    try:
+                        torch.set_num_interop_threads(1)
+                    except RuntimeError:
+                        pass
 
                     logger.info(
-                        "loading_shared_quantized_nli_model",
+                        "loading_shared_nli_model",
                         model_name=model_name,
-                        backend="onnx",
-                        artifact=artifact,
-                        cache_folder=cache_folder,
                         max_length=256,
                     )
 
-                    try:
-                        model = CrossEncoder(
-                            model_name,
-                            backend="onnx",
-                            cache_folder=cache_folder,
-                            model_kwargs={
-                                "file_name": artifact,
-                                "provider": "CPUExecutionProvider",
-                            },
-                            device="cpu",
-                            max_length=256,
-                        )
-                    except (TypeError, Exception):
-                        model = CrossEncoder(
-                            model_name,
-                            device="cpu",
-                            max_length=256,
-                        )
-                    tokenizer = getattr(model, "tokenizer", None)
-                    if tokenizer is None:
-                        raise RuntimeError("Quantized ONNX NLI CrossEncoder did not expose a tokenizer")
+                    tokenizer = AutoTokenizer.from_pretrained(model_name)
+                    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+                    model.eval()
+                    for param in model.parameters():
+                        param.requires_grad = False
 
                     cls._nli_tokenizer = tokenizer
                     cls._nli_model = model
-                    cls._nli_backend = "onnx-int8"
-                    cls._nli_artifact = artifact
+                    cls._nli_backend = "deberta-v3-eval"
+                    cls._nli_artifact = model_name
                     cls._init_counts["nli_model"] += 1
                     logger.info(
-                        "shared_quantized_nli_model_loaded",
+                        "shared_nli_model_loaded",
                         init_count=cls._init_counts["nli_model"],
                         backend=cls._nli_backend,
-                        artifact=artifact,
                     )
         return cls._nli_tokenizer, cls._nli_model
 

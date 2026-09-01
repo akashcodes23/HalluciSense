@@ -1,0 +1,114 @@
+{
+  "startup_rss_mb": 376.91,
+  "warm_rss_mb": 732.55,
+  "peak_rss_mb": 763.45,
+  "final_seq_rss_mb": 712.09,
+  "rss_growth_req1_to_50_mb": -23.39,
+  "mean_rss_mb": 724.09,
+  "median_rss_mb": 713.41,
+  "p95_rss_mb": 756.61,
+  "p99_rss_mb": 763.45,
+  "railway_limit_mb": 1024.0,
+  "railway_safety_margin_mb": 260.55,
+  "model_inventory": {
+    "nli_model": 1,
+    "sentence_transformer": 0,
+    "cross_encoder_reranker": 0,
+    "pipeline": 1
+  },
+  "concurrency_benchmarks": {
+    "concurrency_2": {
+      "concurrency": 2,
+      "success_rate": "2/2",
+      "peak_rss_mb": 712.58,
+      "avg_latency_ms": 265.51,
+      "total_wall_time_ms": 265.86
+    },
+    "concurrency_4": {
+      "concurrency": 4,
+      "success_rate": "4/4",
+      "peak_rss_mb": 700.31,
+      "avg_latency_ms": 553.34,
+      "total_wall_time_ms": 554.07
+    },
+    "concurrency_8": {
+      "concurrency": 8,
+      "success_rate": "8/8",
+      "peak_rss_mb": 612.62,
+      "avg_latency_ms": 1105.79,
+      "total_wall_time_ms": 1107.79
+    }
+  },
+  "trajectory_sample": [
+    {
+      "request_idx": 1,
+      "rss_mb": 735.48,
+      "latency_ms": 1423.89,
+      "h_score": 0.2364,
+      "risk_level": "LOW_RISK"
+    },
+    {
+      "request_idx": 2,
+      "rss_mb": 735.02,
+      "latency_ms": 1275.63,
+      "h_score": 0.3955,
+      "risk_level": "NEEDS_VERIFICATION"
+    },
+    {
+      "request_idx": 3,
+      "rss_mb": 744.02,
+      "latency_ms": 1277.32,
+      "h_score": 0.2379,
+      "risk_level": "LOW_RISK"
+    },
+    {
+      "request_idx": 4,
+      "rss_mb": 741.48,
+      "latency_ms": 1206.04,
+      "h_score": 0.0368,
+      "risk_level": "VERIFIED"
+    },
+    {
+      "request_idx": 5,
+      "rss_mb": 740.38,
+      "latency_ms": 1095.92,
+      "h_score": 0.0368,
+      "risk_level": "VERIFIED"
+    },
+    {
+      "request_idx": 6,
+      "rss_mb": 743.88,
+      "latency_ms": 1274.31,
+      "h_score": 0.0897,
+      "risk_level": "VERIFIED"
+    },
+    {
+      "request_idx": 7,
+      "rss_mb": 745.47,
+      "latency_ms": 1236.67,
+      "h_score": 0.0596,
+      "risk_level": "VERIFIED"
+    },
+    {
+      "request_idx": 8,
+      "rss_mb": 751.45,
+      "latency_ms": 1304.9,
+      "h_score": 0.0897,
+      "risk_level": "VERIFIED"
+    },
+    {
+      "request_idx": 9,
+      "rss_mb": 752.61,
+      "latency_ms": 1287.33,
+      "h_score": 0.0475,
+      "risk_level": "VERIFIED"
+    },
+    {
+      "request_idx": 10,
+      "rss_mb": 754.14,
+      "latency_ms": 1297.65,
+      "h_score": 0.0358,
+      "risk_level": "VERIFIED"
+    }
+  ]
+}

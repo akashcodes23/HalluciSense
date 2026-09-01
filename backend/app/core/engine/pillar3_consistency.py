@@ -23,7 +23,7 @@ logger = structlog.get_logger(__name__)
 
 ALIGNMENT_THRESHOLD: float = 0.20
 LAMBDA_NLI: float = 0.60
-MAX_CLAIMS: int = 15
+MAX_CLAIMS: int = 8
 
 
 class Pillar3ConsistencyEngine:
