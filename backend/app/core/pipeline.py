@@ -9,158 +9,21 @@ classifier. The research model and preprocessing artifacts are not changed.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 import structlog
 
 from app.core.inference.claim_extractor import extract_claims
 from app.core.inference.explanation_engine import generate_rich_explanation
+from app.core.inference.explainability import compute_local_feature_attributions
 from app.core.inference.pillar1_engine import Pillar1Engine
 from app.core.inference.pillar2_engine import Pillar2Engine
 from app.models.registry import registry
 from evaluation.phase6m.dataset import compute_logit
-from evaluation.phase6m.config import EPSILON
+from evaluation.phase6m.config import EPSILON, HYBRID_FEATURE_SCHEMA
 
 logger = structlog.get_logger(__name__)
-
-
-HYBRID_FEATURE_NAMES: List[str] = [
-    "p1_mean_entailment",
-    "p1_max_entailment",
-    "p1_mean_contradiction",
-    "p1_min_support_margin",
-    "p1_num_claims",
-    "p2_max_pairwise_contradiction",
-    "p2_mean_pairwise_contradiction",
-    "p2_max_pairwise_similarity",
-    "p2_fraction_contradictory_pairs",
-    "p2_num_claims",
-    "prob_p1",
-    "prob_p2",
-    "logit_p1",
-    "logit_p2",
-    "prob_disagreement_abs",
-    "prob_mean",
-    "prob_max",
-    "prob_min",
-    "prob_ratio",
-]
-
-
-def _predict_probability(clf: Any, scaler: Any, raw_row: np.ndarray) -> float:
-    """Run the exact frozen preprocessing + classifier path."""
-    scaled = scaler.transform(raw_row.reshape(1, -1))
-    return float(clf.predict_proba(scaled)[0, 1])
-
-
-def _compute_local_feature_explanation(
-    clf: Any,
-    scaler: Any,
-    raw_features: Sequence[float],
-    observed_probability: float,
-    threshold: float,
-    top_k: int = 7,
-) -> Dict[str, Any]:
-    """Compute local leave-one-feature-at-baseline attribution.
-
-    Each feature is replaced independently by the training median represented
-    by RobustScaler.center_. The exact frozen classifier is then evaluated.
-    Positive delta means the observed feature increases hallucination
-    probability relative to its training-median counterfactual.
-
-    This is intentionally *not* called SHAP or feature_importances_. Because
-    HistGradientBoosting is nonlinear, the deltas need not be additive; the
-    residual is exposed as ``interaction_gap``.
-    """
-    raw = np.asarray(list(raw_features), dtype=np.float64).reshape(-1)
-    if raw.size != len(HYBRID_FEATURE_NAMES):
-        return {
-            "available": False,
-            "method": "UNAVAILABLE",
-            "reason": f"Hybrid attribution requires 19 features; received {raw.size}.",
-        }
-    if not np.all(np.isfinite(raw)):
-        return {
-            "available": False,
-            "method": "UNAVAILABLE",
-            "reason": "Hybrid feature vector contains non-finite values.",
-        }
-
-    center = getattr(scaler, "center_", None)
-    if center is None:
-        baseline = np.zeros(raw.size, dtype=np.float64)
-        baseline_method = "zero_raw_feature_baseline"
-    else:
-        baseline = np.asarray(center, dtype=np.float64).reshape(-1)
-        if baseline.size != raw.size or not np.all(np.isfinite(baseline)):
-            return {
-                "available": False,
-                "method": "UNAVAILABLE",
-                "reason": "Preprocessor does not expose a compatible finite RobustScaler center_.",
-            }
-        baseline_method = "training_median_from_RobustScaler_center"
-
-    baseline_probability = _predict_probability(clf, scaler, baseline)
-    attributions: List[Dict[str, Any]] = []
-
-    for index, feature_name in enumerate(HYBRID_FEATURE_NAMES):
-        counterfactual = raw.copy()
-        counterfactual[index] = baseline[index]
-        counterfactual_probability = _predict_probability(clf, scaler, counterfactual)
-        delta = float(observed_probability - counterfactual_probability)
-        attributions.append({
-            "index": index,
-            "feature": feature_name,
-            "value": round(float(raw[index]), 8),
-            "baseline_value": round(float(baseline[index]), 8),
-            "counterfactual_probability": round(float(counterfactual_probability), 8),
-            "delta": round(delta, 8),
-            "direction": (
-                "increases_hallucination" if delta > 1e-9 else
-                "decreases_hallucination" if delta < -1e-9 else
-                "neutral"
-            ),
-        })
-
-    attributions.sort(key=lambda item: abs(float(item["delta"])), reverse=True)
-    abs_total = sum(abs(float(item["delta"])) for item in attributions)
-    for item in attributions:
-        item["relative_strength"] = round(
-            abs(float(item["delta"])) / abs_total, 6
-        ) if abs_total > 0 else 0.0
-
-    positive = [item for item in attributions if item["delta"] > 0][:top_k]
-    negative = [item for item in attributions if item["delta"] < 0][:top_k]
-    interaction_gap = float(
-        observed_probability - (
-            baseline_probability + sum(float(item["delta"]) for item in attributions)
-        )
-    )
-
-    return {
-        "available": True,
-        "method": "LOCAL_LEAVE_ONE_FEATURE_AT_BASELINE",
-        "methodology": (
-            "Each feature is replaced independently by its training median "
-            "(RobustScaler.center_) and the exact frozen HistGradientBoostingClassifier "
-            "is re-evaluated. Delta = P(observed) - P(counterfactual)."
-        ),
-        "baseline_method": baseline_method,
-        "baseline_probability": round(float(baseline_probability), 8),
-        "observed_probability": round(float(observed_probability), 8),
-        "decision_threshold": round(float(threshold), 8),
-        "decision_margin": round(float(observed_probability - threshold), 8),
-        "interaction_gap": round(interaction_gap, 8),
-        "non_additivity_note": (
-            "These are local perturbation effects, not SHAP values or global feature importance. "
-            "The interaction_gap explicitly captures nonlinear interaction effects."
-        ),
-        "feature_count": len(HYBRID_FEATURE_NAMES),
-        "features": attributions,
-        "top_positive_drivers": positive,
-        "top_negative_drivers": negative,
-    }
 
 
 class HalluciSensePipeline:
@@ -232,14 +95,22 @@ class HalluciSensePipeline:
         is_hallucinated = bool(prob_hybrid >= self.threshold)
 
         # Task 8: Faithful local explanation of the frozen hybrid decision.
-        if expected_features == 19 and X_raw.shape[1] == 19:
-            explainability = _compute_local_feature_explanation(
-                clf=self.clf,
-                scaler=self.scaler,
-                raw_features=X_raw[0],
-                observed_probability=prob_hybrid,
-                threshold=self.threshold,
-            )
+        if expected_features == 19 and X_raw.shape[1] == len(HYBRID_FEATURE_SCHEMA):
+            try:
+                explainability = compute_local_feature_attributions(
+                    X_raw=X_raw[0],
+                    scaler=self.scaler,
+                    clf=self.clf,
+                    feature_names=HYBRID_FEATURE_SCHEMA,
+                    threshold=self.threshold,
+                )
+            except Exception as exc:
+                logger.warning("hybrid_local_explainability_failed", error=str(exc))
+                explainability = {
+                    "available": False,
+                    "method": "UNAVAILABLE",
+                    "reason": str(exc),
+                }
         else:
             explainability = {
                 "available": False,
@@ -259,8 +130,6 @@ class HalluciSensePipeline:
             structural_diagnostics=structural_diagnostics,
         )
 
-        # Attach explainability to the existing explanation object without
-        # changing the frozen model's decision path.
         explanation["model_explainability"] = explainability
         explanation["decision_rule"] = {
             "threshold": self.threshold,
@@ -276,8 +145,8 @@ class HalluciSensePipeline:
             "claims": [c["text"] for c in claims_struct],
             "explanation": explanation,
             "explainability": explainability,
-            "feature_vector": [round(float(v), 8) for v in X_raw[0].tolist()] if X_raw.shape[1] == 19 else None,
-            "feature_schema": HYBRID_FEATURE_NAMES if X_raw.shape[1] == 19 else None,
+            "feature_vector": [round(float(v), 8) for v in X_raw[0].tolist()] if X_raw.shape[1] == len(HYBRID_FEATURE_SCHEMA) else None,
+            "feature_schema": list(HYBRID_FEATURE_SCHEMA) if X_raw.shape[1] == len(HYBRID_FEATURE_SCHEMA) else None,
             "confidence_score": round(abs(prob_hybrid - 0.5) * 2.0, 4),
         }
 
