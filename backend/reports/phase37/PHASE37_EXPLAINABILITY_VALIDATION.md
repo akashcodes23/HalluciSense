@@ -102,10 +102,10 @@ The validation protocol subjected the attribution engine to 32 unit and integrat
 | **B** | *"The capital of France is Berlin."* | **0.2973** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
 | **C** | *"The speed of light in vacuum is exactly 299,792,458 meters per second."* | **0.2973** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
 | **D** | *"12 multiplied by 8 equals 95."* | **0.2973** | 0.54 | **VERIFIED** (Known limit) | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
-| **E** | *"Paris is the capital of France. It became the capital in 1800 because Napoleon personally designed the city."* | **0.2973** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
-| **F** | *"The Moon orbits Earth every 27.3 days. Jupiter is the largest planet in our solar system."* | **0.2973** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
-| **G** | *"An ancient subterranean civilization constructed advanced fiber-optic networks beneath the Sahara desert in 4000 BC."* | **0.2973** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
-| **H** | *"Albert Einstein composed Beethoven's Ninth Symphony while working at Princeton University."* | **0.2973** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0969) | `prob_mean` (-0.2509) | +0.0587 |
+| **E** | *"Paris is the capital of France. It became the capital in 1800 because Napoleon personally designed the city."* | **0.3546** (L) / **0.6799** (R) | 0.54 | **VERIFIED / FLAGGED** | `prob_max` (+0.0216) / `p2_max_sim` (+0.038) | `p1_mean_entailment` (-0.0792) | -0.1426 (L) / -0.1943 (R) |
+| **F** | *"The Moon orbits Earth every 27.3 days. Jupiter is the largest planet in our solar system."* | **0.3499** (L) / **0.7081** (R) | 0.54 | **VERIFIED / FLAGGED** | `p1_mean_contradiction` (+0.0225) / `p2_max_sim` (+0.041) | `p1_mean_entailment` (-0.0789) | -0.1717 (L) / -0.2452 (R) |
+| **G** | *"An ancient subterranean civilization constructed advanced fiber-optic networks beneath the Sahara desert in 4000 BC."* | **0.3368** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0600) | `prob_mean` (-0.2040) | -0.0086 |
+| **H** | *"Albert Einstein composed Beethoven's Ninth Symphony while working at Princeton University."* | **0.2684** | 0.54 | **VERIFIED** | `p1_mean_contradiction` (+0.0718) | `prob_mean` (-0.2740) | +0.1037 |
 
 *Note on Case D (Arithmetic):* The NLI model (`cross-encoder/nli-deberta-v3-small`) operates as a text entailment model, not a symbolic arithmetic solver. The attribution layer transparently documents this limitation by surfacing the exact sub-signals without fabricating artificial certainty.
 
