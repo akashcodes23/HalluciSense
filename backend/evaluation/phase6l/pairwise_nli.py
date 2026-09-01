@@ -48,12 +48,9 @@ def get_nli_engine(model_name: str = DEFAULT_NLI_MODEL) -> EvidenceEntailmentEng
 
 
 def get_similarity_model(model_name: str = SIMILARITY_MODEL_NAME) -> Any:
-    """Get or initialize singleton SentenceTransformer model."""
-    global _GLOBAL_EMBED_MODEL
-    if _GLOBAL_EMBED_MODEL is None:
-        from sentence_transformers import SentenceTransformer
-        _GLOBAL_EMBED_MODEL = SentenceTransformer(model_name)
-    return _GLOBAL_EMBED_MODEL
+    """Get or initialize singleton SentenceTransformer model via ModelRegistry."""
+    from app.core.engine.model_registry import ModelRegistry
+    return ModelRegistry.get_sentence_transformer(model_name)
 
 
 def evaluate_bidirectional_nli_and_similarity(

@@ -68,8 +68,9 @@ async def get_sentence_detail(
 @router.post("/verify-text", summary="Direct Text Verification")
 def verify_text(request: VerifyRequest):
     start_time = time.perf_counter()
-    pipeline = HallucinationDetectionPipeline()
-    retriever = HybridRetriever()
+    from app.core.engine.model_registry import ModelRegistry
+    pipeline = ModelRegistry.get_pipeline()
+    retriever = pipeline.retriever
 
     text = request.text.strip()
     if not text:

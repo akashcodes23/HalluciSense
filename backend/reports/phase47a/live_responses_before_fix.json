@@ -1,0 +1,1116 @@
+{
+  "CASE_A": {
+    "trace_id": "TRACE_F99A0704F682",
+    "overall_h_score": 0.0284,
+    "risk_level": "VERIFIED",
+    "confidence": 0.5284,
+    "pillar_scores": {
+      "retrieval": 0.0023,
+      "confidence": 0.0875,
+      "consistency": 0.0
+    },
+    "failure_taxonomy": "NONE",
+    "processing_time_ms": 4875.44,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "The capital of France is Paris.",
+        "score": 0.0284,
+        "risk_level": "VERIFIED"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "The capital of France is Paris.",
+        "score": 0.0284,
+        "tier": "VERIFIED",
+        "color_hex": "#10B981"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Wikipedia: Paris",
+        "snippet": "Paris is the capital and largest city of France, with an estimated city population of 2.04 million in an area of 105.4 km2 (40.7 sq mi), and a metropolitan population of 13.2 million as of January 2026. Located on the river Seine in the centre of the \u00cele-de-France region, it is the largest metropolitan area and fourth-most populous city in the European Union (EU). Paris is nicknamed the \"City of Light\", partly because of its role in the Age of Enlightenment.\nAdministratively, Paris is divided into twenty arrondissements (districts), each having their own cultural identity.",
+        "score": 0.85,
+        "source": "Wikipedia: Paris"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: List of capitals of France",
+        "snippet": "This is a chronological list of capitals of France. The capital of France has been Paris since its liberation in 1944.",
+        "score": 0.85,
+        "source": "Wikipedia: List of capitals of France"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: Liberation of Paris",
+        "snippet": "The Liberation of Paris (French: Lib\u00e9ration de Paris) was a battle that took place during World War II from 19 August 1944 until the German garrison surrendered the French capital on 25 August 1944. Paris had been occupied by Nazi Germany since the signing of the Armistice of 22 June 1940, after which the Wehrmacht occupied northern and western France.\nGiven Paris's role as capital, military expediency was weighed against symbolic and political objectives at both the planning and operational levels. SHAEF sought to bypass the city to conserve resources and hasten a strategic thrust toward the Rhine.",
+        "score": 0.85,
+        "source": "Wikipedia: Liberation of Paris"
+      },
+      {
+        "id": "ev_4",
+        "title": "Product Architecture",
+        "snippet": "The backend uses FastAPI and Celery for async processing.",
+        "score": 0.5271865868047592,
+        "source": "Product Architecture"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.0437,
+      "blackbox_variation_score": 0.0,
+      "epistemic_uncertainty": 0.1806,
+      "aleatoric_uncertainty": 0.4253,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 0.85)."
+    },
+    "root_cause_classification": "VERIFIED",
+    "measured_timings": {
+      "retrieval_ms": 1623.83,
+      "bm25_ms": 0.42,
+      "dense_ms": 1305.33,
+      "nli_ms": 314.2,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1623.83,
+      "p2_latency_ms": 0.12,
+      "p3_latency_ms": 0.36,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 4875.44
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.3979,
+        "beta": 0.3147,
+        "gamma": 0.2874
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.0023,
+        "p2_confidence_gap": 0.0875,
+        "p3_consistency_failure": 0.0
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.0009,
+        "p2_contribution": 0.0275,
+        "p3_contribution": 0.0
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (SINGLE_CLAIM_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.0284,
+      "calibrated_h_score": 0.001,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, SINGLE_CLAIM_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.0009 + 0.0275 + 0.0000 = 0.0284 (2.84%)."
+    }
+  },
+  "CASE_B": {
+    "trace_id": "TRACE_0D10A68F84DE",
+    "overall_h_score": 0.4247,
+    "risk_level": "NEEDS_VERIFICATION",
+    "confidence": 0.9247,
+    "pillar_scores": {
+      "retrieval": 0.9981,
+      "confidence": 0.0875,
+      "consistency": 0.0
+    },
+    "failure_taxonomy": "Factual Contradiction",
+    "processing_time_ms": 1398.87,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "The capital of France is Berlin.",
+        "score": 0.4247,
+        "risk_level": "NEEDS_VERIFICATION"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "The capital of France is Berlin.",
+        "score": 0.4247,
+        "tier": "NEEDS_VERIFICATION",
+        "color_hex": "#F59E0B"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Wikipedia: Capital of Germany",
+        "snippet": "The capital of Germany is the city of Berlin. It is the seat of the Federal President of Germany, whose official residence is Bellevue Castle. The Federal Council is the representation of the Lands of Germany and has its seat at the former Prussian House of Lords. Though most of the ministries are seated in Berlin, some of them, as well as some minor departments, are seated in Bonn, the former capital of West Germany.",
+        "score": 0.85,
+        "source": "Wikipedia: Capital of Germany"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: East Berlin",
+        "snippet": "East Berlin (German: Ost-Berlin; pronounced [\u02c8\u0254stb\u025b\u0281\u02ccli\u02d0n] ) was the capital of East Germany (GDR) from 1949 to 1990. From 1945, it was the Soviet occupation sector of Berlin. The American, British, and French sectors were known as West Berlin. From 13 August 1961 until 9 November 1989, East Berlin was separated from West Berlin by the Berlin Wall.",
+        "score": 0.85,
+        "source": "Wikipedia: East Berlin"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: Germania (city)",
+        "snippet": "Welthauptstadt Germania (pronounced [\u02c8v\u025blt\u02ccha\u028a\u032fpt\u0283tat \u0261\u025b\u0281\u02c8ma\u02d0ni\u032fa]; lit.\u2009'World Capital Germania') was the projected renewal of the German capital Berlin during the Nazi period, as part of Adolf Hitler's vision for the future of Nazi Germany after the planned victory in World War II. It was to be the capital of his planned \"Greater Germanic Reich\". Albert Speer, the \"first architect of the Third Reich\", produced many of the plans for the rebuilt city in his capacity as overseer of the project, only a small portion of which was realised between 1938 and 1943.\n\nSome of the projects were completed, such as the creation of a great East\u2013West city axis, which included broadening Charlottenburger Chau\u00dfee (today Stra\u00dfe des 17. Juni) and placing the Berlin Victory Column in the centre, far away from the Reichstag, where it originally stood.",
+        "score": 0.85,
+        "source": "Wikipedia: Germania (city)"
+      },
+      {
+        "id": "ev_4",
+        "title": "Product Architecture",
+        "snippet": "The backend uses FastAPI and Celery for async processing.",
+        "score": 0.5271865868047592,
+        "source": "Product Architecture"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.0437,
+      "blackbox_variation_score": 0.0,
+      "epistemic_uncertainty": 0.1806,
+      "aleatoric_uncertainty": 0.027,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 0.85)."
+    },
+    "root_cause_classification": "Factual Contradiction",
+    "measured_timings": {
+      "retrieval_ms": 1396.8,
+      "bm25_ms": 0.08,
+      "dense_ms": 1211.56,
+      "nli_ms": 183.9,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1396.8,
+      "p2_latency_ms": 0.03,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1398.87
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.3979,
+        "beta": 0.3147,
+        "gamma": 0.2874
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.9981,
+        "p2_confidence_gap": 0.0875,
+        "p3_consistency_failure": 0.0
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.3971,
+        "p2_contribution": 0.0275,
+        "p3_contribution": 0.0
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (SINGLE_CLAIM_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.4247,
+      "calibrated_h_score": 0.2685,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, SINGLE_CLAIM_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.3971 + 0.0275 + 0.0000 = 0.4247 (42.47%)."
+    }
+  },
+  "CASE_C": {
+    "trace_id": "TRACE_DE0E0F022287",
+    "overall_h_score": 0.4254,
+    "risk_level": "NEEDS_VERIFICATION",
+    "confidence": 0.9254,
+    "pillar_scores": {
+      "retrieval": 0.9998,
+      "confidence": 0.0875,
+      "consistency": 0.0
+    },
+    "failure_taxonomy": "Factual Contradiction",
+    "processing_time_ms": 1390.57,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "What is the capital of France?",
+        "score": 0.4254,
+        "risk_level": "NEEDS_VERIFICATION"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "What is the capital of France?",
+        "score": 0.4254,
+        "tier": "NEEDS_VERIFICATION",
+        "color_hex": "#F59E0B"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Wikipedia: Closed-ended question",
+        "snippet": "A closed-ended question is any question for which a researcher provides research participants with options from which to choose a response. Closed-ended questions are sometimes phrased as a statement that requires a response.\nA closed-ended question contrasts with an open-ended question, which cannot easily be answered with specific information.",
+        "score": 0.85,
+        "source": "Wikipedia: Closed-ended question"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: WhatsApp",
+        "snippet": "WhatsApp Messenger, commonly known simply as WhatsApp, is an American social media, instant messaging (IM), and Voice over IP (VoIP) service accessible via desktop and mobile app. Owned by Meta Platforms, the service allows users to send text messages, voice messages, and video messages, make voice and video calls, and share images, documents, user locations, and other content. The service requires a cellular mobile telephone number to register. WhatsApp was launched in May 2009.",
+        "score": 0.85,
+        "source": "Wikipedia: WhatsApp"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: France",
+        "snippet": "France, officially the French Republic, is a country primarily located in Western Europe. Its overseas regions and territories include French Guiana in South America, Saint Pierre and Miquelon in the North Atlantic, the French West Indies, and many islands in Oceania and the Indian Ocean. Metropolitan France shares borders with Belgium and Luxembourg to the north; Germany to the northeast; Switzerland to the east; Italy and Monaco to the southeast; Andorra and Spain to the south; and a maritime border with the United Kingdom to the northwest. Its metropolitan area extends from the Rhine to the Atlantic Ocean and from the Mediterranean Sea to the English Channel and the North Sea.",
+        "score": 0.85,
+        "source": "Wikipedia: France"
+      },
+      {
+        "id": "ev_4",
+        "title": "Product Architecture",
+        "snippet": "The backend uses FastAPI and Celery for async processing.",
+        "score": 0.5271865868047592,
+        "source": "Product Architecture"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.0437,
+      "blackbox_variation_score": 0.0,
+      "epistemic_uncertainty": 0.1806,
+      "aleatoric_uncertainty": 0.0263,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 0.85)."
+    },
+    "root_cause_classification": "Factual Contradiction",
+    "measured_timings": {
+      "retrieval_ms": 1388.73,
+      "bm25_ms": 0.12,
+      "dense_ms": 1211.29,
+      "nli_ms": 176.24,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1388.73,
+      "p2_latency_ms": 0.02,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.0,
+      "total_latency_ms": 1390.57
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.3979,
+        "beta": 0.3147,
+        "gamma": 0.2874
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.9998,
+        "p2_confidence_gap": 0.0875,
+        "p3_consistency_failure": 0.0
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.3978,
+        "p2_contribution": 0.0275,
+        "p3_contribution": 0.0
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (SINGLE_CLAIM_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.4254,
+      "calibrated_h_score": 0.2695,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, SINGLE_CLAIM_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.3978 + 0.0275 + 0.0000 = 0.4254 (42.54%)."
+    }
+  },
+  "CASE_D": {
+    "trace_id": "TRACE_E2245F71D97F",
+    "overall_h_score": 0.5306,
+    "risk_level": "MODERATE_RISK",
+    "confidence": 0.9694,
+    "pillar_scores": {
+      "retrieval": 0.9992,
+      "confidence": 0.05,
+      "consistency": 0.33
+    },
+    "failure_taxonomy": "Factual Contradiction",
+    "processing_time_ms": 5283.35,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "Paris is the capital of France.",
+        "score": 0.0161,
+        "risk_level": "VERIFIED"
+      },
+      {
+        "sentence_index": 1,
+        "text": "Berlin is the capital of France.",
+        "score": 0.442,
+        "risk_level": "NEEDS_VERIFICATION"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "Paris is the capital of France.",
+        "score": 0.5306,
+        "tier": "MODERATE_RISK",
+        "color_hex": "#F97316"
+      },
+      {
+        "token": "Berlin is the capital of France.",
+        "score": 0.5306,
+        "tier": "MODERATE_RISK",
+        "color_hex": "#F97316"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Product Architecture",
+        "snippet": "The backend uses FastAPI and Celery for async processing.",
+        "score": 1.0,
+        "source": "Product Architecture"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: Paris",
+        "snippet": "Paris is the capital and largest city of France, with an estimated city population of 2.04 million in an area of 105.4 km2 (40.7 sq mi), and a metropolitan population of 13.2 million as of January 2026. Located on the river Seine in the centre of the \u00cele-de-France region, it is the largest metropolitan area and fourth-most populous city in the European Union (EU). Paris is nicknamed the \"City of Light\", partly because of its role in the Age of Enlightenment.\nAdministratively, Paris is divided into twenty arrondissements (districts), each having their own cultural identity.",
+        "score": 0.85,
+        "source": "Wikipedia: Paris"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: Capital of the Netherlands",
+        "snippet": "In the Netherlands, the Constitution refers to Amsterdam as the capital city. However, since 1588, the States General and the Executive Branch, along with the Supreme Court and the Council of State, have been situated  in The Hague as the seat of government. Since the 1983 revision of the Constitution of the Netherlands, Article 32 mentions that \"the King shall be sworn in and inaugurated as soon as possible in the capital city, Amsterdam\". It is the only reference in the document stating that Amsterdam is the capital.",
+        "score": 0.85,
+        "source": "Wikipedia: Capital of the Netherlands"
+      },
+      {
+        "id": "ev_4",
+        "title": "Wikipedia: Temporary capital",
+        "snippet": "A temporary capital or a provisional capital is a city or town chosen by a government as an interim base of operations due to some difficulty in retaining or establishing control of a different metropolitan area. The most common circumstances leading to this are either a civil war, where control of the capital is contested, or during an invasion, where the designated capital is taken or threatened.\nBy definition, a temporary capital is located somewhere on the country's territory, as opposed to a capital-in-exile located on the territory of a different country. However, a country's capital may move in and out of exile over the course of a conflict.",
+        "score": 0.85,
+        "source": "Wikipedia: Temporary capital"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.025,
+      "blackbox_variation_score": 0.33,
+      "epistemic_uncertainty": 0.4028,
+      "aleatoric_uncertainty": 0.0153,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 1.00)."
+    },
+    "root_cause_classification": "Factual Contradiction",
+    "measured_timings": {
+      "retrieval_ms": 1116.75,
+      "bm25_ms": 0.1,
+      "dense_ms": 929.53,
+      "nli_ms": 184.24,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1116.75,
+      "p2_latency_ms": 0.03,
+      "p3_latency_ms": 4047.4,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 5283.35
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.4274,
+        "beta": 0.305,
+        "gamma": 0.2676
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.9992,
+        "p2_confidence_gap": 0.05,
+        "p3_consistency_failure": 0.33
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.4271,
+        "p2_contribution": 0.0152,
+        "p3_contribution": 0.0883
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (INTRA_RESPONSE_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.5306,
+      "calibrated_h_score": 0.4435,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, INTRA_RESPONSE_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.4271 + 0.0152 + 0.0883 = 0.5306 (53.06%)."
+    }
+  },
+  "CASE_E": {
+    "trace_id": "TRACE_ADE57A13183C",
+    "overall_h_score": 0.1605,
+    "risk_level": "VERIFIED",
+    "confidence": 0.6605,
+    "pillar_scores": {
+      "retrieval": 0.1333,
+      "confidence": 0.05,
+      "consistency": 0.33
+    },
+    "failure_taxonomy": "NONE",
+    "processing_time_ms": 1474.23,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "Paris is the capital of France.",
+        "score": 0.0722,
+        "risk_level": "VERIFIED"
+      },
+      {
+        "sentence_index": 1,
+        "text": "Berlin is the capital of Germany.",
+        "score": 0.0211,
+        "risk_level": "VERIFIED"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "Paris is the capital of France.",
+        "score": 0.1605,
+        "tier": "VERIFIED",
+        "color_hex": "#10B981"
+      },
+      {
+        "token": "Berlin is the capital of Germany.",
+        "score": 0.1605,
+        "tier": "VERIFIED",
+        "color_hex": "#10B981"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Product Architecture",
+        "snippet": "The backend uses FastAPI and Celery for async processing.",
+        "score": 1.0,
+        "source": "Product Architecture"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: Germania (city)",
+        "snippet": "Welthauptstadt Germania (pronounced [\u02c8v\u025blt\u02ccha\u028a\u032fpt\u0283tat \u0261\u025b\u0281\u02c8ma\u02d0ni\u032fa]; lit.\u2009'World Capital Germania') was the projected renewal of the German capital Berlin during the Nazi period, as part of Adolf Hitler's vision for the future of Nazi Germany after the planned victory in World War II. It was to be the capital of his planned \"Greater Germanic Reich\". Albert Speer, the \"first architect of the Third Reich\", produced many of the plans for the rebuilt city in his capacity as overseer of the project, only a small portion of which was realised between 1938 and 1943.\n\nSome of the projects were completed, such as the creation of a great East\u2013West city axis, which included broadening Charlottenburger Chau\u00dfee (today Stra\u00dfe des 17. Juni) and placing the Berlin Victory Column in the centre, far away from the Reichstag, where it originally stood.",
+        "score": 0.85,
+        "source": "Wikipedia: Germania (city)"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: Fashion capital",
+        "snippet": "A fashion capital is a city with major influence on the international fashion scene, from history, heritage, designers, trends, and styles, to manufacturing innovation and retailing of fashion products, including events such as fashion weeks, fashion council awards, and trade fairs that together, generate significant economic output.\nWith exquisite fashion heritage, structured organization, and the most vaunted fashion designers of the 20th century, four cities are considered the main fashion capitals of the 21st century. The three most prominent fashion capitals of the world\u2014in chronological order of their eponymous fashion weeks, are New York City, Milan, and Paris, which receive most media coverage. In some fashion circles, a second-tier of fashion capitals is also noted, including Tokyo, London, and Los Angeles.",
+        "score": 0.85,
+        "source": "Wikipedia: Fashion capital"
+      },
+      {
+        "id": "ev_4",
+        "title": "Wikipedia: Temporary capital",
+        "snippet": "A temporary capital or a provisional capital is a city or town chosen by a government as an interim base of operations due to some difficulty in retaining or establishing control of a different metropolitan area. The most common circumstances leading to this are either a civil war, where control of the capital is contested, or during an invasion, where the designated capital is taken or threatened.\nBy definition, a temporary capital is located somewhere on the country's territory, as opposed to a capital-in-exile located on the territory of a different country. However, a country's capital may move in and out of exile over the course of a conflict.",
+        "score": 0.85,
+        "source": "Wikipedia: Temporary capital"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.025,
+      "blackbox_variation_score": 0.33,
+      "epistemic_uncertainty": 0.4028,
+      "aleatoric_uncertainty": 0.3617,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 1.00)."
+    },
+    "root_cause_classification": "VERIFIED",
+    "measured_timings": {
+      "retrieval_ms": 1295.38,
+      "bm25_ms": 0.45,
+      "dense_ms": 1067.91,
+      "nli_ms": 223.24,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1295.38,
+      "p2_latency_ms": 0.03,
+      "p3_latency_ms": 9.45,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 1474.23
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.4274,
+        "beta": 0.305,
+        "gamma": 0.2676
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.1333,
+        "p2_confidence_gap": 0.05,
+        "p3_consistency_failure": 0.33
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.057,
+        "p2_contribution": 0.0152,
+        "p3_contribution": 0.0883
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (INTRA_RESPONSE_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.1605,
+      "calibrated_h_score": 0.0304,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, INTRA_RESPONSE_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.0570 + 0.0152 + 0.0883 = 0.1605 (16.05%)."
+    }
+  },
+  "CASE_MATH_TRUE": {
+    "trace_id": "TRACE_3A51D3AD1E59",
+    "overall_h_score": 0.3274,
+    "risk_level": "LOW_RISK",
+    "confidence": 0.8274,
+    "pillar_scores": {
+      "retrieval": 0.75,
+      "confidence": 0.0875,
+      "consistency": 0.0
+    },
+    "failure_taxonomy": "NONE",
+    "processing_time_ms": 1069.26,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "12 multiplied by 8 equals 96.",
+        "score": 0.3274,
+        "risk_level": "LOW_RISK"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "12 multiplied by 8 equals 96.",
+        "score": 0.3274,
+        "tier": "VERIFIED",
+        "color_hex": "#10B981"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Wikipedia: Power of two",
+        "snippet": "A power of two is a number of the form 2n where n is an integer, that is, the result of exponentiation with the number two as the base and integer n as the exponent. In the fast-growing hierarchy, 2n is exactly equal to \n  \n    \n      \n        \n          f\n          \n            1\n          \n          \n            n\n          \n        \n        (\n        1\n        )\n      \n    \n    {\\displaystyle f_{1}^{n}(1)}\n  \n. In the Hardy hierarchy, 2n is exactly equal to \n  \n    \n      \n        \n          H\n          \n            \u03c9\n            \n              n\n            \n          \n        \n        (\n        1\n        )\n      \n    \n    {\\displaystyle H_{\\omega {n}}(1)}\n  \n.\nPowers of two with non-negative exponents are integers: 20 = 1, 21 = 2, and 2n is n 2s  multiplied together.",
+        "score": 0.85,
+        "source": "Wikipedia: Power of two"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: List of AMD graphics processing units",
+        "snippet": "The following is a list that contains general information about GPUs, and other video cards, made by AMD, including those made by ATI Technologies before 2006, based on official specifications in table-form.",
+        "score": 0.85,
+        "source": "Wikipedia: List of AMD graphics processing units"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: 2026\u20132027 FIDE Circuit",
+        "snippet": "The 2026\u20132027 FIDE Circuit is a system comprising the top chess tournaments in 2026 and 2027, which will serve as a qualification path for the Candidates Tournament 2028. Players receive points based on their performance and the strength of the tournament. A player's final Circuit score will be the sum of their twelve best results of the years.\nIt also includes a sub-ranking list which consists scores of only tournaments with more than 50 participants, serving as a qualification path for Total Chess World Championship Tour events.",
+        "score": 0.85,
+        "source": "Wikipedia: 2026\u20132027 FIDE Circuit"
+      },
+      {
+        "id": "ev_4",
+        "title": "Internal Company Policy",
+        "snippet": "All employees must complete compliance training by Q3.",
+        "score": 0.5537922650173357,
+        "source": "Internal Company Policy"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.0437,
+      "blackbox_variation_score": 0.0,
+      "epistemic_uncertainty": 0.18,
+      "aleatoric_uncertainty": 0.1262,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 0.85)."
+    },
+    "root_cause_classification": "VERIFIED",
+    "measured_timings": {
+      "retrieval_ms": 1066.85,
+      "bm25_ms": 0.31,
+      "dense_ms": 866.73,
+      "nli_ms": 197.88,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1066.85,
+      "p2_latency_ms": 0.03,
+      "p3_latency_ms": 0.03,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 1069.26
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.4,
+        "beta": 0.3136,
+        "gamma": 0.2864
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.75,
+        "p2_confidence_gap": 0.0875,
+        "p3_consistency_failure": 0.0
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.3,
+        "p2_contribution": 0.0274,
+        "p3_contribution": 0.0
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (SINGLE_CLAIM_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.3274,
+      "calibrated_h_score": 0.1467,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, SINGLE_CLAIM_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.3000 + 0.0274 + 0.0000 = 0.3274 (32.74%)."
+    }
+  },
+  "CASE_MATH_FALSE": {
+    "trace_id": "TRACE_F5A48C420DEB",
+    "overall_h_score": 0.3794,
+    "risk_level": "NEEDS_VERIFICATION",
+    "confidence": 0.8794,
+    "pillar_scores": {
+      "retrieval": 0.88,
+      "confidence": 0.0875,
+      "consistency": 0.0
+    },
+    "failure_taxonomy": "Factual Contradiction",
+    "processing_time_ms": 1149.5,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "12 multiplied by 8 equals 95.",
+        "score": 0.3794,
+        "risk_level": "NEEDS_VERIFICATION"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "12 multiplied by 8 equals 95.",
+        "score": 0.3794,
+        "tier": "NEEDS_VERIFICATION",
+        "color_hex": "#F59E0B"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Wikipedia: Artin's conjecture on primitive roots",
+        "snippet": "In number theory, Artin's conjecture on primitive roots states that a given integer a that is neither a square number nor \u22121 is a primitive root modulo infinitely many primes p. The conjecture also ascribes an asymptotic density to these primes. This conjectural density equals Artin's constant or a rational multiple thereof.\nThe conjecture was made by Emil Artin to Helmut Hasse on September 27, 1927, according to the latter's diary.",
+        "score": 0.85,
+        "source": "Wikipedia: Artin's conjecture on primitive roots"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: ISBN",
+        "snippet": "The International Standard Book Number (ISBN) is a numeric commercial book identifier that is intended to be unique. Publishers purchase or receive ISBNs from an affiliate of the International ISBN Agency.\nAn ISBN cannot be used as a generic identifier for a work or title. A different ISBN is assigned to each separate edition and variation of a publication, but not to a simple reprinting of an existing item.",
+        "score": 0.85,
+        "source": "Wikipedia: ISBN"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: List of AMD graphics processing units",
+        "snippet": "The following is a list that contains general information about GPUs, and other video cards, made by AMD, including those made by ATI Technologies before 2006, based on official specifications in table-form.",
+        "score": 0.85,
+        "source": "Wikipedia: List of AMD graphics processing units"
+      },
+      {
+        "id": "ev_4",
+        "title": "Internal Company Policy",
+        "snippet": "All employees must complete compliance training by Q3.",
+        "score": 0.5537922650173357,
+        "source": "Internal Company Policy"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.0437,
+      "blackbox_variation_score": 0.0,
+      "epistemic_uncertainty": 0.18,
+      "aleatoric_uncertainty": 0.0742,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 0.85)."
+    },
+    "root_cause_classification": "Factual Contradiction",
+    "measured_timings": {
+      "retrieval_ms": 1147.56,
+      "bm25_ms": 0.32,
+      "dense_ms": 974.33,
+      "nli_ms": 171.26,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1147.56,
+      "p2_latency_ms": 0.03,
+      "p3_latency_ms": 0.02,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 1149.5
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.4,
+        "beta": 0.3136,
+        "gamma": 0.2864
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.88,
+        "p2_confidence_gap": 0.0875,
+        "p3_consistency_failure": 0.0
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.352,
+        "p2_contribution": 0.0274,
+        "p3_contribution": 0.0
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (SINGLE_CLAIM_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.3794,
+      "calibrated_h_score": 0.2066,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, SINGLE_CLAIM_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.3520 + 0.0274 + 0.0000 = 0.3794 (37.94%)."
+    }
+  },
+  "CASE_MULTI_FACT": {
+    "trace_id": "TRACE_C89DFDB05695",
+    "overall_h_score": 0.5298,
+    "risk_level": "MODERATE_RISK",
+    "confidence": 0.9702,
+    "pillar_scores": {
+      "retrieval": 0.9972,
+      "confidence": 0.05,
+      "consistency": 0.33
+    },
+    "failure_taxonomy": "Factual Contradiction",
+    "processing_time_ms": 1823.29,
+    "version": "1.0.0",
+    "hallucination": false,
+    "sentence_scores": [
+      {
+        "sentence_index": 0,
+        "text": "The Moon orbits Earth every 27.",
+        "score": 0.4424,
+        "risk_level": "NEEDS_VERIFICATION"
+      },
+      {
+        "sentence_index": 1,
+        "text": "3 days.",
+        "score": 0.442,
+        "risk_level": "NEEDS_VERIFICATION"
+      },
+      {
+        "sentence_index": 2,
+        "text": "Jupiter is the largest planet in our solar system.",
+        "score": 0.234,
+        "risk_level": "LOW_RISK"
+      }
+    ],
+    "token_heatmap": [
+      {
+        "token": "The Moon orbits Earth every 27.3 days.",
+        "score": 0.5298,
+        "tier": "MODERATE_RISK",
+        "color_hex": "#F97316"
+      },
+      {
+        "token": "Jupiter is the largest planet in our solar system.",
+        "score": 0.5298,
+        "tier": "MODERATE_RISK",
+        "color_hex": "#F97316"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev_1",
+        "title": "Product Architecture",
+        "snippet": "The backend uses FastAPI and Celery for async processing.",
+        "score": 1.0,
+        "source": "Product Architecture"
+      },
+      {
+        "id": "ev_2",
+        "title": "Wikipedia: Moon",
+        "snippet": "The Moon is the only natural satellite of Earth. It orbits around Earth at an average distance of 384,399 kilometers (238,854 mi), a distance roughly 30 times the width of Earth. It completes an orbit (lunar month) in relation to Earth and the Sun (synodically) every 29.5 days. The Moon and Earth are bound by gravitational attraction, which is stronger on the sides facing each other.",
+        "score": 0.85,
+        "source": "Wikipedia: Moon"
+      },
+      {
+        "id": "ev_3",
+        "title": "Wikipedia: Solar System",
+        "snippet": "The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one. The Solar System is an isolated single-star planetary system (not part of a larger star system) within the Milky Way Galaxy. The system formed about 4.6 billion years ago when a dense region of a molecular cloud collapsed, creating the Sun and a protoplanetary disc from which the orbiting bodies assembled.\nThe Sun accounts for 99.86% of the Solar System's total mass.",
+        "score": 0.85,
+        "source": "Wikipedia: Solar System"
+      },
+      {
+        "id": "ev_4",
+        "title": "Wikipedia: Titan (moon)",
+        "snippet": "Titan is the largest moon of Saturn and the second largest in the Solar System. It is the only moon that is known to have a dense atmosphere (denser than that of Earth), and is the only known object in the Solar System besides Earth with clear evidence of stable bodies of surface liquid. Titan is one of seven gravitationally rounded moons of Saturn, and is the second-most distant among them. Frequently described as a planet-like moon, Titan is 48.16% larger in diameter than Earth's moon, and 80% more massive.",
+        "score": 0.85,
+        "source": "Wikipedia: Titan (moon)"
+      }
+    ],
+    "confidence_analysis": {
+      "whitebox_entropy": 0.025,
+      "blackbox_variation_score": 0.33,
+      "epistemic_uncertainty": 0.4028,
+      "aleatoric_uncertainty": 0.0161,
+      "methodology": "UNCERTAINTY_PROXY",
+      "signal_type": "PROXY",
+      "uncertainty_measure": "Multi-Sample Variance Proxy",
+      "generations_used": 1,
+      "raw_signal_metadata": {
+        "logprobs_provided": false,
+        "generations_count": 1,
+        "model_name": "gpt-4o"
+      },
+      "explanation": "Static verification confidence: High evidence grounding (max similarity 1.00)."
+    },
+    "root_cause_classification": "Factual Contradiction",
+    "measured_timings": {
+      "retrieval_ms": 1423.14,
+      "bm25_ms": 0.28,
+      "dense_ms": 1252.73,
+      "nli_ms": 165.1,
+      "gemini_generation_ms": null,
+      "p1_latency_ms": 1423.14,
+      "p2_latency_ms": 0.03,
+      "p3_latency_ms": 56.42,
+      "fusion_latency_ms": 0.01,
+      "total_latency_ms": 1823.29
+    },
+    "pillar_status": {
+      "p1_status": "EXECUTED",
+      "p2_status": "EXECUTED",
+      "p3_status": "EXECUTED",
+      "fusion_status": "FULL_THREE_PILLAR",
+      "p1_available": true,
+      "p2_available": true,
+      "p3_available": true,
+      "is_full_analysis": true
+    },
+    "fusion_decomposition": {
+      "equation": "H = alpha*P1 + beta*P2 + gamma*P3",
+      "fusion_mode": "FULL_THREE_PILLAR",
+      "configured_weights": {
+        "alpha": 0.45,
+        "beta": 0.3,
+        "gamma": 0.25
+      },
+      "effective_weights": {
+        "alpha": 0.4274,
+        "beta": 0.305,
+        "gamma": 0.2676
+      },
+      "pillar_scores": {
+        "p1_factual_error": 0.9972,
+        "p2_confidence_gap": 0.05,
+        "p3_consistency_failure": 0.33
+      },
+      "weighted_contributions": {
+        "p1_contribution": 0.4262,
+        "p2_contribution": 0.0152,
+        "p3_contribution": 0.0883
+      },
+      "available_pillars": [
+        "Pillar 1: Evidence Grounding",
+        "Pillar 2: Confidence (STATIC_VERIFICATION_CONFIDENCE)",
+        "Pillar 3: Consistency (INTRA_RESPONSE_CONSISTENCY)"
+      ],
+      "missing_pillars": [],
+      "uncalibrated_h_score": 0.5298,
+      "calibrated_h_score": 0.4421,
+      "is_full_analysis": true,
+      "explanation": "Full 3-Pillar weighted fusion (STATIC_VERIFICATION_CONFIDENCE, INTRA_RESPONSE_CONSISTENCY): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = 0.4262 + 0.0152 + 0.0883 = 0.5298 (52.98%)."
+    }
+  }
+}

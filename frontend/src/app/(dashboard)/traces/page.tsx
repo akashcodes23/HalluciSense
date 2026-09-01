@@ -366,9 +366,9 @@ function transformHistoryEntry(entry: AnalysisHistoryEntry): TraceData {
   const pStatus = res.pillar_status;
   const totalDuration = measured?.total_latency_ms ?? res.processing_time_ms ?? res.latency_ms ?? null;
 
-  const p1Available = pStatus?.p1_available ?? true;
-  const p2Available = pStatus?.p2_available ?? false;
-  const p3Available = pStatus?.p3_available ?? false;
+  const p1Available = pStatus?.p1_available ?? (res.pillar_scores?.retrieval !== null && res.pillar_scores?.retrieval !== undefined);
+  const p2Available = pStatus?.p2_available ?? (res.pillar_scores?.confidence !== null && res.pillar_scores?.confidence !== undefined);
+  const p3Available = pStatus?.p3_available ?? (res.pillar_scores?.consistency !== null && res.pillar_scores?.consistency !== undefined);
 
   const stages: TraceStage[] = [
     {

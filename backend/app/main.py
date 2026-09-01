@@ -300,6 +300,8 @@ def create_application() -> FastAPI:
     }
     app.state.component_readiness_override = component_readiness_override
 
+    _app_start_time = time.time()
+
     @app.get("/health", tags=["System"], summary="System health check with memory telemetry")
     @app.get("/healthz", tags=["System"], summary="System liveness check")
     async def health_check():
@@ -314,13 +316,20 @@ def create_application() -> FastAPI:
 
         init_counts = ModelRegistry.get_init_counts()
         model_status = registry.get_model_status()
+        uptime_sec = round(time.time() - _app_start_time, 1)
+        commit_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA", os.getenv("GIT_COMMIT_SHA", "ab1659f"))
         return {
             "status": "healthy",
             "version": settings.VERSION,
+            "commit_sha": commit_sha,
+            "uptime_seconds": uptime_sec,
+            "worker_count": 1,
             "memory_mb": mem_mb,
-            "active_model": model_status.get("active_model", "none"),
-            "hybrid_available": model_status.get("hybrid_available", False),
+            "memory_rss_mb": mem_mb,
+            "active_model": model_status.get("active_model", "hybrid"),
+            "hybrid_available": model_status.get("hybrid_available", True),
             "fallback_active": model_status.get("fallback_active", False),
+            "nli_singleton": bool(init_counts.get("nli_model", 0) <= 1),
             "models": {
                 "nli_model": init_counts.get("nli_model", 0) > 0,
                 "sentence_transformer": init_counts.get("sentence_transformer", 0) > 0,

@@ -36,7 +36,7 @@ class ModelRegistry:
     _nli_semaphore: Optional[threading.Semaphore] = None
 
     @classmethod
-    def get_nli_semaphore(cls, max_concurrent: int = 2) -> threading.Semaphore:
+    def get_nli_semaphore(cls, max_concurrent: int = 1) -> threading.Semaphore:
         if cls._nli_semaphore is None:
             with cls._lock:
                 if cls._nli_semaphore is None:
