@@ -1,0 +1,44 @@
+{
+  "startup_rss_mb": 376.86,
+  "warm_rss_mb": 807.12,
+  "min_rss_mb": 809.8,
+  "mean_rss_mb": 837.99,
+  "p95_rss_mb": 840.03,
+  "p99_rss_mb": 840.03,
+  "peak_rss_mb": 841.56,
+  "final_seq_rss_mb": 840.03,
+  "post_trim_rss_mb": 841.56,
+  "retained_delta_mb": 32.91,
+  "railway_limit_mb": 1024.0,
+  "railway_headroom_mb": 182.44,
+  "model_init_counts": {
+    "nli_model": 1,
+    "sentence_transformer": 0,
+    "cross_encoder_reranker": 0,
+    "pipeline": 1
+  },
+  "concurrency_results": {
+    "concurrency_2": {
+      "workers": 2,
+      "success_rate": "2/2",
+      "peak_rss_mb": 840.31,
+      "avg_latency_ms": 249.12,
+      "wall_time_ms": 249.43
+    },
+    "concurrency_4": {
+      "workers": 4,
+      "success_rate": "4/4",
+      "peak_rss_mb": 840.7,
+      "avg_latency_ms": 506.17,
+      "wall_time_ms": 506.99
+    },
+    "concurrency_8": {
+      "workers": 8,
+      "success_rate": "8/8",
+      "peak_rss_mb": 841.56,
+      "avg_latency_ms": 1043.62,
+      "wall_time_ms": 1046.01
+    }
+  },
+  "total_requests_executed": 114
+}

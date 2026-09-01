@@ -126,7 +126,7 @@ class EvidenceEntailmentEngine:
                     hypotheses,
                     padding=True,
                     truncation=True,
-                    max_length=256,
+                    max_length=128,
                     return_tensors="pt",
                 )
                 with torch.inference_mode():
