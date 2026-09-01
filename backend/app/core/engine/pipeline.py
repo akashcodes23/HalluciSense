@@ -547,6 +547,8 @@ Respond STRICTLY in JSON using this schema:
         p2_global = self.p2_engine.analyze(
             raw_tokens,
             token_probabilities,
+            evidence_items=evidence_items,
+            p1_result=p1_global,
         )
         confidence_duration_ms = round((time.perf_counter() - t_p2_start) * 1000.0, 2)
         tok_proc_ms = getattr(self.p2_engine, "last_token_processing_ms", 0.0)
@@ -635,6 +637,8 @@ Respond STRICTLY in JSON using this schema:
             sent_p2 = self.p2_engine.analyze(
                 sent_tokens,
                 sent_probs,
+                evidence_items=evidence_items,
+                p1_result=sent_p1,
             )
 
             # -------------------------------------------------

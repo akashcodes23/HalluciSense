@@ -19,6 +19,7 @@ class RootCauseCategory(str, Enum):
     CLAIM_EXTRACTION_FAILURE = "Claim Extraction Failure"
     EVIDENCE_MISSING = "Evidence Missing"
     EVIDENCE_RANKING_FAILURE = "Evidence Ranking Failure"
+    FACTUAL_CONTRADICTION = "Factual Contradiction"
     ENTITY_LINKING_FAILURE = "Entity Linking Failure"
     NLI_FAILURE = "NLI Failure"
     CONFIDENCE_FAILURE = "Confidence Failure"
@@ -82,12 +83,12 @@ class RootCauseClassifier:
         max_sim = max([getattr(e, "similarity_score", getattr(e, "score", 0.0)) for e in evidence_items], default=0.0)
         if max_sim < 0.35:
             return RootCauseCategory.RETRIEVAL_FAILURE
-        elif max_sim < 0.65:
+        elif max_sim < 0.60:
             return RootCauseCategory.EVIDENCE_RANKING_FAILURE
 
-        # 4. Entity Linking / Contradiction Failure
-        if fe_score >= 0.80:
-            return RootCauseCategory.ENTITY_LINKING_FAILURE
+        # 4. Direct Factual Contradiction
+        if fe_score >= 0.75:
+            return RootCauseCategory.FACTUAL_CONTRADICTION
 
         # 5. NLI Neutral Ambiguity Failure
         if 0.45 <= fe_score <= 0.55:

@@ -57,6 +57,7 @@ if USE_PYDANTIC:
         confidence_gap_score: Optional[float] = Field(None, ge=0.0, le=1.0)
         available: bool = Field(default=False)
         status: str = Field(default="UNAVAILABLE")
+        mode: Optional[str] = Field(default="STATIC_VERIFICATION_CONFIDENCE")
         reasoning: str = Field(...)
         # White-Box Metrics
         token_logprobs: List[float] = Field(default_factory=list)
@@ -86,6 +87,7 @@ if USE_PYDANTIC:
         pairwise_similarities: List[float] = Field(default_factory=list)
         consistency_failure_score: Optional[float] = Field(None, ge=0.0, le=1.0)
         similarity_method: str = Field(default="unavailable")
+        mode: Optional[str] = Field(default="INTRA_RESPONSE_CONSISTENCY")
         nli_analyses: List[NLIAnalysis] = Field(default_factory=list)
         contradiction_score: Optional[float] = Field(None)
         nli_available: bool = Field(default=False)
@@ -188,6 +190,7 @@ else:
         reasoning: str
         available: bool = False
         status: str = "UNAVAILABLE"
+        mode: Optional[str] = "STATIC_VERIFICATION_CONFIDENCE"
         token_logprobs: List[float] = field(default_factory=list)
         attention_entropy: Optional[float] = None
         predictive_entropy: Optional[float] = None
@@ -216,6 +219,7 @@ else:
         sample_responses: List[str] = field(default_factory=list)
         pairwise_similarities: List[float] = field(default_factory=list)
         similarity_method: str = "unavailable"
+        mode: Optional[str] = "INTRA_RESPONSE_CONSISTENCY"
         nli_analyses: List[NLIAnalysis] = field(default_factory=list)
         contradiction_score: Optional[float] = None
         nli_available: bool = False

@@ -269,24 +269,27 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         calibrated_h = float(getattr(report, "calibrated_probability", overall_h) or overall_h)
 
         avail_pillars = []
+        p2_mode = getattr(p2, "mode", "STATIC_VERIFICATION_CONFIDENCE") if p2 else "STATIC_VERIFICATION_CONFIDENCE"
+        p3_mode = getattr(p3, "mode", "INTRA_RESPONSE_CONSISTENCY") if p3 else "INTRA_RESPONSE_CONSISTENCY"
+
         if p1_available:
             avail_pillars.append("Pillar 1: Evidence Grounding")
         if p2_available:
-            avail_pillars.append("Pillar 2: Confidence Estimation")
+            avail_pillars.append(f"Pillar 2: Confidence ({p2_mode})")
         if p3_available:
-            avail_pillars.append("Pillar 3: Consistency Reasoning")
+            avail_pillars.append(f"Pillar 3: Consistency ({p3_mode})")
 
         missing_pillars = []
         if not p2_available:
-            missing_pillars.append("Pillar 2: Confidence (Token logprobs omitted)")
+            missing_pillars.append("Pillar 2: Confidence (Unavailable)")
         if not p3_available:
-            missing_pillars.append("Pillar 3: Consistency (Single generation mode)")
+            missing_pillars.append("Pillar 3: Consistency (Unavailable)")
 
         fusion_mode_str = "FULL_THREE_PILLAR" if is_full_analysis else "PARTIAL_RENORMALIZED"
 
         if is_full_analysis:
             decomp_explanation = (
-                f"Full 3-Pillar weighted fusion: H = 0.45*P1 + 0.30*P2 + 0.25*P3 = "
+                f"Full 3-Pillar weighted fusion ({p2_mode}, {p3_mode}): H = 0.45*P1 + 0.30*P2 + 0.25*P3 = "
                 f"{c_p1:.4f} + {c_p2 or 0.0:.4f} + {c_p3 or 0.0:.4f} = {overall_h:.4f} ({overall_h * 100:.2f}%)."
             )
         else:

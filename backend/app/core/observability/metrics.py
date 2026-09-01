@@ -37,6 +37,12 @@ class VerificationMetricsTracker:
         self.symbolic_evaluations_count = 0
         self.retrieval_requests_count = 0
         self.retrieval_failures_count = 0
+        self.p1_executions = 0
+        self.p2_static_executions = 0
+        self.p2_gen_executions = 0
+        self.p3_single_claim_executions = 0
+        self.p3_intra_response_executions = 0
+        self.p3_cross_gen_executions = 0
         self.total_latency_ms = 0.0
         self.created_at = time.time()
 
@@ -49,6 +55,9 @@ class VerificationMetricsTracker:
         symbolic: int,
         retrieval: int,
         latency_ms: float,
+        p1_exec: int = 1,
+        p2_mode: str = "STATIC_VERIFICATION_CONFIDENCE",
+        p3_mode: str = "INTRA_RESPONSE_CONSISTENCY",
     ):
         with self._lock:
             self.total_requests += 1
@@ -59,6 +68,19 @@ class VerificationMetricsTracker:
             self.symbolic_evaluations_count += symbolic
             self.retrieval_requests_count += retrieval
             self.total_latency_ms += latency_ms
+            self.p1_executions += p1_exec
+
+            if p2_mode == "GENERATION_LOGPROB":
+                self.p2_gen_executions += 1
+            else:
+                self.p2_static_executions += 1
+
+            if p3_mode == "SINGLE_CLAIM_CONSISTENCY":
+                self.p3_single_claim_executions += 1
+            elif p3_mode == "CROSS_GENERATION_CONSISTENCY":
+                self.p3_cross_gen_executions += 1
+            else:
+                self.p3_intra_response_executions += 1
 
     def get_summary(self) -> Dict[str, Any]:
         with self._lock:
@@ -73,6 +95,12 @@ class VerificationMetricsTracker:
                 "insufficient_evidence_count": self.insufficient_evidence_count,
                 "symbolic_evaluations_count": self.symbolic_evaluations_count,
                 "retrieval_requests_count": self.retrieval_requests_count,
+                "p1_executions": self.p1_executions,
+                "p2_static_executions": self.p2_static_executions,
+                "p2_gen_executions": self.p2_gen_executions,
+                "p3_single_claim_executions": self.p3_single_claim_executions,
+                "p3_intra_response_executions": self.p3_intra_response_executions,
+                "p3_cross_gen_executions": self.p3_cross_gen_executions,
                 "average_latency_ms": avg_lat,
             }
 

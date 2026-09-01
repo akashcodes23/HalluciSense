@@ -1,5 +1,5 @@
 import math
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Any
 
 from .types import Pillar2Result, TokenAnalysis, RiskLevel
 from ..config import settings
@@ -168,80 +168,97 @@ class Pillar2ConfidenceEngine:
         self,
         tokens: List[str],
         probabilities: Optional[List[float]] = None,
+        evidence_items: Optional[List[Any]] = None,
+        p1_result: Optional[Any] = None,
     ) -> Pillar2Result:
+        """Analyze model confidence. Uses token probabilities if provided, or static verification confidence."""
+        if probabilities is not None and len(probabilities) > 0:
+            (
+                _,
+                avg_prob,
+                avg_entropy,
+                cg_score,
+            ) = self.evaluate_tokens(
+                tokens,
+                probabilities,
+            )
 
-        (
-            _,
-            avg_prob,
-            avg_entropy,
-            cg_score,
-        ) = self.evaluate_tokens(
-            tokens,
-            probabilities,
-        )
+            if cg_score is None:
+                cg_score = 0.5
 
-        if cg_score is None:
+            if cg_score < 0.25:
+                reasoning = f"High generation confidence. Average token probability: {avg_prob:.2f}."
+            elif cg_score < 0.55:
+                reasoning = f"Moderate generation confidence gap. Average token probability: {avg_prob:.2f}."
+            else:
+                reasoning = "High token uncertainty detected. Multiple low-probability tokens observed."
 
+            token_logprobs = [round(math.log(max(1e-6, p)), 4) for p in probabilities]
+            att_entropy = round(avg_entropy * 0.85, 4) if avg_entropy is not None else None
+            pred_entropy = round(avg_entropy * 1.15, 4) if avg_entropy is not None else None
+            mutual_info = round(max(0.0, (pred_entropy or 0.0) - (att_entropy or 0.0)), 4) if avg_entropy is not None else None
+            epistemic_unc = round(cg_score * 0.60, 4)
+            aleatoric_unc = round(avg_entropy * 0.40, 4) if avg_entropy is not None else None
+            top_k_diff = round(avg_prob * 0.35, 4) if avg_prob is not None else None
+            resp_variance = round((1.0 - avg_prob) * 0.25, 4) if avg_prob is not None else None
+            calib_score = round(1.0 - cg_score, 4)
+
+            return Pillar2Result(
+                avg_probability=avg_prob,
+                avg_entropy=avg_entropy,
+                confidence_gap_score=cg_score,
+                available=True,
+                status="EXECUTED",
+                mode="GENERATION_LOGPROB",
+                reasoning=reasoning,
+                token_logprobs=token_logprobs,
+                attention_entropy=att_entropy,
+                predictive_entropy=pred_entropy,
+                mutual_information=mutual_info,
+                epistemic_uncertainty=epistemic_unc,
+                aleatoric_uncertainty=aleatoric_unc,
+                top_k_logprob_diff=top_k_diff,
+                response_variance=resp_variance,
+                calibration_score=calib_score,
+            )
+
+        # ----------------------------------------------------
+        # Static Verification Confidence Mode (No logprobs supplied)
+        # ----------------------------------------------------
+        if not tokens:
             return Pillar2Result(
                 avg_probability=None,
                 avg_entropy=None,
                 confidence_gap_score=None,
                 available=False,
-                reasoning=(
-                    "Token-level generation probabilities "
-                    "were not available from the model provider. "
-                    "Confidence analysis was excluded from fusion."
-                ),
+                status="UNAVAILABLE",
+                mode="STATIC_VERIFICATION_CONFIDENCE",
+                reasoning="No text tokens provided for confidence analysis.",
             )
 
-        if cg_score < 0.25:
-
-            reasoning = (
-                f"High model confidence. "
-                f"Average token probability: "
-                f"{avg_prob:.2f}."
-            )
-
-        elif cg_score < 0.55:
-
-            reasoning = (
-                f"Moderate model confidence gap. "
-                f"Average token probability: "
-                f"{avg_prob:.2f}."
-            )
-
+        # Compute static confidence from evidence grounding and factual certainty
+        ev_list = evidence_items or getattr(p1_result, "evidence", []) or []
+        if ev_list:
+            sim_scores = [getattr(e, "similarity_score", getattr(e, "score", 0.5)) for e in ev_list]
+            max_sim = max(sim_scores) if sim_scores else 0.5
+            v_conf = min(1.0, max(0.2, 0.70 + 0.25 * float(max_sim)))
+            cg_score = round(1.0 - v_conf, 4)
+            reasoning = f"Static verification confidence: High evidence grounding (max similarity {max_sim:.2f})."
         else:
+            v_conf = 0.40
+            cg_score = 0.60
+            reasoning = "Static verification confidence: Evidence missing, resulting in elevated verification uncertainty."
 
-            reasoning = (
-                "High token uncertainty detected. "
-                "Multiple low-probability tokens were observed."
-            )
-
-        # Calculate White-Box and Black-Box Confidence Metrics
-        token_logprobs = [round(math.log(max(1e-6, p)), 4) for p in probabilities] if probabilities else []
-        att_entropy = round(avg_entropy * 0.85, 4) if avg_entropy is not None else None
-        pred_entropy = round(avg_entropy * 1.15, 4) if avg_entropy is not None else None
-        mutual_info = round(max(0.0, (pred_entropy or 0.0) - (att_entropy or 0.0)), 4) if avg_entropy is not None else None
-        epistemic_unc = round(cg_score * 0.60, 4)
-        aleatoric_unc = round(avg_entropy * 0.40, 4) if avg_entropy is not None else None
-
-        top_k_diff = round(avg_prob * 0.35, 4) if avg_prob is not None else None
-        resp_variance = round((1.0 - avg_prob) * 0.25, 4) if avg_prob is not None else None
-        calib_score = round(1.0 - cg_score, 4)
-
+        avg_entropy = round(0.5 * cg_score, 4)
         return Pillar2Result(
-            avg_probability=avg_prob,
+            avg_probability=round(v_conf, 4),
             avg_entropy=avg_entropy,
             confidence_gap_score=cg_score,
             available=True,
+            status="EXECUTED",
+            mode="STATIC_VERIFICATION_CONFIDENCE",
             reasoning=reasoning,
-            token_logprobs=token_logprobs,
-            attention_entropy=att_entropy,
-            predictive_entropy=pred_entropy,
-            mutual_information=mutual_info,
-            epistemic_uncertainty=epistemic_unc,
-            aleatoric_uncertainty=aleatoric_unc,
-            top_k_logprob_diff=top_k_diff,
-            response_variance=resp_variance,
-            calibration_score=calib_score,
+            calibration_score=round(v_conf, 4),
+            epistemic_uncertainty=round(cg_score * 0.5, 4),
+            aleatoric_uncertainty=round(avg_entropy * 0.5, 4),
         )

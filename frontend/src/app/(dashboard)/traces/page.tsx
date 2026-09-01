@@ -387,7 +387,7 @@ function transformHistoryEntry(entry: AnalysisHistoryEntry): TraceData {
       status: p2Available ? "completed" : "unavailable",
       details: p2Available ? {
         confidence_gap: res.pillar_scores?.confidence ?? null,
-      } : { reason: "Token logprobs not available" }
+      } : { reason: "Confidence analysis unavailable" }
     },
     {
       name: "Pillar 3 — Consistency Reasoning",
@@ -395,7 +395,7 @@ function transformHistoryEntry(entry: AnalysisHistoryEntry): TraceData {
       status: p3Available ? "completed" : "unavailable",
       details: p3Available ? {
         consistency: res.pillar_scores?.consistency ?? null,
-      } : { reason: "Multi-generation not available for static input" }
+      } : { reason: "Consistency analysis unavailable" }
     },
     {
       name: "Adaptive Fusion",

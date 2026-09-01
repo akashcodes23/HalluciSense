@@ -104,6 +104,9 @@ class FusionEngine:
             "alpha_factual_error": round(eff_w1, 4),
             "beta_confidence_gap": round(eff_w2, 4),
             "gamma_consistency_failure": round(eff_w3, 4),
+            "alpha": round(eff_w1, 4),
+            "beta": round(eff_w2, 4),
+            "gamma": round(eff_w3, 4),
         }
         mask = [m_fe, m_cg, m_cf]
         return round(max(0.0, min(1.0, h)), 4), effective_weights, mask
