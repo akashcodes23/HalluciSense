@@ -1,0 +1,23 @@
+{
+  "canonical_19_features": [
+    "p1_mean_entailment",
+    "p1_max_entailment",
+    "p1_mean_contradiction",
+    "p1_min_support_margin",
+    "p1_num_claims",
+    "p2_max_pairwise_contradiction",
+    "p2_mean_pairwise_contradiction",
+    "p2_max_pairwise_similarity",
+    "p2_fraction_contradictory_pairs",
+    "p2_num_claims",
+    "prob_p1",
+    "prob_p2",
+    "logit_p1",
+    "logit_p2",
+    "prob_disagreement_abs",
+    "prob_mean",
+    "prob_max",
+    "prob_min",
+    "prob_ratio"
+  ]
+}

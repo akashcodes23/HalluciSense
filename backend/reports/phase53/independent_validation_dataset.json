@@ -1,0 +1,1414 @@
+{
+  "dataset_name": "phase53_independent_validation_set_v1",
+  "total_examples": 200,
+  "factual_count": 100,
+  "hallucinated_count": 100,
+  "overlap_audit": {
+    "phase51_overlap_count": 0,
+    "phase52_overlap_count": 0,
+    "internal_duplicate_count": 0,
+    "leakage_status": "ZERO_LEAKAGE_VERIFIED"
+  },
+  "examples": [
+    {
+      "id": "IV_F01",
+      "category": "factual",
+      "text": "Stockholm is the capital city of Sweden.",
+      "query": "Capital of Sweden",
+      "label": 0
+    },
+    {
+      "id": "IV_F02",
+      "category": "factual",
+      "text": "Oslo is the capital city of Norway.",
+      "query": "Capital of Norway",
+      "label": 0
+    },
+    {
+      "id": "IV_F03",
+      "category": "factual",
+      "text": "Helsinki is the capital of Finland.",
+      "query": "Capital of Finland",
+      "label": 0
+    },
+    {
+      "id": "IV_F04",
+      "category": "factual",
+      "text": "Copenhagen is the capital of Denmark.",
+      "query": "Capital of Denmark",
+      "label": 0
+    },
+    {
+      "id": "IV_F05",
+      "category": "factual",
+      "text": "The chemical element sodium has symbol Na.",
+      "query": "Sodium symbol",
+      "label": 0
+    },
+    {
+      "id": "IV_F06",
+      "category": "factual",
+      "text": "Potassium has the chemical symbol K.",
+      "query": "Potassium symbol",
+      "label": 0
+    },
+    {
+      "id": "IV_F07",
+      "category": "factual",
+      "text": "The Danube flows through multiple Central and Eastern European countries.",
+      "query": "Danube river",
+      "label": 0
+    },
+    {
+      "id": "IV_F08",
+      "category": "factual",
+      "text": "The Rhine river originates in the Swiss Alps.",
+      "query": "Rhine river origin",
+      "label": 0
+    },
+    {
+      "id": "IV_F09",
+      "category": "factual",
+      "text": "The speed of sound in dry air at 20 degrees Celsius is about 343 meters per second.",
+      "query": "Speed of sound air",
+      "label": 0
+    },
+    {
+      "id": "IV_F10",
+      "category": "factual",
+      "text": "Johannes Kepler formulated three laws of planetary motion.",
+      "query": "Kepler laws",
+      "label": 0
+    },
+    {
+      "id": "IV_F11",
+      "category": "factual",
+      "text": "Marie Curie was awarded Nobel Prizes in both Physics and Chemistry.",
+      "query": "Marie Curie Nobel",
+      "label": 0
+    },
+    {
+      "id": "IV_F12",
+      "category": "factual",
+      "text": "Electrons orbit atomic nuclei in defined quantum energy shells.",
+      "query": "Electron shells",
+      "label": 0
+    },
+    {
+      "id": "IV_F13",
+      "category": "factual",
+      "text": "The mitochondria generate most of the chemical energy needed by cells.",
+      "query": "Mitochondria function",
+      "label": 0
+    },
+    {
+      "id": "IV_F14",
+      "category": "factual",
+      "text": "Ribosomes are macromolecular machines that synthesize biological proteins.",
+      "query": "Ribosome function",
+      "label": 0
+    },
+    {
+      "id": "IV_F15",
+      "category": "factual",
+      "text": "Hemoglobin is an iron-containing oxygen-transport metalloprotein.",
+      "query": "Hemoglobin function",
+      "label": 0
+    },
+    {
+      "id": "IV_F16",
+      "category": "factual",
+      "text": "The Mediterranean Sea is almost entirely surrounded by land.",
+      "query": "Mediterranean Sea",
+      "label": 0
+    },
+    {
+      "id": "IV_F17",
+      "category": "factual",
+      "text": "The Alps are the highest mountain range situated entirely in Europe.",
+      "query": "Alps mountain range",
+      "label": 0
+    },
+    {
+      "id": "IV_F18",
+      "category": "factual",
+      "text": "The Andes are the longest continental mountain range in the world.",
+      "query": "Andes mountain range",
+      "label": 0
+    },
+    {
+      "id": "IV_F19",
+      "category": "factual",
+      "text": "Neptune is the eighth and farthest known planet from the Sun.",
+      "query": "Neptune planet",
+      "label": 0
+    },
+    {
+      "id": "IV_F20",
+      "category": "factual",
+      "text": "Uranus has a unique sideways planetary tilt.",
+      "query": "Uranus tilt",
+      "label": 0
+    },
+    {
+      "id": "IV_F21",
+      "category": "factual",
+      "text": "The boiling point of pure ethanol at standard pressure is about 78.37 degrees Celsius.",
+      "query": "Ethanol boiling point",
+      "label": 0
+    },
+    {
+      "id": "IV_F22",
+      "category": "factual",
+      "text": "Chlorophyll gives plant foliage its characteristic green color.",
+      "query": "Chlorophyll green",
+      "label": 0
+    },
+    {
+      "id": "IV_F23",
+      "category": "factual",
+      "text": "The ozone layer absorbs most of the Sun's ultraviolet radiation.",
+      "query": "Ozone layer UV",
+      "label": 0
+    },
+    {
+      "id": "IV_F24",
+      "category": "factual",
+      "text": "Tectonic plate movements can cause earthquakes and volcanic activity.",
+      "query": "Plate tectonics",
+      "label": 0
+    },
+    {
+      "id": "IV_F25",
+      "category": "factual",
+      "text": "The pancreas secretes insulin to regulate blood glucose levels.",
+      "query": "Pancreas insulin",
+      "label": 0
+    },
+    {
+      "id": "IV_F26",
+      "category": "factual",
+      "text": "Titan is the largest moon orbiting the planet Saturn.",
+      "query": "Titan moon Saturn",
+      "label": 0
+    },
+    {
+      "id": "IV_F27",
+      "category": "factual",
+      "text": "Europa is an icy Galilean moon of Jupiter with a subsurface ocean.",
+      "query": "Europa moon ocean",
+      "label": 0
+    },
+    {
+      "id": "IV_F28",
+      "category": "factual",
+      "text": "The Suez Canal connects the Mediterranean Sea to the Red Sea.",
+      "query": "Suez Canal",
+      "label": 0
+    },
+    {
+      "id": "IV_F29",
+      "category": "factual",
+      "text": "The Panama Canal links the Atlantic Ocean to the Pacific Ocean.",
+      "query": "Panama Canal",
+      "label": 0
+    },
+    {
+      "id": "IV_F30",
+      "category": "factual",
+      "text": "The Periodic Table was originally organized by Dmitri Mendeleev.",
+      "query": "Periodic Table Mendeleev",
+      "label": 0
+    },
+    {
+      "id": "IV_F31",
+      "category": "paraphrase",
+      "text": "Sweden is administratively centered around its capital of Stockholm.",
+      "query": "Capital of Sweden",
+      "label": 0
+    },
+    {
+      "id": "IV_F32",
+      "category": "paraphrase",
+      "text": "Norway conducts governmental affairs from Oslo.",
+      "query": "Capital of Norway",
+      "label": 0
+    },
+    {
+      "id": "IV_F33",
+      "category": "paraphrase",
+      "text": "Helsinki serves as the capital metropolis for Finland.",
+      "query": "Capital of Finland",
+      "label": 0
+    },
+    {
+      "id": "IV_F34",
+      "category": "paraphrase",
+      "text": "The Danish capital and largest urban center is Copenhagen.",
+      "query": "Capital of Denmark",
+      "label": 0
+    },
+    {
+      "id": "IV_F35",
+      "category": "paraphrase",
+      "text": "The alkali metal sodium is designated on periodic charts as Na.",
+      "query": "Sodium symbol",
+      "label": 0
+    },
+    {
+      "id": "IV_F36",
+      "category": "paraphrase",
+      "text": "In chemical notation, potassium is identified by the single letter K.",
+      "query": "Potassium symbol",
+      "label": 0
+    },
+    {
+      "id": "IV_F37",
+      "category": "paraphrase",
+      "text": "Flowing east across the continent, the Danube drains into the Black Sea.",
+      "query": "Danube river Black Sea",
+      "label": 0
+    },
+    {
+      "id": "IV_F38",
+      "category": "paraphrase",
+      "text": "Kepler outlined three fundamental geometric principles governing planetary orbits.",
+      "query": "Kepler laws planetary",
+      "label": 0
+    },
+    {
+      "id": "IV_F39",
+      "category": "paraphrase",
+      "text": "Dual Nobel laureateship in distinct scientific branches was achieved by Marie Curie.",
+      "query": "Marie Curie Nobel awards",
+      "label": 0
+    },
+    {
+      "id": "IV_F40",
+      "category": "paraphrase",
+      "text": "Cellular respiration yields adenosine triphosphate within mitochondria organelles.",
+      "query": "Mitochondria ATP",
+      "label": 0
+    },
+    {
+      "id": "IV_F41",
+      "category": "paraphrase",
+      "text": "Protein translation along messenger RNA is catalyzed by cytoplasmic ribosomes.",
+      "query": "Ribosomes translation",
+      "label": 0
+    },
+    {
+      "id": "IV_F42",
+      "category": "paraphrase",
+      "text": "Erythrocytes rely on hemoglobin to circulate respiratory oxygen molecules.",
+      "query": "Hemoglobin oxygen transport",
+      "label": 0
+    },
+    {
+      "id": "IV_F43",
+      "category": "paraphrase",
+      "text": "Stretching along western South America, the Andes form an expansive mountain spine.",
+      "query": "Andes South America",
+      "label": 0
+    },
+    {
+      "id": "IV_F44",
+      "category": "paraphrase",
+      "text": "Orbiting furthest along the solar perimeter, Neptune is an ice giant planet.",
+      "query": "Neptune ice giant",
+      "label": 0
+    },
+    {
+      "id": "IV_F45",
+      "category": "paraphrase",
+      "text": "Atmospheric stratospheric ozone shields living matter from solar ultraviolet flux.",
+      "query": "Ozone shield UV",
+      "label": 0
+    },
+    {
+      "id": "IV_F46",
+      "category": "paraphrase",
+      "text": "Endocrine beta cells synthesize insulin to maintain blood sugar balance.",
+      "query": "Insulin regulation glucose",
+      "label": 0
+    },
+    {
+      "id": "IV_F47",
+      "category": "paraphrase",
+      "text": "Saturn is orbited by Titan, a moon possessing a dense hydrocarbon atmosphere.",
+      "query": "Titan moon atmosphere",
+      "label": 0
+    },
+    {
+      "id": "IV_F48",
+      "category": "paraphrase",
+      "text": "Maritime vessels transit between the Mediterranean and Red Sea via the Suez Canal.",
+      "query": "Suez Canal transit",
+      "label": 0
+    },
+    {
+      "id": "IV_F49",
+      "category": "paraphrase",
+      "text": "The Isthmus of Panama is traversed by a canal connecting major oceans.",
+      "query": "Panama Canal isthmus",
+      "label": 0
+    },
+    {
+      "id": "IV_F50",
+      "category": "paraphrase",
+      "text": "Dmitri Mendeleev formulated the recurring periodicity of atomic elements in 1869.",
+      "query": "Mendeleev periodic table 1869",
+      "label": 0
+    },
+    {
+      "id": "IV_F51",
+      "category": "paraphrase",
+      "text": "Under ambient conditions, liquid water demonstrates neutral pH near 7.0.",
+      "query": "Water pH neutral",
+      "label": 0
+    },
+    {
+      "id": "IV_F52",
+      "category": "paraphrase",
+      "text": "Avogadro constant quantifies the number of constituent particles per mole.",
+      "query": "Avogadro constant",
+      "label": 0
+    },
+    {
+      "id": "IV_F53",
+      "category": "paraphrase",
+      "text": "Planetary gravitational fields accelerate falling masses uniformly in vacuum.",
+      "query": "Gravity vacuum acceleration",
+      "label": 0
+    },
+    {
+      "id": "IV_F54",
+      "category": "paraphrase",
+      "text": "Enzymatic proteins function as biological catalysts lowering activation barriers.",
+      "query": "Enzymes biological catalysts",
+      "label": 0
+    },
+    {
+      "id": "IV_F55",
+      "category": "paraphrase",
+      "text": "The Earth rotates eastward on its rotational axis once per sidereal day.",
+      "query": "Earth axis rotation",
+      "label": 0
+    },
+    {
+      "id": "IV_F56",
+      "category": "numerical",
+      "text": "14 multiplied by 5 equals 70.",
+      "query": "14*5",
+      "label": 0
+    },
+    {
+      "id": "IV_F57",
+      "category": "numerical",
+      "text": "36 plus 48 equals 84.",
+      "query": "36+48",
+      "label": 0
+    },
+    {
+      "id": "IV_F58",
+      "category": "numerical",
+      "text": "125 divided by 5 equals 25.",
+      "query": "125/5",
+      "label": 0
+    },
+    {
+      "id": "IV_F59",
+      "category": "numerical",
+      "text": "90 minus 27 equals 63.",
+      "query": "90-27",
+      "label": 0
+    },
+    {
+      "id": "IV_F60",
+      "category": "numerical",
+      "text": "8 multiplied by 12 equals 96.",
+      "query": "8*12",
+      "label": 0
+    },
+    {
+      "id": "IV_F61",
+      "category": "numerical",
+      "text": "225 divided by 15 equals 15.",
+      "query": "225/15",
+      "label": 0
+    },
+    {
+      "id": "IV_F62",
+      "category": "numerical",
+      "text": "55 plus 45 equals 100.",
+      "query": "55+45",
+      "label": 0
+    },
+    {
+      "id": "IV_F63",
+      "category": "numerical",
+      "text": "13 multiplied by 3 equals 39.",
+      "query": "13*3",
+      "label": 0
+    },
+    {
+      "id": "IV_F64",
+      "category": "numerical",
+      "text": "96 divided by 8 equals 12.",
+      "query": "96/8",
+      "label": 0
+    },
+    {
+      "id": "IV_F65",
+      "category": "numerical",
+      "text": "77 minus 33 equals 44.",
+      "query": "77-33",
+      "label": 0
+    },
+    {
+      "id": "IV_F66",
+      "category": "numerical",
+      "text": "17 multiplied by 2 equals 34.",
+      "query": "17*2",
+      "label": 0
+    },
+    {
+      "id": "IV_F67",
+      "category": "numerical",
+      "text": "300 minus 75 equals 225.",
+      "query": "300-75",
+      "label": 0
+    },
+    {
+      "id": "IV_F68",
+      "category": "numerical",
+      "text": "7 multiplied by 8 equals 56.",
+      "query": "7*8",
+      "label": 0
+    },
+    {
+      "id": "IV_F69",
+      "category": "numerical",
+      "text": "108 divided by 9 equals 12.",
+      "query": "108/9",
+      "label": 0
+    },
+    {
+      "id": "IV_F70",
+      "category": "numerical",
+      "text": "65 plus 35 equals 100.",
+      "query": "65+35",
+      "label": 0
+    },
+    {
+      "id": "IV_F71",
+      "category": "numerical",
+      "text": "18 multiplied by 3 equals 54.",
+      "query": "18*3",
+      "label": 0
+    },
+    {
+      "id": "IV_F72",
+      "category": "numerical",
+      "text": "400 divided by 8 equals 50.",
+      "query": "400/8",
+      "label": 0
+    },
+    {
+      "id": "IV_F73",
+      "category": "numerical",
+      "text": "24 plus 36 equals 60.",
+      "query": "24+36",
+      "label": 0
+    },
+    {
+      "id": "IV_F74",
+      "category": "numerical",
+      "text": "56 divided by 7 equals 8.",
+      "query": "56/7",
+      "label": 0
+    },
+    {
+      "id": "IV_F75",
+      "category": "numerical",
+      "text": "9 multiplied by 6 equals 54.",
+      "query": "9*6",
+      "label": 0
+    },
+    {
+      "id": "IV_F76",
+      "category": "numerical",
+      "text": "15 multiplied by 4 equals 60.",
+      "query": "15*4",
+      "label": 0
+    },
+    {
+      "id": "IV_F77",
+      "category": "numerical",
+      "text": "110 minus 40 equals 70.",
+      "query": "110-40",
+      "label": 0
+    },
+    {
+      "id": "IV_F78",
+      "category": "numerical",
+      "text": "84 divided by 7 equals 12.",
+      "query": "84/7",
+      "label": 0
+    },
+    {
+      "id": "IV_F79",
+      "category": "numerical",
+      "text": "19 plus 21 equals 40.",
+      "query": "19+21",
+      "label": 0
+    },
+    {
+      "id": "IV_F80",
+      "category": "numerical",
+      "text": "16 multiplied by 5 equals 80.",
+      "query": "16*5",
+      "label": 0
+    },
+    {
+      "id": "IV_F81",
+      "category": "consistent_multi_claim",
+      "text": "Stockholm is the capital of Sweden. Oslo is the capital of Norway.",
+      "query": "Capitals Scandinavia",
+      "label": 0
+    },
+    {
+      "id": "IV_F82",
+      "category": "consistent_multi_claim",
+      "text": "Helsinki is the capital of Finland. Copenhagen is the capital of Denmark.",
+      "query": "Nordic capitals",
+      "label": 0
+    },
+    {
+      "id": "IV_F83",
+      "category": "consistent_multi_claim",
+      "text": "Sodium has symbol Na. Potassium has symbol K.",
+      "query": "Alkali metals symbols",
+      "label": 0
+    },
+    {
+      "id": "IV_F84",
+      "category": "consistent_multi_claim",
+      "text": "The Danube is a European river. The Rhine is also a European river.",
+      "query": "European rivers",
+      "label": 0
+    },
+    {
+      "id": "IV_F85",
+      "category": "consistent_multi_claim",
+      "text": "Johannes Kepler studied astronomy. Marie Curie researched radioactivity.",
+      "query": "Kepler Curie science",
+      "label": 0
+    },
+    {
+      "id": "IV_F86",
+      "category": "consistent_multi_claim",
+      "text": "Mitochondria produce cellular energy. Ribosomes assemble cellular proteins.",
+      "query": "Cell organelles function",
+      "label": 0
+    },
+    {
+      "id": "IV_F87",
+      "category": "consistent_multi_claim",
+      "text": "The Alps are in Europe. The Andes are in South America.",
+      "query": "Mountain ranges continents",
+      "label": 0
+    },
+    {
+      "id": "IV_F88",
+      "category": "consistent_multi_claim",
+      "text": "Neptune is an outer planet. Uranus is an outer planet.",
+      "query": "Outer planets",
+      "label": 0
+    },
+    {
+      "id": "IV_F89",
+      "category": "consistent_multi_claim",
+      "text": "Titan orbits Saturn. Europa orbits Jupiter.",
+      "query": "Gas giant moons",
+      "label": 0
+    },
+    {
+      "id": "IV_F90",
+      "category": "consistent_multi_claim",
+      "text": "The Suez Canal is in Egypt. The Panama Canal is in Panama.",
+      "query": "Canals geography",
+      "label": 0
+    },
+    {
+      "id": "IV_F91",
+      "category": "consistent_multi_claim",
+      "text": "Gold is a noble metal. Platinum is a noble metal.",
+      "query": "Noble metals",
+      "label": 0
+    },
+    {
+      "id": "IV_F92",
+      "category": "consistent_multi_claim",
+      "text": "The Atlantic is an ocean. The Indian is an ocean.",
+      "query": "World oceans",
+      "label": 0
+    },
+    {
+      "id": "IV_F93",
+      "category": "consistent_multi_claim",
+      "text": "Helium has atomic number 2. Neon has atomic number 10.",
+      "query": "Noble gases atomic numbers",
+      "label": 0
+    },
+    {
+      "id": "IV_F94",
+      "category": "consistent_multi_claim",
+      "text": "The heart has four chambers. The lungs contain alveoli.",
+      "query": "Cardiopulmonary anatomy",
+      "label": 0
+    },
+    {
+      "id": "IV_F95",
+      "category": "consistent_multi_claim",
+      "text": "Photosynthesis requires light. Respiration consumes oxygen.",
+      "query": "Plant physiology",
+      "label": 0
+    },
+    {
+      "id": "IV_F96",
+      "category": "consistent_multi_claim",
+      "text": "Rome is the capital of Italy. Athens is the capital of Greece.",
+      "query": "Southern European capitals",
+      "label": 0
+    },
+    {
+      "id": "IV_F97",
+      "category": "consistent_multi_claim",
+      "text": "Mercury is the smallest planet. Jupiter is the largest planet.",
+      "query": "Smallest largest planets",
+      "label": 0
+    },
+    {
+      "id": "IV_F98",
+      "category": "consistent_multi_claim",
+      "text": "DNA contains adenine. RNA contains uracil.",
+      "query": "Nucleic acids bases",
+      "label": 0
+    },
+    {
+      "id": "IV_F99",
+      "category": "consistent_multi_claim",
+      "text": "Iron is a ferromagnetic metal. Nickel is a ferromagnetic metal.",
+      "query": "Ferromagnetic elements",
+      "label": 0
+    },
+    {
+      "id": "IV_F100",
+      "category": "consistent_multi_claim",
+      "text": "Canada is in North America. Brazil is in South America.",
+      "query": "Americas countries",
+      "label": 0
+    },
+    {
+      "id": "IV_H01",
+      "category": "clearly_false",
+      "text": "Stockholm is the capital city of Norway.",
+      "query": "Capital of Norway",
+      "label": 1
+    },
+    {
+      "id": "IV_H02",
+      "category": "clearly_false",
+      "text": "Oslo is the capital city of Sweden.",
+      "query": "Capital of Sweden",
+      "label": 1
+    },
+    {
+      "id": "IV_H03",
+      "category": "clearly_false",
+      "text": "Helsinki is the capital of Denmark.",
+      "query": "Capital of Denmark",
+      "label": 1
+    },
+    {
+      "id": "IV_H04",
+      "category": "clearly_false",
+      "text": "Copenhagen is the capital of Finland.",
+      "query": "Capital of Finland",
+      "label": 1
+    },
+    {
+      "id": "IV_H05",
+      "category": "clearly_false",
+      "text": "The chemical element sodium has symbol Fe.",
+      "query": "Sodium symbol",
+      "label": 1
+    },
+    {
+      "id": "IV_H06",
+      "category": "clearly_false",
+      "text": "Potassium has the chemical symbol Na.",
+      "query": "Potassium symbol",
+      "label": 1
+    },
+    {
+      "id": "IV_H07",
+      "category": "clearly_false",
+      "text": "The Danube flows entirely through South America.",
+      "query": "Danube river location",
+      "label": 1
+    },
+    {
+      "id": "IV_H08",
+      "category": "clearly_false",
+      "text": "The Rhine river originates in the Sahara desert.",
+      "query": "Rhine river origin",
+      "label": 1
+    },
+    {
+      "id": "IV_H09",
+      "category": "clearly_false",
+      "text": "The speed of sound in air is 300,000 kilometers per second.",
+      "query": "Speed of sound air",
+      "label": 1
+    },
+    {
+      "id": "IV_H10",
+      "category": "clearly_false",
+      "text": "Johannes Kepler invented the steam locomotive in 1950.",
+      "query": "Kepler inventions",
+      "label": 1
+    },
+    {
+      "id": "IV_H11",
+      "category": "clearly_false",
+      "text": "Marie Curie was the first person to walk on Mars.",
+      "query": "Marie Curie Mars",
+      "label": 1
+    },
+    {
+      "id": "IV_H12",
+      "category": "clearly_false",
+      "text": "Electrons are massive neutral particles that form atomic nuclei.",
+      "query": "Electrons nucleus",
+      "label": 1
+    },
+    {
+      "id": "IV_H13",
+      "category": "clearly_false",
+      "text": "Mitochondria are responsible for pumping blood through veins.",
+      "query": "Mitochondria blood",
+      "label": 1
+    },
+    {
+      "id": "IV_H14",
+      "category": "clearly_false",
+      "text": "Ribosomes are crystalline minerals mined from quartz veins.",
+      "query": "Ribosomes quartz",
+      "label": 1
+    },
+    {
+      "id": "IV_H15",
+      "category": "clearly_false",
+      "text": "Hemoglobin is an inorganic plastic polymer synthesized by trees.",
+      "query": "Hemoglobin plastic",
+      "label": 1
+    },
+    {
+      "id": "IV_H16",
+      "category": "clearly_false",
+      "text": "The Mediterranean Sea is situated between Canada and Greenland.",
+      "query": "Mediterranean location",
+      "label": 1
+    },
+    {
+      "id": "IV_H17",
+      "category": "clearly_false",
+      "text": "The Alps are a submerged coral reef in the Pacific Ocean.",
+      "query": "Alps coral reef",
+      "label": 1
+    },
+    {
+      "id": "IV_H18",
+      "category": "clearly_false",
+      "text": "The Andes are located on the surface of the Moon.",
+      "query": "Andes moon",
+      "label": 1
+    },
+    {
+      "id": "IV_H19",
+      "category": "clearly_false",
+      "text": "Neptune is the closest planet orbiting inside Mercury's orbit.",
+      "query": "Neptune orbit",
+      "label": 1
+    },
+    {
+      "id": "IV_H20",
+      "category": "clearly_false",
+      "text": "Uranus is a terrestrial rock planet with no gas atmosphere.",
+      "query": "Uranus gas",
+      "label": 1
+    },
+    {
+      "id": "IV_H21",
+      "category": "clearly_false",
+      "text": "The boiling point of ethanol is 5,000 degrees Celsius.",
+      "query": "Ethanol boiling point",
+      "label": 1
+    },
+    {
+      "id": "IV_H22",
+      "category": "clearly_false",
+      "text": "Chlorophyll gives plant foliage its dark purple neon glow.",
+      "query": "Chlorophyll purple",
+      "label": 1
+    },
+    {
+      "id": "IV_H23",
+      "category": "clearly_false",
+      "text": "The ozone layer is a solid steel dome constructed in 1920.",
+      "query": "Ozone layer steel",
+      "label": 1
+    },
+    {
+      "id": "IV_H24",
+      "category": "clearly_false",
+      "text": "Tectonic plates are giant wooden rafts floating on molten ice.",
+      "query": "Tectonic plates wood",
+      "label": 1
+    },
+    {
+      "id": "IV_H25",
+      "category": "clearly_false",
+      "text": "The pancreas secretes liquid petroleum into the bloodstream.",
+      "query": "Pancreas petroleum",
+      "label": 1
+    },
+    {
+      "id": "IV_H26",
+      "category": "numerical_error",
+      "text": "14 multiplied by 5 equals 75.",
+      "query": "14*5",
+      "label": 1
+    },
+    {
+      "id": "IV_H27",
+      "category": "numerical_error",
+      "text": "36 plus 48 equals 94.",
+      "query": "36+48",
+      "label": 1
+    },
+    {
+      "id": "IV_H28",
+      "category": "numerical_error",
+      "text": "125 divided by 5 equals 30.",
+      "query": "125/5",
+      "label": 1
+    },
+    {
+      "id": "IV_H29",
+      "category": "numerical_error",
+      "text": "90 minus 27 equals 53.",
+      "query": "90-27",
+      "label": 1
+    },
+    {
+      "id": "IV_H30",
+      "category": "numerical_error",
+      "text": "8 multiplied by 12 equals 98.",
+      "query": "8*12",
+      "label": 1
+    },
+    {
+      "id": "IV_H31",
+      "category": "numerical_error",
+      "text": "225 divided by 15 equals 12.",
+      "query": "225/15",
+      "label": 1
+    },
+    {
+      "id": "IV_H32",
+      "category": "numerical_error",
+      "text": "55 plus 45 equals 110.",
+      "query": "55+45",
+      "label": 1
+    },
+    {
+      "id": "IV_H33",
+      "category": "numerical_error",
+      "text": "13 multiplied by 3 equals 49.",
+      "query": "13*3",
+      "label": 1
+    },
+    {
+      "id": "IV_H34",
+      "category": "numerical_error",
+      "text": "96 divided by 8 equals 14.",
+      "query": "96/8",
+      "label": 1
+    },
+    {
+      "id": "IV_H35",
+      "category": "numerical_error",
+      "text": "77 minus 33 equals 34.",
+      "query": "77-33",
+      "label": 1
+    },
+    {
+      "id": "IV_H36",
+      "category": "numerical_error",
+      "text": "17 multiplied by 2 equals 38.",
+      "query": "17*2",
+      "label": 1
+    },
+    {
+      "id": "IV_H37",
+      "category": "numerical_error",
+      "text": "300 minus 75 equals 215.",
+      "query": "300-75",
+      "label": 1
+    },
+    {
+      "id": "IV_H38",
+      "category": "numerical_error",
+      "text": "7 multiplied by 8 equals 54.",
+      "query": "7*8",
+      "label": 1
+    },
+    {
+      "id": "IV_H39",
+      "category": "numerical_error",
+      "text": "108 divided by 9 equals 14.",
+      "query": "108/9",
+      "label": 1
+    },
+    {
+      "id": "IV_H40",
+      "category": "numerical_error",
+      "text": "65 plus 35 equals 90.",
+      "query": "65+35",
+      "label": 1
+    },
+    {
+      "id": "IV_H41",
+      "category": "numerical_error",
+      "text": "18 multiplied by 3 equals 58.",
+      "query": "18*3",
+      "label": 1
+    },
+    {
+      "id": "IV_H42",
+      "category": "numerical_error",
+      "text": "400 divided by 8 equals 45.",
+      "query": "400/8",
+      "label": 1
+    },
+    {
+      "id": "IV_H43",
+      "category": "numerical_error",
+      "text": "24 plus 36 equals 70.",
+      "query": "24+36",
+      "label": 1
+    },
+    {
+      "id": "IV_H44",
+      "category": "numerical_error",
+      "text": "56 divided by 7 equals 9.",
+      "query": "56/7",
+      "label": 1
+    },
+    {
+      "id": "IV_H45",
+      "category": "numerical_error",
+      "text": "9 multiplied by 6 equals 58.",
+      "query": "9*6",
+      "label": 1
+    },
+    {
+      "id": "IV_H46",
+      "category": "multi_claim_contradiction",
+      "text": "Stockholm is the capital of Sweden. Oslo is the capital of Sweden.",
+      "query": "Capitals Sweden",
+      "label": 1
+    },
+    {
+      "id": "IV_H47",
+      "category": "multi_claim_contradiction",
+      "text": "Helsinki is the capital of Finland. Madrid is the capital of Finland.",
+      "query": "Capitals Finland",
+      "label": 1
+    },
+    {
+      "id": "IV_H48",
+      "category": "multi_claim_contradiction",
+      "text": "Sodium has symbol Na. Sodium has no symbol and is not an element.",
+      "query": "Sodium element",
+      "label": 1
+    },
+    {
+      "id": "IV_H49",
+      "category": "multi_claim_contradiction",
+      "text": "The Danube is a river in Europe. The Danube does not exist on Earth.",
+      "query": "Danube river existence",
+      "label": 1
+    },
+    {
+      "id": "IV_H50",
+      "category": "multi_claim_contradiction",
+      "text": "Marie Curie won two Nobel Prizes. Marie Curie never worked in science.",
+      "query": "Marie Curie career",
+      "label": 1
+    },
+    {
+      "id": "IV_H51",
+      "category": "multi_claim_contradiction",
+      "text": "Mitochondria produce ATP. Mitochondria produce zero energy and consume all life.",
+      "query": "Mitochondria ATP energy",
+      "label": 1
+    },
+    {
+      "id": "IV_H52",
+      "category": "multi_claim_contradiction",
+      "text": "The Alps are mountain peaks. The Alps are deep ocean trenches.",
+      "query": "Alps mountains trenches",
+      "label": 1
+    },
+    {
+      "id": "IV_H53",
+      "category": "multi_claim_contradiction",
+      "text": "Neptune orbits the Sun. Neptune orbits around Jupiter once every 3 days.",
+      "query": "Neptune orbit Sun Jupiter",
+      "label": 1
+    },
+    {
+      "id": "IV_H54",
+      "category": "multi_claim_contradiction",
+      "text": "Titan is a moon of Saturn. Titan is an independent star in the Andromeda galaxy.",
+      "query": "Titan moon star",
+      "label": 1
+    },
+    {
+      "id": "IV_H55",
+      "category": "multi_claim_contradiction",
+      "text": "The Suez Canal is in Egypt. The Suez Canal is located entirely inside Switzerland.",
+      "query": "Suez Canal Switzerland",
+      "label": 1
+    },
+    {
+      "id": "IV_H56",
+      "category": "multi_claim_contradiction",
+      "text": "Ethanol boils at 78 degrees Celsius. Ethanol only boils at absolute zero.",
+      "query": "Ethanol boiling absolute zero",
+      "label": 1
+    },
+    {
+      "id": "IV_H57",
+      "category": "multi_claim_contradiction",
+      "text": "Chlorophyll is in plants. Chlorophyll has never been found in any botanical organism.",
+      "query": "Chlorophyll plants",
+      "label": 1
+    },
+    {
+      "id": "IV_H58",
+      "category": "multi_claim_contradiction",
+      "text": "The ozone layer absorbs UV radiation. The ozone layer is transparent and absorbs zero radiation.",
+      "query": "Ozone layer UV absorption",
+      "label": 1
+    },
+    {
+      "id": "IV_H59",
+      "category": "multi_claim_contradiction",
+      "text": "Tectonic plates move continuously. Tectonic plates are stationary and never move.",
+      "query": "Tectonic plates movement",
+      "label": 1
+    },
+    {
+      "id": "IV_H60",
+      "category": "multi_claim_contradiction",
+      "text": "Dmitri Mendeleev created the Periodic Table. Dmitri Mendeleev was an illiterate fisherman who never wrote.",
+      "query": "Mendeleev biography",
+      "label": 1
+    },
+    {
+      "id": "IV_H61",
+      "category": "entity_swap",
+      "text": "Marie Curie formulated Kepler's laws of planetary motion in 1609.",
+      "query": "Kepler laws Marie Curie",
+      "label": 1
+    },
+    {
+      "id": "IV_H62",
+      "category": "entity_swap",
+      "text": "Johannes Kepler won the Nobel Prize in Chemistry for discovering radium.",
+      "query": "Radium discovery Kepler",
+      "label": 1
+    },
+    {
+      "id": "IV_H63",
+      "category": "entity_swap",
+      "text": "Stockholm is the capital of Denmark.",
+      "query": "Capital of Denmark",
+      "label": 1
+    },
+    {
+      "id": "IV_H64",
+      "category": "entity_swap",
+      "text": "Copenhagen is the capital of Sweden.",
+      "query": "Capital of Sweden",
+      "label": 1
+    },
+    {
+      "id": "IV_H65",
+      "category": "entity_swap",
+      "text": "The Suez Canal was built across Panama.",
+      "query": "Suez Canal Panama",
+      "label": 1
+    },
+    {
+      "id": "IV_H66",
+      "category": "entity_swap",
+      "text": "The Panama Canal was constructed in Egypt.",
+      "query": "Panama Canal Egypt",
+      "label": 1
+    },
+    {
+      "id": "IV_H67",
+      "category": "entity_swap",
+      "text": "Titan is a Galilean moon orbiting Jupiter.",
+      "query": "Titan moon Jupiter",
+      "label": 1
+    },
+    {
+      "id": "IV_H68",
+      "category": "entity_swap",
+      "text": "Europa is the largest moon orbiting Saturn.",
+      "query": "Europa moon Saturn",
+      "label": 1
+    },
+    {
+      "id": "IV_H69",
+      "category": "temporal_mutation",
+      "text": "Marie Curie discovered radium in 1492.",
+      "query": "Marie Curie radium year",
+      "label": 1
+    },
+    {
+      "id": "IV_H70",
+      "category": "temporal_mutation",
+      "text": "The Suez Canal was officially opened in 2018.",
+      "query": "Suez Canal opening year",
+      "label": 1
+    },
+    {
+      "id": "IV_H71",
+      "category": "temporal_mutation",
+      "text": "Dmitri Mendeleev published the periodic system in 300 BC.",
+      "query": "Periodic table year Mendeleev",
+      "label": 1
+    },
+    {
+      "id": "IV_H72",
+      "category": "temporal_mutation",
+      "text": "The Panama Canal opened for maritime traffic in 1700.",
+      "query": "Panama Canal opening year",
+      "label": 1
+    },
+    {
+      "id": "IV_H73",
+      "category": "negation",
+      "text": "Stockholm is not the capital of Sweden.",
+      "query": "Capital of Sweden",
+      "label": 1
+    },
+    {
+      "id": "IV_H74",
+      "category": "negation",
+      "text": "The chemical element sodium does not have symbol Na.",
+      "query": "Sodium symbol",
+      "label": 1
+    },
+    {
+      "id": "IV_H75",
+      "category": "negation",
+      "text": "Mitochondria do not produce energy in human cells.",
+      "query": "Mitochondria energy",
+      "label": 1
+    },
+    {
+      "id": "IV_H76",
+      "category": "negation",
+      "text": "The Alps are not located on the European continent.",
+      "query": "Alps Europe",
+      "label": 1
+    },
+    {
+      "id": "IV_H77",
+      "category": "negation",
+      "text": "Neptune is not a planet in the solar system.",
+      "query": "Neptune planet solar system",
+      "label": 1
+    },
+    {
+      "id": "IV_H78",
+      "category": "unsupported",
+      "text": "Stockholm was founded by subterranean penguin architects in 800 BC.",
+      "query": "Stockholm founding penguins",
+      "label": 1
+    },
+    {
+      "id": "IV_H79",
+      "category": "unsupported",
+      "text": "Marie Curie invented a battery powered by radioactive dragon scales.",
+      "query": "Marie Curie dragon battery",
+      "label": 1
+    },
+    {
+      "id": "IV_H80",
+      "category": "unsupported",
+      "text": "The Danube river is made of liquid liquid nitrogen and glowing magma.",
+      "query": "Danube magma nitrogen",
+      "label": 1
+    },
+    {
+      "id": "IV_H81",
+      "category": "unsupported",
+      "text": "Saturn's moon Titan is an enormous disco ball manufactured in 1970.",
+      "query": "Titan disco ball",
+      "label": 1
+    },
+    {
+      "id": "IV_H82",
+      "category": "unsupported",
+      "text": "The Alps were formed when giant alien spaceships crashed into France.",
+      "query": "Alps alien spaceships",
+      "label": 1
+    },
+    {
+      "id": "IV_H83",
+      "category": "unsupported_causal",
+      "text": "The Suez Canal was built because medieval pharaohs wanted to race supersonic jet skis.",
+      "query": "Suez canal purpose pharaohs",
+      "label": 1
+    },
+    {
+      "id": "IV_H84",
+      "category": "unsupported_causal",
+      "text": "Mitochondria produce ATP because microscopic elves pedal miniature stationary bicycles inside cells.",
+      "query": "Mitochondria elves bicycles",
+      "label": 1
+    },
+    {
+      "id": "IV_H85",
+      "category": "unsupported_causal",
+      "text": "Earthquakes happen because underground mole kings get into wrestling arguments.",
+      "query": "Earthquakes mole kings",
+      "label": 1
+    },
+    {
+      "id": "IV_H86",
+      "category": "unsupported_causal",
+      "text": "Photosynthesis occurs because plants want to send telepathic greeting cards to Mars.",
+      "query": "Photosynthesis telepathy Mars",
+      "label": 1
+    },
+    {
+      "id": "IV_H87",
+      "category": "direct_contradiction",
+      "text": "Liquid water contains zero hydrogen atoms and zero oxygen atoms.",
+      "query": "Water atoms composition",
+      "label": 1
+    },
+    {
+      "id": "IV_H88",
+      "category": "direct_contradiction",
+      "text": "The sun is completely cold and emits negative thermal energy.",
+      "query": "Sun thermal energy",
+      "label": 1
+    },
+    {
+      "id": "IV_H89",
+      "category": "direct_contradiction",
+      "text": "Gravity causes all dropped objects to accelerate vertically upward toward space.",
+      "query": "Gravity acceleration direction",
+      "label": 1
+    },
+    {
+      "id": "IV_H90",
+      "category": "direct_contradiction",
+      "text": "Sound propagates infinitely faster in vacuum than in any physical matter.",
+      "query": "Sound vacuum matter",
+      "label": 1
+    },
+    {
+      "id": "IV_H91",
+      "category": "ambiguous",
+      "text": "Ancient mysterious energy frequencies might dictate all unknown cosmic destinies.",
+      "query": "Cosmic energy destiny",
+      "label": 1
+    },
+    {
+      "id": "IV_H92",
+      "category": "ambiguous",
+      "text": "Some unnamed researchers claim that a secret substance alters reality permanently.",
+      "query": "Secret substance reality",
+      "label": 1
+    },
+    {
+      "id": "IV_H93",
+      "category": "ambiguous",
+      "text": "Rumors suggest that certain historical dates were fabricated by a forgotten guild.",
+      "query": "Historical dates guild",
+      "label": 1
+    },
+    {
+      "id": "IV_H94",
+      "category": "ambiguous",
+      "text": "Mysterious vibrations in the ocean depths may explain all historical weather changes.",
+      "query": "Ocean vibrations weather",
+      "label": 1
+    },
+    {
+      "id": "IV_H95",
+      "category": "clearly_false",
+      "text": "Rome is the capital of Greece.",
+      "query": "Capital of Greece",
+      "label": 1
+    },
+    {
+      "id": "IV_H96",
+      "category": "clearly_false",
+      "text": "Athens is the capital of Italy.",
+      "query": "Capital of Italy",
+      "label": 1
+    },
+    {
+      "id": "IV_H97",
+      "category": "clearly_false",
+      "text": "The Pacific Ocean is completely dry land surrounded by mountains.",
+      "query": "Pacific ocean dry",
+      "label": 1
+    },
+    {
+      "id": "IV_H98",
+      "category": "clearly_false",
+      "text": "Helium is the heaviest metal on the periodic table.",
+      "query": "Helium heavy metal",
+      "label": 1
+    },
+    {
+      "id": "IV_H99",
+      "category": "clearly_false",
+      "text": "Plants breathe pure sulfur dioxide during cellular respiration.",
+      "query": "Plants sulfur dioxide",
+      "label": 1
+    },
+    {
+      "id": "IV_H100",
+      "category": "clearly_false",
+      "text": "Oxygen is toxic to all aerobic life forms on Earth.",
+      "query": "Oxygen aerobic life",
+      "label": 1
+    }
+  ]
+}

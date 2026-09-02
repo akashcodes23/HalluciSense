@@ -1,0 +1,1040 @@
+{
+  "timestamp": 1788326996.647228,
+  "phase52_polarity_reassessment": {
+    "p1_mean_entailment": {
+      "feature_index": 0,
+      "permutation_importance": -0.003333,
+      "permutation_std": 0.007888,
+      "spearman_correlation_label": -0.54,
+      "spearman_correlation_ph": -0.8277,
+      "factual_median": 0.5025,
+      "hallucinated_median": 0.0016,
+      "quantile_response_q05_to_q95": [
+        0.3898,
+        0.3898,
+        0.4029,
+        0.3242,
+        0.3778,
+        0.3903,
+        0.4281
+      ],
+      "expected_trend": "DECREASING",
+      "monotonicity_violation_rate": 0.6667,
+      "polarity_classification": "LOCALLY_ADVERSE"
+    },
+    "p1_max_entailment": {
+      "feature_index": 1,
+      "permutation_importance": -0.026,
+      "permutation_std": 0.008138,
+      "spearman_correlation_label": -0.54,
+      "spearman_correlation_ph": -0.8277,
+      "factual_median": 0.5025,
+      "hallucinated_median": 0.0016,
+      "quantile_response_q05_to_q95": [
+        0.3466,
+        0.3583,
+        0.3772,
+        0.392,
+        0.3964,
+        0.379,
+        0.3728
+      ],
+      "expected_trend": "DECREASING",
+      "monotonicity_violation_rate": 0.6667,
+      "polarity_classification": "LOCALLY_ADVERSE"
+    },
+    "p1_mean_contradiction": {
+      "feature_index": 2,
+      "permutation_importance": 0.033,
+      "permutation_std": 0.015878,
+      "spearman_correlation_label": 0.54,
+      "spearman_correlation_ph": 0.8277,
+      "factual_median": 0.4975,
+      "hallucinated_median": 0.9984,
+      "quantile_response_q05_to_q95": [
+        0.3265,
+        0.338,
+        0.3599,
+        0.3795,
+        0.4453,
+        0.5002,
+        0.4977
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.1667,
+      "polarity_classification": "GLOBALLY_ALIGNED"
+    },
+    "p1_min_support_margin": {
+      "feature_index": 3,
+      "permutation_importance": 0.088,
+      "permutation_std": 0.01875,
+      "spearman_correlation_label": -0.54,
+      "spearman_correlation_ph": -0.8277,
+      "factual_median": 0.0049,
+      "hallucinated_median": -0.9968,
+      "quantile_response_q05_to_q95": [
+        0.3696,
+        0.3828,
+        0.3832,
+        0.3181,
+        0.3291,
+        0.329,
+        0.2898
+      ],
+      "expected_trend": "DECREASING",
+      "monotonicity_violation_rate": 0.3333,
+      "polarity_classification": "LOCALLY_ADVERSE"
+    },
+    "p1_num_claims": {
+      "feature_index": 4,
+      "permutation_importance": -0.003,
+      "permutation_std": 0.001,
+      "spearman_correlation_label": -0.1686,
+      "spearman_correlation_ph": 0.3494,
+      "factual_median": 1.0,
+      "hallucinated_median": 1.0,
+      "quantile_response_q05_to_q95": [
+        0.3656,
+        0.3656,
+        0.3656,
+        0.3656,
+        0.3656,
+        0.363,
+        0.363
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.1667,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "p2_max_pairwise_contradiction": {
+      "feature_index": 5,
+      "permutation_importance": 0.012333,
+      "permutation_std": 0.008699,
+      "spearman_correlation_label": -0.1528,
+      "spearman_correlation_ph": 0.375,
+      "factual_median": 0.0,
+      "hallucinated_median": 0.0,
+      "quantile_response_q05_to_q95": [
+        0.3668,
+        0.3668,
+        0.3668,
+        0.3668,
+        0.3668,
+        0.3499,
+        0.3722
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.1667,
+      "polarity_classification": "GLOBALLY_ALIGNED"
+    },
+    "p2_mean_pairwise_contradiction": {
+      "feature_index": 6,
+      "permutation_importance": -0.017667,
+      "permutation_std": 0.003,
+      "spearman_correlation_label": -0.1528,
+      "spearman_correlation_ph": 0.375,
+      "factual_median": 0.0,
+      "hallucinated_median": 0.0,
+      "quantile_response_q05_to_q95": [
+        0.3533,
+        0.3533,
+        0.3533,
+        0.3533,
+        0.3533,
+        0.3835,
+        0.3835
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "p2_max_pairwise_similarity": {
+      "feature_index": 7,
+      "permutation_importance": -0.016,
+      "permutation_std": 0.00786,
+      "spearman_correlation_label": 0.1528,
+      "spearman_correlation_ph": -0.375,
+      "factual_median": 1.0,
+      "hallucinated_median": 1.0,
+      "quantile_response_q05_to_q95": [
+        0.5564,
+        0.5564,
+        0.3372,
+        0.3372,
+        0.3372,
+        0.3372,
+        0.3372
+      ],
+      "expected_trend": "DECREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "p2_fraction_contradictory_pairs": {
+      "feature_index": 8,
+      "permutation_importance": -0.000333,
+      "permutation_std": 0.002333,
+      "spearman_correlation_label": -0.0802,
+      "spearman_correlation_ph": 0.4872,
+      "factual_median": 0.0,
+      "hallucinated_median": 0.0,
+      "quantile_response_q05_to_q95": [
+        0.3689,
+        0.3689,
+        0.3689,
+        0.3689,
+        0.3689,
+        0.3777,
+        0.3777
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "p2_num_claims": {
+      "feature_index": 9,
+      "permutation_importance": 0.0,
+      "permutation_std": 0.0,
+      "spearman_correlation_label": -0.1686,
+      "spearman_correlation_ph": 0.3494,
+      "factual_median": 1.0,
+      "hallucinated_median": 1.0,
+      "quantile_response_q05_to_q95": [
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "prob_p1": {
+      "feature_index": 10,
+      "permutation_importance": 0.035333,
+      "permutation_std": 0.011075,
+      "spearman_correlation_label": 0.54,
+      "spearman_correlation_ph": 0.8277,
+      "factual_median": 0.4975,
+      "hallucinated_median": 0.9984,
+      "quantile_response_q05_to_q95": [
+        0.293,
+        0.293,
+        0.293,
+        0.4209,
+        0.4209,
+        0.4209,
+        0.4209
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "GLOBALLY_ALIGNED"
+    },
+    "prob_p2": {
+      "feature_index": 11,
+      "permutation_importance": 0.0,
+      "permutation_std": 0.0,
+      "spearman_correlation_label": 0.1152,
+      "spearman_correlation_ph": -0.0886,
+      "factual_median": 0.0875,
+      "hallucinated_median": 0.0875,
+      "quantile_response_q05_to_q95": [
+        0.3657,
+        0.3657,
+        0.3657,
+        0.3657,
+        0.3657,
+        0.3657,
+        0.3657
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "logit_p1": {
+      "feature_index": 12,
+      "permutation_importance": 0.0,
+      "permutation_std": 0.0,
+      "spearman_correlation_label": 0.54,
+      "spearman_correlation_ph": 0.8277,
+      "factual_median": -0.0098,
+      "hallucinated_median": 6.4362,
+      "quantile_response_q05_to_q95": [
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "logit_p2": {
+      "feature_index": 13,
+      "permutation_importance": 0.0,
+      "permutation_std": 0.0,
+      "spearman_correlation_label": 0.1152,
+      "spearman_correlation_ph": -0.0886,
+      "factual_median": -2.3445,
+      "hallucinated_median": -2.3445,
+      "quantile_response_q05_to_q95": [
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "prob_disagreement_abs": {
+      "feature_index": 14,
+      "permutation_importance": -0.006667,
+      "permutation_std": 0.004714,
+      "spearman_correlation_label": 0.4665,
+      "spearman_correlation_ph": 0.867,
+      "factual_median": 0.41,
+      "hallucinated_median": 0.9109,
+      "quantile_response_q05_to_q95": [
+        0.4099,
+        0.4096,
+        0.4106,
+        0.3666,
+        0.3666,
+        0.3666,
+        0.3666
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.1667,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "prob_mean": {
+      "feature_index": 15,
+      "permutation_importance": 0.074333,
+      "permutation_std": 0.013,
+      "spearman_correlation_label": 0.5419,
+      "spearman_correlation_ph": 0.8036,
+      "factual_median": 0.2912,
+      "hallucinated_median": 0.5387,
+      "quantile_response_q05_to_q95": [
+        0.3056,
+        0.3056,
+        0.3056,
+        0.3078,
+        0.4009,
+        0.4009,
+        0.4009
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "GLOBALLY_ALIGNED"
+    },
+    "prob_max": {
+      "feature_index": 16,
+      "permutation_importance": 0.058667,
+      "permutation_std": 0.011372,
+      "spearman_correlation_label": 0.5371,
+      "spearman_correlation_ph": 0.8358,
+      "factual_median": 0.4975,
+      "hallucinated_median": 0.9984,
+      "quantile_response_q05_to_q95": [
+        0.324,
+        0.324,
+        0.324,
+        0.3681,
+        0.3681,
+        0.3681,
+        0.3681
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "GLOBALLY_ALIGNED"
+    },
+    "prob_min": {
+      "feature_index": 17,
+      "permutation_importance": 0.0,
+      "permutation_std": 0.0,
+      "spearman_correlation_label": 0.3089,
+      "spearman_correlation_ph": 0.252,
+      "factual_median": 0.0875,
+      "hallucinated_median": 0.0875,
+      "quantile_response_q05_to_q95": [
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659,
+        0.3659
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.0,
+      "polarity_classification": "WEAK_NEUTRAL"
+    },
+    "prob_ratio": {
+      "feature_index": 18,
+      "permutation_importance": 0.016333,
+      "permutation_std": 0.009939,
+      "spearman_correlation_label": 0.457,
+      "spearman_correlation_ph": 0.8386,
+      "factual_median": 5.6862,
+      "hallucinated_median": 11.4107,
+      "quantile_response_q05_to_q95": [
+        0.3429,
+        0.3401,
+        0.3656,
+        0.3656,
+        0.3656,
+        0.3656,
+        0.3656
+      ],
+      "expected_trend": "INCREASING",
+      "monotonicity_violation_rate": 0.1667,
+      "polarity_classification": "INTERACTION_DEPENDENT"
+    }
+  },
+  "repeated_cv_candidates": {
+    "Candidate_A_Calibrated_Logistic_Regression": {
+      "mcc_mean": 0.4958,
+      "mcc_std": 0.1076,
+      "recall_mean": 0.712,
+      "recall_std": 0.0863,
+      "specificity_mean": 0.7787,
+      "specificity_std": 0.0853,
+      "f1_mean": 0.7351,
+      "f1_std": 0.0595,
+      "accuracy_mean": 0.7453,
+      "accuracy_std": 0.0545,
+      "balanced_accuracy_mean": 0.7453,
+      "balanced_accuracy_std": 0.0545,
+      "auroc_mean": 0.841,
+      "auroc_std": 0.0445,
+      "auprc_mean": 0.8523,
+      "auprc_std": 0.0437,
+      "brier_mean": 0.1679,
+      "brier_std": 0.0211,
+      "ece_mean": 0.1294,
+      "ece_std": 0.0471
+    },
+    "Candidate_B_HistGradientBoosting": {
+      "mcc_mean": 0.5317,
+      "mcc_std": 0.0778,
+      "recall_mean": 0.7293,
+      "recall_std": 0.0958,
+      "specificity_mean": 0.7933,
+      "specificity_std": 0.0957,
+      "f1_mean": 0.7513,
+      "f1_std": 0.05,
+      "accuracy_mean": 0.7613,
+      "accuracy_std": 0.0399,
+      "balanced_accuracy_mean": 0.7613,
+      "balanced_accuracy_std": 0.0399,
+      "auroc_mean": 0.8528,
+      "auroc_std": 0.0435,
+      "auprc_mean": 0.8552,
+      "auprc_std": 0.0494,
+      "brier_mean": 0.159,
+      "brier_std": 0.0273,
+      "ece_mean": 0.1275,
+      "ece_std": 0.0296
+    },
+    "Candidate_C_RandomForest": {
+      "mcc_mean": 0.4827,
+      "mcc_std": 0.1181,
+      "recall_mean": 0.6653,
+      "recall_std": 0.1004,
+      "specificity_mean": 0.808,
+      "specificity_std": 0.0839,
+      "f1_mean": 0.7137,
+      "f1_std": 0.0735,
+      "accuracy_mean": 0.7367,
+      "accuracy_std": 0.0593,
+      "balanced_accuracy_mean": 0.7367,
+      "balanced_accuracy_std": 0.0593,
+      "auroc_mean": 0.8397,
+      "auroc_std": 0.0521,
+      "auprc_mean": 0.8469,
+      "auprc_std": 0.0604,
+      "brier_mean": 0.1653,
+      "brier_std": 0.027,
+      "ece_mean": 0.1287,
+      "ece_std": 0.0347
+    },
+    "Candidate_D_HGBoost_Selected_Subset": {
+      "mcc_mean": 0.5422,
+      "mcc_std": 0.0775,
+      "recall_mean": 0.7387,
+      "recall_std": 0.1069,
+      "specificity_mean": 0.7933,
+      "specificity_std": 0.1007,
+      "f1_mean": 0.7565,
+      "f1_std": 0.0527,
+      "accuracy_mean": 0.766,
+      "accuracy_std": 0.041,
+      "balanced_accuracy_mean": 0.766,
+      "balanced_accuracy_std": 0.041,
+      "auroc_mean": 0.8608,
+      "auroc_std": 0.0444,
+      "auprc_mean": 0.8629,
+      "auprc_std": 0.0497,
+      "brier_mean": 0.1541,
+      "brier_std": 0.0264,
+      "ece_mean": 0.1196,
+      "ece_std": 0.0286
+    },
+    "Candidate_E_Monotonic_Logistic": {
+      "mcc_mean": 0.4732,
+      "mcc_std": 0.111,
+      "recall_mean": 0.708,
+      "recall_std": 0.0785,
+      "specificity_mean": 0.7613,
+      "specificity_std": 0.0842,
+      "f1_mean": 0.7265,
+      "f1_std": 0.0581,
+      "accuracy_mean": 0.7347,
+      "accuracy_std": 0.0556,
+      "balanced_accuracy_mean": 0.7347,
+      "balanced_accuracy_std": 0.0556,
+      "auroc_mean": 0.8394,
+      "auroc_std": 0.0433,
+      "auprc_mean": 0.8505,
+      "auprc_std": 0.0427,
+      "brier_mean": 0.1698,
+      "brier_std": 0.0211,
+      "ece_mean": 0.1291,
+      "ece_std": 0.0395
+    }
+  },
+  "strategy_s1_symbolic_audit": [
+    {
+      "claim": "14 multiplied by 5 equals 70.",
+      "claim_type": "ARITHMETIC",
+      "expected_ground_truth": "FACTUAL",
+      "gateway_status": "verified_symbolically",
+      "gateway_is_consistent": true,
+      "raw_candidate_b_prob": 0.6002,
+      "strategy_s1_prob": 0.2,
+      "strategy_s1_verdict": "FACTUAL",
+      "is_correct": true
+    },
+    {
+      "claim": "14 multiplied by 5 equals 75.",
+      "claim_type": "ARITHMETIC",
+      "expected_ground_truth": "HALLUCINATED",
+      "gateway_status": "verified_symbolically",
+      "gateway_is_consistent": false,
+      "raw_candidate_b_prob": 0.6002,
+      "strategy_s1_prob": 0.95,
+      "strategy_s1_verdict": "HALLUCINATED",
+      "is_correct": true
+    },
+    {
+      "claim": "36 plus 48 equals 84.",
+      "claim_type": "ARITHMETIC",
+      "expected_ground_truth": "FACTUAL",
+      "gateway_status": "verified_symbolically",
+      "gateway_is_consistent": true,
+      "raw_candidate_b_prob": 0.6092,
+      "strategy_s1_prob": 0.2,
+      "strategy_s1_verdict": "FACTUAL",
+      "is_correct": true
+    },
+    {
+      "claim": "36 plus 48 equals 94.",
+      "claim_type": "ARITHMETIC",
+      "expected_ground_truth": "HALLUCINATED",
+      "gateway_status": "verified_symbolically",
+      "gateway_is_consistent": false,
+      "raw_candidate_b_prob": 0.5783,
+      "strategy_s1_prob": 0.95,
+      "strategy_s1_verdict": "HALLUCINATED",
+      "is_correct": true
+    },
+    {
+      "claim": "100 meters is equal to 10000 centimeters.",
+      "claim_type": "UNIT_CONVERSION",
+      "expected_ground_truth": "FACTUAL",
+      "gateway_status": "requires_textual_grounding",
+      "gateway_is_consistent": null,
+      "raw_candidate_b_prob": 0.49,
+      "strategy_s1_prob": 0.49,
+      "strategy_s1_verdict": "FACTUAL",
+      "is_correct": true
+    },
+    {
+      "claim": "100 meters is equal to 50 centimeters.",
+      "claim_type": "UNIT_CONVERSION",
+      "expected_ground_truth": "HALLUCINATED",
+      "gateway_status": "requires_textual_grounding",
+      "gateway_is_consistent": null,
+      "raw_candidate_b_prob": 0.7717,
+      "strategy_s1_prob": 0.7717,
+      "strategy_s1_verdict": "HALLUCINATED",
+      "is_correct": true
+    },
+    {
+      "claim": "The year 2000 occurred after the year 1990.",
+      "claim_type": "TEMPORAL_MATH",
+      "expected_ground_truth": "FACTUAL",
+      "gateway_status": "requires_textual_grounding",
+      "gateway_is_consistent": null,
+      "raw_candidate_b_prob": 0.1832,
+      "strategy_s1_prob": 0.1832,
+      "strategy_s1_verdict": "FACTUAL",
+      "is_correct": true
+    },
+    {
+      "claim": "The year 1800 occurred after the year 2020.",
+      "claim_type": "TEMPORAL_MATH",
+      "expected_ground_truth": "HALLUCINATED",
+      "gateway_status": "requires_textual_grounding",
+      "gateway_is_consistent": null,
+      "raw_candidate_b_prob": 0.0715,
+      "strategy_s1_prob": 0.0715,
+      "strategy_s1_verdict": "FACTUAL",
+      "is_correct": false
+    },
+    {
+      "claim": "Stockholm is the capital of Sweden and 12 * 8 = 96.",
+      "claim_type": "MIXED",
+      "expected_ground_truth": "FACTUAL",
+      "gateway_status": "requires_textual_grounding",
+      "gateway_is_consistent": null,
+      "raw_candidate_b_prob": 0.5783,
+      "strategy_s1_prob": 0.5783,
+      "strategy_s1_verdict": "HALLUCINATED",
+      "is_correct": false
+    },
+    {
+      "claim": "Stockholm is the capital of Sweden and 12 * 8 = 95.",
+      "claim_type": "MIXED",
+      "expected_ground_truth": "HALLUCINATED",
+      "gateway_status": "requires_textual_grounding",
+      "gateway_is_consistent": null,
+      "raw_candidate_b_prob": 0.5783,
+      "strategy_s1_prob": 0.5783,
+      "strategy_s1_verdict": "HALLUCINATED",
+      "is_correct": true
+    }
+  ],
+  "counterfactual_matched_pairs": [
+    {
+      "category": "arithmetic",
+      "true_claim": "14 multiplied by 5 equals 70.",
+      "false_claim": "14 multiplied by 5 equals 75.",
+      "delta_p1": 0.0019,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.2738,
+      "frozen_prob_false": 0.2738,
+      "frozen_delta_p_h": 0.0,
+      "candidate_prob_true": 0.6002,
+      "candidate_prob_false": 0.6002,
+      "candidate_delta_p_h": 0.0,
+      "candidate_s1_delta_p_h": 0.75,
+      "remediated_direction_correct": true
+    },
+    {
+      "category": "fact_swap",
+      "true_claim": "Stockholm is the capital of Sweden.",
+      "false_claim": "Stockholm is the capital of Norway.",
+      "delta_p1": 0.9962,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.2623,
+      "frozen_prob_false": 0.5316,
+      "frozen_delta_p_h": 0.2693,
+      "candidate_prob_true": 0.0466,
+      "candidate_prob_false": 0.8929,
+      "candidate_delta_p_h": 0.8463,
+      "candidate_s1_delta_p_h": 0.8463,
+      "remediated_direction_correct": true
+    },
+    {
+      "category": "entity_swap",
+      "true_claim": "Johannes Kepler formulated planetary laws.",
+      "false_claim": "Marie Curie formulated Kepler's planetary laws in 1609.",
+      "delta_p1": 0.0047,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.4053,
+      "frozen_prob_false": 0.588,
+      "frozen_delta_p_h": 0.1827,
+      "candidate_prob_true": 0.7717,
+      "candidate_prob_false": 0.9398,
+      "candidate_delta_p_h": 0.1681,
+      "candidate_s1_delta_p_h": 0.1681,
+      "remediated_direction_correct": true
+    },
+    {
+      "category": "negation",
+      "true_claim": "Stockholm is the capital of Sweden.",
+      "false_claim": "Stockholm is not the capital of Sweden.",
+      "delta_p1": 0.8476,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.2623,
+      "frozen_prob_false": 0.2474,
+      "frozen_delta_p_h": -0.0148,
+      "candidate_prob_true": 0.0466,
+      "candidate_prob_false": 0.5783,
+      "candidate_delta_p_h": 0.5317,
+      "candidate_s1_delta_p_h": 0.5317,
+      "remediated_direction_correct": true
+    },
+    {
+      "category": "temporal",
+      "true_claim": "Dmitri Mendeleev published the periodic system in 1869.",
+      "false_claim": "Dmitri Mendeleev published the periodic system in 300 BC.",
+      "delta_p1": -0.2323,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.5071,
+      "frozen_prob_false": 0.259,
+      "frozen_delta_p_h": -0.248,
+      "candidate_prob_true": 0.3555,
+      "candidate_prob_false": 0.49,
+      "candidate_delta_p_h": 0.1345,
+      "candidate_s1_delta_p_h": 0.1345,
+      "remediated_direction_correct": false
+    },
+    {
+      "category": "direct_contradiction",
+      "true_claim": "Water contains hydrogen and oxygen.",
+      "false_claim": "Liquid water contains zero hydrogen atoms and zero oxygen atoms.",
+      "delta_p1": 0.3393,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.1612,
+      "frozen_prob_false": 0.2119,
+      "frozen_delta_p_h": 0.0507,
+      "candidate_prob_true": 0.2276,
+      "candidate_prob_false": 0.49,
+      "candidate_delta_p_h": 0.2624,
+      "candidate_s1_delta_p_h": 0.2624,
+      "remediated_direction_correct": true
+    },
+    {
+      "category": "causal",
+      "true_claim": "Photosynthesis converts solar light into glucose.",
+      "false_claim": "Photosynthesis occurs because plants want to send telepathic greeting cards to Mars.",
+      "delta_p1": 0.4438,
+      "delta_p2": 0.5125,
+      "delta_p3": 0.0,
+      "frozen_prob_true": 0.0967,
+      "frozen_prob_false": 0.4167,
+      "frozen_delta_p_h": 0.32,
+      "candidate_prob_true": 0.2587,
+      "candidate_prob_false": 0.9141,
+      "candidate_delta_p_h": 0.6554,
+      "candidate_s1_delta_p_h": 0.6554,
+      "remediated_direction_correct": true
+    },
+    {
+      "category": "multi_claim",
+      "true_claim": "Stockholm is in Sweden. Oslo is in Norway.",
+      "false_claim": "Stockholm is the capital of Sweden. Oslo is the capital of Sweden.",
+      "delta_p1": 0.9489,
+      "delta_p2": -0.0375,
+      "delta_p3": 0.0054,
+      "frozen_prob_true": 0.4574,
+      "frozen_prob_false": 0.7644,
+      "frozen_delta_p_h": 0.307,
+      "candidate_prob_true": 0.0848,
+      "candidate_prob_false": 0.0805,
+      "candidate_delta_p_h": -0.0043,
+      "candidate_s1_delta_p_h": -0.0043,
+      "remediated_direction_correct": false
+    }
+  ],
+  "independent_validation_metrics": {
+    "model_0_frozen_baseline": {
+      "auroc": 0.6931,
+      "auprc": 0.5999,
+      "accuracy": 0.54,
+      "precision": 0.6053,
+      "recall": 0.23,
+      "specificity": 0.85,
+      "f1_score": 0.3333,
+      "mcc": 0.102,
+      "balanced_accuracy": 0.54,
+      "brier_score": 0.2528,
+      "ece": 0.1934,
+      "confusion_matrix": {
+        "tn": 85,
+        "fp": 15,
+        "fn": 77,
+        "tp": 23
+      }
+    },
+    "model_1_candidate_b": {
+      "auroc": 0.8363,
+      "auprc": 0.848,
+      "accuracy": 0.76,
+      "precision": 0.7653,
+      "recall": 0.75,
+      "specificity": 0.77,
+      "f1_score": 0.7576,
+      "mcc": 0.5201,
+      "balanced_accuracy": 0.76,
+      "brier_score": 0.1639,
+      "ece": 0.0567,
+      "confusion_matrix": {
+        "tn": 77,
+        "fp": 23,
+        "fn": 25,
+        "tp": 75
+      }
+    },
+    "model_2_candidate_b_plus_s1": {
+      "auroc": 0.9176,
+      "auprc": 0.9332,
+      "accuracy": 0.85,
+      "precision": 0.8804,
+      "recall": 0.81,
+      "specificity": 0.89,
+      "f1_score": 0.8438,
+      "mcc": 0.7023,
+      "balanced_accuracy": 0.85,
+      "brier_score": 0.111,
+      "ece": 0.0977,
+      "confusion_matrix": {
+        "tn": 89,
+        "fp": 11,
+        "fn": 19,
+        "tp": 81
+      }
+    }
+  },
+  "bootstrap_95_confidence_intervals": {
+    "model_0_frozen": {
+      "auroc": [
+        0.6137,
+        0.7669
+      ],
+      "accuracy": [
+        0.475,
+        0.605
+      ],
+      "recall": [
+        0.15,
+        0.3137
+      ],
+      "specificity": [
+        0.7822,
+        0.9091
+      ],
+      "f1": [
+        0.2302,
+        0.4314
+      ],
+      "mcc": [
+        -0.0238,
+        0.2283
+      ],
+      "balanced_accuracy": [
+        0.4901,
+        0.5923
+      ]
+    },
+    "model_1_candidate_b": {
+      "auroc": [
+        0.7789,
+        0.8899
+      ],
+      "accuracy": [
+        0.6999,
+        0.82
+      ],
+      "recall": [
+        0.6569,
+        0.8333
+      ],
+      "specificity": [
+        0.6842,
+        0.8519
+      ],
+      "f1": [
+        0.6808,
+        0.8229
+      ],
+      "mcc": [
+        0.3939,
+        0.6409
+      ],
+      "balanced_accuracy": [
+        0.6973,
+        0.8206
+      ]
+    },
+    "model_2_candidate_b_plus_s1": {
+      "auroc": [
+        0.8738,
+        0.956
+      ],
+      "accuracy": [
+        0.7999,
+        0.9
+      ],
+      "recall": [
+        0.7254,
+        0.8864
+      ],
+      "specificity": [
+        0.8257,
+        0.9485
+      ],
+      "f1": [
+        0.7821,
+        0.8976
+      ],
+      "mcc": [
+        0.5985,
+        0.7999
+      ],
+      "balanced_accuracy": [
+        0.7976,
+        0.8993
+      ]
+    }
+  },
+  "statistical_tests": {
+    "wilcoxon_pval_m0_vs_m1": 1.3e-07,
+    "wilcoxon_pval_m0_vs_m2": 0.0,
+    "is_statistically_significant": true
+  },
+  "category_level_breakdown": {
+    "multi_claim_contradiction": {
+      "count": 15,
+      "model_0_frozen_recall": 0.6667,
+      "model_1_candidate_recall": 0.6667,
+      "model_2_remediated_recall": 0.6667
+    },
+    "unsupported_causal": {
+      "count": 4,
+      "model_0_frozen_recall": 0.0,
+      "model_1_candidate_recall": 0.5,
+      "model_2_remediated_recall": 0.5
+    },
+    "factual": {
+      "count": 30,
+      "model_0_frozen_specificity": 1.0,
+      "model_1_candidate_specificity": 0.9,
+      "model_2_remediated_specificity": 0.9
+    },
+    "entity_swap": {
+      "count": 8,
+      "model_0_frozen_recall": 0.0,
+      "model_1_candidate_recall": 0.75,
+      "model_2_remediated_recall": 0.75
+    },
+    "ambiguous": {
+      "count": 4,
+      "model_0_frozen_recall": 0.0,
+      "model_1_candidate_recall": 0.75,
+      "model_2_remediated_recall": 0.75
+    },
+    "numerical_error": {
+      "count": 20,
+      "model_0_frozen_recall": 0.05,
+      "model_1_candidate_recall": 0.7,
+      "model_2_remediated_recall": 1.0
+    },
+    "numerical": {
+      "count": 25,
+      "model_0_frozen_specificity": 0.92,
+      "model_1_candidate_specificity": 0.52,
+      "model_2_remediated_specificity": 1.0
+    },
+    "negation": {
+      "count": 5,
+      "model_0_frozen_recall": 0.4,
+      "model_1_candidate_recall": 0.6,
+      "model_2_remediated_recall": 0.6
+    },
+    "paraphrase": {
+      "count": 25,
+      "model_0_frozen_specificity": 0.92,
+      "model_1_candidate_specificity": 0.72,
+      "model_2_remediated_specificity": 0.72
+    },
+    "temporal_mutation": {
+      "count": 4,
+      "model_0_frozen_recall": 0.0,
+      "model_1_candidate_recall": 1.0,
+      "model_2_remediated_recall": 1.0
+    },
+    "direct_contradiction": {
+      "count": 4,
+      "model_0_frozen_recall": 0.0,
+      "model_1_candidate_recall": 0.75,
+      "model_2_remediated_recall": 0.75
+    },
+    "unsupported": {
+      "count": 5,
+      "model_0_frozen_recall": 0.4,
+      "model_1_candidate_recall": 1.0,
+      "model_2_remediated_recall": 1.0
+    },
+    "consistent_multi_claim": {
+      "count": 20,
+      "model_0_frozen_specificity": 0.45,
+      "model_1_candidate_specificity": 0.95,
+      "model_2_remediated_specificity": 0.95
+    },
+    "clearly_false": {
+      "count": 31,
+      "model_0_frozen_recall": 0.2581,
+      "model_1_candidate_recall": 0.8065,
+      "model_2_remediated_recall": 0.8065
+    }
+  },
+  "error_decomposition_r1_r12": {
+    "model_0_frozen_fn_distribution": {
+      "R1": 0,
+      "R2": 0,
+      "R3": 0,
+      "R4": 29,
+      "R5": 0,
+      "R6": 0,
+      "R7": 29,
+      "R8": 0,
+      "R9": 19,
+      "R10": 0,
+      "R11": 0,
+      "R12": 0
+    },
+    "model_2_remediated_fn_distribution": {
+      "R1": 2,
+      "R2": 15,
+      "R3": 0,
+      "R4": 2,
+      "R5": 0,
+      "R6": 0,
+      "R7": 0,
+      "R8": 0,
+      "R9": 0,
+      "R10": 0,
+      "R11": 0,
+      "R12": 0
+    }
+  },
+  "runtime_soak_audit": {
+    "local_startup_rss_mb": 493.62,
+    "local_peak_rss_mb": 539.81,
+    "local_final_rss_mb": 539.81,
+    "soak_requests_completed": 10,
+    "soak_duration_seconds": 1.56,
+    "active_models_count": 2,
+    "worker_count": 1,
+    "railway_status": "Railway runtime stability not independently verified in Phase 53 (Local measurements only)."
+  }
+}

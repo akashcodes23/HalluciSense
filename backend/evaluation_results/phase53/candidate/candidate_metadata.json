@@ -1,0 +1,14 @@
+{
+  "candidate_id": "candidate_b_hgb_phase53_v1",
+  "model_type": "HistGradientBoostingClassifier",
+  "hyperparameters": {
+    "max_iter": 60,
+    "max_depth": 3,
+    "l2_regularization": 1.5,
+    "min_samples_leaf": 15
+  },
+  "training_samples": 300,
+  "training_dataset": "backend/reports/phase52/forensic_50_50_dataset.json",
+  "status": "VALIDATED_DEVELOPMENT_CANDIDATE_IMMUTABLE",
+  "timestamp": 1788326738.7052622
+}
