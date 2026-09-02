@@ -6,16 +6,21 @@
   --color-bg-surface: #111113;
   --color-bg-raised: #18181b;
   --color-bg-overlay: #1c1c1f;
-  --color-accent-primary: #a78bfa;
+  --color-accent-primary: #2dd4bf;
 
   /* ── Semantic Status ──────────────────────────────────────────────────── */
   --color-status-verified: #22c55e;
   --color-status-warning: #f59e0b;
   --color-status-hallucination: #ef4444;
-  --color-status-evidence: #3b82f6;
-  --color-status-ai: #a78bfa;
+  --color-status-evidence: #2dd4bf;
+  --color-status-ai: #2dd4bf;
   --color-status-success: #22c55e;
   --color-status-error: #ef4444;
+
+  /* ── Three Pillar Tokens ──────────────────────────────────────────────── */
+  --color-pillar-p1: #2dd4bf;
+  --color-pillar-p2: #60a5fa;
+  --color-pillar-p3: #f59e0b;
 
   /* ── Typography ───────────────────────────────────────────────────────── */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
@@ -34,11 +39,24 @@
   --bg-overlay:      #1c1c1f;
   --bg-inset:        #0a0a0c;
 
-  /* ── Primary / Brand ────────────────────────────────────────────────── */
-  --primary:         #a78bfa;
-  --primary-hover:   #b69dfc;
-  --primary-soft:    rgba(167, 139, 250, 0.10);
-  --primary-glow:    rgba(167, 139, 250, 0.20);
+  /* ── Primary / Brand (Teal - Unified Scientific Identity) ────────────── */
+  --primary:         #2dd4bf;
+  --primary-hover:   #5eead4;
+  --primary-soft:    rgba(45, 212, 191, 0.10);
+  --primary-glow:    rgba(45, 212, 191, 0.20);
+
+  /* ── Three-Pillar Semantic Palette ──────────────────────────────────── */
+  --pillar-p1:       #2dd4bf;
+  --pillar-p1-soft:  rgba(45, 212, 191, 0.10);
+  --pillar-p1-border: rgba(45, 212, 191, 0.25);
+
+  --pillar-p2:       #60a5fa;
+  --pillar-p2-soft:  rgba(96, 165, 250, 0.10);
+  --pillar-p2-border: rgba(96, 165, 250, 0.25);
+
+  --pillar-p3:       #f59e0b;
+  --pillar-p3-soft:  rgba(245, 158, 11, 0.10);
+  --pillar-p3-border: rgba(245, 158, 11, 0.25);
 
   /* ── Semantic Colors — Verification ─────────────────────────────────── */
   --verified:        #22c55e;
@@ -53,18 +71,18 @@
   --warning-soft:    rgba(245, 158, 11, 0.10);
   --warning-border:  rgba(245, 158, 11, 0.25);
 
-  --evidence:        #3b82f6;
-  --evidence-soft:   rgba(59, 130, 246, 0.10);
-  --evidence-border: rgba(59, 130, 246, 0.25);
+  --evidence:        #2dd4bf;
+  --evidence-soft:   rgba(45, 212, 191, 0.10);
+  --evidence-border: rgba(45, 212, 191, 0.25);
 
-  --ai:              #a78bfa;
-  --ai-soft:         rgba(167, 139, 250, 0.10);
-  --ai-border:       rgba(167, 139, 250, 0.25);
+  --ai:              #2dd4bf;
+  --ai-soft:         rgba(45, 212, 191, 0.10);
+  --ai-border:       rgba(45, 212, 191, 0.25);
 
   /* ── Legacy compat aliases ──────────────────────────────────────────── */
   --success:         #22c55e;
   --danger:          #ef4444;
-  --info:            #3b82f6;
+  --info:            #60a5fa;
 
   /* ── Text ───────────────────────────────────────────────────────────── */
   --text-primary:    #fafafa;
@@ -102,12 +120,12 @@
   --shadow-sm:       0 1px 2px rgba(0,0,0,0.3);
   --shadow-md:       0 2px 8px rgba(0,0,0,0.4);
   --shadow-lg:       0 4px 16px rgba(0,0,0,0.5);
-  --shadow-glow:     0 0 20px rgba(167,139,250,0.15);
+  --shadow-glow:     0 0 20px rgba(45, 212, 191, 0.15);
 
   /* ── Legacy compat ──────────────────────────────────────────────────── */
-  --accent-indigo:   #6366f1;
-  --accent-purple:   #a78bfa;
-  --accent-blue:     #3b82f6;
+  --accent-indigo:   #60a5fa;
+  --accent-purple:   #2dd4bf;
+  --accent-blue:     #60a5fa;
   --nav-height:      52px;
   --bg-secondary:    #111113;
   --bg-tertiary:     #18181b;
@@ -231,7 +249,7 @@ body {
 
 /* ═══ Gradient Text ══════════════════════════════════════════════════════ */
 .text-gradient {
-  background: linear-gradient(135deg, #6366F1 0%, #A78BFA 50%, #3B82F6 100%);
+  background: linear-gradient(135deg, #2DD4BF 0%, #60A5FA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -547,21 +565,21 @@ body {
 
 .mesh-orb-1 {
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, transparent 70%);
   top: -200px; left: 50%;
   transform: translateX(-50%);
 }
 
 .mesh-orb-2 {
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.06) 0%, transparent 70%);
   bottom: 20%; right: -150px;
   animation-delay: -8s;
 }
 
 .mesh-orb-3 {
   width: 350px; height: 350px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, transparent 70%);
   bottom: 10%; left: -100px;
   animation-delay: -16s;
 }

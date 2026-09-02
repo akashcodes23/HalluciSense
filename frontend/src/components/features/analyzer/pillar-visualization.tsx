@@ -35,29 +35,35 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Pillar 1 */}
         <PillarCard
-          icon={<Database className="w-4 h-4 text-blue-400" />}
-          title="Pillar 1 — Factual Grounding"
+          icon={<Database className="w-4 h-4 text-teal-400" />}
+          title="Pillar 1 — Evidence Grounding"
           score={p1}
           weight={effectiveWeights.alpha}
           description="NLI cross-encoder claim entailment and factual error calculation."
+          colorClass="bg-teal-500"
+          borderClass="border-teal-500/20"
         />
 
         {/* Pillar 2 */}
         <PillarCard
-          icon={<Activity className="w-4 h-4 text-amber-400" />}
+          icon={<Activity className="w-4 h-4 text-blue-400" />}
           title="Pillar 2 — Confidence Gap"
           score={p2}
           weight={effectiveWeights.beta}
           description="Token entropy and whitebox/blackbox uncertainty variance."
+          colorClass="bg-blue-500"
+          borderClass="border-blue-500/20"
         />
 
         {/* Pillar 3 */}
         <PillarCard
-          icon={<GitBranch className="w-4 h-4 text-indigo-400" />}
+          icon={<GitBranch className="w-4 h-4 text-amber-400" />}
           title="Pillar 3 — Consistency Failure"
           score={p3}
           weight={effectiveWeights.gamma}
           description="Cross-sample contradiction and multi-generation self-consistency."
+          colorClass="bg-amber-500"
+          borderClass="border-amber-500/20"
         />
       </div>
     </div>
@@ -70,18 +76,22 @@ function PillarCard({
   score,
   weight,
   description,
+  colorClass = "bg-teal-500",
+  borderClass = "border-white/[0.06]",
 }: {
   icon: React.ReactNode;
   title: string;
   score: number | null;
   weight: number;
   description: string;
+  colorClass?: string;
+  borderClass?: string;
 }) {
   const isAvailable = score != null && !isNaN(score);
   const pct = isAvailable ? Math.min(Math.max(score * 100, 0), 100) : 0;
 
   return (
-    <div className="p-4 rounded-xl border border-white/[0.06] bg-[#0b1220] space-y-3">
+    <div className={`p-4 rounded-xl border ${borderClass} bg-[#0b1220] space-y-3`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {icon}
@@ -97,7 +107,7 @@ function PillarCard({
         </div>
         <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
           <motion.div
-            className="h-full rounded-full bg-blue-500"
+            className={`h-full rounded-full ${colorClass}`}
             initial={{ width: 0 }}
             animate={{ width: `${pct}%` }}
             transition={{ duration: 0.5 }}

@@ -71,8 +71,8 @@ export function MessageBubble({
       <div
         className={`w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 ${
           isUser
-            ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
-            : 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+            ? 'bg-slate-500/15 text-slate-300 border border-slate-500/20'
+            : 'bg-teal-500/15 text-teal-400 border border-teal-500/25'
         }`}
       >
         {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
@@ -89,7 +89,7 @@ export function MessageBubble({
 
             {!isUser && (
               <span className="flex items-center gap-1 text-[10px] font-mono font-medium text-slate-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
-                <Cpu className="w-3 h-3 text-indigo-400" /> {model_used}
+                <Cpu className="w-3 h-3 text-teal-400" /> {model_used}
               </span>
             )}
 
@@ -113,7 +113,7 @@ export function MessageBubble({
             {!isUser && isAnnotated && (
               <button
                 onClick={handleInspect}
-                className="flex items-center gap-1 text-xs font-semibold text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 hover:bg-indigo-500/20 px-2.5 py-1 rounded-xl border border-indigo-500/30 transition-all"
+                className="flex items-center gap-1 text-xs font-semibold text-teal-400 hover:text-teal-300 bg-teal-500/10 hover:bg-teal-500/20 px-2.5 py-1 rounded-xl border border-teal-500/30 transition-all cursor-pointer"
               >
                 <ShieldCheck className="w-3.5 h-3.5" /> Inspect Verification
               </button>

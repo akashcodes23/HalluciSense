@@ -132,21 +132,21 @@ function SubmitButton({ loading, label }: { loading: boolean; label: string }) {
   return (
     <motion.button
       type="submit" disabled={loading}
-      whileHover={loading ? {} : { scale: 1.015, boxShadow: '0 8px 24px rgba(99,102,241,0.4)' }}
+      whileHover={loading ? {} : { scale: 1.015, boxShadow: '0 8px 24px rgba(45,212,191,0.3)' }}
       whileTap={{ scale: 0.985 }}
       style={{
         width: '100%', padding: '14px', borderRadius: 12, border: 'none',
         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        background: 'linear-gradient(135deg, #6366f1 0%, #818cf8 100%)',
-        color: '#fff', fontSize: '0.95rem', fontWeight: 600, cursor: loading ? 'default' : 'pointer',
-        marginTop: 16, marginBottom: 24, boxShadow: '0 4px 14px rgba(99,102,241,0.25)',
+        background: 'linear-gradient(135deg, #0d9488 0%, #2dd4bf 100%)',
+        color: '#09090b', fontSize: '0.95rem', fontWeight: 600, cursor: loading ? 'default' : 'pointer',
+        marginTop: 16, marginBottom: 24, boxShadow: '0 4px 14px rgba(45,212,191,0.2)',
         transition: 'box-shadow 0.2s',
       }}
     >
       {loading ? (
         <span style={{
-          width: 16, height: 16, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.3)',
-          borderTopColor: '#fff', animation: 'spin 0.7s linear infinite'
+          width: 16, height: 16, borderRadius: '50%', border: '2px solid rgba(0,0,0,0.3)',
+          borderTopColor: '#09090b', animation: 'spin 0.7s linear infinite'
         }} />
       ) : label}
     </motion.button>
@@ -219,10 +219,10 @@ export default function AuthPage() {
           display: 'inline-flex', alignItems: 'center', gap: 12, textDecoration: 'none'
         }}>
           <div style={{
-            width: 40, height: 40, borderRadius: 12, background: 'rgba(99,102,241,0.1)',
-            border: '1px solid rgba(99,102,241,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center'
+            width: 40, height: 40, borderRadius: 12, background: 'rgba(45,212,191,0.1)',
+            border: '1px solid rgba(45,212,191,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center'
           }}>
-            <Database size={20} color="#818cf8" />
+            <Database size={20} color="#2dd4bf" />
           </div>
           <span style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--text-primary)' }}>
             HalluciSense
@@ -236,7 +236,7 @@ export default function AuthPage() {
             lineHeight: 1.05, color: 'var(--text-primary)', maxWidth: 600, marginBottom: 24
           }}>
             Know when to <br />
-            <span style={{ color: '#818cf8', fontWeight: 600 }}>trust</span> your AI.
+            <span style={{ color: '#2dd4bf', fontWeight: 600 }}>trust</span> your AI.
           </h1>
           <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: 480, lineHeight: 1.6, marginBottom: 56 }}>
             Intercept every LLM response and analyze it across three independent dimensions before a single word reaches you.
@@ -282,7 +282,7 @@ export default function AuthPage() {
           <Link href="/" className="auth-mobile-logo" style={{
             display: 'none', alignItems: 'center', gap: 8, textDecoration: 'none'
           }}>
-            <Database size={24} color="#818cf8" />
+            <Database size={24} color="#2dd4bf" />
             <span style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)' }}>HalluciSense</span>
           </Link>
         </div>
@@ -454,11 +454,11 @@ export default function AuthPage() {
         }
         .glow-1 {
           top: -10%; left: -10%; width: 60%; height: 60%;
-          background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 60%);
+          background: radial-gradient(circle, rgba(45,212,191,0.08) 0%, transparent 60%);
         }
         .glow-2 {
           bottom: -10%; right: -10%; width: 50%; height: 50%;
-          background: radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 60%);
+          background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 60%);
           animation-delay: -5s;
         }
         .glow-3 {

@@ -84,7 +84,7 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/[0.06] pb-6">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-mono">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/20 font-mono">
               Architecture Inspector
             </span>
             <span className="text-xs text-slate-400 font-mono">Phase 6M Hybrid Fusion Engine</span>
@@ -101,7 +101,7 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
           onClick={copyPythonSchema}
           className="px-3.5 py-2 rounded-xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.06] text-slate-300 hover:text-white transition-colors flex items-center gap-2 text-xs font-mono cursor-pointer shrink-0"
         >
-          {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Code className="w-3.5 h-3.5 text-indigo-400" />}
+          {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Code className="w-3.5 h-3.5 text-teal-400" />}
           <span>{copied ? 'Copied' : 'Export Python Schema'}</span>
         </button>
       </div>
@@ -120,18 +120,18 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
         <div className="bg-bg-surface border border-white/[0.06] rounded-2xl p-5 space-y-1">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
             <span>Preprocessor</span>
-            <Sliders className="w-3.5 h-3.5 text-indigo-400" />
+            <Sliders className="w-3.5 h-3.5 text-teal-400" />
           </div>
-          <div className="text-base font-bold text-indigo-400">RobustScaler</div>
+          <div className="text-base font-bold text-teal-400">RobustScaler</div>
           <div className="text-[11px] text-slate-400 font-mono">IQR Median & Quantile Scaling</div>
         </div>
 
         <div className="bg-bg-surface border border-white/[0.06] rounded-2xl p-5 space-y-1">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
             <span>Decision Boundary</span>
-            <SlidersHorizontal className="w-3.5 h-3.5 text-purple-400" />
+            <SlidersHorizontal className="w-3.5 h-3.5 text-cyan-400" />
           </div>
-          <div className="text-base font-bold text-purple-400 font-mono">&tau;* = 0.540</div>
+          <div className="text-base font-bold text-cyan-400 font-mono">&tau;* = 0.540</div>
           <div className="text-[11px] text-slate-400 font-mono">Optimized for F1 / MCC</div>
         </div>
 
@@ -150,7 +150,7 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-              <Layers className="w-5 h-5 text-indigo-400" />
+              <Layers className="w-5 h-5 text-teal-400" />
               <span>19-Dimensional Hybrid Feature Schema</span>
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
@@ -166,7 +166,7 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search feature or formula..."
-              className="w-full bg-white/[0.02] border border-white/[0.06] rounded-xl pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500/50 font-mono"
+              className="w-full bg-white/[0.02] border border-white/[0.06] rounded-xl pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-teal-500/50 font-mono"
             />
           </div>
         </div>
@@ -179,7 +179,7 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
               onClick={() => setSelectedGroup(grp)}
               className={`px-3 py-1 text-xs rounded-lg font-mono transition-colors cursor-pointer ${
                 selectedGroup === grp
-                  ? 'bg-indigo-600 text-white font-semibold shadow-sm'
+                  ? 'bg-teal-500 text-zinc-950 font-semibold shadow-sm'
                   : 'text-slate-400 hover:text-slate-200 bg-white/[0.02] hover:bg-white/[0.04]'
               }`}
             >
@@ -204,15 +204,15 @@ CLASSIFIER = "HistGradientBoostingClassifier(max_iter=100, max_depth=4)"`;
               {filteredFeatures.map((feat) => (
                 <tr key={feat.name} className="hover:bg-white/[0.02] transition-colors">
                   <td className="py-3.5 px-4 font-mono text-xs text-slate-400">[{feat.index.toString().padStart(2, '0')}]</td>
-                  <td className="py-3.5 px-4 font-mono font-medium text-indigo-300">{feat.name}</td>
+                  <td className="py-3.5 px-4 font-mono font-medium text-teal-300">{feat.name}</td>
                   <td className="py-3.5 px-4">
                     <span
                       className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold ${
                         feat.group.includes('Pillar 1')
-                          ? 'bg-blue-500/10 text-blue-300 border border-blue-500/20'
+                          ? 'bg-teal-500/10 text-teal-300 border border-teal-500/20'
                           : feat.group.includes('Pillar 2')
-                          ? 'bg-purple-500/10 text-purple-300 border border-purple-500/20'
-                          : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20'
+                          ? 'bg-blue-500/10 text-blue-300 border border-blue-500/20'
+                          : 'bg-amber-500/10 text-amber-300 border border-amber-500/20'
                       }`}
                     >
                       {feat.group}

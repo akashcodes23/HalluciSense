@@ -11,11 +11,11 @@ interface EvidenceCardProps {
 
 function getSourceMeta(sourceName: string) {
   const srcLower = (sourceName || '').toLowerCase();
-  if (srcLower.includes('wikipedia')) return { icon: BookOpen, color: '#3b82f6', label: 'Wikipedia' };
-  if (srcLower.includes('wikidata')) return { icon: Database, color: '#9333ea', label: 'Wikidata' };
+  if (srcLower.includes('wikipedia')) return { icon: BookOpen, color: '#38bdf8', label: 'Wikipedia' };
+  if (srcLower.includes('wikidata')) return { icon: Database, color: '#06b6d4', label: 'Wikidata' };
   if (srcLower.includes('pubmed')) return { icon: FileText, color: '#10b981', label: 'PubMed' };
   if (srcLower.includes('crossref')) return { icon: Globe, color: '#f59e0b', label: 'CrossRef' };
-  return { icon: Globe, color: '#6366f1', label: sourceName || 'Web Source' };
+  return { icon: Globe, color: '#2dd4bf', label: sourceName || 'Web Source' };
 }
 
 export function EvidenceCard({ evidence }: EvidenceCardProps) {
@@ -62,7 +62,7 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
       </div>
 
       {/* Snippet */}
-      <blockquote className="text-xs text-slate-300 leading-relaxed border-l-2 border-indigo-500/40 pl-3 italic">
+      <blockquote className="text-xs text-slate-300 leading-relaxed border-l-2 border-teal-500/40 pl-3 italic">
         &quot;{evidence.snippet}&quot;
       </blockquote>
 
@@ -82,7 +82,7 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
         </div>
         <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
           <div
-            className="h-full rounded-full bg-blue-500 origin-left"
+            className="h-full rounded-full bg-teal-500 origin-left"
             style={{ width: `${confidence}%` }}
           />
         </div>
@@ -103,7 +103,7 @@ export function EvidenceCard({ evidence }: EvidenceCardProps) {
             href={evidence.source_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-[11px] text-indigo-400 hover:text-indigo-300 transition-colors font-medium"
+            className="flex items-center gap-1 text-[11px] text-teal-400 hover:text-teal-300 transition-colors font-medium"
           >
             Open Source <ExternalLink className="w-3 h-3" />
           </a>

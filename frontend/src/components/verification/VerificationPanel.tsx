@@ -135,7 +135,7 @@ export function VerificationPanel() {
       >
         {/* ── Drag Handle ── */}
         <div
-          className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-indigo-500/30 transition-all duration-200 ease-out z-50 opacity-0 hover:opacity-100"
+          className="absolute left-0 top-0 bottom-0 w-1.5 cursor-col-resize hover:bg-teal-500/30 transition-all duration-200 ease-out z-50 opacity-0 hover:opacity-100"
           onPointerDown={(e) => {
             e.preventDefault();
             const startX = e.clientX;
@@ -192,7 +192,7 @@ export function VerificationPanel() {
           {/* ── Evidence Statistics Grid ── */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-              <BarChart2 className="w-3.5 h-3.5 text-indigo-400" /> Evidence Metrics
+              <BarChart2 className="w-3.5 h-3.5 text-teal-400" /> Evidence Metrics
             </h3>
             <div className="grid grid-cols-3 gap-3">
               <div className="bg-white/[0.03] border border-white/5 p-3 rounded-xl text-center">
@@ -213,7 +213,7 @@ export function VerificationPanel() {
           {/* ── Sentence Accordion Inspector ── */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-              <Activity className="w-3.5 h-3.5 text-indigo-400" /> Claim Breakdown ({sentences.length})
+              <Activity className="w-3.5 h-3.5 text-teal-400" /> Claim Breakdown ({sentences.length})
             </h3>
             <div className="space-y-3">
               {sentences.map((sentence, idx) => {
@@ -249,32 +249,27 @@ export function VerificationPanel() {
                         >
                           {cfg.label}
                         </span>
-                        {isExpanded ? (
-                          <ChevronUp className="w-4 h-4 text-slate-400" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 text-slate-400" />
-                        )}
+                        <ChevronDown
+                          className={`w-4 h-4 text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        />
                       </div>
                     </button>
 
-                    {/* Sentence Accordion Body */}
+                    {/* Sentence Details */}
                     {isExpanded && (
                       <div className="p-4 border-t border-white/5 space-y-4 bg-white/[0.01]">
-                        {/* Tri-Pillar Breakdown */}
-                        <div className="space-y-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                            Tri-Pillar Analysis
-                          </span>
+                        {/* Sentence Pillars */}
+                        <div className="grid grid-cols-1 gap-2.5">
                           <PillarCard
-                            label="Factual Grounding"
+                            label="Evidence Grounding"
                             score={sentence.factual_error}
-                            description="Retrieved external evidence entailment."
+                            description="NLI Contradiction against evidence."
                             color={getPillarColor(sentence.factual_error)}
                           />
                           <PillarCard
                             label="Confidence Gap"
                             score={sentence.confidence_gap}
-                            description="Token probability uncertainty."
+                            description="Logit uncertainty & entropy gap."
                             color={getPillarColor(sentence.confidence_gap)}
                           />
                           <PillarCard
@@ -288,7 +283,7 @@ export function VerificationPanel() {
                         {/* NLI Engine Reasoning */}
                         {sentence.reasoning && (
                           <div className="bg-white/[0.02] border border-white/5 p-3 rounded-xl flex gap-2.5">
-                            <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+                            <Info className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
                             <p className="text-xs text-slate-300 leading-relaxed">{sentence.reasoning}</p>
                           </div>
                         )}

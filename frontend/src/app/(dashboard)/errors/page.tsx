@@ -49,7 +49,7 @@ function riskConfig(rl: string) {
     case "MODERATE_RISK":
       return { color: "text-amber-400", bg: "bg-amber-500/15", border: "border-amber-500/30", icon: <ShieldAlert className="w-3.5 h-3.5" />, label: "MODERATE RISK" };
     case "NEEDS_VERIFICATION":
-      return { color: "text-indigo-400", bg: "bg-indigo-500/15", border: "border-indigo-500/30", icon: <Info className="w-3.5 h-3.5" />, label: "UNVERIFIED" };
+      return { color: "text-amber-400", bg: "bg-amber-500/15", border: "border-amber-500/30", icon: <Info className="w-3.5 h-3.5" />, label: "UNVERIFIED" };
     case "CORRECTED":
       return { color: "text-amber-300", bg: "bg-amber-500/10", border: "border-amber-400/30", icon: <AlertTriangle className="w-3.5 h-3.5" />, label: "CORRECTED & RE-VERIFIED" };
     case "FAILED":
@@ -65,7 +65,7 @@ function riskConfig(rl: string) {
 function SourceBadge({ source }: { source: ErrorEventSource }) {
   if (source === "CHAT") {
     return (
-      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 shrink-0">
+      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30 shrink-0">
         <MessageSquare className="w-2.5 h-2.5" />
         CHAT
       </span>
@@ -73,7 +73,7 @@ function SourceBadge({ source }: { source: ErrorEventSource }) {
   }
   if (source === "VERIFY") {
     return (
-      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 shrink-0">
+      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 shrink-0">
         <ShieldCheck className="w-2.5 h-2.5" />
         VERIFY
       </span>

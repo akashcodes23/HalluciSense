@@ -362,6 +362,7 @@ export default function VerifyPage() {
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <PillarScoreCard
+                    pillarNumber={1}
                     label="Evidence Grounding"
                     sublabel="Pillar 1 — Retrieval + NLI"
                     value={currentResult.pillar_scores.retrieval ?? currentResult.pillar_scores.pillar1_factual_error}
@@ -369,6 +370,7 @@ export default function VerifyPage() {
                     reason="Evidence retrieval service unavailable"
                   />
                   <PillarScoreCard
+                    pillarNumber={2}
                     label="Confidence Estimation"
                     sublabel="Pillar 2 — Token uncertainty"
                     value={currentResult.pillar_scores.confidence ?? currentResult.pillar_scores.pillar2_confidence_gap}
@@ -376,6 +378,7 @@ export default function VerifyPage() {
                     reason="Token log-probabilities not provided"
                   />
                   <PillarScoreCard
+                    pillarNumber={3}
                     label="Consistency Reasoning"
                     sublabel="Pillar 3 — Self-consistency"
                     value={currentResult.pillar_scores.consistency ?? currentResult.pillar_scores.pillar3_consistency_failure}
@@ -468,12 +471,14 @@ export default function VerifyPage() {
 }
 
 function PillarScoreCard({
+  pillarNumber,
   label,
   sublabel,
   value,
   status,
   reason,
 }: {
+  pillarNumber?: 1 | 2 | 3;
   label: string;
   sublabel: string;
   value?: number | null;
@@ -486,9 +491,32 @@ function PillarScoreCard({
     ? value > 0.5 ? "var(--hallucination)" : value > 0.25 ? "var(--warning)" : "var(--verified)"
     : "var(--text-dim)";
 
+  const pillarAccent = pillarNumber === 1
+    ? "border-teal-400/20"
+    : pillarNumber === 2
+    ? "border-blue-400/20"
+    : pillarNumber === 3
+    ? "border-amber-400/20"
+    : "border-[var(--border)]";
+
+  const pillarTagColor = pillarNumber === 1
+    ? "text-teal-400 bg-teal-500/10 border-teal-500/20"
+    : pillarNumber === 2
+    ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
+    : pillarNumber === 3
+    ? "text-amber-400 bg-amber-500/10 border-amber-500/20"
+    : "text-[var(--text-dim)] bg-[var(--surface)] border-[var(--border)]";
+
   return (
-    <div className="rounded-[var(--radius)] bg-[var(--surface)] p-3">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-0.5">{label}</p>
+    <div className={cn("rounded-[var(--radius)] bg-[var(--surface)] p-3 border", pillarAccent)}>
+      <div className="flex items-center justify-between gap-2 mb-1">
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] truncate">{label}</p>
+        {pillarNumber && (
+          <span className={cn("text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border shrink-0", pillarTagColor)}>
+            P{pillarNumber}
+          </span>
+        )}
+      </div>
       <p className="text-[10px] text-[var(--text-dim)] mb-2">{sublabel}</p>
       {isAvailable ? (
         <p

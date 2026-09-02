@@ -37,7 +37,7 @@ export default function StatisticsPage() {
           <div key={item.metric} className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{item.metric}</span>
-              <span className="text-xs text-indigo-400 font-mono">95% CI</span>
+              <span className="text-xs text-teal-400 font-mono">95% CI</span>
             </div>
             <div className="text-3xl font-bold text-white">{item.mean.toFixed(4)}</div>
 

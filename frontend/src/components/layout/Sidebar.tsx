@@ -58,8 +58,8 @@ export function Sidebar({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSide
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-              <Database className="w-5 h-5 text-indigo-400" />
+            <div className="w-8 h-8 rounded-lg bg-teal-500/15 border border-teal-500/20 flex items-center justify-center">
+              <Database className="w-5 h-5 text-teal-400" />
             </div>
             <span className="font-semibold text-lg tracking-tight">HalluciSense</span>
           </Link>
@@ -96,7 +96,7 @@ export function Sidebar({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSide
                       value={editTitle}
                       onChange={(e) => setEditTitle(e.target.value)}
                       onBlur={(e) => handleRenameSubmit(e, chat.id)}
-                      className="w-full bg-black/40 border border-white/10 rounded px-2 py-1 text-sm text-white focus:outline-none focus:border-indigo-500"
+                      className="w-full bg-black/40 border border-white/10 rounded px-2 py-1 text-sm text-white focus:outline-none focus:border-teal-500"
                     />
                   </form>
                 ) : (
@@ -155,12 +155,12 @@ export function Sidebar({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSide
               <MessageSquarePlus className="w-4 h-4" />
               <span className="text-sm">New Session</span>
             </Link>
-            <Link href="/verify" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out ${pathname === '/verify' ? 'bg-white/10 text-white' : 'hover:bg-white/5 text-slate-400'}`}>
-              <ShieldCheck className="w-4 h-4" />
+            <Link href="/verify" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out ${pathname === '/verify' ? 'bg-teal-500/10 text-teal-300 border border-teal-500/20' : 'hover:bg-white/5 text-slate-400'}`}>
+              <ShieldCheck className="w-4 h-4 text-teal-400" />
               <span className="text-sm">Verification Engine</span>
             </Link>
             <Link href="/benchmark" className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ease-out ${pathname === '/benchmark' ? 'bg-white/10 text-white' : 'hover:bg-white/5 text-slate-400'}`}>
-              <Database className="w-4 h-4 text-purple-400" />
+              <Database className="w-4 h-4 text-teal-400" />
               <span className="text-sm">Benchmark Leaderboard</span>
             </Link>
           </nav>

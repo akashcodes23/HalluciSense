@@ -46,7 +46,7 @@ export const VerificationTracePanel: React.FC<Props> = ({ summary }) => {
     <div className="bg-slate-900/60 backdrop-blur border border-slate-800 rounded-xl p-5 shadow-lg space-y-4">
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-indigo-400" />
+          <Shield className="w-5 h-5 text-teal-400" />
           <h3 className="text-sm font-semibold text-slate-200">Evidence Intelligence & Audit Trace</h3>
         </div>
         <div className="flex items-center gap-3 text-xs text-slate-400">
@@ -89,7 +89,7 @@ export const VerificationTracePanel: React.FC<Props> = ({ summary }) => {
 
             {claim.symbolic_result && (
               <div className="bg-slate-900/80 border border-slate-800 rounded p-2.5 text-xs font-mono text-slate-300 space-y-1">
-                <div className="flex items-center gap-1.5 text-indigo-400 font-semibold">
+                <div className="flex items-center gap-1.5 text-teal-400 font-semibold">
                   <Terminal className="w-3.5 h-3.5" /> Deterministic Symbolic Computation
                 </div>
                 <p>{claim.reason}</p>

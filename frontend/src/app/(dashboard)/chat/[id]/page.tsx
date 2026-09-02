@@ -209,7 +209,7 @@ export default function ChatPage() {
   return (
     <div className="flex flex-1 h-full overflow-hidden relative">
       {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Chat Area */}
       <div className="flex-1 h-full overflow-hidden min-w-0">

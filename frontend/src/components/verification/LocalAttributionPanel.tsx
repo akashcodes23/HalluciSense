@@ -169,7 +169,7 @@ export function LocalAttributionPanel({ attribution, semanticGrounding, classNam
         <Card className={cn("bg-[var(--surface)] border-[var(--border)]", className)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <Shield className="w-4 h-4 text-indigo-400" />
+              <Shield className="w-4 h-4 text-teal-400" />
               Evidence Grounding Trace
             </CardTitle>
           </CardHeader>
@@ -235,10 +235,10 @@ export function LocalAttributionPanel({ attribution, semanticGrounding, classNam
           <div className="p-3.5 rounded-[var(--radius-md)] bg-[var(--surface)] border border-[var(--border)] space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                <Shield className="w-3.5 h-3.5 text-teal-400" />
                 Claim ↔ Evidence Grounding Trace
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-950/60 text-indigo-300 border border-indigo-800 font-mono">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-950/60 text-teal-300 border border-teal-800/40 font-mono">
                 {semanticGrounding.shadow_only ? "Shadow NLI Diagnostic" : "Active NLI Grounding"}
               </span>
             </div>

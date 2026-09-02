@@ -342,7 +342,7 @@ export default function ClosedLoopChatPage() {
                         </span>
                       )}
                       {msg.verification.status === "REVIEW" && (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-500/15 border border-indigo-500/30 text-indigo-400">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/15 border border-amber-500/30 text-amber-400">
                           <Info className="w-3.5 h-3.5" />
                           REQUIRES REVIEW
                         </span>
@@ -428,7 +428,7 @@ export default function ClosedLoopChatPage() {
                           </div>
                           <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
                             <span className="text-slate-500 block text-[9px] uppercase">Trace ID</span>
-                            <span className="font-bold text-indigo-400 truncate block">{msg.trace_id || "N/A"}</span>
+                            <span className="font-bold text-teal-400 truncate block">{msg.trace_id || "N/A"}</span>
                           </div>
                         </div>
 
@@ -495,7 +495,7 @@ export default function ClosedLoopChatPage() {
               {/* Progress bar */}
               <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 rounded-full"
+                  className="h-full bg-gradient-to-r from-teal-500 to-emerald-400 rounded-full"
                   initial={{ width: "10%" }}
                   animate={{ width: `${((currentStageIdx + 1) / PIPELINE_STAGES.length) * 100}%` }}
                   transition={{ duration: 0.3 }}

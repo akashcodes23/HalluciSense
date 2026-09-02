@@ -66,7 +66,7 @@ export default function AdminPage() {
                 <td className="px-6 py-4 font-medium text-white">{u.full_name}</td>
                 <td className="px-6 py-4">{u.email}</td>
                 <td className="px-6 py-4">
-                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${u.role === 'ADMIN' ? 'bg-purple-500/20 text-purple-400' : 'bg-slate-500/20 text-slate-400'}`}>
+                  <span className={`px-2 py-1 rounded-full text-xs font-bold ${u.role === 'ADMIN' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' : 'bg-slate-500/20 text-slate-400 border border-slate-500/30'}`}>
                     {u.role}
                   </span>
                 </td>

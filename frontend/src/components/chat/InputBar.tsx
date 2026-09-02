@@ -60,7 +60,7 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
             onClick={() => setInputMode('chat')}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm transition-all cursor-pointer ${
               inputMode === 'chat'
-                ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/30'
+                ? 'bg-teal-500 text-zinc-950 font-semibold shadow-md shadow-teal-500/20'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
@@ -71,7 +71,7 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
             onClick={() => setInputMode('verify')}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm transition-all cursor-pointer ${
               inputMode === 'verify'
-                ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/30'
+                ? 'bg-teal-500 text-zinc-950 font-semibold shadow-md shadow-teal-500/20'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
@@ -109,7 +109,7 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
                         }}
                         className={`w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-white/[0.08] text-indigo-300 font-semibold'
+                            ? 'bg-white/[0.08] text-teal-300 font-semibold'
                             : 'text-slate-300 hover:bg-white/5'
                         }`}
                       >
@@ -124,7 +124,7 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
         )}
       </div>
 
-      <div className="relative flex items-end bg-[#151923] border border-white/10 rounded-[28px] p-2 shadow-2xl shadow-black/50 focus-within:ring-2 focus-within:ring-indigo-500/30 transition-all duration-200 ease-out">
+      <div className="relative flex items-end bg-[#151923] border border-white/10 rounded-[28px] p-2 shadow-2xl shadow-black/50 focus-within:ring-2 focus-within:ring-teal-500/30 transition-all duration-200 ease-out">
         <textarea
           ref={textareaRef}
           value={input}
@@ -147,7 +147,7 @@ export function InputBar({ onSend, isLoading, onStop }: InputBarProps) {
             <button 
               onClick={handleSubmit}
               disabled={!input.trim()}
-              className="p-2.5 rounded-full bg-indigo-500 text-white hover:bg-indigo-600 disabled:opacity-30 disabled:hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20"
+              className="p-2.5 rounded-full bg-teal-500 text-zinc-950 hover:bg-teal-400 disabled:opacity-30 disabled:hover:bg-teal-500 transition-all shadow-lg shadow-teal-500/20 cursor-pointer"
             >
               {inputMode === 'verify' ? <CheckCircle className="w-4 h-4" /> : <Send className="w-4 h-4" />}
             </button>

@@ -86,17 +86,17 @@ export const DebugDashboard: React.FC = () => {
             placeholder="Search Trace ID..."
             value={searchId}
             onChange={(e) => setSearchId(e.target.value)}
-            className="px-3 py-1.5 bg-black/40 border border-white/10 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-mono"
+            className="px-3 py-1.5 bg-black/40 border border-white/10 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 font-mono"
           />
           <button
             onClick={() => fetchTraceById(searchId)}
-            className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold rounded-lg transition-colors"
+            className="px-3 py-1.5 bg-teal-500 hover:bg-teal-400 text-zinc-950 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
           >
             Search
           </button>
           <button
             onClick={fetchLatestTrace}
-            className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold rounded-lg transition-colors"
+            className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
           >
             Latest
           </button>
@@ -120,7 +120,7 @@ export const DebugDashboard: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
               <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Trace ID</span>
-              <span className="text-xs font-mono text-indigo-400 font-semibold">{trace.trace_id}</span>
+              <span className="text-xs font-mono text-teal-400 font-semibold">{trace.trace_id}</span>
             </div>
             <div className="p-3 bg-white/[0.02] border border-white/5 rounded-lg">
               <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Total Latency</span>
