@@ -82,7 +82,14 @@ class ModelRegistry:
                     )
 
                     tokenizer = AutoTokenizer.from_pretrained(model_name)
-                    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+                    try:
+                        model = AutoModelForSequenceClassification.from_pretrained(
+                            model_name,
+                            low_cpu_mem_usage=True,
+                        )
+                    except Exception:
+                        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
                     model.eval()
                     for param in model.parameters():
                         param.requires_grad = False
@@ -92,10 +99,15 @@ class ModelRegistry:
                     cls._nli_backend = "deberta-v3-eval"
                     cls._nli_artifact = model_name
                     cls._init_counts["nli_model"] += 1
+
+                    from app.core.engine.memory_utils import trim_process_memory
+                    post_load_rss = trim_process_memory()
+
                     logger.info(
                         "shared_nli_model_loaded",
                         init_count=cls._init_counts["nli_model"],
                         backend=cls._nli_backend,
+                        post_load_rss_mb=post_load_rss,
                     )
         return cls._nli_tokenizer, cls._nli_model
 
