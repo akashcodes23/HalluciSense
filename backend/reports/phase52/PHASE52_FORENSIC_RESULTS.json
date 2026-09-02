@@ -1,0 +1,491 @@
+{
+  "timestamp": 1788325862.423218,
+  "dataset_total": 300,
+  "ablation_table": {
+    "A_P1_only": {
+      "auroc": 0.8083,
+      "auprc": 0.8253,
+      "accuracy": 0.7033,
+      "precision": 0.6704,
+      "recall": 0.8,
+      "specificity": 0.6067,
+      "f1_score": 0.7295,
+      "mcc": 0.4145,
+      "balanced_accuracy": 0.7033,
+      "brier_score": 0.2448,
+      "ece": 0.2054
+    },
+    "B_P2_only": {
+      "auroc": 0.5462,
+      "auprc": 0.7275,
+      "accuracy": 0.5033,
+      "precision": 1.0,
+      "recall": 0.0067,
+      "specificity": 1.0,
+      "f1_score": 0.0132,
+      "mcc": 0.0578,
+      "balanced_accuracy": 0.5033,
+      "brier_score": 0.4214,
+      "ece": 0.4172
+    },
+    "C_P3_only": {
+      "auroc": 0.4428,
+      "auprc": 0.4407,
+      "accuracy": 0.4733,
+      "precision": 0.3947,
+      "recall": 0.1,
+      "specificity": 0.8467,
+      "f1_score": 0.1596,
+      "mcc": -0.0802,
+      "balanced_accuracy": 0.4733,
+      "brier_score": 0.5225,
+      "ece": 0.5236
+    },
+    "D_P1_plus_P2": {
+      "auroc": 0.8139,
+      "auprc": 0.8327,
+      "accuracy": 0.7167,
+      "precision": 0.6946,
+      "recall": 0.7733,
+      "specificity": 0.66,
+      "f1_score": 0.7319,
+      "mcc": 0.4361,
+      "balanced_accuracy": 0.7167,
+      "brier_score": 0.1978,
+      "ece": 0.0795
+    },
+    "E_P1_plus_P3": {
+      "auroc": 0.7358,
+      "auprc": 0.6728,
+      "accuracy": 0.7,
+      "precision": 0.6744,
+      "recall": 0.7733,
+      "specificity": 0.6267,
+      "f1_score": 0.7205,
+      "mcc": 0.4044,
+      "balanced_accuracy": 0.7,
+      "brier_score": 0.2294,
+      "ece": 0.1537
+    },
+    "F_P2_plus_P3": {
+      "auroc": 0.4832,
+      "auprc": 0.4753,
+      "accuracy": 0.5133,
+      "precision": 0.6667,
+      "recall": 0.0533,
+      "specificity": 0.9733,
+      "f1_score": 0.0988,
+      "mcc": 0.068,
+      "balanced_accuracy": 0.5133,
+      "brier_score": 0.4436,
+      "ece": 0.4292
+    },
+    "G_P1_plus_P2_plus_P3_Hybrid": {
+      "auroc": 0.6905,
+      "auprc": 0.5883,
+      "accuracy": 0.57,
+      "precision": 0.6479,
+      "recall": 0.3067,
+      "specificity": 0.8333,
+      "f1_score": 0.4163,
+      "mcc": 0.1647,
+      "balanced_accuracy": 0.57,
+      "brier_score": 0.2516,
+      "ece": 0.2043
+    }
+  },
+  "feature_polarity_audit": {
+    "p1_mean_entailment": {
+      "feature_index": 0,
+      "scaler_median": 0.0024,
+      "scaler_iqr": 0.0444,
+      "expected_semantic_direction": "HIGHER_MORE_FACTUAL",
+      "p_at_low_feature": 0.6397,
+      "p_at_high_feature": 0.6116,
+      "sensitivity_delta": -0.028,
+      "classifier_response": "DECREASES_P_H",
+      "is_polarity_inverted": false
+    },
+    "p1_max_entailment": {
+      "feature_index": 1,
+      "scaler_median": 0.0041,
+      "scaler_iqr": 0.0867,
+      "expected_semantic_direction": "HIGHER_MORE_FACTUAL",
+      "p_at_low_feature": 0.6705,
+      "p_at_high_feature": 0.6157,
+      "sensitivity_delta": -0.0548,
+      "classifier_response": "DECREASES_P_H",
+      "is_polarity_inverted": false
+    },
+    "p1_mean_contradiction": {
+      "feature_index": 2,
+      "scaler_median": 0.0373,
+      "scaler_iqr": 0.808275,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6902,
+      "p_at_high_feature": 0.5855,
+      "sensitivity_delta": -0.1048,
+      "classifier_response": "DECREASES_P_H",
+      "is_polarity_inverted": true
+    },
+    "p1_min_support_margin": {
+      "feature_index": 3,
+      "scaler_median": -0.0195,
+      "scaler_iqr": 0.9867,
+      "expected_semantic_direction": "HIGHER_MORE_FACTUAL",
+      "p_at_low_feature": 0.6219,
+      "p_at_high_feature": 0.6629,
+      "sensitivity_delta": 0.0411,
+      "classifier_response": "INCREASES_P_H",
+      "is_polarity_inverted": true
+    },
+    "p1_num_claims": {
+      "feature_index": 4,
+      "scaler_median": 2.0,
+      "scaler_iqr": 4.0,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6416,
+      "sensitivity_delta": 0.0177,
+      "classifier_response": "INCREASES_P_H",
+      "is_polarity_inverted": false
+    },
+    "p2_max_pairwise_contradiction": {
+      "feature_index": 5,
+      "scaler_median": 0.000235,
+      "scaler_iqr": 0.99516,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6272,
+      "sensitivity_delta": 0.0033,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "p2_mean_pairwise_contradiction": {
+      "feature_index": 6,
+      "scaler_median": 0.000235,
+      "scaler_iqr": 0.179857,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6254,
+      "sensitivity_delta": 0.0014,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "p2_max_pairwise_similarity": {
+      "feature_index": 7,
+      "scaler_median": 0.0,
+      "scaler_iqr": 0.540956,
+      "expected_semantic_direction": "HIGHER_MORE_FACTUAL",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.7342,
+      "sensitivity_delta": 0.1102,
+      "classifier_response": "INCREASES_P_H",
+      "is_polarity_inverted": true
+    },
+    "p2_fraction_contradictory_pairs": {
+      "feature_index": 8,
+      "scaler_median": 0.0,
+      "scaler_iqr": 0.166667,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": 0.0,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "p2_num_claims": {
+      "feature_index": 9,
+      "scaler_median": 2.0,
+      "scaler_iqr": 4.0,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": 0.0,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "prob_p1": {
+      "feature_index": 10,
+      "scaler_median": 0.533938,
+      "scaler_iqr": 0.164212,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.5716,
+      "p_at_high_feature": 0.6103,
+      "sensitivity_delta": 0.0387,
+      "classifier_response": "INCREASES_P_H",
+      "is_polarity_inverted": false
+    },
+    "prob_p2": {
+      "feature_index": 11,
+      "scaler_median": 0.434131,
+      "scaler_iqr": 0.31276,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6419,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": -0.018,
+      "classifier_response": "DECREASES_P_H",
+      "is_polarity_inverted": true
+    },
+    "logit_p1": {
+      "feature_index": 12,
+      "scaler_median": 0.135962,
+      "scaler_iqr": 0.66528,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": 0.0,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "logit_p2": {
+      "feature_index": 13,
+      "scaler_median": -0.265016,
+      "scaler_iqr": 1.347116,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": 0.0,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "prob_disagreement_abs": {
+      "feature_index": 14,
+      "scaler_median": 0.13191,
+      "scaler_iqr": 0.149284,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6532,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": -0.0293,
+      "classifier_response": "DECREASES_P_H",
+      "is_polarity_inverted": true
+    },
+    "prob_mean": {
+      "feature_index": 15,
+      "scaler_median": 0.521929,
+      "scaler_iqr": 0.185944,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.4196,
+      "p_at_high_feature": 0.6167,
+      "sensitivity_delta": 0.1971,
+      "classifier_response": "INCREASES_P_H",
+      "is_polarity_inverted": false
+    },
+    "prob_max": {
+      "feature_index": 16,
+      "scaler_median": 0.609486,
+      "scaler_iqr": 0.302682,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.5355,
+      "p_at_high_feature": 0.6247,
+      "sensitivity_delta": 0.0891,
+      "classifier_response": "INCREASES_P_H",
+      "is_polarity_inverted": false
+    },
+    "prob_min": {
+      "feature_index": 17,
+      "scaler_median": 0.434131,
+      "scaler_iqr": 0.046948,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.6239,
+      "sensitivity_delta": 0.0,
+      "classifier_response": "NEUTRAL",
+      "is_polarity_inverted": false
+    },
+    "prob_ratio": {
+      "feature_index": 18,
+      "scaler_median": 1.01652,
+      "scaler_iqr": 0.476299,
+      "expected_semantic_direction": "HIGHER_MORE_HALLUCINATED",
+      "p_at_low_feature": 0.6239,
+      "p_at_high_feature": 0.5922,
+      "sensitivity_delta": -0.0317,
+      "classifier_response": "DECREASES_P_H",
+      "is_polarity_inverted": true
+    }
+  },
+  "symbolic_audit": {
+    "claim_true_96": {
+      "text": "12 multiplied by 8 equals 96.",
+      "gateway_result": {
+        "claim_text": "12 multiplied by 8 equals 96.",
+        "claim_type": "ARITHMETIC",
+        "modality": "symbolic_arithmetic",
+        "status": "verified_symbolically",
+        "is_consistent": true,
+        "computed_value": 96.0,
+        "claimed_value": 96.0,
+        "explanation": "Computed 12 * 8 = 96.0000 (Claim stated 96.0000)",
+        "support_margin": 1.0,
+        "entailment": 1.0,
+        "contradiction": 0.0,
+        "neutral": 0.0
+      },
+      "shadow_probability": 0.2973,
+      "active_probability": 0.3631,
+      "shadow_verdict": "FACTUAL",
+      "active_verdict": "FACTUAL"
+    },
+    "claim_false_95": {
+      "text": "12 multiplied by 8 equals 95.",
+      "gateway_result": {
+        "claim_text": "12 multiplied by 8 equals 95.",
+        "claim_type": "ARITHMETIC",
+        "modality": "symbolic_arithmetic",
+        "status": "verified_symbolically",
+        "is_consistent": false,
+        "computed_value": 96.0,
+        "claimed_value": 95.0,
+        "explanation": "Computed 12 * 8 = 96.0000 (Claim stated 95.0000)",
+        "support_margin": -1.0,
+        "entailment": 0.0,
+        "contradiction": 1.0,
+        "neutral": 0.0
+      },
+      "shadow_probability": 0.2973,
+      "active_probability": 0.5337,
+      "shadow_verdict": "FACTUAL",
+      "active_verdict": "FACTUAL"
+    },
+    "defect_summary": "In default shadow mode, symbolic contradiction is suppressed from feature vector, causing 95 to produce P(H)=0.2973 (False Negative). In active mode, symbolic contradiction sets mean_contradiction=0.95, but due to tree threshold tau=0.54, P(H)=0.5337 falls just short."
+  },
+  "counterfactual_analysis": {
+    "P1_sensitivity": {
+      "prob_p1_low": 0.05,
+      "P_H_low": 0.5716,
+      "prob_p1_high": 0.95,
+      "P_H_high": 0.656,
+      "gradient_dP_dP1": 0.0937
+    },
+    "P2_sensitivity": {
+      "prob_p2_low": 0.05,
+      "P_H_low": 0.6419,
+      "prob_p2_high": 0.95,
+      "P_H_high": 0.6239,
+      "gradient_dP_dP2": -0.02
+    },
+    "P3_sensitivity": {
+      "prob_p3_low": 0.05,
+      "P_H_low": 0.6272,
+      "prob_p3_high": 0.95,
+      "P_H_high": 0.6272,
+      "gradient_dP_dP3": 0.0
+    }
+  },
+  "false_negative_codes": {
+    "R1_retrieval_failure": 10,
+    "R2_nli_neutral_dilution": 10,
+    "R3_claim_segmentation": 0,
+    "R4_p2_proxy_dilution": 0,
+    "R5_p3_single_claim_inapplicability": 0,
+    "R6_fusion_polarity_conflict": 0,
+    "R7_feature_polarity_inversion": 60,
+    "R8_classifier_probability_compression": 0,
+    "R9_threshold_conservatism": 2,
+    "R10_symbolic_path_suppression": 20,
+    "R11_unsupported_claim_defaulting": 2
+  },
+  "total_false_negatives": 104,
+  "development_candidates": {
+    "Candidate_A_Calibrated_Logistic_Regression": {
+      "mean_mcc": 0.4879,
+      "mean_recall": 0.6533,
+      "mean_specificity": 0.8267,
+      "mean_auroc": 0.8377,
+      "mean_auprc": 0.8525,
+      "mean_brier": 0.1672,
+      "mean_ece": 0.1139,
+      "is_non_degenerate": true
+    },
+    "Candidate_B_HistGradientBoosting": {
+      "mean_mcc": 0.4893,
+      "mean_recall": 0.7,
+      "mean_specificity": 0.7867,
+      "mean_auroc": 0.8388,
+      "mean_auprc": 0.8459,
+      "mean_brier": 0.1634,
+      "mean_ece": 0.1391,
+      "is_non_degenerate": true
+    },
+    "Candidate_C_RandomForest": {
+      "mean_mcc": 0.4805,
+      "mean_recall": 0.66,
+      "mean_specificity": 0.8133,
+      "mean_auroc": 0.8396,
+      "mean_auprc": 0.8467,
+      "mean_brier": 0.1617,
+      "mean_ece": 0.1234,
+      "is_non_degenerate": true
+    }
+  },
+  "production_contract": [
+    {
+      "text": "The capital of France is Paris.",
+      "p1_score": 0.0021,
+      "p2_score": 0.0875,
+      "p3_score": 0.0,
+      "p2_mode": "STATIC_VERIFICATION_CONFIDENCE",
+      "p3_mode": "SINGLE_CLAIM_CONSISTENCY",
+      "prob_hybrid": 0.2973,
+      "primary_status": "ALL_VERIFIED",
+      "is_hallucinated": false
+    },
+    {
+      "text": "The capital of France is Berlin.",
+      "p1_score": 0.999,
+      "p2_score": 0.0875,
+      "p3_score": 0.0,
+      "p2_mode": "STATIC_VERIFICATION_CONFIDENCE",
+      "p3_mode": "SINGLE_CLAIM_CONSISTENCY",
+      "prob_hybrid": 0.2973,
+      "primary_status": "CONTAINS_CONTRADICTION",
+      "is_hallucinated": false
+    },
+    {
+      "text": "Paris is the capital of France. Berlin is the capital of France.",
+      "p1_score": 0.9992,
+      "p2_score": 0.05,
+      "p3_score": 0.9993,
+      "p2_mode": "STATIC_VERIFICATION_CONFIDENCE",
+      "p3_mode": "INTRA_RESPONSE_CONSISTENCY",
+      "prob_hybrid": 0.3499,
+      "primary_status": "CONTAINS_CONTRADICTION",
+      "is_hallucinated": false
+    },
+    {
+      "text": "Paris is the capital of France. Berlin is the capital of Germany.",
+      "p1_score": 0.175,
+      "p2_score": 0.05,
+      "p3_score": 0.9742,
+      "p2_mode": "STATIC_VERIFICATION_CONFIDENCE",
+      "p3_mode": "INTRA_RESPONSE_CONSISTENCY",
+      "prob_hybrid": 0.3499,
+      "primary_status": "ALL_VERIFIED",
+      "is_hallucinated": false
+    },
+    {
+      "text": "12 multiplied by 8 equals 96.",
+      "p1_score": 0.88,
+      "p2_score": 0.0875,
+      "p3_score": 0.0,
+      "p2_mode": "STATIC_VERIFICATION_CONFIDENCE",
+      "p3_mode": "SINGLE_CLAIM_CONSISTENCY",
+      "prob_hybrid": 0.2973,
+      "primary_status": "ALL_VERIFIED",
+      "is_hallucinated": false
+    },
+    {
+      "text": "12 multiplied by 8 equals 95.",
+      "p1_score": 0.175,
+      "p2_score": 0.0875,
+      "p3_score": 0.0,
+      "p2_mode": "STATIC_VERIFICATION_CONFIDENCE",
+      "p3_mode": "SINGLE_CLAIM_CONSISTENCY",
+      "prob_hybrid": 0.2973,
+      "primary_status": "CONTAINS_CONTRADICTION",
+      "is_hallucinated": false
+    }
+  ],
+  "total_runtime_seconds": 711.59
+}
