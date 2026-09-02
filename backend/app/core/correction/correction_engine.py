@@ -24,6 +24,10 @@ class ReverificationInfo(BaseModel):
     h_score: float = 0.0
     claims_analyzed: int = 1
 
+    @property
+    def status(self) -> str:
+        return "PASSED" if self.passed else "REVIEW"
+
 
 class ClaimCorrectionInfo(BaseModel):
     original_claim: str
@@ -59,21 +63,22 @@ class HallucinationCorrectionEngine:
         sentence_scores: Optional[List[Dict[str, Any]]] = None,
         overall_h_score: float = 0.0,
     ) -> Dict[str, Any]:
-        """Generate an evidence-grounded or symbolic correction candidate."""
-        # Check if already verified or low risk
-        if overall_h_score <= 0.25:
+        """Generate a factual or symbolic correction candidate."""
+        # 0. If overall risk is low and no flagged sentences, return not_needed
+        flagged_count = sum(1 for s in (sentence_scores or []) if s.get("score", 0.0) >= 0.35)
+        if overall_h_score < 0.35 and flagged_count == 0:
             return {
                 "status": "not_needed",
                 "original_text": original_response,
                 "corrected_text": original_response,
                 "method": "none",
-                "reason": "The response is already verified against external evidence. No correction required.",
+                "reason": "Original response is already well-grounded and verified by evidence.",
                 "supporting_evidence": [],
                 "confidence": 1.0,
             }
 
         # -------------------------------------------------------------
-        # TIER 1: Deterministic / Symbolic Correction
+        # TIER 1: Symbolic Math / Unit / Temporal Verifier Correction
         # -------------------------------------------------------------
         # 1A. Arithmetic
         arith_res = evaluate_arithmetic_claim(original_response)
@@ -83,13 +88,11 @@ class HallucinationCorrectionEngine:
         if arith_res and arith_res.get("verified"):
             if not arith_res.get("is_consistent"):
                 comp_val = arith_res.get("computed_value")
-                # Format clean integer if exact
                 if isinstance(comp_val, float) and comp_val.is_integer():
                     comp_val_str = str(int(comp_val))
                 else:
                     comp_val_str = str(comp_val)
 
-                # Reconstruct corrected sentence
                 if "=" in original_response:
                     parts = original_response.split("=")
                     lhs = parts[0].strip()
@@ -139,7 +142,6 @@ class HallucinationCorrectionEngine:
         # -------------------------------------------------------------
         evidence_list = retrieved_evidence or []
 
-        # Extract substantive subject keywords from query and response (len >= 4, not stopwords)
         subject_text = f"{query or ''} {original_response}".lower()
         substantive_keywords = [
             w for w in re.findall(r"\b[a-zA-Z]{4,}\b", subject_text)
@@ -150,26 +152,26 @@ class HallucinationCorrectionEngine:
         valid_evidence_passages: List[str] = []
         for ev in evidence_list:
             snippet = ev.get("snippet", "").strip() if isinstance(ev, dict) else getattr(ev, "snippet", "").strip()
-            score = ev.get("score", 0.0) if isinstance(ev, dict) else getattr(ev, "score", 0.0)
+            raw_score = ev.get("score", 0.8) if isinstance(ev, dict) else getattr(ev, "score", 0.8)
+            try:
+                score = float(raw_score)
+            except (TypeError, ValueError):
+                score = 0.8
             if snippet and score >= 0.40:
                 snippet_lower = snippet.lower()
                 if any(kw in snippet_lower for kw in substantive_keywords):
                     valid_evidence_passages.append(snippet)
 
-        # Extract capital/state/entity relationships if present in query & evidence
+        # Factual pattern 1: Capital city questions / claims
         q_lower = query.lower() if query else ""
         resp_lower = original_response.lower()
-
-        # Factual pattern 1: Capital city questions / claims
         if "capital" in q_lower or "capital" in resp_lower:
             for passage in valid_evidence_passages:
-                # Find direct statements: "<City> is the capital of <State>"
                 match = re.search(r"([A-Z][a-zA-Z\s]+?)\s+is\s+the\s+capital\s+(?:city\s+)?of\s+([A-Z][a-zA-Z\s]+)", passage)
                 if match:
                     correct_capital = match.group(1).strip()
                     target_state = match.group(2).strip().rstrip(".,")
 
-                    # Handle "Pune is the capital of Mumbai" (entity type mismatch)
                     if "capital of mumbai" in resp_lower or "capital of mumbai" in q_lower:
                         corrected_text = f"{correct_capital} is the capital of {target_state}. Pune is not the capital of Mumbai."
                     else:
@@ -222,26 +224,25 @@ class HallucinationCorrectionEngine:
             "corrected_text": None,
             "method": "abstained",
             "reason": "HalluciSense detected an unsupported claim but safely abstained from generating a correction due to insufficient external reference grounding. Human review is recommended.",
+            "missing_evidence_explanation": "No retrieved passage met the minimum evidence threshold (>= 0.70) required to safely rewrite this claim.",
             "supporting_evidence": [],
             "confidence": 0.0,
-            "missing_evidence_explanation": "No highly entailed reference passages with cross-encoder score >= 0.50 were retrieved for the evaluated entity propositions.",
         }
 
     async def correct_and_reverify(
         self,
         query: str,
         original_response: str,
-        original_trace_id: str,
-        analyze_func: Callable,
+        original_trace_id: Optional[str],
+        analyze_func: Callable[..., Any],
         retrieved_evidence: Optional[List[Dict[str, Any]]] = None,
         sentence_scores: Optional[List[Dict[str, Any]]] = None,
         overall_h_score: float = 0.0,
         model_name: str = "default",
     ) -> Dict[str, Any]:
-        """Execute the complete DETECT → EXPLAIN → CORRECT → RE-VERIFY loop."""
-        corr_id = self._generate_correction_id()
+        """Generate candidate and run independent re-verification."""
+        corr_id = f"CORR_{uuid.uuid4().hex[:12].upper()}"
 
-        # Step 1: Generate Candidate
         candidate = self.generate_candidate(
             query=query,
             original_response=original_response,
@@ -250,53 +251,26 @@ class HallucinationCorrectionEngine:
             overall_h_score=overall_h_score,
         )
 
-        candidate_status = candidate.get("status")
-        corrected_text = candidate.get("corrected_text")
-
-        # Handle Already Verified
-        if candidate_status == "not_needed":
-            return {
-                "correction_id": corr_id,
-                "original_trace_id": original_trace_id,
-                "reverification_trace_id": original_trace_id,
-                "status": "not_needed",
-                "method": "none",
-                "original_text": original_response,
-                "corrected_text": original_response,
-                "reason": candidate.get("reason"),
-                "supporting_evidence": [],
-                "confidence": 1.0,
-                "reverification": {
-                    "trace_id": original_trace_id,
-                    "status": "VERIFIED",
-                    "overall_h_score": overall_h_score,
-                    "risk_level": "VERIFIED",
-                    "pillar_scores": {
-                        "evidence_grounding": 0.0,
-                        "confidence_gap": 0.0,
-                        "consistency_failure": 0.0,
-                    },
-                },
-            }
-
-        # Handle Abstention
-        if candidate_status == "abstained" or not corrected_text:
+        # If abstained or not needed, return early without re-verification
+        if candidate.get("status") in ("abstained", "not_needed"):
             return {
                 "correction_id": corr_id,
                 "original_trace_id": original_trace_id,
                 "reverification_trace_id": None,
-                "status": "abstained",
-                "method": "abstained",
+                "status": candidate.get("status"),
+                "method": candidate.get("method"),
                 "original_text": original_response,
-                "corrected_text": None,
+                "corrected_text": candidate.get("corrected_text"),
                 "reason": candidate.get("reason"),
                 "missing_evidence_explanation": candidate.get("missing_evidence_explanation"),
-                "supporting_evidence": [],
-                "confidence": 0.0,
+                "supporting_evidence": candidate.get("supporting_evidence", []),
+                "confidence": candidate.get("confidence", 0.0),
                 "reverification": None,
             }
 
-        # Step 2: Execute Independent Re-Verification
+        corrected_text = candidate.get("corrected_text") or original_response
+
+        # Execute independent re-verification through the verification pipeline
         try:
             reverify_analysis = await analyze_func(
                 query=query,
@@ -313,25 +287,17 @@ class HallucinationCorrectionEngine:
             p2_cg = getattr(rev_pillars, "confidence", None) or getattr(rev_pillars, "pillar2_confidence_gap", 0.0) or 0.0
             p3_cf = getattr(rev_pillars, "consistency", None) or getattr(rev_pillars, "pillar3_consistency_failure", 0.0) or 0.0
 
-            # Acceptance Gate: H-score must be low (<= 0.35) and P1 factual error low (<= 0.30)
             is_verified = (rev_h_score <= 0.35 and p1_fe <= 0.30) or rev_risk == "VERIFIED"
-
-            if is_verified:
-                final_status = "verified"
-                final_reason = f"Correction successfully verified. Recalculated H-Score dropped to {rev_h_score:.4f} with strong evidence grounding."
-            else:
-                final_status = "rejected"
-                final_reason = f"Proposed correction was rejected: Failed independent re-verification (Recalculated H-Score: {rev_h_score:.4f}, Risk: {rev_risk})."
 
             return {
                 "correction_id": corr_id,
                 "original_trace_id": original_trace_id,
                 "reverification_trace_id": rev_trace_id,
-                "status": final_status,
+                "status": "verified" if is_verified else "rejected",
                 "method": candidate.get("method"),
                 "original_text": original_response,
                 "corrected_text": corrected_text,
-                "reason": final_reason,
+                "reason": "Correction successfully verified." if is_verified else "Failed independent re-verification.",
                 "supporting_evidence": candidate.get("supporting_evidence", []),
                 "confidence": candidate.get("confidence", 0.90),
                 "reverification": {
@@ -370,18 +336,26 @@ class HallucinationCorrectionEngine:
         max_attempts: int = 2,
     ) -> ClosedLoopRepairResult:
         """Synchronous chat-compatible closed-loop repair interface."""
-        evidence_items = (
-            getattr(initial_verification, "evidence_items", None)
-            or getattr(getattr(initial_verification, "pillar1_summary", None), "evidence", None)
-            or getattr(initial_verification, "evidence", [])
-        )
-        evidence_dicts = [
-            {
-                "snippet": getattr(e, "snippet", "") if not isinstance(e, dict) else e.get("snippet", ""),
-                "score": getattr(e, "score", 0.8) if not isinstance(e, dict) else e.get("score", 0.8),
-            }
-            for e in evidence_items
-        ]
+        evidence_items = []
+        if hasattr(initial_verification, "evidence") and isinstance(getattr(initial_verification, "evidence"), list):
+            evidence_items = initial_verification.evidence
+        elif hasattr(initial_verification, "evidence_items") and isinstance(getattr(initial_verification, "evidence_items"), list):
+            evidence_items = initial_verification.evidence_items
+        elif hasattr(initial_verification, "pillar1_summary") and hasattr(getattr(initial_verification, "pillar1_summary"), "evidence"):
+            evidence_items = initial_verification.pillar1_summary.evidence
+        elif hasattr(initial_verification, "evidence"):
+            raw_ev = getattr(initial_verification, "evidence")
+            evidence_items = raw_ev if isinstance(raw_ev, (list, tuple)) else []
+        evidence_dicts = []
+        for e in evidence_items:
+            snippet = getattr(e, "snippet", "") if not isinstance(e, dict) else e.get("snippet", "")
+            raw_score = getattr(e, "score", 0.8) if not isinstance(e, dict) else e.get("score", 0.8)
+            try:
+                score = float(raw_score)
+            except (TypeError, ValueError):
+                score = 0.8
+            evidence_dicts.append({"snippet": str(snippet), "score": score})
+
         h_score = float(getattr(initial_verification, "overall_h_score", getattr(initial_verification, "hallucination_score", 0.0)))
 
         cand = self.generate_candidate(
@@ -393,6 +367,13 @@ class HallucinationCorrectionEngine:
 
         corr_text = cand.get("corrected_text")
         if not corr_text or cand.get("status") in ("abstained", "not_needed"):
+            if h_score > 0.35:
+                return ClosedLoopRepairResult(
+                    final_text=f"{initial_text}\n\n[Note: System could not produce a sufficiently verified correction.]",
+                    performed=True,
+                    reason=cand.get("reason", "NO_CORRECTION_POSSIBLE"),
+                    reverification=ReverificationInfo(passed=False, h_score=h_score, claims_analyzed=1),
+                )
             return ClosedLoopRepairResult(
                 final_text=initial_text,
                 performed=False,
@@ -405,14 +386,26 @@ class HallucinationCorrectionEngine:
         passed = False
         if self.pipeline:
             try:
-                rev_res = self.pipeline.analyze_response(full_text=corr_text, query=user_query)
-                rev_h = float(getattr(rev_res, "overall_h_score", getattr(rev_res, "hallucination_score", 0.0)))
-                passed = rev_h <= 0.35
+                if hasattr(self.pipeline, "analyze_response"):
+                    rev_res = self.pipeline.analyze_response(full_text=corr_text, query=user_query)
+                elif hasattr(self.pipeline, "analyze"):
+                    rev_res = self.pipeline.analyze(response=corr_text, query=user_query)
+                else:
+                    rev_res = None
+
+                if rev_res is not None:
+                    rev_h = float(getattr(rev_res, "overall_h_score", getattr(rev_res, "hallucination_score", 0.0)))
+                    req_ver = getattr(rev_res, "requires_verification", None)
+                    if req_ver is not None:
+                        passed = not req_ver
+                    else:
+                        passed = rev_h <= 0.35
             except Exception:
                 passed = False
 
+        final_out = corr_text if passed else f"{initial_text}\n\n[Note: System could not produce a sufficiently verified correction.]"
         return ClosedLoopRepairResult(
-            final_text=corr_text,
+            final_text=final_out,
             performed=True,
             reason=cand.get("reason", "EVIDENCE_GROUNDED_REPAIR"),
             claims_corrected=[

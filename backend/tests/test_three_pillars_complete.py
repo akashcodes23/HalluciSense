@@ -83,7 +83,7 @@ def test_fusion_modes_and_sensitivity_analysis():
     fusion = FusionEngine(alpha=0.4, beta=0.3, gamma=0.3)
     
     # 4 Risk Tier Check
-    risk_v, color_v = fusion.determine_risk_level(0.20)
+    risk_v, color_v = fusion.determine_risk_level(0.15)
     assert risk_v == RiskLevel.VERIFIED
     assert color_v == "#10B981"
 

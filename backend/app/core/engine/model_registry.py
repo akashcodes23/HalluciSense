@@ -116,10 +116,16 @@ class ModelRegistry:
                     # from the model repository.  It must never use export=True,
                     # because exporting would instantiate the fp32 PyTorch model
                     # and recreate the Railway OOM condition during startup.
+                    if "/" in artifact:
+                        subfolder, onnx_file = artifact.split("/", 1)
+                    else:
+                        subfolder, onnx_file = "onnx", artifact
+
                     tokenizer = AutoTokenizer.from_pretrained(model_name)
                     model = ORTModelForSequenceClassification.from_pretrained(
                         model_name,
-                        file_name=artifact,
+                        subfolder=subfolder,
+                        file_name=onnx_file,
                         provider="CPUExecutionProvider",
                     )
 

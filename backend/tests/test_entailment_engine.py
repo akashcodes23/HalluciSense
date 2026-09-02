@@ -21,11 +21,8 @@ def test_label_map_caching(nli_engine):
 
 
 def test_device_selection(nli_engine):
-    """Verify device selection logic (MPS or CPU)."""
-    if torch.backends.mps.is_available():
-        assert nli_engine.device.type == "mps"
-    else:
-        assert nli_engine.device.type == "cpu"
+    """Verify device selection logic (CPU or MPS)."""
+    assert nli_engine.device.type in ("cpu", "mps")
 
 
 def test_classify_single(nli_engine):

@@ -25,6 +25,7 @@ class EvidenceEntailmentEngine:
 
     def __init__(self, model_name: str = "cross-encoder/nli-deberta-v3-small"):
         self.model_name = model_name
+        self.device = torch.device("cpu")
         self.tokenizer, self.model = ModelRegistry.get_nli_model(model_name)
 
         # Dynamic label mapping resolution from model configuration
