@@ -355,49 +355,62 @@ export default function VerifyPage() {
           {currentResult.pillar_scores && (
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[var(--text-muted)]" />
-                  Pillar Signals
-                </CardTitle>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[var(--text-muted)]" />
+                    Three-Pillar Verification Signals
+                  </CardTitle>
+                  <span className="text-[10px] font-mono text-[var(--text-dim)] uppercase">
+                    H = 0.45 FE + 0.30 CG + 0.25 CF
+                  </span>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <PillarScoreCard
                     pillarNumber={1}
-                    label="Evidence Support"
-                    sublabel="External evidence grounding"
-                    diagnosticQuestion="Is this claim supported by reliable external evidence?"
+                    label="Evidence Grounding (FE)"
+                    sublabel="Does external evidence support this claim?"
+                    diagnosticQuestion="External evidence retrieval and NLI entailment evaluate factual grounding."
                     value={currentResult.pillar_scores.retrieval ?? currentResult.pillar_scores.pillar1_factual_error}
                     status={currentResult.pillar_status?.p1_available !== false ? "active" : "unavailable"}
                     reason="Evidence retrieval service unavailable"
                   />
                   <PillarScoreCard
                     pillarNumber={2}
-                    label="Model Uncertainty"
-                    sublabel="Internal generation uncertainty"
-                    diagnosticQuestion="Is the model internally uncertain about the claim generated?"
+                    label="Confidence Gap (CG)"
+                    sublabel="How uncertain was the model during generation?"
+                    diagnosticQuestion="Token log-probability entropy and predictive uncertainty analysis."
                     value={currentResult.pillar_scores.confidence ?? currentResult.pillar_scores.pillar2_confidence_gap}
                     status={currentResult.pillar_status?.p2_available ? "active" : "unavailable"}
                     reason="Token log-probabilities not provided"
                   />
                   <PillarScoreCard
                     pillarNumber={3}
-                    label="Generation Consistency"
-                    sublabel="Agreement across generations"
-                    diagnosticQuestion="Does the model produce a consistent claim across generations?"
+                    label="Consistency Failure (CF)"
+                    sublabel="Do independent generations agree with this claim?"
+                    diagnosticQuestion="Multi-candidate semantic consistency and cross-sample contradiction analysis."
                     value={currentResult.pillar_scores.consistency ?? currentResult.pillar_scores.pillar3_consistency_failure}
                     status={currentResult.pillar_status?.p3_available ? "active" : "unavailable"}
                     reason="Multiple generations not available"
                   />
                 </div>
 
+                {/* Explainability Insight */}
+                <div className="mt-3 p-3 rounded-[var(--radius)] bg-black/30 border border-white/[0.04] text-[11px] text-[var(--text-dim)] flex items-start gap-2">
+                  <Info className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                  <p className="leading-relaxed">
+                    <strong className="text-[var(--text-secondary)]">Explainable Signal Separation:</strong> A model can be internally confident (<span className="text-emerald-400 font-mono">low CG</span>) and consistent (<span className="text-emerald-400 font-mono">low CF</span>) while remaining factually false (<span className="text-red-400 font-mono">high FE</span>). HalluciSense evaluates all three independent dimensions before computing the calibrated verdict.
+                  </p>
+                </div>
+
                 {/* Fusion Decomposition */}
                 {currentResult.fusion_decomposition && (
-                  <div className="mt-4 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)]">
+                  <div className="mt-3 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)]">
                     <div className="flex items-center gap-2 mb-2">
                       <Info className="w-3.5 h-3.5 text-[var(--text-dim)]" />
                       <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                        Fusion Decomposition
+                        Adaptive Hybrid Fusion Decomposition
                       </span>
                       <Badge variant="ai" size="sm">{currentResult.fusion_decomposition.fusion_mode}</Badge>
                     </div>

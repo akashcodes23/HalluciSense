@@ -36,10 +36,10 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
         {/* Pillar 1 */}
         <PillarCard
           icon={<Database className="w-4 h-4 text-teal-400" />}
-          title="Pillar 1 — Evidence Support"
+          title="Pillar 1 — Evidence Grounding (FE)"
           score={p1}
           weight={effectiveWeights.alpha}
-          description="External evidence retrieval and NLI entailment evaluate factual grounding."
+          description="Hybrid BM25 + FAISS retrieval and cross-encoder NLI entailment scoring."
           colorClass="bg-teal-500"
           borderClass="border-teal-500/20"
         />
@@ -47,10 +47,10 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
         {/* Pillar 2 */}
         <PillarCard
           icon={<Activity className="w-4 h-4 text-blue-400" />}
-          title="Pillar 2 — Model Uncertainty"
+          title="Pillar 2 — Confidence Gap (CG)"
           score={p2}
           weight={effectiveWeights.beta}
-          description="Token-level probability and entropy analysis estimate generation uncertainty."
+          description="Token log-probability distribution and Shannon entropy H(p) uncertainty analysis."
           colorClass="bg-blue-500"
           borderClass="border-blue-500/20"
         />
@@ -58,10 +58,10 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
         {/* Pillar 3 */}
         <PillarCard
           icon={<GitBranch className="w-4 h-4 text-amber-400" />}
-          title="Pillar 3 — Generation Consistency"
+          title="Pillar 3 — Consistency Failure (CF)"
           score={p3}
           weight={effectiveWeights.gamma}
-          description="Semantic comparison across independent generations measures instability."
+          description="Multi-sample semantic consistency and cross-generation contradiction analysis."
           colorClass="bg-amber-500"
           borderClass="border-amber-500/20"
         />

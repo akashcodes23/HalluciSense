@@ -129,25 +129,25 @@ function Navbar() {
 /* ── Hero State Data Dictionary ────────────────────────────────────────────── */
 const HERO_STATES = {
   detect: {
-    tag: "Pillar 1 · Evidence Support",
+    tag: "Pillar 1 · Evidence Grounding (FE)",
     headline: "Detect Hallucinations.",
     color: "text-emerald-400",
     glowColor: "rgba(16,185,129,0.3)",
-    description: "External evidence retrieval and NLI entailment evaluate whether the generated claim is grounded in reliable reference material.",
+    description: "Hybrid BM25 sparse + FAISS dense neural retrieval with cross-encoder NLI isolating factual claims from ungrounded parametric hallucinations.",
   },
   confidence: {
-    tag: "Pillar 2 · Model Uncertainty",
+    tag: "Pillar 2 · Confidence Gap (CG)",
     headline: "Measure Confidence.",
     color: "text-teal-400",
     glowColor: "rgba(20,184,166,0.3)",
-    description: "Token-level probability and Shannon entropy analysis estimate internal generation uncertainty in the model's responses.",
+    description: "Token-level probability and Shannon entropy H(p) quantification estimating internal model uncertainty during generation.",
   },
   verify: {
-    tag: "Pillar 3 · Generation Consistency",
+    tag: "Pillar 3 · Consistency Failure (CF)",
     headline: "Verify Evidence.",
     color: "text-cyan-400",
     glowColor: "rgba(6,182,212,0.3)",
-    description: "Semantic comparison across independent generations measures instability and disagreement in the model's claims.",
+    description: "Multi-sample semantic consistency checks and cross-generation contradiction analysis measuring response stability.",
   },
 } as const;
 
@@ -200,7 +200,7 @@ export default function LandingPage() {
             <FadeUp delay={0.1}>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[11px] font-semibold tracking-wider uppercase font-mono">
                 <Sparkles className="w-3.5 h-3.5" />
-                HALLUCISENSE / TRUST ENGINE
+                EXPLAINABLE AI · DETECTION · CORRECTION · RE-VERIFICATION
               </div>
             </FadeUp>
 
@@ -241,7 +241,7 @@ export default function LandingPage() {
                   transition={{ duration: 0.35 }}
                   className="text-slate-400 text-sm sm:text-base max-w-xl leading-relaxed font-sans"
                 >
-                  {currentHero.description}
+                  HalluciSense decomposes an LLM response into atomic claims and evaluates each claim through evidence grounding, confidence gap, and consistency failure signals before producing an explainable, calibrated decision.
                 </motion.p>
               </AnimatePresence>
             </div>
@@ -294,10 +294,10 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[10px] font-semibold tracking-wide uppercase font-mono mb-2">
-              Tri-Modal Verification Framework
+              Tri-Modal Research Framework · Detect · Explain · Correct · Re-Verify
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-space-grotesk)] text-white tracking-tight">
-              Adaptive Multi-Signal Architecture
+              Adaptive Three-Pillar Architecture
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed">
               Grounded external evidence retrieval acts as the foundation for every claim, with predictive model uncertainty and stochastic generation consistency activating dynamically for live inference.
@@ -312,14 +312,14 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <Database className="w-8 h-8 text-emerald-400" />
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold uppercase">
-                      External Grounding
+                      P1 · FE
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-                    Pillar 1 — Evidence Support
+                    Pillar 1 — Evidence Grounding (FE)
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    External evidence retrieval and NLI entailment evaluate whether the claim is grounded in supporting reference material. Evaluates all claims with hybrid BM25 + FAISS vector search and DeBERTa-v3 cross-encoder NLI.
+                    Hybrid BM25 sparse + FAISS dense retrieval against external reference corpora with DeBERTa-v3 cross-encoder NLI entailment scoring. Evaluates factual error and evidence contradiction across claims.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-emerald-400 flex items-center justify-center gap-2">
@@ -335,14 +335,14 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <Activity className="w-8 h-8 text-teal-400" />
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20 font-semibold uppercase">
-                      Internal Uncertainty
+                      P2 · CG
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-                    Pillar 2 — Model Uncertainty
+                    Pillar 2 — Confidence Gap (CG)
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Token-level probability and entropy analysis estimate uncertainty in the model’s generation. Dynamically active during live streaming when provider token log-probabilities are exposed.
+                    Token log-probability distribution and Shannon entropy H(p) analysis quantifying internal generation uncertainty during streaming LLM generation.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-teal-400 flex items-center justify-center gap-2">
@@ -358,14 +358,14 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <GitBranch className="w-8 h-8 text-cyan-400" />
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold uppercase">
-                      Stochastic Stability
+                      P3 · CF
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-                    Pillar 3 — Generation Consistency
+                    Pillar 3 — Consistency Failure (CF)
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Semantic comparison across independent generations measures instability and disagreement in the model’s responses. Evaluates consistency across stochastic alternate generations or intra-response claim pairs.
+                    Semantic consistency and cross-sample contradiction analysis across independent stochastic generations or intra-response claim pairs.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-cyan-400 flex items-center justify-center gap-2">

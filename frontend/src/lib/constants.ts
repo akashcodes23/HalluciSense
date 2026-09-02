@@ -42,23 +42,26 @@ export const RISK_LEVELS = {
 
 export const PILLAR_INFO = {
   retrieval: {
-    name: "Evidence Support",
-    shortName: "Evidence",
-    description: "External evidence retrieval and entailment evaluate whether the claim is grounded in reference material",
+    name: "Evidence Grounding",
+    shortName: "Grounding",
+    symbol: "FE",
+    description: "Hybrid BM25 sparse + FAISS dense retrieval with cross-encoder NLI entailment scoring",
     icon: "Database",
     color: "#6366F1",
   },
   confidence: {
-    name: "Model Uncertainty",
-    shortName: "Uncertainty",
-    description: "Token-level probability and entropy analysis estimate uncertainty in the model's generation",
+    name: "Confidence Gap",
+    shortName: "Confidence",
+    symbol: "CG",
+    description: "Token log-probability distribution and Shannon entropy H(p) uncertainty analysis",
     icon: "Activity",
     color: "#A855F7",
   },
   consistency: {
-    name: "Generation Consistency",
+    name: "Consistency Failure",
     shortName: "Consistency",
-    description: "Semantic comparison across independent generations measures instability and disagreement",
+    symbol: "CF",
+    description: "Multi-sample semantic consistency and cross-generation contradiction analysis",
     icon: "GitBranch",
     color: "#3B82F6",
   },
@@ -100,40 +103,40 @@ export const NAV_ITEMS = [
 
 export function getPillar1Diagnostic(value?: number | null, isAvailable: boolean = true): { metricLabel: string; interpretation: string } {
   if (!isAvailable || value == null || isNaN(value)) {
-    return { metricLabel: "Factual Risk", interpretation: "Evidence retrieval unavailable" };
+    return { metricLabel: "Factual Error", interpretation: "Evidence retrieval unavailable" };
   }
   if (value <= 0.20) {
-    return { metricLabel: "Factual Risk", interpretation: "Strong external grounding detected" };
+    return { metricLabel: "Factual Error", interpretation: "Strong external evidence supports this claim." };
   }
   if (value <= 0.50) {
-    return { metricLabel: "Factual Risk", interpretation: "Evidence is inconclusive" };
+    return { metricLabel: "Factual Error", interpretation: "Evidence is inconclusive or partially grounded." };
   }
-  return { metricLabel: "Factual Risk", interpretation: "Evidence does not support the claim" };
+  return { metricLabel: "Factual Error", interpretation: "Retrieved evidence contradicts or fails to support this claim." };
 }
 
 export function getPillar2Diagnostic(value?: number | null, isAvailable: boolean = true): { metricLabel: string; interpretation: string } {
   if (!isAvailable || value == null || isNaN(value)) {
-    return { metricLabel: "Uncertainty Gap", interpretation: "Token log-probabilities not provided" };
+    return { metricLabel: "Confidence Gap", interpretation: "Token log-probabilities not provided" };
   }
   if (value <= 0.25) {
-    return { metricLabel: "Uncertainty Gap", interpretation: "Low internal generation uncertainty" };
+    return { metricLabel: "Confidence Gap", interpretation: "Low confidence gap indicates low internal generation uncertainty." };
   }
   if (value <= 0.55) {
-    return { metricLabel: "Uncertainty Gap", interpretation: "Moderate internal uncertainty" };
+    return { metricLabel: "Confidence Gap", interpretation: "Moderate confidence gap observed across generated tokens." };
   }
-  return { metricLabel: "Uncertainty Gap", interpretation: "High internal generation uncertainty" };
+  return { metricLabel: "Confidence Gap", interpretation: "Elevated confidence gap indicates greater generation uncertainty." };
 }
 
 export function getPillar3Diagnostic(value?: number | null, isAvailable: boolean = true): { metricLabel: string; interpretation: string } {
   if (!isAvailable || value == null || isNaN(value)) {
-    return { metricLabel: "Disagreement", interpretation: "Multiple generations not available" };
+    return { metricLabel: "Consistency Failure", interpretation: "Multiple generations not available" };
   }
   if (value <= 0.20) {
-    return { metricLabel: "Disagreement", interpretation: "High agreement across generations" };
+    return { metricLabel: "Consistency Failure", interpretation: "Independent generations show strong semantic agreement." };
   }
   if (value <= 0.50) {
-    return { metricLabel: "Disagreement", interpretation: "Partial generation disagreement" };
+    return { metricLabel: "Consistency Failure", interpretation: "Partial semantic variation detected across generations." };
   }
-  return { metricLabel: "Disagreement", interpretation: "High disagreement across generations" };
+  return { metricLabel: "Consistency Failure", interpretation: "Independent generations show substantial disagreement." };
 }
 

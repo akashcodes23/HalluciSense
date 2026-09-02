@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "HalluciSense — Detect Hallucinations with Scientific Confidence",
   description:
-    "Confidence-aware AI verification powered by a three-pillar hallucination detection framework: Evidence Support, Model Uncertainty, and Generation Consistency.",
+    "Explainable AI system for hallucination detection, correction, and re-verification powered by three research pillars: Evidence Grounding (FE), Confidence Gap (CG), and Consistency Failure (CF).",
   keywords: [
     "hallucination detection",
     "AI safety",

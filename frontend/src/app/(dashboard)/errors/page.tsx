@@ -431,9 +431,9 @@ export default function ErrorFeedPage() {
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-2">Pillar Signals</p>
                 <div className="rounded-[var(--radius-md)] border border-[var(--border)] px-3 py-1">
-                  <PillarRow label="P1 · Evidence Support" value={selectedEntry.pillar_scores.retrieval ?? selectedEntry.pillar_scores.pillar1_factual_error} />
-                  <PillarRow label="P2 · Model Uncertainty" value={selectedEntry.pillar_scores.confidence ?? selectedEntry.pillar_scores.pillar2_confidence_gap} />
-                  <PillarRow label="P3 · Generation Consistency" value={selectedEntry.pillar_scores.consistency ?? selectedEntry.pillar_scores.pillar3_consistency_failure} />
+                  <PillarRow label="P1 · Evidence Grounding (FE)" value={selectedEntry.pillar_scores.retrieval ?? selectedEntry.pillar_scores.pillar1_factual_error} />
+                  <PillarRow label="P2 · Confidence Gap (CG)" value={selectedEntry.pillar_scores.confidence ?? selectedEntry.pillar_scores.pillar2_confidence_gap} />
+                  <PillarRow label="P3 · Consistency Failure (CF)" value={selectedEntry.pillar_scores.consistency ?? selectedEntry.pillar_scores.pillar3_consistency_failure} />
                 </div>
               </div>
             )}

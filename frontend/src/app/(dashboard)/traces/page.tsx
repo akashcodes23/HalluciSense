@@ -406,12 +406,18 @@ function TracesContent() {
  */
 function formatCanonicalStageName(rawName: string): string {
   const map: Record<string, string> = {
-    pillar1_evidence_grounding: "Pillar 1 — Evidence Support",
-    pillar1_evidence_support: "Pillar 1 — Evidence Support",
-    pillar2_confidence_estimation: "Pillar 2 — Model Uncertainty",
-    pillar2_model_uncertainty: "Pillar 2 — Model Uncertainty",
-    pillar3_consistency_reasoning: "Pillar 3 — Generation Consistency",
-    pillar3_generation_consistency: "Pillar 3 — Generation Consistency",
+    pillar1_evidence_grounding: "Pillar 1 — Evidence Grounding (FE)",
+    pillar1_evidence_support: "Pillar 1 — Evidence Grounding (FE)",
+    pillar1_retrieval: "Pillar 1 — Evidence Grounding (FE)",
+    retrieval: "Pillar 1 — Evidence Grounding (FE)",
+    pillar2_confidence_gap: "Pillar 2 — Confidence Gap (CG)",
+    pillar2_confidence_estimation: "Pillar 2 — Confidence Gap (CG)",
+    pillar2_model_uncertainty: "Pillar 2 — Confidence Gap (CG)",
+    confidence: "Pillar 2 — Confidence Gap (CG)",
+    pillar3_consistency_failure: "Pillar 3 — Consistency Failure (CF)",
+    pillar3_consistency_reasoning: "Pillar 3 — Consistency Failure (CF)",
+    pillar3_generation_consistency: "Pillar 3 — Consistency Failure (CF)",
+    consistency: "Pillar 3 — Consistency Failure (CF)",
     adaptive_fusion_engine: "Adaptive Hybrid Fusion",
     adaptive_fusion: "Adaptive Hybrid Fusion",
     input_validation: "Input Validation",
@@ -523,7 +529,7 @@ function transformHistoryEntry(entry: AnalysisHistoryEntry): TraceData {
 
   const stages: TraceStage[] = [
     {
-      name: "Pillar 1 — Evidence Support",
+      name: "Pillar 1 — Evidence Grounding (FE)",
       duration_ms: measured?.p1_latency_ms ?? null,
       status: p1Available ? "completed" : "failed",
       details: {
@@ -533,20 +539,20 @@ function transformHistoryEntry(entry: AnalysisHistoryEntry): TraceData {
       },
     },
     {
-      name: "Pillar 2 — Model Uncertainty",
+      name: "Pillar 2 — Confidence Gap (CG)",
       duration_ms: measured?.p2_latency_ms ?? null,
       status: p2Available ? "completed" : "unavailable",
       details: p2Available ? {
         confidence_gap: res.pillar_scores?.confidence ?? null,
-      } : { reason: "Token uncertainty analysis unavailable (no logprobs)" },
+      } : { reason: "Token log-probability entropy analysis unavailable" },
     },
     {
-      name: "Pillar 3 — Generation Consistency",
+      name: "Pillar 3 — Consistency Failure (CF)",
       duration_ms: measured?.p3_latency_ms ?? null,
       status: p3Available ? "completed" : "unavailable",
       details: p3Available ? {
         consistency: res.pillar_scores?.consistency ?? null,
-      } : { reason: "Consistency analysis unavailable" },
+      } : { reason: "Multi-sample consistency analysis unavailable" },
     },
     {
       name: "Adaptive Hybrid Fusion",
