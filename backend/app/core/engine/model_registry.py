@@ -2,7 +2,7 @@
 
 Phase 47B memory policy:
 - One NLI model per process.
-- NLI uses the official quantized int8 ONNX artifact for the same
+- NLI uses the official quantized ONNX artifact for the same
   cross-encoder/nli-deberta-v3-small model, avoiding the ~568 MB fp32
   PyTorch weight allocation in the Railway process.
 - No SentenceTransformer is loaded by the verification path.
@@ -11,7 +11,6 @@ Phase 47B memory policy:
 
 from __future__ import annotations
 
-import os
 import platform
 import threading
 from typing import Optional, Tuple, Any
@@ -51,23 +50,53 @@ class ModelRegistry:
 
     @classmethod
     def _quantized_nli_file(cls) -> str:
-        """Select the official CPU int8 artifact for the host architecture."""
+        """Select an official 8-bit ONNX artifact supported by the host CPU.
+
+        The upstream model publishes signed INT8 artifacts for ARM64 and
+        AVX-512/AVX-512-VNNI, plus a UINT8 AVX2 artifact for the broad x86_64
+        fallback.  Do not select an AVX-512 graph unless the host advertises
+        the instruction set.
+        """
         machine = platform.machine().lower()
         if machine in {"aarch64", "arm64"}:
             return "onnx/model_qint8_arm64.onnx"
-        return "onnx/model_qint8_avx2.onnx"
+
+        if machine in {"x86_64", "amd64", "x64"}:
+            flags = set()
+            try:
+                with open("/proc/cpuinfo", "r", encoding="utf-8") as handle:
+                    for line in handle:
+                        if line.lower().startswith(("flags", "features")) and ":" in line:
+                            flags.update(line.split(":", 1)[1].strip().lower().split())
+                            break
+            except OSError:
+                pass
+
+            if "avx512_vnni" in flags:
+                return "onnx/model_qint8_avx512_vnni.onnx"
+            if "avx512f" in flags:
+                return "onnx/model_qint8_avx512.onnx"
+
+            # The upstream repository does not publish a signed INT8 AVX2
+            # graph; its AVX2 artifact is UINT8 and is the safe x86 fallback.
+            return "onnx/model_quint8_avx2.onnx"
+
+        raise RuntimeError(
+            f"Unsupported CPU architecture for quantized NLI ONNX runtime: {machine}"
+        )
 
     @classmethod
     def get_nli_model(
         cls,
         model_name: str = "cross-encoder/nli-deberta-v3-small",
     ) -> Tuple[Any, Any]:
-        """Return the single shared DeBERTa NLI singleton."""
+        """Return the single shared quantized ONNX DeBERTa NLI singleton."""
         if cls._nli_model is None or cls._nli_tokenizer is None:
             with cls._lock:
                 if cls._nli_model is None or cls._nli_tokenizer is None:
                     import torch
-                    from transformers import AutoTokenizer, AutoModelForSequenceClassification
+                    from transformers import AutoTokenizer
+                    from optimum.onnxruntime import ORTModelForSequenceClassification
 
                     torch.set_num_threads(1)
                     try:
@@ -75,38 +104,39 @@ class ModelRegistry:
                     except RuntimeError:
                         pass
 
+                    artifact = cls._quantized_nli_file()
                     logger.info(
-                        "loading_shared_nli_model",
+                        "loading_shared_quantized_nli_model",
                         model_name=model_name,
+                        artifact=artifact,
                         max_length=256,
                     )
 
+                    # This path intentionally requests an existing ONNX file
+                    # from the model repository.  It must never use export=True,
+                    # because exporting would instantiate the fp32 PyTorch model
+                    # and recreate the Railway OOM condition during startup.
                     tokenizer = AutoTokenizer.from_pretrained(model_name)
-                    try:
-                        model = AutoModelForSequenceClassification.from_pretrained(
-                            model_name,
-                            low_cpu_mem_usage=True,
-                        )
-                    except Exception:
-                        model = AutoModelForSequenceClassification.from_pretrained(model_name)
-
-                    model.eval()
-                    for param in model.parameters():
-                        param.requires_grad = False
+                    model = ORTModelForSequenceClassification.from_pretrained(
+                        model_name,
+                        file_name=artifact,
+                        provider="CPUExecutionProvider",
+                    )
 
                     cls._nli_tokenizer = tokenizer
                     cls._nli_model = model
-                    cls._nli_backend = "deberta-v3-eval"
-                    cls._nli_artifact = model_name
+                    cls._nli_backend = "onnxruntime-quantized"
+                    cls._nli_artifact = artifact
                     cls._init_counts["nli_model"] += 1
 
                     from app.core.engine.memory_utils import trim_process_memory
                     post_load_rss = trim_process_memory()
 
                     logger.info(
-                        "shared_nli_model_loaded",
+                        "shared_quantized_nli_model_loaded",
                         init_count=cls._init_counts["nli_model"],
                         backend=cls._nli_backend,
+                        artifact=cls._nli_artifact,
                         post_load_rss_mb=post_load_rss,
                     )
         return cls._nli_tokenizer, cls._nli_model
