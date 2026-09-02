@@ -1,9 +1,9 @@
-"""NLI Entailment Engine with Singleton DeBERTa and Bounded Chunked Inference.
+"""NLI Entailment Engine with Singleton Quantized ONNX DeBERTa and bounded inference.
 
 Phase 49 guarantees:
-- Exactly ONE DeBERTa model in process memory.
+- Exactly ONE DeBERTa NLI model in process memory.
 - Bounded chunked inference (batch size strictly <= 2).
-- Zero autograd graph retention via torch.inference_mode().
+- No autograd graph retention.
 - Strict input sequence truncation (claim <= 128, evidence <= 256).
 - Immediate deallocation of intermediate tensors.
 """
@@ -21,7 +21,7 @@ logger = structlog.get_logger(__name__)
 
 
 class EvidenceEntailmentEngine:
-    """NLI-based factual verification with bounded-memory DeBERTa inference."""
+    """NLI-based factual verification with bounded-memory quantized ONNX inference."""
 
     def __init__(self, model_name: str = "cross-encoder/nli-deberta-v3-small"):
         self.model_name = model_name
@@ -52,7 +52,7 @@ class EvidenceEntailmentEngine:
             "batches": 0,
             "batch_size": 2,
             "inference_ms": 0.0,
-            "backend": "pytorch-eval-bounded",
+            "backend": "onnxruntime-quantized-bounded",
         }
         self.MAX_CACHE_ENTRIES = 256
         self._cache: OrderedDict = OrderedDict()
@@ -75,7 +75,7 @@ class EvidenceEntailmentEngine:
                 "batches": 0,
                 "batch_size": batch_size,
                 "inference_ms": 0.0,
-                "backend": "pytorch-eval-bounded",
+                "backend": "onnxruntime-quantized-bounded",
             }
             return []
 
@@ -104,7 +104,7 @@ class EvidenceEntailmentEngine:
                 "batches": 0,
                 "batch_size": batch_size,
                 "inference_ms": 0.0,
-                "backend": "pytorch-eval-bounded",
+                "backend": "onnxruntime-quantized-bounded",
             }
             return results
 
@@ -112,14 +112,14 @@ class EvidenceEntailmentEngine:
         semaphore = ModelRegistry.get_nli_semaphore(max_concurrent=1)
         num_batches = 0
 
-        # Enforce micro-chunking: at most 2 pairs processed per PyTorch forward pass
+        # Enforce micro-chunking: at most 2 pairs per ONNX forward pass.
         chunk_size = max(1, min(batch_size, 2))
 
         with semaphore:
             for start in range(0, len(uncached_pairs), chunk_size):
                 chunk = uncached_pairs[start:start + chunk_size]
-                premises = [p[0][:350] for p in chunk]   # Truncate evidence string
-                hypotheses = [p[1][:150] for p in chunk] # Truncate claim string
+                premises = [p[0][:350] for p in chunk]
+                hypotheses = [p[1][:150] for p in chunk]
 
                 inputs = self.tokenizer(
                     premises,
@@ -130,7 +130,12 @@ class EvidenceEntailmentEngine:
                     return_tensors="pt",
                 )
                 with torch.inference_mode():
+                    # Optimum's ORT sequence-classification wrapper returns the
+                    # same logits interface as Transformers while executing the
+                    # quantized graph in ONNX Runtime on CPU.
                     logits = self.model(**inputs).logits
+                    if not isinstance(logits, torch.Tensor):
+                        logits = torch.as_tensor(logits)
                     probs = torch.softmax(logits, dim=-1).cpu().numpy()
                 del inputs, logits
                 num_batches += 1
@@ -152,13 +157,16 @@ class EvidenceEntailmentEngine:
                             self._cache.popitem(last=False)
                         self._cache[cache_key] = pred
 
+                # Release the NumPy probability buffer before the next chunk.
+                del probs
+
         inference_ms = (time.perf_counter() - t0) * 1000.0
         self.last_batch_metrics = {
             "pairs": len(claims),
             "batches": num_batches,
             "batch_size": chunk_size,
             "inference_ms": round(inference_ms, 2),
-            "backend": "pytorch-eval-bounded",
+            "backend": "onnxruntime-quantized-bounded",
         }
         logger.info("nli_batch_completed", **self.last_batch_metrics)
         return results
