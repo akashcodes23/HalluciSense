@@ -1,0 +1,2038 @@
+{
+  "total_examples": 280,
+  "total_categories": 14,
+  "category_summary": {
+    "A_clearly_factual": {
+      "count": 20,
+      "factual_count": 20,
+      "hallucinated_count": 0
+    },
+    "B_clearly_false": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "C_direct_contradiction": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "D_unsupported_claim": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "E_ambiguous_claim": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "F_multi_claim_contradiction": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "G_multi_claim_consistency": {
+      "count": 20,
+      "factual_count": 20,
+      "hallucinated_count": 0
+    },
+    "H_numerical_correctness": {
+      "count": 20,
+      "factual_count": 20,
+      "hallucinated_count": 0
+    },
+    "I_numerical_error": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "J_entity_swap": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "K_temporal_mutation": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "L_negation": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    },
+    "M_paraphrase": {
+      "count": 20,
+      "factual_count": 20,
+      "hallucinated_count": 0
+    },
+    "N_unsupported_causal": {
+      "count": 20,
+      "factual_count": 0,
+      "hallucinated_count": 20
+    }
+  },
+  "examples": [
+    {
+      "example_id": "A_01",
+      "category": "A_clearly_factual",
+      "text": "The capital of France is Paris.",
+      "query": "What is the capital of France?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_02",
+      "category": "A_clearly_factual",
+      "text": "Water freezes at 0 degrees Celsius under standard atmospheric pressure.",
+      "query": "At what temperature does water freeze?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_03",
+      "category": "A_clearly_factual",
+      "text": "The chemical formula for water is H2O.",
+      "query": "What is the chemical formula for water?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_04",
+      "category": "A_clearly_factual",
+      "text": "Jupiter is the largest planet in our solar system.",
+      "query": "Which is the largest planet?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_05",
+      "category": "A_clearly_factual",
+      "text": "Albert Einstein developed the theory of general relativity.",
+      "query": "Who developed general relativity?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_06",
+      "category": "A_clearly_factual",
+      "text": "The speed of light in a vacuum is approximately 299,792,458 meters per second.",
+      "query": "What is the speed of light?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_07",
+      "category": "A_clearly_factual",
+      "text": "Oxygen has atomic number 8.",
+      "query": "What is the atomic number of oxygen?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_08",
+      "category": "A_clearly_factual",
+      "text": "Photosynthesis converts sunlight, carbon dioxide, and water into glucose and oxygen.",
+      "query": "What is photosynthesis?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_09",
+      "category": "A_clearly_factual",
+      "text": "The Pacific Ocean is the largest ocean on Earth.",
+      "query": "What is the largest ocean?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_10",
+      "category": "A_clearly_factual",
+      "text": "William Shakespeare wrote Hamlet.",
+      "query": "Who wrote Hamlet?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_11",
+      "category": "A_clearly_factual",
+      "text": "The human body typically has 206 bones in adulthood.",
+      "query": "How many bones in the human body?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_12",
+      "category": "A_clearly_factual",
+      "text": "Tokyo is the capital of Japan.",
+      "query": "What is the capital of Japan?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_13",
+      "category": "A_clearly_factual",
+      "text": "DNA consists of two strands forming a double helix.",
+      "query": "What is the structure of DNA?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_14",
+      "category": "A_clearly_factual",
+      "text": "The Mona Lisa was painted by Leonardo da Vinci.",
+      "query": "Who painted the Mona Lisa?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_15",
+      "category": "A_clearly_factual",
+      "text": "Mount Everest is the highest mountain above sea level.",
+      "query": "What is the highest mountain?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_16",
+      "category": "A_clearly_factual",
+      "text": "Helium is a noble gas with atomic number 2.",
+      "query": "What is helium?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_17",
+      "category": "A_clearly_factual",
+      "text": "The Amazon rainforest is predominantly located in Brazil.",
+      "query": "Where is the Amazon rainforest?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_18",
+      "category": "A_clearly_factual",
+      "text": "The Sahara is the largest hot desert in the world.",
+      "query": "What is the largest hot desert?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_19",
+      "category": "A_clearly_factual",
+      "text": "Gold is a chemical element with symbol Au.",
+      "query": "What is the symbol for gold?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "A_20",
+      "category": "A_clearly_factual",
+      "text": "The Great Barrier Reef is located off the coast of Australia.",
+      "query": "Where is the Great Barrier Reef?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "B_01",
+      "category": "B_clearly_false",
+      "text": "The capital of France is Berlin.",
+      "query": "What is the capital of France?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_02",
+      "category": "B_clearly_false",
+      "text": "Water freezes at 100 degrees Celsius under standard atmospheric pressure.",
+      "query": "At what temperature does water freeze?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_03",
+      "category": "B_clearly_false",
+      "text": "The chemical formula for water is CO2.",
+      "query": "What is the formula for water?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_04",
+      "category": "B_clearly_false",
+      "text": "Mars is the largest planet in our solar system.",
+      "query": "Which is the largest planet?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_05",
+      "category": "B_clearly_false",
+      "text": "Isaac Newton developed the theory of general relativity.",
+      "query": "Who developed general relativity?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_06",
+      "category": "B_clearly_false",
+      "text": "The speed of light in a vacuum is 500 meters per second.",
+      "query": "What is the speed of light?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_07",
+      "category": "B_clearly_false",
+      "text": "Oxygen has atomic number 79.",
+      "query": "What is the atomic number of oxygen?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_08",
+      "category": "B_clearly_false",
+      "text": "Photosynthesis occurs exclusively in animal cells.",
+      "query": "What is photosynthesis?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_09",
+      "category": "B_clearly_false",
+      "text": "The Atlantic Ocean is the smallest ocean on Earth.",
+      "query": "What is the largest ocean?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_10",
+      "category": "B_clearly_false",
+      "text": "Charles Dickens wrote Hamlet.",
+      "query": "Who wrote Hamlet?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_11",
+      "category": "B_clearly_false",
+      "text": "The human body contains over 5,000 bones in adulthood.",
+      "query": "How many bones in the human body?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_12",
+      "category": "B_clearly_false",
+      "text": "Beijing is the capital of Japan.",
+      "query": "What is the capital of Japan?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_13",
+      "category": "B_clearly_false",
+      "text": "DNA is composed of a single straight protein strand with no nucleotides.",
+      "query": "What is DNA?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_14",
+      "category": "B_clearly_false",
+      "text": "Pablo Picasso painted the Mona Lisa in 1985.",
+      "query": "Who painted the Mona Lisa?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_15",
+      "category": "B_clearly_false",
+      "text": "Mount Fuji is the highest mountain on Earth.",
+      "query": "What is the highest mountain?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_16",
+      "category": "B_clearly_false",
+      "text": "Helium is an alkali metal that burns vigorously in air.",
+      "query": "What is helium?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_17",
+      "category": "B_clearly_false",
+      "text": "The Amazon rainforest is located in central Germany.",
+      "query": "Where is the Amazon?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_18",
+      "category": "B_clearly_false",
+      "text": "The Sahara is an Arctic tundra covered in perpetual glacier ice.",
+      "query": "What is the Sahara?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_19",
+      "category": "B_clearly_false",
+      "text": "Gold has the chemical symbol Fe and rusts easily.",
+      "query": "What is gold?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "B_20",
+      "category": "B_clearly_false",
+      "text": "The Great Barrier Reef is a volcanic mountain range in Switzerland.",
+      "query": "Where is the Great Barrier Reef?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_01",
+      "category": "C_direct_contradiction",
+      "text": "The earth is entirely flat and has no curvature.",
+      "query": "Is the earth round?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_02",
+      "category": "C_direct_contradiction",
+      "text": "Humans do not require oxygen to survive.",
+      "query": "Do humans need oxygen?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_03",
+      "category": "C_direct_contradiction",
+      "text": "The sun orbits around the Earth once every 24 hours.",
+      "query": "Does the earth orbit the sun?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_04",
+      "category": "C_direct_contradiction",
+      "text": "Sound travels faster in a complete vacuum than through solid steel.",
+      "query": "How does sound travel?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_05",
+      "category": "C_direct_contradiction",
+      "text": "Absolute zero temperature is hotter than the core of the Sun.",
+      "query": "What is absolute zero?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_06",
+      "category": "C_direct_contradiction",
+      "text": "Mammals are cold-blooded creatures that lay shelled eggs exclusively.",
+      "query": "Are mammals warm-blooded?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_07",
+      "category": "C_direct_contradiction",
+      "text": "Light cannot travel through empty space.",
+      "query": "Can light travel in vacuum?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_08",
+      "category": "C_direct_contradiction",
+      "text": "Pure water is a strong acidic substance with pH 1.0.",
+      "query": "What is the pH of water?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_09",
+      "category": "C_direct_contradiction",
+      "text": "Gravity repels masses away from each other proportionally to distance.",
+      "query": "What is gravity?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_10",
+      "category": "C_direct_contradiction",
+      "text": "Diamonds are made entirely of pure liquid nitrogen.",
+      "query": "What are diamonds made of?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_11",
+      "category": "C_direct_contradiction",
+      "text": "The Pacific ocean contains no liquid water.",
+      "query": "Pacific ocean",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_12",
+      "category": "C_direct_contradiction",
+      "text": "Electrons have a strong positive electrical charge.",
+      "query": "What charge do electrons have?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_13",
+      "category": "C_direct_contradiction",
+      "text": "Plants produce carbon dioxide and consume pure methane during photosynthesis.",
+      "query": "Photosynthesis",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_14",
+      "category": "C_direct_contradiction",
+      "text": "The Moon has a larger mass and volume than the Sun.",
+      "query": "Is the moon bigger than the sun?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_15",
+      "category": "C_direct_contradiction",
+      "text": "The human brain contains zero neurons.",
+      "query": "Human brain",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_16",
+      "category": "C_direct_contradiction",
+      "text": "Antarctica is the hottest tropical rainforest on Earth.",
+      "query": "What is Antarctica?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_17",
+      "category": "C_direct_contradiction",
+      "text": "Iron is a gas at room temperature.",
+      "query": "What state is iron?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_18",
+      "category": "C_direct_contradiction",
+      "text": "All living organisms are completely devoid of cells.",
+      "query": "Cell theory",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_19",
+      "category": "C_direct_contradiction",
+      "text": "The speed of sound exceeds the speed of light in a vacuum.",
+      "query": "Speed of sound vs light",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "C_20",
+      "category": "C_direct_contradiction",
+      "text": "The Eiffel Tower was carved out of solid marble in Ancient Egypt.",
+      "query": "Eiffel tower origin",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_01",
+      "category": "D_unsupported_claim",
+      "text": "Napoleon Bonaparte secretly traveled to Australia in 1812 to establish an underground palace.",
+      "query": "Napoleon travels",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_02",
+      "category": "D_unsupported_claim",
+      "text": "Ancient Romans invented quantum computers powered by steam in 50 BC.",
+      "query": "Roman inventions",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_03",
+      "category": "D_unsupported_claim",
+      "text": "Eating purple cabbage allows humans to communicate telepathically across galaxies.",
+      "query": "Purple cabbage effects",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_04",
+      "category": "D_unsupported_claim",
+      "text": "Shakespeare owned a domesticated penguin named Bartholomew in Stratford-upon-Avon.",
+      "query": "Shakespeare pets",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_05",
+      "category": "D_unsupported_claim",
+      "text": "The core of the planet Saturn is composed of solid milk chocolate.",
+      "query": "Saturn core composition",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_06",
+      "category": "D_unsupported_claim",
+      "text": "Cleopatra invented the electric guitar during her reign in Alexandria.",
+      "query": "Cleopatra inventions",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_07",
+      "category": "D_unsupported_claim",
+      "text": "A secret civilization of giant badger monks operates beneath the Antarctic ice sheet.",
+      "query": "Antarctic discoveries",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_08",
+      "category": "D_unsupported_claim",
+      "text": "George Washington invented the internet in 1789 to send encrypted messages to Thomas Jefferson.",
+      "query": "George Washington internet",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_09",
+      "category": "D_unsupported_claim",
+      "text": "Pluto is made entirely of compressed titanium and emits classical violin music.",
+      "query": "Pluto characteristics",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_10",
+      "category": "D_unsupported_claim",
+      "text": "The Statue of Liberty was originally built as a wireless charging tower for steam locomotives.",
+      "query": "Statue of Liberty purpose",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_11",
+      "category": "D_unsupported_claim",
+      "text": "Drinking seawater gives humans the biological ability to breathe underwater indefinitely.",
+      "query": "Drinking seawater",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_12",
+      "category": "D_unsupported_claim",
+      "text": "Beethoven composed his 9th symphony while scuba diving in the Pacific Ocean.",
+      "query": "Beethoven 9th symphony",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_13",
+      "category": "D_unsupported_claim",
+      "text": "Sunlight contains micro-crystals of ruby that give birds the power of flight.",
+      "query": "How birds fly",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_14",
+      "category": "D_unsupported_claim",
+      "text": "The Great Pyramids were originally painted neon pink with fluorescent dyes.",
+      "query": "Great Pyramids color",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_15",
+      "category": "D_unsupported_claim",
+      "text": "Galileo used an optical laser pointer to communicate with Martian settlers.",
+      "query": "Galileo laser",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_16",
+      "category": "D_unsupported_claim",
+      "text": "The Amazon river flows backwards every leap year due to lunar gravitational anomalies.",
+      "query": "Amazon river flow",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_17",
+      "category": "D_unsupported_claim",
+      "text": "Julius Caesar was an accomplished jazz saxophonist in 44 BC.",
+      "query": "Julius Caesar music",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_18",
+      "category": "D_unsupported_claim",
+      "text": "Clouds are solid fiberglass formations suspended by magnetic levitation.",
+      "query": "What are clouds?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_19",
+      "category": "D_unsupported_claim",
+      "text": "Alexander the Great discovered nuclear fission using bronze pottery.",
+      "query": "Alexander the Great physics",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "D_20",
+      "category": "D_unsupported_claim",
+      "text": "Koalas can run at speeds exceeding 120 miles per hour when hunting gazelles.",
+      "query": "Koala running speed",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_01",
+      "category": "E_ambiguous_claim",
+      "text": "It has been said that something happened somewhere in Europe many centuries ago that changed everything.",
+      "query": "European history",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_02",
+      "category": "E_ambiguous_claim",
+      "text": "Certain mysterious cosmic energy pulses might be responsible for all unknown phenomena on Earth.",
+      "query": "Cosmic energy",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_03",
+      "category": "E_ambiguous_claim",
+      "text": "Some ancient philosopher proved that reality is just an illusion created by vibrational frequencies.",
+      "query": "Philosophy",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_04",
+      "category": "E_ambiguous_claim",
+      "text": "Scientists may have discovered a secret element that defies all known laws of physics.",
+      "query": "New elements",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_05",
+      "category": "E_ambiguous_claim",
+      "text": "An obscure historical figure allegedly achieved immortality through natural alchemy.",
+      "query": "Alchemy history",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_06",
+      "category": "E_ambiguous_claim",
+      "text": "There are rumors that the weather in certain remote islands is controlled by ancient mechanisms.",
+      "query": "Weather control",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_07",
+      "category": "E_ambiguous_claim",
+      "text": "Certain frequencies of sound are capable of manipulating human thoughts instantaneously.",
+      "query": "Sound frequency thoughts",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_08",
+      "category": "E_ambiguous_claim",
+      "text": "A famous king in the Middle Ages was actually two different people acting as one person.",
+      "query": "Medieval kings",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_09",
+      "category": "E_ambiguous_claim",
+      "text": "Some studies suggest that trees have a hidden collective consciousness with secret plans.",
+      "query": "Tree communication",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_10",
+      "category": "E_ambiguous_claim",
+      "text": "Mysterious forces at the center of the Earth regulate the rotation of the Milky Way galaxy.",
+      "query": "Earth center",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_11",
+      "category": "E_ambiguous_claim",
+      "text": "Ancient texts suggest that humans once flew using specialized vocal harmonies.",
+      "query": "Ancient texts flight",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_12",
+      "category": "E_ambiguous_claim",
+      "text": "Certain minerals can produce unlimited electrical power if exposed to starlight.",
+      "query": "Mineral power",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_13",
+      "category": "E_ambiguous_claim",
+      "text": "An unidentified historical empire conquered all continents before disappearing without a trace.",
+      "query": "Lost empires",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_14",
+      "category": "E_ambiguous_claim",
+      "text": "The moon might be hollow and occupied by forgotten historical expeditions.",
+      "query": "Hollow moon",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_15",
+      "category": "E_ambiguous_claim",
+      "text": "Some obscure mathematical equations have the physical power to alter gravitational fields.",
+      "query": "Math and gravity",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_16",
+      "category": "E_ambiguous_claim",
+      "text": "It is widely speculated by unnamed researchers that time travel was solved in 1920.",
+      "query": "Time travel research",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_17",
+      "category": "E_ambiguous_claim",
+      "text": "Certain animals possess an innate sixth sense enabling them to predict historical stock markets.",
+      "query": "Animal senses",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_18",
+      "category": "E_ambiguous_claim",
+      "text": "A hidden library containing all lost knowledge is buried beneath a random desert dune.",
+      "query": "Lost libraries",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_19",
+      "category": "E_ambiguous_claim",
+      "text": "Water memory enables ordinary tap water to remember human emotions across centuries.",
+      "query": "Water memory",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "E_20",
+      "category": "E_ambiguous_claim",
+      "text": "The pyramids were designed to emit invisible cosmic rays to preserve pharaonic spirits.",
+      "query": "Pyramid rays",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_01",
+      "category": "F_multi_claim_contradiction",
+      "text": "Paris is the capital of France. Berlin is the capital of France.",
+      "query": "Capitals",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_02",
+      "category": "F_multi_claim_contradiction",
+      "text": "Water freezes at 0 degrees Celsius. Water only freezes at 100 degrees Celsius.",
+      "query": "Water freezing point",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_03",
+      "category": "F_multi_claim_contradiction",
+      "text": "The sun rises in the east. The sun never rises in the east and only rises in the west.",
+      "query": "Sun rising",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_04",
+      "category": "F_multi_claim_contradiction",
+      "text": "Jupiter is a gas giant. Jupiter has a solid iron surface with no atmosphere.",
+      "query": "Jupiter planet",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_05",
+      "category": "F_multi_claim_contradiction",
+      "text": "Albert Einstein was born in Germany. Albert Einstein was born on the moon in 2050.",
+      "query": "Einstein birthplace",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_06",
+      "category": "F_multi_claim_contradiction",
+      "text": "Gold is a metal. Gold is a non-metallic organic liquid.",
+      "query": "Gold properties",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_07",
+      "category": "F_multi_claim_contradiction",
+      "text": "Mount Everest is in the Himalayas. Mount Everest is located entirely in Brazil.",
+      "query": "Mount Everest location",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_08",
+      "category": "F_multi_claim_contradiction",
+      "text": "Humans are mammals. Humans belong to the reptile class.",
+      "query": "Human taxonomy",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_09",
+      "category": "F_multi_claim_contradiction",
+      "text": "Tokyo is in Japan. Tokyo is located in central Canada.",
+      "query": "Tokyo location",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_10",
+      "category": "F_multi_claim_contradiction",
+      "text": "The Pacific Ocean is filled with saltwater. The Pacific Ocean contains purely freshwater.",
+      "query": "Pacific Ocean water",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_11",
+      "category": "F_multi_claim_contradiction",
+      "text": "Oxygen is necessary for aerobic respiration. Oxygen is completely toxic and never used in respiration.",
+      "query": "Oxygen respiration",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_12",
+      "category": "F_multi_claim_contradiction",
+      "text": "Shakespeare was an English playwright. Shakespeare never wrote in English and lived in Tokyo.",
+      "query": "Shakespeare language",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_13",
+      "category": "F_multi_claim_contradiction",
+      "text": "The speed of light is finite. The speed of light is infinite and instantaneous.",
+      "query": "Speed of light",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_14",
+      "category": "F_multi_claim_contradiction",
+      "text": "DNA has a double helix structure. DNA is completely unstructured and contains no strands.",
+      "query": "DNA structure",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_15",
+      "category": "F_multi_claim_contradiction",
+      "text": "The Nile River is in Africa. The Nile River flows exclusively through Antarctica.",
+      "query": "Nile River location",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_16",
+      "category": "F_multi_claim_contradiction",
+      "text": "Diamond is an allotrope of carbon. Diamond contains zero carbon atoms.",
+      "query": "Diamond composition",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_17",
+      "category": "F_multi_claim_contradiction",
+      "text": "Helium is lighter than air. Helium is heavier than solid lead.",
+      "query": "Helium density",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_18",
+      "category": "F_multi_claim_contradiction",
+      "text": "Leonardo da Vinci painted the Mona Lisa. Leonardo da Vinci was a painter who never produced any artwork.",
+      "query": "Leonardo artwork",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_19",
+      "category": "F_multi_claim_contradiction",
+      "text": "The Amazon is a river. The Amazon is a dry subterranean cave with zero water.",
+      "query": "Amazon river",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "F_20",
+      "category": "F_multi_claim_contradiction",
+      "text": "Earth has one natural moon. Earth has fifteen natural gas moons.",
+      "query": "Earth moons",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "G_01",
+      "category": "G_multi_claim_consistency",
+      "text": "Paris is the capital of France. Berlin is the capital of Germany.",
+      "query": "Capitals",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_02",
+      "category": "G_multi_claim_consistency",
+      "text": "Water freezes at 0 degrees Celsius. Water boils at 100 degrees Celsius under standard pressure.",
+      "query": "Water phase changes",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_03",
+      "category": "G_multi_claim_consistency",
+      "text": "Jupiter is the largest planet in our solar system. Saturn is famous for its prominent ring system.",
+      "query": "Gas giants",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_04",
+      "category": "G_multi_claim_consistency",
+      "text": "Mount Everest is Earth's highest mountain above sea level. K2 is the second-highest mountain.",
+      "query": "Highest mountains",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_05",
+      "category": "G_multi_claim_consistency",
+      "text": "The Nile is a major north-flowing river in Africa. The Amazon is the largest river by discharge.",
+      "query": "World rivers",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_06",
+      "category": "G_multi_claim_consistency",
+      "text": "Oxygen has atomic number 8. Carbon has atomic number 6.",
+      "query": "Atomic numbers",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_07",
+      "category": "G_multi_claim_consistency",
+      "text": "William Shakespeare wrote Hamlet. He also wrote Macbeth.",
+      "query": "Shakespeare plays",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_08",
+      "category": "G_multi_claim_consistency",
+      "text": "Tokyo is the capital of Japan. Rome is the capital of Italy.",
+      "query": "World capitals",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_09",
+      "category": "G_multi_claim_consistency",
+      "text": "The Pacific is the largest ocean. The Atlantic is the second-largest ocean.",
+      "query": "Oceans",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_10",
+      "category": "G_multi_claim_consistency",
+      "text": "Albert Einstein developed general relativity. Isaac Newton formulated the laws of universal gravitation.",
+      "query": "Physicists",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_11",
+      "category": "G_multi_claim_consistency",
+      "text": "DNA stores genetic information. RNA plays a key role in protein synthesis.",
+      "query": "Nucleic acids",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_12",
+      "category": "G_multi_claim_consistency",
+      "text": "Helium is a noble gas. Neon is also a noble gas.",
+      "query": "Noble gases",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_13",
+      "category": "G_multi_claim_consistency",
+      "text": "The Sahara is the largest hot desert. Antarctica is classified as a polar desert.",
+      "query": "Deserts",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_14",
+      "category": "G_multi_claim_consistency",
+      "text": "Leonardo da Vinci painted the Mona Lisa. Michelangelo sculpted David.",
+      "query": "Renaissance artists",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_15",
+      "category": "G_multi_claim_consistency",
+      "text": "Gold has symbol Au. Silver has symbol Ag.",
+      "query": "Chemical symbols",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_16",
+      "category": "G_multi_claim_consistency",
+      "text": "The human heart pumps blood. The lungs facilitate gas exchange.",
+      "query": "Human organs",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_17",
+      "category": "G_multi_claim_consistency",
+      "text": "Mercury is closest to the Sun. Neptune is the eighth planet from the Sun.",
+      "query": "Solar system planets",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_18",
+      "category": "G_multi_claim_consistency",
+      "text": "Photosynthesis produces glucose. Cellular respiration breaks down glucose to release energy.",
+      "query": "Biological processes",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_19",
+      "category": "G_multi_claim_consistency",
+      "text": "Madrid is the capital of Spain. Lisbon is the capital of Portugal.",
+      "query": "Iberian capitals",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "G_20",
+      "category": "G_multi_claim_consistency",
+      "text": "Iron is a magnetic transition metal. Copper is an excellent conductor of electricity.",
+      "query": "Metals",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_01",
+      "category": "H_numerical_correctness",
+      "text": "12 multiplied by 8 equals 96.",
+      "query": "12*8",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_02",
+      "category": "H_numerical_correctness",
+      "text": "15 plus 27 equals 42.",
+      "query": "15+27",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_03",
+      "category": "H_numerical_correctness",
+      "text": "100 divided by 4 equals 25.",
+      "query": "100/4",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_04",
+      "category": "H_numerical_correctness",
+      "text": "50 minus 18 equals 32.",
+      "query": "50-18",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_05",
+      "category": "H_numerical_correctness",
+      "text": "7 multiplied by 9 equals 63.",
+      "query": "7*9",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_06",
+      "category": "H_numerical_correctness",
+      "text": "144 divided by 12 equals 12.",
+      "query": "144/12",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_07",
+      "category": "H_numerical_correctness",
+      "text": "25 plus 75 equals 100.",
+      "query": "25+75",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_08",
+      "category": "H_numerical_correctness",
+      "text": "9 multiplied by 9 equals 81.",
+      "query": "9*9",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_09",
+      "category": "H_numerical_correctness",
+      "text": "80 divided by 8 equals 10.",
+      "query": "80/8",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_10",
+      "category": "H_numerical_correctness",
+      "text": "64 minus 28 equals 36.",
+      "query": "64-28",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_11",
+      "category": "H_numerical_correctness",
+      "text": "11 multiplied by 11 equals 121.",
+      "query": "11*11",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_12",
+      "category": "H_numerical_correctness",
+      "text": "200 minus 45 equals 155.",
+      "query": "200-45",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_13",
+      "category": "H_numerical_correctness",
+      "text": "6 multiplied by 7 equals 42.",
+      "query": "6*7",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_14",
+      "category": "H_numerical_correctness",
+      "text": "81 divided by 9 equals 9.",
+      "query": "81/9",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_15",
+      "category": "H_numerical_correctness",
+      "text": "30 plus 70 equals 100.",
+      "query": "30+70",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_16",
+      "category": "H_numerical_correctness",
+      "text": "16 multiplied by 4 equals 64.",
+      "query": "16*4",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_17",
+      "category": "H_numerical_correctness",
+      "text": "500 divided by 5 equals 100.",
+      "query": "500/5",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_18",
+      "category": "H_numerical_correctness",
+      "text": "13 plus 19 equals 32.",
+      "query": "13+19",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_19",
+      "category": "H_numerical_correctness",
+      "text": "48 divided by 6 equals 8.",
+      "query": "48/6",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "H_20",
+      "category": "H_numerical_correctness",
+      "text": "8 multiplied by 5 equals 40.",
+      "query": "8*5",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "I_01",
+      "category": "I_numerical_error",
+      "text": "12 multiplied by 8 equals 95.",
+      "query": "12*8",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_02",
+      "category": "I_numerical_error",
+      "text": "15 plus 27 equals 49.",
+      "query": "15+27",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_03",
+      "category": "I_numerical_error",
+      "text": "100 divided by 4 equals 26.",
+      "query": "100/4",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_04",
+      "category": "I_numerical_error",
+      "text": "50 minus 18 equals 35.",
+      "query": "50-18",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_05",
+      "category": "I_numerical_error",
+      "text": "7 multiplied by 9 equals 65.",
+      "query": "7*9",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_06",
+      "category": "I_numerical_error",
+      "text": "144 divided by 12 equals 14.",
+      "query": "144/12",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_07",
+      "category": "I_numerical_error",
+      "text": "25 plus 75 equals 110.",
+      "query": "25+75",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_08",
+      "category": "I_numerical_error",
+      "text": "9 multiplied by 9 equals 83.",
+      "query": "9*9",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_09",
+      "category": "I_numerical_error",
+      "text": "80 divided by 8 equals 12.",
+      "query": "80/8",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_10",
+      "category": "I_numerical_error",
+      "text": "64 minus 28 equals 40.",
+      "query": "64-28",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_11",
+      "category": "I_numerical_error",
+      "text": "11 multiplied by 11 equals 125.",
+      "query": "11*11",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_12",
+      "category": "I_numerical_error",
+      "text": "200 minus 45 equals 160.",
+      "query": "200-45",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_13",
+      "category": "I_numerical_error",
+      "text": "6 multiplied by 7 equals 45.",
+      "query": "6*7",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_14",
+      "category": "I_numerical_error",
+      "text": "81 divided by 9 equals 8.",
+      "query": "81/9",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_15",
+      "category": "I_numerical_error",
+      "text": "30 plus 70 equals 90.",
+      "query": "30+70",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_16",
+      "category": "I_numerical_error",
+      "text": "16 multiplied by 4 equals 60.",
+      "query": "16*4",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_17",
+      "category": "I_numerical_error",
+      "text": "500 divided by 5 equals 105.",
+      "query": "500/5",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_18",
+      "category": "I_numerical_error",
+      "text": "13 plus 19 equals 35.",
+      "query": "13+19",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_19",
+      "category": "I_numerical_error",
+      "text": "48 divided by 6 equals 9.",
+      "query": "48/6",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "I_20",
+      "category": "I_numerical_error",
+      "text": "8 multiplied by 5 equals 45.",
+      "query": "8*5",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_01",
+      "category": "J_entity_swap",
+      "text": "Leonardo da Vinci wrote the tragedy Hamlet.",
+      "query": "Who wrote Hamlet?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_02",
+      "category": "J_entity_swap",
+      "text": "William Shakespeare painted the Mona Lisa.",
+      "query": "Who painted Mona Lisa?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_03",
+      "category": "J_entity_swap",
+      "text": "Albert Einstein developed the telescope and discovered Jupiter's moons in 1610.",
+      "query": "Jupiter moons discovery",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_04",
+      "category": "J_entity_swap",
+      "text": "Galileo Galilei formulated the theory of general relativity in 1915.",
+      "query": "General relativity",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_05",
+      "category": "J_entity_swap",
+      "text": "Madrid is the capital of Italy.",
+      "query": "Capital of Italy",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_06",
+      "category": "J_entity_swap",
+      "text": "Rome is the capital of Spain.",
+      "query": "Capital of Spain",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_07",
+      "category": "J_entity_swap",
+      "text": "The Amazon River flows through Egypt into the Mediterranean Sea.",
+      "query": "Amazon River",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_08",
+      "category": "J_entity_swap",
+      "text": "The Nile River originates in the Andes and discharges in Brazil.",
+      "query": "Nile River",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_09",
+      "category": "J_entity_swap",
+      "text": "Neil Armstrong discovered penicillin in 1928.",
+      "query": "Discovery of penicillin",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_10",
+      "category": "J_entity_swap",
+      "text": "Alexander Fleming was the first person to walk on the Moon.",
+      "query": "First person on Moon",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_11",
+      "category": "J_entity_swap",
+      "text": "Ludwig van Beethoven invented the telephone.",
+      "query": "Telephone invention",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_12",
+      "category": "J_entity_swap",
+      "text": "Alexander Graham Bell composed the Moonlight Sonata.",
+      "query": "Moonlight Sonata",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_13",
+      "category": "J_entity_swap",
+      "text": "Isaac Newton sculpted the statue of David.",
+      "query": "Statue of David",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_14",
+      "category": "J_entity_swap",
+      "text": "Michelangelo published the Principia Mathematica establishing gravity.",
+      "query": "Principia Mathematica",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_15",
+      "category": "J_entity_swap",
+      "text": "Tokyo is the capital of South Korea.",
+      "query": "Capital of South Korea",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_16",
+      "category": "J_entity_swap",
+      "text": "Seoul is the capital of Japan.",
+      "query": "Capital of Japan",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_17",
+      "category": "J_entity_swap",
+      "text": "Charles Darwin founded Microsoft in 1975.",
+      "query": "Microsoft founder",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_18",
+      "category": "J_entity_swap",
+      "text": "Bill Gates published On the Origin of Species in 1859.",
+      "query": "Origin of Species",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_19",
+      "category": "J_entity_swap",
+      "text": "Mars is known as the Blue Planet due to its vast liquid oceans.",
+      "query": "Blue Planet",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "J_20",
+      "category": "J_entity_swap",
+      "text": "Earth is known as the Red Planet due to its iron oxide surface dust.",
+      "query": "Red Planet",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_01",
+      "category": "K_temporal_mutation",
+      "text": "World War II ended in 1776.",
+      "query": "When did World War II end?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_02",
+      "category": "K_temporal_mutation",
+      "text": "The United States Declaration of Independence was signed in 1945.",
+      "query": "Declaration of Independence year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_03",
+      "category": "K_temporal_mutation",
+      "text": "The Apollo 11 moon landing occurred in 1492.",
+      "query": "Apollo 11 year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_04",
+      "category": "K_temporal_mutation",
+      "text": "Christopher Columbus reached the Americas in 1969.",
+      "query": "Columbus voyage year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_05",
+      "category": "K_temporal_mutation",
+      "text": "The French Revolution began in 2010.",
+      "query": "French Revolution year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_06",
+      "category": "K_temporal_mutation",
+      "text": "The fall of the Western Roman Empire occurred in 1989.",
+      "query": "Fall of Rome",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_07",
+      "category": "K_temporal_mutation",
+      "text": "The Berlin Wall fell in 476 AD.",
+      "query": "Fall of Berlin Wall",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_08",
+      "category": "K_temporal_mutation",
+      "text": "The Titanic sank in the year 2020.",
+      "query": "Titanic sinking year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_09",
+      "category": "K_temporal_mutation",
+      "text": "The first iPhone was released by Apple in 1805.",
+      "query": "iPhone release year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_10",
+      "category": "K_temporal_mutation",
+      "text": "The battle of Waterloo was fought in 1999.",
+      "query": "Battle of Waterloo",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_11",
+      "category": "K_temporal_mutation",
+      "text": "The Magna Carta was signed in 1914.",
+      "query": "Magna Carta year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_12",
+      "category": "K_temporal_mutation",
+      "text": "World War I began in 1215.",
+      "query": "World War I start year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_13",
+      "category": "K_temporal_mutation",
+      "text": "The Chernobyl disaster occurred in 1650.",
+      "query": "Chernobyl year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_14",
+      "category": "K_temporal_mutation",
+      "text": "The Industrial Revolution started in 300 BC.",
+      "query": "Industrial Revolution",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_15",
+      "category": "K_temporal_mutation",
+      "text": "Albert Einstein won the Nobel Prize in Physics in 1450.",
+      "query": "Einstein Nobel Prize",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_16",
+      "category": "K_temporal_mutation",
+      "text": "The first heavier-than-air airplane flight by the Wright brothers happened in 1600.",
+      "query": "Wright brothers flight",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_17",
+      "category": "K_temporal_mutation",
+      "text": "The United Nations was established in 1700.",
+      "query": "UN founding year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_18",
+      "category": "K_temporal_mutation",
+      "text": "The American Civil War was fought between 1970 and 1975.",
+      "query": "American Civil War years",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_19",
+      "category": "K_temporal_mutation",
+      "text": "Johannes Gutenberg introduced the printing press to Europe in 1995.",
+      "query": "Printing press year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "K_20",
+      "category": "K_temporal_mutation",
+      "text": "The Hubble Space Telescope was launched in 1890.",
+      "query": "Hubble launch year",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_01",
+      "category": "L_negation",
+      "text": "Paris is not the capital of France.",
+      "query": "Capital of France",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_02",
+      "category": "L_negation",
+      "text": "Water does not freeze at 0 degrees Celsius.",
+      "query": "Water freezing point",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_03",
+      "category": "L_negation",
+      "text": "Jupiter is not the largest planet in our solar system.",
+      "query": "Largest planet",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_04",
+      "category": "L_negation",
+      "text": "The Earth does not orbit around the Sun.",
+      "query": "Earth orbit",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_05",
+      "category": "L_negation",
+      "text": "Oxygen is not required for human respiration.",
+      "query": "Oxygen need",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_06",
+      "category": "L_negation",
+      "text": "Albert Einstein did not contribute to the theory of relativity.",
+      "query": "Einstein relativity",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_07",
+      "category": "L_negation",
+      "text": "The chemical formula for water is not H2O.",
+      "query": "Formula for water",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_08",
+      "category": "L_negation",
+      "text": "Mount Everest is not the highest mountain above sea level.",
+      "query": "Mount Everest height",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_09",
+      "category": "L_negation",
+      "text": "Tokyo is not located in Japan.",
+      "query": "Tokyo location",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_10",
+      "category": "L_negation",
+      "text": "William Shakespeare was not a playwright.",
+      "query": "Shakespeare profession",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_11",
+      "category": "L_negation",
+      "text": "The Pacific Ocean is not the largest ocean on Earth.",
+      "query": "Pacific Ocean size",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_12",
+      "category": "L_negation",
+      "text": "Diamonds are not composed of carbon atoms.",
+      "query": "Diamond composition",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_13",
+      "category": "L_negation",
+      "text": "The heart does not pump blood through the human body.",
+      "query": "Heart function",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_14",
+      "category": "L_negation",
+      "text": "Light does not travel at a finite speed in a vacuum.",
+      "query": "Speed of light",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_15",
+      "category": "L_negation",
+      "text": "Gold is not a chemical element.",
+      "query": "Gold element",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_16",
+      "category": "L_negation",
+      "text": "The Mona Lisa was not created during the Renaissance.",
+      "query": "Mona Lisa period",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_17",
+      "category": "L_negation",
+      "text": "DNA is not involved in genetic inheritance.",
+      "query": "DNA function",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_18",
+      "category": "L_negation",
+      "text": "Helium is not an inert gas.",
+      "query": "Helium reactivity",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_19",
+      "category": "L_negation",
+      "text": "The Amazon is not located in South America.",
+      "query": "Amazon location",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "L_20",
+      "category": "L_negation",
+      "text": "The speed of sound is not affected by the medium it travels through.",
+      "query": "Speed of sound medium",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "M_01",
+      "category": "M_paraphrase",
+      "text": "The principal city and government seat of France is Paris.",
+      "query": "Capital of France",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_02",
+      "category": "M_paraphrase",
+      "text": "At zero degrees on the Celsius scale, pure liquid water turns to solid ice.",
+      "query": "Water freezing point",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_03",
+      "category": "M_paraphrase",
+      "text": "A water molecule consists of two hydrogen atoms bonded to one oxygen atom.",
+      "query": "Water formula",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_04",
+      "category": "M_paraphrase",
+      "text": "Among all the planets orbiting our Sun, Jupiter has the greatest volume and mass.",
+      "query": "Largest planet",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_05",
+      "category": "M_paraphrase",
+      "text": "General relativity was formulated by the theoretical physicist Albert Einstein.",
+      "query": "Who developed relativity?",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_06",
+      "category": "M_paraphrase",
+      "text": "In a vacuum, photons propagate at a constant velocity of nearly 300,000 kilometers per second.",
+      "query": "Speed of light",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_07",
+      "category": "M_paraphrase",
+      "text": "The atomic nucleus of an oxygen atom contains exactly eight protons.",
+      "query": "Oxygen atomic number",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_08",
+      "category": "M_paraphrase",
+      "text": "Plants utilize solar energy to convert carbon dioxide and water into biochemical sugars.",
+      "query": "Photosynthesis",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_09",
+      "category": "M_paraphrase",
+      "text": "Of all marine bodies on Earth, the Pacific encompasses the largest surface area.",
+      "query": "Pacific Ocean",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_10",
+      "category": "M_paraphrase",
+      "text": "The tragedy of Prince Hamlet of Denmark was authored by William Shakespeare.",
+      "query": "Hamlet author",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_11",
+      "category": "M_paraphrase",
+      "text": "The adult human skeletal framework comprises 206 individual bones.",
+      "query": "Human skeleton",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_12",
+      "category": "M_paraphrase",
+      "text": "The national capital and most populous metropolis of Japan is Tokyo.",
+      "query": "Japan capital",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_13",
+      "category": "M_paraphrase",
+      "text": "Deoxyribonucleic acid is structured as a double-stranded helical polymer.",
+      "query": "DNA structure",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_14",
+      "category": "M_paraphrase",
+      "text": "Leonardo da Vinci is the Renaissance master who created the Mona Lisa portrait.",
+      "query": "Mona Lisa artist",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_15",
+      "category": "M_paraphrase",
+      "text": "The highest terrestrial elevation above mean sea level is the summit of Mount Everest.",
+      "query": "Mount Everest",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_16",
+      "category": "M_paraphrase",
+      "text": "With two protons in its nucleus, helium is classified as an unreactive noble gas.",
+      "query": "Helium gas",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_17",
+      "category": "M_paraphrase",
+      "text": "The vast majority of the Amazon basin lies within the borders of Brazil.",
+      "query": "Amazon basin",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_18",
+      "category": "M_paraphrase",
+      "text": "The Sahara represents the most extensive non-polar arid region on our planet.",
+      "query": "Sahara desert",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_19",
+      "category": "M_paraphrase",
+      "text": "Represented by the elemental symbol Au, gold is a dense transition metal.",
+      "query": "Gold element",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "M_20",
+      "category": "M_paraphrase",
+      "text": "Situated in the Coral Sea off Queensland, the Great Barrier Reef is the largest coral system.",
+      "query": "Great Barrier Reef",
+      "ground_truth_label": 0
+    },
+    {
+      "example_id": "N_01",
+      "category": "N_unsupported_causal",
+      "text": "The French Revolution occurred because King Louis XVI was secretly a clone created by Martian time travelers.",
+      "query": "French Revolution cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_02",
+      "category": "N_unsupported_causal",
+      "text": "Dinosaurs went extinct because ancient humans hunted them with laser rifles.",
+      "query": "Dinosaur extinction",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_03",
+      "category": "N_unsupported_causal",
+      "text": "The Roman Empire collapsed because emperors drank excessive amounts of caffeinated soda.",
+      "query": "Fall of Rome cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_04",
+      "category": "N_unsupported_causal",
+      "text": "The Titanic sank because a giant subterranean sea monster attacked the hull.",
+      "query": "Why did Titanic sink?",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_05",
+      "category": "N_unsupported_causal",
+      "text": "Photosynthesis evolved because plants wanted to communicate with orbiting satellites.",
+      "query": "Photosynthesis evolution",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_06",
+      "category": "N_unsupported_causal",
+      "text": "The Black Death was caused by extraterrestrial bacteria dispersed by medieval comets.",
+      "query": "Black Death cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_07",
+      "category": "N_unsupported_causal",
+      "text": "Earthquakes are triggered by giant subterranean underground lizards fighting over territorial boundaries.",
+      "query": "Earthquake causes",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_08",
+      "category": "N_unsupported_causal",
+      "text": "The Great Wall of China was constructed to prevent woolly mammoths from entering Beijing.",
+      "query": "Great Wall purpose",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_09",
+      "category": "N_unsupported_causal",
+      "text": "Global sea levels are rising because submarine volcanic dragons are heating the ocean floor.",
+      "query": "Sea level rise",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_10",
+      "category": "N_unsupported_causal",
+      "text": "The American Civil War occurred because both sides were competing to build the first supersonic jet.",
+      "query": "Civil War cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_11",
+      "category": "N_unsupported_causal",
+      "text": "Gravity exists because the Earth is constantly accelerating through a cosmic tunnel created by wormholes.",
+      "query": "Why gravity exists",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_12",
+      "category": "N_unsupported_causal",
+      "text": "The Library of Alexandria was destroyed to hide proof that ancient Egyptians had built working spaceships.",
+      "query": "Library of Alexandria",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_13",
+      "category": "N_unsupported_causal",
+      "text": "Lightning strikes occur because clouds become angry at high-altitude mountain peaks.",
+      "query": "Lightning cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_14",
+      "category": "N_unsupported_causal",
+      "text": "World War I was triggered by an argument over which country owned the Moon.",
+      "query": "World War I cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_15",
+      "category": "N_unsupported_causal",
+      "text": "The Sahara Desert formed because ancient Roman steam engines evaporated all global precipitation.",
+      "query": "Sahara formation",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_16",
+      "category": "N_unsupported_causal",
+      "text": "Human language evolved specifically so people could give instructions to domesticated velociraptors.",
+      "query": "Language evolution",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_17",
+      "category": "N_unsupported_causal",
+      "text": "Rainbows appear after rain because sunlight interacts with airborne holographic projectors.",
+      "query": "Rainbow formation",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_18",
+      "category": "N_unsupported_causal",
+      "text": "The Ice Ages occurred because prehistoric tribes constructed giant ice-making factories.",
+      "query": "Ice Ages cause",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_19",
+      "category": "N_unsupported_causal",
+      "text": "Tectonic plates move because the Earth's molten core is driven by nuclear-powered submarine propellers.",
+      "query": "Plate tectonics",
+      "ground_truth_label": 1
+    },
+    {
+      "example_id": "N_20",
+      "category": "N_unsupported_causal",
+      "text": "The Mona Lisa smiles because Leonardo da Vinci showed her a modern smartphone video.",
+      "query": "Mona Lisa smile",
+      "ground_truth_label": 1
+    }
+  ]
+}

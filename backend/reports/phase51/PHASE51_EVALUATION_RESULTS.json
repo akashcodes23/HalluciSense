@@ -1,0 +1,2072 @@
+{
+  "evaluation_timestamp": 1788324354.391486,
+  "total_samples": 280,
+  "frozen_baseline_metrics": {
+    "accuracy": 0.4679,
+    "precision": 0.8493,
+    "recall": 0.31,
+    "specificity": 0.8625,
+    "f1_score": 0.4542,
+    "mcc": 0.1775,
+    "balanced_accuracy": 0.5863,
+    "auroc": 0.7183,
+    "auprc": 0.7879,
+    "brier_score": 0.2918,
+    "ece": 0.3438,
+    "confusion_matrix": {
+      "true_negatives": 69,
+      "false_positives": 11,
+      "false_negatives": 138,
+      "true_positives": 62
+    }
+  },
+  "category_metrics": {
+    "M_paraphrase": {
+      "count": 20,
+      "accuracy": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "mean_hallucination_prob": 0.1814,
+      "correct_count": 20,
+      "error_count": 0
+    },
+    "J_entity_swap": {
+      "count": 20,
+      "accuracy": 0.45,
+      "recall": 0.45,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.4893,
+      "correct_count": 9,
+      "error_count": 11
+    },
+    "L_negation": {
+      "count": 20,
+      "accuracy": 0.45,
+      "recall": 0.45,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.4699,
+      "correct_count": 9,
+      "error_count": 11
+    },
+    "I_numerical_error": {
+      "count": 20,
+      "accuracy": 0.0,
+      "recall": 0.0,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.3023,
+      "correct_count": 0,
+      "error_count": 20
+    },
+    "D_unsupported_claim": {
+      "count": 20,
+      "accuracy": 0.35,
+      "recall": 0.35,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.4784,
+      "correct_count": 7,
+      "error_count": 13
+    },
+    "K_temporal_mutation": {
+      "count": 20,
+      "accuracy": 0.45,
+      "recall": 0.45,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.4409,
+      "correct_count": 9,
+      "error_count": 11
+    },
+    "B_clearly_false": {
+      "count": 20,
+      "accuracy": 0.15,
+      "recall": 0.15,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.3906,
+      "correct_count": 3,
+      "error_count": 17
+    },
+    "C_direct_contradiction": {
+      "count": 20,
+      "accuracy": 0.35,
+      "recall": 0.35,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.4476,
+      "correct_count": 7,
+      "error_count": 13
+    },
+    "G_multi_claim_consistency": {
+      "count": 20,
+      "accuracy": 0.45,
+      "recall": 1.0,
+      "specificity": 0.45,
+      "mean_hallucination_prob": 0.5295,
+      "correct_count": 9,
+      "error_count": 11
+    },
+    "H_numerical_correctness": {
+      "count": 20,
+      "accuracy": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "mean_hallucination_prob": 0.3021,
+      "correct_count": 20,
+      "error_count": 0
+    },
+    "A_clearly_factual": {
+      "count": 20,
+      "accuracy": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "mean_hallucination_prob": 0.1688,
+      "correct_count": 20,
+      "error_count": 0
+    },
+    "E_ambiguous_claim": {
+      "count": 20,
+      "accuracy": 0.1,
+      "recall": 0.1,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.3005,
+      "correct_count": 2,
+      "error_count": 18
+    },
+    "F_multi_claim_contradiction": {
+      "count": 20,
+      "accuracy": 0.7,
+      "recall": 0.7,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.6433,
+      "correct_count": 14,
+      "error_count": 6
+    },
+    "N_unsupported_causal": {
+      "count": 20,
+      "accuracy": 0.1,
+      "recall": 0.1,
+      "specificity": 0.0,
+      "mean_hallucination_prob": 0.337,
+      "correct_count": 2,
+      "error_count": 18
+    }
+  },
+  "feature_analysis": {
+    "p1_mean_entailment": {
+      "factual_mean": 0.5379,
+      "factual_median": 0.5035,
+      "factual_std": 0.3694,
+      "factual_iqr": 0.7502,
+      "hallucinated_mean": 0.1437,
+      "hallucinated_median": 0.0028,
+      "hallucinated_std": 0.2531,
+      "hallucinated_iqr": 0.1442,
+      "standardized_mean_diff_smd": -1.2451,
+      "univariate_auroc": 0.1659,
+      "correlation_with_label": -0.5219,
+      "missingness_rate": 0.0
+    },
+    "p1_max_entailment": {
+      "factual_mean": 0.5379,
+      "factual_median": 0.5035,
+      "factual_std": 0.3694,
+      "factual_iqr": 0.7502,
+      "hallucinated_mean": 0.1437,
+      "hallucinated_median": 0.0028,
+      "hallucinated_std": 0.2531,
+      "hallucinated_iqr": 0.1442,
+      "standardized_mean_diff_smd": -1.2451,
+      "univariate_auroc": 0.1659,
+      "correlation_with_label": -0.5219,
+      "missingness_rate": 0.0
+    },
+    "p1_mean_contradiction": {
+      "factual_mean": 0.4621,
+      "factual_median": 0.4965,
+      "factual_std": 0.3694,
+      "factual_iqr": 0.7502,
+      "hallucinated_mean": 0.8563,
+      "hallucinated_median": 0.9972,
+      "hallucinated_std": 0.2531,
+      "hallucinated_iqr": 0.1442,
+      "standardized_mean_diff_smd": 1.2451,
+      "univariate_auroc": 0.8341,
+      "correlation_with_label": 0.5219,
+      "missingness_rate": 0.0
+    },
+    "p1_min_support_margin": {
+      "factual_mean": 0.0758,
+      "factual_median": 0.0071,
+      "factual_std": 0.7388,
+      "factual_iqr": 1.5004,
+      "hallucinated_mean": -0.7127,
+      "hallucinated_median": -0.9945,
+      "hallucinated_std": 0.5062,
+      "hallucinated_iqr": 0.2884,
+      "standardized_mean_diff_smd": -1.2451,
+      "univariate_auroc": 0.1659,
+      "correlation_with_label": -0.5219,
+      "missingness_rate": 0.0
+    },
+    "p1_num_claims": {
+      "factual_mean": 1.25,
+      "factual_median": 1.0,
+      "factual_std": 0.433,
+      "factual_iqr": 0.25,
+      "hallucinated_mean": 1.105,
+      "hallucinated_median": 1.0,
+      "hallucinated_std": 0.3066,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": -0.3865,
+      "univariate_auroc": 0.4275,
+      "correlation_with_label": -0.1853,
+      "missingness_rate": 0.0
+    },
+    "p2_max_pairwise_contradiction": {
+      "factual_mean": 0.1675,
+      "factual_median": 0.0,
+      "factual_std": 0.3636,
+      "factual_iqr": 0.0001,
+      "hallucinated_mean": 0.0999,
+      "hallucinated_median": 0.0,
+      "hallucinated_std": 0.2998,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": -0.2026,
+      "univariate_auroc": 0.4353,
+      "correlation_with_label": -0.0951,
+      "missingness_rate": 0.0
+    },
+    "p2_mean_pairwise_contradiction": {
+      "factual_mean": 0.1675,
+      "factual_median": 0.0,
+      "factual_std": 0.3636,
+      "factual_iqr": 0.0001,
+      "hallucinated_mean": 0.0999,
+      "hallucinated_median": 0.0,
+      "hallucinated_std": 0.2998,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": -0.2026,
+      "univariate_auroc": 0.4353,
+      "correlation_with_label": -0.0951,
+      "missingness_rate": 0.0
+    },
+    "p2_max_pairwise_similarity": {
+      "factual_mean": 0.8325,
+      "factual_median": 1.0,
+      "factual_std": 0.3636,
+      "factual_iqr": 0.0001,
+      "hallucinated_mean": 0.9001,
+      "hallucinated_median": 1.0,
+      "hallucinated_std": 0.2998,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": 0.2026,
+      "univariate_auroc": 0.5647,
+      "correlation_with_label": 0.0951,
+      "missingness_rate": 0.0
+    },
+    "p2_fraction_contradictory_pairs": {
+      "factual_mean": 0.175,
+      "factual_median": 0.0,
+      "factual_std": 0.38,
+      "factual_iqr": 0.0,
+      "hallucinated_mean": 0.1,
+      "hallucinated_median": 0.0,
+      "hallucinated_std": 0.3,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": -0.2191,
+      "univariate_auroc": 0.4625,
+      "correlation_with_label": -0.1037,
+      "missingness_rate": 0.0
+    },
+    "p2_num_claims": {
+      "factual_mean": 1.25,
+      "factual_median": 1.0,
+      "factual_std": 0.433,
+      "factual_iqr": 0.25,
+      "hallucinated_mean": 1.105,
+      "hallucinated_median": 1.0,
+      "hallucinated_std": 0.3066,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": -0.3865,
+      "univariate_auroc": 0.4275,
+      "correlation_with_label": -0.1853,
+      "missingness_rate": 0.0
+    },
+    "prob_p1": {
+      "factual_mean": 0.4621,
+      "factual_median": 0.4965,
+      "factual_std": 0.3694,
+      "factual_iqr": 0.7502,
+      "hallucinated_mean": 0.8563,
+      "hallucinated_median": 0.9972,
+      "hallucinated_std": 0.2531,
+      "hallucinated_iqr": 0.1442,
+      "standardized_mean_diff_smd": 1.2451,
+      "univariate_auroc": 0.8341,
+      "correlation_with_label": 0.5219,
+      "missingness_rate": 0.0
+    },
+    "prob_p2": {
+      "factual_mean": 0.0779,
+      "factual_median": 0.0875,
+      "factual_std": 0.0162,
+      "factual_iqr": 0.0228,
+      "hallucinated_mean": 0.0815,
+      "hallucinated_median": 0.0875,
+      "hallucinated_std": 0.0135,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": 0.2424,
+      "univariate_auroc": 0.5478,
+      "correlation_with_label": 0.1134,
+      "missingness_rate": 0.0
+    },
+    "logit_p1": {
+      "factual_mean": 0.0125,
+      "factual_median": -0.0142,
+      "factual_std": 3.2814,
+      "factual_iqr": 3.896,
+      "hallucinated_mean": 4.63,
+      "hallucinated_median": 5.8936,
+      "hallucinated_std": 3.8899,
+      "hallucinated_iqr": 5.8232,
+      "standardized_mean_diff_smd": 1.2832,
+      "univariate_auroc": 0.8341,
+      "correlation_with_label": 0.4885,
+      "missingness_rate": 0.0
+    },
+    "logit_p2": {
+      "factual_mean": -2.4976,
+      "factual_median": -2.3445,
+      "factual_std": 0.2594,
+      "factual_iqr": 0.3362,
+      "hallucinated_mean": -2.4395,
+      "hallucinated_median": -2.3445,
+      "hallucinated_std": 0.2149,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": 0.244,
+      "univariate_auroc": 0.5478,
+      "correlation_with_label": 0.1141,
+      "missingness_rate": 0.0
+    },
+    "prob_disagreement_abs": {
+      "factual_mean": 0.4038,
+      "factual_median": 0.4089,
+      "factual_std": 0.3489,
+      "factual_iqr": 0.7195,
+      "hallucinated_mean": 0.7777,
+      "hallucinated_median": 0.9104,
+      "hallucinated_std": 0.2469,
+      "hallucinated_iqr": 0.1197,
+      "standardized_mean_diff_smd": 1.2372,
+      "univariate_auroc": 0.8043,
+      "correlation_with_label": 0.5168,
+      "missingness_rate": 0.0
+    },
+    "prob_mean": {
+      "factual_mean": 0.27,
+      "factual_median": 0.2911,
+      "factual_std": 0.1846,
+      "factual_iqr": 0.3838,
+      "hallucinated_mean": 0.4689,
+      "hallucinated_median": 0.5347,
+      "hallucinated_std": 0.1255,
+      "hallucinated_iqr": 0.0719,
+      "standardized_mean_diff_smd": 1.2604,
+      "univariate_auroc": 0.837,
+      "correlation_with_label": 0.5271,
+      "missingness_rate": 0.0
+    },
+    "prob_max": {
+      "factual_mean": 0.4719,
+      "factual_median": 0.4965,
+      "factual_std": 0.3581,
+      "factual_iqr": 0.7502,
+      "hallucinated_mean": 0.8578,
+      "hallucinated_median": 0.9972,
+      "hallucinated_std": 0.2484,
+      "hallucinated_iqr": 0.1442,
+      "standardized_mean_diff_smd": 1.2522,
+      "univariate_auroc": 0.8346,
+      "correlation_with_label": 0.523,
+      "missingness_rate": 0.0
+    },
+    "prob_min": {
+      "factual_mean": 0.0681,
+      "factual_median": 0.0875,
+      "factual_std": 0.0278,
+      "factual_iqr": 0.0375,
+      "hallucinated_mean": 0.0801,
+      "hallucinated_median": 0.0875,
+      "hallucinated_std": 0.0166,
+      "hallucinated_iqr": 0.0,
+      "standardized_mean_diff_smd": 0.5232,
+      "univariate_auroc": 0.6069,
+      "correlation_with_label": 0.2561,
+      "missingness_rate": 0.0
+    },
+    "prob_ratio": {
+      "factual_mean": 6.3484,
+      "factual_median": 5.6805,
+      "factual_std": 5.8235,
+      "factual_iqr": 8.5678,
+      "hallucinated_mean": 11.0715,
+      "hallucinated_median": 11.409,
+      "hallucinated_std": 4.5807,
+      "hallucinated_iqr": 1.3691,
+      "standardized_mean_diff_smd": 0.9015,
+      "univariate_auroc": 0.7933,
+      "correlation_with_label": 0.3947,
+      "missingness_rate": 0.0
+    }
+  },
+  "top_5_informative_features": [
+    "logit_p1",
+    "prob_mean",
+    "prob_max",
+    "p1_mean_entailment",
+    "p1_max_entailment"
+  ],
+  "bottom_5_non_informative_features": [
+    "p2_max_pairwise_contradiction",
+    "p2_mean_pairwise_contradiction",
+    "p2_max_pairwise_similarity",
+    "p2_fraction_contradictory_pairs",
+    "prob_p2"
+  ],
+  "failure_mode_counts": {
+    "retrieval_failure": 7,
+    "nli_failure": 44,
+    "temporal_reasoning_failure": 11,
+    "numerical_reasoning_failure": 20,
+    "unsupported_causal_failure": 18,
+    "negation_handling_failure": 11,
+    "threshold_boundary_failure": 38
+  },
+  "total_errors": 149,
+  "errors": [
+    {
+      "id": "B_01",
+      "category": "B_clearly_false",
+      "text": "The capital of France is Berlin.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4053,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_02",
+      "category": "B_clearly_false",
+      "text": "Water freezes at 100 degrees Celsius under standard atmospheric pressure.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_03",
+      "category": "B_clearly_false",
+      "text": "The chemical formula for water is CO2.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4762,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_04",
+      "category": "B_clearly_false",
+      "text": "Mars is the largest planet in our solar system.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.078,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "B_06",
+      "category": "B_clearly_false",
+      "text": "The speed of light in a vacuum is 500 meters per second.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2738,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_07",
+      "category": "B_clearly_false",
+      "text": "Oxygen has atomic number 79.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.259,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_08",
+      "category": "B_clearly_false",
+      "text": "Photosynthesis occurs exclusively in animal cells.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_09",
+      "category": "B_clearly_false",
+      "text": "The Atlantic Ocean is the smallest ocean on Earth.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5242,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_11",
+      "category": "B_clearly_false",
+      "text": "The human body contains over 5,000 bones in adulthood.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_12",
+      "category": "B_clearly_false",
+      "text": "Beijing is the capital of Japan.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.524,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_13",
+      "category": "B_clearly_false",
+      "text": "DNA is composed of a single straight protein strand with no nucleotides.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_15",
+      "category": "B_clearly_false",
+      "text": "Mount Fuji is the highest mountain on Earth.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1096,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "B_16",
+      "category": "B_clearly_false",
+      "text": "Helium is an alkali metal that burns vigorously in air.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_17",
+      "category": "B_clearly_false",
+      "text": "The Amazon rainforest is located in central Germany.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_18",
+      "category": "B_clearly_false",
+      "text": "The Sahara is an Arctic tundra covered in perpetual glacier ice.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "B_19",
+      "category": "B_clearly_false",
+      "text": "Gold has the chemical symbol Fe and rusts easily.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5323,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "B_20",
+      "category": "B_clearly_false",
+      "text": "The Great Barrier Reef is a volcanic mountain range in Switzerland.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "C_02",
+      "category": "C_direct_contradiction",
+      "text": "Humans do not require oxygen to survive.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4458,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_03",
+      "category": "C_direct_contradiction",
+      "text": "The sun orbits around the Earth once every 24 hours.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.524,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_05",
+      "category": "C_direct_contradiction",
+      "text": "Absolute zero temperature is hotter than the core of the Sun.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_07",
+      "category": "C_direct_contradiction",
+      "text": "Light cannot travel through empty space.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4053,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "C_08",
+      "category": "C_direct_contradiction",
+      "text": "Pure water is a strong acidic substance with pH 1.0.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5259,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_10",
+      "category": "C_direct_contradiction",
+      "text": "Diamonds are made entirely of pure liquid nitrogen.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "C_11",
+      "category": "C_direct_contradiction",
+      "text": "The Pacific ocean contains no liquid water.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4591,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_12",
+      "category": "C_direct_contradiction",
+      "text": "Electrons have a strong positive electrical charge.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1612,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "C_13",
+      "category": "C_direct_contradiction",
+      "text": "Plants produce carbon dioxide and consume pure methane during photosynthesis.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4439,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_14",
+      "category": "C_direct_contradiction",
+      "text": "The Moon has a larger mass and volume than the Sun.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.0878,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "C_16",
+      "category": "C_direct_contradiction",
+      "text": "Antarctica is the hottest tropical rainforest on Earth.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "C_19",
+      "category": "C_direct_contradiction",
+      "text": "The speed of sound exceeds the speed of light in a vacuum.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "C_20",
+      "category": "C_direct_contradiction",
+      "text": "The Eiffel Tower was carved out of solid marble in Ancient Egypt.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "D_01",
+      "category": "D_unsupported_claim",
+      "text": "Napoleon Bonaparte secretly traveled to Australia in 1812 to establish an underground palace.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.524,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_02",
+      "category": "D_unsupported_claim",
+      "text": "Ancient Romans invented quantum computers powered by steam in 50 BC.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.259,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "D_07",
+      "category": "D_unsupported_claim",
+      "text": "A secret civilization of giant badger monks operates beneath the Antarctic ice sheet.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4769,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_08",
+      "category": "D_unsupported_claim",
+      "text": "George Washington invented the internet in 1789 to send encrypted messages to Thomas Jefferson.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4672,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_10",
+      "category": "D_unsupported_claim",
+      "text": "The Statue of Liberty was originally built as a wireless charging tower for steam locomotives.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5323,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_11",
+      "category": "D_unsupported_claim",
+      "text": "Drinking seawater gives humans the biological ability to breathe underwater indefinitely.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5071,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_13",
+      "category": "D_unsupported_claim",
+      "text": "Sunlight contains micro-crystals of ruby that give birds the power of flight.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4971,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_14",
+      "category": "D_unsupported_claim",
+      "text": "The Great Pyramids were originally painted neon pink with fluorescent dyes.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "D_15",
+      "category": "D_unsupported_claim",
+      "text": "Galileo used an optical laser pointer to communicate with Martian settlers.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "D_16",
+      "category": "D_unsupported_claim",
+      "text": "The Amazon river flows backwards every leap year due to lunar gravitational anomalies.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5003,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_17",
+      "category": "D_unsupported_claim",
+      "text": "Julius Caesar was an accomplished jazz saxophonist in 44 BC.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "D_18",
+      "category": "D_unsupported_claim",
+      "text": "Clouds are solid fiberglass formations suspended by magnetic levitation.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "D_19",
+      "category": "D_unsupported_claim",
+      "text": "Alexander the Great discovered nuclear fission using bronze pottery.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5259,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "E_01",
+      "category": "E_ambiguous_claim",
+      "text": "It has been said that something happened somewhere in Europe many centuries ago that changed everything.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2129,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_02",
+      "category": "E_ambiguous_claim",
+      "text": "Certain mysterious cosmic energy pulses might be responsible for all unknown phenomena on Earth.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2296,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_03",
+      "category": "E_ambiguous_claim",
+      "text": "Some ancient philosopher proved that reality is just an illusion created by vibrational frequencies.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4672,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "E_04",
+      "category": "E_ambiguous_claim",
+      "text": "Scientists may have discovered a secret element that defies all known laws of physics.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_05",
+      "category": "E_ambiguous_claim",
+      "text": "An obscure historical figure allegedly achieved immortality through natural alchemy.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_06",
+      "category": "E_ambiguous_claim",
+      "text": "There are rumors that the weather in certain remote islands is controlled by ancient mechanisms.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2094,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_07",
+      "category": "E_ambiguous_claim",
+      "text": "Certain frequencies of sound are capable of manipulating human thoughts instantaneously.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2296,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_08",
+      "category": "E_ambiguous_claim",
+      "text": "A famous king in the Middle Ages was actually two different people acting as one person.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1284,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "E_09",
+      "category": "E_ambiguous_claim",
+      "text": "Some studies suggest that trees have a hidden collective consciousness with secret plans.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2105,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_11",
+      "category": "E_ambiguous_claim",
+      "text": "Ancient texts suggest that humans once flew using specialized vocal harmonies.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2319,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_12",
+      "category": "E_ambiguous_claim",
+      "text": "Certain minerals can produce unlimited electrical power if exposed to starlight.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.0774,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "E_13",
+      "category": "E_ambiguous_claim",
+      "text": "An unidentified historical empire conquered all continents before disappearing without a trace.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "E_14",
+      "category": "E_ambiguous_claim",
+      "text": "The moon might be hollow and occupied by forgotten historical expeditions.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2105,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_15",
+      "category": "E_ambiguous_claim",
+      "text": "Some obscure mathematical equations have the physical power to alter gravitational fields.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2483,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_16",
+      "category": "E_ambiguous_claim",
+      "text": "It is widely speculated by unnamed researchers that time travel was solved in 1920.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5259,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "E_17",
+      "category": "E_ambiguous_claim",
+      "text": "Certain animals possess an innate sixth sense enabling them to predict historical stock markets.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_19",
+      "category": "E_ambiguous_claim",
+      "text": "Water memory enables ordinary tap water to remember human emotions across centuries.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "E_20",
+      "category": "E_ambiguous_claim",
+      "text": "The pyramids were designed to emit invisible cosmic rays to preserve pharaonic spirits.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5259,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "F_04",
+      "category": "F_multi_claim_contradiction",
+      "text": "Jupiter is a gas giant. Jupiter has a solid iron surface with no atmosphere.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4202,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "F_05",
+      "category": "F_multi_claim_contradiction",
+      "text": "Albert Einstein was born in Germany. Albert Einstein was born on the moon in 2050.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4019,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "F_10",
+      "category": "F_multi_claim_contradiction",
+      "text": "The Pacific Ocean is filled with saltwater. The Pacific Ocean contains purely freshwater.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4202,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "F_15",
+      "category": "F_multi_claim_contradiction",
+      "text": "The Nile River is in Africa. The Nile River flows exclusively through Antarctica.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4202,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "F_19",
+      "category": "F_multi_claim_contradiction",
+      "text": "The Amazon is a river. The Amazon is a dry subterranean cave with zero water.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4202,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "F_20",
+      "category": "F_multi_claim_contradiction",
+      "text": "Earth has one natural moon. Earth has fifteen natural gas moons.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5073,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "G_01",
+      "category": "G_multi_claim_consistency",
+      "text": "Paris is the capital of France. Berlin is the capital of Germany.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.5998,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "G_02",
+      "category": "G_multi_claim_consistency",
+      "text": "Water freezes at 0 degrees Celsius. Water boils at 100 degrees Celsius under standard pressure.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.8174,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_05",
+      "category": "G_multi_claim_consistency",
+      "text": "The Nile is a major north-flowing river in Africa. The Amazon is the largest river by discharge.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.7856,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_08",
+      "category": "G_multi_claim_consistency",
+      "text": "Tokyo is the capital of Japan. Rome is the capital of Italy.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.7205,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_10",
+      "category": "G_multi_claim_consistency",
+      "text": "Albert Einstein developed general relativity. Isaac Newton formulated the laws of universal gravitation.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.7448,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_11",
+      "category": "G_multi_claim_consistency",
+      "text": "DNA stores genetic information. RNA plays a key role in protein synthesis.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.5779,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "G_13",
+      "category": "G_multi_claim_consistency",
+      "text": "The Sahara is the largest hot desert. Antarctica is classified as a polar desert.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.7852,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_16",
+      "category": "G_multi_claim_consistency",
+      "text": "The human heart pumps blood. The lungs facilitate gas exchange.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.7734,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_17",
+      "category": "G_multi_claim_consistency",
+      "text": "Mercury is closest to the Sun. Neptune is the eighth planet from the Sun.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.8437,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "G_18",
+      "category": "G_multi_claim_consistency",
+      "text": "Photosynthesis produces glucose. Cellular respiration breaks down glucose to release energy.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.6188,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "G_19",
+      "category": "G_multi_claim_consistency",
+      "text": "Madrid is the capital of Spain. Lisbon is the capital of Portugal.",
+      "error_type": "FALSE_POSITIVE",
+      "y_true": 0,
+      "y_pred": 1,
+      "prob_hybrid": 0.8454,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "I_01",
+      "category": "I_numerical_error",
+      "text": "12 multiplied by 8 equals 95.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_02",
+      "category": "I_numerical_error",
+      "text": "15 plus 27 equals 49.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5003,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_03",
+      "category": "I_numerical_error",
+      "text": "100 divided by 4 equals 26.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5323,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_04",
+      "category": "I_numerical_error",
+      "text": "50 minus 18 equals 35.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2485,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_05",
+      "category": "I_numerical_error",
+      "text": "7 multiplied by 9 equals 65.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_06",
+      "category": "I_numerical_error",
+      "text": "144 divided by 12 equals 14.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.259,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_07",
+      "category": "I_numerical_error",
+      "text": "25 plus 75 equals 110.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2483,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_08",
+      "category": "I_numerical_error",
+      "text": "9 multiplied by 9 equals 83.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2483,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_09",
+      "category": "I_numerical_error",
+      "text": "80 divided by 8 equals 12.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2119,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_10",
+      "category": "I_numerical_error",
+      "text": "64 minus 28 equals 40.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1864,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_11",
+      "category": "I_numerical_error",
+      "text": "11 multiplied by 11 equals 125.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_12",
+      "category": "I_numerical_error",
+      "text": "200 minus 45 equals 160.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_13",
+      "category": "I_numerical_error",
+      "text": "6 multiplied by 7 equals 45.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5071,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_14",
+      "category": "I_numerical_error",
+      "text": "81 divided by 9 equals 8.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2677,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_15",
+      "category": "I_numerical_error",
+      "text": "30 plus 70 equals 90.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2505,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_16",
+      "category": "I_numerical_error",
+      "text": "16 multiplied by 4 equals 60.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4439,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_17",
+      "category": "I_numerical_error",
+      "text": "500 divided by 5 equals 105.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5071,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_18",
+      "category": "I_numerical_error",
+      "text": "13 plus 19 equals 35.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1612,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_19",
+      "category": "I_numerical_error",
+      "text": "48 divided by 6 equals 9.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2439,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "I_20",
+      "category": "I_numerical_error",
+      "text": "8 multiplied by 5 equals 45.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2034,
+      "failure_mechanism": "numerical_reasoning_failure"
+    },
+    {
+      "id": "J_01",
+      "category": "J_entity_swap",
+      "text": "Leonardo da Vinci wrote the tragedy Hamlet.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "J_05",
+      "category": "J_entity_swap",
+      "text": "Madrid is the capital of Italy.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4971,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "J_06",
+      "category": "J_entity_swap",
+      "text": "Rome is the capital of Spain.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.3555,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "J_07",
+      "category": "J_entity_swap",
+      "text": "The Amazon River flows through Egypt into the Mediterranean Sea.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "J_10",
+      "category": "J_entity_swap",
+      "text": "Alexander Fleming was the first person to walk on the Moon.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "J_12",
+      "category": "J_entity_swap",
+      "text": "Alexander Graham Bell composed the Moonlight Sonata.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "nli_failure"
+    },
+    {
+      "id": "J_13",
+      "category": "J_entity_swap",
+      "text": "Isaac Newton sculpted the statue of David.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "J_15",
+      "category": "J_entity_swap",
+      "text": "Tokyo is the capital of South Korea.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1197,
+      "failure_mechanism": "retrieval_failure"
+    },
+    {
+      "id": "J_17",
+      "category": "J_entity_swap",
+      "text": "Charles Darwin founded Microsoft in 1975.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "J_18",
+      "category": "J_entity_swap",
+      "text": "Bill Gates published On the Origin of Species in 1859.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "J_19",
+      "category": "J_entity_swap",
+      "text": "Mars is known as the Blue Planet due to its vast liquid oceans.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4753,
+      "failure_mechanism": "threshold_boundary_failure"
+    },
+    {
+      "id": "K_02",
+      "category": "K_temporal_mutation",
+      "text": "The United States Declaration of Independence was signed in 1945.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2738,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_05",
+      "category": "K_temporal_mutation",
+      "text": "The French Revolution began in 2010.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_06",
+      "category": "K_temporal_mutation",
+      "text": "The fall of the Western Roman Empire occurred in 1989.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2505,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_07",
+      "category": "K_temporal_mutation",
+      "text": "The Berlin Wall fell in 476 AD.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.259,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_10",
+      "category": "K_temporal_mutation",
+      "text": "The battle of Waterloo was fought in 1999.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_11",
+      "category": "K_temporal_mutation",
+      "text": "The Magna Carta was signed in 1914.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2857,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_14",
+      "category": "K_temporal_mutation",
+      "text": "The Industrial Revolution started in 300 BC.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5323,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_15",
+      "category": "K_temporal_mutation",
+      "text": "Albert Einstein won the Nobel Prize in Physics in 1450.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_17",
+      "category": "K_temporal_mutation",
+      "text": "The United Nations was established in 1700.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2738,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_18",
+      "category": "K_temporal_mutation",
+      "text": "The American Civil War was fought between 1970 and 1975.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5132,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "K_19",
+      "category": "K_temporal_mutation",
+      "text": "Johannes Gutenberg introduced the printing press to Europe in 1995.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2738,
+      "failure_mechanism": "temporal_reasoning_failure"
+    },
+    {
+      "id": "L_02",
+      "category": "L_negation",
+      "text": "Water does not freeze at 0 degrees Celsius.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4439,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_03",
+      "category": "L_negation",
+      "text": "Jupiter is not the largest planet in our solar system.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2474,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_05",
+      "category": "L_negation",
+      "text": "Oxygen is not required for human respiration.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2567,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_07",
+      "category": "L_negation",
+      "text": "The chemical formula for water is not H2O.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2474,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_11",
+      "category": "L_negation",
+      "text": "The Pacific Ocean is not the largest ocean on Earth.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2474,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_13",
+      "category": "L_negation",
+      "text": "The heart does not pump blood through the human body.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4762,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_14",
+      "category": "L_negation",
+      "text": "Light does not travel at a finite speed in a vacuum.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_15",
+      "category": "L_negation",
+      "text": "Gold is not a chemical element.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_17",
+      "category": "L_negation",
+      "text": "DNA is not involved in genetic inheritance.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5003,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_19",
+      "category": "L_negation",
+      "text": "The Amazon is not located in South America.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.1612,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "L_20",
+      "category": "L_negation",
+      "text": "The speed of sound is not affected by the medium it travels through.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "negation_handling_failure"
+    },
+    {
+      "id": "N_01",
+      "category": "N_unsupported_causal",
+      "text": "The French Revolution occurred because King Louis XVI was secretly a clone created by Martian time travelers.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4439,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_02",
+      "category": "N_unsupported_causal",
+      "text": "Dinosaurs went extinct because ancient humans hunted them with laser rifles.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2034,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_03",
+      "category": "N_unsupported_causal",
+      "text": "The Roman Empire collapsed because emperors drank excessive amounts of caffeinated soda.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2034,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_04",
+      "category": "N_unsupported_causal",
+      "text": "The Titanic sank because a giant subterranean sea monster attacked the hull.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.5316,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_05",
+      "category": "N_unsupported_causal",
+      "text": "Photosynthesis evolved because plants wanted to communicate with orbiting satellites.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2319,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_06",
+      "category": "N_unsupported_causal",
+      "text": "The Black Death was caused by extraterrestrial bacteria dispersed by medieval comets.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4925,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_08",
+      "category": "N_unsupported_causal",
+      "text": "The Great Wall of China was constructed to prevent woolly mammoths from entering Beijing.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4053,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_09",
+      "category": "N_unsupported_causal",
+      "text": "Global sea levels are rising because submarine volcanic dragons are heating the ocean floor.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2034,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_10",
+      "category": "N_unsupported_causal",
+      "text": "The American Civil War occurred because both sides were competing to build the first supersonic jet.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4458,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_11",
+      "category": "N_unsupported_causal",
+      "text": "Gravity exists because the Earth is constantly accelerating through a cosmic tunnel created by wormholes.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.3111,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_12",
+      "category": "N_unsupported_causal",
+      "text": "The Library of Alexandria was destroyed to hide proof that ancient Egyptians had built working spaceships.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.0774,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_13",
+      "category": "N_unsupported_causal",
+      "text": "Lightning strikes occur because clouds become angry at high-altitude mountain peaks.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2105,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_14",
+      "category": "N_unsupported_causal",
+      "text": "World War I was triggered by an argument over which country owned the Moon.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4672,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_15",
+      "category": "N_unsupported_causal",
+      "text": "The Sahara Desert formed because ancient Roman steam engines evaporated all global precipitation.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2738,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_16",
+      "category": "N_unsupported_causal",
+      "text": "Human language evolved specifically so people could give instructions to domesticated velociraptors.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2094,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_17",
+      "category": "N_unsupported_causal",
+      "text": "Rainbows appear after rain because sunlight interacts with airborne holographic projectors.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.4689,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_18",
+      "category": "N_unsupported_causal",
+      "text": "The Ice Ages occurred because prehistoric tribes constructed giant ice-making factories.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "unsupported_causal_failure"
+    },
+    {
+      "id": "N_19",
+      "category": "N_unsupported_causal",
+      "text": "Tectonic plates move because the Earth's molten core is driven by nuclear-powered submarine propellers.",
+      "error_type": "FALSE_NEGATIVE",
+      "y_true": 1,
+      "y_pred": 0,
+      "prob_hybrid": 0.2051,
+      "failure_mechanism": "unsupported_causal_failure"
+    }
+  ],
+  "ablation_results": {
+    "P1_only": {
+      "auroc": 0.8341,
+      "mcc": 0.4557,
+      "f1": 0.8329,
+      "specificity": 0.6625
+    },
+    "P2_only": {
+      "auroc": 0.5478,
+      "mcc": 0.0,
+      "f1": 0.0,
+      "specificity": 1.0
+    },
+    "P3_only": {
+      "auroc": 0.4353,
+      "mcc": -0.1037,
+      "f1": 0.1709,
+      "specificity": 0.825
+    },
+    "P1_plus_P2": {
+      "auroc": 0.8357,
+      "mcc": 0.4463,
+      "f1": 0.8097,
+      "specificity": 0.725
+    },
+    "P1_plus_P3": {
+      "auroc": 0.7473,
+      "mcc": 0.4031,
+      "f1": 0.8053,
+      "specificity": 0.6625
+    },
+    "P2_plus_P3": {
+      "auroc": 0.4679,
+      "mcc": 0.0725,
+      "f1": 0.1121,
+      "specificity": 0.975
+    },
+    "P1_plus_P2_plus_P3_Hybrid": {
+      "auroc": 0.7183,
+      "mcc": 0.1775,
+      "f1": 0.4542,
+      "specificity": 0.8625
+    }
+  },
+  "development_candidates_5fold_cv": {
+    "Calibrated_Logistic_Regression": {
+      "mean_mcc": 0.586,
+      "mean_recall": 0.945,
+      "mean_specificity": 0.575,
+      "mean_auroc": 0.8562
+    },
+    "Random_Forest_Meta": {
+      "mean_mcc": 0.581,
+      "mean_recall": 0.925,
+      "mean_specificity": 0.6125,
+      "mean_auroc": 0.8489
+    },
+    "Hist_Gradient_Boosting_Refit": {
+      "mean_mcc": 0.5929,
+      "mean_recall": 0.915,
+      "mean_specificity": 0.65,
+      "mean_auroc": 0.8586
+    }
+  },
+  "ece_bins": [
+    {
+      "bin": "[0.0, 0.1]",
+      "count": 9,
+      "accuracy": 0.4444,
+      "confidence": 0.0832,
+      "calibration_error": 0.3612
+    },
+    {
+      "bin": "[0.1, 0.2]",
+      "count": 37,
+      "accuracy": 0.1892,
+      "confidence": 0.1349,
+      "calibration_error": 0.0543
+    },
+    {
+      "bin": "[0.2, 0.3]",
+      "count": 84,
+      "accuracy": 0.7381,
+      "confidence": 0.2445,
+      "calibration_error": 0.4936
+    },
+    {
+      "bin": "[0.3, 0.4]",
+      "count": 3,
+      "accuracy": 0.6667,
+      "confidence": 0.3259,
+      "calibration_error": 0.3408
+    },
+    {
+      "bin": "[0.4, 0.5]",
+      "count": 31,
+      "accuracy": 0.8387,
+      "confidence": 0.453,
+      "calibration_error": 0.3857
+    },
+    {
+      "bin": "[0.5, 0.6]",
+      "count": 91,
+      "accuracy": 0.9121,
+      "confidence": 0.548,
+      "calibration_error": 0.3641
+    },
+    {
+      "bin": "[0.6, 0.7]",
+      "count": 4,
+      "accuracy": 0.75,
+      "confidence": 0.6271,
+      "calibration_error": 0.1229
+    },
+    {
+      "bin": "[0.7, 0.8]",
+      "count": 17,
+      "accuracy": 0.7059,
+      "confidence": 0.7422,
+      "calibration_error": 0.0363
+    },
+    {
+      "bin": "[0.8, 0.9]",
+      "count": 4,
+      "accuracy": 0.25,
+      "confidence": 0.8342,
+      "calibration_error": 0.5842
+    },
+    {
+      "bin": "[0.9, 1.0]",
+      "count": 0,
+      "accuracy": 0.0,
+      "confidence": 0.0,
+      "calibration_error": 0.0
+    }
+  ],
+  "total_diagnostic_runtime_seconds": 690.33
+}
