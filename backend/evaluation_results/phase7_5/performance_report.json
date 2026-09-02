@@ -1,11 +1,11 @@
 {
-  "cold_start_ms": 1125.98,
-  "warm_inference_mean_ms": 1104.9,
-  "p50_latency_ms": 1124.36,
-  "p90_latency_ms": 1229.66,
-  "p95_latency_ms": 1325.7,
-  "p99_latency_ms": 1537.2,
-  "estimated_rps": 0.91,
+  "cold_start_ms": 1364.43,
+  "warm_inference_mean_ms": 1176.54,
+  "p50_latency_ms": 1142.12,
+  "p90_latency_ms": 1289.49,
+  "p95_latency_ms": 1366.89,
+  "p99_latency_ms": 1817.82,
+  "estimated_rps": 0.85,
   "ram_usage_mb": 142.5,
   "cpu_utilization_pct": 12.4
 }
