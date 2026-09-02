@@ -19,6 +19,7 @@ import { VerdictBanner } from "@/components/verification/VerdictBanner";
 import { ClaimAnalysisCard } from "@/components/verification/ClaimAnalysisCard";
 import { LocalAttributionPanel } from "@/components/verification/LocalAttributionPanel";
 import { VerificationTracePanel } from "@/components/verification/VerificationTracePanel";
+import { ClosedLoopCorrectionPanel } from "@/components/verification/ClosedLoopCorrectionPanel";
 import { VerificationUnavailable } from "@/components/ui/EmptyState";
 import { useAnalysis } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
@@ -347,7 +348,10 @@ export default function VerifyPage() {
             flaggedClaims={currentResult.flagged_sentences_count}
             correctionAvailable={true}
             onCorrect={() => {
-              toast.info("Correction feature available through the Chat interface.");
+              const el = document.getElementById("closed-loop-panel");
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
             }}
           />
 
@@ -422,6 +426,13 @@ export default function VerifyPage() {
               </CardContent>
             </Card>
           )}
+
+          {/* Explainable Closed-Loop: DETECT → EXPLAIN → CORRECT → RE-VERIFY */}
+          <ClosedLoopCorrectionPanel
+            originalQuery={query}
+            originalResponse={response}
+            analysisResult={currentResult}
+          />
 
           {/* Claim-Level Analysis */}
           {currentResult.sentence_scores && currentResult.sentence_scores.length > 0 && (

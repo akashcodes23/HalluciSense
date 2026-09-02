@@ -123,7 +123,6 @@ class WikipediaKnowledgeSource:
             "prop": "extracts",
             "exintro": True,
             "explaintext": True,
-            "exsentences": 4,
             "titles": "|".join(titles),
             "format": "json",
         }

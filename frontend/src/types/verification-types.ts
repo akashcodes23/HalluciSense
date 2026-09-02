@@ -33,7 +33,7 @@ export interface LocalAttribution {
   inference_count: number;
 }
 
-export type EpistemicCategory = 
+export type EpistemicCategory =
   | 'ASSERTED_FACT'
   | 'PREDICTION'
   | 'HYPOTHETICAL'
@@ -349,3 +349,61 @@ export interface TraceData {
 }
 
 export type VerificationState = 'IDLE' | 'CONNECTING' | 'ANALYZING' | 'COMPLETED' | 'FAILED';
+
+export interface CorrectionRequest {
+  query?: string;
+  response: string;
+  trace_id?: string;
+  model_name?: string;
+}
+
+export interface SupportingEvidenceItem {
+  source: string;
+  snippet: string;
+  score: number;
+}
+
+export interface ReverificationPillars {
+  evidence_grounding: number;
+  confidence_gap: number;
+  consistency_failure: number;
+}
+
+export interface ReverificationResult {
+  trace_id: string;
+  status: string;
+  overall_h_score: number;
+  risk_level: string;
+  pillar_scores: ReverificationPillars;
+}
+
+export interface CorrectionResult {
+  correction_id: string;
+  original_trace_id?: string;
+  reverification_trace_id?: string;
+  status: "verified" | "abstained" | "rejected" | "not_needed";
+  method: "symbolic_arithmetic" | "symbolic_unit" | "evidence_grounded" | "abstained" | "none";
+  original_text: string;
+  corrected_text?: string | null;
+  reason: string;
+  missing_evidence_explanation?: string | null;
+  supporting_evidence: SupportingEvidenceItem[];
+  confidence: number;
+  reverification?: ReverificationResult | null;
+}
+
+export interface CorrectionResponse {
+  correction: CorrectionResult;
+  original_diagnosis?: {
+    trace_id?: string;
+    risk_level?: string;
+    overall_h_score?: number;
+    root_cause?: string;
+    pillar_scores?: {
+      evidence_grounding?: number;
+      confidence_gap?: number;
+      consistency_failure?: number;
+    };
+  };
+  execution_time_ms: number;
+}

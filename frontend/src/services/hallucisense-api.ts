@@ -10,6 +10,8 @@ import type {
   ExplainResponse,
   MetricsResponse,
   TraceData,
+  CorrectionRequest,
+  CorrectionResponse,
 } from "@/types/hallucisense";
 
 const getBaseUrl = (): string => {
@@ -106,6 +108,15 @@ export async function explainResponse(
   payload: ExplainRequest
 ): Promise<ExplainResponse> {
   return request<ExplainResponse>("/api/v1/explain", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function correctResponse(
+  payload: CorrectionRequest
+): Promise<CorrectionResponse> {
+  return request<CorrectionResponse>("/api/v1/correct", {
     method: "POST",
     body: JSON.stringify(payload),
   });

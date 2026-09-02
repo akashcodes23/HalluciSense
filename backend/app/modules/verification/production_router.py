@@ -21,6 +21,12 @@ from app.schemas.production_schemas import (
     ExplainRequest,
     ExplainResponse,
     MetricsResponse,
+    CorrectionRequest,
+    CorrectionResponse,
+    CorrectionResult,
+    ReverificationResult,
+    ReverificationPillars,
+    SupportingEvidenceItem,
     PillarScores,
     SentenceScore,
     TokenHeatmapItem,
@@ -35,6 +41,7 @@ from app.core.engine.token_localization import TokenLevelLocalizationEngine
 from app.core.engine.tracer import PipelineTracer, get_latest_trace, get_trace_by_id
 from app.core.engine.root_cause_classifier import RootCauseClassifier
 from app.core.engine.metrics_tracker import get_metrics_tracker
+from app.core.correction.correction_engine import HallucinationCorrectionEngine
 from app.core.config import settings
 
 router = APIRouter(tags=["Analysis"])
@@ -609,6 +616,128 @@ async def explain_analysis(payload: ExplainRequest, request: Request, response: 
         confidence_explanation=conf_exp,
         fusion_decomposition=decomp,
         measured_timings=analysis.measured_timings,
+    )
+
+
+_correction_engine = HallucinationCorrectionEngine()
+
+
+@router.post(
+    "/correct",
+    response_model=CorrectionResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Evidence-grounded hallucination correction and independent re-verification",
+    description="Generates an evidence-grounded or symbolic correction candidate and runs it back through the verification pipeline to validate whether the corrected claim is supported.",
+)
+async def correct_and_reverify_response(
+    payload: CorrectionRequest,
+    request: Request,
+    response: Response,
+) -> CorrectionResponse:
+    """Execute complete DETECT → EXPLAIN → CORRECT → RE-VERIFY explainable AI loop."""
+    start_t = time.perf_counter()
+
+    # Step 1: Run detection & diagnosis on original response (or fetch existing trace)
+    original_analysis = await analyze_response(
+        AnalysisRequest(
+            query=payload.query,
+            response=payload.response,
+            model_name=payload.model_name or "default",
+        ),
+        request,
+        response,
+    )
+
+    orig_trace_id = payload.trace_id or original_analysis.trace_id
+    orig_h_score = original_analysis.overall_h_score
+    orig_risk = original_analysis.risk_level
+    evidence_dicts = [
+        {"id": ev.id, "title": ev.title, "snippet": ev.snippet, "score": ev.score, "source": ev.source}
+        for ev in original_analysis.evidence
+    ]
+    sentence_dicts = [
+        {"sentence_index": s.sentence_index, "text": s.text, "score": s.score, "risk_level": s.risk_level}
+        for s in original_analysis.sentence_scores
+    ]
+
+    fastapi_resp = response
+
+    # Helper callback for executing verification on the candidate correction
+    async def _reverify_runner(query: Optional[str] = None, response: str = "", model_name: str = "default", **kwargs):
+        resp_text = response or kwargs.get("response_text", "")
+        return await analyze_response(
+            AnalysisRequest(query=query, response=resp_text, model_name=model_name),
+            request,
+            fastapi_resp,
+        )
+
+    # Step 2: Execute correction generation and independent re-verification
+    corr_outcome = await _correction_engine.correct_and_reverify(
+        query=payload.query or "",
+        original_response=payload.response,
+        original_trace_id=orig_trace_id,
+        analyze_func=_reverify_runner,
+        retrieved_evidence=evidence_dicts,
+        sentence_scores=sentence_dicts,
+        overall_h_score=orig_h_score,
+        model_name=payload.model_name or "default",
+    )
+
+    exec_dur_ms = round((time.perf_counter() - start_t) * 1000.0, 2)
+
+    # Format strongly typed response
+    rev_data = corr_outcome.get("reverification")
+    rev_obj = None
+    if rev_data:
+        p_scores = rev_data.get("pillar_scores", {})
+        rev_obj = ReverificationResult(
+            trace_id=rev_data.get("trace_id", ""),
+            status=rev_data.get("status", "VERIFIED"),
+            overall_h_score=rev_data.get("overall_h_score", 0.0),
+            risk_level=rev_data.get("risk_level", "VERIFIED"),
+            pillar_scores=ReverificationPillars(
+                evidence_grounding=p_scores.get("evidence_grounding", 0.0),
+                confidence_gap=p_scores.get("confidence_gap", 0.0),
+                consistency_failure=p_scores.get("consistency_failure", 0.0),
+            ),
+        )
+
+    supporting_items = [
+        SupportingEvidenceItem(source=item.get("source", "Reference Corpus"), snippet=item.get("snippet", ""), score=item.get("score", 1.0))
+        for item in corr_outcome.get("supporting_evidence", [])
+    ]
+
+    corr_res = CorrectionResult(
+        correction_id=corr_outcome.get("correction_id", ""),
+        original_trace_id=corr_outcome.get("original_trace_id"),
+        reverification_trace_id=corr_outcome.get("reverification_trace_id"),
+        status=corr_outcome.get("status", "abstained"),
+        method=corr_outcome.get("method", "abstained"),
+        original_text=corr_outcome.get("original_text", payload.response),
+        corrected_text=corr_outcome.get("corrected_text"),
+        reason=corr_outcome.get("reason", ""),
+        missing_evidence_explanation=corr_outcome.get("missing_evidence_explanation"),
+        supporting_evidence=supporting_items,
+        confidence=corr_outcome.get("confidence", 0.0),
+        reverification=rev_obj,
+    )
+
+    orig_diag = {
+        "trace_id": orig_trace_id,
+        "risk_level": orig_risk,
+        "overall_h_score": orig_h_score,
+        "root_cause": original_analysis.root_cause_classification,
+        "pillar_scores": {
+            "evidence_grounding": original_analysis.pillar_scores.retrieval,
+            "confidence_gap": original_analysis.pillar_scores.confidence,
+            "consistency_failure": original_analysis.pillar_scores.consistency,
+        },
+    }
+
+    return CorrectionResponse(
+        correction=corr_res,
+        original_diagnosis=orig_diag,
+        execution_time_ms=exec_dur_ms,
     )
 
 

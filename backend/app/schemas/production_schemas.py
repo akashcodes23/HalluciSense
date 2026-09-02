@@ -134,7 +134,7 @@ class AnalysisResponse(BaseModel):
     evidence: List[EvidenceItem] = Field(default_factory=list)
     confidence_analysis: Optional[ConfidenceAnalysis] = Field(None)
     root_cause_classification: Optional[str] = Field("VERIFIED", description="Single-label failure classification")
-    
+
     # ── Real Timing & Fusion Provenance ──────────────────────────────────────
     measured_timings: Optional[MeasuredTimingBreakdown] = Field(None, description="Actual measured sub-operation timings")
     pillar_status: Optional[PillarExecutionStatus] = Field(None, description="Detailed execution and availability status")
@@ -168,3 +168,57 @@ class MetricsResponse(BaseModel):
     error_rate: Optional[float] = Field(None, ge=0.0, le=100.0, description="Failed requests percentage (null if 0 requests)", example=0.3)
     memory_mb: float = Field(..., ge=0.0, description="Process RSS RAM memory usage in MB", example=421.0)
     status: str = Field(default="READY")
+
+
+class CorrectionRequest(BaseModel):
+    """Input request model for evidence-grounded correction and re-verification."""
+    query: Optional[str] = Field(None, description="User query or context prompt", example="What is the capital of Maharashtra?")
+    response: str = Field(..., min_length=1, max_length=10000, description="Original response that was flagged for correction", example="Pune is the capital of Maharashtra.")
+    trace_id: Optional[str] = Field(None, description="Original verification trace ID", example="TRACE_1559CBA5E9B8")
+    model_name: Optional[str] = Field("default", description="Model identifier")
+
+
+class SupportingEvidenceItem(BaseModel):
+    """Evidence snippet supporting a correction candidate."""
+    source: str = Field(...)
+    snippet: str = Field(...)
+    score: float = Field(default=1.0)
+
+
+class ReverificationPillars(BaseModel):
+    """Three-pillar verification breakdown of the corrected response."""
+    evidence_grounding: float = Field(..., ge=0.0, le=1.0)
+    confidence_gap: float = Field(..., ge=0.0, le=1.0)
+    consistency_failure: float = Field(..., ge=0.0, le=1.0)
+
+
+class ReverificationResult(BaseModel):
+    """Independent verification result of the candidate correction."""
+    trace_id: str = Field(..., description="Unique trace ID for the re-verification execution")
+    status: str = Field(..., description="VERIFIED, REJECTED, NEEDS_REVIEW, or FAILED")
+    overall_h_score: float = Field(..., ge=0.0, le=1.0)
+    risk_level: str = Field(...)
+    pillar_scores: ReverificationPillars
+
+
+class CorrectionResult(BaseModel):
+    """Evidence-grounded correction candidate outcome."""
+    correction_id: str = Field(...)
+    original_trace_id: Optional[str] = Field(None)
+    reverification_trace_id: Optional[str] = Field(None)
+    status: str = Field(..., description="verified, abstained, rejected, or not_needed")
+    method: str = Field(..., description="symbolic_arithmetic, symbolic_unit, evidence_grounded, abstained, or none")
+    original_text: str = Field(...)
+    corrected_text: Optional[str] = Field(None)
+    reason: str = Field(...)
+    missing_evidence_explanation: Optional[str] = Field(None)
+    supporting_evidence: List[SupportingEvidenceItem] = Field(default_factory=list)
+    confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+    reverification: Optional[ReverificationResult] = Field(None)
+
+
+class CorrectionResponse(BaseModel):
+    """Top-level response model for POST /api/v1/correct."""
+    correction: CorrectionResult
+    original_diagnosis: Optional[Dict[str, Any]] = Field(None)
+    execution_time_ms: float = Field(default=0.0)

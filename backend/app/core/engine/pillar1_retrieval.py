@@ -9,6 +9,8 @@ from .temporal import TemporalClaimEngine, TemporalStatus, EpistemicModality
 from .numeric_unit_checker import NumericUnitChecker, NumericUnitStatus
 from .negation_detector import NegationDetector
 from .causal_direction import CausalDirectionChecker
+from app.core.verification.symbolic_verifier import evaluate_arithmetic_claim
+from app.core.verification.unit_verifier import evaluate_unit_claim
 
 
 class EventTemporalAnchorResolver:
@@ -251,6 +253,20 @@ class Pillar1RetrievalEngine:
             else:
                 return 0.95, 0.0, 0.05
 
+        # Check for capital city contradiction or entailment
+        claim_cap_m = re.search(r'\b([A-Z][a-zA-Z\s]+?)\s+is\s+the\s+capital\s+(?:city\s+)?of\s+([A-Z][a-zA-Z\s]+)', claim)
+        snippet_cap_m = re.search(r'\b([A-Z][a-zA-Z\s]+?)\s+is\s+the\s+capital\s+(?:city\s+)?of\s+([A-Z][a-zA-Z\s]+)', item.snippet)
+        if claim_cap_m and snippet_cap_m:
+            c_city = claim_cap_m.group(1).strip().lower()
+            c_state = claim_cap_m.group(2).strip().lower().rstrip(".,")
+            s_city = snippet_cap_m.group(1).strip().lower()
+            s_state = snippet_cap_m.group(2).strip().lower().rstrip(".,")
+            if (c_state in s_state or s_state in c_state):
+                if c_city != s_city:
+                    return 0.0, 0.98, 0.02
+                else:
+                    return 0.98, 0.0, 0.02
+
         if neutral > 0.60 and contradiction < 0.30 and sim_score >= 0.70:
             match = re.match(r'^([A-Za-z0-9\s]+)\s+is\s+([A-Za-z0-9]+)\.?$', claim.strip(), re.IGNORECASE)
             if match:
@@ -259,13 +275,13 @@ class Pillar1RetrievalEngine:
                 if f"{subj} ({obj})" in snippet_lower or f"{subj} ({obj}" in snippet_lower or f"formula {obj}" in snippet_lower:
                     entailment = max(entailment, 0.90)
 
-        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_formula_m:
+        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_formula_m and not claim_cap_m:
             claim_keywords = [w.lower() for w in re.findall(r'\b[A-Za-z]{4,}\b', claim)]
             snippet_lower = item.snippet.lower()
             if claim_keywords:
                 matching_words = sum(1 for kw in claim_keywords if kw in snippet_lower)
                 coverage_ratio = matching_words / float(len(claim_keywords))
-                if coverage_ratio >= 0.50:
+                if coverage_ratio >= 0.90:
                     entailment = max(entailment, round(0.70 + 0.25 * coverage_ratio, 4))
                     neutral = max(0.0, 1.0 - entailment - contradiction)
         return entailment, contradiction, neutral
@@ -375,8 +391,32 @@ class Pillar1RetrievalEngine:
                     fe_score = round(max(fe_score, caus_res.confidence_penalty), 4)
                     break
 
+        # Check deterministic symbolic arithmetic & unit claims
+        sym_reasoning = None
+        arith_res = evaluate_arithmetic_claim(text)
+        if not arith_res and query:
+            arith_res = evaluate_arithmetic_claim(f"{query} = {text}")
+        if arith_res and arith_res.get("verified"):
+            if arith_res.get("is_consistent") is True:
+                fe_score = 0.0
+                sym_reasoning = f"Symbolic Arithmetic Verified: {arith_res.get('explanation')}"
+            elif arith_res.get("is_consistent") is False:
+                fe_score = 1.0
+                sym_reasoning = f"Symbolic Arithmetic Contradiction: {arith_res.get('explanation')}"
+
+        unit_res = evaluate_unit_claim(text)
+        if unit_res and unit_res.get("verified"):
+            if unit_res.get("is_consistent") is True:
+                fe_score = 0.0
+                sym_reasoning = f"Symbolic Unit Verified: {unit_res.get('explanation')}"
+            elif unit_res.get("is_consistent") is False:
+                fe_score = 1.0
+                sym_reasoning = f"Symbolic Unit Contradiction: {unit_res.get('explanation')}"
+
         if not claims:
             reasoning = "No discrete factual claims identified."
+        elif sym_reasoning:
+            reasoning = sym_reasoning
         elif temp_res.temporal_inconsistency_score > 0.0:
             reasoning = f"Temporal Inconsistency: {temp_res.reasoning}"
         elif event_anchor_score is not None and event_anchor_score > 0.0:
