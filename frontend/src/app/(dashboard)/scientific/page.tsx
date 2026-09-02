@@ -233,7 +233,7 @@ function MetricCard({ label, value, highlight, invert }: { label: string; value:
   );
 }
 
-function InfoPill({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
+function InfoPill({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
   return (
     <div className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius-sm)] bg-[var(--surface)] text-[12px]">
       <Icon className="w-3.5 h-3.5 text-[var(--text-dim)]" />

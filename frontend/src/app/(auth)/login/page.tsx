@@ -45,7 +45,7 @@ const fieldVariants = {
 function Field({
   id, icon: Icon, label, type = 'text', placeholder, value, onChange, extra, customDir
 }: {
-  id: string; icon: React.ElementType; label: string; type?: string; placeholder: string;
+  id: string; icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>; label: string; type?: string; placeholder: string;
   value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; extra?: React.ReactNode;
   customDir: number;
 }) {

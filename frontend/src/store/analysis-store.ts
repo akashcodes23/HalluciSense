@@ -86,6 +86,7 @@ interface AnalysisState {
   sidebarOpen: boolean;
   activeTab: "results" | "evidence" | "heatmap" | "trace";
   selectedTraceId: string | null;
+  activeHeroState: "detect" | "confidence" | "verify";
 
   // Actions
   setCurrentResult: (result: AnalysisResponse | null) => void;
@@ -96,6 +97,7 @@ interface AnalysisState {
   setSidebarOpen: (open: boolean) => void;
   setActiveTab: (tab: AnalysisState["activeTab"]) => void;
   setSelectedTraceId: (id: string | null) => void;
+  setActiveHeroState: (state: "detect" | "confidence" | "verify") => void;
   reset: () => void;
 
   // Error feed actions
@@ -115,6 +117,7 @@ export const useAnalysisStore = create<AnalysisState>()(
       sidebarOpen: true,
       activeTab: "results",
       selectedTraceId: null,
+      activeHeroState: "detect",
 
       setCurrentResult: (result) => set({ currentResult: result }),
       setCurrentExplain: (explain) => set({ currentExplain: explain }),
@@ -129,6 +132,7 @@ export const useAnalysisStore = create<AnalysisState>()(
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       setActiveTab: (tab) => set({ activeTab: tab }),
       setSelectedTraceId: (id) => set({ selectedTraceId: id }),
+      setActiveHeroState: (state) => set({ activeHeroState: state }),
 
       reset: () =>
         set({
@@ -137,6 +141,7 @@ export const useAnalysisStore = create<AnalysisState>()(
           isAnalyzing: false,
           activeTab: "results",
           selectedTraceId: null,
+          activeHeroState: "detect",
         }),
 
       // Error feed — with duplicate protection
