@@ -42,23 +42,23 @@ export const RISK_LEVELS = {
 
 export const PILLAR_INFO = {
   retrieval: {
-    name: "Evidence Grounding",
+    name: "Evidence Support",
     shortName: "Evidence",
-    description: "Hybrid BM25 + Dense retrieval with NLI cross-verification",
+    description: "External evidence retrieval and entailment evaluate whether the claim is grounded in reference material",
     icon: "Database",
     color: "#6366F1",
   },
   confidence: {
-    name: "Confidence Estimation",
-    shortName: "Confidence",
-    description: "White-box logit entropy and epistemic uncertainty analysis",
+    name: "Model Uncertainty",
+    shortName: "Uncertainty",
+    description: "Token-level probability and entropy analysis estimate uncertainty in the model's generation",
     icon: "Activity",
     color: "#A855F7",
   },
   consistency: {
-    name: "Consistency Reasoning",
+    name: "Generation Consistency",
     shortName: "Consistency",
-    description: "Paraphrase-based self-consistency verification",
+    description: "Semantic comparison across independent generations measures instability and disagreement",
     icon: "GitBranch",
     color: "#3B82F6",
   },
@@ -97,3 +97,43 @@ export const NAV_ITEMS = [
   { href: "/metrics", label: "Metrics", icon: "BarChart3" },
   { href: "/settings", label: "Settings", icon: "Settings" },
 ] as const;
+
+export function getPillar1Diagnostic(value?: number | null, isAvailable: boolean = true): { metricLabel: string; interpretation: string } {
+  if (!isAvailable || value == null || isNaN(value)) {
+    return { metricLabel: "Factual Risk", interpretation: "Evidence retrieval unavailable" };
+  }
+  if (value <= 0.20) {
+    return { metricLabel: "Factual Risk", interpretation: "Strong external grounding detected" };
+  }
+  if (value <= 0.50) {
+    return { metricLabel: "Factual Risk", interpretation: "Evidence is inconclusive" };
+  }
+  return { metricLabel: "Factual Risk", interpretation: "Evidence does not support the claim" };
+}
+
+export function getPillar2Diagnostic(value?: number | null, isAvailable: boolean = true): { metricLabel: string; interpretation: string } {
+  if (!isAvailable || value == null || isNaN(value)) {
+    return { metricLabel: "Uncertainty Gap", interpretation: "Token log-probabilities not provided" };
+  }
+  if (value <= 0.25) {
+    return { metricLabel: "Uncertainty Gap", interpretation: "Low internal generation uncertainty" };
+  }
+  if (value <= 0.55) {
+    return { metricLabel: "Uncertainty Gap", interpretation: "Moderate internal uncertainty" };
+  }
+  return { metricLabel: "Uncertainty Gap", interpretation: "High internal generation uncertainty" };
+}
+
+export function getPillar3Diagnostic(value?: number | null, isAvailable: boolean = true): { metricLabel: string; interpretation: string } {
+  if (!isAvailable || value == null || isNaN(value)) {
+    return { metricLabel: "Disagreement", interpretation: "Multiple generations not available" };
+  }
+  if (value <= 0.20) {
+    return { metricLabel: "Disagreement", interpretation: "High agreement across generations" };
+  }
+  if (value <= 0.50) {
+    return { metricLabel: "Disagreement", interpretation: "Partial generation disagreement" };
+  }
+  return { metricLabel: "Disagreement", interpretation: "High disagreement across generations" };
+}
+

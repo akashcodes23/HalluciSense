@@ -129,25 +129,25 @@ function Navbar() {
 /* ── Hero State Data Dictionary ────────────────────────────────────────────── */
 const HERO_STATES = {
   detect: {
-    tag: "Pillar 1 · Grounding Engine",
+    tag: "Pillar 1 · Evidence Support",
     headline: "Detect Hallucinations.",
     color: "text-emerald-400",
     glowColor: "rgba(16,185,129,0.3)",
-    description: "Invariant hybrid BM25 + dense neural retrieval with cross-encoder NLI isolating factual evidence from ungrounded parametric hallucinations.",
+    description: "External evidence retrieval and NLI entailment evaluate whether the generated claim is grounded in reliable reference material.",
   },
   confidence: {
-    tag: "Pillar 2 · Predictive Uncertainty",
+    tag: "Pillar 2 · Model Uncertainty",
     headline: "Measure Confidence.",
     color: "text-teal-400",
     glowColor: "rgba(20,184,166,0.3)",
-    description: "Adaptive Shannon entropy quantification and probability margin estimation calibrated to surface subtle model hallucinations in real time.",
+    description: "Token-level probability and Shannon entropy analysis estimate internal generation uncertainty in the model's responses.",
   },
   verify: {
-    tag: "Pillar 3 · Symbolic Consensus",
+    tag: "Pillar 3 · Generation Consistency",
     headline: "Verify Evidence.",
     color: "text-cyan-400",
     glowColor: "rgba(6,182,212,0.3)",
-    description: "Deterministic symbolic verification gateways paired with multi-candidate semantic consistency checks for inspectable, verifiable AI.",
+    description: "Semantic comparison across independent generations measures instability and disagreement in the model's claims.",
   },
 } as const;
 
@@ -300,7 +300,7 @@ export default function LandingPage() {
               Adaptive Multi-Signal Architecture
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed">
-              Grounded external evidence retrieval acts as the invariant foundation for every claim, with predictive token uncertainty and semantic consensus activating dynamically for live generation streams.
+              Grounded external evidence retrieval acts as the foundation for every claim, with predictive model uncertainty and stochastic generation consistency activating dynamically for live inference.
             </p>
           </div>
 
@@ -312,14 +312,14 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <Database className="w-8 h-8 text-emerald-400" />
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold uppercase">
-                      Invariant Base
+                      External Grounding
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-                    Pillar 1 — Evidence Grounding
+                    Pillar 1 — Evidence Support
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Hybrid BM25 sparse + FAISS dense vector retrieval against external reference corpora with DeBERTa-v3 cross-encoder NLI entailment scoring. Evaluates all claims, including offline text.
+                    External evidence retrieval and NLI entailment evaluate whether the claim is grounded in supporting reference material. Evaluates all claims with hybrid BM25 + FAISS vector search and DeBERTa-v3 cross-encoder NLI.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-emerald-400 flex items-center justify-center gap-2">
@@ -335,14 +335,14 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <Activity className="w-8 h-8 text-teal-400" />
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20 font-semibold uppercase">
-                      Adaptive Signal
+                      Internal Uncertainty
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-                    Pillar 2 — Predictive Confidence
+                    Pillar 2 — Model Uncertainty
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Token log-probability entropy analysis quantifying internal model uncertainty. Dynamically active during live streaming generation when provider logprobs are exposed.
+                    Token-level probability and entropy analysis estimate uncertainty in the model’s generation. Dynamically active during live streaming when provider token log-probabilities are exposed.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-teal-400 flex items-center justify-center gap-2">
@@ -358,18 +358,18 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <GitBranch className="w-8 h-8 text-cyan-400" />
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold uppercase">
-                      Adaptive Signal
+                      Stochastic Stability
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-                    Pillar 3 — Semantic Consistency
+                    Pillar 3 — Generation Consistency
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Evaluates semantic embedding cosine variance and claim-aligned contradiction across exactly 3 stochastic alternate generations during live multi-candidate runs.
+                    Semantic comparison across independent generations measures instability and disagreement in the model’s responses. Evaluates consistency across stochastic alternate generations or intra-response claim pairs.
                   </p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 font-mono text-[10px] tracking-wider uppercase text-cyan-400 flex items-center justify-center gap-2">
-                  Multi-Sample · 3 Stochastic Candidates
+                  Multi-Sample · Cross-Generation Stability
                 </div>
               </GlassCard>
             </ScrollReveal>

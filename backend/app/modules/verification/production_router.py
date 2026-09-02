@@ -313,17 +313,17 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         p3_mode = getattr(p3, "mode", "INTRA_RESPONSE_CONSISTENCY") if p3 else "INTRA_RESPONSE_CONSISTENCY"
 
         if p1_available:
-            avail_pillars.append("Pillar 1: Evidence Grounding")
+            avail_pillars.append("Pillar 1: Evidence Support")
         if p2_available:
-            avail_pillars.append(f"Pillar 2: Confidence ({p2_mode})")
+            avail_pillars.append(f"Pillar 2: Model Uncertainty ({p2_mode})")
         if p3_available:
-            avail_pillars.append(f"Pillar 3: Consistency ({p3_mode})")
+            avail_pillars.append(f"Pillar 3: Generation Consistency ({p3_mode})")
 
         missing_pillars = []
         if not p2_available:
-            missing_pillars.append("Pillar 2: Confidence (Unavailable)")
+            missing_pillars.append("Pillar 2: Model Uncertainty (Unavailable)")
         if not p3_available:
-            missing_pillars.append("Pillar 3: Consistency (Unavailable)")
+            missing_pillars.append("Pillar 3: Generation Consistency (Unavailable)")
 
         fusion_mode_str = "FULL_THREE_PILLAR" if is_full_analysis else "PARTIAL_RENORMALIZED"
 
@@ -484,9 +484,9 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         full_perf_dict = timer.get_summary()
 
         # Record Real Pipeline Trace (No fake derivations)
-        tracer.record_stage("pillar1_evidence_grounding", p1_dur_ms, {"factual_error": fe_val, "evidence_count": len(evidence_items)}, confidence=1.0 - fe_val)
-        tracer.record_stage("pillar2_confidence_estimation", p2_dur_ms, {"available": p2_available, "confidence_gap": cg_val if p2_available else None}, confidence=1.0 - cg_val if p2_available else None)
-        tracer.record_stage("pillar3_consistency_reasoning", p3_dur_ms, {"available": p3_available, "consistency_failure": cf_val if p3_available else None}, confidence=1.0 - cf_val if p3_available else None)
+        tracer.record_stage("pillar1_evidence_support", p1_dur_ms, {"factual_error": fe_val, "evidence_count": len(evidence_items)}, confidence=1.0 - fe_val)
+        tracer.record_stage("pillar2_model_uncertainty", p2_dur_ms, {"available": p2_available, "confidence_gap": cg_val if p2_available else None}, confidence=1.0 - cg_val if p2_available else None)
+        tracer.record_stage("pillar3_generation_consistency", p3_dur_ms, {"available": p3_available, "consistency_failure": cf_val if p3_available else None}, confidence=1.0 - cf_val if p3_available else None)
         tracer.record_stage("adaptive_fusion_engine", fusion_dur_ms, {"weights": weights_used, "is_full_analysis": is_full_analysis}, confidence=1.0 - overall_h)
         tracer.finalize(
             final_h_score=overall_h,

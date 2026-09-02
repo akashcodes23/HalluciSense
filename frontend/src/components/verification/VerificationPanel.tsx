@@ -261,21 +261,21 @@ export function VerificationPanel() {
                         {/* Sentence Pillars */}
                         <div className="grid grid-cols-1 gap-2.5">
                           <PillarCard
-                            label="Evidence Grounding"
+                            label="P1 · Evidence Support"
                             score={sentence.factual_error}
-                            description="NLI Contradiction against evidence."
+                            description="External evidence retrieval and NLI entailment evaluation."
                             color={getPillarColor(sentence.factual_error)}
                           />
                           <PillarCard
-                            label="Confidence Gap"
+                            label="P2 · Model Uncertainty"
                             score={sentence.confidence_gap}
-                            description="Logit uncertainty & entropy gap."
+                            description="Token log-probability entropy and generation uncertainty."
                             color={getPillarColor(sentence.confidence_gap)}
                           />
                           <PillarCard
-                            label="Consistency Failure"
+                            label="P3 · Generation Consistency"
                             score={sentence.consistency_failure}
-                            description="Semantic drift across sample turns."
+                            description="Semantic agreement across stochastic generations."
                             color={getPillarColor(sentence.consistency_failure)}
                           />
                         </div>

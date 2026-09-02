@@ -36,10 +36,10 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
         {/* Pillar 1 */}
         <PillarCard
           icon={<Database className="w-4 h-4 text-teal-400" />}
-          title="Pillar 1 — Evidence Grounding"
+          title="Pillar 1 — Evidence Support"
           score={p1}
           weight={effectiveWeights.alpha}
-          description="NLI cross-encoder claim entailment and factual error calculation."
+          description="External evidence retrieval and NLI entailment evaluate factual grounding."
           colorClass="bg-teal-500"
           borderClass="border-teal-500/20"
         />
@@ -47,10 +47,10 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
         {/* Pillar 2 */}
         <PillarCard
           icon={<Activity className="w-4 h-4 text-blue-400" />}
-          title="Pillar 2 — Confidence Gap"
+          title="Pillar 2 — Model Uncertainty"
           score={p2}
           weight={effectiveWeights.beta}
-          description="Token entropy and whitebox/blackbox uncertainty variance."
+          description="Token-level probability and entropy analysis estimate generation uncertainty."
           colorClass="bg-blue-500"
           borderClass="border-blue-500/20"
         />
@@ -58,10 +58,10 @@ export function PillarVisualization({ pillars, weights }: PillarVisualizationPro
         {/* Pillar 3 */}
         <PillarCard
           icon={<GitBranch className="w-4 h-4 text-amber-400" />}
-          title="Pillar 3 — Consistency Failure"
+          title="Pillar 3 — Generation Consistency"
           score={p3}
           weight={effectiveWeights.gamma}
-          description="Cross-sample contradiction and multi-generation self-consistency."
+          description="Semantic comparison across independent generations measures instability."
           colorClass="bg-amber-500"
           borderClass="border-amber-500/20"
         />

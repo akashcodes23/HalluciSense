@@ -24,6 +24,7 @@ import { useAnalysis } from "@/hooks/use-analysis";
 import { useAnalysisStore } from "@/store/analysis-store";
 import { formatLatency } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { getPillar1Diagnostic, getPillar2Diagnostic, getPillar3Diagnostic } from "@/lib/constants";
 import type { EvidenceItem } from "@/types/hallucisense";
 import { toast } from "sonner";
 
@@ -363,24 +364,27 @@ export default function VerifyPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <PillarScoreCard
                     pillarNumber={1}
-                    label="Evidence Grounding"
-                    sublabel="Pillar 1 — Retrieval + NLI"
+                    label="Evidence Support"
+                    sublabel="External evidence grounding"
+                    diagnosticQuestion="Is this claim supported by reliable external evidence?"
                     value={currentResult.pillar_scores.retrieval ?? currentResult.pillar_scores.pillar1_factual_error}
                     status={currentResult.pillar_status?.p1_available !== false ? "active" : "unavailable"}
                     reason="Evidence retrieval service unavailable"
                   />
                   <PillarScoreCard
                     pillarNumber={2}
-                    label="Confidence Estimation"
-                    sublabel="Pillar 2 — Token uncertainty"
+                    label="Model Uncertainty"
+                    sublabel="Internal generation uncertainty"
+                    diagnosticQuestion="Is the model internally uncertain about the claim generated?"
                     value={currentResult.pillar_scores.confidence ?? currentResult.pillar_scores.pillar2_confidence_gap}
                     status={currentResult.pillar_status?.p2_available ? "active" : "unavailable"}
                     reason="Token log-probabilities not provided"
                   />
                   <PillarScoreCard
                     pillarNumber={3}
-                    label="Consistency Reasoning"
-                    sublabel="Pillar 3 — Self-consistency"
+                    label="Generation Consistency"
+                    sublabel="Agreement across generations"
+                    diagnosticQuestion="Does the model produce a consistent claim across generations?"
                     value={currentResult.pillar_scores.consistency ?? currentResult.pillar_scores.pillar3_consistency_failure}
                     status={currentResult.pillar_status?.p3_available ? "active" : "unavailable"}
                     reason="Multiple generations not available"
@@ -474,6 +478,7 @@ function PillarScoreCard({
   pillarNumber,
   label,
   sublabel,
+  diagnosticQuestion,
   value,
   status,
   reason,
@@ -481,6 +486,7 @@ function PillarScoreCard({
   pillarNumber?: 1 | 2 | 3;
   label: string;
   sublabel: string;
+  diagnosticQuestion?: string;
   value?: number | null;
   status: "active" | "unavailable";
   reason?: string;
@@ -507,33 +513,70 @@ function PillarScoreCard({
     ? "text-amber-400 bg-amber-500/10 border-amber-500/20"
     : "text-[var(--text-dim)] bg-[var(--surface)] border-[var(--border)]";
 
+  // Dynamic interpretation and explicit metric labels
+  let metricLabel = "Risk Metric";
+  let interpretation = "";
+
+  if (pillarNumber === 1) {
+    const diag = getPillar1Diagnostic(value, isAvailable);
+    metricLabel = diag.metricLabel;
+    interpretation = diag.interpretation;
+  } else if (pillarNumber === 2) {
+    const diag = getPillar2Diagnostic(value, isAvailable);
+    metricLabel = diag.metricLabel;
+    interpretation = diag.interpretation;
+  } else if (pillarNumber === 3) {
+    const diag = getPillar3Diagnostic(value, isAvailable);
+    metricLabel = diag.metricLabel;
+    interpretation = diag.interpretation;
+  }
+
   return (
-    <div className={cn("rounded-[var(--radius)] bg-[var(--surface)] p-3 border", pillarAccent)}>
-      <div className="flex items-center justify-between gap-2 mb-1">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] truncate">{label}</p>
-        {pillarNumber && (
-          <span className={cn("text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border shrink-0", pillarTagColor)}>
-            P{pillarNumber}
-          </span>
-        )}
-      </div>
-      <p className="text-[10px] text-[var(--text-dim)] mb-2">{sublabel}</p>
-      {isAvailable ? (
-        <p
-          className="text-xl font-bold font-mono cursor-help"
-          style={{ color: riskColor }}
-          title="Hallucination Risk: Higher values indicate greater hallucination risk"
-        >
-          {scorePercent}%
-        </p>
-      ) : (
-        <div>
-          <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
-          {reason && (
-            <p className="text-[10px] text-[var(--text-dim)] mt-0.5">{reason}</p>
+    <div className={cn("rounded-[var(--radius)] bg-[var(--surface)] p-3.5 border flex flex-col justify-between space-y-3", pillarAccent)}>
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-1">
+          <p className="text-[12px] font-semibold uppercase tracking-wider text-[var(--text-primary)] truncate" title={diagnosticQuestion || label}>
+            {label}
+          </p>
+          {pillarNumber && (
+            <span className={cn("text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border shrink-0", pillarTagColor)}>
+              P{pillarNumber}
+            </span>
           )}
         </div>
-      )}
+        <p className="text-[10px] text-[var(--text-dim)]">{sublabel}</p>
+      </div>
+
+      <div>
+        {isAvailable ? (
+          <div className="space-y-2">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-[11px] font-semibold text-[var(--text-muted)] font-mono">{metricLabel}:</span>
+              <span
+                className="text-xl font-bold font-mono"
+                style={{ color: riskColor }}
+              >
+                {scorePercent}%
+              </span>
+            </div>
+            <div className="pt-2 border-t border-[var(--border)]">
+              <span className="text-[9px] font-semibold uppercase tracking-wider text-[var(--text-dim)] block mb-0.5">
+                Interpretation:
+              </span>
+              <p className="text-[11px] text-[var(--text-secondary)] font-medium leading-snug">
+                {interpretation}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
+            {reason && (
+              <p className="text-[10px] text-[var(--text-dim)] mt-1 leading-tight">{reason}</p>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
