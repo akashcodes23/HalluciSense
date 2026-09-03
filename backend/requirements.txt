@@ -16,6 +16,7 @@ accelerate==1.2.1
 
 # ONNX extra provides the CPU ONNX Runtime stack used by the shared
 # quantized DeBERTa NLI CrossEncoder in production.
+onnxruntime==1.23.2
 optimum[onnxruntime]==2.1.0
 sentence-transformers[onnx]==3.3.1
 transformers==4.47.1
