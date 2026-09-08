@@ -119,8 +119,8 @@ def test_batch_claim_grounding(nli_adapter):
 
 
 def test_pipeline_shadow_mode_attachment(pipeline_instance):
-    """Verify predict() attaches semantic_grounding with shadow_only=True."""
-    res = pipeline_instance.predict(response_text="Paris is the capital of France.")
+    """Verify predict() attaches semantic_grounding with shadow_only=True when shadow mode requested."""
+    res = pipeline_instance.predict(response_text="Paris is the capital of France.", semantic_mode="shadow")
     assert "semantic_grounding" in res
     sg = res["semantic_grounding"]
     assert sg.get("shadow_only") is True

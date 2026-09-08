@@ -82,7 +82,7 @@ export interface PillarScores {
   pillar2_confidence_gap?: number | null;
   pillar3_consistency_failure?: number | null;
   retrieval?: number;
-  confidence?: number;
+  confidence?: number | null;
   consistency?: number;
   effective_weights?: {
     alpha: number;
@@ -407,3 +407,89 @@ export interface CorrectionResponse {
   };
   execution_time_ms: number;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Current HalluciSense Pipeline Contracts (/api/v1/hallucisense/*)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface PredictRequest {
+  response_text: string;
+  claims?: string[];
+  feature_vector?: number[];
+}
+
+export interface PillarContributions {
+  pillar_1_probability: number;
+  pillar_2_probability: number;
+  probability_disagreement: number;
+}
+
+export interface ClaimEvidencePassage {
+  title?: string;
+  url?: string;
+  snippet: string;
+  entailment?: number;
+  neutral?: number;
+  contradiction?: number;
+}
+
+export interface ClaimAnalysisItem {
+  claim_id: number;
+  claim_text: string;
+  max_entailment?: number;
+  mean_contradiction?: number;
+  support_margin?: number;
+  evidence_passages?: ClaimEvidencePassage[];
+}
+
+export interface PipelineExplanation {
+  verdict: string;
+  risk_severity: string;
+  summary: string;
+  primary_driver: string;
+  pillar_contributions: PillarContributions;
+  claim_analysis: ClaimAnalysisItem[];
+  structural_analysis: Record<string, unknown>;
+  recommendation: string;
+}
+
+export interface PredictResponse {
+  request_id: string;
+  trace_id: string;
+  is_hallucinated: boolean;
+  hallucination_probability: number;
+  operating_threshold: number;
+  claim_count: number;
+  claims: string[];
+  explanation: PipelineExplanation;
+  confidence_score: number;
+  local_attribution?: LocalAttribution;
+  semantic_grounding?: SemanticGrounding;
+  candidate_comparison?: CandidateComparison;
+  verification_summary?: ResponseVerificationSummary;
+}
+
+export interface HalluciSenseExplainRequest {
+  response_text?: string;
+  claims?: string[];
+  feature_vector?: number[];
+}
+
+export interface HalluciSenseExplainResponse {
+  source: string;
+  response_text: string | null;
+  prediction?: {
+    is_hallucinated: boolean;
+    hallucination_probability: number;
+    operating_threshold: number;
+    claim_count: number;
+    claims: string[];
+    confidence_score: number;
+  };
+  explanation?: PipelineExplanation;
+  local_attribution?: LocalAttribution;
+  semantic_grounding?: SemanticGrounding;
+  latency_ms: number;
+  feature_schema?: Record<string, unknown>;
+}
+

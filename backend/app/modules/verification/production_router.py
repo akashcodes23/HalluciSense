@@ -379,14 +379,24 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         loc_m = timer.measurements.get("token_localization")
         localization_ms = loc_m.duration_ms if loc_m else 0.0
 
+        # Check if factual contradiction is present from P1 or individual sentences
+        if fe_val >= 0.50:
+            overall_h = max(overall_h, fe_val)
+            risk_level_str = "LIKELY_HALLUCINATED"
+            root_cause = "FACTUAL_CONTRADICTION"
+
         heatmap_items = []
         for ann in annotations:
+            raw_s = float(ann["risk_score"])
+            eff_s = max(raw_s, overall_h) if (fe_val >= 0.50 or overall_h >= 0.50) else raw_s
+            tier = "LIKELY_HALLUCINATED" if eff_s >= 0.50 else ("NEEDS_VERIFICATION" if eff_s >= 0.30 else "VERIFIED")
+            color = "#EF4444" if tier == "LIKELY_HALLUCINATED" else ("#F59E0B" if tier == "NEEDS_VERIFICATION" else "#10B981")
             heatmap_items.append(
                 TokenHeatmapItem(
                     token=ann["text"],
-                    score=ann["risk_score"],
-                    tier=ann["risk_tier"],
-                    color_hex=ann["color_hex"],
+                    score=round(eff_s, 4),
+                    tier=tier,
+                    color_hex=color,
                 )
             )
 
@@ -528,10 +538,10 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             risk_level=risk_level_str,
             confidence=confidence_val,
             pillar_scores=pillar_scores,
-            failure_taxonomy=root_cause if overall_h >= 0.35 else "NONE",
+            failure_taxonomy=root_cause if overall_h >= 0.30 else "NONE",
             processing_time_ms=round(total_req_ms, 2),
             version="1.0.0",
-            hallucination=overall_h >= 0.54,
+            hallucination=bool(overall_h >= 0.50 or risk_level_str == "LIKELY_HALLUCINATED"),
             sentence_scores=sentences,
             token_heatmap=heatmap_items,
             evidence=evidence_items,

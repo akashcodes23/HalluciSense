@@ -38,7 +38,7 @@ def test_model_registry_resolution():
 def test_pillar1_engine_features():
     p1 = Pillar1Engine()
     claims_struct = [{"claim_id": 0, "text": "Paris is the capital of France."}]
-    feats, prob, evidence = p1.extract_features_and_predict(claims_struct)
+    feats, prob, evidence, *rest = p1.extract_features_and_predict(claims_struct)
 
     assert len(feats) == 5
     assert 0.0 <= prob <= 1.0

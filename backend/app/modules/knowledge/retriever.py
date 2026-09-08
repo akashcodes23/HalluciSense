@@ -13,15 +13,10 @@ logger = structlog.get_logger(__name__)
 
 class HybridRetriever:
     """Orchestrates multiple knowledge sources to find evidence for claims."""
-    def __init__(self):
+    def __init__(self, internal_docs: List[dict] = None):
         self.wiki = WikipediaKnowledgeSource(max_results=3)
         self.vector_store = FAISSVectorStore()
-        internal_docs = [
-            {"title": "Internal Company Policy", "url": "https://intranet/policy", "text": "All employees must complete compliance training by Q3."},
-            {"title": "Product Architecture", "url": "https://wiki/arch", "text": "The backend uses FastAPI and Celery for async processing."},
-            {"title": "HalluciSense Design", "url": "https://wiki/design", "text": "HalluciSense uses a three-pillar system: Factual Error, Confidence Gap, and Consistency Failure."}
-        ]
-        self.bm25 = BM25Retriever(internal_docs)
+        self.bm25 = BM25Retriever(internal_docs or [])
         self.reranker = None
         self.last_timings = {}
         self.last_cache_metrics = {}

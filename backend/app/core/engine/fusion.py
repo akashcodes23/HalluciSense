@@ -146,20 +146,14 @@ class FusionEngine:
     def determine_risk_level(self, h_score: float) -> Tuple[RiskLevel, str]:
         """Assign RiskLevel enum and hexadecimal color indicator across risk tiers:
 
-        - VERIFIED (< 0.20): Green (#10B981)
-        - LOW_RISK (0.20 to 0.35): Green (#10B981)
-        - NEEDS_VERIFICATION (0.35 to 0.50): Yellow (#F59E0B)
-        - MODERATE_RISK (0.50 to 0.65): Orange (#F97316)
-        - LIKELY_HALLUCINATED (>= 0.65): Red (#EF4444)
+        - VERIFIED (< 0.30): Green (#10B981) - only when sentence is not at all hallucinated
+        - NEEDS_VERIFICATION (0.30 to 0.50): Yellow (#F59E0B) - around 50% hallucinated / review
+        - LIKELY_HALLUCINATED (>= 0.50): Red (#EF4444) - hallucinated
         """
-        if h_score < 0.20:
+        if h_score < 0.30:
             return RiskLevel.VERIFIED, "#10B981"
-        elif h_score < 0.35:
-            return RiskLevel.LOW_RISK, "#10B981"
         elif h_score < 0.50:
             return RiskLevel.NEEDS_VERIFICATION, "#F59E0B"
-        elif h_score < 0.65:
-            return RiskLevel.MODERATE_RISK, "#F97316"
         else:
             return RiskLevel.LIKELY_HALLUCINATED, "#EF4444"
 
@@ -235,6 +229,10 @@ class FusionEngine:
             h_score, weights_used, _ = self.compute_adaptive_h_score(
                 p1.factual_error_score, cg_score, cf_score, reliabilities
             )
+        # Factual contradiction gating: low internal uncertainty (CG) or self-consistency (CF)
+        # must never suppress a direct factual error (FE >= 0.50) into an unverified state
+        if p1 and p1.factual_error_score >= 0.50:
+            h_score = max(h_score, float(p1.factual_error_score))
 
         risk_level, color_code = self.determine_risk_level(h_score)
         self.last_fusion_ms = round((time.perf_counter() - t_fus0) * 1000.0, 2)

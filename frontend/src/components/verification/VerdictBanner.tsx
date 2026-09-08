@@ -35,6 +35,13 @@ const verdictConfig: Record<string, {
     className: "verdict-verified",
     badgeVariant: "verified",
   },
+  LOW_RISK: {
+    icon: <ShieldCheck className="w-6 h-6" />,
+    label: "✓ VERIFIED",
+    sublabel: "Sentence is not hallucinated; verified against reference facts",
+    className: "verdict-verified",
+    badgeVariant: "verified",
+  },
   LIKELY_HALLUCINATED: {
     icon: <ShieldX className="w-6 h-6" />,
     label: "✕ HALLUCINATION DETECTED",
@@ -42,17 +49,31 @@ const verdictConfig: Record<string, {
     className: "verdict-hallucination",
     badgeVariant: "hallucination",
   },
+  HALLUCINATED: {
+    icon: <ShieldX className="w-6 h-6" />,
+    label: "✕ HALLUCINATION DETECTED",
+    sublabel: "Claims contradict verified reference knowledge",
+    className: "verdict-hallucination",
+    badgeVariant: "hallucination",
+  },
+  CONTRADICTED: {
+    icon: <ShieldX className="w-6 h-6" />,
+    label: "✕ FACTUAL CONTRADICTION",
+    sublabel: "External reference evidence directly refutes the statement",
+    className: "verdict-hallucination",
+    badgeVariant: "hallucination",
+  },
   NEEDS_VERIFICATION: {
     icon: <AlertTriangle className="w-6 h-6" />,
     label: "⚠ NEEDS REVIEW",
-    sublabel: "Insufficient evidence to confirm or refute",
+    sublabel: "Moderate certainty or insufficient evidence to confirm",
     className: "verdict-warning",
     badgeVariant: "warning",
   },
   MODERATE_RISK: {
     icon: <AlertTriangle className="w-6 h-6" />,
-    label: "⚠ MODERATE RISK",
-    sublabel: "Some claims show inconsistencies",
+    label: "⚠ NEEDS REVIEW",
+    sublabel: "Some claims show uncertainty or partial grounding",
     className: "verdict-warning",
     badgeVariant: "warning",
   },
@@ -139,7 +160,7 @@ export function VerdictBanner({
             </Badge>
           </Link>
         )}
-        {correctionAvailable && onCorrect && riskLevel === "LIKELY_HALLUCINATED" && (
+        {correctionAvailable && onCorrect && (riskLevel === "LIKELY_HALLUCINATED" || riskLevel === "HALLUCINATED" || riskLevel === "CONTRADICTED" || (hScore != null && hScore >= 0.35)) && (
           <Button
             variant="default"
             size="sm"

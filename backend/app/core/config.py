@@ -86,7 +86,7 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str = ""
     OPENAI_API_KEY: str = ""
     DEFAULT_LLM_PROVIDER: str = "gemini"
-    DEFAULT_LLM_MODEL: str = "gemini-2.0-flash"
+    DEFAULT_LLM_MODEL: str = "gemini-3.6-flash"
 
     # ── Rate Limiting ─────────────────────────────────────────────────────────
     RATE_LIMIT_PER_MINUTE: int = 100

@@ -178,19 +178,32 @@ class HallucinationDetectionPipeline:
 
         sentence_spans = []
 
-        # Terminal punctuation followed by another sentence
-        # or end-of-string.
+        # Protect abbreviations to prevent premature splits (e.g. Dr., Mr., etc.)
+        from app.core.inference.claim_extractor import ABBREVIATIONS
+        protected_text = text
+        abbrev_map = {}
+        for idx, abbr in enumerate(ABBREVIATIONS):
+            token = f"__ABBR_{idx}__"
+            matches = re.findall(abbr, protected_text, flags=re.IGNORECASE)
+            for m in set(matches):
+                abbrev_map[token] = m
+                protected_text = protected_text.replace(m, token)
+
+        # Terminal punctuation followed by another sentence or end-of-string
         pattern = re.compile(
             r"[^.!?]+[.!?]+|\s*[^.!?]+$"
         )
 
         start = 0
 
-        for match in pattern.finditer(text):
+        for match in pattern.finditer(protected_text):
             sentence_text = match.group(0).strip()
 
             if not sentence_text:
                 continue
+
+            for token, original in abbrev_map.items():
+                sentence_text = sentence_text.replace(token, original)
 
             span_start = text.find(
                 sentence_text,

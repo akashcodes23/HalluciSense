@@ -214,8 +214,8 @@ class SemanticNLIAdapter:
                 primary_status = best_ev["label"]
             else:
                 max_e = 0.0
-                mean_c = 0.5  # Neutral penalty when ungrounded
-                margin = -0.5
+                mean_c = 0.0  # Neutral / ungrounded default matching Phase 6I
+                margin = 0.0
                 best_ev = None
                 primary_status = "insufficient_evidence"
 
@@ -240,8 +240,8 @@ class SemanticNLIAdapter:
 
         agg_mean_entailment = float(np.mean(claim_max_ents)) if claim_max_ents else 0.0
         agg_max_entailment = float(max(claim_max_ents)) if claim_max_ents else 0.0
-        agg_mean_contradiction = float(np.mean(claim_mean_cons)) if claim_mean_cons else 0.5
-        agg_min_margin = float(min(claim_margins)) if claim_margins else -0.5
+        agg_mean_contradiction = float(np.mean(claim_mean_cons)) if claim_mean_cons else 0.0
+        agg_min_margin = float(min(claim_margins)) if claim_margins else 0.0
 
         return {
             "status": "evaluated",

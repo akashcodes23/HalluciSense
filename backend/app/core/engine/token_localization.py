@@ -38,12 +38,10 @@ class TokenLevelLocalizationEngine:
     }
 
     def get_tier_and_color(self, score: float) -> Tuple[str, str]:
-        if score < 0.35:
+        if score < 0.30:
             return "VERIFIED", self.COLOR_TIERS["VERIFIED"]
         elif score < 0.50:
             return "NEEDS_VERIFICATION", self.COLOR_TIERS["NEEDS_VERIFICATION"]
-        elif score < 0.65:
-            return "MODERATE_RISK", self.COLOR_TIERS["MODERATE_RISK"]
         else:
             return "LIKELY_HALLUCINATED", self.COLOR_TIERS["LIKELY_HALLUCINATED"]
 
@@ -56,7 +54,27 @@ class TokenLevelLocalizationEngine:
         """Propagate scores to tokens, merge adjacent spans, generate interactive HTML heatmap."""
         import time
         t_loc0 = time.perf_counter()
-        sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", response_text) if s.strip()]
+
+        # Protect common abbreviations (e.g. Dr., Mr., etc.) from premature splitting
+        from app.core.inference.claim_extractor import ABBREVIATIONS
+        protected_text = response_text
+        abbrev_map = {}
+        for idx, abbr in enumerate(ABBREVIATIONS):
+            token = f"__ABBR_{idx}__"
+            matches = re.findall(abbr, protected_text, flags=re.IGNORECASE)
+            for m in set(matches):
+                abbrev_map[token] = m
+                protected_text = protected_text.replace(m, token)
+
+        raw_sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", protected_text) if s.strip()]
+        sentences = []
+        for s in raw_sentences:
+            for token, original in abbrev_map.items():
+                s = s.replace(token, original)
+            if s.strip():
+                sentences.append(s.strip())
+        if not sentences:
+            sentences = [response_text.strip()]
 
         annotations: List[TokenSpanAnnotation] = []
         html_chunks: List[str] = []

@@ -157,13 +157,14 @@ class Pillar1Engine:
             f_num_claims,
         ]
 
-        # Evaluate Semantic NLI
+        # Evaluate Semantic NLI Grounding (Phase 6I Gold Schema)
         semantic_grounding = self.semantic_nli.evaluate_claim_evidence_grounding(
             claims=claims,
             evidence_by_claim=evidence_by_claim,
             max_evidence_per_claim=3,
         )
-        semantic_grounding["shadow_only"] = (semantic_mode == "shadow")
+        is_legacy_proxy = (semantic_mode == "legacy_proxy")
+        semantic_grounding["shadow_only"] = bool(semantic_mode in ("shadow", "legacy_proxy"))
 
         # Phase 42 Evidence Intelligence Gateway (Symbolic Integration)
         from app.core.verification.gateway import EvidenceIntelligenceGateway
@@ -173,8 +174,8 @@ class Pillar1Engine:
             gw_res = EvidenceIntelligenceGateway.verify_claim(c_text)
             if gw_res.get("status") == "verified_symbolically":
                 symbolic_traces.append(gw_res)
-                # If active mode and symbolic contradiction is found, reflect in active features
-                if semantic_mode == "active" and not gw_res.get("is_consistent"):
+                # If symbolic contradiction is found, reflect in features
+                if not is_legacy_proxy and not gw_res.get("is_consistent"):
                     agg = semantic_grounding.get("aggregated_features", {})
                     agg["mean_contradiction"] = max(float(agg.get("mean_contradiction", 0.0)), 0.95)
                     agg["min_support_margin"] = min(float(agg.get("min_support_margin", 0.0)), -0.90)
@@ -183,18 +184,19 @@ class Pillar1Engine:
         if symbolic_traces:
             semantic_grounding["symbolic_verifications"] = symbolic_traces
 
-        # Determine which features reach base P1 and downstream classifier
-        if semantic_mode == "active":
+        # Determine which features reach base P1 and downstream hybrid classifier
+        if is_legacy_proxy:
+            raw_features = proxy_raw_features
+        else:
+            # Production default: Genuine Semantic NLI features matching Phase 6I training schema
             agg = semantic_grounding.get("aggregated_features", {})
             raw_features = [
-                float(agg.get("mean_entailment", f_mean_entailment_proxy)),
-                float(agg.get("max_entailment", f_max_entailment_proxy)),
-                float(agg.get("mean_contradiction", f_mean_contradiction_proxy)),
-                float(agg.get("min_support_margin", f_min_support_margin_proxy)),
+                float(agg.get("mean_entailment", 0.0)),
+                float(agg.get("max_entailment", 0.0)),
+                float(agg.get("mean_contradiction", 0.0)),
+                float(agg.get("min_support_margin", 0.0)),
                 f_num_claims,
             ]
-        else:
-            raw_features = proxy_raw_features
 
         X_raw = np.array(raw_features, dtype=np.float64).reshape(1, -1)
         X_scaled = self.scaler.transform(X_raw)

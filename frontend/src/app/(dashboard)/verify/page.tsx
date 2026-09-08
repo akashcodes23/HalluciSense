@@ -457,24 +457,46 @@ export default function VerifyPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-1">
-                  {currentResult.token_heatmap.map((token, i) => (
-                    <span
-                      key={i}
-                      className={cn(
-                        "px-1 py-0.5 rounded text-[12px] font-mono",
-                        token.is_hallucination_suspect ? "token-red" :
-                          token.tier === "GREEN" ? "token-green" :
-                          token.tier === "YELLOW" ? "token-yellow" :
-                          token.tier === "ORANGE" ? "token-orange" :
-                          token.tier === "RED" ? "token-red" :
-                          "text-[var(--text-secondary)]"
-                      )}
-                      title={`Score: ${token.score?.toFixed(3) ?? "—"}, Entropy: ${token.entropy?.toFixed(3) ?? "—"}`}
-                    >
-                      {token.token}
-                    </span>
-                  ))}
+                <div className="flex flex-wrap gap-1.5 leading-relaxed">
+                  {currentResult.token_heatmap.map((token, i) => {
+                    const isRed = Boolean(
+                      token.is_hallucination_suspect ||
+                      token.tier === "RED" ||
+                      token.tier === "LIKELY_HALLUCINATED" ||
+                      (token.score != null && token.score >= 0.50)
+                    );
+                    const isYellow = Boolean(
+                      !isRed && (
+                        token.tier === "YELLOW" ||
+                        token.tier === "ORANGE" ||
+                        token.tier === "NEEDS_VERIFICATION" ||
+                        token.tier === "MODERATE_RISK" ||
+                        (token.score != null && token.score >= 0.30)
+                      )
+                    );
+                    const isGreen = !isRed && !isYellow;
+
+                    const tokenClass = isRed ? "token-red" : isYellow ? "token-yellow" : "token-green";
+                    const colorHex = isRed ? "#EF4444" : isYellow ? "#F59E0B" : "#10B981";
+
+                    return (
+                      <span
+                        key={i}
+                        className={cn(
+                          "px-1.5 py-0.5 rounded text-[12px] font-mono inline-block transition-all",
+                          tokenClass
+                        )}
+                        style={{
+                          backgroundColor: colorHex + "24",
+                          color: colorHex,
+                          borderBottom: `2px solid ${colorHex}80`,
+                        }}
+                        title={`Score: ${token.score?.toFixed(3) ?? "—"}, Tier: ${token.tier ?? (isRed ? "Hallucinated" : isYellow ? "Caution" : "Safe")}`}
+                      >
+                        {token.token}
+                      </span>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>

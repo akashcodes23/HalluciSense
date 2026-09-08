@@ -188,15 +188,17 @@ class GeminiProvider(AbstractLLMProvider):
     """
 
     FALLBACK_MODELS: List[str] = [
-        "gemini-2.5-pro",
+        "gemini-3.6-flash",
+        "gemini-flash-latest",
         "gemini-2.5-flash",
-        "gemini-2.0-flash",
-        "gemini-2.0-flash-lite",
+        "gemini-2.5-pro",
     ]
 
     SUPPORTED_MODELS: Set[str] = {
-        "gemini-2.5-pro",
+        "gemini-3.6-flash",
+        "gemini-flash-latest",
         "gemini-2.5-flash",
+        "gemini-2.5-pro",
         "gemini-2.0-flash",
         "gemini-2.0-flash-lite",
         "gemini-1.5-pro",
@@ -206,14 +208,14 @@ class GeminiProvider(AbstractLLMProvider):
     DEFAULTS = GeminiDefaults()
     MAX_CONFIG_CACHE_SIZE: int = 16
 
-    def __init__(self, model_slug: str = "gemini-2.0-flash"):
+    def __init__(self, model_slug: str = "gemini-3.6-flash"):
         if model_slug not in self.SUPPORTED_MODELS:
             logger.warning(
                 "gemini_unsupported_model_requested",
                 requested=model_slug,
-                fallback="gemini-2.0-flash",
+                fallback="gemini-3.6-flash",
             )
-            self._model_slug = "gemini-2.0-flash"
+            self._model_slug = "gemini-3.6-flash"
         else:
             self._model_slug = model_slug
 

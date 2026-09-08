@@ -206,37 +206,71 @@ function EvidenceRow({ evidence, index }: { evidence: EvidenceItem; index: numbe
 
 function getRiskTokenColor(level: string): string {
   switch (level) {
-    case "VERIFIED": return "var(--verified)";
-    case "NEEDS_VERIFICATION": case "MODERATE_RISK": return "var(--warning)";
-    case "LIKELY_HALLUCINATED": return "var(--hallucination)";
-    default: return "var(--text-muted)";
+    case "VERIFIED":
+    case "LOW_RISK":
+      return "var(--verified)";
+    case "NEEDS_VERIFICATION":
+    case "MODERATE_RISK":
+      return "var(--warning)";
+    case "LIKELY_HALLUCINATED":
+    case "HALLUCINATED":
+    case "CONTRADICTED":
+      return "var(--hallucination)";
+    default:
+      return "var(--text-muted)";
   }
 }
 
 function getBadgeVariant(level: string): "verified" | "hallucination" | "warning" | "outline" {
   switch (level) {
-    case "VERIFIED": return "verified";
-    case "LIKELY_HALLUCINATED": return "hallucination";
-    case "NEEDS_VERIFICATION": case "MODERATE_RISK": return "warning";
-    default: return "outline";
+    case "VERIFIED":
+    case "LOW_RISK":
+      return "verified";
+    case "LIKELY_HALLUCINATED":
+    case "HALLUCINATED":
+    case "CONTRADICTED":
+      return "hallucination";
+    case "NEEDS_VERIFICATION":
+    case "MODERATE_RISK":
+      return "warning";
+    default:
+      return "outline";
   }
 }
 
 function getStatusIcon(level: string) {
   switch (level) {
-    case "VERIFIED": return <CheckCircle2 className="w-3 h-3" />;
-    case "LIKELY_HALLUCINATED": return <XCircle className="w-3 h-3" />;
-    case "NEEDS_VERIFICATION": case "MODERATE_RISK": return <MinusCircle className="w-3 h-3" />;
-    default: return null;
+    case "VERIFIED":
+    case "LOW_RISK":
+      return <CheckCircle2 className="w-3 h-3" />;
+    case "LIKELY_HALLUCINATED":
+    case "HALLUCINATED":
+    case "CONTRADICTED":
+      return <XCircle className="w-3 h-3" />;
+    case "NEEDS_VERIFICATION":
+    case "MODERATE_RISK":
+      return <MinusCircle className="w-3 h-3" />;
+    default:
+      return null;
   }
 }
 
 function getRiskLabel(level: string): string {
   switch (level) {
-    case "VERIFIED": return "Verified";
-    case "NEEDS_VERIFICATION": return "Needs Review";
-    case "MODERATE_RISK": return "Moderate Risk";
-    case "LIKELY_HALLUCINATED": return "Hallucinated";
-    default: return level;
+    case "VERIFIED":
+      return "Verified";
+    case "LOW_RISK":
+      return "Low Risk";
+    case "NEEDS_VERIFICATION":
+      return "Needs Review";
+    case "MODERATE_RISK":
+      return "Moderate Risk";
+    case "LIKELY_HALLUCINATED":
+    case "HALLUCINATED":
+      return "Hallucinated";
+    case "CONTRADICTED":
+      return "Contradicted";
+    default:
+      return level;
   }
 }
