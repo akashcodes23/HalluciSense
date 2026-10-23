@@ -4,7 +4,7 @@ import json
 import numpy as np
 import google.generativeai as genai
 
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Any, Dict
 
 from ..config import settings
 from app.core.circuit_breaker import QuotaCircuitBreaker
@@ -17,6 +17,9 @@ from .types import (
     TokenAnalysis,
     EvidenceItem,
     RiskLevel,
+    Pillar1Result,
+    Pillar2Result,
+    Pillar3Result,
 )
 
 from .pillar1_retrieval import Pillar1RetrievalEngine
@@ -428,14 +431,17 @@ Respond STRICTLY in JSON using this schema:
     # MAIN ANALYSIS PIPELINE
     # =========================================================
 
+    _UNSET = object()
+
     def analyze(
         self,
         text: str,
-        token_probabilities: Optional[List[float]] = None,
+        token_probabilities: Any = _UNSET,
         provided_evidence: Optional[List[EvidenceItem]] = None,
-        sample_responses: Optional[List[str]] = None,
+        sample_responses: Any = _UNSET,
         query: Optional[str] = None,
         evidence_items: Optional[List[EvidenceItem]] = None,
+        is_logprobs: Optional[bool] = None,
     ) -> HallucinationReport:
         """Alias for analyze_response to support standard engine contract."""
         ev = evidence_items if evidence_items is not None else provided_evidence
@@ -445,16 +451,18 @@ Respond STRICTLY in JSON using this schema:
             evidence_items=ev,
             sample_responses=sample_responses,
             query=query,
+            is_logprobs=is_logprobs,
         )
 
     def analyze_response(
         self,
         full_text: str,
-        token_probabilities: Optional[List[float]] = None,
+        token_probabilities: Any = _UNSET,
         evidence_items: Optional[List[EvidenceItem]] = None,
-        sample_responses: Optional[List[str]] = None,
+        sample_responses: Any = _UNSET,
         query: Optional[str] = None,
         provided_evidence: Optional[List[EvidenceItem]] = None,
+        is_logprobs: Optional[bool] = None,
     ) -> HallucinationReport:
         """
         Run the complete hybrid hallucination detection pipeline
@@ -495,7 +503,7 @@ Respond STRICTLY in JSON using this schema:
                 full_text="",
                 corrected_response=None,
                 overall_h_score=0.0,
-                overall_risk_level=RiskLevel.VERIFIED,
+                overall_risk_level=RiskLevel.INSUFFICIENT_EVIDENCE,
                 sentence_analyses=[],
                 token_analyses=[],
                 pillar1_summary=p1_res,
@@ -514,8 +522,8 @@ Respond STRICTLY in JSON using this schema:
         if evidence_items is None:
             evidence_items = []
 
-        if sample_responses is None:
-            sample_responses = []
+        if sample_responses is self._UNSET:
+            sample_responses = None
 
         # =====================================================
         # EVIDENCE RETRIEVAL (when no external evidence provided)
@@ -550,19 +558,38 @@ Respond STRICTLY in JSON using this schema:
             clean_text,
         )
 
-        token_analyses, _, _, _ = (
-            self.p2_engine.evaluate_tokens(
-                raw_tokens,
-                token_probabilities,
+        if token_probabilities is None or (isinstance(token_probabilities, list) and len(token_probabilities) == 0):
+            token_analyses = []
+            p2_global = Pillar2Result(
+                avg_probability=None,
+                avg_entropy=None,
+                confidence_gap_score=None,
+                available=False,
+                status="UNAVAILABLE",
+                mode="WHITE_BOX_LOGPROBS_REQUIRED",
+                is_proxy=False,
+                reasoning=(
+                    "Token-level generation probabilities were not provided. "
+                    "Pillar 2 uncertainty analysis was excluded from fusion."
+                ),
             )
-        )
+        else:
+            actual_probs = None if token_probabilities is self._UNSET else token_probabilities
+            token_analyses, _, _, _ = (
+                self.p2_engine.evaluate_tokens(
+                    raw_tokens,
+                    actual_probs,
+                    is_logprobs=is_logprobs,
+                )
+            )
 
-        p2_global = self.p2_engine.analyze(
-            raw_tokens,
-            token_probabilities,
-            evidence_items=evidence_items,
-            p1_result=p1_global,
-        )
+            p2_global = self.p2_engine.analyze(
+                raw_tokens,
+                actual_probs,
+                evidence_items=evidence_items,
+                p1_result=p1_global,
+                is_logprobs=is_logprobs,
+            )
         confidence_duration_ms = round((time.perf_counter() - t_p2_start) * 1000.0, 2)
         tok_proc_ms = getattr(self.p2_engine, "last_token_processing_ms", 0.0)
         ent_calc_ms = getattr(self.p2_engine, "last_entropy_calculation_ms", 0.0)
@@ -572,16 +599,32 @@ Respond STRICTLY in JSON using this schema:
         # =====================================================
 
         t_p3_start = time.perf_counter()
-        has_llm_key = bool(getattr(settings, "GEMINI_API_KEY", "") or getattr(settings, "OPENAI_API_KEY", ""))
-        if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False) and has_llm_key:
-            sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
+        if sample_responses == []:
+            p3_global = Pillar3Result(
+                sample_responses=[],
+                pairwise_similarities=[],
+                consistency_failure_score=None,
+                similarity_method="unavailable",
+                mode="MULTI_SAMPLE_REQUIRED",
+                nli_analyses=[],
+                contradiction_score=None,
+                nli_available=False,
+                alignment_method="unavailable",
+                reasoning="Multiple independent generations not available. Consistency analysis excluded from fusion.",
+                available=False,
+                status="UNAVAILABLE",
+            )
+        else:
+            has_llm_key = bool(getattr(settings, "GEMINI_API_KEY", "") or getattr(settings, "OPENAI_API_KEY", ""))
+            if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False) and has_llm_key:
+                sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
 
-        p3_global = self.p3_engine.analyze(
-            clean_text,
-            sample_responses,
-        )
+            p3_global = self.p3_engine.analyze(
+                clean_text,
+                sample_responses,
+            )
         consistency_duration_ms = round((time.perf_counter() - t_p3_start) * 1000.0, 2)
-        p3_sub_timings = getattr(p3_global, "last_timings", {})
+        p3_sub_timings = getattr(p3_global, "last_timings", None) or {}
 
         # =====================================================
         # SENTENCE EXTRACTION
@@ -612,7 +655,7 @@ Respond STRICTLY in JSON using this schema:
         for (
             idx,
             (sent_text, s_start, s_end),
-        ) in enumerate(sentence_spans[:10]):
+        ) in enumerate(sentence_spans):
 
             # -------------------------------------------------
             # PILLAR 1
@@ -632,36 +675,64 @@ Respond STRICTLY in JSON using this schema:
                 sent_text,
             )
 
-            if token_probabilities is not None:
-                sentence_token_count = len(
-                    sent_tokens
+            if token_probabilities is None or (isinstance(token_probabilities, list) and len(token_probabilities) == 0):
+                sent_p2 = Pillar2Result(
+                    avg_probability=None,
+                    avg_entropy=None,
+                    confidence_gap_score=None,
+                    available=False,
+                    status="UNAVAILABLE",
+                    mode="WHITE_BOX_LOGPROBS_REQUIRED",
+                    is_proxy=False,
+                    reasoning="Token-level generation probabilities not provided.",
                 )
-
+            elif token_probabilities is not self._UNSET and token_probabilities is not None:
+                sentence_token_count = len(sent_tokens)
                 sent_probs = token_probabilities[
                     token_cursor:
                     token_cursor + sentence_token_count
                 ]
-
                 token_cursor += sentence_token_count
-
+                sent_p2 = self.p2_engine.analyze(
+                    sent_tokens,
+                    sent_probs,
+                    evidence_items=evidence_items,
+                    p1_result=sent_p1,
+                    is_logprobs=is_logprobs,
+                )
             else:
-                sent_probs = None
-
-            sent_p2 = self.p2_engine.analyze(
-                sent_tokens,
-                sent_probs,
-                evidence_items=evidence_items,
-                p1_result=sent_p1,
-            )
+                sent_p2 = self.p2_engine.analyze(
+                    sent_tokens,
+                    None,
+                    evidence_items=evidence_items,
+                    p1_result=sent_p1,
+                    is_logprobs=is_logprobs,
+                )
 
             # -------------------------------------------------
             # PILLAR 3
             # -------------------------------------------------
 
-            sent_p3 = self.p3_engine.analyze(
-                sent_text,
-                sample_responses,
-            )
+            if sample_responses == []:
+                sent_p3 = Pillar3Result(
+                    sample_responses=[],
+                    pairwise_similarities=[],
+                    consistency_failure_score=None,
+                    similarity_method="unavailable",
+                    mode="MULTI_SAMPLE_REQUIRED",
+                    nli_analyses=[],
+                    contradiction_score=None,
+                    nli_available=False,
+                    alignment_method="unavailable",
+                    reasoning="Multiple independent generations not available.",
+                    available=False,
+                    status="UNAVAILABLE",
+                )
+            else:
+                sent_p3 = self.p3_engine.analyze(
+                    sent_text,
+                    sample_responses,
+                )
 
             # -------------------------------------------------
             # SENTENCE-LEVEL FUSION
@@ -827,6 +898,20 @@ Respond STRICTLY in JSON using this schema:
                     sentence_analyses,
                     evidence_items,
                 )
+                # Closed-Loop Downstream Re-Verification Gate (Contribution N5)
+                # Verify that the repaired text actually resolves factual errors without introducing new ones
+                if corrected_text and corrected_text != clean_text and evidence_items:
+                    try:
+                        reverify_p1 = self.p1_engine.analyze(corrected_text, evidence_items, query=query)
+                        post_fe = float(getattr(reverify_p1, "factual_error_score", 0.0) or 0.0)
+                        if post_fe >= 0.35:
+                            logger.warning("reverification_gate_rejected_correction", post_fe=post_fe)
+                            corrected_text = (
+                                f"Correction generated but failed downstream re-verification "
+                                f"(post-repair FE={post_fe:.2f} >= 0.35). Reverted to original."
+                            )
+                    except Exception as rev_err:
+                        logger.warning("reverification_exception", error=str(rev_err))
             except Exception as correction_exc:
                 logger.error(
                     "correction_generation_failed_in_pipeline",
@@ -838,10 +923,13 @@ Respond STRICTLY in JSON using this schema:
                 )
 
         else:
-            corrected_text = (
-                "This response is factually consistent.\n"
-                "No correction required."
-            )
+            if overall_risk in (RiskLevel.VERIFIED, RiskLevel.LOW_RISK):
+                corrected_text = (
+                    "This response is factually consistent.\n"
+                    "No correction required."
+                )
+            else:
+                corrected_text = None
 
         # =====================================================
         # RESEARCH EXPLAINABILITY & CALIBRATION DECOMPOSITION

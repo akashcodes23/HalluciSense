@@ -1,0 +1,22 @@
+# HalluciSense Claim-to-Evidence Matrix
+
+**Document Version**: 2.0  
+**Status**: Completely Audited & Traced  
+
+---
+
+## 1. Traceability Mapping
+
+| Claim Identifier | Manuscript Statement | Evidence Type | Source Artifact / File | Verifiable Value / Finding | Verification Script / Test |
+|---|---|:---:|---|:---:|---|
+| **CLAIM-01** | Multi-signal fusion achieves statistically superior AUROC over single-signal constituents. | Empirical Benchmark | `backend/evaluation/results/ablation_results.csv`, `table5_ablation.tex` | AUROC: P1=0.962, P2=0.824, P3=0.891 vs Full=0.996 ($p < 0.001$) | `backend/tests/test_ablation_benchmark.py` |
+| **CLAIM-02** | HalluciSense significantly outperforms native baselines (SelfCheckGPT, FactScore, RAGAS, AlignScore, Pure NLI). | Statistical Hypothesis Test | `backend/evaluation/results/statistical_tests.json`, `table4_baseline_comparison.tex` | McNemar $\chi^2 \ge 18.88$, all $p < 0.001$; AUROC 0.9501 vs 0.7196–0.8813 | `backend/tests/test_statistical_tests.py` |
+| **CLAIM-03** | Availability-aware adaptive fusion maintains calibrated discrimination under missing token logprobs (Mask $[1,0,1]$). | Paired Statistical Evaluation | `backend/paper/tables/table6_availability_robustness.tex`, `phase15_availability_statistics.json` | $\Delta\text{AUROC} = +0.1490$ (95% CI $[+0.1382, +0.1610]$, $p < 0.001$, Cohen's $d = 1.42$) | `backend/tests/test_phase14_signal_availability.py` |
+| **CLAIM-04** | Post-hoc Platt logistic calibration reduces Expected Calibration Error (ECE) below 0.10. | Probability Calibration | `backend/paper/tables/table7_calibration.tex`, `backend/evaluation/phase15/statistical_analysis.py` | ECE reduced from $0.1972$ to $0.0937$; Brier score reduced from $0.0412$ to $0.0164$ ($a=1.82, b=-0.45$) | `backend/tests/test_phase14_calibration.py` |
+| **CLAIM-05** | Selective prediction achieves zero observed classification errors at 80% coverage on evaluated test queries. | Selective Risk Analysis | `backend/paper/tables/table8_selective_abstention.tex`, `phase15_selective_prediction.json` | Selective Risk = $0.00\%$ at 80% coverage; $\text{AURC} = 0.0051$ | `backend/tests/test_phase14_abstention.py` |
+| **CLAIM-06** | Closed-loop repair achieves 88.4% CSR while reverification bounds secondary error induction (CIHR) to 2.1%. | Closed-Loop Repair Audit | `backend/paper/tables/table9_closed_loop_correction.tex`, `phase15_correction_audit.json` | $\text{CSR} = 88.4\%$, $\text{RPR} = 91.2\%$, $\text{CIHR} = 2.1\%$, $\Delta H = -0.756$ ($N=350$) | `backend/tests/test_phase14_correction.py` |
+| **CLAIM-07** | Zero-tuning generalization confirmed across 5 external public benchmarks ($N=850$). | External Cross-Dataset Benchmark | `backend/evaluation/phase14/benchmark_table.csv`, `table3_external_generalization.tex` | Aggregate External AUROC = $0.9964$ (95% CI $[0.9938, 0.9985]$), AUPRC = $0.9958$, Macro F1 = $0.9812$ | `backend/tests/test_phase14_external_generalization.py` |
+| **CLAIM-08** | The canonical diagnostic benchmark dataset is frozen and immutable. | Cryptographic Provenance | `HalluciSense_Canonical_Benchmark_Dataset.sha256.txt`, `backend/evaluation/results/benchmark_dataset.jsonl` | SHA-256 Checksum: `dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58de0ef6059efd5` | `backend/tests/test_phase17_manuscript_integrity.py` |
+| **CLAIM-09** | Memory footprint is strictly bounded to prevent out-of-memory crashes on edge/production hardware. | Systems Profiling | `backend/app/core/engine/model_registry.py`, `backend/tests/test_phase11_memory_safety.py` | Peak RSS $\le 1124.5\text{ MB}$ ($\le 1.2\text{ GB}$) via ModelRegistry singletons and lazy loading | `backend/tests/test_phase11_memory_safety.py` |
+| **CLAIM-10** | External passage retrieval dominates execution duration, while offline mode reduces latency by $\approx 65\%$. | Systems Telemetry | `backend/evaluation/results/computational_analysis_results.json`, `production_router.py` | Retrieval latency: $780.2\text{ ms}$ ($64.7\%$ of $1205.4\text{ ms}$); Offline latency: $422.3\text{ ms}$ | `backend/tests/test_performance_stress.py` |
+| **CLAIM-11** | Zero-Logit Safety Invariant prevents hallucinating false confidence for black-box LLM APIs. | Code Architecture | `backend/app/core/engine/pillar2_confidence.py` (lines 15–18, 68–73), `fusion.py` | When probabilities are absent, $\text{CG} = \text{None}$ and $m_{\text{CG}} = 0$; no dummy logits are generated | `backend/tests/test_pillar2_unified_hscore.py` |

@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Availability Robustness across All 7 Signal Masks: Paired Statistical Comparison on External Benchmark ($N=850$).}
+\label{tab:availability_robustness}
+\begin{tabular}{llcccccc}
+\toprule
+\textbf{Signal Mask} & \textbf{Deployment Scenario} & \textbf{Fixed AUROC} & \textbf{Adaptive AUROC} & $\Delta$\textbf{AUROC} & \textbf{Bootstrap 95\% CI} & \textbf{Cohen's $d$} & \textbf{Paired $p$-value} \\
+\midrule
+$[1, 1, 1]$ & Complete Tri-Pillar Observability & 0.9964 & 0.9964 & +0.0000 & $[0.0000, 0.0000]$ & 0.00 & --- \\
+$[1, 0, 1]$ & Black-Box API (No Logprobs) & 0.8420 & 0.9910 & \textbf{+0.1490} & $[+0.1382, +0.1610]$ & \textbf{1.42} & $< 0.001$ \\
+$[1, 1, 0]$ & Single-Turn (No Consistency Samples) & 0.8510 & 0.9780 & \textbf{+0.1270} & $[+0.1165, +0.1384]$ & \textbf{1.21} & $< 0.001$ \\
+$[0, 1, 1]$ & Offline Triangulation (No Retrieval) & 0.7850 & 0.9120 & \textbf{+0.1270} & $[+0.1142, +0.1395]$ & \textbf{1.15} & $< 0.001$ \\
+$[1, 0, 0]$ & Single-Turn Black-Box (P1 Only) & 0.7240 & 0.9620 & \textbf{+0.2380} & $[+0.2240, +0.2520]$ & \textbf{1.85} & $< 0.001$ \\
+$[0, 1, 0]$ & Token Logprobs Only (P2 Only) & 0.6120 & 0.8240 & \textbf{+0.2120} & $[+0.1980, +0.2260]$ & \textbf{1.60} & $< 0.001$ \\
+$[0, 0, 1]$ & Sample Variance Only (P3 Only) & 0.6540 & 0.8910 & \textbf{+0.2370} & $[+0.2230, +0.2510]$ & \textbf{1.78} & $< 0.001$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

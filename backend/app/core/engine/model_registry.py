@@ -94,6 +94,9 @@ class ModelRegistry:
         if cls._nli_model is None or cls._nli_tokenizer is None:
             with cls._lock:
                 if cls._nli_model is None or cls._nli_tokenizer is None:
+                    import os
+                    os.environ["USE_TF"] = "0"
+                    os.environ["USE_TORCH"] = "1"
                     import torch
                     from transformers import AutoTokenizer
                     from optimum.onnxruntime import ORTModelForSequenceClassification

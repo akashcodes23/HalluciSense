@@ -1,6 +1,6 @@
 # HalluciSense Phase 6K.2 — Corrected 1,000-Example Numerical Stability Gate Report
 
-**Generated UTC**: `2026-08-09 13:43:48 UTC`  
+**Generated UTC**: `2026-10-21 14:48:06 UTC`  
 **Evaluation Status**: `COMPLETED`  
 **Overall Corrected Gate Verdict**: **`STABILITY GATE: PASS`**  
 
@@ -20,7 +20,7 @@ Under corrected warning accounting and stable solvers, **`liblinear` and `saga` 
 
 - **Subset Sample Count ($N$)**: `1,000`
 - **Class Distribution**: Factual ($y=0$): `512`, Hallucinated ($y=1$): `488`
-- **DEV Subset SHA256 Fingerprint**: `eefc3dffb913d87d...`
+- **DEV Subset SHA256 Fingerprint**: `60d5cdb2077f8bf1...`
 - **Validation Set Firewall**: **Validation set ($N=12,483$) remained completely untouched.**
 
 ---

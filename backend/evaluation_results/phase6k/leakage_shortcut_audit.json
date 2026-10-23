@@ -1,6 +1,6 @@
 {
   "target_leakage_detected": false,
-  "max_feature_target_correlation": 0.6799022612122616,
+  "max_feature_target_correlation": 0.6799022612122613,
   "leakage_feature_name": "mean_contradiction",
   "dev_exact_duplicates": 0,
   "val_exact_duplicates": 0,

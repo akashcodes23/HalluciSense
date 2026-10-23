@@ -18,6 +18,7 @@ class AnalysisRequest(BaseModel):
     provided_evidence: Optional[List[Any]] = Field(default=None, description="Optional ground-truth reference passages or evidence")
     sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations for P3 consistency analysis")
     logprobs: Optional[List[float]] = Field(default=None, description="Optional token generation probabilities from model provider")
+    logprobs_representation: Optional[str] = Field(default="auto", description="Representation of token scores: 'logprob' (natural log <= 0), 'probability' ([0, 1]), or 'auto'")
 
 
 class ExplainRequest(BaseModel):
@@ -28,6 +29,7 @@ class ExplainRequest(BaseModel):
     provided_evidence: Optional[List[Any]] = Field(default=None, description="Optional ground-truth reference passages or evidence")
     sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations")
     logprobs: Optional[List[float]] = Field(default=None, description="Optional token generation probabilities")
+    logprobs_representation: Optional[str] = Field(default="auto", description="Representation: 'logprob', 'probability', or 'auto'")
 
 
 class PillarScores(BaseModel):

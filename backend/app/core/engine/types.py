@@ -42,7 +42,8 @@ if USE_PYDANTIC:
     class Pillar1Result(BaseModel):
         claims: List[str] = Field(default_factory=list)
         evidence: List[EvidenceItem] = Field(default_factory=list)
-        factual_error_score: float = Field(..., ge=0.0, le=1.0)
+        factual_error_score: Optional[float] = Field(default=None, ge=0.0, le=1.0)
+        available: bool = Field(default=True)
         reasoning: str = Field(...)
         retrieved_passages: List[str] = Field(default_factory=list)
         citation_confidence_score: Optional[float] = Field(None)
@@ -58,8 +59,15 @@ if USE_PYDANTIC:
         available: bool = Field(default=False)
         status: str = Field(default="UNAVAILABLE")
         mode: Optional[str] = Field(default="STATIC_VERIFICATION_CONFIDENCE")
+        # is_proxy=True means this score was derived from evidence similarity,
+        # NOT from genuine token log-probabilities. Fusion must apply reduced reliability.
+        is_proxy: bool = Field(
+            default=False,
+            description="True when mode is STATIC_VERIFICATION_CONFIDENCE (evidence-similarity proxy); "
+                        "False only when genuine token log-probabilities were provided.",
+        )
         reasoning: str = Field(...)
-        # White-Box Metrics
+        # White-Box Metrics (only populated when logprobs are supplied)
         token_logprobs: List[float] = Field(default_factory=list)
         attention_entropy: Optional[float] = Field(None)
         predictive_entropy: Optional[float] = Field(None)
@@ -172,8 +180,9 @@ else:
 
     @dataclass
     class Pillar1Result:
-        factual_error_score: float
-        reasoning: str
+        factual_error_score: Optional[float] = None
+        reasoning: str = ""
+        available: bool = True
         claims: List[str] = field(default_factory=list)
         evidence: List[EvidenceItem] = field(default_factory=list)
         retrieved_passages: List[str] = field(default_factory=list)

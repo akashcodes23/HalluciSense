@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Main Benchmark Performance on Held-Out Test Split ($N=150$).}
+\label{tab:main_results}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Evaluation Condition} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{Macro F1} & \textbf{Accuracy} & \textbf{ECE} & \textbf{Brier} \\
+\midrule
+Canonical Fixed Fusion Baseline & 1.0000 & 0.9967 & 0.9867 & 0.9867 & 0.1972 & 0.0412 \\
+Adaptive Platt Calibrated Hybrid & \textbf{1.0000} & \textbf{0.9967} & \textbf{0.9867} & \textbf{0.9867} & \textbf{0.0937} & \textbf{0.0164} \\
+Adaptive + Selective Abstention (80\%) & 1.0000 & 1.0000 & 1.0000 & 1.0000 & 0.0410 & 0.0051 \\
+\bottomrule
+\end{tabular}
+\end{table}

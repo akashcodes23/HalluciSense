@@ -1,0 +1,511 @@
+=== PAGE 1 ===
+HalluciSense: A Confidence-Aware Hybrid
+Framework for Detecting and Quantifying
+Hallucinations in Large Language Models
+Akash G Patil
+Dept. of Computer Science & Engineering (AI/ML)
+JSS Academy of Technical Education
+Bengaluru, India
+1JS23CI007
+Chirag O
+Dept. of Computer Science & Engineering (AI/ML)
+JSS Academy of Technical Education
+Bengaluru, India
+1JS23CI016
+Darshan A
+Dept. of Computer Science & Engineering (AI/ML)
+JSS Academy of Technical Education
+Bengaluru, India
+1JS23CI017
+Keerthan B M
+Dept. of Computer Science & Engineering (AI/ML)
+JSS Academy of Technical Education
+Bengaluru, India
+1JS23CI040
+Abstract—Large Language Models (LLMs) generate fluent yet
+factually incorrect text—a phenomenon termed hallucination—
+posing critical risks in high-stakes domains. Existing detec-
+tion systems produce binary outputs, fail to localize halluci-
+nated spans, and rely on single signals. This paper presents
+HalluciSense, a model-agnostic hybrid framework that uni-
+fies retrieval-based verification, model-intrinsic confidence scor-
+ing, and cross-consistency checking into a single interpretable
+pipeline. We introduce the Hallucination Score (H-Score), a
+continuous0–1metric that quantifies severity through learned
+fusion of factual error, confidence gap, and consistency failure
+components. HalluciSense achieves span-level localization via
+score propagation to tokens and sentences. The framework is
+designed to operate across GPT-4, LLaMA-3, Mistral-7B, and
+Gemini without fine-tuning. We detail the three-pillar archi-
+tecture, the H-Score fusion mechanism, and a comprehensive
+evaluation protocol targeting TruthfulQA, HaluEval, and FEVER
+benchmarks.
+Index Terms—Large language models, hallucination detection,
+confidence quantification, retrieval-augmented verification, span-
+level localization
+I. INTRODUCTION
+Large Language Models (LLMs) such as GPT-4, LLaMA-3,
+and Gemini have demonstrated remarkable capabilities across
+natural language processing tasks. However, these models
+frequently generate text that is factually incorrect, inconsistent,
+or entirely fabricated—a phenomenon widely termedhalluci-
+nation[6], [24]. The severity of this problem is amplified in
+high-stakes applications including healthcare diagnostics, legal
+analysis, and educational tutoring.
+Existing hallucination detection methodologies exhibit three
+critical limitations.First, current systems such as SelfCheck-
+GPT [25] and FActScore [26] produce binary hallucinated/not-
+hallucinated labels without quantifying severity [1]. A re-
+sponse containing minor temporal inaccuracies demands dif-
+ferent intervention than one with fundamental factual contra-
+dictions, yet binary systems treat both identically.Second,
+most approaches evaluate responses at the document or sen-
+tence level without pinpointing specific problematic spans [7].
+This coarse granularity impedes targeted correction strategies.
+Third, the majority of detectors rely on isolated signals:
+either retrieval-based fact-checking [26], model confidence
+scores [4], or self-consistency sampling [25]. Each signal
+individually suffers from characteristic failure modes, and no
+existing framework robustly fuses all three signal types [6].
+This paper presentsHalluciSense, a confidence-aware hy-
+brid framework designed to address these limitations through
+the following contributions:
+1) A unified three-pillar architecture combining retrieval
+verification, confidence analysis, and consistency check-
+ing into a model-agnostic pipeline.
+2) TheH-Score, a continuous0–1severity metric com-
+puted asH=α·FE+β·CG+γ·CF, whereα, β, γ
+are learned weights and FE, CG, CF denote factual
+error, confidence gap, and consistency failure scores,
+respectively.
+3) Span-level localization propagating pillar scores to in-
+dividual tokens and sentences, enabling interpretable
+heatmap visualization.
+4) A comprehensive evaluation protocol targeting Truth-
+fulQA, HaluEval, and FEVER benchmarks with F1,
+AUC-ROC, Span-IoU, and Expected Calibration Error
+metrics.
+II. LITERATUREREVIEW
+A. Retrieval-Based Verification
+Retrieval-based methods leverage external knowledge
+sources to verify generated claims. FActScore [26] decom-
+
+=== PAGE 2 ===
+poses biographies into atomic facts and verifies each against
+Wikipedia, achieving fine-grained fact-level precision but
+lacking confidence integration and severity quantification.
+RAGTruth [23] introduced a word-level manually annotated
+corpus for retrieval-augmented generation scenarios; fine-
+tuned detectors achieved competitive performance against
+GPT-4, though the framework penalizes true facts absent
+in provided context. LUMINA [8] measures distributional
+distance for context utilization across transformer layers, out-
+performing prior utilization-based methods by up to13%
+AUROC on RAGTruth and HalluRAG, but requires unre-
+stricted access to internal transformer layers. ReDeEP [19]
+analyzes Knowledge FFNs and Copying Heads to decouple
+internal parametric from external retrieved knowledge, im-
+proving RAG hallucination detection accuracy at the cost
+of higher processing latency. LettuceDetect [18] employs a
+ModernBERT-based token-classification model handling up
+to8k tokens, achieving excellent example-level F1 at30–60
+examples per second, though it is pre-trained primarily on
+English. FRANQ [12] proposes distinct uncertainty quantifica-
+tion techniques to estimate factuality based strictly on context
+faithfulness, achieving more accurate factual error detection
+than standard UQ methods, but requires computationally heavy
+parallel processing.
+B. Confidence-Based and Uncertainty Quantification Methods
+Confidence-based methods exploit model-internal signals to
+detect uncertainty indicative of hallucination. INSIDE [21]
+introduces EigenScore for semantic consistency combined
+with feature clipping to reduce overconfidence, achieving
+significant performance improvements using internal state
+consistency metrics on CoQA, SQuAD, NQ, and TriviaQA;
+however, it is dependent on selection of optimal intermedi-
+ate layers. Semantic Entropy Probes [20] train lightweight
+linear probes on hidden states to approximate semantic en-
+tropy efficiently, capturing hallucinations in short-form gen-
+erations with massive computational savings, though perfor-
+mance drops on long-form generations with highly inter-
+dependent reasoning chains. Kang et al. [4] comprehensively
+evaluate token-probability, output consistency, internal states,
+and self-checking uncertainty quantification techniques on
+TriviaQA, GSM8K, and FactScore-Bio, finding that output
+consistency and internal state probing outperform traditional
+token-probability methods; the study focuses purely on QA
+tasks. Binkowski et al. [17] propose LapEigvals, utilizing
+top-keigenvalues of Laplacian matrices derived from in-
+ternal attention maps, achieving state-of-the-art performance
+among attention-based methods across five diverse LLMs on
+NQ-Open, TriviaQA, CoQA, SQuADv2, HaluEvalQA, Truth-
+fulQA, and GSM8K; the method is incompatible with closed-
+weight models. Liang and Wang [3] introduce lightweight
+MLP neural probes on frozen LLMs with multi-objective
+joint loss and Bayesian optimization, boosting precision on
+TriviaQA by over270%; optimal probe insertion layers vary
+across different model sizes.
+C. Consistency-Based Methods
+Consistency-based methods assess hallucination through
+response stability. SelfCheckGPT [25] samples multiple re-
+sponses to the same query and measures consistency, estab-
+lishing a strong baseline but lacking factual grounding, severity
+quantification, and span-level localization. A unified multiple
+testing framework [10] combines semantic entropy, lexical
+similarity, and spectral eigenvalue distributions through mul-
+tiple hypothesis testing, achieving the highest AUROC across
+CoQA and TriviaQA using zero-resource models; it depends
+on high-quality calibration datasets to establish baseline non-
+hallucination distributions. Efficient hallucination detection via
+semantic clustering [2] employs adaptive sampling variance
+thresholds combined with DeBERTa-v3-large architecture,
+achieving state-of-the-art AUROC with significantly fewer
+samples on CoQA, TriviaQA, TruthfulQA, and SimpleQA;
+performance is heavily dependent on secondary auxiliary NLI
+models. Statistically efficient semantic entropy estimators [15]
+propose SE-Bayes and SE-Histogram estimators computed
+over semantic generation clusters, achieving high AUROC
+with minimal sampling budgets on NQ, SV AMP, SQuAD,
+and TriviaQA; clustering requires reliable auxiliary language
+models.
+D. Hybrid and Multi-Signal Approaches
+Hybrid approaches remain limited. Song et al. [5] propose
+a unified framework using multi-path reasoning with segment-
+aware temporalized cross-attention, outperforming state-of-
+the-art methods on TruthfulQA, GSM8K, and TriviaQA by
+pinpointing subtle semantic dissonances; multi-path reason-
+ing introduces substantial inference latency. Obeso et al. [9]
+employ LoRA-based linear probes predicting entity labels
+from hidden model activations for real-time detection in long-
+form generation, achieving high AUC for Llama-3.3-70B on
+LongFact, LongFact++, HealthBench, TriviaQA, and MATH;
+the approach is restricted to entity-level hallucinations. LLM-
+Match [22] uses a retrieval-augmented generation module
+leveraging BioBERT embeddings followed by fine-tuning an
+open-source language model with a classification head, achiev-
+ing a superior Macro-F1 score of0.86on n2c2, SIGIR,
+and TREC CT benchmarks. To our knowledge, no exist-
+ing framework simultaneously integrates retrieval verification,
+confidence analysis, and consistency checking into a unified
+model-agnostic pipeline with continuous severity scoring and
+span-level localization.
+E. Surveys and Benchmarks
+Alansari and Luqman [6] provide a structured taxonomic
+analysis of detection methods and RAG mitigation strategies,
+identifying attention bottlenecks and low-resource limitations.
+Huang et al. [24] establish a coherent framework separating
+factuality and faithfulness hallucinations, analyzing data, train-
+ing, and inference causes. Wang et al. [22] survey factuality
+challenges across language and vision modalities, identify-
+ing a critical lack of efficient fact-checkers. HalluLens [14]
+introduces a comprehensive benchmark with PreciseWikiQA,
+
+=== PAGE 3 ===
+LongWiki, and NonExistentRefusal, clarifying extrinsic versus
+intrinsic hallucinations through dynamic test generation. Faith-
+Judge [13] proposes an LLM-as-a-judge framework combined
+with the HHEM model to track hallucination rates, improving
+automated evaluation over zero-shot baselines on FaithBench,
+AggreFact, RAGTruth, and TofuEval-MB, though scalability is
+constrained by API costs. Sardana [16] benchmarks real-time
+reference-free models including Lynx and HHEM, finding they
+consistently detect incorrect RAG responses with high pre-
+cision on CovidQA, PubmedQA, DROP, and FinanceBench,
+but suffer false positives on complex multi-hop reasoning
+questions.
+F . Research Gaps
+Our systematic literature survey of26papers reveals six
+persistent gaps [6]:(1)Missing hybrid approaches that fuse
+retrieval verification with internal confidence signals;(2)Lack
+of continuous hallucination severity scoring beyond binary
+classification;(3)Lack of fine-grained token-level localization;
+(4)Computational bottlenecks in LLM-as-a-judge pipelines;
+(5)Inflexible knowledge conflict resolution between para-
+metric and retrieved knowledge;(6)Multilingual evaluation
+scarcity beyond English-centric datasets. HalluciSense directly
+addresses gaps (1)–(3).
+III. METHODOLOGY
+A. Problem Formulation
+LetMdenote an LLM that generates a responseR=
+[r1, r2, . . . , rm]consisting ofmtokens given a user query
+Q. We define a hallucination as any spanR[i:j]within
+the response that is factually incorrect, inconsistent with
+established knowledge, or internally contradictory. We address
+three problems:(P1)Detection: determine whetherRcontains
+at least one hallucinated span;(P2)Quantification: compute a
+severity scoreS(R)∈[0,1];(P3)Localization: identify all
+hallucinated spans{R[i k :j k]}Kk=1 with individual severity
+scores.
+B. Architecture Overview
+HalluciSense processes a(Q, R)pair through three parallel
+pillars, each producing normalized token-level score matrices.
+These are fused via learned weights into the H-Score, which
+is propagated back for localization. Figure 1 illustrates the
+architecture.
+User Query(Q) +LLM Response(R)
+↓
+HalluciSense Engine
+Retrieval Verifier Confidence Analyzer
+(FE Score) (CG Score)
+↘ ↙
+Consistency Checker (CF Score)
+↓
+H=α·FE+β·CG+γ·CF
+↓
+Span-Level Heatmap + Severity Annotation
+Fig. 1. HalluciSense architecture. Three parallel pillars process the query–
+response pair, with scores fused into the H-Score and propagated for local-
+ization.
+C. Pillar 1: Retrieval Verifier
+The Retrieval Verifier assesses factual accuracy through a
+four-stage pipeline.
+Stage 1: Claim Extraction.Given responseR, segment
+into sentences{s 1, . . . , sn}. For each sentences i, extract
+factual claims using Named Entity Recognition combined with
+dependency parsing to identify subject-predicate-object triples,
+yielding claimsC i ={c i1, . . . , cip}.
+Stage 2: Evidence Retrieval.For each claimc ij, construct
+a search query and retrieve top-kevidence passages from a
+hybrid retrieval system combining BM25 lexical matching,
+dense retrieval via FAISS with Sentence-BERT embeddings,
+and Wikipedia API structured lookups. The retrieved evidence
+set isE ij ={e 1, . . . , ek}.
+Stage 3: NLI-Based Entailment Checking.Employ an
+NLI model (RoBERTa-large-MNLI) to classify each claim-
+evidence pair(c ij, el)into entailment, contradiction, or neu-
+tral, outputting probability distributionsP NLI(y|c ij, el).
+Stage 4: Factual Error Score.The FE score for sentence
+si is:
+FE(si) = 1− 1|Ci|
+|Ci|X
+j=1
+max
+el∈Eij
+PNLI(entailment|c ij, el).(1)
+Each token ins i inherits FE(s i), creating token-level matrix
+FE∈[0,1] m.
+D. Pillar 2: Confidence Analyzer
+The Confidence Analyzer exploits model-internal signals.
+Token Log-Probability Analysis.For white-box models
+(LLaMA-3, Mistral-7B), extract token log-probabilities
+{logP(r t |r <t, Q)}mt=1. Per-token confidence is
+Conftoken(rt) = exp(logP(r t |r <t, Q)). For black-box
+APIs (GPT-4, Gemini), approximate confidence through top-k
+log-probability differentials.
+Entropy-Based Uncertainty.Compute local entropy over
+the token distribution:
+Ht =−
+X
+v∈V
+P(v|r <t, Q) logP(v|r <t, Q),(2)
+
+=== PAGE 4 ===
+whereVis the vocabulary. Tokens withH t > τH (75th
+percentile of training entropies) are flagged as high-uncertainty
+regions.
+Attention Weight Analysis.For models with accessible
+attention matrices, compute attention entropy across heads and
+layers:
+AttnEnt(l,h)t =−
+tX
+s=1
+A(l,h)t,s logA (l,h)t,s ,(3)
+whereA (l,h)t,s is the attention weight from tokentto tokens
+in layerl, headh.
+Confidence Gap Score.The CG score combines these
+signals:
+CG(rt) =σ
+ 
+w1 ·(−logConf token(rt)) +w 2 ·H t +w 3 · AttnEntt
+
+,
+(4)
+whereσis the sigmoid and{w 1, w2, w3}are learned weights.
+For black-box models,w 3 = 0.
+E. Pillar 3: Consistency Checker
+The Consistency Checker detects internal contradictions
+through paraphrase-based resampling.
+Paraphrase Generation.Given queryQ, generateNse-
+mantically equivalent paraphrases{Q (1), . . . , Q(N) }using T5-
+large-paraphrase with nucleus sampling (top-p= 0.9, temper-
+ature= 1.0).
+Response Sampling.For each paraphraseQ (i), generate
+responseR (i) from the target LLMM, yieldingNresponses.
+Semantic Similarity.Encode all responses using Sentence-
+BERT (all-mpnet-base-v2) and compute pairwise cosine sim-
+ilarities Sim(R, R(i)).
+Consistency Failure Score.The CF score for sentences j
+is:
+CF(sj) = 1− 1N
+NX
+i=1
+Sim(sj, s(i)j ),(5)
+wheres (i)j is the aligned sentence from thei-th paraphrased
+response. Low similarity indicates unstable, potentially hallu-
+cinated content.
+F . H-Score Fusion
+The H-Score fuses pillar scores through learned weighting:
+H=α·FE+β·CG+γ·CF,(6)
+whereα, β, γ∈[0,1]andα+β+γ= 1. Weights are learned
+via gradient descent minimizing binary cross-entropy between
+aggregated sentence-level H-Scores and ground-truth labels:
+L=−
+nX
+j=1
+
+yj log( ¯Hj) + (1−y j) log(1− ¯Hj) ,(7)
+where ¯Hj = 1|sj | Prt∈sj Ht andy j ∈ {0,1}. The overall
+response severity isS(R) = max j ¯Hj.
+G. Span-Level Localization
+Token-Level.Each tokenr t inheritsH t. Tokens withH t >
+τtoken (default0.5) are highlighted.
+Sentence-Level.Sentences are labeled hallucinated if ¯Hj >
+τsentence (default0.5).
+Span Aggregation.Contiguous hallucinated tokens are
+merged into spansR[i:j]with reported span H-Score
+maxt∈[i,j] Ht and dominant pillar type.
+H. Model-Agnostic Design
+HalluciSense achieves model-agnosticism through modular
+adaptation: the Retrieval Verifier requires no model access; the
+Confidence Analyzer adapts to available signals (full logits,
+top-kprobabilities, or none); the Consistency Checker uses
+standard generation APIs. For black-box models with lim-
+ited confidence signals, the framework automatically adjusts
+weights to rely more heavily on retrieval and consistency.
+IV. EXPERIMENTALDESIGN ANDEVALUATIONPROTOCOL
+Note: HalluciSense is currently in Phase 1 of development.
+The architecture has been finalized and baseline systems have
+been configured. Full implementation and empirical evaluation
+are scheduled for Phase 2 (May–October 2026). This section
+presents the completed experimental design, dataset curation,
+and evaluation protocol.
+A. Datasets
+Table I summarizes the benchmark datasets identified for
+evaluation.
+TABLE I
+BENCHMARK DATASETS FORHALLUCISENSE EVALUATION.
+Dataset Size Task Type
+TruthfulQA 817 Q&A Adversarial factuality
+HaluEval 35,000 samples QA, dialogue, summarization
+SelfCheckGPT Corpus∼5K passages Consistency evaluation
+FActScore Wiki 500 bios Fact-level precision
+FEVER 185K claims Claim verification
+B. Custom Data Collection
+A custom annotation corpus is being constructed through
+the following protocol:
+1)Response Generation:Prompt GPT-4, LLaMA-3,
+Mistral-7B, and Gemini on TruthfulQA and HaluEval
+to collect10K+(Q, R)pairs.
+2)Annotation:Three annotators label hallucinated spans
+with type (factual, consistency, fabrication) and severity
+1–5. Inter-rater agreement target: Cohen’s Kappa≥0.7.
+3)Knowledge Base:Build FAISS index on Wikipedia
+November 2024 dump (∼6M passages) for retrieval
+pillar evidence matching.
+4)Split:70% train / 15% validation / 15% test, stratified
+by model and hallucination type.
+
+=== PAGE 5 ===
+C. Baselines
+HalluciSense will be compared against: SelfCheckGPT [25]
+(consistency-based), FActScore [26] (retrieval-based), and
+CoVe (chain-of-verification). Table II presents the comparison
+framework.
+TABLE II
+BASELINE COMPARISON FRAMEWORK.
+System Type Expected F1 Span Loc.
+SelfCheckGPT [25] Consistency 0.71 No
+FActScore [26] Retrieval 0.68 No
+CoVe Verification 0.73 No
+HalluciSense (Ours) Hybrid Target: 0.85+ Yes
+Target performance values are estimated from literature
+benchmarks; exact results are pending the experimental phase.
+D. Evaluation Metrics
+Detection:F1 score, AUC-ROC, Precision, Recall.Local-
+ization:Span-IoU (Intersection-over-Union of predicted vs.
+annotated spans).Calibration:Expected Calibration Error
+(ECE) measuring correlation between H-Score and actual error
+rate.
+E. Target LLMs
+Evaluation spans four architectures: GPT-4 (gpt-4-turbo-
+2024-04-09), LLaMA-3-70B-Instruct, Mistral-7B-Instruct-
+v0.2, and Gemini-1.5-Pro.
+F . Technology Stack
+Implementation utilizes PyTorch 2.x, HuggingFace Trans-
+formers, SentenceTransformers, FAISS, BM25, RoBERTa-
+large-MNLI, and FastAPI. White-box models run via Hug-
+gingFace with bfloat16 precision; black-box APIs use official
+SDKs.
+V. CONCLUSION
+This paper presented HalluciSense, a confidence-aware hy-
+brid framework for detecting, quantifying, and localizing hal-
+lucinations in Large Language Models. By unifying retrieval-
+based verification, model-intrinsic confidence analysis, and
+cross-consistency checking, HalluciSense addresses the critical
+limitations of existing single-signal, binary-output approaches.
+The introduced H-Score provides a continuous, interpretable
+severity measure, while span-level localization enables precise
+identification of hallucinated regions. The framework’s model-
+agnostic design ensures compatibility across GPT-4, LLaMA-
+3, Mistral-7B, and Gemini without fine-tuning. A comprehen-
+sive evaluation protocol targeting TruthfulQA, HaluEval, and
+FEVER has been established, with full empirical benchmark-
+ing scheduled for Phase 2 of development.
+ACKNOWLEDGMENT
+The authors thank the Department of Computer Science &
+Engineering (AI/ML) at JSS Academy of Technical Education,
+Bengaluru, for supporting this research.
+REFERENCES
+[1] A. Pesaranghader and E. Li, “Hallucination Detection and Mitigation in
+Large Language Models,” 2026.
+[2] “Efficient Hallucination Detection via Semantic Clustering,” 2026. (Au-
+thors not specified in source.)
+[3] S. Liang and H. Wang, “Neural Probe-Based Hallucination Detection
+for LLMs,” 2025.
+[4] S. Kang, Y . F. Bakman, et al., “Uncertainty Quantification for Halluci-
+nation Detection in LLMs,” 2025.
+[5] Y . Song, L. Qiu, X. Zhang, and Z. Tang, “Hallucination Detection via
+Internal States and Structured Reasoning Consistency,” 2025.
+[6] A. Alansari and H. Luqman, “Large Language Models Hallucination: A
+Comprehensive Survey,” 2025.
+[7] E. Rykov, K. Petrushina, et al., “Multilingual Span-Level Hallucination
+Detection,” 2025.
+[8] S. Yeh, S. Li, and T. Mallick, “LUMINA: Detecting Hallucinations in
+RAG with Context-Knowledge Signals,” 2025.
+[9] O. Obeso, A. Arditi, J. Ferrando, et al., “Real-Time Detection of
+Hallucinated Entities in Long-Form Generation,” 2025.
+[10] “A Unified Multiple Testing Framework for Detecting Hallucinations in
+LLMs,” 2025. (Authors not specified in source.)
+[11] E. Gumaan, “Theoretical Foundations and Mitigation of Hallucination
+in LLMs,” 2025.
+[12] E. Fadeeva, A. Rubashevskii, et al., “Faithfulness-Aware Uncertainty
+Quantification for Fact-Checking RAG,” 2025.
+[13] M. S. Tamber, F. S. Bao, et al., “Benchmarking LLM Faithfulness in
+RAG with Evolving Leaderboards,” 2025.
+[14] Y . Bang, Z. Ji, et al., “HalluLens: LLM Hallucination Benchmark,” 2025.
+[15] “Statistically Efficient Semantic Entropy Estimators for Hallucination
+Detection,” 2025. (Authors not specified in source.)
+[16] A. Sardana, “Real-Time Evaluation Models for RAG: Who Detects
+Hallucinations Best?” 2025.
+[17] J. Binkowski, D. Janiak, et al., “Hallucination Detection in LLMs Using
+Spectral Features of Attention Maps,” 2025.
+[18] A. Kov ´acs and G. Recski, “LettuceDetect: A Hallucination Detection
+Framework for RAG Applications,” 2025.
+[19] Z. Sun, X. Zang, et al., “ReDeEP: Detecting Hallucination in Retrieval-
+Augmented Generation,” 2024.
+[20] J. Kossen, J. Han, et al., “Semantic Entropy Probes: Robust and Cheap
+Hallucination Detection in LLMs,” 2024.
+[21] C. Chen, K. Liu, et al., “INSIDE: LLMs’ Internal States Retain the
+Power of Hallucination Detection,” 2024.
+[22] Y . Wang, M. Wang, et al., “Factuality of Large Language Models: A
+Survey,” 2024.
+[23] C. Niu, Y . Wu, et al., “RAGTruth: A Hallucination Corpus for Trust-
+worthy RAG Language Models,” 2024.
+[24] L. Huang, W. Yu, et al., “A Survey on Hallucination in LLMs: Principles,
+Taxonomy, Challenges,” 2024.
+[25] P. Manakul, A. Liusie, and M. J. F. Gales, “SelfCheckGPT: Zero-
+Resource Black-Box Hallucination Detection for Generative Large Lan-
+guage Models,” 2023.
+[26] S. Min, K. Krishna, et al., “FActScore: Fine-grained Atomic Evaluation
+of Factual Precision in Long Form Text Generation,” 2023.
+

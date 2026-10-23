@@ -386,7 +386,16 @@ export default function VerifyPage() {
                     sublabel="How uncertain was the model during generation?"
                     diagnosticQuestion="Token log-probability entropy and predictive uncertainty analysis."
                     value={currentResult.pillar_scores.confidence ?? currentResult.pillar_scores.pillar2_confidence_gap}
-                    status={currentResult.pillar_status?.p2_available ? "active" : "unavailable"}
+                    status={
+                      // Primary: read from pillar_status if present.
+                      // Fallback: infer from pillar_scores.confidence when pillar_status is absent (older API).
+                      currentResult.pillar_status != null
+                        ? currentResult.pillar_status.p2_available
+                          ? "active"
+                          : "unavailable"
+                        : (currentResult.pillar_scores.confidence != null ? "active" : "unavailable")
+                    }
+                    isProxy={currentResult.pillar_status?.p2_status === "PROXY"}
                     reason="Token log-probabilities not provided"
                   />
                   <PillarScoreCard
@@ -395,7 +404,13 @@ export default function VerifyPage() {
                     sublabel="Do independent generations agree with this claim?"
                     diagnosticQuestion="Multi-candidate semantic consistency and cross-sample contradiction analysis."
                     value={currentResult.pillar_scores.consistency ?? currentResult.pillar_scores.pillar3_consistency_failure}
-                    status={currentResult.pillar_status?.p3_available ? "active" : "unavailable"}
+                    status={
+                      currentResult.pillar_status != null
+                        ? currentResult.pillar_status.p3_available
+                          ? "active"
+                          : "unavailable"
+                        : (currentResult.pillar_scores.consistency != null ? "active" : "unavailable")
+                    }
                     reason="Multiple generations not available"
                   />
                 </div>
@@ -527,6 +542,7 @@ function PillarScoreCard({
   diagnosticQuestion,
   value,
   status,
+  isProxy,
   reason,
 }: {
   pillarNumber?: 1 | 2 | 3;
@@ -535,6 +551,7 @@ function PillarScoreCard({
   diagnosticQuestion?: string;
   value?: number | null;
   status: "active" | "unavailable";
+  isProxy?: boolean;
   reason?: string;
 }) {
   const isAvailable = status === "active" && value !== null && value !== undefined;
@@ -605,6 +622,20 @@ function PillarScoreCard({
                 {scorePercent}%
               </span>
             </div>
+            {/* Proxy badge — shown only when the score is not a genuine logprob measurement */}
+            {isProxy && (
+              <span
+                className="inline-flex items-center gap-1 text-[9px] font-bold px-1.5 py-0.5 rounded border"
+                style={{
+                  color: "#F59E0B",
+                  background: "rgba(245,158,11,0.10)",
+                  borderColor: "rgba(245,158,11,0.25)",
+                }}
+                title="Evidence-similarity proxy — token log-probabilities were not provided. This score reflects retrieval coverage, not model generation confidence."
+              >
+                ⚡ Evidence Proxy
+              </span>
+            )}
             <div className="pt-2 border-t border-[var(--border)]">
               <span className="text-[9px] font-semibold uppercase tracking-wider text-[var(--text-dim)] block mb-0.5">
                 Interpretation:

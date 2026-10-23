@@ -19,8 +19,8 @@
     "val_inf_count": 0,
     "dev_matrix_rank": 5,
     "val_matrix_rank": 5,
-    "dev_condition_number": 95.51383516077102,
-    "val_condition_number": 114.74260320174594,
+    "dev_condition_number": 95.51383516076889,
+    "val_condition_number": 114.74260320174542,
     "dev_pos_ratio": 0.5431192027861108,
     "val_pos_ratio": 0.4705714285714286
   },
@@ -32,10 +32,10 @@
     "other_runtime_warning": 0,
     "other_warning": 0
   },
-  "total_warnings": 0,
+  "total_warnings": 3,
   "threshold_free_metrics": {
-    "roc_auc": 0.6902071535320233,
-    "pr_auc": 0.6310874177873081,
+    "roc_auc": 0.690207481197723,
+    "pr_auc": 0.6310879639316028,
     "brier_score": 0.23321484838877207,
     "log_loss": 0.6593305313001152
   },

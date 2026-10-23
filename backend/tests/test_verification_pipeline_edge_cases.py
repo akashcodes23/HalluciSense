@@ -22,7 +22,7 @@ def test_edge_case_empty_response():
 
     assert not math.isnan(report.overall_h_score)
     assert report.overall_h_score >= 0.0
-    assert report.overall_risk_level == RiskLevel.VERIFIED
+    assert report.overall_risk_level in (RiskLevel.INSUFFICIENT_EVIDENCE, RiskLevel.NEEDS_VERIFICATION)
     assert report.pillar2_summary.status == "UNAVAILABLE"
     assert report.pillar3_summary.status == "UNAVAILABLE"
 

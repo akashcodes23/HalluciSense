@@ -12,6 +12,13 @@ Implements two complementary fusion formulations:
    - m in {0, 1}^3 is the signal availability mask
    - r in (0, 1]^3 is the empirical signal reliability vector
    - w = [alpha, beta, gamma] are base feature importance weights
+
+Reliability rules:
+- Pillar 1: reliability = dense_retrieval_score if available, else 1.0
+- Pillar 2 (genuine logprob): reliability = calibration_score, floor 0.1, cap 1.0
+- Pillar 2 (proxy/STATIC): reliability capped at PROXY_P2_RELIABILITY (0.20) —
+  because the proxy score is derived from retrieval similarity, not model confidence
+- Pillar 3: reliability = 1.0 if CF available, else 0.5
 """
 
 from __future__ import annotations
@@ -20,6 +27,39 @@ import time
 from typing import Dict, Tuple, Optional, Any, List
 from .types import RiskLevel, Pillar1Result, Pillar2Result, Pillar3Result
 from ..config import settings
+
+# Maximum reliability weight for Pillar 2 when it is in PROXY (evidence-similarity)
+# mode rather than genuine token log-probability mode.
+# Must be well below 1.0 so FE remains the dominant signal when logprobs are absent.
+PROXY_P2_RELIABILITY: float = 0.20
+
+
+class EffectiveWeights(dict):
+    """Dictionary of effective weights that exposes canonical long-form keys for iteration/summing
+
+    while preserving backward compatibility for legacy short-form keys ('alpha', 'beta', 'gamma').
+    """
+
+    _ALIASES = {
+        "alpha": "alpha_factual_error",
+        "beta": "beta_confidence_gap",
+        "gamma": "gamma_consistency_failure",
+    }
+
+    def __getitem__(self, key: str) -> float:
+        if key in self._ALIASES and not dict.__contains__(self, key):
+            return dict.__getitem__(self, self._ALIASES[key])
+        return dict.__getitem__(self, key)
+
+    def __contains__(self, key: object) -> bool:
+        if key in self._ALIASES and dict.__contains__(self, self._ALIASES[key]):
+            return True
+        return dict.__contains__(self, key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        if key in self._ALIASES and not dict.__contains__(self, key):
+            return dict.get(self, self._ALIASES[key], default)
+        return dict.get(self, key, default)
 
 
 class FusionEngine:
@@ -91,23 +131,21 @@ class FusionEngine:
             eff_w1 = w1 / total_denom
             eff_w2 = w2 / total_denom
             eff_w3 = w3 / total_denom
+            h = eff_w1 * fe_c
+            if m_cg == 1 and cg is not None:
+                h += eff_w2 * max(0.0, min(1.0, float(cg)))
+            if m_cf == 1 and cf is not None:
+                h += eff_w3 * max(0.0, min(1.0, float(cf)))
         else:
-            eff_w1, eff_w2, eff_w3 = 1.0, 0.0, 0.0
+            eff_w1, eff_w2, eff_w3 = 0.0, 0.0, 0.0
+            # When no signals are available, score defaults to uninformative prior (0.50)
+            h = 0.50
 
-        h = eff_w1 * fe_c
-        if m_cg == 1 and cg is not None:
-            h += eff_w2 * max(0.0, min(1.0, float(cg)))
-        if m_cf == 1 and cf is not None:
-            h += eff_w3 * max(0.0, min(1.0, float(cf)))
-
-        effective_weights = {
+        effective_weights = EffectiveWeights({
             "alpha_factual_error": round(eff_w1, 4),
             "beta_confidence_gap": round(eff_w2, 4),
             "gamma_consistency_failure": round(eff_w3, 4),
-            "alpha": round(eff_w1, 4),
-            "beta": round(eff_w2, 4),
-            "gamma": round(eff_w3, 4),
-        }
+        })
         mask = [m_fe, m_cg, m_cf]
         return round(max(0.0, min(1.0, h)), 4), effective_weights, mask
 
@@ -127,11 +165,11 @@ class FusionEngine:
             eff_beta = 0.0
             eff_gamma = 0.0
 
-        return {
+        return EffectiveWeights({
             "alpha_factual_error": eff_alpha,
             "beta_confidence_gap": eff_beta,
             "gamma_consistency_failure": eff_gamma,
-        }
+        })
 
     def compute_h_score(
         self,
@@ -208,11 +246,36 @@ class FusionEngine:
         if p3 and p3.consistency_failure_score is None:
             cf_score = None
 
-        # Determine signal reliabilities
+        # Determine signal reliabilities.
+        # Pillar 1: use dense_retrieval_score if set, else full reliability.
         r_p1 = getattr(p1, "dense_retrieval_score", None) or 1.0
-        r_p2 = getattr(p2, "calibration_score", None) or 1.0
+
+        # Pillar 2: genuine logprob → calibration_score; proxy → capped at PROXY_P2_RELIABILITY.
+        # This ensures the evidence-similarity proxy does not suppress FE as if it were real.
+        p2_is_proxy = bool(getattr(p2, "is_proxy", False))
+        if p2_is_proxy:
+            # Proxy reliability is capped regardless of calibration_score
+            raw_p2_reliability = getattr(p2, "calibration_score", None) or PROXY_P2_RELIABILITY
+            r_p2 = min(float(raw_p2_reliability), PROXY_P2_RELIABILITY)
+        else:
+            r_p2 = getattr(p2, "calibration_score", None) or 1.0
+
+        # Pillar 3: full reliability when score is genuine; reduced when unavailable
         r_p3 = 1.0 if cf_score is not None else 0.5
         reliabilities = (float(r_p1), float(r_p2), float(r_p3))
+
+        p1_avail = bool(p1 and getattr(p1, "available", True) and p1.factual_error_score is not None)
+        p2_avail = bool(cg_score is not None)
+        p3_avail = bool(cf_score is not None)
+
+        if not p1_avail and not p2_avail and not p3_avail:
+            effective_weights = EffectiveWeights({
+                "alpha_factual_error": 0.0,
+                "beta_confidence_gap": 0.0,
+                "gamma_consistency_failure": 0.0,
+            })
+            self.last_fusion_ms = round((time.perf_counter() - t_fus0) * 1000.0, 2)
+            return 0.5, RiskLevel.INSUFFICIENT_EVIDENCE, "#6B7280", effective_weights
 
         if mode.upper() == "CANONICAL":
             canon_score, is_complete = self.compute_canonical_h_score(p1.factual_error_score, cg_score, cf_score)

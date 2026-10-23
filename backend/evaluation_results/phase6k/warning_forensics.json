@@ -1,15 +1,205 @@
 {
   "step1_warning_counting": {
-    "raw_recorded_warning_count": 0,
+    "raw_recorded_warning_count": 27,
     "mutually_exclusive_counts": {
-      "overflow_matmul": 0,
-      "divide_by_zero_matmul": 0,
-      "invalid_matmul": 0,
+      "overflow_matmul": 9,
+      "divide_by_zero_matmul": 9,
+      "invalid_matmul": 9,
       "convergence_warning": 0,
       "other_runtime_warning": 0,
       "other_warning": 0
     },
-    "detailed_warning_records": [],
+    "detailed_warning_records": [
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "divide by zero encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "divide_by_zero_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "overflow encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "overflow_matmul"
+      },
+      {
+        "category_name": "RuntimeWarning",
+        "message": "invalid value encountered in matmul",
+        "filename": "_linear_loss.py",
+        "lineno": 200,
+        "mutually_exclusive_category": "invalid_matmul"
+      }
+    ],
     "flaw_identified": "Previous benchmark counted single warning strings under multiple overlapping string clauses (e.g., matching both runtime_warning, overflow, and invalid clauses simultaneously) as well as counting warnings across multiple steps."
   },
   "step2_matrix_inspection": {
@@ -20,7 +210,7 @@
       ],
       "dtype": "float64",
       "matrix_rank": 3,
-      "condition_number": 31.30808744848328,
+      "condition_number": 31.30808744848324,
       "all_finite": true,
       "target_all_finite": true,
       "global_stats": {
@@ -85,7 +275,7 @@
       ],
       "dtype": "float64",
       "matrix_rank": 3,
-      "condition_number": 3.5988577786755225,
+      "condition_number": 3.598857778675522,
       "all_finite": true,
       "global_stats": {
         "min": -1.260103329701864,
@@ -144,11 +334,11 @@
     },
     "float64_conversion_test": {
       "input_dtype": "float64",
-      "warnings_emitted": 0,
+      "warnings_emitted": 27,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 9,
+        "divide_by_zero_matmul": 9,
+        "invalid_matmul": 9,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -163,11 +353,11 @@
       "output_min": -1.6839053785667282,
       "output_max": 0.8938873986183653,
       "output_abs_max": 1.6839053785667282,
-      "warnings_count": 0,
+      "warnings_count": 3,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 1,
+        "divide_by_zero_matmul": 1,
+        "invalid_matmul": 1,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -180,11 +370,11 @@
       "output_min": -16.839053785667282,
       "output_max": 8.938873986183653,
       "output_abs_max": 16.839053785667282,
-      "warnings_count": 0,
+      "warnings_count": 3,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 1,
+        "divide_by_zero_matmul": 1,
+        "invalid_matmul": 1,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -197,11 +387,11 @@
       "output_min": -168.39053785667284,
       "output_max": 89.38873986183654,
       "output_abs_max": 168.39053785667284,
-      "warnings_count": 0,
+      "warnings_count": 3,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 1,
+        "divide_by_zero_matmul": 1,
+        "invalid_matmul": 1,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -214,11 +404,11 @@
       "output_min": -1683.905378566728,
       "output_max": 893.8873986183653,
       "output_abs_max": 1683.905378566728,
-      "warnings_count": 0,
+      "warnings_count": 3,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 1,
+        "divide_by_zero_matmul": 1,
+        "invalid_matmul": 1,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -231,11 +421,11 @@
       "output_min": -16839.05378566728,
       "output_max": 8938.873986183653,
       "output_abs_max": 16839.05378566728,
-      "warnings_count": 0,
+      "warnings_count": 3,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 1,
+        "divide_by_zero_matmul": 1,
+        "invalid_matmul": 1,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -248,11 +438,11 @@
       "output_min": -1683905.3785667282,
       "output_max": 893887.3986183652,
       "output_abs_max": 1683905.3785667282,
-      "warnings_count": 0,
+      "warnings_count": 3,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 1,
+        "divide_by_zero_matmul": 1,
+        "invalid_matmul": 1,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -265,20 +455,20 @@
       "fit_success": true,
       "converged": true,
       "n_iter": 7,
-      "coef_min": 0.059474593731199725,
+      "coef_min": 0.059474593731199635,
       "coef_max": 0.23065917474769757,
       "coef_abs_max": 0.23065917474769757,
-      "coef_l2_norm": 0.24741586351616432,
-      "intercept": 0.17444602366487005,
+      "coef_l2_norm": 0.2474158635161643,
+      "intercept": 0.17444602366487008,
       "predictions_all_finite": true,
       "probabilities_all_finite": true,
       "training_accuracy": 0.593,
       "training_roc_auc": 0.5727379700263147,
-      "warning_count": 0,
+      "warning_count": 27,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 9,
+        "divide_by_zero_matmul": 9,
+        "invalid_matmul": 9,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -292,7 +482,7 @@
       "coef_min": 0.059493117657558575,
       "coef_max": 0.23055799705644048,
       "coef_abs_max": 0.23055799705644048,
-      "coef_l2_norm": 0.2473033403339297,
+      "coef_l2_norm": 0.24730334033392973,
       "intercept": 0.17370657588077268,
       "predictions_all_finite": true,
       "probabilities_all_finite": true,
@@ -313,20 +503,20 @@
       "fit_success": true,
       "converged": true,
       "n_iter": 3,
-      "coef_min": 0.059488896679811866,
-      "coef_max": 0.23054269096058733,
-      "coef_abs_max": 0.23054269096058733,
-      "coef_l2_norm": 0.24727968254605276,
+      "coef_min": 0.05948889667981186,
+      "coef_max": 0.23054269096058735,
+      "coef_abs_max": 0.23054269096058735,
+      "coef_l2_norm": 0.2472796825460528,
       "intercept": 0.17439594223917093,
       "predictions_all_finite": true,
       "probabilities_all_finite": true,
       "training_accuracy": 0.593,
       "training_roc_auc": 0.5727460296351818,
-      "warning_count": 0,
+      "warning_count": 33,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 11,
+        "divide_by_zero_matmul": 11,
+        "invalid_matmul": 11,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -345,7 +535,7 @@
       "predictions_all_finite": true,
       "probabilities_all_finite": true,
       "training_accuracy": 0.593,
-      "training_roc_auc": 0.5727460296351818,
+      "training_roc_auc": 0.5727480445373986,
       "warning_count": 0,
       "warning_summary": {
         "overflow_matmul": 0,
@@ -362,13 +552,13 @@
       "C": 0.001,
       "converged": true,
       "n_iter": 6,
-      "coef_abs_max": 0.03110387670632917,
+      "coef_abs_max": 0.03110387670632915,
       "coef_l2_norm": 0.03919120307268828,
-      "warning_count": 0,
+      "warning_count": 30,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 10,
+        "divide_by_zero_matmul": 10,
+        "invalid_matmul": 10,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -378,13 +568,13 @@
       "C": 0.01,
       "converged": true,
       "n_iter": 7,
-      "coef_abs_max": 0.10695364781520174,
-      "coef_l2_norm": 0.11610104018881384,
-      "warning_count": 0,
+      "coef_abs_max": 0.10695364781520175,
+      "coef_l2_norm": 0.11610104018881386,
+      "warning_count": 27,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 9,
+        "divide_by_zero_matmul": 9,
+        "invalid_matmul": 9,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -394,13 +584,13 @@
       "C": 0.1,
       "converged": true,
       "n_iter": 6,
-      "coef_abs_max": 0.1995313862374993,
-      "coef_l2_norm": 0.21035490636608656,
-      "warning_count": 0,
+      "coef_abs_max": 0.19953138623749922,
+      "coef_l2_norm": 0.21035490636608664,
+      "warning_count": 24,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 8,
+        "divide_by_zero_matmul": 8,
+        "invalid_matmul": 8,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -411,12 +601,12 @@
       "converged": true,
       "n_iter": 7,
       "coef_abs_max": 0.23065917474769757,
-      "coef_l2_norm": 0.24741586351616432,
-      "warning_count": 0,
+      "coef_l2_norm": 0.2474158635161643,
+      "warning_count": 27,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 9,
+        "divide_by_zero_matmul": 9,
+        "invalid_matmul": 9,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -426,13 +616,13 @@
       "C": 10.0,
       "converged": true,
       "n_iter": 7,
-      "coef_abs_max": 0.23462173092175978,
-      "coef_l2_norm": 0.2522706952332614,
-      "warning_count": 0,
+      "coef_abs_max": 0.23462173092175984,
+      "coef_l2_norm": 0.25227069523326145,
+      "warning_count": 27,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 9,
+        "divide_by_zero_matmul": 9,
+        "invalid_matmul": 9,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -442,13 +632,13 @@
       "C": 100.0,
       "converged": true,
       "n_iter": 7,
-      "coef_abs_max": 0.2350287181338267,
+      "coef_abs_max": 0.23502871813382673,
       "coef_l2_norm": 0.2527708347590772,
-      "warning_count": 0,
+      "warning_count": 27,
       "warning_summary": {
-        "overflow_matmul": 0,
-        "divide_by_zero_matmul": 0,
-        "invalid_matmul": 0,
+        "overflow_matmul": 9,
+        "divide_by_zero_matmul": 9,
+        "invalid_matmul": 9,
         "convergence_warning": 0,
         "other_runtime_warning": 0,
         "other_warning": 0
@@ -456,9 +646,9 @@
     }
   ],
   "step6_manual_logit_check": {
-    "z_min": -0.007870252728216037,
-    "z_max": 0.7482403246582369,
-    "z_abs_max": 0.7482403246582369,
+    "z_min": -0.007870252728215954,
+    "z_max": 0.7482403246582364,
+    "z_abs_max": 0.7482403246582364,
     "z_all_finite": true,
     "prob_manual_all_finite": true,
     "max_prob_diff_vs_sklearn": 0.0,
@@ -466,25 +656,25 @@
   },
   "step7_environment": {
     "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
-    "numpy_version": "1.26.4",
+    "numpy_version": "2.2.6",
     "scipy_version": "/Users/akashgpatil/.pyenv/versions/3.10.12/lib/python3.10/site-packages/scipy/stats/__init__.py",
-    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
     "processor": "arm",
     "architecture": "64bit",
     "device_backend": "CPU (NumPy / SciPy / scikit-learn)",
     "mps_participating": false
   },
   "step8_standalone_reproduction": {
-    "standalone_warning_count": 0,
+    "standalone_warning_count": 27,
     "warning_summary": {
-      "overflow_matmul": 0,
-      "divide_by_zero_matmul": 0,
-      "invalid_matmul": 0,
+      "overflow_matmul": 9,
+      "divide_by_zero_matmul": 9,
+      "invalid_matmul": 9,
       "convergence_warning": 0,
       "other_runtime_warning": 0,
       "other_warning": 0
     },
-    "reproduced_in_standalone": false,
+    "reproduced_in_standalone": true,
     "verdict_explanation": "If standalone_warning_count > 0, the warning originates directly from scikit-learn's internal L-BFGS solver dot-product evaluation on this specific distribution. If standalone_warning_count == 0, the warning originated from instrumentation / secondary calls in Phase 6K."
   }
 }

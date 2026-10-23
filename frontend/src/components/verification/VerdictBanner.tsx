@@ -70,6 +70,13 @@ const verdictConfig: Record<string, {
     className: "verdict-warning",
     badgeVariant: "warning",
   },
+  INSUFFICIENT_EVIDENCE: {
+    icon: <AlertTriangle className="w-6 h-6" />,
+    label: "⚠ INSUFFICIENT EVIDENCE",
+    sublabel: "No conclusive evidence retrieved to confirm or refute claims",
+    className: "verdict-warning",
+    badgeVariant: "warning",
+  },
   MODERATE_RISK: {
     icon: <AlertTriangle className="w-6 h-6" />,
     label: "⚠ NEEDS REVIEW",

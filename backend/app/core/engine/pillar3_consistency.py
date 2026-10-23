@@ -57,7 +57,15 @@ class Pillar3ConsistencyEngine:
     def _sanitize_samples(self, primary_response: str, sample_responses: Optional[List[str]]) -> List[str]:
         if not sample_responses:
             return []
-        return [s.strip() for s in sample_responses if isinstance(s, str) and s.strip() and s.strip() != primary_response.strip()]
+        seen = {primary_response.strip().lower()}
+        unique_samples = []
+        for s in sample_responses:
+            if isinstance(s, str) and s.strip():
+                clean_s = s.strip()
+                if clean_s.lower() not in seen:
+                    seen.add(clean_s.lower())
+                    unique_samples.append(clean_s)
+        return unique_samples
 
     def _split_sentences(self, text: str) -> List[str]:
         if not text or not text.strip():

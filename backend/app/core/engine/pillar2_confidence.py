@@ -18,12 +18,14 @@ class Pillar2ConfidenceEngine:
     """
 
     def calculate_entropy(self, prob: float) -> float:
-        """
-        Binary entropy:
+        """Binary Bernoulli entropy of token selection:
 
         H(p) = -p log2(p) - (1-p) log2(1-p)
-        """
 
+        Measures the uncertainty between selecting this token versus any alternative.
+        Note: Full categorical predictive distribution entropy requires the full
+        vocabulary logit vector, which black-box / inference APIs do not expose.
+        """
         p = max(
             settings.MIN_TOKEN_PROBABILITY,
             min(
@@ -46,6 +48,7 @@ class Pillar2ConfidenceEngine:
         self,
         tokens: List[str],
         probabilities: Optional[List[float]] = None,
+        is_logprobs: Optional[bool] = None,
     ) -> Tuple[
         List[TokenAnalysis],
         Optional[float],
@@ -76,7 +79,17 @@ class Pillar2ConfidenceEngine:
         else:
             effective_tokens = [f"tok_{i}" for i in range(len(probabilities))]
 
+        # Determine representation: explicit contract first, fallback to value-based inference
+        if is_logprobs is not None:
+            is_log_space = bool(is_logprobs)
+        else:
+            is_log_space = any(
+                isinstance(p, (int, float)) and not math.isnan(p) and p < 0.0
+                for p in probabilities
+            )
+
         token_analyses: List[TokenAnalysis] = []
+        clean_logprobs: List[float] = []
 
         total_prob = 0.0
         total_entropy = 0.0
@@ -84,31 +97,49 @@ class Pillar2ConfidenceEngine:
         token_proc_ms = (time.perf_counter() - t_proc_start) * 1000.0
 
         t_ent_start = time.perf_counter()
-        for idx, (tok, prob) in enumerate(
+        for idx, (tok, raw_val) in enumerate(
             zip(effective_tokens, probabilities)
         ):
+            # Sanitize NaN / Infinity
+            if raw_val is None or (isinstance(raw_val, float) and math.isnan(raw_val)):
+                prob_clamped = 0.5
+                lp = round(math.log(0.5), 4)
+            elif isinstance(raw_val, float) and math.isinf(raw_val) and raw_val < 0:
+                prob_clamped = settings.MIN_TOKEN_PROBABILITY
+                lp = -50.0
+            elif isinstance(raw_val, float) and math.isinf(raw_val) and raw_val > 0:
+                prob_clamped = 1.0
+                lp = 0.0
+            elif is_log_space:
+                # Log-probability space: lp <= 0.0 -> p = exp(lp).
+                # Invalid positive numbers in log-space are clamped to 0.0 (corresponding to p = 1.0).
+                raw_f = float(raw_val)
+                lp = min(0.0, raw_f)
+                prob_clamped = max(
+                    settings.MIN_TOKEN_PROBABILITY,
+                    min(1.0, math.exp(max(-50.0, lp))),
+                )
+                lp = round(lp, 4)
+            else:
+                # Linear probability space: p in [0.0, 1.0].
+                # A genuine 0.0 is an available zero-valued measurement, clamped only for log stability.
+                raw_f = max(0.0, min(1.0, float(raw_val)))
+                prob_clamped = max(
+                    settings.MIN_TOKEN_PROBABILITY,
+                    raw_f,
+                )
+                lp = round(math.log(prob_clamped), 4)
 
-            prob_clamped = max(
-                0.0,
-                min(1.0, float(prob)),
-            )
-
-            entropy = self.calculate_entropy(
-                prob_clamped
-            )
+            clean_logprobs.append(lp)
+            entropy = self.calculate_entropy(prob_clamped)
 
             if prob_clamped >= 0.75:
-
                 risk = RiskLevel.VERIFIED
                 color = "#10B981"
-
             elif prob_clamped >= 0.45:
-
                 risk = RiskLevel.NEEDS_VERIFICATION
                 color = "#F59E0B"
-
             else:
-
                 risk = RiskLevel.LIKELY_HALLUCINATED
                 color = "#EF4444"
                 low_prob_count += 1
@@ -117,10 +148,7 @@ class Pillar2ConfidenceEngine:
                 TokenAnalysis(
                     token=tok,
                     position=idx,
-                    probability=round(
-                        prob_clamped,
-                        4,
-                    ),
+                    probability=round(prob_clamped if prob_clamped > settings.MIN_TOKEN_PROBABILITY or raw_val != 0.0 else 0.0, 4),
                     entropy=entropy,
                     risk_level=risk,
                     color_code=color,
@@ -130,17 +158,10 @@ class Pillar2ConfidenceEngine:
             total_prob += prob_clamped
             total_entropy += entropy
 
-        avg_prob = (
-            total_prob / len(tokens)
-        )
-
-        avg_entropy = (
-            total_entropy / len(tokens)
-        )
-
-        uncertain_fraction = (
-            low_prob_count / len(tokens)
-        )
+        n_eval = len(effective_tokens)
+        avg_prob = total_prob / n_eval if n_eval > 0 else 0.0
+        avg_entropy = total_entropy / n_eval if n_eval > 0 else 0.0
+        uncertain_fraction = low_prob_count / n_eval if n_eval > 0 else 0.0
 
         confidence_gap = (
             (1.0 - avg_prob) * 0.7
@@ -155,6 +176,7 @@ class Pillar2ConfidenceEngine:
             ),
         )
 
+        self._last_clean_logprobs = clean_logprobs
         self.last_token_processing_ms = round(token_proc_ms, 2)
         self.last_entropy_calculation_ms = round((time.perf_counter() - t_ent_start) * 1000.0, 2)
         return (
@@ -170,6 +192,7 @@ class Pillar2ConfidenceEngine:
         probabilities: Optional[List[float]] = None,
         evidence_items: Optional[List[Any]] = None,
         p1_result: Optional[Any] = None,
+        is_logprobs: Optional[bool] = None,
     ) -> Pillar2Result:
         """Analyze model confidence. Uses token probabilities if provided, or static verification confidence."""
         if probabilities is not None and len(probabilities) > 0:
@@ -181,19 +204,33 @@ class Pillar2ConfidenceEngine:
             ) = self.evaluate_tokens(
                 tokens,
                 probabilities,
+                is_logprobs=is_logprobs,
             )
 
             if cg_score is None:
                 cg_score = 0.5
 
             if cg_score < 0.25:
-                reasoning = f"High generation confidence. Average token probability: {avg_prob:.2f}."
+                reasoning = (
+                    f"High generation confidence. Average token probability: {avg_prob:.2f} "
+                    f"(Binary Bernoulli entropy: {avg_entropy:.2f}). "
+                    f"Note: Token predictability reflects generation certainty, not factual truth."
+                )
             elif cg_score < 0.55:
-                reasoning = f"Moderate generation confidence gap. Average token probability: {avg_prob:.2f}."
+                reasoning = (
+                    f"Moderate generation confidence gap. Average token probability: {avg_prob:.2f} "
+                    f"(Binary Bernoulli entropy: {avg_entropy:.2f}). "
+                    f"Note: Token predictability reflects generation certainty, not factual truth."
+                )
             else:
-                reasoning = "High token uncertainty detected. Multiple low-probability tokens observed."
+                reasoning = (
+                    f"High token uncertainty detected. Multiple low-probability tokens observed "
+                    f"(Average token probability: {avg_prob:.2f}, Binary Bernoulli entropy: {avg_entropy:.2f})."
+                )
 
-            token_logprobs = [round(math.log(max(1e-6, p)), 4) for p in probabilities]
+            token_logprobs = getattr(self, "_last_clean_logprobs", None) or [
+                round(math.log(max(1e-6, min(1.0, float(p)))), 4) for p in probabilities if not math.isnan(float(p))
+            ]
             att_entropy = round(avg_entropy * 0.85, 4) if avg_entropy is not None else None
             pred_entropy = round(avg_entropy * 1.15, 4) if avg_entropy is not None else None
             mutual_info = round(max(0.0, (pred_entropy or 0.0) - (att_entropy or 0.0)), 4) if avg_entropy is not None else None
@@ -210,6 +247,7 @@ class Pillar2ConfidenceEngine:
                 available=True,
                 status="EXECUTED",
                 mode="GENERATION_LOGPROB",
+                is_proxy=False,
                 reasoning=reasoning,
                 token_logprobs=token_logprobs,
                 attention_entropy=att_entropy,
@@ -233,21 +271,39 @@ class Pillar2ConfidenceEngine:
                 available=False,
                 status="UNAVAILABLE",
                 mode="STATIC_VERIFICATION_CONFIDENCE",
+                is_proxy=True,
                 reasoning="No text tokens provided for confidence analysis.",
             )
 
-        # Compute static confidence from evidence grounding and factual certainty
+        # Compute a proxy uncertainty estimate from evidence-grounding similarity.
+        # IMPORTANT: This is NOT a measurement of token-level generation probabilities.
+        # It is an evidence-similarity proxy used only when logprobs are absent.
+        # Fusion applies a reduced reliability weight (r_p2=PROXY_RELIABILITY) for this path.
         ev_list = evidence_items or getattr(p1_result, "evidence", []) or []
         if ev_list:
-            sim_scores = [getattr(e, "similarity_score", getattr(e, "score", 0.5)) for e in ev_list]
+            sim_scores = [
+                getattr(e, "similarity_score", getattr(e, "score", 0.5))
+                for e in ev_list
+            ]
             max_sim = max(sim_scores) if sim_scores else 0.5
+            # Evidence-similarity proxy: lower similarity = higher uncertainty proxy
+            # v_conf is evidence coverage confidence, NOT model generation confidence.
             v_conf = min(1.0, max(0.2, 0.70 + 0.25 * float(max_sim)))
             cg_score = round(1.0 - v_conf, 4)
-            reasoning = f"Static verification confidence: High evidence grounding (max similarity {max_sim:.2f})."
+            reasoning = (
+                f"[PROXY — evidence-similarity estimate, NOT token log-probabilities] "
+                f"Evidence coverage confidence: {v_conf:.2f} (max retrieved similarity: {max_sim:.2f}). "
+                f"Proxy uncertainty score: {cg_score:.2f}. "
+                f"This score reflects retrieval coverage, not model generation uncertainty."
+            )
         else:
             v_conf = 0.40
             cg_score = 0.60
-            reasoning = "Static verification confidence: Evidence missing, resulting in elevated verification uncertainty."
+            reasoning = (
+                "[PROXY — evidence-similarity estimate, NOT token log-probabilities] "
+                "No retrieved evidence available. Default proxy uncertainty applied (0.60). "
+                "Actual token-level confidence could not be measured."
+            )
 
         avg_entropy = round(0.5 * cg_score, 4)
         return Pillar2Result(
@@ -257,7 +313,10 @@ class Pillar2ConfidenceEngine:
             available=True,
             status="EXECUTED",
             mode="STATIC_VERIFICATION_CONFIDENCE",
+            is_proxy=True,
             reasoning=reasoning,
+            # calibration_score reflects evidence coverage, not logprob calibration.
+            # Fusion uses this as reliability weight but caps it at PROXY_RELIABILITY.
             calibration_score=round(v_conf, 4),
             epistemic_uncertainty=round(cg_score * 0.5, 4),
             aleatoric_uncertainty=round(avg_entropy * 0.5, 4),

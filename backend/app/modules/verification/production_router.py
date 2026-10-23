@@ -229,7 +229,14 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         q_text = query
         l_probs = payload.logprobs
         s_resps = payload.sample_responses
-        e_items = ev_items
+        l_probs_rep = getattr(payload, "logprobs_representation", "auto")
+        if l_probs_rep == "logprob":
+            is_lp = True
+        elif l_probs_rep == "probability":
+            is_lp = False
+        else:
+            is_lp = None
+
         report = await loop.run_in_executor(
             _pipeline_executor,
             lambda: get_pipeline().analyze(
@@ -238,6 +245,7 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                 token_probabilities=l_probs,
                 sample_responses=s_resps,
                 evidence_items=e_items,
+                is_logprobs=is_lp,
             ),
         )
         p_dur = (time.perf_counter() - t0) * 1000.0
@@ -277,10 +285,16 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         timer.record("adaptive_fusion", fusion_dur_ms)
         timer.record("calibration", 0.0)
 
-        p1_available = True
+        p1_available = bool(p1 and getattr(p1, "available", True) and getattr(p1, "factual_error_score", None) is not None)
         p2_available = bool(p2 and getattr(p2, "available", False) and getattr(p2, "confidence_gap_score", None) is not None)
         p3_available = bool(p3 and getattr(p3, "available", False) and getattr(p3, "consistency_failure_score", None) is not None)
+
+        # Distinguish genuine logprob P2 from evidence-similarity proxy P2.
+        # is_full_genuine_analysis requires all three pillars with non-proxy P2.
+        p2_is_proxy = bool(p2_available and getattr(p2, "is_proxy", False))
+        p2_is_genuine = bool(p2_available and not p2_is_proxy)
         is_full_analysis = bool(p1_available and p2_available and p3_available)
+        is_full_genuine_analysis = bool(p1_available and p2_is_genuine and p3_available)
 
         fe_val = float(getattr(p1, "factual_error_score", 0.0))
         cg_val = float(p2.confidence_gap_score) if p2_available else 0.0
@@ -292,15 +306,27 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             consistency=round(cf_val, 4) if p3_available else None,
         )
 
+        # Determine p2_status string for the audit record.
+        # EXECUTED = genuine logprob path; PROXY = evidence-similarity fallback;
+        # UNAVAILABLE = no tokens or all-zero input.
+        if p2_is_genuine:
+            p2_status_str = "EXECUTED"
+        elif p2_is_proxy:
+            p2_status_str = "PROXY"
+        else:
+            p2_status_str = getattr(p2, "status", "UNAVAILABLE") if p2 else "UNAVAILABLE"
+
+        p3_status_str = "EXECUTED" if p3_available else (getattr(p3, "status", "UNAVAILABLE") if p3 else "UNAVAILABLE")
+
         p_status_obj = PillarExecutionStatus(
             p1_status="EXECUTED" if p1 else "FAILED",
-            p2_status="EXECUTED" if p2_available else "UNAVAILABLE",
-            p3_status="EXECUTED" if p3_available else "UNAVAILABLE",
-            fusion_status="FULL_THREE_PILLAR" if is_full_analysis else ("PARTIAL_TWO_PILLAR" if (p2_available or p3_available) else "PARTIAL_ONE_PILLAR"),
+            p2_status=p2_status_str,
+            p3_status=p3_status_str,
+            fusion_status="FULL_THREE_PILLAR" if is_full_genuine_analysis else ("PARTIAL_GENUINE" if (p2_is_genuine or p3_available) else ("PARTIAL_PROXY" if p2_is_proxy else "PARTIAL_ONE_PILLAR")),
             p1_available=p1_available,
             p2_available=p2_available,
             p3_available=p3_available,
-            is_full_analysis=is_full_analysis,
+            is_full_analysis=is_full_genuine_analysis,
         )
 
         # Mathematical fusion breakdown
@@ -385,6 +411,43 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             risk_level_str = "LIKELY_HALLUCINATED"
             root_cause = "FACTUAL_CONTRADICTION"
 
+        # If all verifier modalities are unavailable, abstain from declaring verified
+        if not p1_available and not p2_available and not p3_available:
+            risk_level_str = "INSUFFICIENT_EVIDENCE"
+            root_cause = "ALL_SIGNALS_UNAVAILABLE"
+
+        # ── Verdict Integrity Check ──────────────────────────────────────────────
+        # A VERIFIED verdict must not be displayed if any sentence-level claim has
+        # INSUFFICIENT_EVIDENCE, CONTRADICTED, or NEEDS_VERIFICATION status, OR if
+        # the factual error score exceeds the empirical verified boundary (FE > 0.20
+        # per phase15_threshold_audit.csv empirical calibration).
+        # This prevents an aggregate numeric H-score from masking genuine claim-level issues.
+        if risk_level_str == "VERIFIED":
+            flagged_sentences = [
+                s for s in report.sentence_analyses
+                if (str(s.risk_level.value) if hasattr(s.risk_level, "value") else str(s.risk_level))
+                not in ("VERIFIED", "LOW_RISK")
+            ]
+            if flagged_sentences or fe_val > 0.20:
+                has_contradicted = any(
+                    (str(s.risk_level.value) if hasattr(s.risk_level, "value") else str(s.risk_level))
+                    in ("CONTRADICTED", "LIKELY_HALLUCINATED")
+                    for s in flagged_sentences
+                )
+                has_insufficient = any(
+                    (str(s.risk_level.value) if hasattr(s.risk_level, "value") else str(s.risk_level))
+                    == "INSUFFICIENT_EVIDENCE"
+                    for s in flagged_sentences
+                )
+                if has_contradicted:
+                    risk_level_str = "LIKELY_HALLUCINATED"
+                    root_cause = "FACTUAL_CONTRADICTION"
+                elif has_insufficient:
+                    risk_level_str = "INSUFFICIENT_EVIDENCE"
+                    root_cause = "RETRIEVAL_FAILURE"
+                else:
+                    risk_level_str = "NEEDS_VERIFICATION"
+
         heatmap_items = []
         for ann in annotations:
             raw_s = float(ann["risk_score"])
@@ -457,24 +520,58 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         # 8. Response Serialization Timing
         with timer.stage("response_serialization"):
             unc = getattr(report, "uncertainty_analysis", {})
-            sig_type = "MEASURED" if (p2_available and payload.logprobs) else ("PROXY" if p2_available else "UNAVAILABLE")
-            method_str = "TOKEN_LOGPROBS" if (p2_available and payload.logprobs) else ("UNCERTAINTY_PROXY" if p2_available else "UNAVAILABLE")
+            # Signal type hierarchy:
+            # MEASURED = genuine token log-probabilities from provider
+            # PROXY    = evidence-similarity fallback (no logprobs)
+            # UNAVAILABLE = P2 not executed (empty text or hard failure)
+            if p2_is_genuine:
+                sig_type = "MEASURED"
+                method_str = "TOKEN_LOGPROBS"
+                uncertainty_measure_str = "Binary Shannon Entropy H(p)"
+            elif p2_is_proxy:
+                sig_type = "PROXY"
+                method_str = "EVIDENCE_SIMILARITY_PROXY"
+                uncertainty_measure_str = "Evidence Retrieval Similarity Proxy (NOT token entropy)"
+            else:
+                sig_type = "UNAVAILABLE"
+                method_str = "UNAVAILABLE"
+                uncertainty_measure_str = "None"
+
             gen_count = len(payload.sample_responses) if payload.sample_responses else 1
+
+            # Build explanation that clearly flags proxy vs genuine measurement
+            if p2 and p2.reasoning:
+                p2_explanation = p2.reasoning
+            elif p2_is_proxy:
+                p2_explanation = (
+                    "Token log-probabilities were not provided. "
+                    "A proxy uncertainty estimate derived from evidence-retrieval similarity is used instead. "
+                    "This is NOT a measurement of model generation confidence."
+                )
+            else:
+                p2_explanation = (
+                    "Token-level logprobs not provided by active LLM provider. "
+                    "Pillar 2 confidence gap could not be measured."
+                )
+
             confidence_info = ConfidenceAnalysis(
-                whitebox_entropy=float(p2.avg_entropy) if (p2_available and p2.avg_entropy is not None) else None,
+                whitebox_entropy=float(p2.avg_entropy) if (p2_is_genuine and p2 and p2.avg_entropy is not None) else None,
                 blackbox_variation_score=float(p3.consistency_failure_score) if (p3_available and p3.consistency_failure_score is not None) else None,
-                epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.0)) if p2_available or p3_available else None,
-                aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.0)) if p2_available else None,
+                epistemic_uncertainty=float(unc.get("epistemic_uncertainty", 0.0)) if (p2_is_genuine or p3_available) else None,
+                aleatoric_uncertainty=float(unc.get("aleatoric_uncertainty", 0.0)) if p2_is_genuine else None,
                 methodology=method_str,
                 signal_type=sig_type,
-                uncertainty_measure="Binary Shannon Entropy H(p)" if (p2_available and payload.logprobs) else ("Multi-Sample Variance Proxy" if p2_available else "None"),
+                uncertainty_measure=uncertainty_measure_str,
                 generations_used=gen_count,
                 raw_signal_metadata={
                     "logprobs_provided": bool(payload.logprobs),
                     "generations_count": gen_count,
                     "model_name": model_name,
+                    "p2_is_proxy": p2_is_proxy,
+                    "p2_is_genuine": p2_is_genuine,
+                    "p2_mode": getattr(p2, "mode", "UNKNOWN") if p2 else "UNKNOWN",
                 },
-                explanation=p2.reasoning if p2 else "Token-level logprobs not provided by active LLM provider. Excluded from fusion.",
+                explanation=p2_explanation,
             )
 
             confidence_val = round(1.0 - abs(overall_h - 0.5), 4)

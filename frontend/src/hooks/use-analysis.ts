@@ -67,12 +67,24 @@ export function useAnalysis() {
     mutationFn: async (payload: AnalysisRequest) => {
       setIsAnalyzing(true);
       const textToAnalyze = payload.text || payload.response || "";
-      const reqPayload = {
+      // Forward all optional fields so the backend receives context evidence,
+      // pre-generated samples, and token logprobs when provided by the caller.
+      const reqPayload: AnalysisRequest = {
         query: payload.query?.trim() || undefined,
         response: textToAnalyze.trim(),
         model_name: payload.model_name || "GPT-4",
+        // Optional signal enrichment fields — do NOT strip these
+        ...(payload.provided_evidence != null && payload.provided_evidence.length > 0
+          ? { provided_evidence: payload.provided_evidence }
+          : {}),
+        ...(payload.sample_responses != null && payload.sample_responses.length > 0
+          ? { sample_responses: payload.sample_responses }
+          : {}),
+        ...(payload.logprobs != null && payload.logprobs.length > 0
+          ? { logprobs: payload.logprobs }
+          : {}),
       };
-      return analyzeResponse(reqPayload as AnalysisRequest);
+      return analyzeResponse(reqPayload);
     },
     onSuccess: (data: AnalysisResponse, variables: AnalysisRequest) => {
       setIsAnalyzing(false);

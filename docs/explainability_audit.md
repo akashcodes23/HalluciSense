@@ -1,6 +1,6 @@
 # HalluciSense Explainability Audit Report
 
-**Audit Date**: `2026-09-01 17:08:58 UTC`  
+**Audit Date**: `2026-10-21 14:51:04 UTC`  
 **Audit Status**: **`PASSED`**  
 
 ---

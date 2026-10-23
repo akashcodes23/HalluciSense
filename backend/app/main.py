@@ -1,6 +1,10 @@
 """
 HalluciSense FastAPI Application Factory.
 """
+import os
+os.environ["USE_TF"] = "0"
+os.environ["USE_TORCH"] = "1"
+
 import time
 import uuid
 import logging
