@@ -15,17 +15,17 @@ import { cn } from "@/lib/utils";
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
-  const [apiUrl, setApiUrl] = useState("https://hallucisense-production-a4cd.up.railway.app");
+  const [apiUrl, setApiUrl] = useState("https://hallucisense-production-c0ee.up.railway.app");
   const [defaultModel, setDefaultModel] = useState("GPT-4o");
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedUrl = localStorage.getItem("hallucisense_api_url");
-      if (savedUrl && !savedUrl.includes("hallucisense-production.up.railway.app")) {
+      if (savedUrl && !savedUrl.includes("hallucisense-production.up.railway.app") && !savedUrl.includes("hallucisense-production-a4cd.up.railway.app")) {
         setApiUrl(savedUrl);
       } else {
-        const activeUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://hallucisense-production-a4cd.up.railway.app";
+        const activeUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://hallucisense-production-c0ee.up.railway.app";
         setApiUrl(activeUrl);
         localStorage.setItem("hallucisense_api_url", activeUrl);
       }
@@ -51,7 +51,7 @@ export default function SettingsPage() {
   };
 
   const handleReset = () => {
-    const defaultUrl = "https://hallucisense-production-a4cd.up.railway.app";
+    const defaultUrl = "https://hallucisense-production-c0ee.up.railway.app";
     const defaultModelVal = "GPT-4o";
     setApiUrl(defaultUrl);
     setDefaultModel(defaultModelVal);

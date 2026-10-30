@@ -13,6 +13,80 @@ from app.core.verification.symbolic_verifier import evaluate_arithmetic_claim
 from app.core.verification.unit_verifier import evaluate_unit_claim
 
 
+def extract_capital_relation(text: str) -> Optional[Tuple[str, str]]:
+    """Extract (city, state/country) tuple from capital assertions.
+
+    Returns (city, entity) in lowercase if text asserts a capital relation, else None.
+    Handles variations like:
+    - 'X is the capital of Y'
+    - 'X, also known as ..., is the capital and largest city of the state of Y'
+    - 'The capital of Y is X'
+    - 'Y's capital is X'
+    """
+    clean = re.sub(r'\s+', ' ', text).strip()
+
+    # Pattern 1: X is/was (the) capital (city) (and ...) of (the ...) Y
+    p1 = re.compile(
+        r'\b([A-Za-z\s’\'-]+?)(?:,\s*(?:also known as|officially)[^,]+?(?:\([^)]*\))?,?)?\s+(?:is|was)\s+(?:the\s+)?capital\s+(?:city\s+)?(?:and\s+[a-z\s]+?\s+)?of\s+(?:the\s+)?(?:[a-z\s]+?\s+state of\s+)?([A-Za-z\s’\'-]+)',
+        re.IGNORECASE
+    )
+    # Pattern 2: (the) capital of Y is/was X
+    p2 = re.compile(
+        r'\b(?:the\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]+?)\s+(?:is|was)\s+([A-Za-z\s’\'-]+)',
+        re.IGNORECASE
+    )
+    # Pattern 3: Y's capital is X
+    p3 = re.compile(
+        r'\b([A-Za-z\s’\'-]+?)(?:\'s|’s)\s+capital\s+(?:city\s+)?(?:is|was)\s+([A-Za-z\s’\'-]+)',
+        re.IGNORECASE
+    )
+
+    m1 = p1.search(clean)
+    if m1:
+        city = m1.group(1).strip().rstrip(",.")
+        entity = m1.group(2).strip().rstrip(",.")
+        city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
+        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+        if len(city.split()) <= 4 and len(entity.split()) <= 4:
+            if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                return city.lower(), entity.lower()
+
+    m2 = p2.search(clean)
+    if m2:
+        entity = m2.group(1).strip().rstrip(",.")
+        city = m2.group(2).strip().rstrip(",.")
+        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+        if len(city.split()) <= 4 and len(entity.split()) <= 4:
+            if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                return city.lower(), entity.lower()
+
+    m3 = p3.search(clean)
+    if m3:
+        entity = m3.group(1).strip().rstrip(",.")
+        city = m3.group(2).strip().rstrip(",.")
+        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+        if len(city.split()) <= 4 and len(entity.split()) <= 4:
+            if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                return city.lower(), entity.lower()
+
+    # Pattern 4: in/of Y ... the capital X (strictly within same sentence)
+    p4 = re.compile(
+        r'\b(?:of|in)\s+([A-Za-z\s’\'-]+?)\b[^.!?]*?\b(?:the\s+)?capital\s+(?:city\s+)?([A-Za-z\s’\'-]+)',
+        re.IGNORECASE
+    )
+    m4 = p4.search(clean)
+    if m4:
+        entity = m4.group(1).strip().rstrip(",.")
+        city = m4.group(2).strip().rstrip(",.")
+        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+        city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
+        if len(city.split()) <= 4 and len(entity.split()) <= 4:
+            if entity.lower() not in {"the", "a", "an", "this", "that", "terms", "terms of", "it"} and len(entity) >= 3 and len(city) >= 3:
+                return city.lower(), entity.lower()
+
+    return None
+
+
 class EventTemporalAnchorResolver:
     """Resolve event/entity time spans dynamically through Wikidata.
 
@@ -253,18 +327,19 @@ class Pillar1RetrievalEngine:
             else:
                 return 0.95, 0.0, 0.05
 
-        # Check for capital city contradiction or entailment
-        claim_cap_m = re.search(r'\b([A-Z][a-zA-Z\s]+?)\s+is\s+the\s+capital\s+(?:city\s+)?of\s+([A-Z][a-zA-Z\s]+)', claim)
-        snippet_cap_m = re.search(r'\b([A-Z][a-zA-Z\s]+?)\s+is\s+the\s+capital\s+(?:city\s+)?of\s+([A-Z][a-zA-Z\s]+)', item.snippet)
-        if claim_cap_m and snippet_cap_m:
-            c_city = claim_cap_m.group(1).strip().lower()
-            c_state = claim_cap_m.group(2).strip().lower().rstrip(".,")
-            s_city = snippet_cap_m.group(1).strip().lower()
-            s_state = snippet_cap_m.group(2).strip().lower().rstrip(".,")
-            if (c_state in s_state or s_state in c_state):
-                if c_city != s_city:
+        # Check for capital city contradiction or entailment using robust structural extractor
+        claim_cap = extract_capital_relation(claim)
+        snippet_cap = extract_capital_relation(item.snippet)
+        if claim_cap and snippet_cap:
+            c_city, c_entity = claim_cap
+            s_city, s_entity = snippet_cap
+            # Check if entities refer to the same target (substring or exact match)
+            if c_entity in s_entity or s_entity in c_entity:
+                if c_city != s_city and c_city not in s_city and s_city not in c_city:
+                    # Clear factual contradiction: evidence names a different capital for the same entity
                     return 0.0, 0.98, 0.02
                 else:
+                    # Clear factual entailment: evidence names the same capital for the same entity
                     return 0.98, 0.0, 0.02
 
         if neutral > 0.60 and contradiction < 0.30 and sim_score >= 0.70:
@@ -275,7 +350,7 @@ class Pillar1RetrievalEngine:
                 if f"{subj} ({obj})" in snippet_lower or f"{subj} ({obj}" in snippet_lower or f"formula {obj}" in snippet_lower:
                     entailment = max(entailment, 0.90)
 
-        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_formula_m and not claim_cap_m:
+        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_formula_m and not claim_cap:
             claim_keywords = [w.lower() for w in re.findall(r'\b[A-Za-z]{4,}\b', claim)]
             snippet_lower = item.snippet.lower()
             if claim_keywords:
@@ -290,9 +365,11 @@ class Pillar1RetrievalEngine:
         import time
         t0 = time.perf_counter()
         if not claims:
+            self.last_claim_statuses = []
             self.last_nli_ms = 0.0
             return 0.0, external_evidence
         if not external_evidence:
+            self.last_claim_statuses = ["INSUFFICIENT_EVIDENCE" for _ in claims]
             self.last_nli_ms = 0.0
             return 0.5, external_evidence
 
@@ -302,17 +379,18 @@ class Pillar1RetrievalEngine:
             relevant_items = [item for item in external_evidence if self._evidence_relevant_to_claim(claim, item)]
             if not relevant_items:
                 relevant_items = external_evidence
-            relevant_items = relevant_items[:3]
+            relevant_items = relevant_items[:8]
             for item_idx, item in enumerate(relevant_items):
                 sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
-                if sim_score >= 0.20:
+                has_rel = bool(extract_capital_relation(claim) and extract_capital_relation(item.snippet))
+                if sim_score >= 0.35 or has_rel:
                     pairs.append((claim, item.snippet))
                     pair_meta.append((claim_idx, item_idx, item))
 
         results = self.entailment_engine.classify_batch(
             [p[0] for p in pairs],
             [p[1] for p in pairs],
-            batch_size=32,
+            batch_size=1,
         ) if pairs else []
 
         best = [[0.0, 0.0, 0.0] for _ in claims]
@@ -320,23 +398,43 @@ class Pillar1RetrievalEngine:
             entailment, contradiction, neutral = self._score_result(
                 claims[claim_idx], item, result, item_idx
             )
+            sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
+            # Subject integrity guard: If a claim asserts a specific subject relation (e.g. capital),
+            # an evidence snippet that does not even mention the asserted subject entity cannot entail the claim
+            claim_cap = extract_capital_relation(claims[claim_idx])
+            snippet_cap = extract_capital_relation(item.snippet)
+            if claim_cap:
+                c_city, _ = claim_cap
+                if c_city not in item.snippet.lower():
+                    entailment = min(entailment, 0.10)
+
+            # Contradiction relevance guard: Low-similarity, out-of-domain passages must not create false contradictions
+            if sim_score < 0.45 and not (claim_cap and snippet_cap):
+                contradiction = min(contradiction, 0.20)
+
             best[claim_idx][0] = max(best[claim_idx][0], entailment)
             best[claim_idx][1] = max(best[claim_idx][1], contradiction)
             best[claim_idx][2] = max(best[claim_idx][2], neutral)
 
         claim_error_scores = []
+        claim_statuses = []
         for best_entailment, strongest_contradiction, best_neutral in best:
-            if strongest_contradiction >= 0.70 and strongest_contradiction > (best_entailment + 0.15):
+            if strongest_contradiction >= 0.70 and strongest_contradiction > best_entailment:
                 claim_error = strongest_contradiction
-            elif best_entailment >= 0.65:
-                claim_error = 1.0 - best_entailment
-            elif strongest_contradiction >= 0.50:
+                claim_stat = "CONTRADICTED"
+            elif strongest_contradiction >= 0.50 and strongest_contradiction > best_entailment:
                 claim_error = strongest_contradiction
-            elif strongest_contradiction < 0.30 and (best_entailment + 0.5 * best_neutral) >= 0.40:
-                claim_error = 1.0 - (best_entailment + 0.5 * best_neutral)
+                claim_stat = "CONTRADICTED"
+            elif best_entailment >= 0.65 and best_entailment > strongest_contradiction:
+                claim_error = max(0.0, 1.0 - best_entailment)
+                claim_stat = "VERIFIED"
             else:
-                claim_error = max(0.50, strongest_contradiction, 1.0 - best_entailment - (0.5 * best_neutral))
+                claim_error = 0.50
+                claim_stat = "INSUFFICIENT_EVIDENCE"
             claim_error_scores.append(max(0.0, min(1.0, claim_error)))
+            claim_statuses.append(claim_stat)
+
+        self.last_claim_statuses = claim_statuses
 
         self.last_nli_ms = round((time.perf_counter() - t0) * 1000.0, 2)
         self.last_nli_batch_metrics = getattr(self.entailment_engine, "last_batch_metrics", {})
@@ -400,18 +498,22 @@ class Pillar1RetrievalEngine:
             if arith_res.get("is_consistent") is True:
                 fe_score = 0.0
                 sym_reasoning = f"Symbolic Arithmetic Verified: {arith_res.get('explanation')}"
+                self.last_claim_statuses = ["VERIFIED" for _ in claims]
             elif arith_res.get("is_consistent") is False:
                 fe_score = 1.0
                 sym_reasoning = f"Symbolic Arithmetic Contradiction: {arith_res.get('explanation')}"
+                self.last_claim_statuses = ["CONTRADICTED" for _ in claims]
 
         unit_res = evaluate_unit_claim(text)
         if unit_res and unit_res.get("verified"):
             if unit_res.get("is_consistent") is True:
                 fe_score = 0.0
                 sym_reasoning = f"Symbolic Unit Verified: {unit_res.get('explanation')}"
+                self.last_claim_statuses = ["VERIFIED" for _ in claims]
             elif unit_res.get("is_consistent") is False:
                 fe_score = 1.0
                 sym_reasoning = f"Symbolic Unit Contradiction: {unit_res.get('explanation')}"
+                self.last_claim_statuses = ["CONTRADICTED" for _ in claims]
 
         if not claims:
             reasoning = "No discrete factual claims identified."

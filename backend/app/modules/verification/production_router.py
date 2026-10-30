@@ -244,7 +244,7 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                 query=q_text,
                 token_probabilities=l_probs,
                 sample_responses=s_resps,
-                evidence_items=e_items,
+                evidence_items=ev_items,
                 is_logprobs=is_lp,
             ),
         )

@@ -20,7 +20,7 @@ from app.core.engine.model_registry import ModelRegistry
 logger = structlog.get_logger(__name__)
 
 DEFAULT_NLI_MODEL = "cross-encoder/nli-deberta-v3-small"
-MAX_EVIDENCE_PER_CLAIM = 3
+MAX_EVIDENCE_PER_CLAIM = 6
 MAX_CLAIMS_FOR_NLI = 15
 
 
@@ -171,6 +171,18 @@ class SemanticNLIAdapter:
             neu = float(nli_res.get("neutral", 0.0))
             con = float(nli_res.get("contradiction", 0.0))
 
+            from app.core.engine.pillar1_retrieval import extract_capital_relation
+            claim_cap = extract_capital_relation(meta["claim_text"])
+            snippet_cap = extract_capital_relation(meta["snippet"])
+            if claim_cap and snippet_cap:
+                c_city, c_entity = claim_cap
+                s_city, s_entity = snippet_cap
+                if c_entity in s_entity or s_entity in c_entity:
+                    if c_city != s_city and c_city not in s_city and s_city not in c_city:
+                        ent, con, neu = 0.0, 0.98, 0.02
+                    else:
+                        ent, con, neu = 0.98, 0.0, 0.02
+
             if ent >= neu and ent >= con:
                 label = "entailment"
                 conf = ent
@@ -206,12 +218,16 @@ class SemanticNLIAdapter:
                 ents = [e["entailment"] for e in ev_evals]
                 cons = [e["contradiction"] for e in ev_evals]
                 max_e = float(max(ents))
+                max_c = float(max(cons))
                 mean_c = float(np.mean(cons))
                 margin = max_e - mean_c
 
-                # Best evidence passage is highest entailment if any entailment, else highest contradiction
-                best_ev = max(ev_evals, key=lambda x: x["entailment"])
-                primary_status = best_ev["label"]
+                if max_c >= 0.50 and max_c > max_e:
+                    primary_status = "contradiction"
+                elif max_e >= 0.65 and max_e > max_c:
+                    primary_status = "entailment"
+                else:
+                    primary_status = "neutral"
             else:
                 max_e = 0.0
                 mean_c = 0.0  # Neutral / ungrounded default matching Phase 6I

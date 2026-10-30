@@ -3,6 +3,7 @@ Hybrid Knowledge Retriever.
 Combines Wikipedia, FAISS, and BM25 strategies to fetch relevant evidence.
 """
 from typing import List
+import re
 import structlog
 from app.modules.knowledge.wikipedia import WikipediaKnowledgeSource
 from app.modules.knowledge.faiss_store import FAISSVectorStore
@@ -28,17 +29,26 @@ class HybridRetriever:
 
         all_evidence = []
         t_start = time.perf_counter()
+        if isinstance(claims, str):
+            claims = [claims]
         clean_claims = [c.strip() for c in claims if c and c.strip()]
 
         t_w0 = time.perf_counter()
         wiki_by_claim = self.wiki.retrieve_batch(clean_claims)
         wiki_ms = (time.perf_counter() - t_w0) * 1000.0
+        _STOPWORDS = {"a", "an", "the", "is", "are", "was", "were", "of", "in", "on", "at", "to", "for", "with", "by", "from", "that", "this", "it", "and", "or", "as"}
         for claim in clean_claims:
+            claim_words = {w for w in re.findall(r'[a-zA-Z0-9]+', claim.lower()) if w not in _STOPWORDS}
             for item in wiki_by_claim.get(claim, []):
                 evidence = dict(item)
                 evidence["claim"] = claim
-                if "similarity_score" not in evidence:
-                    evidence["similarity_score"] = 0.85
+                if "similarity_score" not in evidence or evidence["similarity_score"] == 0.85:
+                    snip_words = {w for w in re.findall(r'[a-zA-Z0-9]+', (item.get("snippet") or "").lower()) if w not in _STOPWORDS}
+                    if claim_words:
+                        overlap = len(claim_words.intersection(snip_words)) / float(len(claim_words))
+                        evidence["similarity_score"] = round(max(0.10, min(0.95, 0.20 + 0.75 * overlap)), 4)
+                    else:
+                        evidence["similarity_score"] = 0.50
                 all_evidence.append(evidence)
 
         faiss_ms = 0.0
@@ -73,7 +83,7 @@ class HybridRetriever:
         if enable_reranker and primary_claim:
             if self.reranker is None:
                 self.reranker = CrossEncoderReranker()
-            top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=5)
+            top_evidence = self.reranker.rerank(primary_claim, unique_evidence, top_k=8)
         else:
             # Strongest candidates selection using existing retrieval similarity scores
             sorted_evidence = sorted(
@@ -81,7 +91,7 @@ class HybridRetriever:
                 key=lambda x: float(x.get("similarity_score", 0.0)),
                 reverse=True,
             )
-            top_evidence = sorted_evidence[:5]
+            top_evidence = sorted_evidence[:8]
 
         rerank_ms = (time.perf_counter() - t_r0) * 1000.0
         total_ms = (time.perf_counter() - t_start) * 1000.0

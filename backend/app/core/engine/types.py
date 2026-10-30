@@ -131,6 +131,9 @@ if USE_PYDANTIC:
         corrected_response: Optional[str] = Field(None)
         overall_h_score: float = Field(..., ge=0.0, le=1.0)
         overall_risk_level: RiskLevel
+        raw_fusion_score: Optional[float] = Field(None, description="Exact unmanipulated raw score from linear algebra fusion")
+        decision_override_reason: Optional[str] = Field(None, description="Explicit justification if verdict diverges from raw threshold")
+        claim_statuses: List[str] = Field(default_factory=list, description="Claim-level evidence verification statuses")
         sentence_analyses: List[SentenceAnalysis] = Field(default_factory=list)
         token_analyses: List[TokenAnalysis] = Field(default_factory=list)
         pillar1_summary: Pillar1Result
@@ -277,3 +280,6 @@ else:
         calibrated_probability: Optional[float] = None
         fusion_mode: str = "ADAPTIVE"
         sensitivity_analysis: Optional[Dict[str, Any]] = None
+        raw_fusion_score: Optional[float] = None
+        decision_override_reason: Optional[str] = None
+        claim_statuses: List[str] = field(default_factory=list)

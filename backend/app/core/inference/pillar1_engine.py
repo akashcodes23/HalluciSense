@@ -110,7 +110,14 @@ class Pillar1Engine:
 
         for c in claims:
             c_text = c.get("text", "")
-            passages = self.retriever.get_evidence(c_text)
+            q_list = [c_text]
+            from app.core.engine.pillar1_retrieval import extract_capital_relation
+            cap_rel = extract_capital_relation(c_text)
+            if cap_rel:
+                _, entity = cap_rel
+                q_list.append(f"capital of {entity}")
+                q_list.append(entity)
+            passages = self.retriever.retrieve(q_list)
             evidence_by_claim[c_text] = passages
 
             ent_scores = []

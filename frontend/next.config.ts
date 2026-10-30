@@ -11,7 +11,7 @@ const nextConfig = {
     const backendUrl =
       process.env.NEXT_PUBLIC_API_BASE_URL ||
       process.env.NEXT_PUBLIC_API_URL ||
-      'https://hallucisense-production-a4cd.up.railway.app';
+      'https://hallucisense-production-c0ee.up.railway.app';
     return [
       {
         source: '/api/:path*',

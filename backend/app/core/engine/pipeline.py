@@ -80,6 +80,24 @@ class HallucinationDetectionPipeline:
             for c in claims:
                 if c not in retrieval_queries:
                     retrieval_queries.append(c)
+                # Expand relation-specific queries for factual assertions
+                from .pillar1_retrieval import extract_capital_relation
+                cap_rel = extract_capital_relation(c)
+                if cap_rel:
+                    city, entity = cap_rel
+                    alt1 = f"capital of {entity}"
+                    alt2 = entity
+                    if alt1 not in retrieval_queries:
+                        retrieval_queries.append(alt1)
+                    if alt2 not in retrieval_queries:
+                        retrieval_queries.append(alt2)
+
+                # Key content terms expansion for factual assertions
+                c_words = [w for w in re.findall(r'[A-Za-z0-9]+', c) if w.lower() not in {"a", "an", "the", "is", "are", "was", "were", "of", "in", "on", "at", "to", "for", "with", "by", "from", "that", "this", "it", "and", "or", "as", "composed", "consists"}]
+                if len(c_words) >= 2:
+                    k_query = " ".join(c_words)
+                    if k_query not in retrieval_queries:
+                        retrieval_queries.append(k_query)
 
             raw_evidence = self.retriever.retrieve(retrieval_queries)
 
@@ -816,6 +834,43 @@ Respond STRICTLY in JSON using this schema:
             p2_global,
             p3_global,
         )
+
+        # Authoritative Verdict Integrity Stage (Phase F)
+        raw_fusion_score = float(overall_h_score)
+        decision_override_reason = None
+        p1_statuses = getattr(self.p1_engine, "last_claim_statuses", [])
+        p1_fe = float(p1_global.factual_error_score or 0.0) if p1_global else 0.0
+        p3_cf = float(p3_global.consistency_failure_score or 0.0) if p3_global and p3_global.available else 0.0
+
+        if p1_statuses:
+            if any(s == "CONTRADICTED" for s in p1_statuses) or p1_fe >= 0.70:
+                overall_risk = RiskLevel.LIKELY_HALLUCINATED
+                overall_color = "#EF4444"
+                if raw_fusion_score < 0.50:
+                    decision_override_reason = "Claim-level factual contradiction detected in atomic claims (Pillar 1)"
+            elif (all(s == "VERIFIED" for s in p1_statuses) or p1_fe <= 0.20) and p3_cf < 0.50:
+                overall_risk = RiskLevel.VERIFIED
+                overall_color = "#10B981"
+                if raw_fusion_score >= 0.30:
+                    decision_override_reason = "All atomic claims verified by grounded reference evidence"
+            elif all(s == "INSUFFICIENT_EVIDENCE" for s in p1_statuses) and p3_cf < 0.50:
+                overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
+                overall_color = "#6B7280"
+                decision_override_reason = "Selective prediction abstention: all atomic claims lack verified reference grounding"
+        elif not evidence_items and p1_fe == 0.50:
+            overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
+            overall_color = "#6B7280"
+            decision_override_reason = "Selective prediction abstention: no external reference evidence available"
+
+        # Synchronize sentence analysis if single-sentence
+        if len(sentence_analyses) == 1:
+            sentence_analyses[0].hallucination_score = overall_h_score
+            sentence_analyses[0].risk_level = overall_risk
+            sentence_analyses[0].color_code = overall_color
+            if sentence_analyses[0].span_localization:
+                sentence_analyses[0].span_localization["sentence_h_score"] = overall_h_score
+                sentence_analyses[0].span_localization["risk_tier"] = overall_risk.value
+                sentence_analyses[0].span_localization["color"] = overall_color
 
         sensitivity_diag = self.fusion_engine.compute_sensitivity_analysis(
             fe=p1_global.factual_error_score,

@@ -255,6 +255,10 @@ class HalluciSensePipeline:
                 )
             claim_results.append(c_res)
 
+        if n_contradicted > 0:
+            is_hallucinated = True
+            prob_hybrid = max(prob_hybrid, 0.95)
+
         primary_summary_stat = (
             "CONTAINS_CONTRADICTION" if n_contradicted > 0
             else ("ALL_VERIFIED" if n_verified == len(claims_struct) and len(claims_struct) > 0

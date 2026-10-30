@@ -113,8 +113,8 @@ class EvidenceEntailmentEngine:
         semaphore = ModelRegistry.get_nli_semaphore(max_concurrent=1)
         num_batches = 0
 
-        # Enforce micro-chunking: at most 2 pairs per ONNX forward pass.
-        chunk_size = max(1, min(batch_size, 2))
+        # Enforce micro-chunking: chunk_size=1 avoids ONNX padding leakage in quantized DeBERTa
+        chunk_size = 1
 
         with semaphore:
             for start in range(0, len(uncached_pairs), chunk_size):

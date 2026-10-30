@@ -82,7 +82,7 @@ def test_pillar3_paraphrase_consistency():
 def test_fusion_modes_and_sensitivity_analysis():
     fusion = FusionEngine(alpha=0.4, beta=0.3, gamma=0.3)
     
-    # 4 Risk Tier Check
+    # Calibrated 3 Risk Tier Check (Red / Yellow / Green)
     risk_v, color_v = fusion.determine_risk_level(0.15)
     assert risk_v == RiskLevel.VERIFIED
     assert color_v == "#10B981"
@@ -92,8 +92,8 @@ def test_fusion_modes_and_sensitivity_analysis():
     assert color_n == "#F59E0B"
 
     risk_m, color_m = fusion.determine_risk_level(0.58)
-    assert risk_m == RiskLevel.MODERATE_RISK
-    assert color_m == "#F97316"
+    assert risk_m == RiskLevel.LIKELY_HALLUCINATED
+    assert color_m == "#EF4444"
 
     risk_l, color_l = fusion.determine_risk_level(0.75)
     assert risk_l == RiskLevel.LIKELY_HALLUCINATED

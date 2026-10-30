@@ -166,16 +166,15 @@ class HallucinationCorrectionEngine:
         q_lower = query.lower() if query else ""
         resp_lower = original_response.lower()
         if "capital" in q_lower or "capital" in resp_lower:
+            from app.core.engine.pillar1_retrieval import extract_capital_relation
             for passage in valid_evidence_passages:
-                match = re.search(r"([A-Z][a-zA-Z\s]+?)\s+is\s+the\s+capital\s+(?:city\s+)?of\s+([A-Z][a-zA-Z\s]+)", passage)
-                if match:
-                    correct_capital = match.group(1).strip()
-                    target_state = match.group(2).strip().rstrip(".,")
-
-                    if "capital of mumbai" in resp_lower or "capital of mumbai" in q_lower:
-                        corrected_text = f"{correct_capital} is the capital of {target_state}. Pune is not the capital of Mumbai."
-                    else:
-                        corrected_text = f"{correct_capital} is the capital of {target_state}."
+                cap_rel = extract_capital_relation(passage)
+                if cap_rel:
+                    correct_capital, target_entity = cap_rel
+                    # Clean and title case properly
+                    correct_capital_str = correct_capital.title()
+                    target_entity_str = target_entity.title()
+                    corrected_text = f"{correct_capital_str} is the capital of {target_entity_str}."
 
                     return {
                         "status": "candidate_generated",
