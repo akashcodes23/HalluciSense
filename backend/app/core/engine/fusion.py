@@ -190,7 +190,7 @@ class FusionEngine:
         """
         if h_score < 0.30:
             return RiskLevel.VERIFIED, "#10B981"
-        elif h_score < 0.50:
+        elif h_score <= 0.50:
             return RiskLevel.NEEDS_VERIFICATION, "#F59E0B"
         else:
             return RiskLevel.LIKELY_HALLUCINATED, "#EF4444"

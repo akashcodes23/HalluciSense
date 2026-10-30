@@ -112,6 +112,7 @@ class MessageService:
         captured_logits = []
         start_time = time.perf_counter()
         token_count = 0
+        char_cursor = 0
 
         try:
             async for chunk in generator:
@@ -121,19 +122,31 @@ class MessageService:
                     yield {"type": "token", "text": chunk.text}
 
                 if chunk.logits:
-                    captured_logits.extend(
-                        [
+                    for l in chunk.logits:
+                        tok_str = l.token or ""
+                        found_idx = full_ai_text.find(tok_str, char_cursor) if tok_str else -1
+                        if found_idx != -1:
+                            tok_start = found_idx
+                            tok_end = found_idx + len(tok_str)
+                            char_cursor = tok_end
+                        else:
+                            tok_start = char_cursor
+                            tok_end = char_cursor + len(tok_str)
+                            char_cursor = tok_end
+
+                        captured_logits.append(
                             {
-                                "token": l.token,
+                                "token": tok_str,
                                 "logprob": l.logprob,
+                                "prob": max(0.0, min(1.0, math.exp(l.logprob))) if l.logprob is not None else None,
+                                "char_start": tok_start,
+                                "char_end": tok_end,
                                 "token_id": getattr(l, "token_id", None),
                                 "position": getattr(l, "position", None),
                                 "provider": getattr(l, "provider", None) or active_model,
                                 "model": getattr(l, "model", None) or active_model,
                             }
-                            for l in chunk.logits
-                        ]
-                    )
+                        )
         except Exception as e:
             logger.error(
                 "message_service_stream_failed",
@@ -196,7 +209,11 @@ class MessageService:
         try:
             logger.info("dispatching_verification_task", message_id=str(ai_msg.id))
             await run_in_threadpool(
-                verify_response_task.delay, str(ai_msg.id), full_ai_text, token_probs
+                verify_response_task.delay,
+                str(ai_msg.id),
+                full_ai_text,
+                token_probs,
+                captured_logits if captured_logits else None,
             )
         except Exception as celery_err:
             logger.warning(
@@ -206,7 +223,12 @@ class MessageService:
             )
             # Spawns background async verification task directly in FastAPI loop if Celery worker is offline
             asyncio.create_task(
-                run_verification_async(ai_msg.id, full_ai_text, token_probs)
+                run_verification_async(
+                    ai_msg.id,
+                    full_ai_text,
+                    token_probs,
+                    captured_logits if captured_logits else None,
+                )
             )
 
         # Signal completion to WebSocket

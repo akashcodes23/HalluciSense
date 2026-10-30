@@ -17,7 +17,8 @@ logger = structlog.get_logger(__name__)
 ABBREVIATIONS = [
     r"Dr\.", r"Mr\.", r"Mrs\.", r"Ms\.", r"Prof\.", r"Sr\.", r"Jr\.",
     r"U\.S\.", r"U\.K\.", r"E\.U\.", r"i\.e\.", r"e\.g\.", r"a\.m\.", r"p\.m\.",
-    r"vs\.", r"etc\.", r"St\.", r"Inc\.", r"Ltd\.", r"Co\.", r"Corp\."
+    r"vs\.", r"etc\.", r"St\.", r"Inc\.", r"Ltd\.", r"Co\.", r"Corp\.",
+    r"approx\.", r"fig\.", r"eq\.", r"no\.", r"vol\.", r"dept\.", r"et al\."
 ]
 
 def extract_claims(text: str) -> List[Dict[str, Any]]:
@@ -34,38 +35,56 @@ def extract_claims(text: str) -> List[Dict[str, Any]]:
 
     raw_text = text.strip()
 
-    # Protect abbreviations by temporarily replacing period with placeholder token
-    protected_text = raw_text
-    abbrev_map = {}
-    for idx, abbr in enumerate(ABBREVIATIONS):
-        token = f"__ABBR_{idx}__"
-        matches = re.findall(abbr, protected_text, flags=re.IGNORECASE)
-        for m in set(matches):
-            abbrev_map[token] = m
-            protected_text = protected_text.replace(m, token)
+    # Protect abbreviations, decimals, scientific notation, and initials
+    protected_ranges: List[tuple[int, int]] = []
 
-    # Sentence boundary regex: split on [.!?] followed by whitespace or newline
-    sentence_pattern = r"(?<=[.!?])\s+"
-    raw_sentences = re.split(sentence_pattern, protected_text)
+    for abbr in ABBREVIATIONS:
+        for m in re.finditer(r'\b' + abbr, raw_text, flags=re.IGNORECASE):
+            protected_ranges.append((m.start(), m.end()))
 
-    claims = []
+    for m in re.finditer(r'\d+\.\d+(?:[eE][+-]?\d+)?', raw_text):
+        protected_ranges.append((m.start(), m.end()))
+
+    for m in re.finditer(r'(?:^|\s)[A-Z]\.(?=\s+[A-Z])', raw_text):
+        protected_ranges.append((m.end() - 1, m.end()))
+
+    for m in re.finditer(r'\.{3,}', raw_text):
+        protected_ranges.append((m.start(), m.end()))
+
+    def is_protected(pos: int) -> bool:
+        return any(start <= pos < end for start, end in protected_ranges)
+
+    claims: List[Dict[str, Any]] = []
     claim_id = 0
+    current_start = 0
 
-    for sent in raw_sentences:
-        # Restore protected abbreviations
-        clean_sent = sent
-        for token, original in abbrev_map.items():
-            clean_sent = clean_sent.replace(token, original)
+    while current_start < len(raw_text) and raw_text[current_start].isspace():
+        current_start += 1
 
-        clean_sent = clean_sent.strip()
-        if len(clean_sent) > 0:
+    for m in re.finditer(r'[.!?]+["\'”’\)\]]*(?=\s+|$)', raw_text):
+        end_pos = m.end()
+        punct_pos = m.start()
+        if not is_protected(punct_pos):
+            sent = raw_text[current_start:end_pos].strip()
+            if sent:
+                claims.append({
+                    "claim_id": claim_id,
+                    "text": sent,
+                })
+                claim_id += 1
+            next_start = end_pos
+            while next_start < len(raw_text) and raw_text[next_start].isspace():
+                next_start += 1
+            current_start = next_start
+
+    if current_start < len(raw_text):
+        remaining = raw_text[current_start:].strip()
+        if remaining:
             claims.append({
                 "claim_id": claim_id,
-                "text": clean_sent,
+                "text": remaining,
             })
-            claim_id += 1
 
-    # Fallback to full text if segmentation yields zero claims
     if not claims:
         claims = [{"claim_id": 0, "text": raw_text}]
 

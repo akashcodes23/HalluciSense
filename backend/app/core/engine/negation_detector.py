@@ -107,6 +107,28 @@ class NegationDetector:
         antonym_match = self.check_antonym_conflict(claim, evidence)
 
         if neg_mismatch and len(c_cues) > 0:
+            # Polarity reversal requires that the evidence actually discusses the negated subject.
+            # If the negated subject is absent from evidence (e.g. claim 'Paris is not capital of Germany'
+            # vs evidence 'Berlin is the capital of Germany'), the evidence does not affirm the negated claim.
+            c_lower = claim.lower()
+            e_lower = evidence.lower()
+            first_cue = c_cues[0]
+            cue_idx = c_lower.find(first_cue)
+            pre_cue = c_lower[:cue_idx].strip() if cue_idx != -1 else c_lower
+            subj_words = [w for w in re.findall(r'\b[a-z0-9-]+\b', pre_cue) if w not in {"the", "a", "an", "this", "that", "it", "these", "those", "does", "do", "did", "is", "was", "are", "were", "has", "have", "had"}]
+            e_words = set(re.findall(r'\b[a-z0-9-]+\b', e_lower))
+
+            if subj_words and not any(w in e_words for w in subj_words):
+                return PolarityAnalysis(
+                    claim_polarity=c_pol,
+                    evidence_polarity=e_pol,
+                    negation_inversion_detected=False,
+                    antonym_inversion_detected=bool(antonym_match),
+                    detected_cues=[],
+                    confidence_penalty=0.0,
+                    explanation="Claim subject is absent from evidence; abstaining from negation penalty.",
+                )
+
             return PolarityAnalysis(
                 claim_polarity=c_pol,
                 evidence_polarity=e_pol,

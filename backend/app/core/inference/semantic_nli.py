@@ -130,11 +130,11 @@ class SemanticNLIAdapter:
                 if isinstance(ev, dict):
                     ev_text = ev.get("snippet", ev.get("text", str(ev)))
                     ev_title = ev.get("title", f"passage_{ev_idx}")
-                    ev_url = ev.get("url", "")
+                    ev_url = ev.get("source_url", ev.get("url", ""))
                 else:
                     ev_text = getattr(ev, "snippet", getattr(ev, "text", str(ev)))
                     ev_title = getattr(ev, "title", f"passage_{ev_idx}")
-                    ev_url = getattr(ev, "url", "")
+                    ev_url = getattr(ev, "source_url", getattr(ev, "url", ""))
 
                 if ev_text and ev_text.strip():
                     all_pair_claims.append(c_text)

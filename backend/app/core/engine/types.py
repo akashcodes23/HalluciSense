@@ -29,6 +29,15 @@ if USE_PYDANTIC:
         is_supporting: bool = Field(True, description="Whether the evidence supports or refutes the claim")
         citation_confidence: Optional[float] = Field(None, description="Confidence score of citation alignment")
         retrieved_passage: Optional[str] = Field(None, description="Full passage content retrieved")
+        retrieval_query: Optional[str] = Field(None, description="Exact search query used to retrieve passage")
+        claim_subject: Optional[str] = Field(None, description="Extracted subject of claim")
+        claim_relation: Optional[str] = Field(None, description="Extracted relation/predicate of claim")
+        claim_object: Optional[str] = Field(None, description="Extracted object/value of claim")
+        relevance_score: Optional[float] = Field(None, ge=0.0, le=1.0, description="Evaluated claim-evidence relevance")
+        entailment_prob: Optional[float] = Field(None, ge=0.0, le=1.0, description="NLI entailment probability")
+        contradiction_prob: Optional[float] = Field(None, ge=0.0, le=1.0, description="NLI contradiction probability")
+        neutral_prob: Optional[float] = Field(None, ge=0.0, le=1.0, description="NLI neutral probability")
+        evaluation_source: Optional[str] = Field("neural_deberta_nli", description="Provenance of NLI scores: neural_deberta_nli or deterministic_domain_rule")
 
     class TokenAnalysis(BaseModel):
         token: str = Field(..., description="The raw token string")
@@ -174,6 +183,15 @@ else:
         is_supporting: bool = True
         citation_confidence: Optional[float] = None
         retrieved_passage: Optional[str] = None
+        retrieval_query: Optional[str] = None
+        claim_subject: Optional[str] = None
+        claim_relation: Optional[str] = None
+        claim_object: Optional[str] = None
+        relevance_score: Optional[float] = None
+        entailment_prob: Optional[float] = None
+        contradiction_prob: Optional[float] = None
+        neutral_prob: Optional[float] = None
+        evaluation_source: Optional[str] = "neural_deberta_nli"
 
     @dataclass
     class TokenAnalysis:

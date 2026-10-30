@@ -70,19 +70,40 @@ class HallucinationDetectionPipeline:
         that Pillar 1 can use for NLI-based scoring.
         """
         try:
-            claims = self.p1_engine.extract_claims(text)
+            sentence_spans = self._split_sentences(text)
+            claims = [
+                s[0] for s in sentence_spans
+                if not self._is_conversational_filler(s[0])
+            ]
             if not claims:
-                claims = [text]
+                p1_claims = self.p1_engine.extract_claims(text)
+                claims = p1_claims if p1_claims else [text]
 
             retrieval_queries = []
             if query and isinstance(query, str) and query.strip():
-                retrieval_queries.append(query.strip())
+                clean_q = self.clean_conversational_prefix(query)
+                if clean_q and clean_q not in retrieval_queries:
+                    retrieval_queries.append(clean_q)
+                if query.strip() not in retrieval_queries:
+                    retrieval_queries.append(query.strip())
+
             for c in claims:
-                if c not in retrieval_queries:
-                    retrieval_queries.append(c)
+                clean_c = self.clean_conversational_prefix(c)
+                target_claim = clean_c if (clean_c and not self._is_conversational_filler(clean_c)) else c
+                if target_claim not in retrieval_queries:
+                    retrieval_queries.append(target_claim)
+
+                # Phase 16C: Targeted scientific queries from SRO structure
+                from app.core.engine.scientific_claim_reasoner import ScientificClaimReasoner
+                sro = ScientificClaimReasoner.extract_sro(target_claim)
+                targeted = ScientificClaimReasoner.generate_targeted_queries(sro)
+                for t_q in targeted:
+                    if t_q not in retrieval_queries:
+                        retrieval_queries.append(t_q)
+
                 # Expand relation-specific queries for factual assertions
                 from .pillar1_retrieval import extract_capital_relation
-                cap_rel = extract_capital_relation(c)
+                cap_rel = extract_capital_relation(target_claim)
                 if cap_rel:
                     city, entity = cap_rel
                     alt1 = f"capital of {entity}"
@@ -93,7 +114,7 @@ class HallucinationDetectionPipeline:
                         retrieval_queries.append(alt2)
 
                 # Key content terms expansion for factual assertions
-                c_words = [w for w in re.findall(r'[A-Za-z0-9]+', c) if w.lower() not in {"a", "an", "the", "is", "are", "was", "were", "of", "in", "on", "at", "to", "for", "with", "by", "from", "that", "this", "it", "and", "or", "as", "composed", "consists"}]
+                c_words = [w for w in re.findall(r'[A-Za-z0-9]+', target_claim) if w.lower() not in {"a", "an", "the", "is", "are", "was", "were", "of", "in", "on", "at", "to", "for", "with", "by", "from", "that", "this", "it", "and", "or", "as", "composed", "consists"}]
                 if len(c_words) >= 2:
                     k_query = " ".join(c_words)
                     if k_query not in retrieval_queries:
@@ -108,12 +129,20 @@ class HallucinationDetectionPipeline:
                     continue
                 evidence_items.append(
                     EvidenceItem(
-                        claim=claims[0] if claims else text,
+                        claim=ev.get("claim", ""),
                         snippet=snippet,
                         source_name=ev.get("source_name", "Wikipedia"),
                         source_url=ev.get("source_url"),
                         similarity_score=max(0.0, min(1.0, float(ev.get("similarity_score", 0.5)))),
                         is_supporting=ev.get("is_supporting", True),
+                        retrieval_query=ev.get("retrieval_query", ""),
+                        claim_subject=ev.get("claim_subject"),
+                        claim_relation=ev.get("claim_relation"),
+                        claim_object=ev.get("claim_object"),
+                        relevance_score=ev.get("relevance_score"),
+                        entailment_prob=ev.get("entailment_prob"),
+                        contradiction_prob=ev.get("contradiction_prob"),
+                        neutral_prob=ev.get("neutral_prob"),
                     )
                 )
 
@@ -188,87 +217,115 @@ class HallucinationDetectionPipeline:
     # SENTENCE SPLITTING
     # =========================================================
 
+    @staticmethod
+    def clean_conversational_prefix(text: str) -> str:
+        cleaned = re.sub(
+            r"^(?:sure|certainly|of course|absolutely|gladly|happy to help|to answer your question)[,!:]?\s*(?:here (?:is|are) (?:the|some|what|your)[^:]*[:.]\s*)?",
+            "",
+            text.strip(),
+            flags=re.IGNORECASE,
+        )
+        return cleaned.strip()
+
+    @staticmethod
+    def _is_conversational_filler(text: str) -> bool:
+        t = text.strip().lower()
+        cleaned = re.sub(
+            r"^(?:sure|certainly|of course|absolutely|gladly|happy to help|to answer your question)[,!:]?\s*(?:here (?:is|are) (?:the|some|what|your)[^:]*[:.]\s*)?",
+            "",
+            t,
+            flags=re.IGNORECASE,
+        ).strip()
+        if not cleaned or len(cleaned) < 5:
+            return True
+        filler_exact = [
+            r"^(?:sure|certainly|of course|absolutely|gladly|happy to help)[,!.]?$",
+            r"^here (?:is|are) (?:the|your) (?:answer|information)[.!:]?$",
+            r"^i hope this (?:helps|information is helpful|is useful)[.!]?$",
+            r"^let me know if you (?:have any|need|would like)[^.]*[.!]?$",
+            r"^feel free to ask[^.]*[.!]?$",
+            r"^please let me know[^.]*[.!]?$",
+            r"^thanks for asking[.!]?$",
+            r"^as an ai language model[,.]?.*",
+        ]
+        return any(re.match(pat, t) for pat in filler_exact)
+
     def _split_sentences(
         self,
         text: str,
     ) -> List[Tuple[str, int, int]]:
         """
-        Split text into sentence strings while preserving
-        character start/end offsets.
+        Split text into sentence strings while preserving character start/end offsets.
+        Correctly handles decimal numbers (e.g. 18.015), scientific notation (e.g. 3.0e8),
+        abbreviations (e.g. Dr., U.S.), chemical formulas, units, dates, and initials.
         """
+        if not text or not text.strip():
+            return []
 
-        sentence_spans = []
+        abbreviations = [
+            r'Dr\.', r'Mr\.', r'Mrs\.', r'Ms\.', r'Prof\.', r'Sr\.', r'Jr\.',
+            r'U\.S\.', r'U\.K\.', r'E\.U\.', r'i\.e\.', r'e\.g\.', r'a\.m\.', r'p\.m\.',
+            r'vs\.', r'etc\.', r'St\.', r'Inc\.', r'Ltd\.', r'Co\.', r'Corp\.',
+            r'approx\.', r'fig\.', r'eq\.', r'no\.', r'vol\.', r'dept\.', r'et al\.'
+        ]
 
-        # Protect abbreviations to prevent premature splits (e.g. Dr., Mr., etc.)
-        from app.core.inference.claim_extractor import ABBREVIATIONS
-        protected_text = text
-        abbrev_map = {}
-        for idx, abbr in enumerate(ABBREVIATIONS):
-            token = f"__ABBR_{idx}__"
-            matches = re.findall(abbr, protected_text, flags=re.IGNORECASE)
-            for m in set(matches):
-                abbrev_map[token] = m
-                protected_text = protected_text.replace(m, token)
+        protected_ranges: List[Tuple[int, int]] = []
 
-        # Terminal punctuation followed by another sentence or end-of-string
-        pattern = re.compile(
-            r"[^.!?]+[.!?]+|\s*[^.!?]+$"
-        )
+        # 1. Abbreviations
+        for abbr in abbreviations:
+            for m in re.finditer(r'\b' + abbr, text, flags=re.IGNORECASE):
+                protected_ranges.append((m.start(), m.end()))
 
-        start = 0
+        # 2. Decimals and scientific notation: e.g. 18.015, 3.0e8, 1.5e-3
+        for m in re.finditer(r'\d+\.\d+(?:[eE][+-]?\d+)?', text):
+            protected_ranges.append((m.start(), m.end()))
 
-        for match in pattern.finditer(protected_text):
-            sentence_text = match.group(0).strip()
+        # 3. Person initials: single capital letter preceded by space/start and followed by capital
+        for m in re.finditer(r'(?:^|\s)[A-Z]\.(?=\s+[A-Z])', text):
+            protected_ranges.append((m.end() - 1, m.end()))
 
-            if not sentence_text:
-                continue
+        # 4. Ellipses
+        for m in re.finditer(r'\.{3,}', text):
+            protected_ranges.append((m.start(), m.end()))
 
-            for token, original in abbrev_map.items():
-                sentence_text = sentence_text.replace(token, original)
+        # 5. URLs
+        for m in re.finditer(r'https?://\S+', text):
+            protected_ranges.append((m.start(), m.end()))
 
-            span_start = text.find(
-                sentence_text,
-                start,
-            )
+        def is_protected(pos: int) -> bool:
+            return any(start <= pos < end for start, end in protected_ranges)
 
-            # Defensive fallback in case find() fails.
-            if span_start == -1:
-                span_start = match.start()
+        sentence_spans: List[Tuple[str, int, int]] = []
+        current_start = 0
+        while current_start < len(text) and text[current_start].isspace():
+            current_start += 1
 
-                while (
-                    span_start < len(text)
-                    and text[span_start].isspace()
-                ):
-                    span_start += 1
+        for m in re.finditer(r'[.!?]+["\'”’\)\]]*(?=\s+|$)', text):
+            end_pos = m.end()
+            punct_pos = m.start()
+            if not is_protected(punct_pos):
+                sent = text[current_start:end_pos].strip()
+                if sent:
+                    # Find exact start of non-whitespace content in text[current_start:end_pos]
+                    sent_offset = text.find(sent, current_start)
+                    if sent_offset != -1:
+                        sentence_spans.append((sent, sent_offset, sent_offset + len(sent)))
+                    else:
+                        sentence_spans.append((sent, current_start, end_pos))
 
-            span_end = span_start + len(sentence_text)
+                next_start = end_pos
+                while next_start < len(text) and text[next_start].isspace():
+                    next_start += 1
+                current_start = next_start
 
-            sentence_spans.append(
-                (
-                    sentence_text,
-                    span_start,
-                    span_end,
-                )
-            )
-
-            start = span_end
-
-        # Fallback for text without terminal punctuation.
-        if not sentence_spans and text.strip():
-            clean = text.strip()
-
-            span_start = text.find(clean)
-
-            if span_start == -1:
-                span_start = 0
-
-            sentence_spans.append(
-                (
-                    clean,
-                    span_start,
-                    span_start + len(clean),
-                )
-            )
+        if current_start < len(text):
+            remaining = text[current_start:].strip()
+            if remaining:
+                sent_offset = text.find(remaining, current_start)
+                if sent_offset != -1:
+                    sentence_spans.append((remaining, sent_offset, sent_offset + len(remaining)))
+                else:
+                    sentence_spans.append((remaining, current_start, len(text)))
 
         return sentence_spans
 
@@ -565,9 +622,18 @@ Respond STRICTLY in JSON using this schema:
         # PILLAR 1 — DOCUMENT-LEVEL FACTUAL VERIFICATION
         # =====================================================
 
+        temp_spans = self._split_sentences(clean_text)
+        factual_parts = [
+            self.clean_conversational_prefix(s[0])
+            for s in temp_spans
+            if not self._is_conversational_filler(s[0])
+        ]
+        factual_parts = [p for p in factual_parts if p and not self._is_conversational_filler(p)]
+        p1_eval_text = " ".join(factual_parts) if factual_parts else clean_text
+
         p1_global = self.p1_engine.analyze(
-            clean_text,
-            evidence_items,
+            p1_eval_text,
+            [EvidenceItem(**e.model_dump()) for e in evidence_items],
             query=query,
         )
         t_ret_end = time.perf_counter()
@@ -688,6 +754,7 @@ Respond STRICTLY in JSON using this schema:
         # SENTENCE-LEVEL THREE-PILLAR ANALYSIS
         # =====================================================
 
+        all_sent_p1_statuses: List[str] = []
         for (
             idx,
             (sent_text, s_start, s_end),
@@ -697,21 +764,75 @@ Respond STRICTLY in JSON using this schema:
             # PILLAR 1
             # -------------------------------------------------
 
-            sent_p1 = self.p1_engine.analyze(
-                sent_text,
-                evidence_items,
-            )
+            if self._is_conversational_filler(sent_text):
+                sent_p1 = Pillar1Result(
+                    claims=[sent_text],
+                    factual_error_score=0.05,
+                    evidence=[],
+                    claim_analyses=[],
+                    available=True,
+                    status="VERIFIED",
+                    reasoning="Conversational discourse framing; non-assertive phrase.",
+                )
+                all_sent_p1_statuses.append("VERIFIED")
+            else:
+                clean_sent = self.clean_conversational_prefix(sent_text)
+                target_sent = clean_sent if (clean_sent and not self._is_conversational_filler(clean_sent)) else sent_text
+                sent_p1 = self.p1_engine.analyze(
+                    target_sent,
+                    [EvidenceItem(**e.model_dump()) for e in evidence_items],
+                )
+                statuses = getattr(self.p1_engine, "last_claim_statuses", [])
+                if statuses:
+                    all_sent_p1_statuses.extend(statuses)
+                elif sent_p1.factual_error_score is not None:
+                    all_sent_p1_statuses.append("VERIFIED" if sent_p1.factual_error_score <= 0.35 else "CONTRADICTED")
 
             # -------------------------------------------------
             # PILLAR 2
             # -------------------------------------------------
 
-            sent_tokens = re.findall(
-                r"\S+",
-                sent_text,
-            )
-
-            if token_probabilities is None or (isinstance(token_probabilities, list) and len(token_probabilities) == 0):
+            if token_measurements and len(token_measurements) > 0:
+                # Genuine BPE token alignment using character offsets
+                matching_tms = [
+                    tm for tm in token_measurements
+                    if (
+                        isinstance(tm, dict)
+                        and tm.get("char_start") is not None
+                        and tm.get("char_end") is not None
+                        and tm["char_start"] < s_end
+                        and tm["char_end"] > s_start
+                    )
+                ]
+                if matching_tms:
+                    sent_tokens = [tm.get("token", "") for tm in matching_tms]
+                    sent_probs = [
+                        tm.get("prob")
+                        if tm.get("prob") is not None
+                        else (math.exp(tm["logprob"]) if tm.get("logprob") is not None else 1.0)
+                        for tm in matching_tms
+                    ]
+                    sent_p2 = self.p2_engine.analyze(
+                        sent_tokens,
+                        sent_probs,
+                        evidence_items=evidence_items,
+                        p1_result=sent_p1,
+                        is_logprobs=False,
+                    )
+                else:
+                    sent_tokens = re.findall(r"\S+", sent_text)
+                    sent_p2 = Pillar2Result(
+                        avg_probability=None,
+                        avg_entropy=None,
+                        confidence_gap_score=None,
+                        available=False,
+                        status="UNAVAILABLE",
+                        mode="WHITE_BOX_LOGPROBS_REQUIRED",
+                        is_proxy=False,
+                        reasoning="No token measurements in sentence span.",
+                    )
+            elif token_probabilities is None or (isinstance(token_probabilities, list) and len(token_probabilities) == 0):
+                sent_tokens = re.findall(r"\S+", sent_text)
                 sent_p2 = Pillar2Result(
                     avg_probability=None,
                     avg_entropy=None,
@@ -723,6 +844,7 @@ Respond STRICTLY in JSON using this schema:
                     reasoning="Token-level generation probabilities not provided.",
                 )
             elif token_probabilities is not self._UNSET and token_probabilities is not None:
+                sent_tokens = re.findall(r"\S+", sent_text)
                 sentence_token_count = len(sent_tokens)
                 sent_probs = token_probabilities[
                     token_cursor:
@@ -737,6 +859,7 @@ Respond STRICTLY in JSON using this schema:
                     is_logprobs=is_logprobs,
                 )
             else:
+                sent_tokens = re.findall(r"\S+", sent_text)
                 sent_p2 = self.p2_engine.analyze(
                     sent_tokens,
                     None,
@@ -856,7 +979,7 @@ Respond STRICTLY in JSON using this schema:
         # Authoritative Verdict Integrity Stage (Phase F & Blocker 3/4 Governance)
         raw_fusion_score = float(overall_h_score)
         decision_override_reason = None
-        p1_statuses = getattr(self.p1_engine, "last_claim_statuses", [])
+        p1_statuses = all_sent_p1_statuses if all_sent_p1_statuses else getattr(self.p1_engine, "last_claim_statuses", [])
         p1_fe = float(p1_global.factual_error_score or 0.0) if p1_global else 0.0
         p3_cf = float(p3_global.consistency_failure_score or 0.0) if p3_global and p3_global.available else 0.0
         p1_has_evidence = bool(evidence_items and p1_global and getattr(p1_global, "available", True) and p1_global.factual_error_score is not None)
@@ -874,24 +997,50 @@ Respond STRICTLY in JSON using this schema:
             overall_color = "#6B7280"
             decision_override_reason = "Selective prediction abstention: no atomic factual claims to verify"
         else:
-            has_contradiction = any(s == "CONTRADICTED" for s in p1_statuses) or p1_fe >= 0.70
-            has_insufficient = any(s == "INSUFFICIENT_EVIDENCE" for s in p1_statuses)
-            all_supported = all(s in ("VERIFIED", "SUPPORTED") for s in p1_statuses)
+            # Filter out conversational filler sentences from whole-response gating
+            factual_p1_statuses = [
+                s for idx, s in enumerate(p1_statuses)
+                if not self._is_conversational_filler(sentence_spans[idx][0] if idx < len(sentence_spans) else "")
+            ]
+            if not factual_p1_statuses:
+                factual_p1_statuses = p1_statuses
+
+            all_supported = all(s in ("VERIFIED", "SUPPORTED") for s in factual_p1_statuses)
+            has_insufficient = any(s == "INSUFFICIENT_EVIDENCE" for s in factual_p1_statuses)
+            supported_count = sum(1 for s in factual_p1_statuses if s in ("VERIFIED", "SUPPORTED"))
+            total_factual = len(factual_p1_statuses)
+
+            factual_sentences = [
+                s for s in sentence_analyses
+                if not self._is_conversational_filler(s.text)
+            ]
+            if factual_sentences:
+                factual_sent_fe = sum(s.factual_error for s in factual_sentences) / len(factual_sentences)
+                if all_supported and not any(s == "CONTRADICTED" for s in factual_p1_statuses):
+                    p1_fe = min(p1_fe, factual_sent_fe)
+
+            has_contradiction = any(s == "CONTRADICTED" for s in factual_p1_statuses) or p1_fe >= 0.70
 
             if has_contradiction:
                 overall_risk = RiskLevel.LIKELY_HALLUCINATED
                 overall_color = "#EF4444"
                 if raw_fusion_score < 0.50:
                     decision_override_reason = "Claim-level factual contradiction detected in atomic claims (Pillar 1)"
-            elif has_insufficient:
-                overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
-                overall_color = "#6B7280"
-                decision_override_reason = "Selective prediction abstention: atomic claims lack verified reference grounding"
             elif all_supported and p1_fe <= 0.30 and p3_cf < 0.50 and raw_fusion_score < 0.35:
                 overall_risk = RiskLevel.VERIFIED
                 overall_color = "#10B981"
                 if raw_fusion_score >= 0.30:
                     decision_override_reason = "All atomic claims verified by grounded reference evidence"
+            elif total_factual > 1 and (supported_count / total_factual) >= 0.70 and not has_contradiction and p1_fe <= 0.35:
+                # When majority of claims are supported and none contradicted, whole response is verified
+                # while ungrounded claims are cleanly flagged at sentence level
+                overall_risk = RiskLevel.VERIFIED if raw_fusion_score < 0.30 else RiskLevel.NEEDS_VERIFICATION
+                overall_color = "#10B981" if overall_risk == RiskLevel.VERIFIED else "#F59E0B"
+                decision_override_reason = f"{supported_count}/{total_factual} claims verified by reference evidence; ungrounded claims flagged at sentence level"
+            elif has_insufficient:
+                overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
+                overall_color = "#6B7280"
+                decision_override_reason = "Selective prediction abstention: atomic claims lack verified reference grounding"
             else:
                 overall_risk = RiskLevel.NEEDS_VERIFICATION
                 overall_color = "#F59E0B"

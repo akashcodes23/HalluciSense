@@ -9,7 +9,7 @@ analysis is complete.
 
 import asyncio
 import time
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from uuid import UUID
 
 import structlog
@@ -53,6 +53,7 @@ async def run_verification_async(
     message_id: UUID,
     full_ai_text: str,
     token_probs: Optional[List[float]],
+    token_measurements: Optional[List[Dict[str, Any]]] = None,
 ):
     """
     Execute the HalluciSense verification pipeline asynchronously.
@@ -274,6 +275,7 @@ async def run_verification_async(
                 token_probabilities=token_probs,
                 evidence_items=evidence_items,
                 sample_responses=sample_responses,
+                token_measurements=token_measurements,
             )
 
             if asyncio.iscoroutine(result):
@@ -524,6 +526,7 @@ def verify_response_task(
     message_id_str: str,
     full_ai_text: str,
     token_probs: Optional[List[float]] = None,
+    token_measurements: Optional[List[Dict[str, Any]]] = None,
 ):
     """
     Celery entry point for HalluciSense verification.
@@ -540,6 +543,7 @@ def verify_response_task(
                 UUID(message_id_str),
                 full_ai_text,
                 token_probs,
+                token_measurements,
             )
         )
         return result

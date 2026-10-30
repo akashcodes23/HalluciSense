@@ -119,7 +119,15 @@ class EvidenceEntailmentEngine:
         with semaphore:
             for start in range(0, len(uncached_pairs), chunk_size):
                 chunk = uncached_pairs[start:start + chunk_size]
-                premises = [p[0][:350] for p in chunk]
+                # Strip LaTeX markup before truncation to avoid cutting off numeric values
+                # buried after display-math sequences (e.g. "{\displaystyle c_{0}} = 299792458").
+                import re as _re
+                def _clean_premise(text: str) -> str:
+                    cleaned = _re.sub(r'\{\\displaystyle[^}]*\}', ' ', text)
+                    cleaned = _re.sub(r'\\[a-zA-Z]+\{[^}]*\}', ' ', cleaned)
+                    cleaned = _re.sub(r'\s+', ' ', cleaned).strip()
+                    return cleaned[:600]
+                premises = [_clean_premise(p[0]) for p in chunk]
                 hypotheses = [p[1][:150] for p in chunk]
 
                 inputs = self.tokenizer(
@@ -127,7 +135,7 @@ class EvidenceEntailmentEngine:
                     hypotheses,
                     padding=True,
                     truncation=True,
-                    max_length=128,
+                    max_length=256,
                     return_tensors="pt",
                 )
                 with torch.inference_mode():

@@ -60,8 +60,9 @@ class WikipediaKnowledgeSource:
             "failed_queries": 0,
         }
 
-    def _search(self, query: str) -> Tuple[str, List[str]]:
-        """Search Wikipedia for page titles; never fabricate evidence on failure."""
+    def _search(self, query: str) -> Tuple[str, List[str], Dict[str, str]]:
+        """Search Wikipedia for page titles and contextual snippets; never fabricate evidence on failure."""
+        import re
         params = {
             "action": "query",
             "list": "search",
@@ -75,7 +76,7 @@ class WikipediaKnowledgeSource:
                 self.api_url,
                 params=params,
                 headers=HEADERS,
-                timeout=(1.0, 2.0),
+                timeout=(1.5, 3.0),
             )
             if resp.status_code != 200:
                 logger.warning(
@@ -83,10 +84,15 @@ class WikipediaKnowledgeSource:
                     query=query,
                     status_code=resp.status_code,
                 )
-                return query, []
+                return query, [], {}
 
             items = resp.json().get("query", {}).get("search", [])
             titles = [item.get("title") for item in items if item.get("title")]
+            snippets = {
+                item.get("title"): re.sub(r'<[^>]+>', '', item.get("snippet", "")).strip()
+                for item in items
+                if item.get("title") and item.get("snippet")
+            }
 
             # A second search is acceptable when the original query is a long
             # sentence and Wikipedia returns no useful page title. It still
@@ -102,16 +108,21 @@ class WikipediaKnowledgeSource:
                         self.api_url,
                         params=params,
                         headers=HEADERS,
-                        timeout=(1.0, 2.0),
+                        timeout=(1.5, 3.0),
                     )
                     if resp2.status_code == 200:
-                        items = resp2.json().get("query", {}).get("search", [])
-                        titles = [item.get("title") for item in items if item.get("title")]
+                        items2 = resp2.json().get("query", {}).get("search", [])
+                        titles = [item.get("title") for item in items2 if item.get("title")]
+                        snippets.update({
+                            item.get("title"): re.sub(r'<[^>]+>', '', item.get("snippet", "")).strip()
+                            for item in items2
+                            if item.get("title") and item.get("snippet")
+                        })
 
-            return query, titles
+            return query, titles, snippets
         except Exception as exc:
             logger.warning("wikipedia_search_exception", query=query, error=str(exc))
-            return query, []
+            return query, [], {}
 
     def _extract_titles(self, titles: List[str]) -> Dict[str, dict]:
         """Extract multiple Wikipedia page summaries in one API request."""
@@ -132,7 +143,7 @@ class WikipediaKnowledgeSource:
                 self.api_url,
                 params=params,
                 headers=HEADERS,
-                timeout=(1.0, 2.0),
+                timeout=(1.5, 3.0),
             )
             if resp.status_code != 200:
                 logger.warning(
@@ -195,7 +206,7 @@ class WikipediaKnowledgeSource:
             try:
                 with ThreadPoolExecutor(max_workers=workers) as executor:
                     futures = [executor.submit(self._search, query) for query in misses]
-                    for future in as_completed(futures, timeout=3.0):
+                    for future in as_completed(futures, timeout=6.0):
                         try:
                             search_results.append(future.result())
                             metrics["search_requests"] += 1
@@ -204,7 +215,13 @@ class WikipediaKnowledgeSource:
             except Exception:
                 pass
 
-            titles_by_query: Dict[str, List[str]] = dict(search_results)
+            titles_by_query: Dict[str, List[str]] = {}
+            snippets_by_title: Dict[str, str] = {}
+            for item in search_results:
+                q, t_list, s_map = item
+                titles_by_query[q] = t_list
+                snippets_by_title.update(s_map)
+
             unique_titles = list(dict.fromkeys(
                 title
                 for titles in titles_by_query.values()
@@ -220,16 +237,26 @@ class WikipediaKnowledgeSource:
                 metrics["extraction_requests"] += 1
 
             for query in misses:
-                evidence = [
-                    extracted_by_title[title]
-                    for title in titles_by_query.get(query, [])
-                    if title in extracted_by_title
-                ]
+                evidence = []
+                for title in titles_by_query.get(query, []):
+                    item = extracted_by_title.get(title)
+                    if item:
+                        item_copy = dict(item)
+                        search_snip = snippets_by_title.get(title)
+                        if search_snip and len(search_snip) > 15:
+                            intro_snip = item_copy.get("snippet", "")
+                            if search_snip not in intro_snip:
+                                item_copy["snippet"] = f"{intro_snip}\n{search_snip}".strip()
+                        item_copy["retrieval_query"] = query
+                        item_copy["title"] = title
+                        evidence.append(item_copy)
+
                 results[query] = evidence
-                with self._cache_lock:
-                    if len(self._cache) >= self.MAX_CACHE_ENTRIES:
-                        self._cache.popitem(last=False)
-                    self._cache[query.lower()] = evidence
+                if evidence or (query in titles_by_query and not titles_by_query[query]):
+                    with self._cache_lock:
+                        if len(self._cache) >= self.MAX_CACHE_ENTRIES:
+                            self._cache.popitem(last=False)
+                        self._cache[query.lower()] = evidence
                 if evidence:
                     metrics["retrieved_pages"] += len(evidence)
                 else:

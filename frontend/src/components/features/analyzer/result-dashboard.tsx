@@ -211,7 +211,7 @@ function ReasoningChain({
 }: {
   chain: string[];
   explanation: string;
-  fusion: Record<string, number>;
+  fusion: Record<string, number | null>;
 }) {
   return (
     <div className="space-y-6">
@@ -253,12 +253,12 @@ function ReasoningChain({
                   <motion.div
                     className="h-full rounded-full bg-blue-500"
                     initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(val * 100, 100)}%` }}
+                    animate={{ width: val !== null ? `${Math.min(val * 100, 100)}%` : "0%" }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                   />
                 </div>
                 <span className="text-xs font-mono text-slate-400 w-12 text-right">
-                  {(val * 100).toFixed(1)}%
+                  {val !== null ? `${(val * 100).toFixed(1)}%` : "N/A"}
                 </span>
               </div>
             ))}

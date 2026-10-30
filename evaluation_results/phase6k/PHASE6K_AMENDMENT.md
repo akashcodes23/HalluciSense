@@ -1,6 +1,6 @@
 # HalluciSense Phase 6K — Official Scientific Amendment
 
-**Document Date**: `2026-09-01 17:06:36 UTC`  
+**Document Date**: `2026-10-30 12:25:01 UTC`  
 **Status**: `OFFICIAL AMENDMENT (PHASE 6K.2)`  
 **Scope**: Correcting the preliminary "NO FEASIBLE CANDIDATE" verdict of Phase 6K based on Warning Forensics (Phase 6K.1) and Corrected Stability Gating (Phase 6K.2).
 

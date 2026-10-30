@@ -15,8 +15,8 @@
       "liblinear_mcc": 0.12378225319844094,
       "saga_mcc": 0.12378225319844094,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999968337788,
-      "max_abs_prob_diff": 7.09733788110678e-05,
+      "prob_pearson_correlation": 0.9999999968337786,
+      "max_abs_prob_diff": 7.097337881095678e-05,
       "materially_equivalent": true
     },
     {
@@ -32,8 +32,8 @@
       "liblinear_mcc": 0.12378225319844094,
       "saga_mcc": 0.12378225319844094,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999994283428,
-      "max_abs_prob_diff": 5.5963608915132745e-05,
+      "prob_pearson_correlation": 0.9999999994283435,
+      "max_abs_prob_diff": 5.596360891524377e-05,
       "materially_equivalent": true
     },
     {
@@ -50,7 +50,7 @@
       "saga_mcc": 0.12378225319844094,
       "abs_mcc_diff": 0.0,
       "prob_pearson_correlation": 0.9999999979195586,
-      "max_abs_prob_diff": 6.192124691140055e-05,
+      "max_abs_prob_diff": 6.192124691128953e-05,
       "materially_equivalent": true
     },
     {
@@ -66,7 +66,7 @@
       "liblinear_mcc": 0.12792477983807646,
       "saga_mcc": 0.12792477983807646,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999990597378,
+      "prob_pearson_correlation": 0.999999999059738,
       "max_abs_prob_diff": 5.9290499014652553e-05,
       "materially_equivalent": true
     },
@@ -83,7 +83,7 @@
       "liblinear_mcc": 0.04588447690308489,
       "saga_mcc": 0.04588447690308489,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999982610314,
+      "prob_pearson_correlation": 0.9999999982610317,
       "max_abs_prob_diff": 5.271076989010748e-05,
       "materially_equivalent": true
     },
@@ -100,7 +100,7 @@
       "liblinear_mcc": 0.04588447690308489,
       "saga_mcc": 0.04588447690308489,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999991454388,
+      "prob_pearson_correlation": 0.999999999145438,
       "max_abs_prob_diff": 5.2245223058910994e-05,
       "materially_equivalent": true
     },
@@ -151,8 +151,8 @@
       "liblinear_mcc": 0.0406256002834036,
       "saga_mcc": 0.0406256002834036,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.999999999265962,
-      "max_abs_prob_diff": 5.6154574709865734e-05,
+      "prob_pearson_correlation": 0.9999999992659615,
+      "max_abs_prob_diff": 5.615457470997676e-05,
       "materially_equivalent": true
     },
     {
@@ -168,7 +168,7 @@
       "liblinear_mcc": 0.0406256002834036,
       "saga_mcc": 0.0406256002834036,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999994551245,
+      "prob_pearson_correlation": 0.9999999994551242,
       "max_abs_prob_diff": 5.499531331809582e-05,
       "materially_equivalent": true
     },
@@ -185,7 +185,7 @@
       "liblinear_mcc": 0.0406256002834036,
       "saga_mcc": 0.0406256002834036,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999973253453,
+      "prob_pearson_correlation": 0.9999999973253452,
       "max_abs_prob_diff": 6.49750304747565e-05,
       "materially_equivalent": true
     },
@@ -202,7 +202,7 @@
       "liblinear_mcc": 0.039072988369494493,
       "saga_mcc": 0.03899830244810925,
       "abs_mcc_diff": 7.468592138524383e-05,
-      "prob_pearson_correlation": 0.999999999722141,
+      "prob_pearson_correlation": 0.9999999997221416,
       "max_abs_prob_diff": 5.356583781856994e-05,
       "materially_equivalent": true
     },
@@ -219,8 +219,8 @@
       "liblinear_mcc": 0.03150062042067288,
       "saga_mcc": 0.03150062042067288,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.9999999994273215,
-      "max_abs_prob_diff": 5.8272407087833766e-05,
+      "prob_pearson_correlation": 0.9999999994273218,
+      "max_abs_prob_diff": 5.827240708794479e-05,
       "materially_equivalent": true
     },
     {
@@ -236,7 +236,7 @@
       "liblinear_mcc": 0.03150062042067288,
       "saga_mcc": 0.029414244587763892,
       "abs_mcc_diff": 0.0020863758329089863,
-      "prob_pearson_correlation": 0.9999999997219218,
+      "prob_pearson_correlation": 0.9999999997219227,
       "max_abs_prob_diff": 5.3796646010628724e-05,
       "materially_equivalent": true
     },
@@ -253,7 +253,7 @@
       "liblinear_mcc": 0.029414244587763892,
       "saga_mcc": 0.029414244587763892,
       "abs_mcc_diff": 0.0,
-      "prob_pearson_correlation": 0.999999998938422,
+      "prob_pearson_correlation": 0.9999999989384217,
       "max_abs_prob_diff": 5.056596392283286e-05,
       "materially_equivalent": true
     },
