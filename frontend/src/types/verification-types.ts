@@ -3,7 +3,7 @@
  * Synchronized with FastAPI Backend Production Schemas (`app.schemas.production_schemas`).
  */
 
-export type RiskLevel = 'VERIFIED' | 'NEEDS_VERIFICATION' | 'MODERATE_RISK' | 'LIKELY_HALLUCINATED';
+export type RiskLevel = 'VERIFIED' | 'NEEDS_VERIFICATION' | 'MODERATE_RISK' | 'LIKELY_HALLUCINATED' | 'INSUFFICIENT_EVIDENCE' | 'ABSTAIN';
 
 export type AttributionDirection = 'hallucination_risk' | 'protective' | 'neutral';
 
@@ -103,6 +103,11 @@ export interface ConfidenceAnalysis {
   signal_type?: "MEASURED" | "DERIVED" | "PROXY" | "UNAVAILABLE";
   uncertainty_measure?: string | null;
   generations_used?: number | null;
+  token_count?: number | null;
+  avg_token_probability?: number | null;
+  source_mode?: "GENUINE_LOGPROBS" | "PASTED_TEXT" | "PROVIDER_UNSUPPORTED" | "UNAVAILABLE";
+  provider?: string | null;
+  model?: string | null;
   raw_signal_metadata?: Record<string, unknown>;
   explanation?: string | null;
 }

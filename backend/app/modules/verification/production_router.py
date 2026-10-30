@@ -228,6 +228,8 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         r_text = response_text
         q_text = query
         l_probs = payload.logprobs
+        t_meas = getattr(payload, "token_measurements", None)
+        g_prov = getattr(payload, "generation_provenance", None)
         s_resps = payload.sample_responses
         l_probs_rep = getattr(payload, "logprobs_representation", "auto")
         if l_probs_rep == "logprob":
@@ -246,6 +248,9 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                 sample_responses=s_resps,
                 evidence_items=ev_items,
                 is_logprobs=is_lp,
+                token_measurements=t_meas,
+                provider=g_prov.get("provider") if g_prov else None,
+                model_name=payload.model_name,
             ),
         )
         p_dur = (time.perf_counter() - t0) * 1000.0
@@ -346,7 +351,7 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         p3_mode = getattr(p3, "mode", "INTRA_RESPONSE_CONSISTENCY") if p3 else "INTRA_RESPONSE_CONSISTENCY"
 
         if p1_available:
-            avail_pillars.append("Pillar 1: Evidence Grounding (FE)")
+            avail_pillars.append("Pillar 1: Evidence Grounding")
         if p2_available:
             avail_pillars.append(f"Pillar 2: Confidence Gap (CG) ({p2_mode})")
         if p3_available:
@@ -407,7 +412,6 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
 
         # Check if factual contradiction is present from P1 or individual sentences
         if fe_val >= 0.50:
-            overall_h = max(overall_h, fe_val)
             risk_level_str = "LIKELY_HALLUCINATED"
             root_cause = "FACTUAL_CONTRADICTION"
 
@@ -554,6 +558,16 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                     "Pillar 2 confidence gap could not be measured."
                 )
 
+            p2_meas_count = getattr(p2, "token_count", None)
+            if p2_meas_count is None and p2 and p2.token_logprobs:
+                p2_meas_count = len(p2.token_logprobs)
+
+            source_mode_str = "GENUINE_LOGPROBS" if p2_is_genuine else (
+                "PASTED_TEXT" if (g_prov and g_prov.get("source") == "PASTED_TEXT") else (
+                    "PROVIDER_UNSUPPORTED" if not p2_available else "UNAVAILABLE"
+                )
+            )
+
             confidence_info = ConfidenceAnalysis(
                 whitebox_entropy=float(p2.avg_entropy) if (p2_is_genuine and p2 and p2.avg_entropy is not None) else None,
                 blackbox_variation_score=float(p3.consistency_failure_score) if (p3_available and p3.consistency_failure_score is not None) else None,
@@ -563,8 +577,14 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                 signal_type=sig_type,
                 uncertainty_measure=uncertainty_measure_str,
                 generations_used=gen_count,
+                token_count=int(p2_meas_count) if p2_meas_count is not None else None,
+                avg_token_probability=float(p2.avg_probability) if (p2 and p2.avg_probability is not None) else None,
+                confidence_gap_score=float(p2.confidence_gap_score) if (p2 and p2.confidence_gap_score is not None) else None,
+                source_mode=source_mode_str,
+                provider=getattr(p2, "provider", None) or (g_prov.get("provider") if g_prov else payload.model_name),
+                model=getattr(p2, "model", None) or (g_prov.get("model") if g_prov else payload.model_name),
                 raw_signal_metadata={
-                    "logprobs_provided": bool(payload.logprobs),
+                    "logprobs_provided": bool(payload.logprobs or payload.token_measurements),
                     "generations_count": gen_count,
                     "model_name": model_name,
                     "p2_is_proxy": p2_is_proxy,
@@ -673,7 +693,21 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
 )
 async def explain_analysis(payload: ExplainRequest, request: Request, response: Response) -> ExplainResponse:
     """Execute detailed explainability analysis."""
-    analysis = await analyze_response(AnalysisRequest(query=payload.query, response=payload.response, model_name=payload.model_name), request, response)
+    analysis = await analyze_response(
+        AnalysisRequest(
+            query=payload.query,
+            response=payload.response,
+            model_name=payload.model_name,
+            provided_evidence=payload.provided_evidence,
+            sample_responses=payload.sample_responses,
+            logprobs=payload.logprobs,
+            logprobs_representation=payload.logprobs_representation,
+            token_measurements=payload.token_measurements,
+            generation_provenance=payload.generation_provenance,
+        ),
+        request,
+        response,
+    )
 
     supporting = [ev.snippet for ev in analysis.evidence if ev.score >= 0.70] or ["No explicit supporting passage retrieved."]
     contradiction = [ev.snippet for ev in analysis.evidence if ev.score < 0.50] or ["No explicit contradiction passage detected."]

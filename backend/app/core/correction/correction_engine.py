@@ -137,6 +137,38 @@ class HallucinationCorrectionEngine:
                 "confidence": 1.0,
             }
 
+        # 1C. Unit Mismatch against Evidence
+        UNIT_PAT = r"(?:m[⋅·]s[−-]1|m/s|km/s|km/h|mph|[a-zA-Z/°]+)"
+        for ev in (retrieved_evidence or []):
+            snip = ev.get("snippet", "") if isinstance(ev, dict) else getattr(ev, "snippet", "")
+            for num_m in re.finditer(r'\b(\d{1,3}(?:,\d{3})+|\d+)\s*(' + UNIT_PAT + r')\b', original_response):
+                num_str = num_m.group(1)
+                unit_str = num_m.group(2)
+                raw_num = num_str.replace(",", "")
+                if raw_num in snip.replace(",", ""):
+                    correct_unit_m = re.search(re.escape(num_str) + r'\s*(' + UNIT_PAT + r')', snip) or re.search(re.escape(raw_num) + r'\s*(' + UNIT_PAT + r')', snip)
+                    if correct_unit_m:
+                        correct_unit = correct_unit_m.group(1)
+                        if "m" in correct_unit and "s" in correct_unit:
+                            correct_unit = "m/s"
+                        if correct_unit.lower() != unit_str.lower():
+                            corrected_text = original_response[:num_m.start(2)] + correct_unit + original_response[num_m.end(2):]
+                            return {
+                                "status": "candidate_generated",
+                                "original_text": original_response,
+                                "corrected_text": corrected_text,
+                                "method": "unit_correction",
+                                "reason": f"Unit corrected from {unit_str} to {correct_unit} based on verified reference evidence.",
+                                "supporting_evidence": [
+                                    {
+                                        "source": "Verified Reference Grounding",
+                                        "snippet": snip,
+                                        "score": 0.95,
+                                    }
+                                ],
+                                "confidence": 0.95,
+                            }
+
         # -------------------------------------------------------------
         # TIER 2: Evidence-Directed Factual Correction
         # -------------------------------------------------------------
@@ -445,9 +477,17 @@ class HallucinationCorrectionEngine:
         if self.pipeline:
             try:
                 if hasattr(self.pipeline, "analyze_response"):
-                    rev_res = self.pipeline.analyze_response(full_text=corr_text, query=user_query)
+                    rev_res = self.pipeline.analyze_response(
+                        full_text=corr_text,
+                        query=user_query,
+                        evidence_items=evidence_items,
+                    )
                 elif hasattr(self.pipeline, "analyze"):
-                    rev_res = self.pipeline.analyze(response=corr_text, query=user_query)
+                    rev_res = self.pipeline.analyze(
+                        response=corr_text,
+                        query=user_query,
+                        evidence_items=evidence_items,
+                    )
                 else:
                     rev_res = None
 
@@ -458,6 +498,32 @@ class HallucinationCorrectionEngine:
                         passed = not req_ver
                     else:
                         passed = rev_h <= 0.35
+
+                # If initial evidence failed to verify the repaired text, attempt fresh retrieval on the corrected text
+                if not passed and evidence_items:
+                    if hasattr(self.pipeline, "analyze_response"):
+                        rev_fresh = self.pipeline.analyze_response(
+                            full_text=corr_text,
+                            query=user_query,
+                            evidence_items=[],
+                        )
+                    elif hasattr(self.pipeline, "analyze"):
+                        rev_fresh = self.pipeline.analyze(
+                            response=corr_text,
+                            query=user_query,
+                            evidence_items=[],
+                        )
+                    else:
+                        rev_fresh = None
+
+                    if rev_fresh is not None:
+                        fresh_h = float(getattr(rev_fresh, "overall_h_score", getattr(rev_fresh, "hallucination_score", 1.0)))
+                        fresh_req = getattr(rev_fresh, "requires_verification", None)
+                        fresh_passed = (not fresh_req) if fresh_req is not None else (fresh_h <= 0.35)
+                        if fresh_passed:
+                            rev_res = rev_fresh
+                            rev_h = fresh_h
+                            passed = True
             except Exception:
                 passed = False
 

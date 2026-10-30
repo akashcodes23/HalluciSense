@@ -25,6 +25,12 @@ CANONICAL_BENCHMARK_HASH = "dfe8c6e48d9b8250667de019047cbc85957eac3a189c7b6ef58d
 def client():
     app = create_application()
     with TestClient(app) as test_client:
+        import time
+        for _ in range(30):
+            res = test_client.get("/ready")
+            if res.status_code == 200:
+                break
+            time.sleep(0.3)
         yield test_client
 
 

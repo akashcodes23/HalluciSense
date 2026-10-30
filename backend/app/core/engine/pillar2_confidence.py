@@ -47,8 +47,9 @@ class Pillar2ConfidenceEngine:
     def evaluate_tokens(
         self,
         tokens: List[str],
-        probabilities: Optional[List[float]] = None,
+        probabilities: Optional[Any] = None,
         is_logprobs: Optional[bool] = None,
+        token_measurements: Optional[List[Any]] = None,
     ) -> Tuple[
         List[TokenAnalysis],
         Optional[float],
@@ -57,6 +58,28 @@ class Pillar2ConfidenceEngine:
     ]:
         import time
         t_proc_start = time.perf_counter()
+
+        # Extract from structured token measurements if supplied
+        measurements = token_measurements
+        if measurements and not probabilities:
+            extracted_tokens = []
+            extracted_probs = []
+            for m in measurements:
+                if isinstance(m, dict):
+                    tok = m.get("token", "")
+                    lp = m.get("logprob")
+                else:
+                    tok = getattr(m, "token", "")
+                    lp = getattr(m, "logprob", None)
+                if tok:
+                    extracted_tokens.append(tok)
+                if lp is not None:
+                    extracted_probs.append(lp)
+            if extracted_tokens:
+                tokens = extracted_tokens
+            if extracted_probs:
+                probabilities = extracted_probs
+                is_logprobs = True
 
         if not tokens:
             self.last_token_processing_ms = round((time.perf_counter() - t_proc_start) * 1000.0, 2)
@@ -189,13 +212,17 @@ class Pillar2ConfidenceEngine:
     def analyze(
         self,
         tokens: List[str],
-        probabilities: Optional[List[float]] = None,
+        probabilities: Optional[Any] = None,
         evidence_items: Optional[List[Any]] = None,
         p1_result: Optional[Any] = None,
         is_logprobs: Optional[bool] = None,
+        token_measurements: Optional[List[Any]] = None,
+        provider: Optional[str] = None,
+        model: Optional[str] = None,
+        allow_proxy: bool = True,
     ) -> Pillar2Result:
         """Analyze model confidence. Uses token probabilities if provided, or static verification confidence."""
-        if probabilities is not None and len(probabilities) > 0:
+        if (probabilities is not None and len(probabilities) > 0) or (token_measurements is not None and len(token_measurements) > 0):
             (
                 _,
                 avg_prob,
@@ -205,31 +232,33 @@ class Pillar2ConfidenceEngine:
                 tokens,
                 probabilities,
                 is_logprobs=is_logprobs,
+                token_measurements=token_measurements,
             )
 
             if cg_score is None:
                 cg_score = 0.5
 
+            prov_str = f" [{provider} / {model}]" if (provider or model) else ""
             if cg_score < 0.25:
                 reasoning = (
-                    f"High generation confidence. Average token probability: {avg_prob:.2f} "
+                    f"High generation confidence{prov_str}. Average token probability: {avg_prob:.2f} "
                     f"(Binary Bernoulli entropy: {avg_entropy:.2f}). "
                     f"Note: Token predictability reflects generation certainty, not factual truth."
                 )
             elif cg_score < 0.55:
                 reasoning = (
-                    f"Moderate generation confidence gap. Average token probability: {avg_prob:.2f} "
+                    f"Moderate generation confidence gap{prov_str}. Average token probability: {avg_prob:.2f} "
                     f"(Binary Bernoulli entropy: {avg_entropy:.2f}). "
                     f"Note: Token predictability reflects generation certainty, not factual truth."
                 )
             else:
                 reasoning = (
-                    f"High token uncertainty detected. Multiple low-probability tokens observed "
+                    f"High token uncertainty detected{prov_str}. Multiple low-probability tokens observed "
                     f"(Average token probability: {avg_prob:.2f}, Binary Bernoulli entropy: {avg_entropy:.2f})."
                 )
 
             token_logprobs = getattr(self, "_last_clean_logprobs", None) or [
-                round(math.log(max(1e-6, min(1.0, float(p)))), 4) for p in probabilities if not math.isnan(float(p))
+                round(math.log(max(1e-6, min(1.0, float(p)))), 4) for p in (probabilities or []) if not math.isnan(float(p))
             ]
             att_entropy = round(avg_entropy * 0.85, 4) if avg_entropy is not None else None
             pred_entropy = round(avg_entropy * 1.15, 4) if avg_entropy is not None else None
@@ -240,6 +269,7 @@ class Pillar2ConfidenceEngine:
             resp_variance = round((1.0 - avg_prob) * 0.25, 4) if avg_prob is not None else None
             calib_score = round(1.0 - cg_score, 4)
 
+            eval_count = len(token_logprobs) if token_logprobs else len(tokens)
             return Pillar2Result(
                 avg_probability=avg_prob,
                 avg_entropy=avg_entropy,
@@ -249,6 +279,9 @@ class Pillar2ConfidenceEngine:
                 mode="GENERATION_LOGPROB",
                 is_proxy=False,
                 reasoning=reasoning,
+                token_count=eval_count,
+                provider=provider,
+                model=model,
                 token_logprobs=token_logprobs,
                 attention_entropy=att_entropy,
                 predictive_entropy=pred_entropy,
@@ -263,21 +296,25 @@ class Pillar2ConfidenceEngine:
         # ----------------------------------------------------
         # Static Verification Confidence Mode (No logprobs supplied)
         # ----------------------------------------------------
-        if not tokens:
+        if not tokens or not allow_proxy:
             return Pillar2Result(
                 avg_probability=None,
                 avg_entropy=None,
                 confidence_gap_score=None,
                 available=False,
                 status="UNAVAILABLE",
-                mode="STATIC_VERIFICATION_CONFIDENCE",
-                is_proxy=True,
-                reasoning="No text tokens provided for confidence analysis.",
+                mode="UNAVAILABLE",
+                is_proxy=False,
+                reasoning=(
+                    "Generation-time token log-probabilities were not captured. "
+                    "For manually pasted text or providers without logprob support, "
+                    "Pillar 2 uncertainty analysis is excluded from fusion (m2=0)."
+                ),
             )
 
         # Compute a proxy uncertainty estimate from evidence-grounding similarity.
         # IMPORTANT: This is NOT a measurement of token-level generation probabilities.
-        # It is an evidence-similarity proxy used only when logprobs are absent.
+        # It is an evidence-similarity proxy used only when logprobs are absent and proxy allowed.
         # Fusion applies a reduced reliability weight (r_p2=PROXY_RELIABILITY) for this path.
         ev_list = evidence_items or getattr(p1_result, "evidence", []) or []
         if ev_list:

@@ -460,6 +460,9 @@ Respond STRICTLY in JSON using this schema:
         query: Optional[str] = None,
         evidence_items: Optional[List[EvidenceItem]] = None,
         is_logprobs: Optional[bool] = None,
+        token_measurements: Optional[List[Any]] = None,
+        provider: Optional[str] = None,
+        model_name: Optional[str] = None,
     ) -> HallucinationReport:
         """Alias for analyze_response to support standard engine contract."""
         ev = evidence_items if evidence_items is not None else provided_evidence
@@ -470,6 +473,9 @@ Respond STRICTLY in JSON using this schema:
             sample_responses=sample_responses,
             query=query,
             is_logprobs=is_logprobs,
+            token_measurements=token_measurements,
+            provider=provider,
+            model_name=model_name,
         )
 
     def analyze_response(
@@ -481,6 +487,9 @@ Respond STRICTLY in JSON using this schema:
         query: Optional[str] = None,
         provided_evidence: Optional[List[EvidenceItem]] = None,
         is_logprobs: Optional[bool] = None,
+        token_measurements: Optional[List[Any]] = None,
+        provider: Optional[str] = None,
+        model_name: Optional[str] = None,
     ) -> HallucinationReport:
         """
         Run the complete hybrid hallucination detection pipeline
@@ -576,7 +585,10 @@ Respond STRICTLY in JSON using this schema:
             clean_text,
         )
 
-        if token_probabilities is None or (isinstance(token_probabilities, list) and len(token_probabilities) == 0):
+        has_measurements = token_measurements is not None and len(token_measurements) > 0
+        has_probs = token_probabilities is not self._UNSET and token_probabilities is not None and len(token_probabilities) > 0
+
+        if not has_probs and not has_measurements:
             token_analyses = []
             p2_global = Pillar2Result(
                 avg_probability=None,
@@ -584,11 +596,12 @@ Respond STRICTLY in JSON using this schema:
                 confidence_gap_score=None,
                 available=False,
                 status="UNAVAILABLE",
-                mode="WHITE_BOX_LOGPROBS_REQUIRED",
+                mode="UNAVAILABLE",
                 is_proxy=False,
                 reasoning=(
-                    "Token-level generation probabilities were not provided. "
-                    "Pillar 2 uncertainty analysis was excluded from fusion."
+                    "Generation-time token log-probabilities were not captured. "
+                    "For manually pasted text or providers without logprob support, "
+                    "Pillar 2 uncertainty analysis is excluded from fusion (m2=0)."
                 ),
             )
         else:
@@ -598,6 +611,7 @@ Respond STRICTLY in JSON using this schema:
                     raw_tokens,
                     actual_probs,
                     is_logprobs=is_logprobs,
+                    token_measurements=token_measurements,
                 )
             )
 
@@ -607,6 +621,10 @@ Respond STRICTLY in JSON using this schema:
                 evidence_items=evidence_items,
                 p1_result=p1_global,
                 is_logprobs=is_logprobs,
+                token_measurements=token_measurements,
+                provider=provider,
+                model=model_name,
+                allow_proxy=False,
             )
         confidence_duration_ms = round((time.perf_counter() - t_p2_start) * 1000.0, 2)
         tok_proc_ms = getattr(self.p2_engine, "last_token_processing_ms", 0.0)
@@ -617,7 +635,11 @@ Respond STRICTLY in JSON using this schema:
         # =====================================================
 
         t_p3_start = time.perf_counter()
-        if sample_responses == []:
+        has_llm_key = bool(getattr(settings, "GEMINI_API_KEY", "") or getattr(settings, "OPENAI_API_KEY", ""))
+        if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False) and has_llm_key:
+            sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
+
+        if not sample_responses:
             p3_global = Pillar3Result(
                 sample_responses=[],
                 pairwise_similarities=[],
@@ -633,10 +655,6 @@ Respond STRICTLY in JSON using this schema:
                 status="UNAVAILABLE",
             )
         else:
-            has_llm_key = bool(getattr(settings, "GEMINI_API_KEY", "") or getattr(settings, "OPENAI_API_KEY", ""))
-            if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False) and has_llm_key:
-                sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
-
             p3_global = self.p3_engine.analyze(
                 clean_text,
                 sample_responses,
@@ -731,7 +749,7 @@ Respond STRICTLY in JSON using this schema:
             # PILLAR 3
             # -------------------------------------------------
 
-            if sample_responses == []:
+            if not sample_responses:
                 sent_p3 = Pillar3Result(
                     sample_responses=[],
                     pairwise_similarities=[],
@@ -835,32 +853,49 @@ Respond STRICTLY in JSON using this schema:
             p3_global,
         )
 
-        # Authoritative Verdict Integrity Stage (Phase F)
+        # Authoritative Verdict Integrity Stage (Phase F & Blocker 3/4 Governance)
         raw_fusion_score = float(overall_h_score)
         decision_override_reason = None
         p1_statuses = getattr(self.p1_engine, "last_claim_statuses", [])
         p1_fe = float(p1_global.factual_error_score or 0.0) if p1_global else 0.0
         p3_cf = float(p3_global.consistency_failure_score or 0.0) if p3_global and p3_global.available else 0.0
+        p1_has_evidence = bool(evidence_items and p1_global and getattr(p1_global, "available", True) and p1_global.factual_error_score is not None)
 
-        if p1_statuses:
-            if any(s == "CONTRADICTED" for s in p1_statuses) or p1_fe >= 0.70:
+        if not p1_has_evidence:
+            # Pillar 2/3 Factuality Governance: Without independent factual reference grounding,
+            # internal token uncertainty (P2) or semantic inconsistency (P3) cannot establish factual truth or falsity.
+            # The system preserves all pillar measurements while issuing an explicit abstention.
+            overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
+            overall_color = "#6B7280"
+            decision_override_reason = "Selective prediction abstention: factual verification requires independent external evidence (Pillar 1 unavailable)"
+        elif not p1_statuses:
+            # Empty claim list invariant: VERIFIED is allowed only when all required claims are SUPPORTED
+            overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
+            overall_color = "#6B7280"
+            decision_override_reason = "Selective prediction abstention: no atomic factual claims to verify"
+        else:
+            has_contradiction = any(s == "CONTRADICTED" for s in p1_statuses) or p1_fe >= 0.70
+            has_insufficient = any(s == "INSUFFICIENT_EVIDENCE" for s in p1_statuses)
+            all_supported = all(s in ("VERIFIED", "SUPPORTED") for s in p1_statuses)
+
+            if has_contradiction:
                 overall_risk = RiskLevel.LIKELY_HALLUCINATED
                 overall_color = "#EF4444"
                 if raw_fusion_score < 0.50:
                     decision_override_reason = "Claim-level factual contradiction detected in atomic claims (Pillar 1)"
-            elif (all(s == "VERIFIED" for s in p1_statuses) or p1_fe <= 0.20) and p3_cf < 0.50:
+            elif has_insufficient:
+                overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
+                overall_color = "#6B7280"
+                decision_override_reason = "Selective prediction abstention: atomic claims lack verified reference grounding"
+            elif all_supported and p1_fe <= 0.30 and p3_cf < 0.50 and raw_fusion_score < 0.35:
                 overall_risk = RiskLevel.VERIFIED
                 overall_color = "#10B981"
                 if raw_fusion_score >= 0.30:
                     decision_override_reason = "All atomic claims verified by grounded reference evidence"
-            elif all(s == "INSUFFICIENT_EVIDENCE" for s in p1_statuses) and p3_cf < 0.50:
-                overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
-                overall_color = "#6B7280"
-                decision_override_reason = "Selective prediction abstention: all atomic claims lack verified reference grounding"
-        elif not evidence_items and p1_fe == 0.50:
-            overall_risk = RiskLevel.INSUFFICIENT_EVIDENCE
-            overall_color = "#6B7280"
-            decision_override_reason = "Selective prediction abstention: no external reference evidence available"
+            else:
+                overall_risk = RiskLevel.NEEDS_VERIFICATION
+                overall_color = "#F59E0B"
+                decision_override_reason = "Claims require verification: numerical criteria or evidence confidence not satisfied"
 
         # Synchronize sentence analysis if single-sentence
         if len(sentence_analyses) == 1:

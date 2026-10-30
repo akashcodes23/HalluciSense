@@ -13,12 +13,14 @@ from pydantic import BaseModel, Field
 class AnalysisRequest(BaseModel):
     """Input request model for canonical hallucination analysis."""
     query: Optional[str] = Field(None, max_length=2000, description="User query or context prompt", example="Who invented the telephone?")
-    response: str = Field(..., min_length=1, max_length=10000, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
+    response: str = Field(..., min_length=1, description="Generated LLM response to evaluate", example="Alexander Graham Bell invented the telephone in 1876.")
     model_name: Optional[str] = Field("GPT-4", description="Target LLM architecture name", example="GPT-4")
     provided_evidence: Optional[List[Any]] = Field(default=None, description="Optional ground-truth reference passages or evidence")
     sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations for P3 consistency analysis")
     logprobs: Optional[List[float]] = Field(default=None, description="Optional token generation probabilities from model provider")
     logprobs_representation: Optional[str] = Field(default="auto", description="Representation of token scores: 'logprob' (natural log <= 0), 'probability' ([0, 1]), or 'auto'")
+    token_measurements: Optional[List[Dict[str, Any]]] = Field(default=None, description="Granular token generation measurements including logprobs, IDs, positions, and provider provenance")
+    generation_provenance: Optional[Dict[str, Any]] = Field(default=None, description="Metadata describing generation source, e.g. provider, model, pasted vs generated")
 
 
 class ExplainRequest(BaseModel):
@@ -30,6 +32,8 @@ class ExplainRequest(BaseModel):
     sample_responses: Optional[List[str]] = Field(default=None, description="Optional alternate candidate generations")
     logprobs: Optional[List[float]] = Field(default=None, description="Optional token generation probabilities")
     logprobs_representation: Optional[str] = Field(default="auto", description="Representation: 'logprob', 'probability', or 'auto'")
+    token_measurements: Optional[List[Dict[str, Any]]] = Field(default=None, description="Granular token generation measurements")
+    generation_provenance: Optional[Dict[str, Any]] = Field(default=None, description="Metadata describing generation source")
 
 
 class PillarScores(BaseModel):
@@ -116,6 +120,12 @@ class ConfidenceAnalysis(BaseModel):
     signal_type: str = Field(default="UNAVAILABLE", description="MEASURED, DERIVED, PROXY, or UNAVAILABLE")
     uncertainty_measure: Optional[str] = Field(None)
     generations_used: Optional[int] = Field(None)
+    token_count: Optional[int] = Field(None, description="Total number of evaluated generation tokens")
+    avg_token_probability: Optional[float] = Field(None, description="Mean exponentiated token probability exp(logprob)")
+    confidence_gap_score: Optional[float] = Field(None, description="Pillar 2 confidence gap metric: 0.7*(1-mean(p)) + 0.3*(low_prob_frac)")
+    source_mode: Optional[str] = Field(None, description="GENUINE_LOGPROBS, PASTED_TEXT, PROVIDER_UNSUPPORTED, or UNAVAILABLE")
+    provider: Optional[str] = Field(None, description="LLM provider name")
+    model: Optional[str] = Field(None, description="LLM model identifier")
     raw_signal_metadata: Dict[str, Any] = Field(default_factory=dict)
     explanation: Optional[str] = Field(None)
 

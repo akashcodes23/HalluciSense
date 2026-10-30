@@ -294,9 +294,17 @@ class FusionEngine:
             )
         # Factual contradiction gating: low internal uncertainty (CG) or self-consistency (CF)
         # must never suppress a direct factual error (FE >= 0.50) into an unverified state
-        if p1 and p1.factual_error_score >= 0.50:
+        if p1 and p1.factual_error_score is not None and p1.factual_error_score >= 0.50:
             h_score = max(h_score, float(p1.factual_error_score))
 
-        risk_level, color_code = self.determine_risk_level(h_score)
+        if not p1_avail:
+            # Factuality Governance: Without independent factual evidence (Pillar 1 unavailable),
+            # token uncertainty (P2) or semantic inconsistency (P3) cannot independently establish
+            # factual truth (VERIFIED) or factual falsity (LIKELY_HALLUCINATED).
+            # The system preserves all pillar measurements but strictly returns INSUFFICIENT_EVIDENCE.
+            risk_level, color_code = RiskLevel.INSUFFICIENT_EVIDENCE, "#6B7280"
+        else:
+            risk_level, color_code = self.determine_risk_level(h_score)
+
         self.last_fusion_ms = round((time.perf_counter() - t_fus0) * 1000.0, 2)
         return h_score, risk_level, color_code, weights_used

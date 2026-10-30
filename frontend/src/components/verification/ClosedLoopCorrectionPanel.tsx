@@ -41,7 +41,8 @@ export function ClosedLoopCorrectionPanel({
   const [correctionData, setCorrectionData] = useState<CorrectionResponse | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const isVerifiedAlready = analysisResult.risk_level === "VERIFIED" || analysisResult.overall_h_score < 0.20;
+  const isVerifiedAlready = analysisResult.risk_level === "VERIFIED" && (analysisResult.pillar_scores?.retrieval ?? 1.0) <= 0.20;
+  const isAbstainedInsufficient = analysisResult.risk_level === "INSUFFICIENT_EVIDENCE";
 
   const handleRunCorrection = async () => {
     setIsExecuting(true);
@@ -138,6 +139,16 @@ export function ClosedLoopCorrectionPanel({
               <h4 className="text-sm font-semibold text-emerald-300">All Claims Grounded in Evidence</h4>
               <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                 The response has passed external evidence retrieval (FE = {(analysisResult.pillar_scores?.retrieval ?? 0.0).toFixed(2)}) and shows no factual contradiction. No correction or repair is required.
+              </p>
+            </div>
+          </div>
+        ) : isAbstainedInsufficient ? (
+          <div className="p-4 rounded-xl bg-slate-500/10 border border-slate-500/20 flex items-start gap-3">
+            <Info className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-sm font-semibold text-slate-300">Reference Evidence Inconclusive (Selective Prediction Abstention)</h4>
+              <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                External reference retrieval did not yield sufficient verifiable passages to confirm or contradict this statement. HalluciSense safely abstains from declaring verification or inventing ungrounded facts.
               </p>
             </div>
           </div>

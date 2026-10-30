@@ -96,10 +96,19 @@ class OpenAIProvider(AbstractLLMProvider):
 
                                 logits = []
                                 if choice.get("logprobs") and choice["logprobs"].get("content"):
-                                    for lp in choice["logprobs"]["content"]:
-                                        logits.append(
-                                            TokenLogit(token=lp["token"], logprob=lp["logprob"])
-                                        )
+                                    for idx, lp in enumerate(choice["logprobs"]["content"]):
+                                        selected_lp = lp.get("logprob")
+                                        if selected_lp is not None:
+                                            logits.append(
+                                                TokenLogit(
+                                                    token=str(lp.get("token", "")),
+                                                    logprob=float(selected_lp),
+                                                    token_id=None,
+                                                    position=tokens_yielded + idx,
+                                                    provider="OpenAI",
+                                                    model=self._model_slug,
+                                                )
+                                            )
 
                                 if content or logits:
                                     tokens_yielded += 1
@@ -149,13 +158,27 @@ class OpenAIProvider(AbstractLLMProvider):
             "messages": formatted_messages,
             "temperature": temperature,
             "stream": False,
+            "logprobs": True,
+            "top_logprobs": 5,
         }
 
         client = get_shared_async_client()
-        response = await client.post(
-            "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
-        )
-        response.raise_for_status()
+        try:
+            response = await client.post(
+                "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
+            )
+            response.raise_for_status()
+        except httpx.HTTPStatusError as status_err:
+            if status_err.response.status_code == 400 and "logprobs" in status_err.response.text:
+                payload.pop("logprobs", None)
+                payload.pop("top_logprobs", None)
+                response = await client.post(
+                    "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
+                )
+                response.raise_for_status()
+            else:
+                raise status_err
+
         data = response.json()
         choices = data.get("choices", [])
         if choices:

@@ -122,7 +122,17 @@ class MessageService:
 
                 if chunk.logits:
                     captured_logits.extend(
-                        [{"token": l.token, "logprob": l.logprob} for l in chunk.logits]
+                        [
+                            {
+                                "token": l.token,
+                                "logprob": l.logprob,
+                                "token_id": getattr(l, "token_id", None),
+                                "position": getattr(l, "position", None),
+                                "provider": getattr(l, "provider", None) or active_model,
+                                "model": getattr(l, "model", None) or active_model,
+                            }
+                            for l in chunk.logits
+                        ]
                     )
         except Exception as e:
             logger.error(

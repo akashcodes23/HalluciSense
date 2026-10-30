@@ -8,7 +8,7 @@ import os
 import random
 import threading
 from dataclasses import dataclass, replace
-from typing import AsyncGenerator, Dict, List, Optional, Set, TypedDict
+from typing import AsyncGenerator, Dict, List, Optional, Set, TypedDict, Any
 
 # Enforce native DNS resolution for gRPC on macOS to prevent lookup deadlocks
 os.environ["GRPC_DNS_RESOLVER"] = "native"
@@ -31,7 +31,7 @@ from app.core.config import settings
 from app.core.circuit_breaker import QuotaCircuitBreaker
 from app.core.exceptions import HalluciSenseError
 from app.modules.providers.base import AbstractLLMProvider
-from app.modules.providers.schemas import ProviderResponseChunk
+from app.modules.providers.schemas import ProviderResponseChunk, TokenLogit
 
 logger = structlog.get_logger(__name__)
 
@@ -137,6 +137,40 @@ def _extract_chunk_text(chunk: object) -> str:
         pass
 
     return ""
+
+
+def _extract_chunk_logits(
+    chunk: object, model_name: Optional[str] = None, start_pos: int = 0
+) -> List[TokenLogit]:
+    """Safely extracts chosen token log-probabilities from Gemini response candidate."""
+    logits: List[TokenLogit] = []
+    if chunk is None:
+        return logits
+    try:
+        candidates = getattr(chunk, "candidates", None)
+        if candidates:
+            cand = candidates[0]
+            logprobs_res = getattr(cand, "logprobs_result", None)
+            if logprobs_res:
+                chosen = getattr(logprobs_res, "chosen_candidates", None) or []
+                for idx, c in enumerate(chosen):
+                    t_token = getattr(c, "token", "") or ""
+                    t_id = getattr(c, "token_id", None)
+                    t_lp = getattr(c, "log_probability", None)
+                    if t_lp is not None:
+                        logits.append(
+                            TokenLogit(
+                                token=str(t_token),
+                                logprob=float(t_lp),
+                                token_id=int(t_id) if t_id is not None else None,
+                                position=start_pos + idx,
+                                provider="Google Gemini",
+                                model=model_name or "gemini",
+                            )
+                        )
+    except Exception as e:
+        logger.debug("gemini_logprob_extraction_skipped", error=str(e))
+    return logits
 
 
 def _format_messages_for_gemini(messages: List[ChatMessage]) -> List[Dict[str, object]]:
@@ -274,22 +308,21 @@ class GeminiProvider(AbstractLLMProvider):
                 self._model_cache[model_name] = genai.GenerativeModel(model_name=model_name)
             return self._model_cache[model_name]
 
-    def _get_generation_config(self, temperature: Optional[float] = None) -> GenerationConfig:
-        """Retrieves or constructs cached immutable GenerationConfig instance."""
+    def _get_generation_config(
+        self, temperature: Optional[float] = None, request_logprobs: bool = True
+    ) -> Dict[str, Any]:
+        """Retrieves generation config dict including response_logprobs and logprobs."""
         temp = temperature if temperature is not None else self.DEFAULTS.temperature
-        with self._cache_lock:
-            if temp not in self._generation_config_cache:
-                if len(self._generation_config_cache) >= self.MAX_CONFIG_CACHE_SIZE:
-                    oldest = next(iter(self._generation_config_cache))
-                    del self._generation_config_cache[oldest]
-
-                self._generation_config_cache[temp] = GenerationConfig(
-                    temperature=temp,
-                    top_p=self.DEFAULTS.top_p,
-                    top_k=self.DEFAULTS.top_k,
-                    max_output_tokens=self.DEFAULTS.max_output_tokens,
-                )
-            return self._generation_config_cache[temp]
+        cfg: Dict[str, Any] = {
+            "temperature": temp,
+            "top_p": self.DEFAULTS.top_p,
+            "top_k": self.DEFAULTS.top_k,
+            "max_output_tokens": self.DEFAULTS.max_output_tokens,
+        }
+        if request_logprobs:
+            cfg["response_logprobs"] = True
+            cfg["logprobs"] = 5
+        return cfg
 
     async def _execute_with_retry(
         self,
@@ -301,7 +334,7 @@ class GeminiProvider(AbstractLLMProvider):
     ) -> object:
         """Executes generate_content with backoff retry policy for transient errors."""
         model_client = self._get_generative_model(model_name, system_prompt)
-        gen_config = self._get_generation_config(temperature=temperature)
+        gen_config = self._get_generation_config(temperature=temperature, request_logprobs=True)
 
         max_retries = settings.GEMINI_MAX_RETRIES
         timeout_seconds = settings.GEMINI_GENERATION_TIMEOUT
@@ -311,11 +344,29 @@ class GeminiProvider(AbstractLLMProvider):
         for attempt in range(1, max_retries + 1):
             try:
                 def _do_generate() -> object:
-                    return model_client.generate_content(
-                        contents=formatted_contents,
-                        generation_config=gen_config,
-                        stream=stream,
-                    )
+                    try:
+                        return model_client.generate_content(
+                            contents=formatted_contents,
+                            generation_config=gen_config,
+                            stream=stream,
+                        )
+                    except Exception as gen_err:
+                        err_msg = str(gen_err).lower()
+                        if "logprob" in err_msg or "invalid argument" in err_msg:
+                            logger.info(
+                                "gemini_model_logprob_unsupported_falling_back",
+                                model=model_name,
+                                error=str(gen_err),
+                            )
+                            fallback_cfg = self._get_generation_config(
+                                temperature=temperature, request_logprobs=False
+                            )
+                            return model_client.generate_content(
+                                contents=formatted_contents,
+                                generation_config=fallback_cfg,
+                                stream=stream,
+                            )
+                        raise gen_err
 
                 response = await asyncio.wait_for(
                     asyncio.to_thread(_do_generate),
@@ -498,6 +549,7 @@ class GeminiProvider(AbstractLLMProvider):
         queue: asyncio.Queue = asyncio.Queue(maxsize=settings.GEMINI_QUEUE_SIZE)
 
         def _producer() -> None:
+            current_pos = 0
             try:
                 logger.info("gemini_producer_thread_started", provider=self.provider_name, model=active_model)
                 if hasattr(response_stream, "__iter__"):
@@ -507,8 +559,19 @@ class GeminiProvider(AbstractLLMProvider):
                             break
 
                         text = _extract_chunk_text(chunk)
-                        if text:
-                            future = asyncio.run_coroutine_threadsafe(queue.put(text), loop)
+                        chunk_logits = _extract_chunk_logits(chunk, active_model, start_pos=current_pos)
+                        if chunk_logits:
+                            current_pos += len(chunk_logits)
+                        elif text:
+                            current_pos += 1
+
+                        if text or chunk_logits:
+                            chunk_obj = ProviderResponseChunk(
+                                text=text or "",
+                                logits=chunk_logits if chunk_logits else None,
+                                is_done=False,
+                            )
+                            future = asyncio.run_coroutine_threadsafe(queue.put(chunk_obj), loop)
                             try:
                                 future.result(timeout=5.0)
                             except Exception as put_err:
@@ -573,14 +636,10 @@ class GeminiProvider(AbstractLLMProvider):
                     raise item
 
                 tokens_yielded += 1
-                logger.debug(
-                    "gemini_chunk_yielded",
-                    provider=self.provider_name,
-                    model=active_model,
-                    chunk_index=tokens_yielded,
-                    length=len(str(item)),
-                )
-                yield ProviderResponseChunk(text=str(item), logits=None, is_done=False)
+                if isinstance(item, ProviderResponseChunk):
+                    yield item
+                else:
+                    yield ProviderResponseChunk(text=str(item), logits=None, is_done=False)
 
             logger.info(
                 "gemini_stream_completed",

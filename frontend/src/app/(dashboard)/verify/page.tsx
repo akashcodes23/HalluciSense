@@ -396,7 +396,12 @@ export default function VerifyPage() {
                         : (currentResult.pillar_scores.confidence != null ? "active" : "unavailable")
                     }
                     isProxy={currentResult.pillar_status?.p2_status === "PROXY"}
-                    reason="Token log-probabilities not provided"
+                    reason={
+                      currentResult.confidence_analysis?.source_mode === "PASTED_TEXT"
+                        ? "Manually pasted text — generation-time token log-probabilities were not captured."
+                        : currentResult.confidence_analysis?.explanation || "Generation-time token log-probabilities not provided by LLM provider"
+                    }
+                    confidenceDetails={currentResult.confidence_analysis}
                   />
                   <PillarScoreCard
                     pillarNumber={3}
@@ -544,6 +549,7 @@ function PillarScoreCard({
   status,
   isProxy,
   reason,
+  confidenceDetails,
 }: {
   pillarNumber?: 1 | 2 | 3;
   label: string;
@@ -553,6 +559,7 @@ function PillarScoreCard({
   status: "active" | "unavailable";
   isProxy?: boolean;
   reason?: string;
+  confidenceDetails?: any;
 }) {
   const isAvailable = status === "active" && value !== null && value !== undefined;
   const scorePercent = isAvailable ? Math.round(value * 100) : null;
@@ -636,6 +643,39 @@ function PillarScoreCard({
                 ⚡ Evidence Proxy
               </span>
             )}
+            {/* Genuine Logprob Metadata Breakdown for Pillar 2 */}
+            {pillarNumber === 2 && !isProxy && confidenceDetails && (
+              <div className="p-2 rounded bg-white/[0.02] border border-white/5 space-y-1 text-[10px] font-mono">
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>Tokens:</span>
+                  <span className="text-white font-semibold">{confidenceDetails.token_count ?? "—"}</span>
+                </div>
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>Avg Token Prob p̄:</span>
+                  <span className="text-emerald-400 font-semibold">
+                    {confidenceDetails.avg_token_probability !== undefined && confidenceDetails.avg_token_probability !== null
+                      ? (confidenceDetails.avg_token_probability * 100).toFixed(1) + "%"
+                      : "—"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>Bernoulli Entropy:</span>
+                  <span className="text-sky-400 font-semibold">
+                    {confidenceDetails.whitebox_entropy !== undefined && confidenceDetails.whitebox_entropy !== null
+                      ? confidenceDetails.whitebox_entropy.toFixed(3)
+                      : "—"}
+                  </span>
+                </div>
+                {(confidenceDetails.provider || confidenceDetails.model) && (
+                  <div className="pt-1 mt-1 border-t border-white/5 flex items-center justify-between text-[9px]">
+                    <span className="text-[var(--text-dim)]">Source:</span>
+                    <span className="text-slate-300 font-sans truncate max-w-[130px]">
+                      {confidenceDetails.provider ?? ""} {confidenceDetails.model ? `· ${confidenceDetails.model}` : ""}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
             <div className="pt-2 border-t border-[var(--border)]">
               <span className="text-[9px] font-semibold uppercase tracking-wider text-[var(--text-dim)] block mb-0.5">
                 Interpretation:
@@ -646,10 +686,15 @@ function PillarScoreCard({
             </div>
           </div>
         ) : (
-          <div>
+          <div className="space-y-1.5">
             <p className="text-sm text-[var(--text-dim)] italic">Unavailable</p>
             {reason && (
-              <p className="text-[10px] text-[var(--text-dim)] mt-1 leading-tight">{reason}</p>
+              <p className="text-[10px] text-[var(--text-dim)] leading-tight">{reason}</p>
+            )}
+            {pillarNumber === 2 && (
+              <p className="text-[9px] text-slate-500 italic leading-snug pt-1 border-t border-white/5">
+                Pillar 2 uncertainty analysis excluded from fusion (m₂=0). No replacement score fabricated.
+              </p>
             )}
           </div>
         )}

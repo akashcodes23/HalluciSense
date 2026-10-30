@@ -1,5 +1,5 @@
 import re
-from typing import List, Tuple, Optional, Dict, Any
+from typing import List, Tuple, Optional, Dict, Any, Set
 
 import httpx
 
@@ -85,6 +85,67 @@ def extract_capital_relation(text: str) -> Optional[Tuple[str, str]]:
                 return city.lower(), entity.lower()
 
     return None
+
+
+STOP_FORMULA_WORDS = {"is", "are", "was", "were", "can", "could", "of", "for", "a", "an", "the", "any", "which", "to", "in", "by", "that", "be", "as", "such", "several", "its", "each"}
+
+
+def extract_chemical_formula(text: str) -> Optional[Tuple[str, str]]:
+    """Extract (subject, chemical_formula) from text if present.
+
+    Handles statements like:
+    - 'Water has the chemical formula H2O'
+    - 'Water is an inorganic compound with the chemical formula H2O'
+    - 'Methane (CH4) is a hydrocarbon'
+    Excludes English stop-words from being treated as chemical symbols.
+    """
+    m = re.search(r'\b([A-Za-z]{3,})\b[^.!?]*?\b(?:chemical\s+formula|formula)\s*(?:is|:)?\s*([A-Za-z0-9]+)\b', text, re.IGNORECASE)
+    if m:
+        subj = m.group(1).lower()
+        form = m.group(2)
+        if form.lower() not in STOP_FORMULA_WORDS and len(form) >= 2:
+            return subj, form.upper()
+    return None
+
+
+NON_ENTITY_BASES = {
+    "january", "february", "march", "april", "may", "june",
+    "july", "august", "september", "october", "november", "december",
+    "day", "month", "year", "grade", "page", "section", "part",
+    "chapter", "table", "figure", "rule", "step", "level"
+}
+
+
+def has_conflicting_designated_entity(claim: str, snippet: str, source_name: str = "") -> bool:
+    """Detect if an evidence snippet/source primarily describes a distinct sibling entity in the same series.
+
+    Prevents false cross-encoder contradictions where an unrelated premise (e.g., Apollo 12)
+    is erroneously evaluated as contradicting a claim about a distinct entity (e.g., Apollo 11).
+    """
+    clean_claim = re.sub(r"^(?:the\s+)", "", claim.strip(), flags=re.IGNORECASE)
+    m_claim = re.match(r"^([A-Za-z]+(?:\s+[A-Za-z]+)?)\s+(\d+|[IVXLCDM]+)\b", clean_claim)
+    if not m_claim:
+        m_claim_all = re.findall(r"\b([A-Za-z]+(?:\s+[A-Za-z]+)?)\s+(\d+|[IVXLCDM]+)\b", claim)
+        valid = [(b.lower(), d.lower()) for b, d in m_claim_all if b.lower() not in NON_ENTITY_BASES]
+        if len(valid) == 1:
+            c_base, c_des = valid[0]
+        else:
+            return False
+    else:
+        c_base, c_des = m_claim.group(1).lower(), m_claim.group(2).lower()
+
+    if c_base in NON_ENTITY_BASES:
+        return False
+
+    check_texts = [source_name, snippet[:120]]
+    for t in check_texts:
+        clean_t = re.sub(r"^(?:wikipedia:\s*|the\s+)", "", t.strip(), flags=re.IGNORECASE)
+        m_ev = re.match(r"^([A-Za-z]+(?:\s+[A-Za-z]+)?)\s+(\d+|[IVXLCDM]+)\b", clean_t)
+        if m_ev:
+            e_base, e_des = m_ev.group(1).lower(), m_ev.group(2).lower()
+            if e_base == c_base and e_des != c_des:
+                return True
+    return False
 
 
 class EventTemporalAnchorResolver:
@@ -299,6 +360,8 @@ class Pillar1RetrievalEngine:
         return claims
 
     def _evidence_relevant_to_claim(self, claim: str, item: EvidenceItem) -> bool:
+        if has_conflicting_designated_entity(claim, item.snippet, getattr(item, "source_name", "")):
+            return False
         evidence_claim = (item.claim or "").strip()
         if not evidence_claim:
             return True
@@ -315,17 +378,26 @@ class Pillar1RetrievalEngine:
         neutral = result["neutral"]
         sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
 
-        # Check for chemical formula contradiction or match
-        claim_formula_m = re.search(r'\b(?:chemical\s+formula|formula)\s+([A-Za-z0-9]+)\b', claim, re.IGNORECASE)
-        snippet_formula_m = re.search(r'\b(?:chemical\s+formula|formula)\s+([A-Za-z0-9]+)\b', item.snippet, re.IGNORECASE)
+        # Designated entity alignment guard: If a snippet describes a conflicting designated sibling entity
+        # (e.g. Apollo 12 vs Apollo 11, Boeing 777 vs Boeing 737, World War II vs World War I),
+        # it must not trigger false contradictions against facts asserted about the claim's entity.
+        if has_conflicting_designated_entity(claim, item.snippet, getattr(item, "source_name", "")):
+            contradiction = min(contradiction, 0.05)
+            entailment = min(entailment, 0.05)
+            neutral = max(neutral, 0.95)
 
-        if claim_formula_m and snippet_formula_m:
-            c_form = claim_formula_m.group(1).upper()
-            s_form = snippet_formula_m.group(1).upper()
-            if c_form != s_form:
-                return 0.0, 0.95, 0.05
-            else:
-                return 0.95, 0.0, 0.05
+        # Check for chemical formula contradiction or match
+        claim_form = extract_chemical_formula(claim)
+        snippet_form = extract_chemical_formula(item.snippet)
+
+        if claim_form and snippet_form:
+            c_subj, c_formula = claim_form
+            s_subj, s_formula = snippet_form
+            if c_subj in s_subj or s_subj in c_subj:
+                if c_formula != s_formula:
+                    return 0.0, 0.98, 0.02
+                else:
+                    return 0.98, 0.0, 0.02
 
         # Check for capital city contradiction or entailment using robust structural extractor
         claim_cap = extract_capital_relation(claim)
@@ -342,15 +414,15 @@ class Pillar1RetrievalEngine:
                     # Clear factual entailment: evidence names the same capital for the same entity
                     return 0.98, 0.0, 0.02
 
-        if neutral > 0.60 and contradiction < 0.30 and sim_score >= 0.70:
-            match = re.match(r'^([A-Za-z0-9\s]+)\s+is\s+([A-Za-z0-9]+)\.?$', claim.strip(), re.IGNORECASE)
-            if match:
-                subj, obj = match.group(1).strip().lower(), match.group(2).strip().lower()
-                snippet_lower = item.snippet.lower()
-                if f"{subj} ({obj})" in snippet_lower or f"{subj} ({obj}" in snippet_lower or f"formula {obj}" in snippet_lower:
-                    entailment = max(entailment, 0.90)
+        # Formula / alias match for short equivalence statements "X is Y"
+        match = re.match(r'^([A-Za-z0-9\s]+)\s+is\s+([A-Za-z0-9]+)\.?$', claim.strip(), re.IGNORECASE)
+        if match:
+            subj, obj = match.group(1).strip().lower(), match.group(2).strip().lower()
+            snippet_lower = item.snippet.lower()
+            if f"{subj} ({obj})" in snippet_lower or f"{subj} ({obj}" in snippet_lower or f"formula {obj}" in snippet_lower or f"formula is {obj}" in snippet_lower:
+                return 0.98, 0.0, 0.02
 
-        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_formula_m and not claim_cap:
+        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_form and not claim_cap:
             claim_keywords = [w.lower() for w in re.findall(r'\b[A-Za-z]{4,}\b', claim)]
             snippet_lower = item.snippet.lower()
             if claim_keywords:
@@ -411,6 +483,20 @@ class Pillar1RetrievalEngine:
             # Contradiction relevance guard: Low-similarity, out-of-domain passages must not create false contradictions
             if sim_score < 0.45 and not (claim_cap and snippet_cap):
                 contradiction = min(contradiction, 0.20)
+
+            # Media title guard: Passages describing entertainment/media works (TV shows, movies, paintings, albums)
+            # must not trigger false contradictions against non-media factual claims (e.g. "Water is H2O")
+            if re.search(r'\b(?:television\s+(?:show|series)|tv\s+(?:show|series)|drama\s+series|oil\s+painting|album\s+by|song\s+by|video\s+game)\b', item.snippet, re.IGNORECASE):
+                if not re.search(r'\b(?:movie|film|album|song|series|show|painting|actor|actress|directed|written|composed|starring|play|novel)\b', claims[claim_idx], re.IGNORECASE):
+                    contradiction = min(contradiction, 0.10)
+
+            # Designated entity alignment guard: If a snippet describes a conflicting designated sibling entity
+            # (e.g. Apollo 12 vs Apollo 11, Boeing 777 vs Boeing 737, World War II vs World War I),
+            # it must not trigger false contradictions against facts asserted about the claim's entity.
+            if has_conflicting_designated_entity(claims[claim_idx], item.snippet, getattr(item, "source_name", "")):
+                contradiction = min(contradiction, 0.05)
+                entailment = min(entailment, 0.05)
+                neutral = max(neutral, 0.95)
 
             best[claim_idx][0] = max(best[claim_idx][0], entailment)
             best[claim_idx][1] = max(best[claim_idx][1], contradiction)
