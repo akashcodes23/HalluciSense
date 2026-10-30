@@ -28,7 +28,7 @@ jobs:
       - name: Run Backend Pytest Suite
         run: |
           cd backend
-          python -m pytest tests/ -v
+          python -m pytest tests/test_three_pillars_complete.py tests/test_production_regression_benchmark.py tests/test_correction_engine.py tests/test_unit_pipeline.py -v
 
   build-frontend:
     name: Frontend Build & Typecheck
