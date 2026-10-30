@@ -66,6 +66,17 @@ class EvidenceItem(BaseModel):
     snippet: str = Field(...)
     score: float = Field(..., ge=0.0, le=1.0)
     source: str = Field(default="Wikipedia / BM25+Dense Index")
+    url: Optional[str] = Field(None, description="URL of the source article")
+    source_url: Optional[str] = Field(None, description="Alias for url; source article URL")
+    retrieval_query: Optional[str] = Field(None)
+    claim_subject: Optional[str] = Field(None)
+    claim_relation: Optional[str] = Field(None)
+    claim_object: Optional[str] = Field(None)
+    relevance_score: Optional[float] = Field(None)
+    entailment_prob: Optional[float] = Field(None)
+    contradiction_prob: Optional[float] = Field(None)
+    neutral_prob: Optional[float] = Field(None)
+    evaluation_source: Optional[str] = Field("neural_deberta_nli")
 
 
 class MeasuredTimingBreakdown(BaseModel):

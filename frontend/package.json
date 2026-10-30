@@ -9,7 +9,8 @@
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:contract": "node --experimental-strip-types src/services/__tests__/contract-normalization.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

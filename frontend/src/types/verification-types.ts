@@ -83,7 +83,7 @@ export interface PillarScores {
   pillar3_consistency_failure?: number | null;
   retrieval?: number;
   confidence?: number | null;
-  consistency?: number;
+  consistency?: number | null;
   effective_weights?: {
     alpha: number;
     beta: number;
@@ -302,7 +302,7 @@ export interface ExplainResponse {
   contradiction_evidence?: string[];
   reasoning_chain?: string[];
   adaptive_weights?: Record<string, number>;
-  fusion_contribution?: Record<string, number>;
+  fusion_contribution?: Record<string, number | null>;
   fusion_decomposition?: MathematicalFusionDecomposition;
   measured_timings?: MeasuredTimingBreakdown;
 }

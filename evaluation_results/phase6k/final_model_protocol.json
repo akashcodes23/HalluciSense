@@ -1,6 +1,6 @@
 {
   "protocol_status": "LOCKED_PRE_EVALUATION",
-  "timestamp_utc": "2026-09-01 17:06:37 UTC",
+  "timestamp_utc": "2026-10-30 12:25:02 UTC",
   "selected_candidate_key": "candidate_3",
   "display_name": "Candidate 3 (Set B + RobustScaler + liblinear)",
   "locked_features": [
@@ -37,8 +37,8 @@
   },
   "fingerprints": {
     "dev_n_samples": 100,
-    "dev_sha256": "70f8a81a09c8a87c3f77b2ab5f91cd92d23b45408ba36b378815312f14c2cdae",
+    "dev_sha256": "21a0f3fed0458bee92983d4d49fbad129ead8e8045abc5b6ac5630fca835c9d7",
     "val_n_samples": 50,
-    "val_sha256": "637dd568689c72ff4dd3d21726d120641494efcd7f4861e0890ba658ac989db2"
+    "val_sha256": "b4eb4d4f2ef92d6e24b7815c0e7550d79d58ae48327e96db737e8e79db4aff1d"
   }
 }

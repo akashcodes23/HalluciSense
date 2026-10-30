@@ -231,6 +231,10 @@ class NumericUnitChecker:
                         c_val_base = cq.value * c_scale
                         e_val_base = eq.value * e_scale
 
+                        if abs(c_val_base - e_val_base) < 1e-5:
+                            cq_matched = True
+                            break
+
                         ratio = c_val_base / e_val_base if e_val_base != 0 else float("inf")
                         if abs(ratio - 1.0) < self.tolerance_pct:
                             cq_matched = True
@@ -248,6 +252,10 @@ class NumericUnitChecker:
                                 f"Numerical conflict: claim={cq.value} {cq.unit} vs evidence={eq.value} {eq.unit}",
                             )
                     elif c_unit == e_unit:
+                        if abs(cq.value - eq.value) < 1e-5:
+                            cq_matched = True
+                            break
+
                         ratio = cq.value / eq.value if eq.value != 0 else float("inf")
                         if abs(ratio - 1.0) < self.tolerance_pct:
                             cq_matched = True
@@ -265,30 +273,31 @@ class NumericUnitChecker:
                                 f"Numerical conflict with matching unit {cq.unit}: claim={cq.value} vs evidence={eq.value}",
                             )
                     elif c_unit != e_unit:
-                        best_conflict = (
-                            NumericUnitStatus.UNIT_CONFLICT,
-                            0.80,
-                            f"Unit conflict: claim uses {cq.unit} but evidence discusses {eq.unit}",
-                        )
+                        # Incompatible dimensions (e.g. temperature vs speed) - not a conflict unless referring to same attribute
+                        pass
 
-                # 2. If units are not explicitly tagged, compare raw values / exponents
-                elif cq.value != 0 and eq.value != 0:
-                    ratio = cq.value / eq.value
-                    if abs(ratio - 1.0) < self.tolerance_pct:
+                # 2. Both quantities are strictly dimensionless (neither has a physical unit)
+                elif c_unit is None and e_unit is None:
+                    if abs(cq.value - eq.value) < 1e-5:
                         cq_matched = True
                         break
-                    elif abs(cq.exponent - eq.exponent) >= 2 or abs(math.log10(max(1e-12, abs(ratio)))) >= 1.0:
-                        best_conflict = (
-                            NumericUnitStatus.SCALE_CONFLICT,
-                            0.88,
-                            f"Order of magnitude error: claim exponent 10^{cq.exponent} vs evidence 10^{eq.exponent}",
-                        )
-                    elif ratio > 1.5 or ratio < 0.67:
-                        best_conflict = (
-                            NumericUnitStatus.NUMERIC_CONFLICT,
-                            0.75,
-                            f"Numerical value mismatch: claim states {cq.value}, evidence states {eq.value}",
-                        )
+                    if cq.value != 0 and eq.value != 0:
+                        ratio = cq.value / eq.value
+                        if abs(ratio - 1.0) < self.tolerance_pct:
+                            cq_matched = True
+                            break
+                        elif abs(cq.exponent - eq.exponent) >= 2 or abs(math.log10(max(1e-12, abs(ratio)))) >= 1.0:
+                            best_conflict = (
+                                NumericUnitStatus.SCALE_CONFLICT,
+                                0.88,
+                                f"Order of magnitude error: claim exponent 10^{cq.exponent} vs evidence 10^{eq.exponent}",
+                            )
+                        elif ratio > 1.5 or ratio < 0.67:
+                            best_conflict = (
+                                NumericUnitStatus.NUMERIC_CONFLICT,
+                                0.75,
+                                f"Numerical value mismatch: claim states {cq.value}, evidence states {eq.value}",
+                            )
 
             if cq_matched:
                 return (

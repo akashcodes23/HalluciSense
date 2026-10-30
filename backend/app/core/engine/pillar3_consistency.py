@@ -246,6 +246,15 @@ class Pillar3ConsistencyEngine:
             con = float(result.get("contradiction", 0.0))
             ent = float(result.get("entailment", 0.0))
             neu = float(result.get("neutral", 0.0))
+            # Gate: topically unrelated sentence pairs (Jaccard < 0.05 and NLI
+            # labels them neutral or entailed with high confidence) must not
+            # generate contradiction signal. This prevents "Water freezes at 0°C"
+            # vs "Light travels at 3×10^8 m/s" from being flagged as contradictory.
+            if sim < 0.05 and con > 0.30 and (ent + neu) > con:
+                con = min(con, 0.10)
+            elif sim < 0.10 and con > 0.50:
+                # Dampen high contradiction signal on topically-unrelated sentences
+                con = con * 0.30
             similarities.append(round(sim, 4))
             contradictions.append(con)
             probs = {"contradiction": con, "entailment": ent, "neutral": neu}
@@ -299,21 +308,9 @@ class Pillar3ConsistencyEngine:
         sanitization_ms = (time.perf_counter() - t_san0) * 1000.0
 
         if not valid_samples:
-            res = self.evaluate_intra_response_consistency(primary_response)
-            p3_dur = (time.perf_counter() - t_p3_start) * 1000.0
-            res.last_timings = {
-                "start_time": t_p3_start,
-                "end_time": time.perf_counter(),
-                "duration_ms": round(p3_dur, 2),
-                "sanitization_ms": round(sanitization_ms, 2),
-                "jaccard_ms": 0.0,
-                "semantic_ms": 0.0,
-                "nli_ms": round(max(0.0, p3_dur - sanitization_ms), 2),
-                "consistency_paraphrase_ms": 0.0,
-                "consistency_multi_run_ms": 0.0,
-                "consistency_comparison_ms": round(p3_dur, 2),
-            }
-            return res
+            # When independent alternate samples are not provided, evaluate
+            # static intra-response claim consistency across internal claims.
+            return self.evaluate_intra_response_consistency(primary_response)
 
         logger.info("pillar3_analysis_started", num_samples=len(valid_samples))
 

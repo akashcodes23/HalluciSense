@@ -93,13 +93,18 @@ async function request<T>(
 }
 
 export class HalluciSenseAPIError extends Error {
+  public status: number;
+  public body: Record<string, unknown>;
+
   constructor(
     message: string,
-    public status: number,
-    public body: Record<string, unknown>
+    status: number,
+    body: Record<string, unknown>
   ) {
     super(message);
     this.name = "HalluciSenseAPIError";
+    this.status = status;
+    this.body = body;
   }
 }
 
@@ -107,7 +112,7 @@ export class HalluciSenseAPIError extends Error {
 // Normalization Adapters (Map Current ML Pipeline -> UI Representation)
 // ─────────────────────────────────────────────────────────────────────────────
 
-function normalizePredictResponse(
+export function normalizePredictResponse(
   res: PredictResponse,
   latencyMs?: number
 ): AnalysisResponse {
@@ -178,7 +183,7 @@ function normalizePredictResponse(
   }
 
   const p1Prob = res.explanation?.pillar_contributions?.pillar_1_probability ?? 0;
-  const p2Prob = res.explanation?.pillar_contributions?.pillar_2_probability ?? 0;
+  const p2Prob = res.explanation?.pillar_contributions?.pillar_2_probability ?? null;
 
   return {
     request_id: res.request_id,
@@ -191,16 +196,26 @@ function normalizePredictResponse(
     total_sentences_count: res.claim_count ?? sentenceScores.length,
     pillar_scores: {
       retrieval: p1Prob,
-      consistency: p2Prob,
-      confidence: null,
+      consistency: null, // Legacy Phase 7 had no Pillar 3 multi-sample consistency
+      confidence: p2Prob,
       pillar1_factual_error: p1Prob,
-      pillar2_confidence_gap: null,
-      pillar3_consistency_failure: p2Prob,
+      pillar2_confidence_gap: p2Prob,
+      pillar3_consistency_failure: null,
       effective_weights: {
-        alpha: 0.5,
-        beta: 0.0,
-        gamma: 0.5,
+        alpha: 0.6,
+        beta: 0.4,
+        gamma: 0.0,
       },
+    },
+    pillar_status: {
+      p1_status: "EXECUTED",
+      p2_status: p2Prob !== null ? "EXECUTED" : "UNAVAILABLE",
+      p3_status: "UNAVAILABLE",
+      fusion_status: "PARTIAL_TWO_PILLAR",
+      p1_available: true,
+      p2_available: p2Prob !== null,
+      p3_available: false,
+      is_full_analysis: false,
     },
     sentence_scores: sentenceScores,
     evidence: evidenceItems,
@@ -216,13 +231,15 @@ function normalizePredictResponse(
   };
 }
 
-function normalizeExplainResponse(
+export function normalizeExplainResponse(
   res: HalluciSenseExplainResponse,
   latencyMs?: number
 ): ExplainResponse {
-  const p1Prob = res.explanation?.pillar_contributions?.pillar_1_probability ?? 0;
-  const p2Prob = res.explanation?.pillar_contributions?.pillar_2_probability ?? 0;
-  const disagreement = res.explanation?.pillar_contributions?.probability_disagreement ?? Math.abs(p1Prob - p2Prob);
+  const p1Prob = res.explanation?.pillar_contributions?.pillar_1_probability ?? null;
+  const p2Prob = res.explanation?.pillar_contributions?.pillar_2_probability ?? null;
+  const disagreement = res.explanation?.pillar_contributions?.probability_disagreement ?? (
+    (p1Prob !== null && p2Prob !== null) ? Math.abs(p1Prob - p2Prob) : null
+  );
 
   const supporting: string[] = [];
   const contradiction: string[] = [];
@@ -254,8 +271,8 @@ function normalizeExplainResponse(
 
   const reasoningChain: string[] = [
     `Step 1: Extracted ${res.prediction?.claim_count ?? 1} claims from response text.`,
-    `Step 2: Executed Pillar 1 Semantic Grounding (P1 risk = ${(p1Prob * 100).toFixed(1)}%).`,
-    `Step 3: Executed Pillar 2 Structural Consistency (P2 risk = ${(p2Prob * 100).toFixed(1)}%).`,
+    `Step 2: Executed Pillar 1 Semantic Grounding (P1 risk = ${p1Prob !== null ? (p1Prob * 100).toFixed(1) + "%" : "UNAVAILABLE"}).`,
+    `Step 3: Executed Pillar 2 Structural Consistency (P2 risk = ${p2Prob !== null ? (p2Prob * 100).toFixed(1) + "%" : "UNAVAILABLE"}).`,
     `Step 4: Evaluated 19-feature hybrid model (Operating threshold τ = ${res.prediction?.operating_threshold ?? 0.54}).`,
     `Step 5: Generated local counterfactual feature attributions and verification trace.`,
   ];
@@ -272,8 +289,8 @@ function normalizeExplainResponse(
     reasoning_chain: reasoningChain,
     fusion_contribution: {
       pillar1_retrieval_contribution: p1Prob,
-      pillar2_confidence_contribution: 0,
-      pillar3_consistency_contribution: p2Prob,
+      pillar2_confidence_contribution: p2Prob,
+      pillar3_consistency_contribution: null, // Legacy Phase 7/14 never had P3 consistency! Must never fabricate P3.
       probability_disagreement: disagreement,
     },
     measured_timings: {
@@ -287,34 +304,168 @@ function normalizeExplainResponse(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Canonical 3-Pillar Adapters (/api/v1/analyze & /api/v1/explain)
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface BackendAnalysisResponseRaw {
+  trace_id: string;
+  overall_h_score: number;
+  risk_level: string;
+  confidence: number;
+  pillar_scores: {
+    retrieval: number;
+    confidence: number | null;
+    consistency: number | null;
+  };
+  failure_taxonomy?: string;
+  processing_time_ms: number;
+  version?: string;
+  hallucination?: boolean;
+  sentence_scores?: Array<{
+    sentence_index?: number;
+    text?: string;
+    sentence_text?: string;
+    score?: number;
+    risk_level?: string;
+  }>;
+  token_heatmap?: Array<{
+    token: string;
+    score?: number;
+    tier?: string;
+    color_hex?: string;
+  }>;
+  evidence?: Array<{
+    id?: string;
+    title?: string;
+    snippet?: string;
+    score?: number;
+    source?: string;
+    source_name?: string;
+    url?: string;
+    source_url?: string;
+  }>;
+  confidence_analysis?: Record<string, unknown>;
+  root_cause_classification?: string;
+  measured_timings?: any;
+  pillar_status?: any;
+  fusion_decomposition?: any;
+}
+
+export function adaptCanonicalAnalysisResponse(
+  raw: BackendAnalysisResponseRaw,
+  latencyMs?: number
+): AnalysisResponse {
+  const p1Error = raw.pillar_scores?.retrieval ?? 0.0;
+  const p2Conf = raw.pillar_scores?.confidence ?? null;
+  const p3Cons = raw.pillar_scores?.consistency ?? null;
+
+  const p1Available = raw.pillar_status?.p1_available ?? true;
+  const p2Available = raw.pillar_status?.p2_available ?? (p2Conf !== null);
+  const p3Available = raw.pillar_status?.p3_available ?? (p3Cons !== null);
+
+  const sentenceScores: SentenceScore[] = (raw.sentence_scores || []).map((s, idx) => ({
+    sentence_index: s.sentence_index ?? idx,
+    sentence_text: s.text || s.sentence_text || "",
+    text: s.text || s.sentence_text || "",
+    score: s.score ?? 0.0,
+    h_score: s.score ?? 0.0,
+    risk_level: (s.risk_level as RiskLevel) || "NEEDS_VERIFICATION",
+  }));
+
+  const evidenceItems: EvidenceItem[] = (raw.evidence || []).map((e, idx) => ({
+    id: e.id || `ev_${idx}`,
+    claim: e.title || "",
+    snippet: e.snippet || "",
+    title: e.title || "",
+    source_name: e.source_name || e.source || e.title || "External Evidence",
+    source_url: e.source_url || e.url || undefined,
+    score: e.score ?? 1.0,
+    similarity_score: e.score ?? 1.0,
+  }));
+
+  const effWeights = raw.fusion_decomposition?.effective_weights;
+
+  return {
+    trace_id: raw.trace_id,
+    overall_h_score: raw.overall_h_score ?? 0.0,
+    risk_level: (raw.risk_level as RiskLevel) || "NEEDS_VERIFICATION",
+    confidence: raw.confidence ?? 0.0,
+    flagged_sentences_count: sentenceScores.filter(
+      (s) => s.risk_level === "LIKELY_HALLUCINATED" || s.risk_level === "NEEDS_VERIFICATION"
+    ).length,
+    total_sentences_count: sentenceScores.length,
+    pillar_scores: {
+      retrieval: p1Error,
+      confidence: p2Conf,
+      consistency: p3Cons,
+      pillar1_factual_error: p1Error,
+      pillar2_confidence_gap: p2Conf,
+      pillar3_consistency_failure: p3Cons,
+      effective_weights: effWeights
+        ? {
+            alpha: effWeights.alpha_factual_error ?? effWeights.alpha ?? 0.45,
+            beta: effWeights.beta_confidence_gap ?? effWeights.beta ?? 0.30,
+            gamma: effWeights.gamma_consistency_failure ?? effWeights.gamma ?? 0.25,
+          }
+        : undefined,
+    },
+    sentence_scores: sentenceScores,
+    evidence: evidenceItems,
+    root_cause_classification: raw.root_cause_classification || "VERIFIED",
+    failure_taxonomy: raw.failure_taxonomy || "NONE",
+    latency_ms: latencyMs ?? raw.processing_time_ms ?? 0,
+    processing_time_ms: raw.processing_time_ms ?? latencyMs ?? 0,
+    version: raw.version || "1.0.0",
+    pillar_status: raw.pillar_status || {
+      p1_status: p1Available ? "EXECUTED" : "UNAVAILABLE",
+      p2_status: p2Available ? "EXECUTED" : "UNAVAILABLE",
+      p3_status: p3Available ? "EXECUTED" : "UNAVAILABLE",
+      fusion_status: "PARTIAL_RENORMALIZED",
+      p1_available: p1Available,
+      p2_available: p2Available,
+      p3_available: p3Available,
+      is_full_analysis: p1Available && p2Available && p3Available,
+    },
+    fusion_decomposition: raw.fusion_decomposition,
+    confidence_analysis: raw.confidence_analysis as any,
+    token_heatmap: (raw.token_heatmap as any) || [],
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Production API Endpoints
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Executes verification on text input using the current validated HalluciSense pipeline:
- * POST /api/v1/hallucisense/predict
+ * Executes verification on text input using the canonical HalluciSense 3-pillar pipeline:
+ * POST /api/v1/analyze
  */
 export async function analyzeResponse(
   payload: AnalysisRequest
 ): Promise<AnalysisResponse> {
-  const textToAnalyze = payload.response || payload.text || "";
+  const textToAnalyze = (payload.response || payload.text || "").trim();
   const startTime = performance.now();
 
-  const reqBody: PredictRequest = {
-    response_text: textToAnalyze.trim(),
+  const reqBody = {
+    query: payload.query?.trim() || undefined,
+    response: textToAnalyze,
+    model_name: payload.model_name || "GPT-4",
+    provided_evidence: payload.provided_evidence,
+    sample_responses: payload.sample_responses,
+    logprobs: payload.logprobs,
   };
 
-  const rawRes = await request<PredictResponse>("/api/v1/hallucisense/predict", {
+  const rawRes = await request<BackendAnalysisResponseRaw>("/api/v1/analyze", {
     method: "POST",
     body: JSON.stringify(reqBody),
   });
 
   const latencyMs = Math.round(performance.now() - startTime);
-  return normalizePredictResponse(rawRes, latencyMs);
+  return adaptCanonicalAnalysisResponse(rawRes, latencyMs);
 }
 
 /**
- * Direct predict call to POST /api/v1/hallucisense/predict
+ * Direct predict call to POST /api/v1/hallucisense/predict (preserved for legacy benchmark comparisons)
  */
 export async function predictHallucination(
   payload: PredictRequest
@@ -326,26 +477,38 @@ export async function predictHallucination(
 }
 
 /**
- * Executes local counterfactual explanation using the current validated HalluciSense pipeline:
- * POST /api/v1/hallucisense/explain
+ * Executes explainability analysis using canonical endpoint:
+ * POST /api/v1/explain
  */
 export async function explainResponse(
   payload: ExplainRequest
 ): Promise<ExplainResponse> {
-  const textToAnalyze = payload.response || (payload as AnalysisRequest).text || "";
+  const textToAnalyze = (payload.response || (payload as AnalysisRequest).text || "").trim();
   const startTime = performance.now();
 
-  const reqBody: HalluciSenseExplainRequest = {
-    response_text: textToAnalyze.trim(),
+  const reqBody = {
+    query: payload.query?.trim() || undefined,
+    response: textToAnalyze,
+    model_name: payload.model_name || "GPT-4",
   };
 
-  const rawRes = await request<HalluciSenseExplainResponse>("/api/v1/hallucisense/explain", {
+  const rawRes = await request<ExplainResponse>("/api/v1/explain", {
     method: "POST",
     body: JSON.stringify(reqBody),
   });
 
   const latencyMs = Math.round(performance.now() - startTime);
-  return normalizeExplainResponse(rawRes, latencyMs);
+  return {
+    ...rawRes,
+    measured_timings: {
+      ...rawRes.measured_timings,
+      total_latency_ms: rawRes.measured_timings?.total_latency_ms ?? latencyMs,
+      p1_latency_ms: rawRes.measured_timings?.p1_latency_ms ?? 0,
+      p2_latency_ms: rawRes.measured_timings?.p2_latency_ms ?? 0,
+      p3_latency_ms: rawRes.measured_timings?.p3_latency_ms ?? 0,
+      fusion_latency_ms: rawRes.measured_timings?.fusion_latency_ms ?? 0,
+    },
+  };
 }
 
 /**

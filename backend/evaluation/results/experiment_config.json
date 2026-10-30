@@ -1,10 +1,10 @@
 {
   "experiment_name": "HalluciSense Phase 22 Public Benchmark Validation",
-  "timestamp_utc": "2026-08-06 05:47:46 UTC",
-  "git_commit_sha": "d7e336c2c2de938a711fd468e231f7a24f141d49",
+  "timestamp_utc": "2026-10-30 16:56:39 UTC",
+  "git_commit_sha": "26a64cde5b18b0b75b9133333abbf356ac88288c",
   "random_seed": 42,
   "python_version": "3.10.12 (main, Nov 17 2025, 19:23:17) [Clang 17.0.0 (clang-1700.3.19.1)]",
-  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
   "processor": "arm",
   "architecture": "64bit",
   "key_dependency_versions": {

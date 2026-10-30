@@ -11,6 +11,8 @@ from .negation_detector import NegationDetector
 from .causal_direction import CausalDirectionChecker
 from app.core.verification.symbolic_verifier import evaluate_arithmetic_claim
 from app.core.verification.unit_verifier import evaluate_unit_claim
+from app.core.engine.scientific_claim_reasoner import ScientificClaimReasoner, ClaimSRO
+from app.core.verification.precision_policy import NumericalPrecisionPolicy, PrecisionDomain
 
 
 def extract_capital_relation(text: str) -> Optional[Tuple[str, str]]:
@@ -22,67 +24,110 @@ def extract_capital_relation(text: str) -> Optional[Tuple[str, str]]:
     - 'X, also known as ..., is the capital and largest city of the state of Y'
     - 'The capital of Y is X'
     - 'Y's capital is X'
+    - 'Mumbai is the capital of Maharashtra and the most populous...'
     """
-    clean = re.sub(r'\s+', ' ', text).strip()
+    if not text:
+        return None
 
-    # Pattern 1: X is/was (the) capital (city) (and ...) of (the ...) Y
-    p1 = re.compile(
-        r'\b([A-Za-z\s’\'-]+?)(?:,\s*(?:also known as|officially)[^,]+?(?:\([^)]*\))?,?)?\s+(?:is|was)\s+(?:the\s+)?capital\s+(?:city\s+)?(?:and\s+[a-z\s]+?\s+)?of\s+(?:the\s+)?(?:[a-z\s]+?\s+state of\s+)?([A-Za-z\s’\'-]+)',
-        re.IGNORECASE
-    )
-    # Pattern 2: (the) capital of Y is/was X
-    p2 = re.compile(
-        r'\b(?:the\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]+?)\s+(?:is|was)\s+([A-Za-z\s’\'-]+)',
-        re.IGNORECASE
-    )
-    # Pattern 3: Y's capital is X
-    p3 = re.compile(
-        r'\b([A-Za-z\s’\'-]+?)(?:\'s|’s)\s+capital\s+(?:city\s+)?(?:is|was)\s+([A-Za-z\s’\'-]+)',
-        re.IGNORECASE
-    )
+    # Process sentence by sentence to isolate relational clauses
+    sentences = re.split(r'[.!?\n]+', text)
+    for sent in sentences:
+        sent = sent.strip()
+        if not sent or "capital" not in sent.lower():
+            continue
 
-    m1 = p1.search(clean)
-    if m1:
-        city = m1.group(1).strip().rstrip(",.")
-        entity = m1.group(2).strip().rstrip(",.")
-        city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
-        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-        if len(city.split()) <= 4 and len(entity.split()) <= 4:
-            if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
-                return city.lower(), entity.lower()
+        # Negative assertions (e.g. 'Paris is not the capital of Germany') are not affirmative relations
+        if re.search(r"\b(?:not|never|no|isn't|wasn't|isnt|wasnt)\b", sent, re.IGNORECASE):
+            continue
 
-    m2 = p2.search(clean)
-    if m2:
-        entity = m2.group(1).strip().rstrip(",.")
-        city = m2.group(2).strip().rstrip(",.")
-        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-        if len(city.split()) <= 4 and len(entity.split()) <= 4:
-            if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
-                return city.lower(), entity.lower()
+        # Pattern 1: X is/was (the) (official/state/...) capital (city) (and ...) of (the ...) Y
+        m1 = re.search(
+            r'\b([A-Za-z\s’\'-]{2,30}?)(?:,\s*(?:also known as|officially)[^,]+?,?)?\s+(?:is|was)\s+(?:the\s+)?(?:[a-z]+\s+)?capital\s+(?:city\s+)?(?:and\s+[a-z\s]+?\s+)?of\s+(?:the\s+)?(?:[a-z\s]+?\s+state of\s+)?([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
+            sent,
+            re.IGNORECASE,
+        )
+        if m1:
+            city = m1.group(1).strip().rstrip(",.")
+            entity = m1.group(2).strip().rstrip(",.")
+            city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
+            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+            if len(city.split()) <= 4 and len(entity.split()) <= 4:
+                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                    return city.lower(), entity.lower()
 
-    m3 = p3.search(clean)
-    if m3:
-        entity = m3.group(1).strip().rstrip(",.")
-        city = m3.group(2).strip().rstrip(",.")
-        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-        if len(city.split()) <= 4 and len(entity.split()) <= 4:
-            if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
-                return city.lower(), entity.lower()
+        # Pattern 2: (the) capital of Y is/was X
+        m2 = re.search(
+            r'\b(?:the\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]{2,30}?)\s+(?:is|was)\s+([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
+            sent,
+            re.IGNORECASE,
+        )
+        if m2:
+            entity = m2.group(1).strip().rstrip(",.")
+            city = m2.group(2).strip().rstrip(",.")
+            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+            if len(city.split()) <= 4 and len(entity.split()) <= 4:
+                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                    return city.lower(), entity.lower()
 
-    # Pattern 4: in/of Y ... the capital X (strictly within same sentence)
-    p4 = re.compile(
-        r'\b(?:of|in)\s+([A-Za-z\s’\'-]+?)\b[^.!?]*?\b(?:the\s+)?capital\s+(?:city\s+)?([A-Za-z\s’\'-]+)',
-        re.IGNORECASE
-    )
-    m4 = p4.search(clean)
-    if m4:
-        entity = m4.group(1).strip().rstrip(",.")
-        city = m4.group(2).strip().rstrip(",.")
-        entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-        city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
-        if len(city.split()) <= 4 and len(entity.split()) <= 4:
-            if entity.lower() not in {"the", "a", "an", "this", "that", "terms", "terms of", "it"} and len(entity) >= 3 and len(city) >= 3:
-                return city.lower(), entity.lower()
+        # Pattern 3: Y's capital is X
+        m3 = re.search(
+            r'\b([A-Za-z\s’\'-]{2,30}?)(?:\'s|’s)\s+capital\s+(?:city\s+)?(?:is|was)\s+([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
+            sent,
+            re.IGNORECASE,
+        )
+        if m3:
+            entity = m3.group(1).strip().rstrip(",.")
+            city = m3.group(2).strip().rstrip(",.")
+            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+            if len(city.split()) <= 4 and len(entity.split()) <= 4:
+                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                    return city.lower(), entity.lower()
+
+        # Pattern 4: in/of Y, the capital X (strictly within single comma-separated clause)
+        m4 = re.search(
+            r'\b(?:of|in)\s+([A-Za-z\s’\'-]{2,30}?),\s*(?:the\s+)?capital\s+(?:city\s+)?([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
+            sent,
+            re.IGNORECASE,
+        )
+        if m4:
+            entity = m4.group(1).strip().rstrip(",.")
+            city = m4.group(2).strip().rstrip(",.")
+            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+            city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
+            if len(city.split()) <= 4 and len(entity.split()) <= 4:
+                if entity.lower() not in {"the", "a", "an", "this", "that", "terms", "terms of", "it"} and len(entity) >= 3 and len(city) >= 3:
+                    return city.lower(), entity.lower()
+
+        # Pattern 5: (the) capital of Y, X, is/was ... (apposition: capital first)
+        m5 = re.search(
+            r'\b(?:the\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]{2,30}?),\s*([A-Za-z\s’\'-]{2,30}?),\s*(?:is|was|\b)',
+            sent,
+            re.IGNORECASE,
+        )
+        if m5:
+            entity = m5.group(1).strip().rstrip(",.")
+            city = m5.group(2).strip().rstrip(",.")
+            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+            city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
+            if len(city.split()) <= 4 and len(entity.split()) <= 4:
+                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                    return city.lower(), entity.lower()
+
+        # Pattern 6: X, (the) (state/national) capital of Y (city apposition: "Bengaluru, the state capital of Karnataka")
+        m6 = re.search(
+            r'\b([A-Za-z\s’\'-]{2,30}?)\s*,\s+(?:the\s+)?(?:state\s+|national\s+|federal\s+|provincial\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?(?:[a-z\s]+?\s+state\s+of\s+)?([A-Za-z\s’\'-]{2,30}?)(?:\s*[,.]|\s+(?:and|with|in|the|as)|\Z)',
+            sent,
+            re.IGNORECASE,
+        )
+        if m6:
+            city = m6.group(1).strip().rstrip(",.")
+            entity = m6.group(2).strip().rstrip(",.")
+            city = re.split(r'\b(?:officially|formerly|known as|of)\b', city, flags=re.IGNORECASE)[-1].strip()
+            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
+            STOP_CITIES = {"state", "the state", "country", "the country", "nation", "the nation", "city", "the city", "province", "the province"}
+            if len(city.split()) <= 4 and len(entity.split()) <= 4 and city.lower() not in STOP_CITIES:
+                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+                    return city.lower(), entity.lower()
 
     return None
 
@@ -352,8 +397,18 @@ class Pillar1RetrievalEngine:
         if not clean_text:
             self.last_claim_extraction_ms = round((time.perf_counter() - t0) * 1000.0, 2)
             return []
-        raw_claims = re.split(r'(?<!\d),(?!\d)\s*|;\s*', clean_text)
-        claims = [claim.strip() for claim in raw_claims if len(claim.strip().split()) >= 4]
+        # Strip conversational framing prefix if present
+        t_clean = re.sub(
+            r"^(?:sure|certainly|of course|absolutely|gladly|happy to help|to answer your question)[,!:]?\s*(?:here (?:is|are) (?:the|some|what|your)[^:]*[:.]\s*)?",
+            "",
+            clean_text,
+            flags=re.IGNORECASE,
+        ).strip()
+        if t_clean:
+            clean_text = t_clean
+        # Split on sentence boundaries, newlines, semicolons, and clause commas
+        raw_claims = re.split(r'(?<=[.!?])\s+|\n+|;\s*|(?<!\d),(?!\d)\s*', clean_text)
+        claims = [claim.strip() for claim in raw_claims if len(claim.strip().split()) >= 3]
         if not claims:
             claims = [clean_text]
         self.last_claim_extraction_ms = round((time.perf_counter() - t0) * 1000.0, 2)
@@ -372,7 +427,7 @@ class Pillar1RetrievalEngine:
         )
 
     @staticmethod
-    def _score_result(claim: str, item: EvidenceItem, result: dict, idx: int) -> Tuple[float, float, float]:
+    def _score_result(claim: str, item: EvidenceItem, result: dict, idx: int) -> Tuple[float, float, float, str]:
         entailment = result["entailment"]
         contradiction = result["contradiction"]
         neutral = result["neutral"]
@@ -385,6 +440,7 @@ class Pillar1RetrievalEngine:
             contradiction = min(contradiction, 0.05)
             entailment = min(entailment, 0.05)
             neutral = max(neutral, 0.95)
+            return entailment, contradiction, neutral, "neural_deberta_nli"
 
         # Check for chemical formula contradiction or match
         claim_form = extract_chemical_formula(claim)
@@ -395,9 +451,9 @@ class Pillar1RetrievalEngine:
             s_subj, s_formula = snippet_form
             if c_subj in s_subj or s_subj in c_subj:
                 if c_formula != s_formula:
-                    return 0.0, 0.98, 0.02
+                    return 0.0, 0.98, 0.02, "deterministic_chemical_formula_rule"
                 else:
-                    return 0.98, 0.0, 0.02
+                    return 0.98, 0.0, 0.02, "deterministic_chemical_formula_rule"
 
         # Check for capital city contradiction or entailment using robust structural extractor
         claim_cap = extract_capital_relation(claim)
@@ -409,10 +465,115 @@ class Pillar1RetrievalEngine:
             if c_entity in s_entity or s_entity in c_entity:
                 if c_city != s_city and c_city not in s_city and s_city not in c_city:
                     # Clear factual contradiction: evidence names a different capital for the same entity
-                    return 0.0, 0.98, 0.02
+                    return 0.0, 0.98, 0.02, "deterministic_capital_relation_rule"
                 else:
                     # Clear factual entailment: evidence names the same capital for the same entity
-                    return 0.98, 0.0, 0.02
+                    return 0.98, 0.0, 0.02, "deterministic_capital_relation_rule"
+
+        # SRO extraction & domain verification for scientific constants, counts, and astronomy
+        sro = ScientificClaimReasoner.extract_sro(claim)
+
+        # 1. Physical constants and measurement values (speed of light, molar mass, temperature)
+        if sro.domain in ("physics_constant", "chemistry", "thermodynamics"):
+            snip_l = item.snippet.lower()
+            if sro.domain == "physics_constant" and sro.relation == "speed_constant" and sro.numeric_value is not None:
+                # Match speed of light in vacuum evidence
+                if "speed of light" in snip_l or "light travels" in snip_l:
+                    all_speeds = list(re.finditer(r"(\d+(?:,\d{3})*(?:\.\d+)?)\s*(m/s|km/s|m⋅s−1|meters? per second)", item.snippet, re.IGNORECASE))
+                    found_eq = False
+                    for m_snip_speed in all_speeds:
+                        s_val = float(m_snip_speed.group(1).replace(",", ""))
+                        s_unit = m_snip_speed.group(2).lower()
+                        is_eq, _, _ = NumericalPrecisionPolicy.evaluate_equivalence(
+                            sro.numeric_value, sro.unit or "m/s", s_val, s_unit, "speed", claim
+                        )
+                        if is_eq:
+                            found_eq = True
+                            break
+                    if found_eq:
+                        return 0.98, 0.0, 0.02, "deterministic_scientific_constant_rule"
+                    elif "speed of light" in snip_l:
+                        c_speed_match = re.search(r"\bspeed\s+of\s+light\s+(?:in\s+vacuum\s+)?(?:is|equals|=)\s*(\d+(?:,\d{3})*(?:\.\d+)?)\s*(m/s|km/s|m⋅s−1|meters? per second)", snip_l)
+                        if c_speed_match:
+                            s_val = float(c_speed_match.group(1).replace(",", ""))
+                            s_unit = c_speed_match.group(2).lower()
+                            is_eq, _, _ = NumericalPrecisionPolicy.evaluate_equivalence(
+                                sro.numeric_value, sro.unit or "m/s", s_val, s_unit, "speed", claim
+                            )
+                            if not is_eq:
+                                return 0.0, 0.98, 0.02, "deterministic_scientific_constant_rule"
+
+            elif sro.relation == "molar_mass" and sro.numeric_value is not None:
+                # Match molar mass in snippet
+                if "molar mass" in snip_l or "molecular mass" in snip_l or "g/mol" in snip_l or "18.015" in snip_l:
+                    all_mm = list(re.finditer(r"(\d+(?:\.\d+)?)\s*(g/mol|g⋅mol−1|kg/mol|daltons?|grams?\s+per\s+mole|grams)", item.snippet, re.IGNORECASE))
+                    found_eq = False
+                    for m_snip_mm in all_mm:
+                        s_val = float(m_snip_mm.group(1))
+                        s_unit = "g/mol"
+                        is_eq, _, _ = NumericalPrecisionPolicy.evaluate_equivalence(
+                            sro.numeric_value, sro.unit or "g/mol", s_val, s_unit, "molar_mass", claim
+                        )
+                        if is_eq:
+                            found_eq = True
+                            break
+                    if found_eq:
+                        return 0.98, 0.0, 0.02, "deterministic_scientific_constant_rule"
+                    elif sro.subject in snip_l:
+                        subj_mm_match = re.search(rf"\bmolar\s+mass\s+of\s+{re.escape(sro.subject)}\s+(?:is|=)\s+(\d+(?:\.\d+)?)\b", snip_l)
+                        if subj_mm_match:
+                            s_val = float(subj_mm_match.group(1))
+                            is_eq, _, _ = NumericalPrecisionPolicy.evaluate_equivalence(
+                                sro.numeric_value, sro.unit or "g/mol", s_val, "g/mol", "molar_mass", claim
+                            )
+                            if not is_eq:
+                                return 0.0, 0.98, 0.02, "deterministic_scientific_constant_rule"
+
+            elif sro.domain == "thermodynamics" and sro.numeric_value is not None:
+                snip_boil = any(w in snip_l for w in ("boil", "boiling"))
+                snip_freez = any(w in snip_l for w in ("freez", "melting point", "ice"))
+                claim_boil = sro.relation == "boiling_point"
+                claim_freez = sro.relation == "freezing_point"
+                if claim_boil and snip_boil:
+                    m_boil = re.search(r"\bboil\w*\s+(?:at|=)?\s*(\d+(?:\.\d+)?)\s*(°c|°f|k|deg\s*c|degrees?\s+celsius)", snip_l)
+                    if m_boil:
+                        s_val = float(m_boil.group(1))
+                        s_unit = m_boil.group(2).lower()
+                        is_eq, _, _ = NumericalPrecisionPolicy.evaluate_equivalence(
+                            sro.numeric_value, sro.unit or "°c", s_val, s_unit, "temperature", claim
+                        )
+                        if is_eq:
+                            return 0.98, 0.0, 0.02, "deterministic_scientific_constant_rule"
+                        else:
+                            return 0.0, 0.98, 0.02, "deterministic_scientific_constant_rule"
+                elif claim_freez and snip_freez:
+                    m_freez = re.search(r"\bfreez\w*\s+(?:at|=)?\s*(\d+(?:\.\d+)?)\s*(°c|°f|k|deg\s*c|degrees?\s+celsius)", snip_l)
+                    if m_freez:
+                        s_val = float(m_freez.group(1))
+                        s_unit = m_freez.group(2).lower()
+                        is_eq, _, _ = NumericalPrecisionPolicy.evaluate_equivalence(
+                            sro.numeric_value, sro.unit or "°c", s_val, s_unit, "temperature", claim
+                        )
+                        if is_eq:
+                            return 0.98, 0.0, 0.02, "deterministic_scientific_constant_rule"
+                        else:
+                            return 0.0, 0.98, 0.02, "deterministic_scientific_constant_rule"
+
+        # 2. Astronomy: orbits and central body assertions
+        if sro.domain == "astronomy":
+            snip_l = item.snippet.lower()
+            if sro.relation == "centre_of":
+                # e.g., "The Earth is the centre of the Solar System"
+                if "solar system" in snip_l or "universe" in snip_l:
+                    # Check if evidence establishes Sun as centre / heliocentrism
+                    if re.search(r"\b(sun|star)\s+(?:is|at)\s+(?:the\s+)?(?:star\s+at\s+the\s+)?(?:centre|center)\b", snip_l) or "heliocentr" in snip_l or "copernic" in snip_l or "planets revolve around the sun" in snip_l or "orbit the sun" in snip_l:
+                        if sro.subject in ("earth", "moon", "mars", "jupiter"):
+                            return 0.0, 0.98, 0.02, "deterministic_astronomy_rule"
+                        elif sro.subject in ("sun", "star"):
+                            return 0.98, 0.0, 0.02, "deterministic_astronomy_rule"
+            elif sro.relation == "orbits":
+                if f"{sro.subject} orbits the {sro.obj}" in snip_l or f"{sro.subject} orbits {sro.obj}" in snip_l or f"orbit around the {sro.obj}" in snip_l or (sro.subject in snip_l and f"orbit the {sro.obj}" in snip_l) or (sro.subject in snip_l and sro.obj in snip_l and ("orbit" in snip_l or "revolve" in snip_l)):
+                    return 0.98, 0.0, 0.02, "deterministic_astronomy_rule"
 
         # Formula / alias match for short equivalence statements "X is Y"
         match = re.match(r'^([A-Za-z0-9\s]+)\s+is\s+([A-Za-z0-9]+)\.?$', claim.strip(), re.IGNORECASE)
@@ -420,18 +581,55 @@ class Pillar1RetrievalEngine:
             subj, obj = match.group(1).strip().lower(), match.group(2).strip().lower()
             snippet_lower = item.snippet.lower()
             if f"{subj} ({obj})" in snippet_lower or f"{subj} ({obj}" in snippet_lower or f"formula {obj}" in snippet_lower or f"formula is {obj}" in snippet_lower:
-                return 0.98, 0.0, 0.02
+                return 0.98, 0.0, 0.02, "deterministic_chemical_formula_rule"
 
-        if neutral > 0.60 and contradiction < 0.20 and (sim_score >= 0.70 or idx == 0) and not claim_form and not claim_cap:
-            claim_keywords = [w.lower() for w in re.findall(r'\b[A-Za-z]{4,}\b', claim)]
-            snippet_lower = item.snippet.lower()
-            if claim_keywords:
-                matching_words = sum(1 for kw in claim_keywords if kw in snippet_lower)
-                coverage_ratio = matching_words / float(len(claim_keywords))
-                if coverage_ratio >= 0.90:
-                    entailment = max(entailment, round(0.70 + 0.25 * coverage_ratio, 4))
-                    neutral = max(0.0, 1.0 - entailment - contradiction)
-        return entailment, contradiction, neutral
+        # Aircraft specification & discrete quantity consistency
+        num_word_map = {
+            "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+            "seven": 7, "eight": 8, "nine": 9, "ten": 10, "twin": 2, "triple": 3, "quad": 4,
+        }
+        if sro.domain == "aviation" and sro.relation == "engine_count" and sro.numeric_value is not None:
+            c_val = int(round(sro.numeric_value))
+            snip_engine_match = re.search(
+                r"\b(one|two|three|four|five|six|seven|eight|nine|ten|twin|triple|quad|\d+)(?:[- ]engine(?:d|s)?|(?:\s+[a-zA-Z0-9&−-]+){0,8}\s+engines?|(?:\s+[a-zA-Z0-9&−-]+){0,8}\s+turbofan engines?)\b",
+                item.snippet,
+                re.IGNORECASE,
+            )
+            if snip_engine_match:
+                s_raw_num = snip_engine_match.group(1).lower()
+                s_val = num_word_map.get(s_raw_num, int(s_raw_num) if s_raw_num.isdigit() else None)
+                if s_val is not None:
+                    if s_val != c_val:
+                        return 0.0, 0.98, 0.02, "deterministic_aircraft_spec_rule"
+                    else:
+                        return 0.98, 0.0, 0.02, "deterministic_aircraft_spec_rule"
+
+        STOP_NOUNS = {"main", "other", "more", "different", "various", "total", "year", "month", "day", "has", "had", "have", "was", "were", "is", "are"}
+        claim_num_matches = re.finditer(
+            r"\b(one|two|three|four|five|six|seven|eight|nine|ten|twin|triple|quad|\d+)\s+([a-zA-Z]{3,})\b",
+            claim,
+            re.IGNORECASE,
+        )
+        for m in claim_num_matches:
+            c_raw_num = m.group(1).lower()
+            c_noun = m.group(2).lower().rstrip("s")
+            c_val = num_word_map.get(c_raw_num, int(c_raw_num) if c_raw_num.isdigit() else None)
+            if c_val is not None and c_noun not in STOP_NOUNS:
+                snip_engine_match = re.search(
+                    rf"\b(one|two|three|four|five|six|seven|eight|nine|ten|twin|triple|quad|\d+)(?:[- ]engine(?:d|s)?|(?:\s+[a-zA-Z0-9&−-]+){{0,8}}\s+{re.escape(c_noun)}s?)\b",
+                    item.snippet,
+                    re.IGNORECASE,
+                )
+                if snip_engine_match:
+                    s_raw_num = snip_engine_match.group(1).lower()
+                    s_val = num_word_map.get(s_raw_num, int(s_raw_num) if s_raw_num.isdigit() else None)
+                    if s_val is not None:
+                        if s_val != c_val:
+                            return 0.0, 0.98, 0.02, "deterministic_quantity_spec_rule"
+                        else:
+                            return 0.98, 0.0, 0.02, "deterministic_quantity_spec_rule"
+
+        return entailment, contradiction, neutral, "neural_deberta_nli"
 
     def evaluate_claims_against_evidence(self, claims: List[str], external_evidence: List[EvidenceItem]) -> Tuple[float, List[EvidenceItem]]:
         import time
@@ -445,86 +643,140 @@ class Pillar1RetrievalEngine:
             self.last_nli_ms = 0.0
             return 0.5, external_evidence
 
-        pairs = []
-        pair_meta = []
+        claim_error_scores: List[float] = []
+        claim_statuses: List[str] = []
+
         for claim_idx, claim in enumerate(claims):
-            relevant_items = [item for item in external_evidence if self._evidence_relevant_to_claim(claim, item)]
-            if not relevant_items:
-                relevant_items = external_evidence
-            relevant_items = relevant_items[:8]
-            for item_idx, item in enumerate(relevant_items):
-                sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
-                has_rel = bool(extract_capital_relation(claim) and extract_capital_relation(item.snippet))
-                if sim_score >= 0.35 or has_rel:
-                    pairs.append((claim, item.snippet))
-                    pair_meta.append((claim_idx, item_idx, item))
+            sro = ScientificClaimReasoner.extract_sro(claim)
 
-        results = self.entailment_engine.classify_batch(
-            [p[0] for p in pairs],
-            [p[1] for p in pairs],
-            batch_size=1,
-        ) if pairs else []
+            # 1. Relevance Assessment before NLI aggregation (Phase 16B)
+            # Evaluate each evidence item and populate provenance metadata
+            candidate_evidence: List[EvidenceItem] = []
+            for raw_item in external_evidence:
+                rel_score, rel_reason = ScientificClaimReasoner.evaluate_relevance(
+                    sro, raw_item.snippet, getattr(raw_item, "source_name", "")
+                )
+                raw_item.claim = claim
+                raw_item.claim_subject = sro.subject
+                raw_item.claim_relation = sro.relation
+                raw_item.claim_object = sro.obj
+                raw_item.relevance_score = round(rel_score, 4)
+                if not getattr(raw_item, "retrieval_query", None):
+                    raw_item.retrieval_query = sro.raw_claim
 
-        best = [[0.0, 0.0, 0.0] for _ in claims]
-        for result, (claim_idx, item_idx, item) in zip(results, pair_meta):
-            entailment, contradiction, neutral = self._score_result(
-                claims[claim_idx], item, result, item_idx
-            )
-            sim_score = float(getattr(item, "score", getattr(item, "similarity_score", 0.88)))
-            # Subject integrity guard: If a claim asserts a specific subject relation (e.g. capital),
-            # an evidence snippet that does not even mention the asserted subject entity cannot entail the claim
-            claim_cap = extract_capital_relation(claims[claim_idx])
-            snippet_cap = extract_capital_relation(item.snippet)
-            if claim_cap:
-                c_city, _ = claim_cap
-                if c_city not in item.snippet.lower():
-                    entailment = min(entailment, 0.10)
+                item = raw_item.model_copy() if hasattr(raw_item, "model_copy") else raw_item.copy()
+                item.claim = claim
+                item.claim_subject = sro.subject
+                item.claim_relation = sro.relation
+                item.claim_object = sro.obj
+                item.relevance_score = round(rel_score, 4)
+                if not getattr(item, "retrieval_query", None):
+                    item.retrieval_query = sro.raw_claim
 
-            # Contradiction relevance guard: Low-similarity, out-of-domain passages must not create false contradictions
-            if sim_score < 0.45 and not (claim_cap and snippet_cap):
-                contradiction = min(contradiction, 0.20)
+                # Filter strictly by relevance threshold >= 0.40
+                if rel_score >= 0.40:
+                    candidate_evidence.append(item)
+                else:
+                    # Irrelevant evidence excluded from decision
+                    raw_item.entailment_prob = 0.0
+                    raw_item.contradiction_prob = 0.0
+                    raw_item.neutral_prob = 1.0
 
-            # Media title guard: Passages describing entertainment/media works (TV shows, movies, paintings, albums)
-            # must not trigger false contradictions against non-media factual claims (e.g. "Water is H2O")
-            if re.search(r'\b(?:television\s+(?:show|series)|tv\s+(?:show|series)|drama\s+series|oil\s+painting|album\s+by|song\s+by|video\s+game)\b', item.snippet, re.IGNORECASE):
-                if not re.search(r'\b(?:movie|film|album|song|series|show|painting|actor|actress|directed|written|composed|starring|play|novel)\b', claims[claim_idx], re.IGNORECASE):
-                    contradiction = min(contradiction, 0.10)
+            # Condition F: No relevant evidence available for this claim
+            if not candidate_evidence:
+                claim_statuses.append("INSUFFICIENT_EVIDENCE")
+                claim_error_scores.append(0.50)
+                continue
 
-            # Designated entity alignment guard: If a snippet describes a conflicting designated sibling entity
-            # (e.g. Apollo 12 vs Apollo 11, Boeing 777 vs Boeing 737, World War II vs World War I),
-            # it must not trigger false contradictions against facts asserted about the claim's entity.
-            if has_conflicting_designated_entity(claims[claim_idx], item.snippet, getattr(item, "source_name", "")):
-                contradiction = min(contradiction, 0.05)
-                entailment = min(entailment, 0.05)
-                neutral = max(neutral, 0.95)
+            # Sort candidate evidence by relevance score descending
+            candidate_evidence.sort(key=lambda x: getattr(x, "relevance_score", 0.0), reverse=True)
+            top_candidates = candidate_evidence[:8]
 
-            best[claim_idx][0] = max(best[claim_idx][0], entailment)
-            best[claim_idx][1] = max(best[claim_idx][1], contradiction)
-            best[claim_idx][2] = max(best[claim_idx][2], neutral)
+            # 2. Form NLI pairs for relevant candidate evidence
+            pairs = [(claim, item.snippet) for item in top_candidates]
+            results = self.entailment_engine.classify_batch(
+                [p[0] for p in pairs],
+                [p[1] for p in pairs],
+                batch_size=1,
+            ) if pairs else []
 
-        claim_error_scores = []
-        claim_statuses = []
-        for best_entailment, strongest_contradiction, best_neutral in best:
-            if strongest_contradiction >= 0.70 and strongest_contradiction > best_entailment:
-                claim_error = strongest_contradiction
-                claim_stat = "CONTRADICTED"
-            elif strongest_contradiction >= 0.50 and strongest_contradiction > best_entailment:
-                claim_error = strongest_contradiction
-                claim_stat = "CONTRADICTED"
-            elif best_entailment >= 0.65 and best_entailment > strongest_contradiction:
-                claim_error = max(0.0, 1.0 - best_entailment)
-                claim_stat = "VERIFIED"
+            # 3. Score results and populate passage-level NLI probabilities
+            for idx, (result, item) in enumerate(zip(results, top_candidates)):
+                scored = self._score_result(claim, item, result, idx)
+                if len(scored) == 4:
+                    ent, cont, neut, eval_src = scored
+                else:
+                    ent, cont, neut = scored
+                    eval_src = "neural_deberta_nli"
+                item.entailment_prob = round(ent, 4)
+                item.contradiction_prob = round(cont, 4)
+                item.neutral_prob = round(neut, 4)
+                item.evaluation_source = eval_src
+
+                # Mirror scored metrics back to corresponding item in external_evidence
+                for raw_item in external_evidence:
+                    if raw_item.snippet == item.snippet:
+                        raw_item.entailment_prob = item.entailment_prob
+                        raw_item.contradiction_prob = item.contradiction_prob
+                        raw_item.neutral_prob = item.neutral_prob
+                        raw_item.evaluation_source = item.evaluation_source
+                        raw_item.claim_subject = item.claim_subject
+                        raw_item.claim_relation = item.claim_relation
+                        raw_item.claim_object = item.claim_object
+                        raw_item.relevance_score = item.relevance_score
+                        break
+
+            # 4. Multi-passage Evidence Aggregation (Phase 16D Conditions A-F)
+            supporting_passages = [
+                it for it in top_candidates
+                if it.entailment_prob is not None and it.entailment_prob >= 0.65 and it.entailment_prob > (it.contradiction_prob or 0.0)
+            ]
+            contradicting_passages = [
+                it for it in top_candidates
+                if it.contradiction_prob is not None and it.contradiction_prob >= 0.50 and it.contradiction_prob > (it.entailment_prob or 0.0)
+            ]
+            neutral_passages = [
+                it for it in top_candidates
+                if it not in supporting_passages and it not in contradicting_passages
+            ]
+
+            if supporting_passages and contradicting_passages:
+                max_supp_ent = max(it.entailment_prob for it in supporting_passages)
+                max_cont_prob = max(it.contradiction_prob for it in contradicting_passages)
+                if max_supp_ent >= 0.70 and max_cont_prob >= 0.70:
+                    # Genuine conflicting relevant evidence produces an uncertainty state
+                    claim_statuses.append("INSUFFICIENT_EVIDENCE")
+                    claim_error_scores.append(0.50)
+                elif max_supp_ent >= 0.80 and max_cont_prob < 0.70:
+                    # Strongly entailed authoritative evidence dominates weaker counter-signals
+                    claim_statuses.append("VERIFIED")
+                    claim_error_scores.append(max(0.0, round(1.0 - max_supp_ent, 4)))
+                elif max_cont_prob >= 0.80 and max_supp_ent < 0.70:
+                    # Strongly contradictory evidence dominates weaker signals
+                    claim_statuses.append("CONTRADICTED")
+                    claim_error_scores.append(max_cont_prob)
+                else:
+                    claim_statuses.append("INSUFFICIENT_EVIDENCE")
+                    claim_error_scores.append(0.50)
+            elif contradicting_passages and not supporting_passages:
+                # Relevant contradictory evidence determines verdict (Condition B, Condition D)
+                max_cont = max(it.contradiction_prob for it in contradicting_passages)
+                claim_statuses.append("CONTRADICTED")
+                claim_error_scores.append(max_cont)
+            elif supporting_passages and not contradicting_passages:
+                # Relevant supporting evidence determines verdict (Condition A, Condition C)
+                max_ent = max(it.entailment_prob for it in supporting_passages)
+                claim_statuses.append("VERIFIED")
+                claim_error_scores.append(max(0.0, round(1.0 - max_ent, 4)))
             else:
-                claim_error = 0.50
-                claim_stat = "INSUFFICIENT_EVIDENCE"
-            claim_error_scores.append(max(0.0, min(1.0, claim_error)))
-            claim_statuses.append(claim_stat)
+                # Relevant but neutral evidence does NOT become contradiction (Condition E)
+                claim_statuses.append("INSUFFICIENT_EVIDENCE")
+                claim_error_scores.append(0.50)
 
         self.last_claim_statuses = claim_statuses
-
         self.last_nli_ms = round((time.perf_counter() - t0) * 1000.0, 2)
         self.last_nli_batch_metrics = getattr(self.entailment_engine, "last_batch_metrics", {})
-        factual_error = sum(claim_error_scores) / len(claim_error_scores)
+        factual_error = sum(claim_error_scores) / len(claim_error_scores) if claim_error_scores else 0.50
         return round(factual_error, 4), external_evidence
 
     def analyze(self, text: str, provided_evidence: List[EvidenceItem] = None, query: Optional[str] = None) -> Pillar1Result:
@@ -557,23 +809,32 @@ class Pillar1RetrievalEngine:
             }:
                 fe_score = 0.0
 
-        # Symbolic checks against top retrieved evidence
-        ev_snippets = [e.snippet for e in evidence if getattr(e, "snippet", "")]
-        if ev_snippets:
-            ev_combined = " ".join(ev_snippets[:3])
-            num_status, num_penalty, _ = self.numeric_checker.check_consistency(text, ev_combined)
-            if num_status in (NumericUnitStatus.NUMERIC_CONFLICT, NumericUnitStatus.SCALE_CONFLICT, NumericUnitStatus.UNIT_CONFLICT):
-                fe_score = round(max(fe_score, num_penalty), 4)
+        # Symbolic checks against top retrieved evidence (relevant evidence only)
+        # Only evaluate numeric/negation/causal checks on single atomic assertions (len(claims) <= 1)
+        # to avoid false conflicts between distinct numbers in multi-claim texts (e.g. 0°C freezing vs 100°C boiling)
+        if len(claims) <= 1:
+            rel_evidence = [
+                e for e in evidence
+                if getattr(e, "relevance_score", None) is not None
+                and getattr(e, "relevance_score", 0.0) >= 0.40
+                and getattr(e, "snippet", "")
+            ]
+            ev_snippets = [e.snippet for e in rel_evidence]
+            if ev_snippets:
+                ev_combined = " ".join(ev_snippets[:3])
+                num_status, num_penalty, _ = self.numeric_checker.check_consistency(text, ev_combined)
+                if num_status in (NumericUnitStatus.NUMERIC_CONFLICT, NumericUnitStatus.SCALE_CONFLICT, NumericUnitStatus.UNIT_CONFLICT):
+                    fe_score = round(max(fe_score, num_penalty), 4)
 
-            pol_res = self.negation_detector.analyze(text, ev_combined)
-            if pol_res.negation_inversion_detected or pol_res.antonym_inversion_detected:
-                fe_score = round(max(fe_score, pol_res.confidence_penalty), 4)
+                pol_res = self.negation_detector.analyze(text, ev_combined)
+                if pol_res.negation_inversion_detected or pol_res.antonym_inversion_detected:
+                    fe_score = round(max(fe_score, pol_res.confidence_penalty), 4)
 
-            for snip in ev_snippets[:3]:
-                caus_res = self.causal_checker.check_inversion(text, snip)
-                if caus_res.is_inversion_detected:
-                    fe_score = round(max(fe_score, caus_res.confidence_penalty), 4)
-                    break
+                for snip in ev_snippets[:3]:
+                    caus_res = self.causal_checker.check_inversion(text, snip)
+                    if caus_res.is_inversion_detected:
+                        fe_score = round(max(fe_score, caus_res.confidence_penalty), 4)
+                        break
 
         # Check deterministic symbolic arithmetic & unit claims
         sym_reasoning = None

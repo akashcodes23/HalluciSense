@@ -14,7 +14,7 @@
     {
       "feature_a": "feat1",
       "feature_b": "feat2",
-      "pearson_r": 0.9985683037812453,
+      "pearson_r": 0.9985683037812452,
       "spearman_rho": 0.9981249531238282,
       "mi_feature_a": 0.1685848985738021,
       "mi_feature_b": 0.22258354317110718,

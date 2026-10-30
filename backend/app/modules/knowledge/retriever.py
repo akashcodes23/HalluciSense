@@ -42,6 +42,10 @@ class HybridRetriever:
             for item in wiki_by_claim.get(claim, []):
                 evidence = dict(item)
                 evidence["claim"] = claim
+                if not evidence.get("retrieval_query"):
+                    evidence["retrieval_query"] = claim
+                evidence["source_name"] = item.get("source_name") or item.get("title") or "Wikipedia"
+                evidence["source_url"] = item.get("source_url") or item.get("url") or ""
                 if "similarity_score" not in evidence or evidence["similarity_score"] == 0.85:
                     snip_words = {w for w in re.findall(r'[a-zA-Z0-9]+', (item.get("snippet") or "").lower()) if w not in _STOPWORDS}
                     if claim_words:
@@ -91,7 +95,24 @@ class HybridRetriever:
                 key=lambda x: float(x.get("similarity_score", 0.0)),
                 reverse=True,
             )
-            top_evidence = sorted_evidence[:8]
+            # When multiple distinct claims are present, allocate evidence proportionally
+            # so one claim does not starve the others
+            if len(clean_claims) > 1:
+                per_claim_quota = max(2, 8 // len(clean_claims))
+                top_evidence = []
+                by_claim = {}
+                for ev in sorted_evidence:
+                    c = ev.get("claim", "")
+                    by_claim.setdefault(c, []).append(ev)
+                for c, items in by_claim.items():
+                    top_evidence.extend(items[:per_claim_quota])
+                for ev in sorted_evidence:
+                    if len(top_evidence) >= 8:
+                        break
+                    if ev not in top_evidence:
+                        top_evidence.append(ev)
+            else:
+                top_evidence = sorted_evidence[:8]
 
         rerank_ms = (time.perf_counter() - t_r0) * 1000.0
         total_ms = (time.perf_counter() - t_start) * 1000.0
