@@ -344,7 +344,8 @@ class Pillar3ConsistencyEngine:
         sanitization_ms = (time.perf_counter() - t_san0) * 1000.0
 
         if not valid_samples:
-            if allow_intra_response:
+            sents = self._split_sentences(primary_response)
+            if (allow_intra_response or sample_responses is None) and len(sents) >= 2:
                 return self.evaluate_intra_response_consistency(primary_response)
             return Pillar3Result(
                 sample_responses=[],
