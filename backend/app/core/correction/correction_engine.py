@@ -703,7 +703,7 @@ class HallucinationCorrectionEngine:
                 final_text=initial_text,
                 performed=False,
                 reason=cand.get("reason", "SAFE_ABSTENTION_INSUFFICIENT_EVIDENCE"),
-                state=CorrectionState.INSUFFICIENT_EVIDENCE.value,
+                state=CorrectionState.ORIGINAL_VERIFIED.value,
                 reverification=ReverificationInfo(passed=False, h_score=h_score, claims_analyzed=1),
             )
 
@@ -737,6 +737,7 @@ class HallucinationCorrectionEngine:
             except Exception:
                 passed = False
 
+        # On rejection, preserve original response text with unverified note
         final_out = corr_text if passed else f"{initial_text}\n\n[Note: System could not produce a sufficiently verified correction.]"
         final_state = CorrectionState.CORRECTION_ACCEPTED if passed else CorrectionState.CORRECTION_REJECTED
 

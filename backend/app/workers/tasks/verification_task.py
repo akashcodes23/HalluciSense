@@ -182,7 +182,7 @@ async def run_verification_async(
                     req_context.skipped_samples = settings.MAX_SELF_CONSISTENCY_SAMPLES
                     logger.info("pillar3_sample_generation_skipped", reason="high_preliminary_factual_confidence", message_id=str(message_id))
                 else:
-                    target_sample_count = 1
+                    target_sample_count = min(5, getattr(settings, "MAX_SELF_CONSISTENCY_SAMPLES", 5))
                     logger.info(
                         "pillar3_lazy_sample_generation_started",
                         message_id=str(message_id),

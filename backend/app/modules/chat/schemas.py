@@ -80,3 +80,8 @@ class ClosedLoopChatResponse(BaseModel):
     sources: List[str] = Field(default_factory=list)
     trace_id: str
     latency_ms: float
+    pillar_scores: Optional[Dict[str, Optional[float]]] = Field(default=None, description="Pillar 1-3 scores")
+    pillar_status: Optional[Dict[str, Any]] = Field(default=None, description="Detailed pillar execution & availability status")
+    confidence_analysis: Optional[Dict[str, Any]] = Field(default=None, description="Pillar 2 logprob provenance and metrics")
+    effective_weights: Optional[Dict[str, float]] = Field(default=None, description="Adaptive fusion weights")
+    state: Optional[str] = Field(default=None, description="Closed-loop state machine state")
