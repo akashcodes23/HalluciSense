@@ -224,6 +224,41 @@ def extract_capital_relation(text: str) -> Optional[Tuple[str, str]]:
 
 STOP_FORMULA_WORDS = {"is", "are", "was", "were", "can", "could", "of", "for", "a", "an", "the", "any", "which", "to", "in", "by", "that", "be", "as", "such", "several", "its", "each"}
 
+ELEMENT_MAP = {
+    "water": {"hydrogen", "oxygen"},
+    "h2o": {"hydrogen", "oxygen"},
+    "carbon dioxide": {"carbon", "oxygen"},
+    "co2": {"carbon", "oxygen"},
+    "carbon monoxide": {"carbon", "oxygen"},
+    "methane": {"carbon", "hydrogen"},
+    "ch4": {"carbon", "hydrogen"},
+    "ammonia": {"nitrogen", "hydrogen"},
+    "nh3": {"nitrogen", "hydrogen"},
+    "table salt": {"sodium", "chlorine"},
+    "sodium chloride": {"sodium", "chlorine"},
+    "nacl": {"sodium", "chlorine"},
+    "ozone": {"oxygen"},
+    "o3": {"oxygen"},
+    "hydrogen peroxide": {"hydrogen", "oxygen"},
+    "h2o2": {"hydrogen", "oxygen"},
+}
+
+
+def extract_chemical_composition(text: str) -> Optional[Tuple[str, Set[str]]]:
+    """Extract (substance, elements) from chemical composition assertions."""
+    m = re.search(
+        r"\b([a-zA-Z\s]{3,20}?)\s+(?:is\s+)?(?:composed\s+of|consists?\s+of|made\s+up\s+of)\s+([a-zA-Z\s,and]+?)(?:\.|\s*[,;]|\Z)",
+        text,
+        re.IGNORECASE,
+    )
+    if m:
+        subj = m.group(1).strip().lower()
+        raw_elems = m.group(2).lower()
+        elems = set(re.findall(r"\b[a-z]{3,15}\b", raw_elems)) - {"and", "of", "the", "both", "all", "mainly", "primarily"}
+        if subj in ELEMENT_MAP and elems:
+            return subj, elems
+    return None
+
 
 def extract_chemical_formula(text: str) -> Optional[Tuple[str, str]]:
     """Extract (subject, chemical_formula) from text if present.
@@ -239,6 +274,12 @@ def extract_chemical_formula(text: str) -> Optional[Tuple[str, str]]:
         subj = m.group(1).lower()
         form = m.group(2)
         if form.lower() not in STOP_FORMULA_WORDS and len(form) >= 2:
+            return subj, form.upper()
+    m2 = re.search(r'\b([A-Za-z]{3,})\s*\(([A-Za-z0-9]{2,10})\)', text)
+    if m2:
+        subj = m2.group(1).lower()
+        form = m2.group(2)
+        if form.lower() not in STOP_FORMULA_WORDS:
             return subj, form.upper()
     return None
 
@@ -544,6 +585,18 @@ class Pillar1RetrievalEngine:
                     return 0.0, 0.98, 0.02, "deterministic_chemical_formula_rule"
                 else:
                     return 0.98, 0.0, 0.02, "deterministic_chemical_formula_rule"
+
+        # Check for chemical composition match (e.g. Water is composed of hydrogen and oxygen)
+        claim_comp = extract_chemical_composition(claim)
+        if claim_comp:
+            c_subj, c_elems = claim_comp
+            expected_elems = ELEMENT_MAP.get(c_subj, set())
+            snip_lower = item.snippet.lower()
+            if c_subj in snip_lower or (c_subj == "water" and "h2o" in snip_lower):
+                if c_elems == expected_elems or c_elems.issubset(expected_elems):
+                    return 0.98, 0.0, 0.02, "deterministic_chemical_composition_rule"
+                else:
+                    return 0.0, 0.98, 0.02, "deterministic_chemical_composition_rule"
 
         # Check for capital city contradiction or entailment using robust structural extractor
         claim_cap = extract_capital_relation(claim)

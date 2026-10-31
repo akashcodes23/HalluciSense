@@ -95,6 +95,23 @@ class ScientificClaimReasoner:
                 domain="chemistry",
             )
 
+        # Chemical composition assertions: e.g. "Water is composed of hydrogen and oxygen"
+        m_comp = re.search(
+            r"\b([A-Za-z\s]{3,20}?)\s+(?:is\s+)?(?:composed\s+of|consists?\s+of|made\s+up\s+of)\s+([A-Za-z\s,and]+?)(?:\.|\s*[,;]|\Z)",
+            clean,
+            re.IGNORECASE,
+        )
+        if m_comp:
+            subj = m_comp.group(1).strip().lower()
+            elems = m_comp.group(2).strip()
+            return ClaimSRO(
+                raw_claim=claim_text,
+                subject=subj,
+                relation="chemical_composition",
+                obj=elems,
+                domain="chemistry",
+            )
+
         # 3. Molar mass assertions: e.g. "The molar mass of water is 18.015 g/mol.", "One mole of pure water possesses a mass of 18.015 grams."
         if "molar mass" in clean_lower or "g/mol" in clean_lower or re.search(r'\b(?:one|1)?\s*mole\s+of\b', clean_lower):
             m_mole = re.search(r"\b(?:one|1)?\s*mole\s+of\s+([A-Za-z0-9\s]+?)\s+(?:possesses|has|weighs|is)", clean, re.IGNORECASE)
@@ -347,10 +364,10 @@ class ScientificClaimReasoner:
                 return 0.15, "Topical co-occurrence: Mentions unit history but does not establish light speed"
             return 0.20, "Low relevance to speed of light assertion"
 
-        if sro.relation == "chemical_formula":
-            if claim_subj in snip_lower or claim_subj in title_lower:
-                if "formula" in snip_lower or "compound" in snip_lower or "molecule" in snip_lower:
-                    return 0.95, f"Direct chemical formula grounding for {claim_subj}"
+        if sro.relation in ("chemical_formula", "chemical_composition"):
+            if claim_subj in snip_lower or claim_subj in title_lower or (claim_subj == "water" and "h2o" in snip_lower):
+                if any(w in snip_lower for w in ("formula", "compound", "molecule", "hydrogen", "oxygen", "composed")):
+                    return 0.95, f"Direct chemical grounding for {claim_subj}"
                 return 0.70, f"Relevant chemical substance discussion of {claim_subj}"
             return 0.10, f"Entity mismatch: Does not address {claim_subj}"
 
