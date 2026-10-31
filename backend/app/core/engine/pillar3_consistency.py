@@ -93,6 +93,33 @@ class Pillar3ConsistencyEngine:
         """Compute lightweight token-overlap semantic consistency without loading external embedding models."""
         return self.evaluate_jaccard_consistency(primary_response, sample_responses)
 
+    def check_entity_numerical_conflicts(self, text1: str, text2: str) -> List[str]:
+        """Detect entity and numerical contradictions between two claim statements."""
+        conflicts = []
+        # Numerical disparity: only flag when number sets are strictly disjoint
+        nums1 = set(re.findall(r"\b\d+(?:[\.,]\d+)?\b", text1))
+        nums2 = set(re.findall(r"\b\d+(?:[\.,]\d+)?\b", text2))
+        if nums1 and nums2 and nums1.isdisjoint(nums2):
+            w1 = set(re.findall(r"\b[a-zA-Z]{4,}\b", text1.lower()))
+            w2 = set(re.findall(r"\b[a-zA-Z]{4,}\b", text2.lower()))
+            if len(w1.intersection(w2)) >= 2:
+                conflicts.append(f"Numerical disparity: {sorted(list(nums1))} vs {sorted(list(nums2))}")
+
+        # Geopolitical entity relational disparity (e.g. capital cities)
+        try:
+            from app.core.engine.pillar1_retrieval import extract_capital_relation
+            cap1 = extract_capital_relation(text1)
+            cap2 = extract_capital_relation(text2)
+            if cap1 and cap2:
+                city1, ent1 = cap1
+                city2, ent2 = cap2
+                if ent1.lower() == ent2.lower() and city1.lower() != city2.lower():
+                    conflicts.append(f"Entity conflict for {ent1}: '{city1}' vs '{city2}'")
+        except Exception:
+            pass
+
+        return conflicts
+
     def evaluate_claim_nli(
         self,
         primary_response: str,
@@ -157,9 +184,17 @@ class Pillar3ConsistencyEngine:
                     e_prob = float(pred.get("entailment", 0.0))
                     n_prob = float(pred.get("neutral", 0.0))
                     c_prob = float(pred.get("contradiction", 0.0))
+
+                    # Detect entity and numerical conflicts
+                    conflicts = self.check_entity_numerical_conflicts(p_c, s_c)
+                    if conflicts:
+                        c_prob = max(c_prob, 0.75)
+                        e_prob = min(e_prob, 0.15)
+                        n_prob = max(0.0, 1.0 - c_prob - e_prob)
+
                     prob_dict = {"entailment": e_prob, "neutral": n_prob, "contradiction": c_prob}
                     label = max(prob_dict, key=prob_dict.get)
-                    sem_sim = max(sim, e_prob + 0.5 * n_prob)
+                    sem_sim = max(sim, e_prob + 0.5 * n_prob) if c_prob < 0.35 else max(0.0, 1.0 - c_prob)
                     nli_analyses.append(
                         NLIAnalysis(
                             primary_claim=p_c,
@@ -173,7 +208,7 @@ class Pillar3ConsistencyEngine:
                         )
                     )
 
-            aligned_pairs = [item for item in nli_analyses if item.semantic_similarity >= ALIGNMENT_THRESHOLD]
+            aligned_pairs = [item for item in nli_analyses if item.semantic_similarity >= ALIGNMENT_THRESHOLD or (item.contradiction_probability or 0.0) >= 0.35]
             if aligned_pairs:
                 c_scores = [item.contradiction_probability for item in aligned_pairs if item.contradiction_probability is not None]
                 contradiction_score = round(sum(c_scores) / len(c_scores), 4) if c_scores else 0.0
@@ -297,10 +332,11 @@ class Pillar3ConsistencyEngine:
     def analyze(
         self,
         primary_response: str,
-        sample_responses: Optional[List[str]] = None
+        sample_responses: Optional[List[str]] = None,
+        allow_intra_response: bool = False,
     ) -> Pillar3Result:
-        """Execute Pillar 3 consistency. Evaluates cross-generation consistency if samples exist,
-        or intra-response claim consistency for static responses.
+        """Execute Pillar 3 consistency. Evaluates multi-generation consistency across independent samples.
+        If independent samples are absent, returns UNAVAILABLE (unless allow_intra_response=True).
         """
         t_p3_start = time.perf_counter()
         t_san0 = time.perf_counter()
@@ -308,9 +344,27 @@ class Pillar3ConsistencyEngine:
         sanitization_ms = (time.perf_counter() - t_san0) * 1000.0
 
         if not valid_samples:
-            # When independent alternate samples are not provided, evaluate
-            # static intra-response claim consistency across internal claims.
-            return self.evaluate_intra_response_consistency(primary_response)
+            if allow_intra_response:
+                return self.evaluate_intra_response_consistency(primary_response)
+            return Pillar3Result(
+                sample_responses=[],
+                pairwise_similarities=[],
+                consistency_failure_score=None,
+                semantic_agreement=None,
+                contradiction_count=0,
+                conflicting_claims=[],
+                generation_comparisons=[],
+                generation_count=0,
+                similarity_method="unavailable",
+                mode="MULTI_SAMPLE_REQUIRED",
+                nli_analyses=[],
+                contradiction_score=None,
+                nli_available=False,
+                alignment_method="unavailable",
+                reasoning="Multiple independent generations not available. Consistency analysis excluded from fusion.",
+                available=False,
+                status="UNAVAILABLE",
+            )
 
         logger.info("pillar3_analysis_started", num_samples=len(valid_samples))
 
@@ -325,38 +379,60 @@ class Pillar3ConsistencyEngine:
         nli_analyses, contradiction_score, nli_available = self.evaluate_claim_nli(primary_response, valid_samples)
         nli_ms = (time.perf_counter() - t_nli0) * 1000.0
 
-        # 3. Fuse Contradiction Score into Contradiction-Aware CF
-        if nli_available and nli_analyses:
-            avg_sem_sim = sum(item.semantic_similarity for item in nli_analyses) / len(nli_analyses)
-            c_score = contradiction_score if contradiction_score is not None else 0.0
-            cf_final = round(
-                max(0.0, min(1.0, 0.4 * (1.0 - avg_sem_sim) + 0.6 * c_score)),
-                4
+        # 3. Compute Per-Sample Semantic Agreement & Contradiction Details
+        generation_comparisons: List[Dict[str, Any]] = []
+        conflicting_claims: List[str] = []
+        contra_count = 0
+        sem_agreements: List[float] = []
+
+        for idx, sample in enumerate(valid_samples):
+            sample_sim = similarities[idx] if idx < len(similarities) else 0.5
+            matching_nli = nli_analyses[idx] if idx < len(nli_analyses) else None
+            if matching_nli:
+                c_prob = matching_nli.contradiction_probability or 0.0
+                e_prob = matching_nli.entailment_probability or 0.0
+                n_prob = matching_nli.neutral_probability or 0.0
+                lbl = matching_nli.label or "neutral"
+                if c_prob >= 0.35:
+                    contra_count += 1
+                    conflicting_claims.append(f"Sample {idx+1}: '{sample}'")
+                    sample_sem_agree = max(0.0, 1.0 - c_prob)
+                else:
+                    sample_sem_agree = max(sample_sim, e_prob + 0.5 * n_prob)
+            else:
+                c_prob = 0.0
+                lbl = "neutral"
+                sample_sem_agree = sample_sim
+
+            sem_agreements.append(round(sample_sem_agree, 4))
+            generation_comparisons.append({
+                "sample_index": idx + 1,
+                "sample_text": sample,
+                "lexical_similarity": sample_sim,
+                "semantic_agreement": round(sample_sem_agree, 4),
+                "contradiction_probability": round(c_prob, 4),
+                "is_contradiction": c_prob >= 0.35,
+                "label": lbl,
+            })
+
+        mean_semantic_agreement = round(sum(sem_agreements) / len(sem_agreements), 4) if sem_agreements else round(1.0 - cf_lexical, 4)
+
+        # 4. Fuse Contradiction Score into Contradiction-Aware CF: CF = 1 - semantic_agreement
+        if nli_available and contradiction_score is not None and contradiction_score > 0.25:
+            max_c = max([item.contradiction_probability or 0.0 for item in nli_analyses], default=0.0)
+            cf_final = round(max(0.0, min(1.0, 0.40 * (1.0 - mean_semantic_agreement) + 0.60 * max_c)), 4)
+            reasoning = (
+                f"Multi-generation consistency evaluated across {len(valid_samples)} independent generations: "
+                f"mean semantic agreement = {mean_semantic_agreement:.2f}, {contra_count} contradictions detected "
+                f"(mean contradiction prob: {contradiction_score:.2f}, max: {max_c:.2f}). "
+                f"Contradiction-penalized CF = {cf_final:.2f}."
             )
         else:
-            cf_final = cf_lexical
-
-        avg_sim = round(1.0 - cf_lexical, 4)
-        if nli_available and contradiction_score is not None:
-            max_c = max([item.contradiction_probability or 0.0 for item in nli_analyses], default=0.0)
-            if contradiction_score > 0.25:
-                reasoning = (
-                    f"Lexical consistency produced CF_semantic={cf_lexical:.2f}. "
-                    f"Claim-aligned NLI detected contradiction across alternate generations "
-                    f"(mean contradiction prob: {contradiction_score:.2f}, max: {max_c:.2f}). "
-                    f"Contradiction-aware CF={cf_final:.2f}."
-                )
-            else:
-                reasoning = (
-                    f"Self-consistency evaluated across {len(valid_samples)} alternate generations "
-                    f"(avg similarity: {avg_sim:.2f}, CF_semantic={cf_lexical:.2f}). "
-                    f"Claim-aligned NLI verified logical consistency (contradiction score: {contradiction_score:.2f}). "
-                    f"Final CF={cf_final:.2f}."
-                )
-        else:
+            cf_final = round(max(0.0, min(1.0, 1.0 - mean_semantic_agreement)), 4)
             reasoning = (
-                f"Self-consistency evaluated across {len(valid_samples)} alternate generations "
-                f"using {similarity_method} (avg similarity: {avg_sim:.2f}, CF={cf_final:.2f}). "
+                f"Multi-generation consistency evaluated across {len(valid_samples)} independent generations: "
+                f"mean semantic agreement = {mean_semantic_agreement:.2f}, 0 contradictions detected. "
+                f"Final CF = {cf_final:.2f}."
             )
 
         # Construct Paraphrase Matrix
@@ -376,6 +452,11 @@ class Pillar3ConsistencyEngine:
             sample_responses=valid_samples,
             pairwise_similarities=similarities,
             consistency_failure_score=cf_final,
+            semantic_agreement=mean_semantic_agreement,
+            contradiction_count=contra_count,
+            conflicting_claims=conflicting_claims,
+            generation_comparisons=generation_comparisons,
+            generation_count=len(valid_samples),
             similarity_method="lexical_alignment_plus_nli",
             nli_analyses=nli_analyses,
             contradiction_score=contradiction_score,

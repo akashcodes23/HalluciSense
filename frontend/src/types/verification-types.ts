@@ -105,6 +105,10 @@ export interface ConfidenceAnalysis {
   generations_used?: number | null;
   token_count?: number | null;
   avg_token_probability?: number | null;
+  mean_negative_log_likelihood?: number | null;
+  low_probability_token_fraction?: number | null;
+  probability_threshold?: number;
+  is_genuine?: boolean;
   source_mode?: "GENUINE_LOGPROBS" | "PASTED_TEXT" | "PROVIDER_UNSUPPORTED" | "UNAVAILABLE";
   provider?: string | null;
   model?: string | null;
@@ -155,6 +159,9 @@ export interface PillarExecutionStatus {
   p2_available: boolean;
   p3_available: boolean;
   is_full_analysis: boolean;
+  p3_generation_count?: number;
+  p3_semantic_agreement?: number | null;
+  p3_contradiction_count?: number;
 }
 
 export interface MathematicalFusionDecomposition {
@@ -272,6 +279,21 @@ export interface AnalysisResponse {
   measured_timings?: MeasuredTimingBreakdown;
   pillar_status?: PillarExecutionStatus;
   fusion_decomposition?: MathematicalFusionDecomposition;
+  pillar3_details?: {
+    generation_count: number;
+    semantic_agreement: number | null;
+    contradiction_count: number;
+    conflicting_claims: string[];
+    generation_comparisons: Array<{
+      sample_index: number;
+      sample_text: string;
+      lexical_similarity: number;
+      semantic_agreement: number;
+      contradiction_probability: number;
+      is_contradiction: boolean;
+      label: string;
+    }>;
+  } | null;
   local_attribution?: LocalAttribution;
   semantic_grounding?: SemanticGrounding;
   candidate_comparison?: CandidateComparison;
@@ -386,8 +408,9 @@ export interface CorrectionResult {
   correction_id: string;
   original_trace_id?: string;
   reverification_trace_id?: string;
-  status: "verified" | "abstained" | "rejected" | "not_needed";
-  method: "symbolic_arithmetic" | "symbolic_unit" | "evidence_grounded" | "abstained" | "none";
+  status: "verified" | "abstained" | "rejected" | "not_needed" | string;
+  state?: "DETECTED" | "EXPLAINED" | "CORRECTION_GENERATED" | "REVERIFYING" | "CORRECTION_ACCEPTED" | "CORRECTION_REJECTED" | "ABSTAINED" | "NOT_REQUIRED" | "FAILED" | string;
+  method: "symbolic_arithmetic" | "symbolic_unit" | "evidence_grounded" | "abstained" | "none" | string;
   original_text: string;
   corrected_text?: string | null;
   reason: string;
@@ -400,6 +423,15 @@ export interface CorrectionResult {
 export interface CorrectionResponse {
   correction: CorrectionResult;
   original_diagnosis?: {
+    original_claim?: string;
+    claim_classification?: string;
+    supporting_evidence?: unknown[];
+    contradicting_evidence?: unknown[];
+    p1_score?: number;
+    p2_score_and_provenance?: Record<string, unknown>;
+    p3_score_and_generation_comparisons?: Record<string, unknown>;
+    detection_reason?: string;
+    confidence_and_limitations?: string;
     trace_id?: string;
     risk_level?: string;
     overall_h_score?: number;
@@ -409,6 +441,7 @@ export interface CorrectionResponse {
       confidence_gap?: number;
       consistency_failure?: number;
     };
+    [key: string]: unknown;
   };
   execution_time_ms: number;
 }

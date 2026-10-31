@@ -4,7 +4,7 @@ OpenAI Provider implementation via HTTPX.
 import json
 import traceback
 import httpx
-from typing import AsyncGenerator, List, Optional
+from typing import AsyncGenerator, List, Optional, Tuple
 import structlog
 
 from app.modules.providers.base import AbstractLLMProvider
@@ -127,12 +127,12 @@ class OpenAIProvider(AbstractLLMProvider):
             logger.error("openai_stream_chat_failed", model=self._model_slug, error=str(e), traceback=traceback.format_exc())
             raise e
 
-    async def generate_response(
+    async def generate_response_with_logits(
         self,
         messages: List[dict],
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
-    ) -> str:
+    ) -> tuple[str, List[TokenLogit]]:
         if not self.api_key or not self.api_key.strip():
             logger.error("openai_api_key_not_configured")
             raise ValueError("OpenAI API key is not configured in settings.")
@@ -181,6 +181,39 @@ class OpenAIProvider(AbstractLLMProvider):
 
         data = response.json()
         choices = data.get("choices", [])
-        if choices:
-            return choices[0].get("message", {}).get("content", "") or ""
-        return ""
+        if not choices:
+            return "", []
+
+        choice = choices[0]
+        text = choice.get("message", {}).get("content", "") or ""
+        logits: List[TokenLogit] = []
+        logprobs_obj = choice.get("logprobs") or {}
+        content_logprobs = logprobs_obj.get("content") or []
+        for idx, lp in enumerate(content_logprobs):
+            selected_lp = lp.get("logprob")
+            if selected_lp is not None:
+                logits.append(
+                    TokenLogit(
+                        token=str(lp.get("token", "")),
+                        logprob=float(selected_lp),
+                        token_id=None,
+                        position=idx,
+                        provider="OpenAI",
+                        model=self._model_slug,
+                    )
+                )
+
+        return text, logits
+
+    async def generate_response(
+        self,
+        messages: List[dict],
+        temperature: float = 0.7,
+        system_prompt: Optional[str] = None,
+    ) -> str:
+        text, _ = await self.generate_response_with_logits(
+            messages=messages,
+            temperature=temperature,
+            system_prompt=system_prompt,
+        )
+        return text

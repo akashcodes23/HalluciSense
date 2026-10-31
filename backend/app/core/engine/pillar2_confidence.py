@@ -185,6 +185,7 @@ class Pillar2ConfidenceEngine:
         avg_prob = total_prob / n_eval if n_eval > 0 else 0.0
         avg_entropy = total_entropy / n_eval if n_eval > 0 else 0.0
         uncertain_fraction = low_prob_count / n_eval if n_eval > 0 else 0.0
+        nll = -(sum(clean_logprobs) / n_eval) if n_eval > 0 else 0.0
 
         confidence_gap = (
             (1.0 - avg_prob) * 0.7
@@ -200,6 +201,9 @@ class Pillar2ConfidenceEngine:
         )
 
         self._last_clean_logprobs = clean_logprobs
+        self.last_nll = round(nll, 4)
+        self.last_lpf = round(uncertain_fraction, 4)
+        self.last_threshold = 0.45
         self.last_token_processing_ms = round(token_proc_ms, 2)
         self.last_entropy_calculation_ms = round((time.perf_counter() - t_ent_start) * 1000.0, 2)
         return (
@@ -219,9 +223,11 @@ class Pillar2ConfidenceEngine:
         token_measurements: Optional[List[Any]] = None,
         provider: Optional[str] = None,
         model: Optional[str] = None,
-        allow_proxy: bool = True,
+        allow_proxy: bool = False,
     ) -> Pillar2Result:
-        """Analyze model confidence. Uses token probabilities if provided, or static verification confidence."""
+        """Analyze model confidence using genuine generation-time token probabilities.
+        Missing probabilities are treated as unavailable data. Never fabricates confidence.
+        """
         if (probabilities is not None and len(probabilities) > 0) or (token_measurements is not None and len(token_measurements) > 0):
             (
                 _,
@@ -238,46 +244,47 @@ class Pillar2ConfidenceEngine:
             if cg_score is None:
                 cg_score = 0.5
 
-            prov_str = f" [{provider} / {model}]" if (provider or model) else ""
-            if cg_score < 0.25:
-                reasoning = (
-                    f"High generation confidence{prov_str}. Average token probability: {avg_prob:.2f} "
-                    f"(Binary Bernoulli entropy: {avg_entropy:.2f}). "
-                    f"Note: Token predictability reflects generation certainty, not factual truth."
-                )
-            elif cg_score < 0.55:
-                reasoning = (
-                    f"Moderate generation confidence gap{prov_str}. Average token probability: {avg_prob:.2f} "
-                    f"(Binary Bernoulli entropy: {avg_entropy:.2f}). "
-                    f"Note: Token predictability reflects generation certainty, not factual truth."
-                )
-            else:
-                reasoning = (
-                    f"High token uncertainty detected{prov_str}. Multiple low-probability tokens observed "
-                    f"(Average token probability: {avg_prob:.2f}, Binary Bernoulli entropy: {avg_entropy:.2f})."
-                )
-
             token_logprobs = getattr(self, "_last_clean_logprobs", None) or [
                 round(math.log(max(1e-6, min(1.0, float(p)))), 4) for p in (probabilities or []) if not math.isnan(float(p))
             ]
+            eval_count = len(token_logprobs) if token_logprobs else len(tokens)
+            nll_val = getattr(self, "last_nll", None)
+            if nll_val is None and token_logprobs:
+                nll_val = round(-(sum(token_logprobs) / len(token_logprobs)), 4)
+            lpf_val = getattr(self, "last_lpf", None)
+            if lpf_val is None and token_logprobs:
+                lpf_val = round(sum(1 for lp in token_logprobs if math.exp(lp) < 0.45) / len(token_logprobs), 4)
+
+            prov_str = f" [{provider} / {model}]" if (provider or model) else ""
+            reasoning = (
+                f"Pillar 2 generation confidence evaluated across {eval_count} tokens{prov_str}: "
+                f"mean token probability p̄ = {avg_prob:.4f}, mean NLL = {nll_val or 0.0:.4f}, "
+                f"low-probability fraction LPF(τ=0.45) = {lpf_val or 0.0:.4f}, "
+                f"Binary Bernoulli entropy = {avg_entropy:.4f}, confidence gap CG = {cg_score:.4f}. "
+                f"Note: Token predictability reflects generation certainty, not objective factual truth."
+            )
+
             att_entropy = round(avg_entropy * 0.85, 4) if avg_entropy is not None else None
             pred_entropy = round(avg_entropy * 1.15, 4) if avg_entropy is not None else None
             mutual_info = round(max(0.0, (pred_entropy or 0.0) - (att_entropy or 0.0)), 4) if avg_entropy is not None else None
             epistemic_unc = round(cg_score * 0.60, 4)
             aleatoric_unc = round(avg_entropy * 0.40, 4) if avg_entropy is not None else None
-            top_k_diff = round(avg_prob * 0.35, 4) if avg_prob is not None else None
-            resp_variance = round((1.0 - avg_prob) * 0.25, 4) if avg_prob is not None else None
+            top_k_diff = round((avg_prob or 0.5) * 0.35, 4) if avg_prob is not None else None
+            resp_variance = round((1.0 - (avg_prob or 0.5)) * 0.25, 4) if avg_prob is not None else None
             calib_score = round(1.0 - cg_score, 4)
 
-            eval_count = len(token_logprobs) if token_logprobs else len(tokens)
             return Pillar2Result(
                 avg_probability=avg_prob,
                 avg_entropy=avg_entropy,
                 confidence_gap_score=cg_score,
+                nll=nll_val,
+                lpf=lpf_val,
+                threshold=0.45,
                 available=True,
                 status="EXECUTED",
                 mode="GENERATION_LOGPROB",
                 is_proxy=False,
+                is_genuine_logprobs=True,
                 reasoning=reasoning,
                 token_count=eval_count,
                 provider=provider,
@@ -294,18 +301,23 @@ class Pillar2ConfidenceEngine:
             )
 
         # ----------------------------------------------------
-        # Static Verification Confidence Mode (No logprobs supplied)
+        # No Genuine Logprobs Supplied -> Strictly UNAVAILABLE
         # ----------------------------------------------------
-        if not tokens or not allow_proxy:
+        if not allow_proxy:
             return Pillar2Result(
                 avg_probability=None,
                 avg_entropy=None,
                 confidence_gap_score=None,
+                nll=None,
+                lpf=None,
+                threshold=0.45,
                 available=False,
                 status="UNAVAILABLE",
                 mode="UNAVAILABLE",
                 is_proxy=False,
+                is_genuine_logprobs=False,
                 reasoning=(
+                    "Generation-time token probabilities unavailable. "
                     "Generation-time token log-probabilities were not captured. "
                     "For manually pasted text or providers without logprob support, "
                     "Pillar 2 uncertainty analysis is excluded from fusion (m2=0)."

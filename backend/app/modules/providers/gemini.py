@@ -8,7 +8,7 @@ import os
 import random
 import threading
 from dataclasses import dataclass, replace
-from typing import AsyncGenerator, Dict, List, Optional, Set, TypedDict, Any
+from typing import AsyncGenerator, Dict, List, Optional, Set, TypedDict, Any, Tuple
 
 # Enforce native DNS resolution for gRPC on macOS to prevent lookup deadlocks
 os.environ["GRPC_DNS_RESOLVER"] = "native"
@@ -688,13 +688,13 @@ class GeminiProvider(AbstractLLMProvider):
             except Exception:
                 pass
 
-    async def generate_response(
+    async def generate_response_with_logits(
         self,
         messages: List[ChatMessage],
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
-    ) -> str:
-        """Generate a complete non-streaming response text from Gemini."""
+    ) -> Tuple[str, List[TokenLogit]]:
+        """Generate complete non-streaming response text from Gemini accompanied by token logits."""
         if QuotaCircuitBreaker.is_tripped():
             logger.warning("gemini_generate_response_skipped_circuit_breaker_tripped")
             raise GeminiQuotaExceededError("Circuit breaker tripped: HTTP 429 Quota Exhausted")
@@ -721,15 +721,17 @@ class GeminiProvider(AbstractLLMProvider):
                 )
 
                 text = _extract_chunk_text(response)
+                logits = _extract_chunk_logits(response, model_name=model_name, start_pos=0)
                 if text:
                     logger.info(
                         "gemini_generate_response_success",
                         provider=self.provider_name,
                         model=model_name,
                         length=len(text),
+                        logits_count=len(logits),
                         fallback_number=fallback_index,
                     )
-                    return text
+                    return text, logits
             except Exception as e:
                 last_error = e
                 if isinstance(e, (ResourceExhausted, GeminiQuotaExceededError)) or "429" in str(e) or "Quota exceeded" in str(e):
@@ -748,3 +750,17 @@ class GeminiProvider(AbstractLLMProvider):
         err_msg = f"Gemini non-streaming generation failed across all models. Last error: {str(last_error)}"
         logger.exception("gemini_generate_failed", provider=self.provider_name, error=err_msg)
         raise GeminiProviderError(err_msg) from last_error
+
+    async def generate_response(
+        self,
+        messages: List[ChatMessage],
+        temperature: float = 0.7,
+        system_prompt: Optional[str] = None,
+    ) -> str:
+        """Generate a complete non-streaming response text from Gemini."""
+        text, _ = await self.generate_response_with_logits(
+            messages=messages,
+            temperature=temperature,
+            system_prompt=system_prompt,
+        )
+        return text

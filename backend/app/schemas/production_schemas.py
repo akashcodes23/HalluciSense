@@ -103,6 +103,9 @@ class PillarExecutionStatus(BaseModel):
     p2_available: bool = Field(default=False)
     p3_available: bool = Field(default=False)
     is_full_analysis: bool = Field(default=False)
+    p3_generation_count: int = Field(default=0, description="Number of evaluated independent generations")
+    p3_semantic_agreement: Optional[float] = Field(None, description="Mean semantic agreement across generations")
+    p3_contradiction_count: int = Field(default=0, description="Count of detected contradictions across samples")
 
 
 class MathematicalFusionDecomposition(BaseModel):
@@ -134,6 +137,10 @@ class ConfidenceAnalysis(BaseModel):
     token_count: Optional[int] = Field(None, description="Total number of evaluated generation tokens")
     avg_token_probability: Optional[float] = Field(None, description="Mean exponentiated token probability exp(logprob)")
     confidence_gap_score: Optional[float] = Field(None, description="Pillar 2 confidence gap metric: 0.7*(1-mean(p)) + 0.3*(low_prob_frac)")
+    mean_negative_log_likelihood: Optional[float] = Field(None, description="Mean negative log-likelihood NLL: -(1/N)*sum(log(p_i))")
+    low_probability_token_fraction: Optional[float] = Field(None, description="Fraction of tokens with prob < tau (0.45)")
+    probability_threshold: float = Field(default=0.45, description="Low probability threshold tau = 0.45")
+    is_genuine: bool = Field(default=False, description="True only when genuine token log-probabilities were provided")
     source_mode: Optional[str] = Field(None, description="GENUINE_LOGPROBS, PASTED_TEXT, PROVIDER_UNSUPPORTED, or UNAVAILABLE")
     provider: Optional[str] = Field(None, description="LLM provider name")
     model: Optional[str] = Field(None, description="LLM model identifier")
@@ -162,6 +169,7 @@ class AnalysisResponse(BaseModel):
     measured_timings: Optional[MeasuredTimingBreakdown] = Field(None, description="Actual measured sub-operation timings")
     pillar_status: Optional[PillarExecutionStatus] = Field(None, description="Detailed execution and availability status")
     fusion_decomposition: Optional[MathematicalFusionDecomposition] = Field(None, description="Step-by-step linear algebra contribution breakdown")
+    pillar3_details: Optional[Dict[str, Any]] = Field(default=None, description="Detailed multi-generation consistency analysis")
 
 
 class ExplainResponse(BaseModel):
@@ -230,6 +238,7 @@ class CorrectionResult(BaseModel):
     original_trace_id: Optional[str] = Field(None)
     reverification_trace_id: Optional[str] = Field(None)
     status: str = Field(..., description="verified, abstained, rejected, or not_needed")
+    state: Optional[str] = Field(None, description="Explicit state machine state: DETECTED, EXPLAINED, CORRECTION_GENERATED, REVERIFYING, CORRECTION_ACCEPTED, CORRECTION_REJECTED, ABSTAINED, NOT_REQUIRED, FAILED")
     method: str = Field(..., description="symbolic_arithmetic, symbolic_unit, evidence_grounded, abstained, or none")
     original_text: str = Field(...)
     corrected_text: Optional[str] = Field(None)

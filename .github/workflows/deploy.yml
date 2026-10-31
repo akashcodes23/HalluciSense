@@ -83,11 +83,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git Safe Directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Install Railway CLI & Deploy Backend
         run: |
           npm i -g @railway/cli
-          railway up --service backend || echo "Railway token required for live trigger"
+          railway up --service backend
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
@@ -99,3 +104,4 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./frontend
           vercel-args: '--prod'
+          github-token: ${{ secrets.GITHUB_TOKEN }}

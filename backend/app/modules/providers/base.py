@@ -2,7 +2,7 @@
 Abstract LLM Provider Protocol.
 Enforces the interface for all external AI models (Gemini, OpenAI, Anthropic).
 """
-from typing import AsyncGenerator, List, Protocol
+from typing import AsyncGenerator, List, Protocol, Tuple
 from app.modules.providers.schemas import ProviderResponseChunk
 
 class MessageDict(Protocol):
@@ -40,5 +40,16 @@ class AbstractLLMProvider(Protocol):
     ) -> str:
         """
         Generate a complete non-streaming response text.
+        """
+        ...
+
+    async def generate_response_with_logits(
+        self,
+        messages: List[dict],
+        temperature: float = 0.7,
+        system_prompt: str | None = None
+    ) -> tuple[str, list]:
+        """
+        Generate a complete non-streaming response text accompanied by genuine generation-time token logits.
         """
         ...

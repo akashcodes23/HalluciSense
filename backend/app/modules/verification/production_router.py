@@ -332,6 +332,9 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             p2_available=p2_available,
             p3_available=p3_available,
             is_full_analysis=is_full_genuine_analysis,
+            p3_generation_count=int(getattr(p3, "generation_count", len(payload.sample_responses) if payload.sample_responses else 0)),
+            p3_semantic_agreement=float(getattr(p3, "semantic_agreement", 0.0)) if getattr(p3, "semantic_agreement", None) is not None else None,
+            p3_contradiction_count=int(getattr(p3, "contradiction_count", 0)),
         )
 
         # Mathematical fusion breakdown
@@ -580,6 +583,10 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
                 token_count=int(p2_meas_count) if p2_meas_count is not None else None,
                 avg_token_probability=float(p2.avg_probability) if (p2 and p2.avg_probability is not None) else None,
                 confidence_gap_score=float(p2.confidence_gap_score) if (p2 and p2.confidence_gap_score is not None) else None,
+                mean_negative_log_likelihood=float(getattr(p2, "nll", 0.0)) if (p2 and getattr(p2, "nll", None) is not None) else None,
+                low_probability_token_fraction=float(getattr(p2, "lpf", 0.0)) if (p2 and getattr(p2, "lpf", None) is not None) else None,
+                probability_threshold=0.45,
+                is_genuine=p2_is_genuine,
                 source_mode=source_mode_str,
                 provider=getattr(p2, "provider", None) or (g_prov.get("provider") if g_prov else payload.model_name),
                 model=getattr(p2, "model", None) or (g_prov.get("model") if g_prov else payload.model_name),
@@ -649,6 +656,14 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
         # Add HTTP Latency Header
         response.headers["X-HalluciSense-Latency-Ms"] = f"{total_req_ms:.2f}"
 
+        p3_details_dict = {
+            "generation_count": getattr(p3, "generation_count", len(payload.sample_responses) if payload.sample_responses else 0),
+            "semantic_agreement": getattr(p3, "semantic_agreement", None),
+            "contradiction_count": getattr(p3, "contradiction_count", 0),
+            "conflicting_claims": getattr(p3, "conflicting_claims", []),
+            "generation_comparisons": getattr(p3, "generation_comparisons", []),
+        } if p3_available else None
+
         res_body = AnalysisResponse(
             trace_id=tracer.trace_id,
             overall_h_score=round(overall_h, 4),
@@ -667,6 +682,7 @@ async def _execute_analysis(payload: AnalysisRequest, request: Request, response
             measured_timings=measured_timings_obj,
             pillar_status=p_status_obj,
             fusion_decomposition=fusion_decomp,
+            pillar3_details=p3_details_dict,
         )
         from app.core.engine.memory_utils import trim_process_memory
         trim_process_memory()
@@ -822,6 +838,11 @@ async def correct_and_reverify_response(
         sentence_scores=sentence_dicts,
         overall_h_score=orig_h_score,
         model_name=payload.model_name or "default",
+        p1_score=original_analysis.pillar_scores.retrieval,
+        p2_score=original_analysis.pillar_scores.confidence,
+        p3_score=original_analysis.pillar_scores.consistency,
+        p2_details=original_analysis.confidence_analysis.model_dump() if original_analysis.confidence_analysis else None,
+        p3_details=original_analysis.pillar3_details,
     )
 
     exec_dur_ms = round((time.perf_counter() - start_t) * 1000.0, 2)
@@ -853,6 +874,7 @@ async def correct_and_reverify_response(
         original_trace_id=corr_outcome.get("original_trace_id"),
         reverification_trace_id=corr_outcome.get("reverification_trace_id"),
         status=corr_outcome.get("status", "abstained"),
+        state=corr_outcome.get("state", "ABSTAINED"),
         method=corr_outcome.get("method", "abstained"),
         original_text=corr_outcome.get("original_text", payload.response),
         corrected_text=corr_outcome.get("corrected_text"),
@@ -863,7 +885,7 @@ async def correct_and_reverify_response(
         reverification=rev_obj,
     )
 
-    orig_diag = {
+    orig_diag = corr_outcome.get("explanation") or {
         "trace_id": orig_trace_id,
         "risk_level": orig_risk,
         "overall_h_score": orig_h_score,

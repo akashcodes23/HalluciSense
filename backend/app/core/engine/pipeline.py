@@ -157,7 +157,7 @@ class HallucinationDetectionPipeline:
             logger.warning("evidence_retrieval_failed", error=str(e))
             return []
 
-    def _generate_p3_samples(self, text: str, query: Optional[str] = None, count: int = 3) -> List[str]:
+    def _generate_p3_samples(self, text: str, query: Optional[str] = None, count: int = 5) -> List[str]:
         """Generate exactly `count` genuine stochastic alternate responses using active LLM provider.
 
         Used when client does not supply pre-generated candidate responses and self-consistency is enabled.
@@ -703,7 +703,7 @@ Respond STRICTLY in JSON using this schema:
         t_p3_start = time.perf_counter()
         has_llm_key = bool(getattr(settings, "GEMINI_API_KEY", "") or getattr(settings, "OPENAI_API_KEY", ""))
         if (not sample_responses or len(sample_responses) == 0) and getattr(settings, "ENABLE_SELF_CONSISTENCY", False) and has_llm_key:
-            sample_responses = self._generate_p3_samples(clean_text, query=query, count=3)
+            sample_responses = self._generate_p3_samples(clean_text, query=query, count=5)
 
         if not sample_responses:
             p3_global = Pillar3Result(
