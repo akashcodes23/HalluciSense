@@ -51,15 +51,24 @@ async def closed_loop_chat(
     msg_id = f"msg_{uuid.uuid4().hex[:12]}"
     trace_id = f"TRACE_{uuid.uuid4().hex[:12].upper()}"
 
-    # 1. Answer Generation (Draft)
-    draft_response = _generate_draft_answer(payload.message, payload.model_name)
+    # 1. Answer Generation (Draft with genuine logits and independent samples)
+    draft_response, captured_logits, p3_samples, prov_name, mod_slug = await _generate_draft_answer_with_provenance(
+        payload.message, payload.model_name
+    )
     metrics_tracker = get_metrics_tracker()
 
     # 2. Initial Verification & Closed-Loop Correction
     if payload.enable_verification:
         try:
             pipeline = ModelRegistry.get_pipeline()
-            init_verification = pipeline.analyze_response(full_text=draft_response, query=payload.message)
+            init_verification = pipeline.analyze_response(
+                full_text=draft_response,
+                query=payload.message,
+                token_measurements=captured_logits if captured_logits else None,
+                sample_responses=p3_samples if p3_samples else None,
+                provider=prov_name,
+                model_name=mod_slug or payload.model_name,
+            )
             h_score = float(getattr(init_verification, "overall_h_score", getattr(init_verification, "hallucination_score", 0.0)))
             risk_level = getattr(init_verification, "overall_risk_level", getattr(init_verification, "risk_level", "LOW"))
             if hasattr(risk_level, "value"):
@@ -80,6 +89,35 @@ async def closed_loop_chat(
             ]
             sources = [e.get("source_name", "") for e in evidence_dicts if e.get("source_name")]
 
+            p1_sum = getattr(init_verification, "pillar1_summary", None)
+            p2_sum = getattr(init_verification, "pillar2_summary", None)
+            p3_sum = getattr(init_verification, "pillar3_summary", None)
+
+            p_scores = {
+                "retrieval": round(float(getattr(p1_sum, "factual_error_score", 0.0) or 0.0), 4) if p1_sum else None,
+                "confidence": round(float(p2_sum.confidence_gap_score), 4) if (p2_sum and getattr(p2_sum, "available", False) and p2_sum.confidence_gap_score is not None) else None,
+                "consistency": round(float(p3_sum.consistency_failure_score), 4) if (p3_sum and getattr(p3_sum, "available", False) and p3_sum.consistency_failure_score is not None) else None,
+            }
+
+            p_status = {
+                "p1_status": getattr(p1_sum, "status", "EXECUTED") if p1_sum else "FAILED",
+                "p2_status": getattr(p2_sum, "status", "UNAVAILABLE") if p2_sum else "UNAVAILABLE",
+                "p3_status": getattr(p3_sum, "status", "UNAVAILABLE") if p3_sum else "UNAVAILABLE",
+                "p1_available": bool(p1_sum and getattr(p1_sum, "available", True)),
+                "p2_available": bool(p2_sum and getattr(p2_sum, "available", False)),
+                "p3_available": bool(p3_sum and getattr(p3_sum, "available", False)),
+                "p3_generation_count": len(p3_samples) if p3_samples else 0,
+            }
+
+            conf_analysis = {
+                "is_genuine": bool(p2_sum and getattr(p2_sum, "is_genuine_logprobs", False)),
+                "mean_negative_log_likelihood": getattr(p2_sum, "nll", None) if p2_sum else None,
+                "low_probability_token_fraction": getattr(p2_sum, "lpf", None) if p2_sum else None,
+                "provider": prov_name,
+                "model": mod_slug,
+                "explanation": getattr(p2_sum, "reasoning", None) if p2_sum else None,
+            }
+
             # 3. Correction & Re-Verification Gate
             if payload.auto_correct and h_score >= 0.35:
                 corr_engine = _get_correction_engine()
@@ -94,6 +132,7 @@ async def closed_loop_chat(
                 corr_reason = corr_result.reason
                 claims_corr = [c.model_dump() for c in corr_result.claims_corrected]
                 orig_to_corr = corr_result.original_to_corrected
+                final_state = corr_result.state
 
                 if corr_result.reverification and corr_result.reverification.passed:
                     status_str = "CORRECTED"
@@ -114,6 +153,7 @@ async def closed_loop_chat(
                 final_h_score = h_score
                 claims_flagged = 0
                 claims_total = 1
+                final_state = "NOT_REQUIRED" if h_score < 0.35 else "DETECTED"
 
             verif_summary = VerificationSummary(
                 status=status_str,
@@ -209,7 +249,62 @@ async def closed_loop_chat(
         sources=list(set(sources)),
         trace_id=trace_id,
         latency_ms=round(total_latency_ms, 2),
+        pillar_scores=p_scores if payload.enable_verification else None,
+        pillar_status=p_status if payload.enable_verification else None,
+        confidence_analysis=conf_analysis if payload.enable_verification else None,
+        effective_weights=getattr(init_verification, "weights_used", None) if payload.enable_verification else None,
+        state=final_state if payload.enable_verification else "NOT_REQUIRED",
     )
+
+
+async def _generate_draft_answer_with_provenance(
+    message: str, model_name: Optional[str]
+) -> tuple[str, list, list, Optional[str], Optional[str]]:
+    """Generates initial draft answer accompanied by genuine token logits and multi-sample consistency candidates."""
+    from app.core.config import settings
+    from app.modules.orchestrator.service import LLMOrchestrator
+
+    target_model = model_name or getattr(settings, "DEFAULT_LLM_MODEL", "gemini-2.0-flash")
+    has_api_key = bool(
+        ("gemini" in target_model.lower() and getattr(settings, "GEMINI_API_KEY", ""))
+        or ("gpt" in target_model.lower() and getattr(settings, "OPENAI_API_KEY", ""))
+        or getattr(settings, "GEMINI_API_KEY", "")
+        or getattr(settings, "OPENAI_API_KEY", "")
+    )
+
+    if has_api_key:
+        try:
+            orchestrator = LLMOrchestrator(primary_model=target_model)
+            messages = [{"role": "user", "content": message}]
+
+            # 1. Generate primary response with genuine generation-time logits
+            draft_text, logits = await orchestrator.generate_with_logits(
+                messages=messages,
+                temperature=0.7,
+            )
+
+            # 2. Generate independent alternate samples for Pillar 3
+            samples = []
+            if getattr(settings, "ENABLE_SELF_CONSISTENCY", False):
+                try:
+                    samples = await orchestrator.generate_samples(
+                        messages=messages,
+                        count=min(5, getattr(settings, "MAX_SELF_CONSISTENCY_SAMPLES", 5)),
+                        temperature=0.7,
+                    )
+                except Exception as s_exc:
+                    logger.info("p3_sample_generation_in_chat_skipped", error=str(s_exc))
+                    samples = []
+
+            provider_name = "Google Gemini" if "gemini" in target_model.lower() else ("OpenAI" if "gpt" in target_model.lower() else target_model)
+            if draft_text and draft_text.strip():
+                return draft_text.strip(), logits or [], samples or [], provider_name, target_model
+        except Exception as exc:
+            logger.info("llm_draft_generation_with_logits_fallback", error=str(exc))
+
+    # Fallback to deterministic knowledge answers when no API keys are configured or API call fails
+    fallback_text = _generate_draft_answer(message, model_name)
+    return fallback_text, [], [], None, None
 
 
 def _generate_draft_answer(message: str, model_name: Optional[str]) -> str:
