@@ -1,6 +1,6 @@
 # HalluciSense
 
-**An availability-aware multi-signal framework for detecting, calibrating, abstaining on, and correcting LLM hallucinations.**
+**A HYBRID FRAMEWORK FOR DETECTING AND QUANTIFYING HALLUCINATIONS IN LARGE LANGUAGE MODELS**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-009688.svg)](https://fastapi.tiangolo.com)
