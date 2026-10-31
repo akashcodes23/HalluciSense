@@ -95,6 +95,23 @@ class ScientificClaimReasoner:
                 domain="chemistry",
             )
 
+        # Chemical composition assertions: e.g. "Water is composed of hydrogen and oxygen"
+        m_comp = re.search(
+            r"\b([A-Za-z\s]{3,20}?)\s+(?:is\s+)?(?:composed\s+of|consists?\s+of|made\s+up\s+of)\s+([A-Za-z\s,and]+?)(?:\.|\s*[,;]|\Z)",
+            clean,
+            re.IGNORECASE,
+        )
+        if m_comp:
+            subj = m_comp.group(1).strip().lower()
+            elems = m_comp.group(2).strip()
+            return ClaimSRO(
+                raw_claim=claim_text,
+                subject=subj,
+                relation="chemical_composition",
+                obj=elems,
+                domain="chemistry",
+            )
+
         # 3. Molar mass assertions: e.g. "The molar mass of water is 18.015 g/mol.", "One mole of pure water possesses a mass of 18.015 grams."
         if "molar mass" in clean_lower or "g/mol" in clean_lower or re.search(r'\b(?:one|1)?\s*mole\s+of\b', clean_lower):
             m_mole = re.search(r"\b(?:one|1)?\s*mole\s+of\s+([A-Za-z0-9\s]+?)\s+(?:possesses|has|weighs|is)", clean, re.IGNORECASE)
@@ -296,17 +313,37 @@ class ScientificClaimReasoner:
         # 1. Media title guard
         if any(term in title_lower or term in snip_lower[:120] for term in (
             "film)", "movie)", "album)", "song)", "television series)", "video game)",
-            "drama series", "directed by", "starring"
+            "television series", "tv series", "drama series", "fantasy series",
+            "painting)", "artwork)", "sculpture)",
+            "directed by", "starring"
         )):
             if sro.domain != "entertainment":
                 return 0.05, "Rejected: Media entertainment work out-of-domain for factual claim"
 
-        # 2. Designated sibling entity mismatch
+        # 2. Meta-linguistic, conversational, and definitional article guard
+        # Prevents definitional concepts (e.g. questions, interrogatives, punctuation, speech acts)
+        # from being accepted as factual evidence for non-linguistic domains.
+        META_LINGUISTIC_TOPICS = (
+            "question", "questions", "interrogative", "utterance", "speech act",
+            "punctuation", "grammar", "dialogue", "conversation", "semantics",
+            "pragmatics", "linguistics", "figure of speech", "rhetoric", "etymology",
+            "sentence", "statement", "vocabulary", "word"
+        )
+        title_clean = re.sub(r"^wikipedia:\s*", "", title_lower).strip()
+        if (
+            title_clean in META_LINGUISTIC_TOPICS
+            or any(title_clean.startswith(f"{t} (") for t in META_LINGUISTIC_TOPICS)
+            or any(f"category:{t}" in title_clean for t in META_LINGUISTIC_TOPICS)
+        ):
+            if sro.domain != "linguistics":
+                return 0.05, f"Rejected: Definitional/meta-linguistic article '{title_clean}' cannot provide factual grounding for {sro.domain} claim"
+
+        # 3. Designated sibling entity mismatch
         from app.core.engine.pillar1_retrieval import has_conflicting_designated_entity
         if has_conflicting_designated_entity(sro.raw_claim, snippet, source_title):
             return 0.05, "Rejected: Conflicting designated sibling entity in series"
 
-        # 3. Domain-specific relevance validation
+        # 4. Domain-specific relevance validation
         if sro.domain == "physics_constant" and sro.relation == "speed_constant":
             # Speculative, fictional, or alternative hypotheses are not ground-truth physical constant evidence
             if any(term in title_lower for term in ("variable speed of light", "faster-than-light", "superluminal", "tachyon", "science fiction")):
@@ -327,10 +364,10 @@ class ScientificClaimReasoner:
                 return 0.15, "Topical co-occurrence: Mentions unit history but does not establish light speed"
             return 0.20, "Low relevance to speed of light assertion"
 
-        if sro.relation == "chemical_formula":
-            if claim_subj in snip_lower or claim_subj in title_lower:
-                if "formula" in snip_lower or "compound" in snip_lower or "molecule" in snip_lower:
-                    return 0.95, f"Direct chemical formula grounding for {claim_subj}"
+        if sro.relation in ("chemical_formula", "chemical_composition"):
+            if claim_subj in snip_lower or claim_subj in title_lower or (claim_subj == "water" and "h2o" in snip_lower):
+                if any(w in snip_lower for w in ("formula", "compound", "molecule", "hydrogen", "oxygen", "composed")):
+                    return 0.95, f"Direct chemical grounding for {claim_subj}"
                 return 0.70, f"Relevant chemical substance discussion of {claim_subj}"
             return 0.10, f"Entity mismatch: Does not address {claim_subj}"
 
@@ -373,23 +410,39 @@ class ScientificClaimReasoner:
             target_matched = bool(target_words and target_words.issubset(snip_words | title_words))
             subj_matched = bool(subj_words and subj_words.issubset(snip_words | title_words))
 
-            # Check if snippet asserts a capital relation for a different entity
+            # Check if snippet asserts an explicit capital relation
             from .pillar1_retrieval import extract_capital_relation
             snip_cap = extract_capital_relation(snippet)
+
             if snip_cap:
                 s_city, s_ent = snip_cap
-                if not any(tw in s_ent.lower() for tw in target_words) and not any(s_ent.lower() in target_entity for _ in [1]):
+                s_ent_words = set(re.findall(r'\b[a-z0-9-]+\b', s_ent.lower()))
+                target_congruent = bool(
+                    target_words and (
+                        target_words.issubset(s_ent_words)
+                        or s_ent_words.issubset(target_words)
+                        or any(tw in s_ent.lower() for tw in target_words)
+                        or s_ent.lower() in target_entity
+                    )
+                )
+                if not target_congruent:
                     return 0.10, f"Entity mismatch: Evidence describes capital of {s_ent}, not {target_entity}"
 
+                # Snippet describes capital of target_entity!
+                if s_city == claim_subj or claim_subj in s_city or s_city in claim_subj:
+                    return 0.98, f"Direct capital relation support: {s_city} is the capital of {target_entity}"
+                else:
+                    return 0.98, f"Direct capital relation contradiction evidence: {s_city} is the capital of {target_entity}"
+
+            # If no strict capital relation was extracted, lexical overlap alone does NOT establish 0.98 relevance
             if target_matched and "capital" in snip_words:
-                if subj_matched:
-                    return 0.98, f"Direct capital relation evidence for {claim_subj} and {target_entity}"
-                if snip_cap and any(tw in snip_cap[1].lower() for tw in target_words):
-                    return 0.98, f"Direct capital relation evidence for {target_entity}"
-                return 0.50, f"Geographic reference to {target_entity} with capital mention"
+                is_target_article = bool(target_words and target_words.issubset(title_words))
+                if is_target_article:
+                    return 0.65, f"Authoritative entity article for {target_entity} mentioning capital"
+                return 0.35, f"Topical co-occurrence: Mentions {target_entity} and capital without direct relational assertion"
 
             if subj_matched:
-                return 0.30, f"Subject city reference without target state {target_entity}"
+                return 0.25, f"Subject city reference without target state {target_entity}"
 
             return 0.10, f"Entity mismatch: Neither city {claim_subj} nor {target_entity} addressed"
 

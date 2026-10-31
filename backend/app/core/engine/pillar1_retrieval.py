@@ -14,125 +14,250 @@ from app.core.verification.unit_verifier import evaluate_unit_claim
 from app.core.engine.scientific_claim_reasoner import ScientificClaimReasoner, ClaimSRO
 from app.core.verification.precision_policy import NumericalPrecisionPolicy, PrecisionDomain
 
+GENERIC_GEOPOLITICAL_STOP_WORDS = {
+    "state", "the state", "country", "the country", "nation", "the nation",
+    "city", "the city", "province", "the province", "region", "the region",
+    "territory", "the territory", "place", "area", "it", "this", "that", "these", "those",
+    "the", "a", "an", "terms", "terms of", "its", "their", "capital", "capitals", "headquarters",
+    "seat", "government", "administration", "authority",
+    "what", "which", "who", "whom", "whose", "where", "why", "how", "when",
+    "question", "questions", "answer", "answers", "example", "examples", "statement", "query"
+}
+
+
+def is_valid_geopolitical_entity(name: str) -> bool:
+    """Validate that an extracted name is a genuine geopolitical entity, not a grammatical placeholder."""
+    if not name:
+        return False
+    clean = re.sub(r'^(?:the|a|an)\s+', '', name.strip(), flags=re.IGNORECASE).strip().lower()
+    if clean in GENERIC_GEOPOLITICAL_STOP_WORDS:
+        return False
+    if len(clean) < 3:
+        return False
+    if any(ch.isdigit() for ch in clean):
+        return False
+    words = clean.split()
+    if len(words) > 4:
+        return False
+    # Reject strings containing grammatical conjunctions, relative pronouns, or prepositions
+    if any(w in {"is", "was", "are", "were", "and", "or", "which", "that", "with", "from", "for", "in", "on", "at"} for w in words):
+        return False
+    return True
+
+
+def _clean_entity_mention(name: str) -> str:
+    """Strip leading conjunctions, articles, and clause markers from extracted entity names."""
+    if not name:
+        return ""
+    clean = name.strip().rstrip(",.")
+    m = re.search(r'\b(?:and|or|but|while|whereas|that)\s+([A-Za-z\s’\'-]+)$', clean, re.IGNORECASE)
+    if m:
+        clean = m.group(1).strip()
+    clean = re.sub(r'^(?:the|a|an|city of)\s+', '', clean, flags=re.IGNORECASE).strip()
+    return clean
+
 
 def extract_capital_relation(text: str) -> Optional[Tuple[str, str]]:
     """Extract (city, state/country) tuple from capital assertions.
 
-    Returns (city, entity) in lowercase if text asserts a capital relation, else None.
+    Returns (city, entity) in lowercase if text asserts a valid capital relation, else None.
     Handles variations like:
-    - 'X is the capital of Y'
-    - 'X, also known as ..., is the capital and largest city of the state of Y'
-    - 'The capital of Y is X'
-    - 'Y's capital is X'
-    - 'Mumbai is the capital of Maharashtra and the most populous...'
+    - 'The capital of Germany is Berlin.'
+    - 'The capital of Germany is the city of Berlin.'
+    - 'Berlin is the capital of Germany.'
+    - 'Bengaluru, the capital of Karnataka, ...'
+    - 'The capital city of Australia is Canberra.'
+    - 'Germany’s capital is Berlin.'
+    - 'The economy of Bengaluru, the state capital of Karnataka, is ...'
+
+    Employs clause-level negation handling to preserve affirmative assertions in compound sentences:
+    - 'Berlin is not the capital of France.' -> None
+    - 'Berlin is the capital of Germany.' -> ('berlin', 'germany')
+    - 'Berlin is the capital of Germany, but Paris is not.' -> ('berlin', 'germany')
+    - 'Paris is not the capital of Germany. Berlin is.' -> ('berlin', 'germany')
+    - 'The capital of Germany is Berlin, not Munich.' -> ('berlin', 'germany')
+
+    Strictly rejects generic placeholders and interrogatives.
     """
     if not text:
         return None
 
-    # Process sentence by sentence to isolate relational clauses
-    sentences = re.split(r'[.!?\n]+', text)
+    # Process sentence by sentence, tracking negative context for elliptical assertions
+    sentences = [s.strip() for s in re.split(r'[.!?\n]+', text) if s.strip()]
+    negative_context_entity: Optional[str] = None
+
     for sent in sentences:
-        sent = sent.strip()
-        if not sent or "capital" not in sent.lower():
-            continue
+        # Check if sentence is an elliptical affirmative referring to previous negative claim
+        # E.g. 'Paris is not the capital of Germany. Berlin is.'
+        if negative_context_entity:
+            m_ellip = re.match(r'^([A-Za-z\s’\'-]{2,35}?)\s+(?:is|was)\.?$', sent, re.IGNORECASE)
+            if m_ellip:
+                cand_city = _clean_entity_mention(m_ellip.group(1))
+                if is_valid_geopolitical_entity(cand_city):
+                    return cand_city.lower(), negative_context_entity.lower()
 
-        # Negative assertions (e.g. 'Paris is not the capital of Germany') are not affirmative relations
-        if re.search(r"\b(?:not|never|no|isn't|wasn't|isnt|wasnt)\b", sent, re.IGNORECASE):
-            continue
-
-        # Pattern 1: X is/was (the) (official/state/...) capital (city) (and ...) of (the ...) Y
-        m1 = re.search(
-            r'\b([A-Za-z\s’\'-]{2,30}?)(?:,\s*(?:also known as|officially)[^,]+?,?)?\s+(?:is|was)\s+(?:the\s+)?(?:[a-z]+\s+)?capital\s+(?:city\s+)?(?:and\s+[a-z\s]+?\s+)?of\s+(?:the\s+)?(?:[a-z\s]+?\s+state of\s+)?([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
+        # Check for explicit negative capital assertion to populate context for follow-up
+        m_neg_search = re.search(
+            r'\b([A-Za-z\s’\'-]{2,35}?)\s+(?:is|was)\s+not\s+(?:the\s+)?(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]{2,35}?)(?:\.|\s*[,;]|\s+and\b|\s+with\b|\s+in\b|\s+as\b|\Z)',
             sent,
             re.IGNORECASE,
         )
-        if m1:
-            city = m1.group(1).strip().rstrip(",.")
-            entity = m1.group(2).strip().rstrip(",.")
-            city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
-            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-            if len(city.split()) <= 4 and len(entity.split()) <= 4:
-                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+        if m_neg_search:
+            neg_ent = _clean_entity_mention(m_neg_search.group(2))
+            if is_valid_geopolitical_entity(neg_ent):
+                negative_context_entity = neg_ent
+
+        # Segment sentence into clauses on contrastive conjunctions, semicolons, and commas before contrast tags
+        # E.g. 'Berlin is the capital of Germany, but Paris is not.' -> ['Berlin is the capital of Germany', 'Paris is not']
+        # E.g. 'The capital of Germany is Berlin, not Munich.' -> ['The capital of Germany is Berlin', 'not Munich']
+        clauses = re.split(
+            r'\s*[,;]\s*(?:but|however|although|though|whereas|while|yet|not\b)\s*|\s+(?:but|whereas|while)\s+',
+            sent,
+            flags=re.IGNORECASE,
+        )
+
+        for clause in clauses:
+            clause = clause.strip()
+            if not clause or "capital" not in clause.lower():
+                continue
+
+            # Check if this specific clause has internal negation on the capital relation
+            # E.g. 'Berlin is not the capital of France', 'is not capital', 'not the capital'
+            if re.search(r'\b(?:is|was|are|were)\s+not\b|\bnot\s+(?:the\s+)?capital\b|\bnever\s+the\s+capital\b', clause, re.IGNORECASE):
+                continue
+
+            # Pattern 2: (The) (modifier) capital (city) of Y is/was (the) (city of) X
+            # E.g. 'The capital of Germany is Berlin', 'The capital city of Australia is Canberra',
+            #      'The capital of Germany is the city of Berlin.'
+            m2 = re.search(
+                r'\b(?:the\s+)?(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?of\s+(?:the\s+)?(?:(?:[a-z]{3,15}\s+){0,2}(?:state|country|nation|province|territory)\s+of\s+)?([A-Za-z\s’\'-]{2,35}?)\s+(?:is|was)\s+(?:the\s+)?(?:city\s+of\s+)?([A-Za-z\s’\'-]{2,35}?)(?:\.|\s*[,;]|\s+and\b|\s+with\b|\s+in\b|\s+as\b|\Z)',
+                clause,
+                re.IGNORECASE,
+            )
+            if m2:
+                entity = _clean_entity_mention(m2.group(1))
+                city = _clean_entity_mention(m2.group(2))
+                city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
+                city = _clean_entity_mention(city)
+                if is_valid_geopolitical_entity(city) and is_valid_geopolitical_entity(entity):
                     return city.lower(), entity.lower()
 
-        # Pattern 2: (the) capital of Y is/was X
-        m2 = re.search(
-            r'\b(?:the\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]{2,30}?)\s+(?:is|was)\s+([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
-            sent,
-            re.IGNORECASE,
-        )
-        if m2:
-            entity = m2.group(1).strip().rstrip(",.")
-            city = m2.group(2).strip().rstrip(",.")
-            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-            if len(city.split()) <= 4 and len(entity.split()) <= 4:
-                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+            # Pattern 3: Y's (modifier) capital (city) is/was (the) (city of) X
+            # E.g. "Germany's capital is Berlin", "Karnataka's state capital is Bengaluru"
+            m3 = re.search(
+                r'\b([A-Za-z\s’\'-]{2,35}?)(?:\'s|’s)\s+(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?(?:is|was)\s+(?:the\s+)?(?:city\s+of\s+)?([A-Za-z\s’\'-]{2,35}?)(?:\.|\s*[,;]|\s+and\b|\s+with\b|\s+in\b|\s+as\b|\Z)',
+                clause,
+                re.IGNORECASE,
+            )
+            if m3:
+                entity = _clean_entity_mention(m3.group(1))
+                city = _clean_entity_mention(m3.group(2))
+                city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
+                city = _clean_entity_mention(city)
+                if is_valid_geopolitical_entity(city) and is_valid_geopolitical_entity(entity):
                     return city.lower(), entity.lower()
 
-        # Pattern 3: Y's capital is X
-        m3 = re.search(
-            r'\b([A-Za-z\s’\'-]{2,30}?)(?:\'s|’s)\s+capital\s+(?:city\s+)?(?:is|was)\s+([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
-            sent,
-            re.IGNORECASE,
-        )
-        if m3:
-            entity = m3.group(1).strip().rstrip(",.")
-            city = m3.group(2).strip().rstrip(",.")
-            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-            if len(city.split()) <= 4 and len(entity.split()) <= 4:
-                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+            # Pattern 1: X is/was (the) (official/state/...) capital (city) of Y
+            # E.g. 'Berlin is the capital of Germany.', 'Bengaluru is the official state capital of Karnataka.'
+            # Also supports parenthetical annotations like 'Canberra (KAN-brə) is the capital city of Australia'
+            m1 = re.search(
+                r'\b([A-Za-z\s’\'-]{2,35}?)(?:\s*\([^)]*\))?(?:,\s*(?:also known as|officially|formerly)[^,]+?,?)?\s+(?:is|was)\s+(?:the\s+)?(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?(?:and\s+[a-z\s]{1,20}?\s+city\s+)?of\s+(?:the\s+)?(?:(?:[a-z]{3,15}\s+){0,2}(?:state|country|nation|province|territory)\s+of\s+)?([A-Za-z\s’\'-]{2,35}?)(?:\.|\s*[,;]|\s+and\b|\s+with\b|\s+in\b|\s+as\b|\Z)',
+                clause,
+                re.IGNORECASE,
+            )
+            if m1:
+                city = _clean_entity_mention(m1.group(1))
+                entity = _clean_entity_mention(m1.group(2))
+                city = re.split(r'\b(?:officially|formerly|known as)\b', city, flags=re.IGNORECASE)[0].strip()
+                city = _clean_entity_mention(city)
+                if is_valid_geopolitical_entity(city) and is_valid_geopolitical_entity(entity):
                     return city.lower(), entity.lower()
 
-        # Pattern 4: in/of Y, the capital X (strictly within single comma-separated clause)
-        m4 = re.search(
-            r'\b(?:of|in)\s+([A-Za-z\s’\'-]{2,30}?),\s*(?:the\s+)?capital\s+(?:city\s+)?([A-Za-z\s’\'-]{2,30}?)(?:\s+(?:and|with|in|the|as|,|\b)|\Z)',
-            sent,
-            re.IGNORECASE,
-        )
-        if m4:
-            entity = m4.group(1).strip().rstrip(",.")
-            city = m4.group(2).strip().rstrip(",.")
-            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-            city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
-            if len(city.split()) <= 4 and len(entity.split()) <= 4:
-                if entity.lower() not in {"the", "a", "an", "this", "that", "terms", "terms of", "it"} and len(entity) >= 3 and len(city) >= 3:
+            # Pattern 5: X, (the) (state/national) capital of Y (city apposition first)
+            # E.g. 'Bengaluru, the capital of Karnataka, is...', 'The economy of Bengaluru, the state capital of Karnataka, ...'
+            m5 = re.search(
+                r'\b([A-Za-z\s’\'-]{2,35}?)\s*,\s+(?:the\s+)?(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?of\s+(?:the\s+)?(?:(?:[a-z]{3,15}\s+){0,2}(?:state|country|nation|province|territory)\s+of\s+)?([A-Za-z\s’\'-]{2,35}?)(?:\.|\s*[,;]|\s+and\b|\s+with\b|\s+in\b|\s+as\b|\Z)',
+                clause,
+                re.IGNORECASE,
+            )
+            if m5:
+                city = m5.group(1).strip().rstrip(",.")
+                entity = _clean_entity_mention(m5.group(2))
+                city = re.split(r'\b(?:officially|formerly|known as|of)\b', city, flags=re.IGNORECASE)[-1].strip()
+                city = _clean_entity_mention(city)
+                if is_valid_geopolitical_entity(city) and is_valid_geopolitical_entity(entity):
                     return city.lower(), entity.lower()
 
-        # Pattern 5: (the) capital of Y, X, is/was ... (apposition: capital first)
-        m5 = re.search(
-            r'\b(?:the\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]{2,30}?),\s*([A-Za-z\s’\'-]{2,30}?),\s*(?:is|was|\b)',
-            sent,
-            re.IGNORECASE,
-        )
-        if m5:
-            entity = m5.group(1).strip().rstrip(",.")
-            city = m5.group(2).strip().rstrip(",.")
-            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-            city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
-            if len(city.split()) <= 4 and len(entity.split()) <= 4:
-                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+            # Pattern 4: (The) capital of Y, X, is/was ... (capital apposition first)
+            # E.g. 'The capital of Karnataka, Bengaluru, is known as...'
+            # Strictly rejects generic 'state' because 'state' fails is_valid_geopolitical_entity.
+            m4 = re.search(
+                r'\b(?:the\s+)?(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?of\s+(?:the\s+)?([A-Za-z\s’\'-]{2,35}?)\s*,\s*([A-Za-z\s’\'-]{2,35}?)\s*,\s*(?:is|was|\b)',
+                clause,
+                re.IGNORECASE,
+            )
+            if m4:
+                entity = _clean_entity_mention(m4.group(1))
+                city = _clean_entity_mention(m4.group(2))
+                city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
+                city = _clean_entity_mention(city)
+                if is_valid_geopolitical_entity(city) and is_valid_geopolitical_entity(entity):
                     return city.lower(), entity.lower()
 
-        # Pattern 6: X, (the) (state/national) capital of Y (city apposition: "Bengaluru, the state capital of Karnataka")
-        m6 = re.search(
-            r'\b([A-Za-z\s’\'-]{2,30}?)\s*,\s+(?:the\s+)?(?:state\s+|national\s+|federal\s+|provincial\s+)?capital\s+(?:city\s+)?of\s+(?:the\s+)?(?:[a-z\s]+?\s+state\s+of\s+)?([A-Za-z\s’\'-]{2,30}?)(?:\s*[,.]|\s+(?:and|with|in|the|as)|\Z)',
-            sent,
-            re.IGNORECASE,
-        )
-        if m6:
-            city = m6.group(1).strip().rstrip(",.")
-            entity = m6.group(2).strip().rstrip(",.")
-            city = re.split(r'\b(?:officially|formerly|known as|of)\b', city, flags=re.IGNORECASE)[-1].strip()
-            entity = re.sub(r'^(?:the|a|an)\s+', '', entity, flags=re.IGNORECASE).strip()
-            STOP_CITIES = {"state", "the state", "country", "the country", "nation", "the nation", "city", "the city", "province", "the province"}
-            if len(city.split()) <= 4 and len(entity.split()) <= 4 and city.lower() not in STOP_CITIES:
-                if entity.lower() not in {"the", "a", "an", "this", "that"} and len(entity) >= 3 and len(city) >= 3:
+            # Pattern 6: in/of Y, the capital X
+            # E.g. 'In Germany, the capital Berlin has...'
+            m6 = re.search(
+                r'\b(?:of|in)\s+([A-Za-z\s’\'-]{2,35}?)\s*,\s*(?:the\s+)?(?:(?:official|state|national|federal|provincial|administrative)\s+)*capital\s+(?:city\s+)?([A-Za-z\s’\'-]{2,35}?)(?:\.|\s*[,;]|\s+and\b|\s+with\b|\s+in\b|\s+as\b|\Z)',
+                clause,
+                re.IGNORECASE,
+            )
+            if m6:
+                entity = _clean_entity_mention(m6.group(1))
+                city = _clean_entity_mention(m6.group(2))
+                city = re.split(r'\b(?:officially|formerly|known as|and|in|on|at|while|after|before)\b', city, flags=re.IGNORECASE)[0].strip()
+                city = _clean_entity_mention(city)
+                if is_valid_geopolitical_entity(city) and is_valid_geopolitical_entity(entity):
                     return city.lower(), entity.lower()
 
     return None
 
 
 STOP_FORMULA_WORDS = {"is", "are", "was", "were", "can", "could", "of", "for", "a", "an", "the", "any", "which", "to", "in", "by", "that", "be", "as", "such", "several", "its", "each"}
+
+ELEMENT_MAP = {
+    "water": {"hydrogen", "oxygen"},
+    "h2o": {"hydrogen", "oxygen"},
+    "carbon dioxide": {"carbon", "oxygen"},
+    "co2": {"carbon", "oxygen"},
+    "carbon monoxide": {"carbon", "oxygen"},
+    "methane": {"carbon", "hydrogen"},
+    "ch4": {"carbon", "hydrogen"},
+    "ammonia": {"nitrogen", "hydrogen"},
+    "nh3": {"nitrogen", "hydrogen"},
+    "table salt": {"sodium", "chlorine"},
+    "sodium chloride": {"sodium", "chlorine"},
+    "nacl": {"sodium", "chlorine"},
+    "ozone": {"oxygen"},
+    "o3": {"oxygen"},
+    "hydrogen peroxide": {"hydrogen", "oxygen"},
+    "h2o2": {"hydrogen", "oxygen"},
+}
+
+
+def extract_chemical_composition(text: str) -> Optional[Tuple[str, Set[str]]]:
+    """Extract (substance, elements) from chemical composition assertions."""
+    m = re.search(
+        r"\b([a-zA-Z\s]{3,20}?)\s+(?:is\s+)?(?:composed\s+of|consists?\s+of|made\s+up\s+of)\s+([a-zA-Z\s,and]+?)(?:\.|\s*[,;]|\Z)",
+        text,
+        re.IGNORECASE,
+    )
+    if m:
+        subj = m.group(1).strip().lower()
+        raw_elems = m.group(2).lower()
+        elems = set(re.findall(r"\b[a-z]{3,15}\b", raw_elems)) - {"and", "of", "the", "both", "all", "mainly", "primarily"}
+        if subj in ELEMENT_MAP and elems:
+            return subj, elems
+    return None
 
 
 def extract_chemical_formula(text: str) -> Optional[Tuple[str, str]]:
@@ -149,6 +274,12 @@ def extract_chemical_formula(text: str) -> Optional[Tuple[str, str]]:
         subj = m.group(1).lower()
         form = m.group(2)
         if form.lower() not in STOP_FORMULA_WORDS and len(form) >= 2:
+            return subj, form.upper()
+    m2 = re.search(r'\b([A-Za-z]{3,})\s*\(([A-Za-z0-9]{2,10})\)', text)
+    if m2:
+        subj = m2.group(1).lower()
+        form = m2.group(2)
+        if form.lower() not in STOP_FORMULA_WORDS:
             return subj, form.upper()
     return None
 
@@ -454,6 +585,18 @@ class Pillar1RetrievalEngine:
                     return 0.0, 0.98, 0.02, "deterministic_chemical_formula_rule"
                 else:
                     return 0.98, 0.0, 0.02, "deterministic_chemical_formula_rule"
+
+        # Check for chemical composition match (e.g. Water is composed of hydrogen and oxygen)
+        claim_comp = extract_chemical_composition(claim)
+        if claim_comp:
+            c_subj, c_elems = claim_comp
+            expected_elems = ELEMENT_MAP.get(c_subj, set())
+            snip_lower = item.snippet.lower()
+            if c_subj in snip_lower or (c_subj == "water" and "h2o" in snip_lower):
+                if c_elems == expected_elems or c_elems.issubset(expected_elems):
+                    return 0.98, 0.0, 0.02, "deterministic_chemical_composition_rule"
+                else:
+                    return 0.0, 0.98, 0.02, "deterministic_chemical_composition_rule"
 
         # Check for capital city contradiction or entailment using robust structural extractor
         claim_cap = extract_capital_relation(claim)

@@ -416,7 +416,12 @@ export default function VerifyPage() {
                           : "unavailable"
                         : (currentResult.pillar_scores.consistency != null ? "active" : "unavailable")
                     }
-                    reason="Multiple generations not available"
+                    reason="Multiple independent generations not available. Consistency analysis excluded from fusion."
+                    pillar3Details={currentResult.pillar3_details || (currentResult.pillar_status?.p3_generation_count ? {
+                      generation_count: currentResult.pillar_status.p3_generation_count,
+                      semantic_agreement: currentResult.pillar_status.p3_semantic_agreement,
+                      contradiction_count: currentResult.pillar_status.p3_contradiction_count,
+                    } : null)}
                   />
                 </div>
 
@@ -430,17 +435,48 @@ export default function VerifyPage() {
 
                 {/* Fusion Decomposition */}
                 {currentResult.fusion_decomposition && (
-                  <div className="mt-3 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)]">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Info className="w-3.5 h-3.5 text-[var(--text-dim)]" />
-                      <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                        Adaptive Hybrid Fusion Decomposition
-                      </span>
+                  <div className="mt-3 p-3 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--border)] space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Info className="w-3.5 h-3.5 text-[var(--text-dim)]" />
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                          Adaptive Hybrid Fusion Decomposition
+                        </span>
+                      </div>
                       <Badge variant="ai" size="sm">{currentResult.fusion_decomposition.fusion_mode}</Badge>
                     </div>
                     <p className="text-[12px] text-[var(--text-muted)] font-mono leading-relaxed break-all">
                       {currentResult.fusion_decomposition.equation}
                     </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 border-t border-white/5 text-[10px] font-mono">
+                      <div>
+                        <span className="text-[var(--text-dim)] block">Base Weights:</span>
+                        <span className="text-slate-300">α=0.45, β=0.30, γ=0.25</span>
+                      </div>
+                      <div>
+                        <span className="text-[var(--text-dim)] block">Effective Weights:</span>
+                        <span className="text-emerald-400">
+                          α*={currentResult.fusion_decomposition.effective_weights?.alpha?.toFixed(2) ?? "—"}, β*={currentResult.fusion_decomposition.effective_weights?.beta?.toFixed(2) ?? "—"}, γ*={currentResult.fusion_decomposition.effective_weights?.gamma?.toFixed(2) ?? "—"}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-[var(--text-dim)] block">Contributions:</span>
+                        <span className="text-sky-400">
+                          P1: {currentResult.fusion_decomposition.weighted_contributions?.p1_contribution?.toFixed(3) ?? "—"}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-[var(--text-dim)] block">Calibrated H:</span>
+                        <span className="text-white font-bold">
+                          {(currentResult.fusion_decomposition.calibrated_h_score * 100).toFixed(1)}%
+                        </span>
+                      </div>
+                    </div>
+                    {currentResult.fusion_decomposition.explanation && (
+                      <p className="text-[10px] text-slate-400 italic pt-1 border-t border-white/5">
+                        {currentResult.fusion_decomposition.explanation}
+                      </p>
+                    )}
                   </div>
                 )}
               </CardContent>
@@ -550,6 +586,7 @@ function PillarScoreCard({
   isProxy,
   reason,
   confidenceDetails,
+  pillar3Details,
 }: {
   pillarNumber?: 1 | 2 | 3;
   label: string;
@@ -560,6 +597,7 @@ function PillarScoreCard({
   isProxy?: boolean;
   reason?: string;
   confidenceDetails?: any;
+  pillar3Details?: any;
 }) {
   const isAvailable = status === "active" && value !== null && value !== undefined;
   const scorePercent = isAvailable ? Math.round(value * 100) : null;
@@ -651,7 +689,7 @@ function PillarScoreCard({
                   <span className="text-white font-semibold">{confidenceDetails.token_count ?? "—"}</span>
                 </div>
                 <div className="flex items-center justify-between text-[var(--text-dim)]">
-                  <span>Avg Token Prob p̄:</span>
+                  <span>Avg Prob p̄:</span>
                   <span className="text-emerald-400 font-semibold">
                     {confidenceDetails.avg_token_probability !== undefined && confidenceDetails.avg_token_probability !== null
                       ? (confidenceDetails.avg_token_probability * 100).toFixed(1) + "%"
@@ -659,10 +697,18 @@ function PillarScoreCard({
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-[var(--text-dim)]">
-                  <span>Bernoulli Entropy:</span>
-                  <span className="text-sky-400 font-semibold">
-                    {confidenceDetails.whitebox_entropy !== undefined && confidenceDetails.whitebox_entropy !== null
-                      ? confidenceDetails.whitebox_entropy.toFixed(3)
+                  <span>Mean NLL:</span>
+                  <span className="text-sky-300 font-semibold">
+                    {confidenceDetails.mean_negative_log_likelihood !== undefined && confidenceDetails.mean_negative_log_likelihood !== null
+                      ? confidenceDetails.mean_negative_log_likelihood.toFixed(3)
+                      : "—"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>LPF (τ=0.45):</span>
+                  <span className="text-amber-400 font-semibold">
+                    {confidenceDetails.low_probability_token_fraction !== undefined && confidenceDetails.low_probability_token_fraction !== null
+                      ? (confidenceDetails.low_probability_token_fraction * 100).toFixed(1) + "%"
                       : "—"}
                   </span>
                 </div>
@@ -672,6 +718,41 @@ function PillarScoreCard({
                     <span className="text-slate-300 font-sans truncate max-w-[130px]">
                       {confidenceDetails.provider ?? ""} {confidenceDetails.model ? `· ${confidenceDetails.model}` : ""}
                     </span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Multi-Generation Consistency Metadata Breakdown for Pillar 3 */}
+            {pillarNumber === 3 && pillar3Details && (
+              <div className="p-2 rounded bg-white/[0.02] border border-white/5 space-y-1 text-[10px] font-mono">
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>Generations:</span>
+                  <span className="text-white font-semibold">{pillar3Details.generation_count ?? "—"}</span>
+                </div>
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>Agreement:</span>
+                  <span className="text-emerald-400 font-semibold">
+                    {pillar3Details.semantic_agreement !== undefined && pillar3Details.semantic_agreement !== null
+                      ? (pillar3Details.semantic_agreement * 100).toFixed(1) + "%"
+                      : "—"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-[var(--text-dim)]">
+                  <span>Contradictions:</span>
+                  <span className={cn(
+                    "font-semibold",
+                    (pillar3Details.contradiction_count || 0) > 0 ? "text-red-400" : "text-slate-300"
+                  )}>
+                    {pillar3Details.contradiction_count ?? 0}
+                  </span>
+                </div>
+                {pillar3Details.conflicting_claims && pillar3Details.conflicting_claims.length > 0 && (
+                  <div className="pt-1 mt-1 border-t border-white/5 space-y-0.5">
+                    <span className="text-[9px] text-red-400 font-semibold block">Conflicting:</span>
+                    {pillar3Details.conflicting_claims.slice(0, 1).map((cc: string, i: number) => (
+                      <p key={i} className="text-[9px] text-slate-400 truncate" title={cc}>{cc}</p>
+                    ))}
                   </div>
                 )}
               </div>

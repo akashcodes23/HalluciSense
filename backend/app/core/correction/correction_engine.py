@@ -27,15 +27,25 @@ from app.core.verification.temporal_verifier import evaluate_temporal_claim
 
 
 class CorrectionState(str, Enum):
-    """Explicit state machine states for HalluciSense closed-loop correction."""
-    ORIGINAL_VERIFIED = "ORIGINAL_VERIFIED"
-    ORIGINAL_CONTRADICTED = "ORIGINAL_CONTRADICTED"
-    INSUFFICIENT_EVIDENCE = "INSUFFICIENT_EVIDENCE"
+    """Explicit state machine states for HalluciSense closed-loop correction:
+    DETECTED -> EXPLAINED -> CORRECTION_GENERATED -> REVERIFYING -> CORRECTION_ACCEPTED/REJECTED/ABSTAINED/NOT_REQUIRED/FAILED
+    """
+    DETECTED = "DETECTED"
+    EXPLAINED = "EXPLAINED"
     CORRECTION_GENERATED = "CORRECTION_GENERATED"
-    REVERIFICATION_PENDING = "REVERIFICATION_PENDING"
+    REVERIFYING = "REVERIFYING"
     CORRECTION_ACCEPTED = "CORRECTION_ACCEPTED"
     CORRECTION_REJECTED = "CORRECTION_REJECTED"
-    CORRECTION_FAILED = "CORRECTION_FAILED"
+    ABSTAINED = "ABSTAINED"
+    NOT_REQUIRED = "NOT_REQUIRED"
+    FAILED = "FAILED"
+
+    # Backward compatibility aliases
+    ORIGINAL_VERIFIED = "NOT_REQUIRED"
+    ORIGINAL_CONTRADICTED = "DETECTED"
+    INSUFFICIENT_EVIDENCE = "ABSTAINED"
+    REVERIFICATION_PENDING = "REVERIFYING"
+    CORRECTION_FAILED = "FAILED"
 
 
 class ReverificationInfo(BaseModel):
@@ -253,12 +263,23 @@ class HallucinationCorrectionEngine:
 
         valid_evidence_passages: List[str] = []
         for ev in evidence_list:
-            snippet = ev.get("snippet", "").strip() if isinstance(ev, dict) else getattr(ev, "snippet", "").strip()
-            raw_score = ev.get("score", 0.8) if isinstance(ev, dict) else getattr(ev, "score", 0.8)
-            try:
-                score = float(raw_score)
-            except (TypeError, ValueError):
+            if isinstance(ev, str):
+                snippet = ev.strip()
                 score = 0.8
+            elif isinstance(ev, dict):
+                snippet = ev.get("snippet", "").strip()
+                raw_score = ev.get("score", 0.8)
+                try:
+                    score = float(raw_score)
+                except (TypeError, ValueError):
+                    score = 0.8
+            else:
+                snippet = getattr(ev, "snippet", "").strip()
+                raw_score = getattr(ev, "score", 0.8)
+                try:
+                    score = float(raw_score)
+                except (TypeError, ValueError):
+                    score = 0.8
             if snippet and score >= 0.40:
                 snippet_lower = snippet.lower()
                 if any(kw in snippet_lower for kw in substantive_keywords):
@@ -268,14 +289,54 @@ class HallucinationCorrectionEngine:
         q_lower = query.lower() if query else ""
         resp_lower = original_response.lower()
         if "capital" in q_lower or "capital" in resp_lower:
-            from app.core.engine.pillar1_retrieval import extract_capital_relation
+            from app.core.engine.pillar1_retrieval import extract_capital_relation, is_valid_geopolitical_entity
+
+            # Extract the original claim's subject city and target entity
+            orig_cap_rel = extract_capital_relation(original_response)
+            if not orig_cap_rel and query:
+                orig_cap_rel = extract_capital_relation(query)
+
+            claimed_city = orig_cap_rel[0] if orig_cap_rel else None
+            target_entity_to_match = orig_cap_rel[1] if orig_cap_rel else None
+
+            # Fallback for questions without explicit relational syntax: extract target entity from keywords
+            if not target_entity_to_match:
+                for kw in substantive_keywords:
+                    if is_valid_geopolitical_entity(kw) and kw.lower() not in {"capital", "what", "which", "name", "tell", "state", "city", "country"}:
+                        target_entity_to_match = kw.lower()
+                        break
+
             for passage in valid_evidence_passages:
                 cap_rel = extract_capital_relation(passage)
                 if cap_rel:
                     correct_capital, target_entity = cap_rel
+
+                    # Strictly validate that the evidence identifies the same target entity as the original claim
+                    if target_entity_to_match and target_entity.lower() != target_entity_to_match.lower():
+                        continue
+
+                    # Reject generic or ambiguous entities
+                    if not is_valid_geopolitical_entity(target_entity) or not is_valid_geopolitical_entity(correct_capital):
+                        continue
+
+                    # Reject if the evidence asserts the exact same city that was claimed as false
+                    if claimed_city and correct_capital.lower() == claimed_city.lower():
+                        continue
+
                     correct_capital_str = correct_capital.title()
-                    target_entity_str = target_entity.title()
-                    corrected_text = f"{correct_capital_str} is the capital of {target_entity_str}."
+                    target_entity_str = (target_entity_to_match or target_entity).title()
+
+                    # Preserve unrelated factual assertions in multi-claim responses
+                    if claimed_city and re.search(rf"\b{re.escape(claimed_city)}\b", original_response, re.IGNORECASE):
+                        corrected_text = re.sub(
+                            rf"\b{re.escape(claimed_city)}\b",
+                            correct_capital_str,
+                            original_response,
+                            count=1,
+                            flags=re.IGNORECASE,
+                        )
+                    else:
+                        corrected_text = f"{correct_capital_str} is the capital of {target_entity_str}."
 
                     return {
                         "status": "candidate_generated",
@@ -363,6 +424,68 @@ class HallucinationCorrectionEngine:
             "confidence": 0.0,
         }
 
+    def generate_explanation(
+        self,
+        query: str,
+        original_response: str,
+        overall_h_score: float,
+        retrieved_evidence: Optional[List[Dict[str, Any]]] = None,
+        sentence_scores: Optional[List[Dict[str, Any]]] = None,
+        p1_score: Optional[float] = None,
+        p2_score: Optional[float] = None,
+        p3_score: Optional[float] = None,
+        p2_details: Optional[Dict[str, Any]] = None,
+        p3_details: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Generate structured 9-point explainable AI diagnosis for DETECT -> EXPLAIN stage."""
+        fe_val = p1_score if p1_score is not None else overall_h_score
+
+        if fe_val >= 0.50:
+            classification = "FACTUAL_CONTRADICTION"
+        elif not retrieved_evidence:
+            classification = "INSUFFICIENT_EVIDENCE"
+        elif overall_h_score <= 0.35:
+            classification = "VERIFIED"
+        else:
+            classification = "NEEDS_VERIFICATION"
+
+        supporting = []
+        contradicting = []
+        for ev in (retrieved_evidence or []):
+            snip = ev.get("snippet", "") if isinstance(ev, dict) else getattr(ev, "snippet", "")
+            sc = ev.get("score", 0.8) if isinstance(ev, dict) else getattr(ev, "score", 0.8)
+            c_p = ev.get("contradiction_prob", 0.0) if isinstance(ev, dict) else getattr(ev, "contradiction_prob", 0.0)
+            if c_p >= 0.40 or (fe_val >= 0.50 and sc >= 0.50):
+                contradicting.append(ev)
+            elif sc >= 0.40:
+                supporting.append(ev)
+
+        if classification == "FACTUAL_CONTRADICTION":
+            det_reason = f"Pillar 1 detected factual error or contradiction (FE={fe_val:.2f}) against reference corpus."
+        elif classification == "VERIFIED":
+            det_reason = f"Original response is factually supported by reference evidence (H={overall_h_score:.2f})."
+        elif classification == "INSUFFICIENT_EVIDENCE":
+            det_reason = "Reference evidence was insufficient to verify or refute this statement."
+        else:
+            det_reason = f"Response exhibits elevated uncertainty or partial evidence conflict (H={overall_h_score:.2f})."
+
+        return {
+            "original_claim": original_response,
+            "claim_classification": classification,
+            "supporting_evidence": supporting[:3],
+            "contradicting_evidence": contradicting[:3],
+            "p1_score": round(fe_val, 4),
+            "p2_score_and_provenance": p2_details or {"confidence_gap": p2_score, "status": "UNAVAILABLE" if p2_score is None else "EXECUTED"},
+            "p3_score_and_generation_comparisons": p3_details or {"consistency_failure": p3_score, "status": "UNAVAILABLE" if p3_score is None else "EXECUTED"},
+            "detection_reason": det_reason,
+            "confidence_and_limitations": (
+                "Pillar 1 assesses factual entailment against retrieved reference documents. "
+                "Pillar 2 reflects token-level generation predictability, not objective factual truth. "
+                "Pillar 3 assesses sampling consistency across independent generations. "
+                "Abstention safeguards are active when reference passages are inconclusive."
+            ),
+        }
+
     async def correct_and_reverify(
         self,
         query: str,
@@ -373,9 +496,30 @@ class HallucinationCorrectionEngine:
         sentence_scores: Optional[List[Dict[str, Any]]] = None,
         overall_h_score: float = 0.0,
         model_name: str = "default",
+        p1_score: Optional[float] = None,
+        p2_score: Optional[float] = None,
+        p3_score: Optional[float] = None,
+        p2_details: Optional[Dict[str, Any]] = None,
+        p3_details: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
-        """Generate candidate and run independent re-verification with explicit state machine transitions."""
+        """Generate candidate and run independent re-verification with explicit state machine transitions:
+        DETECTED -> EXPLAINED -> CORRECTION_GENERATED -> REVERIFYING -> CORRECTION_ACCEPTED / REJECTED / ABSTAINED
+        """
         corr_id = f"CORR_{uuid.uuid4().hex[:12].upper()}"
+
+        # Stage 2: EXPLAIN
+        explanation = self.generate_explanation(
+            query=query,
+            original_response=original_response,
+            overall_h_score=overall_h_score,
+            retrieved_evidence=retrieved_evidence,
+            sentence_scores=sentence_scores,
+            p1_score=p1_score,
+            p2_score=p2_score,
+            p3_score=p3_score,
+            p2_details=p2_details,
+            p3_details=p3_details,
+        )
 
         candidate = self.generate_candidate(
             query=query,
@@ -394,7 +538,7 @@ class HallucinationCorrectionEngine:
                 "original_trace_id": original_trace_id,
                 "reverification_trace_id": None,
                 "status": "not_needed",
-                "state": CorrectionState.ORIGINAL_VERIFIED.value,
+                "state": CorrectionState.NOT_REQUIRED.value,
                 "method": "none",
                 "original_text": original_response,
                 "corrected_text": original_response,
@@ -402,6 +546,7 @@ class HallucinationCorrectionEngine:
                 "missing_evidence_explanation": None,
                 "supporting_evidence": candidate.get("supporting_evidence", []),
                 "confidence": 1.0,
+                "explanation": explanation,
                 "reverification": None,
             }
 
@@ -412,7 +557,7 @@ class HallucinationCorrectionEngine:
                 "original_trace_id": original_trace_id,
                 "reverification_trace_id": None,
                 "status": "abstained",
-                "state": CorrectionState.INSUFFICIENT_EVIDENCE.value,
+                "state": CorrectionState.ABSTAINED.value,
                 "method": "abstained",
                 "original_text": original_response,
                 "corrected_text": None,
@@ -420,12 +565,13 @@ class HallucinationCorrectionEngine:
                 "missing_evidence_explanation": candidate.get("missing_evidence_explanation"),
                 "supporting_evidence": candidate.get("supporting_evidence", []),
                 "confidence": 0.0,
+                "explanation": explanation,
                 "reverification": None,
             }
 
         corrected_text = candidate.get("corrected_text")
 
-        # 3. Candidate generated -> Transition to REVERIFICATION_PENDING
+        # 3. Candidate generated -> Transition to REVERIFYING
         try:
             reverify_analysis = await analyze_func(
                 query=query,
@@ -462,6 +608,7 @@ class HallucinationCorrectionEngine:
                 "reason": "Correction successfully verified." if is_verified else "Failed independent re-verification; original text preserved.",
                 "supporting_evidence": candidate.get("supporting_evidence", []),
                 "confidence": candidate.get("confidence", 0.90) if is_verified else 0.0,
+                "explanation": explanation,
                 "reverification": {
                     "trace_id": rev_trace_id,
                     "status": "VERIFIED" if is_verified else "REJECTED",
@@ -482,13 +629,14 @@ class HallucinationCorrectionEngine:
                 "original_trace_id": original_trace_id,
                 "reverification_trace_id": None,
                 "status": "failed",
-                "state": CorrectionState.CORRECTION_FAILED.value,
+                "state": CorrectionState.FAILED.value,
                 "method": candidate.get("method"),
                 "original_text": original_response,
                 "corrected_text": original_response,
                 "reason": f"Re-verification execution failed: {str(e)}. Original response preserved.",
                 "supporting_evidence": candidate.get("supporting_evidence", []),
                 "confidence": 0.0,
+                "explanation": explanation,
                 "reverification": None,
             }
 
@@ -501,12 +649,18 @@ class HallucinationCorrectionEngine:
     ) -> ClosedLoopRepairResult:
         """Synchronous chat-compatible closed-loop repair interface."""
         evidence_items = []
-        if hasattr(initial_verification, "evidence") and isinstance(getattr(initial_verification, "evidence"), list):
-            evidence_items = initial_verification.evidence
-        elif hasattr(initial_verification, "evidence_items") and isinstance(getattr(initial_verification, "evidence_items"), list):
-            evidence_items = initial_verification.evidence_items
-        elif hasattr(initial_verification, "pillar1_summary") and hasattr(getattr(initial_verification, "pillar1_summary"), "evidence"):
-            evidence_items = initial_verification.pillar1_summary.evidence
+        if isinstance(initial_verification, dict):
+            evidence_items = initial_verification.get("evidence") or initial_verification.get("evidence_items") or []
+            h_score = float(initial_verification.get("overall_h_score") or initial_verification.get("factual_error_score") or initial_verification.get("hallucination_score") or 0.0)
+        else:
+            if hasattr(initial_verification, "evidence") and isinstance(getattr(initial_verification, "evidence"), list):
+                evidence_items = initial_verification.evidence
+            elif hasattr(initial_verification, "evidence_items") and isinstance(getattr(initial_verification, "evidence_items"), list):
+                evidence_items = initial_verification.evidence_items
+            elif hasattr(initial_verification, "pillar1_summary") and hasattr(getattr(initial_verification, "pillar1_summary"), "evidence"):
+                evidence_items = initial_verification.pillar1_summary.evidence
+
+            h_score = float(getattr(initial_verification, "overall_h_score", getattr(initial_verification, "factual_error_score", getattr(initial_verification, "hallucination_score", 0.0))))
 
         evidence_dicts = []
         for e in evidence_items:
@@ -517,8 +671,6 @@ class HallucinationCorrectionEngine:
             except (TypeError, ValueError):
                 score = 0.8
             evidence_dicts.append({"snippet": str(snippet), "score": score})
-
-        h_score = float(getattr(initial_verification, "overall_h_score", getattr(initial_verification, "hallucination_score", 0.0)))
 
         # Rule: If original is verified, do not correct
         if h_score <= 0.35:

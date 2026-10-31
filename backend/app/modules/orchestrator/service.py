@@ -179,10 +179,46 @@ class LLMOrchestrator:
             f"Primary provider failed: {first_exception}"
         )
 
+    async def generate_with_logits(
+        self,
+        messages: List[dict],
+        temperature: float = 0.7,
+        system_prompt: Optional[str] = None,
+    ) -> tuple[str, list]:
+        candidates = [self.primary_model] + (self.fallback_models if settings.ENABLE_FALLBACK_MODELS else [])
+        first_exception = None
+        for model in candidates:
+            try:
+                provider = self._provider(model)
+                if hasattr(provider, "generate_response_with_logits"):
+                    return await provider.generate_response_with_logits(
+                        messages,
+                        temperature=temperature,
+                        system_prompt=system_prompt,
+                    )
+                else:
+                    text = await provider.generate_response(
+                        messages,
+                        temperature=temperature,
+                        system_prompt=system_prompt,
+                    )
+                    return text, []
+            except Exception as exc:
+                if first_exception is None:
+                    first_exception = exc
+                logger.exception("generate_with_logits_failed", provider=model)
+                err_str = str(exc)
+                if "429" in err_str or "Quota exceeded" in err_str or "ResourceExhausted" in err_str:
+                    logger.warning("orchestrator_halting_fallback_on_quota_error", model=model, error=err_str)
+                    raise exc
+                if not self.enable_fallback or not settings.ENABLE_FALLBACK_MODELS:
+                    raise
+        raise ProviderExhaustedError(f"Primary provider failed: {first_exception}")
+
     async def generate_samples(
         self,
         messages: List[dict],
-        count: int = 3,
+        count: int = 5,
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
         max_concurrency: int = 5,

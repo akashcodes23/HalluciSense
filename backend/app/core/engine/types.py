@@ -65,9 +65,12 @@ if USE_PYDANTIC:
         avg_probability: Optional[float] = Field(None, ge=0.0, le=1.0)
         avg_entropy: Optional[float] = Field(None, ge=0.0)
         confidence_gap_score: Optional[float] = Field(None, ge=0.0, le=1.0)
+        nll: Optional[float] = Field(None, description="Mean Negative Log-Likelihood: -(1/N)*sum(log(p_i))")
+        lpf: Optional[float] = Field(None, description="Low-Probability Token Fraction: count(p_i < tau)/N")
+        threshold: float = Field(default=0.45, description="Low probability threshold tau = 0.45")
         available: bool = Field(default=False)
         status: str = Field(default="UNAVAILABLE")
-        mode: Optional[str] = Field(default="STATIC_VERIFICATION_CONFIDENCE")
+        mode: Optional[str] = Field(default="UNAVAILABLE")
         # is_proxy=True means this score was derived from evidence similarity,
         # NOT from genuine token log-probabilities. Fusion must apply reduced reliability.
         is_proxy: bool = Field(
@@ -75,6 +78,7 @@ if USE_PYDANTIC:
             description="True when mode is STATIC_VERIFICATION_CONFIDENCE (evidence-similarity proxy); "
                         "False only when genuine token log-probabilities were provided.",
         )
+        is_genuine_logprobs: bool = Field(default=False, description="True only when genuine token logprobs were supplied by LLM provider")
         reasoning: str = Field(...)
         # White-Box Metrics (only populated when logprobs are supplied)
         token_count: Optional[int] = Field(default=None)
@@ -107,6 +111,11 @@ if USE_PYDANTIC:
         sample_responses: List[str] = Field(default_factory=list)
         pairwise_similarities: List[float] = Field(default_factory=list)
         consistency_failure_score: Optional[float] = Field(None, ge=0.0, le=1.0)
+        semantic_agreement: Optional[float] = Field(None, ge=0.0, le=1.0, description="Mean semantic agreement across independent samples")
+        contradiction_count: int = Field(default=0, description="Count of detected contradictions across independent samples")
+        conflicting_claims: List[str] = Field(default_factory=list, description="Contradictory or conflicting claims identified in alternate samples")
+        generation_comparisons: List[Dict[str, Any]] = Field(default_factory=list, description="Detailed per-sample comparison metadata")
+        generation_count: int = Field(default=0, description="Number of evaluated independent generations")
         similarity_method: str = Field(default="unavailable")
         mode: Optional[str] = Field(default="INTRA_RESPONSE_CONSISTENCY")
         nli_analyses: List[NLIAnalysis] = Field(default_factory=list)

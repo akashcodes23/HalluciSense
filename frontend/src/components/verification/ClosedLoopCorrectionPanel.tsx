@@ -222,6 +222,9 @@ export function ClosedLoopCorrectionPanel({
                               <CheckCircle2 className="w-3.5 h-3.5" />
                               ✓ CORRECTION VERIFIED
                             </span>
+                            <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-mono font-bold">
+                              STATE: {correctionData.correction.state || "CORRECTION_ACCEPTED"}
+                            </span>
                             <span className="text-xs text-slate-400 font-mono">
                               Method: {correctionData.correction.method.replace(/_/g, " ")}
                             </span>
@@ -307,11 +310,16 @@ export function ClosedLoopCorrectionPanel({
                   {/* Case B: Safely Abstained */}
                   {correctionData.correction.status === "abstained" && (
                     <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-3">
-                      <div className="flex items-center gap-2">
-                        <AlertTriangle className="w-5 h-5 text-amber-400" />
-                        <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-mono">
-                          Correction Safely Abstained
-                        </h4>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <AlertTriangle className="w-5 h-5 text-amber-400" />
+                          <h4 className="text-sm font-bold text-amber-300 uppercase tracking-wider font-mono">
+                            Correction Safely Abstained
+                          </h4>
+                        </div>
+                        <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-mono font-bold">
+                          STATE: {correctionData.correction.state || "ABSTAINED"}
+                        </span>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed">
                         {correctionData.correction.reason}
@@ -328,17 +336,62 @@ export function ClosedLoopCorrectionPanel({
                   {/* Case C: Rejected by Re-verification Gate */}
                   {correctionData.correction.status === "rejected" && (
                     <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 space-y-3">
-                      <div className="flex items-center gap-2">
-                        <XCircle className="w-5 h-5 text-red-400" />
-                        <h4 className="text-sm font-bold text-red-300 uppercase tracking-wider font-mono">
-                          Correction Candidate Rejected
-                        </h4>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <XCircle className="w-5 h-5 text-red-400" />
+                          <h4 className="text-sm font-bold text-red-300 uppercase tracking-wider font-mono">
+                            Correction Candidate Rejected
+                          </h4>
+                        </div>
+                        <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40 text-[10px] font-mono font-bold">
+                          STATE: {correctionData.correction.state || "CORRECTION_REJECTED"}
+                        </span>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed">
                         {correctionData.correction.reason}
                       </p>
                       <p className="text-[11px] text-slate-500">
                         The original response remains flagged as unverified. HalluciSense never accepts unverified candidates.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Case D: Execution Failed */}
+                  {correctionData.correction.status === "failed" && (
+                    <div className="p-4 rounded-xl bg-red-950/20 border border-red-500/20 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <AlertTriangle className="w-5 h-5 text-red-400" />
+                          <h4 className="text-sm font-bold text-red-300 uppercase tracking-wider font-mono">
+                            Execution Failed
+                          </h4>
+                        </div>
+                        <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40 text-[10px] font-mono font-bold">
+                          STATE: FAILED
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        {correctionData.correction.reason || "Re-verification execution encountered an internal error. Original response is safely preserved."}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Case E: Not Needed (Original Verified) */}
+                  {correctionData.correction.status === "not_needed" && (
+                    <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                          <h4 className="text-sm font-bold text-emerald-300 uppercase tracking-wider font-mono">
+                            Correction Not Required
+                          </h4>
+                        </div>
+                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-mono font-bold">
+                          STATE: NOT_REQUIRED
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        {correctionData.correction.reason || "The original statement is verified by reference evidence. No repair required."}
                       </p>
                     </div>
                   )}
